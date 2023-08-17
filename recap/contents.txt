@@ -1,0 +1,9 @@
+
+///////////////////////////////////////////////////////////////
+Odin1.txt
+
+- asking Questions
+- the internet
+    - how it works and definitions
+
+- command line skills
