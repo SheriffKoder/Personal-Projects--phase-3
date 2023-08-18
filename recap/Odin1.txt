@@ -131,6 +131,10 @@ Command Line Skills
 # whoami                        //tell username
 # pwd -P                        //current working directory
 
+//two commands chained using &&
+# git add test1.md && git commit -m 'Create first file'
+
+
 
 DIRECTORY
 # cd                              //go to home
@@ -144,6 +148,7 @@ can add any path to it, -a (hidden), -l (detailed), -lh (MB detailed),
 
 CREATE
 # touch file1.txt file2.txt     //create multiple files
+# touch test{1..4}.md           //create files from test1 to test4.md
 # mkdir name                    //create a folder
 # mkdir -v name                 //verbose mode
 # mkdir -p A/B/C                //create folder A in it folder B in it folder C
@@ -172,22 +177,208 @@ PIPE
 
 
 
-
+///////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////
 Git
 
+
+///////////////////////////////////////////////////////////////
+////clone a repo
+
+//create a new repository on github
+//cd to a folder on your computer, and enter this in the console terminal
+//# git clone GitHubSSHKeyProvidedForThatNewRepo
+
+
+
+///////////////////////////////////////////////////////////////
+//uploading local repo to github
+
+//mkdir [project]
+//cd [project]
+//git init                        //turns directory into a git repo
+//git remote add origin [url]     //add url of an empty repo on Github
+
+
+
+
+
+
+///////////////////////////////////////////////////////////////
+////Notes
+
+commit early and often meaningful commits, structured and consistent
 commit messages should be concise and clear
+Content, what it should/shouldn't contain
 style: Markup syntax, wrap margins, grammar, capitalization, punctuation, simplicity
 
+
+use imperative mood when writing a commit
+this commit allows me to "Add a new line" "fix something needed"
+
+why/what you are making this change opposed to how
+
+
+
+
+
+write the commit note outside and copy it to terminal
 should look like this
 
 //
-50 CHARS SUBJECT LINE OF CHANGE SUMMARY
+50-72 Chars subject line or change summary, no period at end
 
 Around 72 characters of body
 Around 72 characters of body
 Around 72 characters of body
 
-Result
+Result of the change
 //
+
+
+
+///////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////
+////Git commands
+
+//press Q           //Quit
+//press Z           //get to end of log
+
+
+///////////////////////////////////////////////////////////////
+////Viewing changes
+
+//git show                  //will show the last commit changes
+
+//git diff                  //will show the current directory "code" changes
+                            //happened from the last commit (HEAD)
+                            // With --cached compares added files against HEAD; 
+                            //otherwise it compares files not yet added.*
+
+//git log -p                //will show all recent commits
+
+//git log --oneline         //will show all recent commits (subject lines)
+//git shortlog              //groups commits by users
+
+//git remote -value         //display the repo URL
+//code .                    //open the current directory in vscode
+
+
+///////////////////////////////////////////////////////////////
+////Managing commits
+
+//git status                //will show the current directory "file" changes
+                            //happened from the last commit (HEAD)
+                            //un "add ." changes will be in red color
+
+//git restore <file>        //gets you to the last version "add ."
+
+//git add .                 //gets into staging area/ pre ready to commit
+                            //add . (add all in directory)
+//git commit -m "message subject" -m "message body"
+
+//git push                  //add to the current branch
+//git push origin main      //add to the main branch or other
+//git push --force          //add a local(outdated) branch commit 
+                            //which would also get a conflict
+
+
+
+
+///////////////////////////////////////////////////////////////
+////Managing Branches
+
+//Create/Switch Branches
+on Github > repo > main button > add/search name
+
+on Github > repo > setting button > pages > source to main branch
+
+
+//git branch branchName             //create a new branch
+//git switch -c branchName          //switches to the specified branch
+
+
+
+
+
+
+
+///////////////////////////////////////////////////////////////
+////managing a remote repo
+
+//git pull origin/upstream branchName   //gets updates
+                                        //similar to git fetch, status and merge requests
+
+//git branch -a //lists all branches that are now fetched
+
+
+
+
+
+
+
+///////////////////////////////////////////////////////////////
+////Forking a repository
+
+//go to the project want to fork, press the fork button, add to your repository
+//clone the repo stored in your repos on your computer
+
+////syncing with the upstream forked repo
+//git remote -v
+//git remote add upstream sshlink
+//git remote -v                         //now we have origin our fork
+                                        //upstream the original repo
+//git fetch upstream                    //will give all branches for the repo
+//git checkout main                     //go to your main branch
+//git merge upstream/main               //merge the remote with your local
+                                        //will "remove" your files and "replace with" the new files
+
+or
+//open the original github repo
+//click fetch upstream
+//fetch and merge
+
+
+////submitting a pull request
+//after pushing
+//go to the original repo page
+//pull request > new pull request > compare accross forks
+//choose the destination branch / your branch 
+//create new pull request will promote to add a comment
+
+
+////merging pull requests
+changes on same lines in same file
+must resolve all merge conflicts on github manually before can merge a pull request
+by manually edit the conflicted file to select the changes to keep
+
+
+
+
+///////////////////////////////////////////////////////////////
+
+
+a branch is a pointer to a single commit
+each commit is a pointer to the commit that came before it
+
+
+
+sandbox: working directory
+Index: staging area (add . & not yet committed)
+Head: current/last-commit branch (last git commit on branch)
+heads (small-case): set of references to commit objects
+
+a commit is a snapshot
+
+a commit object contain
+- files
+- references to their parent
+- SHA1 name, 40-char string uniquely identifies the commit obj
+
+
+
+// mark files to be moved (rename) and removed, respectively, much like git add.
+# git mv and # git rm 
