@@ -1,7 +1,8 @@
 
+
 ///////////////////////////////////////////////////////////////
 ////Asking Questions
-
+/*
 - ask about the problem not what is done toward the problem to get better answers
 - describe it in "one" sentence
 
@@ -18,11 +19,12 @@ How did you get there?
 What have you tried so far?
 
 
+*/
 
-///////////////////////////////////////////////////////////////
+
 ///////////////////////////////////////////////////////////////
 ////The Internet
-
+/*
 
 
 
@@ -122,11 +124,14 @@ http://www.example.com:80/ path/to/myfile.html?key1=value1&key2#bookmark
 7) anchor: bookmark inside the resource, #identifier
 
 
+*/
+
 
 
 ///////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////
-Command Line Skills
+//Command Line Skills
+/*
 
 # whoami                        //tell username
 # pwd -P                        //current working directory
@@ -176,14 +181,41 @@ PIPE
 # ls -a ~ | grep _                //the output of one command to the input to another command.
 
 
+*/
+
+
 
 ///////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////
-Git
+//Git
+
+//a branch is a pointer to a single commit
+//each commit is a pointer to the commit that came before it
 
 
+
+//sandbox: working directory
+//Index: staging area (add . & not yet committed)
+//HEAD: current/last-commit branch (last git commit on branch)
+//heads (small-case): set of references to commit objects
+
+//a commit is a snapshot
+
+//a commit object contain
+//- files
+//- references to their parent
+//- SHA1 name, 40-char string uniquely identifies the commit obj
+
+
+//press Q           //Quit
+//press Z           //get to end of log
+
+
+
+////Creating cloning repos
+/*
 ///////////////////////////////////////////////////////////////
 ////clone a repo
 
@@ -203,12 +235,17 @@ Git
 
 
 
+///////////////////////////////////////////////////////////////
+//clone a remote branch and work on it locally
+git branch --track [new-local-branch-name] [remote-branch-name]
+
+*/
 
 
 
 ///////////////////////////////////////////////////////////////
-////Notes
-
+////commit message notes
+/*
 commit early and often meaningful commits, structured and consistent
 commit messages should be concise and clear
 Content, what it should/shouldn't contain
@@ -237,25 +274,20 @@ Around 72 characters of body
 Result of the change
 //
 
+*/
 
 
-///////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////
-////Git commands
-
-//press Q           //Quit
-//press Z           //get to end of log
 
 
 ///////////////////////////////////////////////////////////////
 ////Viewing changes
-
+/*
 //git show                  //will show the last commit changes
 
 //git diff                  //will show the current directory "code" changes
                             //happened from the last commit (HEAD)
-                            // With --cached compares added files against HEAD; 
+                            // With --cached compares added files against HEAD;
+                            //to do a final review of what is to be committed 
                             //otherwise it compares files not yet added.*
 
 //git log -p                //will show all recent commits
@@ -267,9 +299,13 @@ Result of the change
 //code .                    //open the current directory in vscode
 
 
+*/
+
+
+
 ///////////////////////////////////////////////////////////////
 ////Managing commits
-
+/*
 //git status                //will show the current directory "file" changes
                             //happened from the last commit (HEAD)
                             //un "add ." changes will be in red color
@@ -286,43 +322,139 @@ Result of the change
                             //which would also get a conflict
 
 
+//remove commits while preserving the working directory
+//git reset [last-good-SHA1] or 
+//git reset -hard <l g SHA>         //updates the working directory
+//undo this reset with ==
+// git reset HEAD^          //resets the commit to the one right before head
+
+
+
+
+////forgot a commit
+// git add test4.md (forgot to add this one)
+// git commit --amend (add the last add to our commit message)
+                        //with no file added, will just replace previous commit message
+
+////undo a commit
+//git log               //copy the hash id for the commit
+//git revert [hash]     //create a new commit that undoes that commit
+                        //follow prompts to edit the commit message or save/commit
+
+////undo changes to a file
+//git log               //copy the hash id for the commit
+//git checkout [saved hash] -- path/to/file //file old version will be in index(staging area)
+//git commit -m ""
+
+//want to ignore an added file
+git rm --cached         //will remove it from tracking but leave the file untouched on disk. 
+                        //and wont be seen in git status
+
+
+//want to edit or remove current un added commits
+git rebase -i <earlier SHA1>            //edit commit messages or remove by removing the message text
+//rebase is used in development as cannot push to remote repos
+
+
+*/
+
 
 
 ///////////////////////////////////////////////////////////////
 ////Managing Branches
+/*
 
 //Create/Switch Branches
 on Github > repo > main button > add/search name
 
 on Github > repo > setting button > pages > source to main branch
 
+//git branch -a                         //lists all branches
+//git branch
 
-//git branch branchName             //create a new branch
+////Create
+//git branch branchName              //create a new branch
+//git checkout -b <name>             //create new branch and checkout to it
+
 //git switch -c branchName          //switches to the specified branch
+                                     //creates branch and switches ?
+//git push --set-upstream origin new-branch //create a new branch on the remote repository
+
+//go to a branch name
+//git checkout [head-name]         //points HEAD(last commit) to the commit object [head-name]
+                                    //commit all the new changes before checking out the new head
 
 
 
 
+////Manage
+//git branch -d branchName                      //deletes a branch
+// git diff [first-branch]...[second-branch]    //Shows content differences between two branches
+
+
+//git branch [new-head-name] [SHA1-reference-to-a-commit-object]
+//create a new head and point it to the requested commit object
+
+
+
+git diff [head1]..[head2] shows the diff between the commits referenced by head2 and head1.
+git diff [head1]...[head2] (three dots) shows the diff between head2 and the common ancestor of head1 and head2. For example, diff master...fix-headers above would show the diff between (D) and (B).
+git log [head1]..[head2] shows the change log between head2 and the common ancestor of head1 and head2. With three dots, it also shows the changes between head1 and the common ancestor; this is not so useful. (Switching head1 and head2, on the other hand, is very useful.)
+git diff --staged //if added and diff no show
+
+
+
+
+//ex//
+//committing to the wrong branch
+# undo the last commit, but leave the changes available
+git reset HEAD~ --soft
+git stash
+# move to the correct branch
+git checkout name-of-the-correct-branch
+git stash pop
+git add . # or add individual files
+git commit -m "your message here";
+# now your changes are on the correct branch
+
+or 
+
+git checkout name-of-the-correct-branch
+# grab the last commit to master
+git cherry-pick master
+# delete it from master
+git checkout master
+git reset HEAD~ --hard
+
+*/
 
 
 
 ///////////////////////////////////////////////////////////////
 ////managing a remote repo
+/*
 
+
+
+////GET 
+//git fetch                             //downloads all history from the remote branches
+//git merge                             //combines remote branch into current local branch
+or
 //git pull origin/upstream branchName   //gets updates
-                                        //similar to git fetch, status and merge requests
+//git pull                              //fetch+merge
+                                        //updates local working branch
+                                        //with new commits from the remote branch
 
-//git branch -a //lists all branches that are now fetched
+//POST 
+// git push                             //Uploads all local branch commits to GitHub
 
-
-
-
+*/
 
 
 
 ///////////////////////////////////////////////////////////////
 ////Forking a repository
-
+/*
 //go to the project want to fork, press the fork button, add to your repository
 //clone the repo stored in your repos on your computer
 
@@ -355,30 +487,14 @@ changes on same lines in same file
 must resolve all merge conflicts on github manually before can merge a pull request
 by manually edit the conflicted file to select the changes to keep
 
+*/
 
-
-
-///////////////////////////////////////////////////////////////
-
-
-a branch is a pointer to a single commit
-each commit is a pointer to the commit that came before it
-
-
-
-sandbox: working directory
-Index: staging area (add . & not yet committed)
-Head: current/last-commit branch (last git commit on branch)
-heads (small-case): set of references to commit objects
-
-a commit is a snapshot
-
-a commit object contain
-- files
-- references to their parent
-- SHA1 name, 40-char string uniquely identifies the commit obj
 
 
 
 // mark files to be moved (rename) and removed, respectively, much like git add.
-# git mv and # git rm 
+// git mv and # git rm 
+
+
+//git garbage collection deleting all branches not visited in the graph
+// git gc
