@@ -64,9 +64,14 @@ if not found
     the request contains headers, meta-data
     finds the ip address of the destination
 
+the client has the IP address
     client request then is released from the ISP
     to go through the internet (containing guiding routers)
     to reach its destination
+    where the request gets wrapped in layer with each router
+    to the destination to help the response packet on the way back
+    by unwrapping these layers
+
     the website in question is stored on a server 
     where it is generated dynamically or the website code is stored there
     and based on the client request, the code sends a back response
@@ -166,3 +171,23 @@ PIPE
 # ls -a ~ | grep _                //the output of one command to the input to another command.
 
 
+
+
+///////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////
+Git
+
+commit messages should be concise and clear
+style: Markup syntax, wrap margins, grammar, capitalization, punctuation, simplicity
+
+should look like this
+
+//
+50 CHARS SUBJECT LINE OF CHANGE SUMMARY
+
+Around 72 characters of body
+Around 72 characters of body
+Around 72 characters of body
+
+Result
+//
