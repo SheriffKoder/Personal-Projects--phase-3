@@ -378,15 +378,503 @@ $("#nestedLi").css("border", "2px solid rgba(0,0,255,0.2");
 //////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 //Part3
+/*
+//events and event handlers
+//react to events with js
+
+////Click
+//reading the event will display data can use like clientX,Y etc.
+$(".red-box").click(function (e) {
+    $(this).fadeTo(500, 0.5);
+});
+
+//auto-click an element
+//$(".red-box").click();
+
+
+
+////Hover
+$(".red-box").hover(function (e) {
+    //$(this).fadeTo(500, 0.5);
+});
+
+//blueBox.hover((HoverIn) => {}, (HoverOut => {}))
+$(".red-box").hover(function (e) {
+    //$(this).slideUp(500);
+},function (e) {
+    //$(this).slideDown(500);
+});
+
+
+////mouse enter/leave
+//stop the animation running on the element
+$(".red-box").mouseenter(function (e) {
+    $(this).stop().fadeTo(500, 0.5);
+});
+
+$(".red-box").mouseleave(function (e) {
+    $(this).stop().fadeTo(500, 1);
+});
+
+//.on for an event or multiple events
+$(".red-box").on("click keydown", function () {
+   // $(this).css("background-color", "green");
+});
+
+
+////Modularizing;
+//defining functions outside and use their variable name
+
+const greenBackground = function () {
+    $(this).css("background-color", "green");
+};
+
+$(".red-box").on("click keydown", greenBackground);
+
+
+////Delegated events
+//allow dynamically / new added elements to have events
+//by assigning the event from a parent
+
+$("body").on("click", ".yellow-box", function () {
+    $(this).slideUp();
+});
+
+$("#content").append("<div class='yellow-box'> </div>");
+
+
+//function accesses inputs properties
+function greetUser(eventData) {
+    username = eventData.user || "anonymous";    // || "default-value"
+    email = eventData.email || "example.com";    // || "default-value"
+  
+    alert("Welcome Back " + username + " your contact is " + email);  
+}
+
+//give data to events
+$(".green-box").click({ user: "Peter", email: "email@test.com" }, function(event) {
+    greetUser(event.data);
+});
+  
+*/  
+//////////////////////////////////////////////////////////////////////////
+
+
+// //which a jQ event property to give the pressed key
+// $("html").keydown(function (event) {
+//     //console.log(event.which);
+// });
+
+
+// //ex : key pressed changes blue-box margin animation
+// const ARROW_RIGHT = "39";
+// const ARROW_LEFT = "37";
+
+// $("html").keydown(function(event) {
+//   if(event.which == ARROW_RIGHT) {
+//     $(".blue-box").stop().animate({
+//       marginLeft: "+=10px"
+//     }, 1000);
+//   }
+//   else if(event.which == ARROW_LEFT) {
+//     $(".blue-box").stop().animate({
+//       marginLeft: "-=10px"
+//     }, 1000);
+//   }
+//   //67=C
+//   else if(event.ctrlKey && event.which == 67) {
+//       $(".blue-box").stop().animate({
+//         marginLeft: "0px"
+//       }, 1000);
+//   }
+
+// });
+
+
+//selecting multiple elements
+//$(".red-box, .blue-box, .green-box").hide();
+//storing multiple elements to use a the same animation
+//put $(this) in the function
+// const myBoxes = $(".red-box, .blue-box, .green-box");
+
+
+// ////focus and blur events on inputs
+// var inputFields = $("input:text, input:password, textarea");
+
+// inputFields.focus(function(){
+//     $(this).css("box-shadow", "0 0 10px yellow");
+// });
+
+// //inputFields.blur(function(){
+//    $(this).css("box-shadow", "0px 0px 10px red");
+// //});
+
+// //ex can be used for input value validation
+// let name = $("#name")
+// name.blur(function () {
+//   if ((name.val().length) < 3) {
+//     name.css("color", "red");
+//   }
+//   else {
+//     name.css("color", "black");
+//   }
+// })
+
+
+
+//////////////////////////////////////////////////////////////////////////
+
+
+
+//example: image slideshow
+//interval loop, fadeout, change src attr, fadeIn, index++
+/*
+let galleryImage = $(".gallery").find("img").first();
+
+let images = [
+    "images/laptop-mobile_small.jpg",
+    "images/laptop-on-table_small.jpg",
+    "images/people-office-group-team_small.jpg"
+];
+    
+
+galleryImage.css("width", "80vw");
+
+
+let i=0;
+setInterval(()=> {
+
+    galleryImage.fadeOut(1500, () => {
+        galleryImage.attr("src", images[i]);
+        galleryImage.fadeIn(1500);
+    });
+
+    i++;
+    if(i === images.length) {
+        i = 0;
+    }
+
+
+}, 3100)
+*/
+
+
+
+//example: change gallery image on click
+//on click, fadeout, src attr, fadeIn, index++
+
+/*
+let images = [
+    "images/laptop-mobile_small.jpg",
+    "images/laptop-on-table_small.jpg",
+    "images/people-office-group-team_small.jpg"
+];
+
+
+j = 0;
+$(".gallery").on("click", () => {
+
+
+    $(".gallery img").fadeOut(500, () => {
+        $(".gallery img").attr("src", images[j]);
+        $(".gallery img").fadeIn(500);
+
+
+    });
+
+    (j === images.length-1) ? j = 0 : j++;
+});
+*/
+
+
+//.add //adds elements to the current selection so check1 becomes "check1 label" ?
+//.is.(":checked")
+//check.prop("checked")
+
+//on element "change" event
+/*
+$("#check1").change(function() {
+    let isChecked = $(this).is(":checked"); //can use .prop("checked")
+    if (isChecked) {
+      $(this).add("label[for='check1'").css("box-shadow", "0 0 4px #181");
+  
+    } else {
+      $(this).add("label[for='check1'").css("box-shadow", "0 0 4px #811");
+  
+    }
+})
+
+$("select").change(function() {
+
+    //get the child in select with attr been selected
+    let selectedOption = $(this).find(":selected");
+    if (selectedOption) {
+        alert(selectedOption.text());
+    }
+})
+*/
+
+
+//on submit event
+//useful for providing fast feedback for the user 
+//and prevent page reload in case the validation is not right
+/*
+
+//example: prevent submit when textarea is empty
+//and give border to textarea
+
+$("form").submit(function(event) {
+
+  let textarea = $("#message");
+  if (textarea.val().trim() == "") {  //if no content in the textarea
+    textarea.css("box-shadow", "0 0 4px #811"); //display red shadow
+    
+    //prevent the form from submitting
+    //will prevent any default actions that will happen 
+    //when click that event or it happens
+    event.preventDefault();
+
+  } else {
+
+    //form will be submitted
+
+  }
+});
+*/
 
 
 
 
+//example: prevent "form" submit if any of inputs is not valid
+//and give the feedback a text to the html span attached
+//function has all input values, where input validation functions preventDefault
+/*
+var form = $("#form1");
+
+form.submit(function(event) {
+    var name = $("#name").val();
+    var password = $("#password").val();
+    var message = $("#message").val();
+    var checkbox = $("#checkbox"); //.is(":checked");
+  
+    validateNameField(name, event);
+    validatePassword(password, event);
+    validateMessage(message, event);
+    validateCheck(checkbox, event);
+  
+});
+
+////////////
+//the event is for using the preventDefault
+
+function validatePassword (password, event) {
+    if(!ValidPassword(password)) {
+      $("#password-feedback").text("Please enter at least four characters and a number");
+      event.preventDefault();
+    } else {
+      //remove text if is valid
+      $("#password-feedback").text("");
+    }
+}
+
+  
+//function ValidPassword (password) {
+    //return password.length >=4 && /.star[0-9].star/.test(password);
+//}
 
 
 
+function isValidName(name) {
+    return name.length >= 2;
+}
 
 
+function ValidMessage (text) {
+
+    return (text.trim() == "" || text.length < 4) ? false : true;
+}
+
+
+function ValidCheck (check) {
+    return check.prop("checked");
+}
+*/
+  
+
+//example: form input on blur feedback
+//function has all inputs, run validate input on each input blur
+/*
+var form = $("#form1");
+enableFastFeedback(form);
+
+function enableFastFeedback(formElement) {
+  var nameInput = formElement.find("#name");
+  var passwordInput = formElement.find("#password");
+  var messageInput = formElement.find("#message");
+  var checkboxInput = formElement.find("#checkbox");
+
+
+  passwordInput.blur(function (event) {
+    var password = $(this).val();
+    //validatePassword(password, event);
+
+    if(!ValidPassword(password)) {
+      $(this).css({"box-shadow": "0 0 4px #811", "border": "1px solid #600"});
+    } else {
+      $(this).css({"box-shadow": "0 0 4px #181", "border": "1px solid #060"});
+    }
+  });
+
+
+
+}
+
+function ValidPassword (password) {
+    return password.length >=4 && /.star[0-9].star/.test(password);
+}
+*/
+
+
+
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+
+/*
+AJAX Requests
+asynchronous javascript and xml
+
+allows to dynamically fetch data from the server without page reloading
+
+
+user interacts with page > request / sent from js > web-server server side script > database
+js manipulates page with data returned < data (xml/text) < web-server server side script < database
+
+
+sending a GET request to a server to retrieve data from a specific url
+or POST data
+
+$.get() //GET ajax request
+$.post() //POST ajax request
+$.ajax()  //advanced, where can set all the basic configurations yourself
+$.getJSON() //GET request to retrieve json data
+
+
+//this can help in making a frontend app and access your backend API ?
+$.ajax({
+    headers: { "Accept": "application/json"},
+    type: 'GET',
+    url: './unExistingFile.js',
+    crossDomain: true,
+    beforeSend: function(xhr){
+        xhr.withCredentials = true;
+  },
+    success: function(data, textStatus, request){
+        console.log(data);
+    }
+});
+
+
+//starwars: https://pipedream.com/apps/swapi
+//free apis: https://github.com/toddmotto/public-apis
+//Pokemon: //https://pokeapi.co/
+
+
+
+*/
+
+
+
+//$.load()
+//retrieve file content from your own server (script or html files)
+/*
+//this does not work
+$("#code").load("js/unExistingFile.js", function(response, statusCode) {
+    if (statusCode === "error") {
+      console.log(statusCode)
+      alert("file does not exist");
+    }
+    console.log(response);  //undefined
+});
+*/
+
+
+//example: using the flickr API
+//getJSON .then .catch
+/*
+//to access a server on a different domain will have to
+//use the "JSON P" format
+//and the "?jsoncallback=?" after the API Url will tell the API to do that
+
+
+let flickrApiUrl = "https://www.flickr.com/services/feeds/photos_public.gne?jsoncallback=?"
+
+
+$.getJSON(flickrApiUrl, { 
+    //configurations set by the API
+    tags: "sun, beach",
+    tagmode: "any",   //image should have sun or beach not must both of them otherwise "all"
+    format: "json"    //to retrieve json data also can use xml
+
+}).then(function(data) {
+    //on success
+    console.log(data);
+
+    //$.each
+    //jQuery method to iterate over an array with index 0,1,2 or object with key names
+
+    $.each(data.items, function (index, value) {
+      console.log(value);
+      //console.log(value.media.m);
+      $("<img>").attr("src", value.media.m).appendTo("#flickr");
+
+      //output only 3 images  - terminate the each function
+      if (index == 2) {
+        return false;
+      }
+
+
+    })
+
+}).catch(function () {
+    alert("AJAX call failed");
+  
+}).always(function () {
+    //executes in either case done/fail  
+});
+*/
+  
+
+//example: pokemon API
+
+/*
+let pokeapiUrl = "https://pokeapi.co/api/v2/generation/1";
+
+$.getJSON(pokeapiUrl)
+.then(function (data) {
+
+    console.log(data);
+
+    $.each(data.pokemon_species, function (index, pokemon) {
+
+        var name = pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1);
+        var par = $("<p>").html("Pokemon species no. " + (index+1) + " is " + name);
+        par.appendTo("#pokemonDiv");
+  
+      //output only 3 images  - terminate the each function
+      if (index == 2) {
+        return false;
+      } 
+
+    })
+
+
+}).catch(function () {
+    alert("AJAX call failed");
+  
+}).always(function () {
+    //executes in either case done/fail  
+});
+*/
 
 
 
