@@ -32,21 +32,6 @@ export products > to shop.js
 
 //////////////////////////////////////////
 ////Steps: using a templating engine
-(1) html, create your htmls
-(1) pug, create a views > shop/add-product/404.pug and add htmlish syntax
-(2) render, got to the shop.js file and use res.render() in the router
-res.render("shop.pug", {anyKey: value}) by nodejs makes user of the defined templating engine
-and then return that template
-as we stated all the views are in the views folder, no need to construct a path
-can just say shop
-(4) put/insert your exported dynamic values from render to .pug
-
-
-//the way you pass template values in res.render
-//are the same across all templating engine
-//the difference is in the html'sh file and app.js use
-
-
 work on the html
 copy the html to the ejs includes which is shared between html
 in the html files, replace some things with these includes
@@ -54,9 +39,9 @@ render in the router
 insert router values in the .ejs files
 
 
-
-
-
+//the way you pass template values in res.render
+//are the same across all templating engine
+//the difference is in the html'sh file and app.js use
 
 
 
@@ -92,6 +77,30 @@ insert router values in the .ejs files
 
 
 
+//////////////////////////////////////////////////////////////////////////////////
+//Section 7 MVC
+
+> move the middlewares in the route files to controller files
+
+> create a product.js models file (new instances of product, cart)
+with save/fetch methods
+
+json.parse > js
+json.stringify > text
+
+> start using req.params
+> fill the form with pre-existing values when "editing" a product
+by checking on the "editing" passed value
+and filling with product.value
+
+
+> edit product
+> delete product
+
+<form action="/admin/delete-product" method="POST">
+    <input type="hidden" value="<%=product.id%>" name="productId">
+    <button class="btn" type="submit"> Delete</button>
+</form>
 
 
 
@@ -195,12 +204,12 @@ app.use(express.static(path.join(__dirname, "public")));
 
 
 ////(5) activate the route files
-app.use(adminJsRoutes.router);
+//app.use(adminJsRoutes.router);
 app.use(shopJsRoutes);
 
 
 ////(5.1)filtering mechanism
-////app.use("/admin", adminJsRoutes);
+app.use("/admin", adminJsRoutes);
 //only routes starting with /admin (ex. /admin/add-page)
 //will be executed from this code 
 //do not add the /admin in the route files's paths
@@ -213,11 +222,15 @@ app.use(shopJsRoutes);
 
 ////(3) undefined paths
 //no url parameter, will catch all un-used urls
-app.use((req, res, next) => {
-    //res.status(404).sendFile(path.join(__dirname, "views", "404.html"));
-    res.status(404).render("404", {myTitle: "404 Page"});
+// app.use((req, res, next) => {
+//     //res.status(404).sendFile(path.join(__dirname, "views", "404.html"));
+//     res.status(404).render("404", {myTitle: "404 Page"});
 
-});
+// });
+
+const errorController = require("./controllers/errorController.js");
+app.use(errorController.get404);
+
 
 
 
