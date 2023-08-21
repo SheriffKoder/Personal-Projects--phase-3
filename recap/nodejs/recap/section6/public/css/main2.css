@@ -1,0 +1,166 @@
+
+
+html {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    margin: 0;
+    font-family: system-ui;
+    background-color: #f1f1f1;
+
+}
+
+
+
+
+.main-header {
+    display: flex;
+    flex-direction: column;
+}
+
+/*////////////////////////////////////////////////*/
+.main-header__nav1 {
+    background-color:#0F1111;
+    padding: 2em;
+}
+
+.main-header__nav2 {
+    background-color:#232f3e;
+    font-size: 0.75em;
+}
+
+/*////////////////////////////////////////////////*/
+.main-header_item-list {
+    display: flex;
+    flex-direction: row;
+    gap: 1em;
+
+}
+
+.main-header__item {
+    list-style: none;
+
+}
+
+
+.main-header__item a {
+    text-decoration: none;
+    color: white;
+    text-transform: uppercase;  
+    padding: 0.5em 1em;
+    border: 1px solid #232f3e;
+
+}
+
+.main-header__item a:hover {
+    border: 1px solid white;
+
+}
+
+
+/*////////////////////////////////////////////////*/
+/* Page : 404 */
+
+h1 {
+    font-size: 1.5em;
+}
+
+
+p {
+    font-size: 0.9em;
+
+}
+
+.main-content {
+    padding: 4em 0;
+    text-align: center;
+
+    border: 1px solid #d6d6d6;
+    border-radius: 3.5px;
+    background-color: white;
+    margin: 0 auto;
+
+}
+
+
+
+.card {
+    margin-top: 4em;
+    border: 1px solid #d6d6d6;
+    border-radius: 3.5px;
+    width: 90%;
+    background-color: white;
+    margin: 4em auto 0 auto;
+    text-align: center;
+
+
+
+}
+
+/*////////////////////////////////////////////////*/
+/* Page : Shop */
+
+
+
+
+
+
+
+/*////////////////////////////////////////////////*/
+/* Page : add-product */
+
+
+.product-form {
+
+    margin: 0 auto;
+    text-align: center;
+    width: 30%;
+    height: 20vh;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+
+
+}
+
+.form-controls {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.form-controls label {
+    margin-bottom: 0.5em;
+    font-weight: bold;
+}
+
+
+.form-controls input {
+    border: 1.5px solid #8b939b;
+    border-radius: 3.5px;
+
+}
+
+.product-form button {
+    width: 10em;
+    border-radius: 2px;
+    border: 1px solid grey;
+    padding: 0.2em 0.5em;
+
+}
+
+.product-form button:hover {
+    width: 10em;
+    background-color:#232f3e;
+    border: 1px solid #232f3e;
+    border-radius: 3px;
+    color: #e6ebf1;
+
+}
+
+
