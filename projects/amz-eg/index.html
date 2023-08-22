@@ -17,17 +17,15 @@
 
     <header>
         <nav class="main-navigation">
+            <div class="main-navigation__wrapper">
             <div class="main-navigation__container">
                 <ul class="main-navigation__List-1">
-                    <li class="main-navigation__List-1-link-small"><a href="" id="header-menu">=</a></li>
-                    <li class="main-navigation__List-1-link"><a href="" id="header-logo"></a><span id="header-logo--text">.eg</span></li>
+                    <li class="main-navigation__List-1-link-small not_desktop"><a href="" id="header-menu">=</a></li>
+                    <li class="main-navigation__List-1-link-logo"><a href="" id="header-logo"></a><span id="header-logo--text">.eg</span></li>
                     <li class="main-navigation__List-1-link not_mobile"><a href="">Deliver to</a></li>
                 </ul>
-                <form class="main-navigation__search">
-                    <input type="search" id="main-navigation__search-box">
-                    <button type="submit" id="main-navigation__search-button"></button>
-                </form>
 
+                <div class="main-navigation__container-separator"></div>
 
                 <ul class="main-navigation__List-2">
                     <li class="main-navigation__List-2-link not_mobile"><a href="">Language</a></li>
@@ -35,7 +33,24 @@
                     <li class="main-navigation__List-2-link not_mobile"><a href="">Orders</a></li>
                     <li class="main-navigation__List-2-link-small"><a href="">Cart</a></li>
                 </ul>
+
+                <div class="main-navigation__search">
+                    <form id="main-navigation__search-form">
+                        <select id="main-navigation__search-categories">
+                            <option>All Categories</option>
+                            <optgroup label="category1">
+                                <option>Electronics</option>
+                                <option>Home</option>
+                            </optgroup>
+                        </select>
+                        <input type="search" id="main-navigation__search-box" placeholder="Search Amazon.eg" autocomplete="off" aria-label="Search Amazon.eg" spellcheck="false" >
+                        <button type="submit" id="main-navigation__search-button"></button>
+                    </form>
+                </div>
+
             </div>
+            </div>
+            <div class="sub_navigation__wrapper">
             <div class="sub-navigation__container">
                 <ul class="sub_navigation__list-1">
                     <li class="sub_navigation__list-1-link"><a href="">= All</a></li>
@@ -49,6 +64,7 @@
 
                 </ul>
             </div>
+        </div>
         </nav>
     </header>
 
