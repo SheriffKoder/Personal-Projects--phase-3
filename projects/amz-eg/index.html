@@ -25,7 +25,7 @@
 <body>
 
     <header>
-        <nav id="main-navigation">
+        <nav id="main-navigation" aria-label="the main">
             <div class="main-navigation__wrapper">
             <div class="main-navigation__container">
                 <ul class="main-navigation__List-1">
@@ -44,7 +44,7 @@
                 </ul>
 
                 <div class="main-navigation__search">
-                    <form id="main-navigation__search-form">
+                    <form id="main-navigation__search-form" aria-label="the search area">
                         <select id="main-navigation__search-categories" aria-label="Browse categories">
                             <option>All Categories</option>
                             <optgroup label="category1">
@@ -61,7 +61,7 @@
             </div>
             <div class="sub_navigation__wrapper">
             <div class="sub-navigation__container">
-                <ul class="sub_navigation__list-1" aria-label="recommended categories list">
+                <ul class="sub_navigation__list-1" aria-label="list of recommended categories">
                     <li class="sub_navigation__list-1-link"><a href="">= All</a></li>
                     <li class="sub_navigation__list-1-link"><a href="">Today's Deals</a></li>
                     <li class="sub_navigation__list-1-link"><a href="">Fashion</a></li>
@@ -82,14 +82,15 @@
     </main>
 
 
-    <footer class="main-footer">
+    <footer class="main-footer" id="main-footer">
 
-        <nav class="main-footer__content-scrollLink">
+        <nav class="main-footer__content-scrollLink" aria-label="Back to top of page">
             <i class="fa fa-caret-up" style="font-size:13px"></i>
-            <a href="#main-navigation" aria-label="Back to top">Back to top</a>
+            <a href="#main-navigation">Back to top</a>
         </nav>
 
-        <div class="main-footer__content-links1-mobile" role="presentation">
+        <nav class="main-footer__content-links1-mobile" aria-label="links area about account control">
+            <a href="#footer_links_2" aria-label="skip to next link area" class="sr-only">next</a>
             <ul class="main-footer__content-links1-mobile-list">
                 <li><a href="">Your Account</a></li>
                 <li><a href="">Your Addresses </a></li>
@@ -105,12 +106,13 @@
                 <li><a href="">Browsing History</a></li>
                 <li><a href="">Returns</a></li>
             </ul>
-        </div>
+        </nav>
 
         
 
         <div class="main-footer__content-links1-wrapper">
-        <div class="main-footer__content-links1" role="presentation">
+        <nav class="main-footer__content-links1" aria-label="link area contains more about amazon, account access, sell with amazon, help links">
+            <a href="#footer_links_2" aria-label="skip to next link area" class="sr-only">next</a>
             <ul class="main-footer__content-links1-list">
                 <li><h3>header</h3></li>
                 <li><a href="">Your Account</a></li>
@@ -149,13 +151,14 @@
                 <li><a href="">Browsing History</a></li>
                 <li><a href="">Returns</a></li>
             </ul>
+        </nav>
         </div>
-        </div>
 
 
-
-        <div class="main-footer__content-links2">
-            <ul class="main-footer__content-links2-list">
+        <div  aria-label="" class="sr-only" id="footer_links_2"></div>
+        <nav class="main-footer__content-links2" id="" aria-label="language and region control">
+            <a href="#footer_links_3" aria-label="skip to next link area" class="sr-only">next</a>
+            <ul class="main-footer__content-links2-list" >
                 <li class="main-footer__content-links2-list-logo">
                     <a href="" id="footer-logo"></a>
                 </li>
@@ -171,16 +174,18 @@
                     </a>
                 </li>
             </ul>
-        </div>
+        </nav>
 
 
         <div class="main-footer__content-signin mobile_only">
             <p>Already a customer ? <a href="" aria-label="sign in link">Sign in</a></p>
         </div>
 
-        <div class="main-footer__content-description-wrapper">
-        <div class="main-footer__content-description" aria-label="More on Amazon">
-            <table collapsing="0" summary="more on amazon">
+        <div id="footer_links_3" aria-label="" class="sr-only"></div>
+        <div class="main-footer__content-description-wrapper" id="">
+        <nav class="main-footer__content-description" aria-label="links area more on amazon">
+            <a href="#footer_links_4" aria-label="skip to next link area"></a>
+            <table collapsing="0">
                 <tbody>
                     <tr>
                         <td class="footer__content-description-data">
@@ -299,21 +304,27 @@
                     </tr>                
                 </tbody>
             </table>
-        </div>
+        </nav>
         </div>
 
-        <div class="main-footer__content-cp">
-            <ul class="main-footer__content-cp-list">
-                <li class="main-footer__content-cp-list-li"><a href="">Conditions of Use & Sale</a></li>
-                <li class="main-footer__content-cp-list-li"><a href="">Privacy Notice</a></li>
-                <li class="main-footer__content-cp-list-li"><a href="">Interest-Based Ads</a></li>
-            </ul>
-            <span>©1996–2023, Amazon.com, Inc. or its affiliates</span>
+        <div id="footer_links_4" aria-label="" class="sr-only"></div>
+        <div class="main-footer__content-cp-wrapper">
+            <nav class="main-footer__content-cp" id="" aria-label="link area Privacy and conditions area">
+                <a href="#main-footer" aria-label="return to the beginning of the footer" class="sr-only">repeat</a>
+                <ul class="main-footer__content-cp-list" >
+                    <li class="main-footer__content-cp-list-li"><a href="">Conditions of Use & Sale</a></li>
+                    <li class="main-footer__content-cp-list-li"><a href="">Privacy Notice</a></li>
+                    <li class="main-footer__content-cp-list-li"><a href="">Interest-Based Ads</a></li>
+                </ul>
+                <span>©1996–2023, Amazon.com, Inc. or its affiliates</span>
+            </nav>
         </div>
+
 
 
 
     </footer>
+    <a href="#main-footer" aria-label="return to the beginning of the footer" class="sr-only">repeat</a>
 
     
 </body>
