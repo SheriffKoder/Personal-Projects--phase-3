@@ -1,0 +1,31 @@
+
+
+html { 
+    box-sizing: border-box; 
+    font-family: 'Amazon Ember', Arial, sans-serif;
+    font-size: 14px;
+
+}
+
+*, *::before, *::after { 
+    box-sizing: inherit;
+    margin: 0; padding: 0; 
+}
+
+:root {
+    --dark-blue: #131921;
+    --light-blue: #232f3e;
+    --search-yellow: #febd69;
+    --search-cat-bg: #e6e6e6;
+    --search-cat-border: #cdcdcd;
+    --search-cat-text: #5a5b5b;
+    --link-color-to-top: #37485b;
+    --link-color-to-top-hover: #48586a;
+
+    --footer-text-grey1: #dddddd;
+    --footer-text-grey2: #cccccc;
+    --footer-text-grey3: #999999;
+
+}
+
+

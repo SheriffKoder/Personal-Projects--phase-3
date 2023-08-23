@@ -7,22 +7,31 @@
 
     <style>
         @import url('https://fonts.cdnfonts.com/css/amazon-ember');
+        main {
+            height: 130vh;
+        }
     </style>
 
-    <link rel="stylesheet" href="nav_style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="./css/basic.css">
+    <link rel="stylesheet" href="./css/nav_style.css">
+    <link rel="stylesheet" href="./css/footer_style.css">
+
+
 
 
 </head>
 <body>
 
     <header>
-        <nav class="main-navigation">
+        <nav id="main-navigation">
             <div class="main-navigation__wrapper">
             <div class="main-navigation__container">
                 <ul class="main-navigation__List-1">
-                    <li class="main-navigation__List-1-link-small not_desktop"><a href="" id="header-menu">=</a></li>
-                    <li class="main-navigation__List-1-link-logo"><a href="" id="header-logo"></a><span id="header-logo--text">.eg</span></li>
-                    <li class="main-navigation__List-1-link not_mobile"><a href="">Deliver to</a></li>
+                    <li class="main-navigation__List-1-link-small not_desktop"><a href="" id="header-menu" aria-label="browse categories">=</a></li>
+                    <li class="main-navigation__List-1-link-logo"><a href="" id="header-logo" aria-label="Amazon egypt home"></a><a href="" id="header-logo--text" aria-label="country selection, currently browsing amazon egypt shop">.eg</a></li>
+                    <li class="main-navigation__List-1-link not_mobile"><a href="" aria-label="choose delivery destination country">Deliver to</a></li>
                 </ul>
 
                 <div class="main-navigation__container-separator"></div>
@@ -36,7 +45,7 @@
 
                 <div class="main-navigation__search">
                     <form id="main-navigation__search-form">
-                        <select id="main-navigation__search-categories">
+                        <select id="main-navigation__search-categories" aria-label="Browse categories">
                             <option>All Categories</option>
                             <optgroup label="category1">
                                 <option>Electronics</option>
@@ -44,7 +53,7 @@
                             </optgroup>
                         </select>
                         <input type="search" id="main-navigation__search-box" placeholder="Search Amazon.eg" autocomplete="off" aria-label="Search Amazon.eg" spellcheck="false" >
-                        <button type="submit" id="main-navigation__search-button"></button>
+                        <button type="submit" id="main-navigation__search-button" aria-label="Submit search"></button>
                     </form>
                 </div>
 
@@ -52,7 +61,7 @@
             </div>
             <div class="sub_navigation__wrapper">
             <div class="sub-navigation__container">
-                <ul class="sub_navigation__list-1">
+                <ul class="sub_navigation__list-1" aria-label="recommended categories list">
                     <li class="sub_navigation__list-1-link"><a href="">= All</a></li>
                     <li class="sub_navigation__list-1-link"><a href="">Today's Deals</a></li>
                     <li class="sub_navigation__list-1-link"><a href="">Fashion</a></li>
@@ -68,8 +77,243 @@
         </nav>
     </header>
 
+    <main>
+
+    </main>
 
 
+    <footer class="main-footer">
+
+        <nav class="main-footer__content-scrollLink">
+            <i class="fa fa-caret-up" style="font-size:13px"></i>
+            <a href="#main-navigation" aria-label="Back to top">Back to top</a>
+        </nav>
+
+        <div class="main-footer__content-links1-mobile" role="presentation">
+            <ul class="main-footer__content-links1-mobile-list">
+                <li><a href="">Your Account</a></li>
+                <li><a href="">Your Addresses </a></li>
+                <li><a href="">Your amazon.eg</a></li>
+                <li><a href="">Sell</a></li>
+                <li><a href="">Customer Service</a></li>
+
+            </ul>
+
+            <ul class="main-footer__content-links1-mobile-list">
+                <li><a href="">Your Orders</a></li>
+                <li><a href="">Your Lists</a></li>
+                <li><a href="">Browsing History</a></li>
+                <li><a href="">Returns</a></li>
+            </ul>
+        </div>
+
+        
+
+        <div class="main-footer__content-links1-wrapper">
+        <div class="main-footer__content-links1" role="presentation">
+            <ul class="main-footer__content-links1-list">
+                <li><h3>header</h3></li>
+                <li><a href="">Your Account</a></li>
+                <li><a href="">Your Addresses </a></li>
+                <li><a href="">Your amazon.eg</a></li>
+                <li><a href="">Sell</a></li>
+                <li><a href="">Customer Service</a></li>
+
+            </ul>
+
+            <ul class="main-footer__content-links1-list">
+                <li><h3>header</h3></li>
+                <li><a href="">Your Account</a></li>
+                <li><a href="">Your Addresses </a></li>
+                <li><a href="">Your amazon.eg</a></li>
+                <li><a href="">Sell</a></li>
+                <li><a href="">Customer Service</a></li>
+
+            </ul>
+
+            <ul class="main-footer__content-links1-list">
+                <li><h3>header</h3></li>
+                <li><a href="">Your Account</a></li>
+                <li><a href="">Your Addresses </a></li>
+                <li><a href="">Your amazon.eg</a></li>
+                <li><a href="">Sell</a></li>
+                <li><a href="">Customer Service</a></li>
+
+            </ul>
+
+
+            <ul class="main-footer__content-links1-list">
+                <li><h3>header</h3></li>
+                <li><a href="">Your Orders</a></li>
+                <li><a href="">Your Lists</a></li>
+                <li><a href="">Browsing History</a></li>
+                <li><a href="">Returns</a></li>
+            </ul>
+        </div>
+        </div>
+
+
+
+        <div class="main-footer__content-links2">
+            <ul class="main-footer__content-links2-list">
+                <li class="main-footer__content-links2-list-logo">
+                    <a href="" id="footer-logo"></a>
+                </li>
+                <li>
+                    <a href="" class="main-footer__content-links2-list-item1" aria-label="language selection">
+                        <span>English</span>
+                        <i class="fa fa-sort" style="font-size:13px"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="" class="main-footer__content-links2-list-item2" aria-label="country selection">
+                        <span>Egypt</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+
+        <div class="main-footer__content-signin mobile_only">
+            <p>Already a customer ? <a href="" aria-label="sign in link">Sign in</a></p>
+        </div>
+
+        <div class="main-footer__content-description-wrapper">
+        <div class="main-footer__content-description" aria-label="More on Amazon">
+            <table collapsing="0" summary="more on amazon">
+                <tbody>
+                    <tr>
+                        <td class="footer__content-description-data">
+                            <a href="">
+                                Amazon Advertising
+                            </a>
+                            <span>
+                                Find, attract and engage customers
+                            </span>
+                        </td>
+
+                        <td class="footer__content-description-space"></td>
+
+                        <td class="footer__content-description-data">
+                            <a href="">
+                                Amazon Advertising
+                            </a>
+                            <span>
+                                Find, attract and engage customers
+                            </span>
+                        </td>
+
+                        <td class="footer__content-description-space"></td>
+
+                        <td class="footer__content-description-data">
+                            <a href="">
+                                Amazon Advertising
+                            </a>
+                            <span>
+                                Find, attract and engage customers
+                            </span>
+                        </td>
+
+                        <td class="footer__content-description-space"></td>
+
+                        <td class="footer__content-description-data">
+                            <a href="">
+                                Amazon Advertising
+                            </a>
+                            <span>
+                                Find, attract and engage customers
+                            </span>
+                        </td>
+
+                        <td class="footer__content-description-space"></td>
+
+                        <td class="footer__content-description-data">
+                            <a href="">
+                                Amazon Advertising
+                            </a>
+                            <span>
+                                Find, attract and engage customers
+                            </span>
+                        </td>
+
+                    </tr>
+
+                    <tr>
+                        <td>&nbsp;</td>
+                    </tr>
+
+                    <tr>
+                        <td class="footer__content-description-data">
+                            <a href="">
+                                Amazon Advertising
+                            </a>
+                            <span>
+                                Find, attract and engage customers
+                            </span>
+                        </td>
+
+                        <td class="footer__content-description-space"></td>
+
+                        <td class="footer__content-description-data">
+                            <a href="">
+                                Amazon Advertising
+                            </a>
+                            <span>
+                                Find, attract and engage customers
+                            </span>
+                        </td>
+
+                        <td class="footer__content-description-space"></td>
+
+                        <td class="footer__content-description-data">
+                            <a href="">
+                                Amazon Advertising
+                            </a>
+                            <span>
+                                Find, attract and engage customers
+                            </span>
+                        </td>
+
+                        <td class="footer__content-description-space"></td>
+
+                        <td class="footer__content-description-data">
+                            <a href="">
+                                Amazon Advertising
+                            </a>
+                            <span>
+                                Find, attract and engage customers
+                            </span>
+                        </td>
+
+                        <td class="footer__content-description-space"></td>
+
+                        <td class="footer__content-description-data">
+                            <a href="">
+                                Amazon Advertising
+                            </a>
+                            <span>
+                                Find, attract and engage customers
+                            </span>
+                        </td>
+
+                    </tr>                
+                </tbody>
+            </table>
+        </div>
+        </div>
+
+        <div class="main-footer__content-cp">
+            <ul class="main-footer__content-cp-list">
+                <li class="main-footer__content-cp-list-li"><a href="">Conditions of Use & Sale</a></li>
+                <li class="main-footer__content-cp-list-li"><a href="">Privacy Notice</a></li>
+                <li class="main-footer__content-cp-list-li"><a href="">Interest-Based Ads</a></li>
+            </ul>
+            <span>©1996–2023, Amazon.com, Inc. or its affiliates</span>
+        </div>
+
+
+
+    </footer>
 
     
 </body>
