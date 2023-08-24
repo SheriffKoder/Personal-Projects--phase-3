@@ -2,7 +2,6 @@
 
 html { 
     box-sizing: border-box; 
-    font-family: 'Amazon Ember', Arial, sans-serif;
     font-size: 14px;
 
 }
@@ -10,7 +9,14 @@ html {
 *, *::before, *::after { 
     box-sizing: inherit;
     margin: 0; padding: 0; 
+    font-family: 'Amazon Ember', Arial, sans-serif;
+
 }
+
+body {
+}
+
+
 
 :root {
     --dark-blue: #131921;
@@ -25,6 +31,16 @@ html {
     --footer-text-grey1: #dddddd;
     --footer-text-grey2: #cccccc;
     --footer-text-grey3: #999999;
+
+    --grey-shadow1: #dddddd8f;
+    --sort-button-grey: #F0F2F2;
+    --sort-button-grey-hover: #e8e4e4;
+    --sort-button-grey-border: #D5D9D9;
+    --sort-button-text: #0F1111;
+
+
+    --product-list-text: #565959;
+    --product-rating-blue: #007185;
 
 }
 
