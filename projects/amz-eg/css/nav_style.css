@@ -22,13 +22,17 @@
     --search-cat-text: #5a5b5b;
 } */
 
+.main-navigation__wrapper, .sub_navigation__wrapper {
+    min-width: 350px;
 
+}
 
 .main-navigation__container {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     /* justify-content: space-between; */
+
 
 }
 
@@ -161,28 +165,54 @@
     justify-content: center;
     height: 2.5rem;
 
+    border: 2.5px solid black;
+    border-radius: 8px;
+
+
+
 }
 
 #main-navigation__search-form:focus-within {
-    outline: 2px solid #fb9901;
-    outline-offset: -1px;
-    border-radius: 5px;
+    border: 2.5px solid #fb9901;
+    border-style:double;
+    /* outline-offset: -1px; */
+    border-radius: 8px;
+
+}
+
+
+#main-navigation__search-form {
+    /* box-shadow: 1px 1px 10px 10px #fb9901; */
+
 }
 
 
 #main-navigation__search-categories {
+    appearance: none;
     height: 100%;
     width: 4rem;
     border: 0px;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
     font-size: 0.5rem;
     background-color: var(--search-cat-bg);
     color: var(--search-cat-text);
     border-right: 1px solid var(--search-cat-border);
     cursor: pointer;
     padding-bottom: 2px;
+    padding-right: 0.9rem;
+    padding-top: 0.3rem;    /*for caret*/
+
+
 }
+
+#main-navigation__search-categories:focus {
+    outline: none;
+}
+
+
 
 #main-navigation__search-box {
     height: 100%;
@@ -211,9 +241,6 @@
 }
 
 
-.search-wrapper {
-    border: 1px solid red;
-}
 
 /*
 ///////////////////////////////////////////////////////////////////
@@ -295,6 +322,9 @@ media queries menu
 */
 
 
+
+
+
 /*for tablets*/
 @media only screen and (min-width: 450px) {
 
@@ -339,6 +369,10 @@ media queries menu
         /* flex: 0.9; */
     }
 
+    #main-navigation__search-categories {
+        padding-left: 0.5rem;
+
+    }
 
 
 
@@ -408,7 +442,9 @@ media queries menu
     #main-navigation__search-categories {
         font-size: 0.9rem;
         width: auto;
-        padding: 0 0.2em;
+        padding: 0 0.6em;
+        padding-right: 0.9rem;
+
     }
 
 
