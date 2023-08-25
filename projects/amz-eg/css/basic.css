@@ -41,7 +41,32 @@ body {
 
     --product-list-text: #565959;
     --product-rating-blue: #007185;
-
+    /* #f4e40a */
 }
 
 
+.caret-up-white {
+    border-left: solid 4px transparent; 
+    border-right: solid 4px transparent; 
+    border-bottom: solid 4px #fff; 
+    height: 0; 
+    width: 0;
+}
+
+.select-caret-down::after {
+    content: "";
+    position: absolute;
+    top: -1px;
+    right: 0.25rem;
+    border-left: solid 4px transparent; 
+    border-right: solid 4px transparent; 
+    border-top: solid 4px var(--search-cat-text); 
+}
+
+.select-caret-down {
+    position: relative;
+}
+  
+.sr-only {
+    color: transparent;
+}
