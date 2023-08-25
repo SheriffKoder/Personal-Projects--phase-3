@@ -2,6 +2,8 @@
 
 footer {
     background-color: var(--dark-blue);
+    min-width: 350px;
+
 }
 
 
@@ -106,20 +108,28 @@ footer {
     width: 1em;
     position: absolute;
     left: 0;
+    top: 20%;
 }
 
 .main-footer__content-links2-list-item1::before {
     background-image: url("../img/globe-icon.png");
     background-size: contain;
-    translate: -30% 10%;   
+    translate: -30% 10%;  
+    -moz-transform: translate(-0%,0%);
+ 
 
 }
 .main-footer__content-links2-list-item2::before {
     background-image: url("../img/country-flag.png");
     background-size: contain;
     translate: -30% 20%;  
+    -moz-transform: translate(-0%,0%);
     border-radius: 1px; 
 
+}
+
+.main-footer__content-links2-list-item1 .select-caret-down {
+    display: none;
 }
 
 /*///////////////////////////////////////////////////////////////*/
@@ -262,7 +272,7 @@ footer {
         flex-direction: row;
         justify-content: flex-end;
         align-items: center;
-        gap: 1rem;
+        gap: 1.2rem;
     }
 
     .main-footer__content-links2-list-item2 {
@@ -290,6 +300,11 @@ footer {
     .main-footer__content-signin {
         display: none;
     }
+
+    .main-footer__content-links2-list-item1 .select-caret-down {
+        display: block;
+    }
+    
 
 
 
