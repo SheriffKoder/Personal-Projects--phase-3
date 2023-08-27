@@ -10,7 +10,7 @@
 .main__login__container {
     width: 100%;
     /* background-color: red; */
-
+    
 }
 
 .main__login__container--header {
@@ -23,6 +23,7 @@
     width: 100%;
     border: 1px solid var(--sort-button-grey);
     box-shadow: 1px 1px 5px var(--sort-button-grey);
+    
 }
 
 
@@ -31,7 +32,6 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-
 
 }
 
@@ -63,3 +63,145 @@
 
 }
 
+
+
+
+
+/*///////////////////////////////////////////////////////////////*/
+
+
+.main__login__container__fields-container--login {
+
+}
+
+.login__header {
+    margin-left: 0.5rem;
+    font-weight: 500;
+}
+
+.login__header2 {
+    font-size: 0.9rem;
+}
+
+.login__email--container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    border: 1px dashed black;
+}
+
+.login__email--label {
+    margin-left: 0.5rem;
+}
+
+#login__email--field {
+    padding: 0.75em;
+    border: inset 0.2px solid black;
+
+}
+
+#login__email--continue {
+    margin-top: 0.5rem;
+    height: 2.7rem;
+    border-radius: 7px;
+    border: 0px;
+    background-color: var(--button-yellow2);
+    font-weight: 400;
+}
+
+.login__email--agreement {
+    font-weight: 400;
+    margin-top: 0.2rem;
+
+}
+
+.login__email--agreement a, .login__email--help-links a {
+    text-decoration: none;
+    color: var(--product-rating-blue);
+}
+
+
+.login__email--help-links {
+    display: flex;
+    flex-direction: column;
+    padding: 1.1rem;
+    margin-top: -0.8rem;
+    gap: 0.2rem;
+}
+
+.login__email--help-details {
+    color: var(--product-rating-blue);
+}
+
+.main__login__container__fields-container--login--content {
+    height: 100%;
+}
+
+
+/*//////////////////////////////*/
+
+
+.login__password--container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    border: 1px dashed black;
+    display: none;
+}
+
+.login__password--header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+}
+
+
+.login__password--label {
+    margin-left: 0.5rem;
+}
+
+#login__password--field {
+    padding: 0.75em;
+    border: inset 0.2px solid black;
+
+}
+
+#login__password--login-link {
+    margin-top: 0.5rem;
+    height: 2.7rem;
+    border-radius: 7px;
+    border: 0px;
+    background-color: var(--button-yellow2);
+    font-weight: 400;
+    
+}
+
+
+.login__password--options {
+    display: flex;
+    flex-direction: row;
+}
+
+.login__password--options-side1 {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+
+.login__password--options-side2 {
+    margin-left: auto;
+}
+
+
+.login__password--options a {
+    text-decoration: none;
+    color: var(--product-rating-blue);
+    font-size: 0.95rem;
+}
+
+
+.login__password--options-side1 label span {
+    padding-left: 0.5rem;
+}
