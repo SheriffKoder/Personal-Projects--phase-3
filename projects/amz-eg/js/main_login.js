@@ -70,4 +70,68 @@ $ (function() {
 
 
 
+    const login_password_container = $(".login__password--container--wrapper");
+    const login_email_continue_button = $("#login__email--continue");
+    const login_email_container = $(".login__email--container--wrapper");
+    const login_password_change_number_button = $(".login__password--current-phone--change");
+    const email_input = $("#login__email--field");
+    const login_password_number_view = $(".login__password--current-phone--number");
+
+
+
+
+
+    ////////////////////////////////////////////////////////////////////////
+    //validate the email/phone field
+
+    const patterns = {
+        telephone: /^\d{11}$/ ,         // only, 11 digits
+        password: /^[\w@-]{8,20}$/,     //the pattern is repeated, looking for (a-z A-Z also 0-9 and _)or @ or -
+        email: /^([a-z\d\.-]+)@([a-z\d-]+)\.([a-z]{2,8})\.?([a-z]{2,8})?$/               //also dots \.
+               // domain with . - .. @ .. domain .. dot .. com ..  .uk(optional)
+    };
+
+    function validEmail(input) {
+        var regex = patterns["email"];
+        return regex.test(input);
+    }
+
+    function validPhone(input) {
+        var regex = patterns["telephone"];
+        return regex.test(input);
+    }
+
+    email_input.on("blur", function () {
+
+        const input = $(this).val();
+
+        if(!validEmail(input) && !validPhone(input)) {
+            $(this).css("border", "1px solid red");
+            login_email_continue_button;
+        } else {
+            $(this).css("border", "1px solid green");
+            ////////////////////////////////////////////////////////////////////////
+            //flip through the email and password fields
+            login_email_continue_button.on("click", function () {
+                login_password_container.stop().fadeIn(700);
+                login_email_container.stop().css("display", "none");
+            });
+
+            login_password_change_number_button.on("click", function () {
+                login_email_container.stop().fadeIn(700);
+                login_password_container.stop().css("display", "none");
+            });
+            ////////////////////////////////////////////////////////////////////////
+            
+
+
+            login_password_number_view.empty().text(`${input}`);
+
+        }
+    })
+
+
+
+
+
 })
