@@ -42,6 +42,14 @@ body {
     --product-list-text: #565959;
     --product-rating-blue: #007185;
     /* #f4e40a */
+
+    --button-yellow: #FFD814;
+    --button-yellow-border: #FCD200;
+    --button-yellow-hover: rgb(237, 201, 21);
+
+    --button-yellow2: #ffea00;
+
+
 }
 
 
@@ -69,4 +77,5 @@ body {
   
 .sr-only {
     color: transparent;
+    display: none;
 }

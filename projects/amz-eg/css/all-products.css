@@ -537,7 +537,6 @@ main {
 
     .main__main__products-list--item--description-buttons-add-to-cart {
         display: block;
-        background-color: var(--search-yellow);
         border: 0.1em solid #FCD200;
         box-shadow: 0 2px 5px 0 rgba(213,217,217,.5);
         border-radius: 14px;
