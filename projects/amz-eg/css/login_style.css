@@ -96,14 +96,16 @@
 }
 
 
-.login__email--label, .signup__name-label, .signup__telephone-label  {
+.login__email--label, .signup__name-label h2, .signup__telephone-label h2, .signup__password-label h2 {
     margin-left: 0.5rem;
+    font-size: 1rem;
 }
 
 #login__email--field, #signup__name--field, #signup__password--field, #signup__telephone--input {
     padding: 0.75rem;
     border: 1px solid rgb(190,190,190,0.9);
     border-radius: 3px;
+    width: 100%;
 
 }
 
@@ -343,3 +345,12 @@
 }
 
 
+
+.signup__telephone--field--message, .signup__email--field--message, .signup__password--field--message {
+
+    top: 2.4rem;
+    right: 0.5rem;
+    -webkit-transform: translate(0%,-9%);
+    -moz-transform: translate(0%,25%);
+
+}

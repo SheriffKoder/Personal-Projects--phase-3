@@ -121,17 +121,17 @@ $ (function() {
 
         const input = $(this).val();
 
-        if(!validEmail(input) && !validPhone(input)) {
+        if (validEmail(input) || validPhone(input)) {
+            $(this).css("border", "1px solid green");
+            invalid_email_message.text("");
+            login_email_continue_button.prop("disabled", false);
+
+            
+        } else if(!validEmail(input) && !validPhone(input)) {
             invalid_email_message.text("the email should be in a valid format or an 11 digit phone number");
             login_email_continue_button.prop("disabled", true);
             $(this).css("border", "1px solid red");
 
-
-
-        } else if (validEmail(input) || validPhone(input)) {
-            $(this).css("border", "1px solid green");
-            invalid_email_message.text("");
-            login_email_continue_button.prop("disabled", false);
 
 
             ////////////////////////////////////////////////////////////////////////
@@ -225,11 +225,11 @@ $ (function() {
     //// if valid will store a value to be used when checking on all three values together to activate the button and form
     signup_name.on("blur keyup", function () {
         if (!validEmail($(this).val())) {
-            invalid_email_message_signup.css({"font-style": "italic", "position": "static"}).text("enter a valid email format*");
+            invalid_email_message_signup.css({"font-style": "italic", "position": "static"}).text("the email should be in a valid format*");
             disable_button_form($(this));
         } else {
             $(this).css("border", "1px solid green");
-            invalid_email_message_signup.css({"font-style": "normal", position: "relative", top: "2.3rem", right: "0.5rem"}).html("&#x2705;");
+            invalid_email_message_signup.css({"font-style": "normal", position: "relative"}).html("&#x2705;");
             passName = true;
             enable_button_form();
         }
@@ -237,10 +237,10 @@ $ (function() {
 
     signup_tel.on("blur keyup", function () {
         if (!validPhone($(this).val())) {
-            invalid_tel_message_signup.css({"font-style": "italic", "position": "static"}).text("make sure the phone has 11 digits*")
+            invalid_tel_message_signup.css({"font-style": "italic", "position": "static"}).text("the phone number entered is not 11 digits*")
             disable_button_form($(this));
         } else {
-            invalid_tel_message_signup.css({"font-style": "normal", position: "relative", top: "2.3rem", right: "0.5rem"}).html("&#x2705;");
+            invalid_tel_message_signup.css({"font-style": "normal", position: "relative"}).html("&#x2705;");
             $(this).css("border", "1px solid green");
             passTel = true;
             enable_button_form();
@@ -254,7 +254,7 @@ $ (function() {
             invalid_password_message_signup.css({"font-style": "italic", "position": "static"}).text("password is less than 8 characters*");
             disable_button_form($(this));
         } else {
-            invalid_password_message_signup.css({"font-style": "normal", position: "relative", top: "2.3rem", right: "0.5rem"}).html("&#x2705;");
+            invalid_password_message_signup.css({"font-style": "normal", position: "relative"}).html("&#x2705;");
             $(this).css("border", "1px solid green");
             passPassword = true;
             enable_button_form();
