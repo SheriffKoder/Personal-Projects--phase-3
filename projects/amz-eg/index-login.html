@@ -100,54 +100,54 @@
                         </label>
                         
                         <div class="main__login__container__fields-container--signup--content" id="signup_content">
-                            <form class="main__signup__container__fields-container--signup--form" id="signup_content">
+                            <form class="main__signup__container__fields-container--signup--form" id="signup_content" aria-label="Sign up">
                                 
                                 <span class="signup__input-field">
                                     <span class="signup--label-wrapper">
                                         <label for="signup__name--field" class="signup__name-label">
-                                            First and last name
+                                            <h2>First and last name</h2>
                                         </label>
-                                        <span class="signup__email--field--message"></span>
+                                        <span class="signup__email--field--message" aria-live="polite"></span>
                                     </span>
-                                <input type="text" class="signup__name--field" id="signup__name--field">
+                                <input type="text" class="signup__name--field" id="signup__name--field" aria-label="required, enter an email address in a valid form">
                                 </span>
 
                                 <span class="signup__telephone__content">
                                     <span class="signup--label-wrapper">
                                         <label for="signup__telephone--input" class="signup__telephone-label">
-                                            Phone number
+                                            <h2>Phone number</h2>
                                         </label>
-                                        <span class="signup__telephone--field--message"></span>
+                                        <span class="signup__telephone--field--message" aria-live="polite"></span>
                                     </span>
     
-                                    <select class="signup__telephone--region"><option>EG +20</option></select>
-                                    <input type="tel" id="signup__telephone--input">
+                                    <select class="signup__telephone--region" aria-label="country telephone number first two digits selection"><option>EG +20</option></select>
+                                    <input type="tel" id="signup__telephone--input" aria-label="required, enter an 11 digit telephone number">
                                 </span>
 
                                 <span class="signup__input-field">
                                     <span class="signup--label-wrapper">
-                                        <label for="signup__password--field">
-                                        Create a password
+                                        <label for="signup__password--field" class="signup__password-label">
+                                        <h2>Create a password</h2>
                                         </label>
-                                        <span class="signup__password--field--message"></span>
+                                        <span class="signup__password--field--message" aria-live="polite"></span>
                                     </span>
 
-                                <input type="password" class="signup__password--field" id="signup__password--field">
-                                <span class="signup__password--notify"><em>i</em> Passwords must be at least 8 characters</span>
+                                <input type="password" class="signup__password--field" id="signup__password--field" aria-label="required, enter a password not less than 8 characters, may be letters, numbers or symbols">
+                                <p class="signup__password--notify" aria-hidden="true" ><em>i</em> Passwords must be at least 8 characters</p>
                                 </span>
 
-                                <p class="signup--notice">
+                                <p class="signup--notice" >
                                     To verify your number, we will send you a text message
                                     with a temporary code. Message and data rates may apply.
                                 </p>
 
-                                <button type="submit" class="signup__verify-button" id="signup__verify-button">Verify mobile number</button>
+                                <button type="submit" class="signup__verify-button" id="signup__verify-button" aria-label="this button is available only in case all inputs are valid">Verify mobile number</button>
 
                                 <p class="signup__agreement">
                                     By creating and account, you agree to Amazon's
-                                    <a>Conditions of Use & Sale</a>
+                                    <a href="">Conditions of Use & Sale</a>
                                     and
-                                    <a>Privacy Notice.</a>
+                                    <a href="">Privacy Notice.</a>
                                 </p>
 
 
@@ -166,19 +166,19 @@
                             <span class="login__header">Sign in. <span class="login__header2">Already a customer?</span></span>
                         </label>
                         
-                        <form class="main__login__container__fields-container--login--content" id="login_content">
+                        <form class="main__login__container__fields-container--login--content" id="login_content" aria-label="login">
 
                             <span class="login__email--container--wrapper">
 
                                 <div class="login__email--container">
-                                        <label for="login__email--field" class="login__email--label">
+                                        <label for="login__email--field" class="login__email--label" >
                                             <strong>Email or phone number</strong>
                                         </label>
-                                    <input type="text" id="login__email--field" name="login__email--field">
-                                    <span class="login__email--field--message">
+                                    <input type="text" id="login__email--field" name="login__email--field" aria-label="required, enter your phone number or your email" placeholder="">
+                                    <span class="login__email--field--message" aria-live="true">
                                     </span>
 
-                                    <button type="button" id="login__email--continue">Continue</button>
+                                    <button type="button" id="login__email--continue" aria-label="this button proceed to enter a password and is available in case entered an email or phone number related to an existing account">Continue</button>
                                     <p class="login__email--agreement">
                                         By signing in, you agree to Amazon's
                                         <a href="" > Conditions of Use</a>
@@ -204,15 +204,15 @@
                                     <div class="login__password--header">
                                         <label for="login__password--field" class="login__password--label"><strong>Amazon password</strong></label>
 
-                                        <div class="login__password--current-phone">
+                                        <div class="login__password--current-phone" aria-label="click the following link to re-enter the email or phone number">
                                             for
                                             <span class="login__password--current-phone--number"> +20101234567</span>
                                             <a class="login__password--current-phone--change"> Change</a>
                                         </div>
                                     </div>
-                                    <input type="text" id="login__password--field" name="login__password--field">
+                                    <input type="text" id="login__password--field" name="login__password--field" aria-label="enter a password that matches the account related to the entered email or phone number, case sensitive">
 
-                                    <span class="login__password--field--message">
+                                    <span class="login__password--field--message" aria-live="true">
                                     </span>
 
                                     <div class="login__password--options">
@@ -226,18 +226,18 @@
                                         <label for="login__stay-signed--checkbox">
                                             <input type="checkbox" id="login__stay-signed--checkbox">
                                             <span>Keep me signed in.</span>
-                                            <a href="" class="login__stay-signed--checkbox--details-link">
+                                            <a href="" class="login__stay-signed--checkbox--details-link" aria-label="link for more information about staying signed in">
                                                 Details
                                             </a>
 
                                         </label>
                                         </div>
                                         <div class="login__password--options-side2">
-                                            <a href="" class="login__password--forgot-link">Forgot password?</a>
+                                            <a href="" class="login__password--forgot-link" aria-label="click here if you forgot your password and want to reset">Forgot password?</a>
                                         </div>
                                     </div>
 
-                                    <button id="login__password--login-link">Sign in</button>
+                                    <button id="login__password--login-link" aria-label="this sign in button is available in case entered a password matching the entered email or phone number">Sign in</button>
 
                                 </div>
                             </span>
