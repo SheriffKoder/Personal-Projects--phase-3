@@ -70,6 +70,7 @@ $ (function() {
     }) 
 
 
+
     /*// sign-in area inputs validation //*/
     ////////////////////////////////////////////////////////////////////////
 
@@ -179,7 +180,6 @@ $ (function() {
     });
         
 
-
     /*// create-account area inputs validation //*/
     ////////////////////////////////////////////////////////////////////////
 
@@ -263,5 +263,24 @@ $ (function() {
     });
 
 
+    /*// add and remove hover backgrounds and borders for buttons //*/
+    ////////////////////////////////////////////////////////////////////////
+
+    const myButtons = [login_email_continue_button,signIn_button, signup_button];
+
+    myButtons.forEach(function(button) {
+        button.on("mouseenter focus", function () {
+            if (!$(this).prop("disabled")) {
+                $(this).css({"background-color": "var(--button-yellow)", "border": "1px solid var(--button-yellow2)", "cursor": "pointer"});
+            }
+        });
+        button.on("mouseleave blur", function () {
+            if (!$(this).prop("disabled")) {
+            $(this).css({"background-color": "var(--button-yellow2)", "border": "var(--button-yellow2)", "cursor": "pointer"});
+            }
+        });
+    });
+
 
 })
+
