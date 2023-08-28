@@ -95,12 +95,64 @@
                         
                         <label for="radio_signup" class="main__login__container__fields-container--signup--label"> 
                             <input type="radio" class="main__login__container__fields-container--signup--selection" id="radio_signup" name="log_user_select">
-                            <span>Sign up</span>
+                            <span class="signup__header">Create account. <span class="signup__header2">New to Amazon?</span></span>
 
                         </label>
                         
                         <div class="main__login__container__fields-container--signup--content" id="signup_content">
-                            Sign up here
+                            <form class="main__signup__container__fields-container--signup--form" id="signup_content">
+                                
+                                <span class="signup__input-field">
+                                    <span class="signup--label-wrapper">
+                                        <label for="signup__name--field" class="signup__name-label">
+                                            First and last name
+                                        </label>
+                                        <span class="signup__email--field--message"></span>
+                                    </span>
+                                <input type="text" class="signup__name--field" id="signup__name--field">
+                                </span>
+
+                                <span class="signup__telephone__content">
+                                    <span class="signup--label-wrapper">
+                                        <label for="signup__telephone--input" class="signup__telephone-label">
+                                            Phone number
+                                        </label>
+                                        <span class="signup__telephone--field--message"></span>
+                                    </span>
+    
+                                    <select class="signup__telephone--region"><option>EG +20</option></select>
+                                    <input type="tel" id="signup__telephone--input">
+                                </span>
+
+                                <span class="signup__input-field">
+                                    <span class="signup--label-wrapper">
+                                        <label for="signup__password--field">
+                                        Create a password
+                                        </label>
+                                        <span class="signup__password--field--message"></span>
+                                    </span>
+
+                                <input type="password" class="signup__password--field" id="signup__password--field">
+                                <span class="signup__password--notify"><em>i</em> Passwords must be at least 8 characters</span>
+                                </span>
+
+                                <p class="signup--notice">
+                                    To verify your number, we will send you a text message
+                                    with a temporary code. Message and data rates may apply.
+                                </p>
+
+                                <button type="submit" class="signup__verify-button" id="signup__verify-button">Verify mobile number</button>
+
+                                <p class="signup__agreement">
+                                    By creating and account, you agree to Amazon's
+                                    <a>Conditions of Use & Sale</a>
+                                    and
+                                    <a>Privacy Notice.</a>
+                                </p>
+
+
+                                
+                            </form>
                         </div>
                     </div>
 
@@ -119,8 +171,13 @@
                             <span class="login__email--container--wrapper">
 
                                 <div class="login__email--container">
-                                    <label for="login__email--field" class="login__email--label">Email or phone number</label>
+                                        <label for="login__email--field" class="login__email--label">
+                                            <strong>Email or phone number</strong>
+                                        </label>
                                     <input type="text" id="login__email--field" name="login__email--field">
+                                    <span class="login__email--field--message">
+                                    </span>
+
                                     <button type="button" id="login__email--continue">Continue</button>
                                     <p class="login__email--agreement">
                                         By signing in, you agree to Amazon's
@@ -145,7 +202,7 @@
                                 <div class="login__password--container">
 
                                     <div class="login__password--header">
-                                        <label for="login__password--field" class="login__password--label">Amazon password</label>
+                                        <label for="login__password--field" class="login__password--label"><strong>Amazon password</strong></label>
 
                                         <div class="login__password--current-phone">
                                             for
@@ -155,6 +212,8 @@
                                     </div>
                                     <input type="text" id="login__password--field" name="login__password--field">
 
+                                    <span class="login__password--field--message">
+                                    </span>
 
                                     <div class="login__password--options">
                                         <div class="login__password--options-side1">
