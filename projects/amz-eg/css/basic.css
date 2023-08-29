@@ -45,7 +45,8 @@ body {
 
     --button-yellow: #FFD814;
     --button-yellow-border: #FCD200;
-    --button-yellow-hover: rgb(237, 201, 21);
+    --button-yellow-hover: #f7cb00;
+    --button-yellow-hover-border: #f2c300;
 
     --button-yellow2: #ffea00;
 
