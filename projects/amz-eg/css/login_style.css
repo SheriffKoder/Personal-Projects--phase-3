@@ -96,7 +96,7 @@
 }
 
 
-.login__email--label, .signup__name-label h2, .signup__telephone-label h2, .signup__password-label h2 {
+.login__email--label h2, .signup__name-label h2, .signup__telephone-label h2, .signup__password-label h2 {
     margin-left: 0.5rem;
     font-size: 1rem;
 }
@@ -113,7 +113,8 @@
     margin-top: 0.5rem;
     height: 2.7rem;
     border-radius: 7px;
-    border: 0px;
+    border: 1px;
+    border-color: var(--button-yellow2);
     background-color: var(--button-yellow2);
     font-weight: 400;
     box-shadow:  2px 2px 4px 1px rgba(245, 245, 245, 0.5);
@@ -174,8 +175,9 @@
 }
 
 
-.login__password--label {
+.login__password--label h2 {
     margin-left: 0.5rem;
+    font-size: 1rem;
 }
 
 #login__password--field {
@@ -188,7 +190,8 @@
     margin-top: 0.5rem;
     height: 2.7rem;
     border-radius: 7px;
-    border: 0px;
+    border: 1px;
+    border-color: var(--button-yellow2);
     background-color: var(--button-yellow2);
     font-weight: 400;
     margin-top: auto;
@@ -304,20 +307,6 @@
 }
 
 
-@media screen and (min-width: 650px) {
-    .main__login__wrapper {
-        padding: 3rem 0.5rem;
-    }
-    
-}
-
-/*not cause below 360 to have the form clipped from left*/
-@media screen and (max-width: 360px) {
-    .main__login__wrapper {
-        display: block;
-    }
-    
-}
 
 
 
@@ -353,4 +342,32 @@
     -webkit-transform: translate(0%,-9%);
     -moz-transform: translate(0%,25%);
 
+}
+
+#login__password--login-link:enabled:hover, #login__password--login-link:enabled:focus,
+#login__email--continue:enabled:hover, #login__email--continue:enabled:focus,
+#signup__verify-button:enabled:hover, #signup__verify-button:enabled:focus
+ {
+    background-color: var(--button-yellow);
+    border: 1px solid var(--button-yellow2);
+    cursor: pointer;
+}
+
+
+
+
+
+@media screen and (min-width: 650px) {
+    .main__login__wrapper {
+        padding: 3rem 0.5rem;
+    }
+    
+}
+
+/*not cause below 360 to have the form clipped from left*/
+@media screen and (max-width: 360px) {
+    .main__login__wrapper {
+        display: block;
+    }
+    
 }
