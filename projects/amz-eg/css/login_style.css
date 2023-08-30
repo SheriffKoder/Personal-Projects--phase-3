@@ -12,7 +12,10 @@
     width: 100%;
     /* background-color: red; */
     max-width: 450px;
-    min-width: 360px;
+    min-width: 335px;
+
+    margin-left:  auto;
+
     
 }
 

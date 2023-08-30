@@ -81,13 +81,13 @@
         </nav>
     </header>
 
-    <main>
+    <main aria-label="Seller products page">
 
-        <aside class="main__main__top-bar">
+        <aside class="main__main__top-bar" aria-label="products amount and sort by">
             <span class="main__main__top-bar-container">
-                <p>1–16 of over 4,000 results</p>
-                <select class="main__main__top-bar--sort">
-                    <option class="">Sort by: Featured</option>
+                <span><span aria-label="number of pages the results are spread">1–16 </span>of over 4,000 results</span>
+                <select class="main__main__top-bar--sort" aria-label="sort products drop down select">
+                    <option>Sort by: Featured</option>
                 </select>
             </span>
             <span class="select-caret-down"></span>
@@ -133,74 +133,75 @@
                 </aside>
 
 
-                <div class="main__main__products-list">
+                <div class="main__main__products-list" aria-label="all products list">
                     
                     <div class="main__main__products-list--text">
-                        <h1 class="main__main__products-list--text--header">
+                        <h1 class="main__main__products-list--text--header" aria-hidden="true">
                         Results
                         </h1>
-                        <p class=main__main__products-list--text--notify">
+                        <p class="main__main__products-list--text--notify" aria-label="note">
                         Price and other details may vary, based on product size and colour.
                         </p>
 
                     </div>
     
                     
-                    <div class="main__main__products-list--item">
+                    <div class="main__main__products-list--item" aria-label="product number one">
                         
                         <a href="" class="main__main__products-list--item--image--container">
-                            <img src="./img/product-image.jpg" class="main__main__products-list--item--image" alt="product image">
+                            <img src="./img/product-image.jpg" class="main__main__products-list--item--image" alt="phone screen protector">
                         </a>                        
-                        <div class="main__main__products-list--item--description">
+                        <div class="main__main__products-list--item--description" aria-label="product's details">
                             
-                            <a href="" class="main__main__products-list--item--description--header-link">
+                            <span aria-label="product's name">
+                            <a href="" class="main__main__products-list--item--description--header-link"">
                                 USB Power Cable to Adapter Jack 5.5×2.1mm 5V to 8.4V
                             </a>
+                            </span>
                             
-                            <span class="main__main__products-list--item--description--color">
+                            <span class="main__main__products-list--item--description--color" aria-label="product's color">
                                 blue
                             </span>
                             
-                            <span class="main__main__products-list--item--description--rating">
-                                <span class="main__main__products-list--item--description--rating--rate">
+                            <span class="main__main__products-list--item--description--rating" aria-label="product's rating">
+                                <span class="main__main__products-list--item--description--rating--rate" aria-label="current product's rating from 5">
                                     4.9
                                 </span>
-                                <span class="main__main__products-list--item--description--rating--stars">
+                                <span class="main__main__products-list--item--description--rating--stars" aria-hidden="true">
                                     &#11088; &#11088; &#11088; &#11088; &#11088;
                                 </span>
-                                <span class="main__main__products-list--item--description--rating--number">
+                                <span class="main__main__products-list--item--description--rating--number" aria-label="number of ratings given by customers">
                                     (2)
                                 </span>
                             </span>
                             
-                            <span class="main__main__products-list--item--description--price">
-                                <span class="main__main__products-list--item--description--price--currency">
+                            <span class="main__main__products-list--item--description--price" aria-label="product's price">
+                                <span class="main__main__products-list--item--description--price--currency" aria-label="currency">
                                 EGP
                                 </span>
-                                <p class="main__main__products-list--item--description--price--number">
+                                <p class="main__main__products-list--item--description--price--number" aria-label="egyptian pounds">
                                 100
                                 </p>
-                                <span class="main__main__products-list--item--description--price--decimal">
+                                <span class="main__main__products-list--item--description--price--decimal" aria-label="cents">
                                 00
                                 </span>
                             </span>
 
-                            <span class="main__main__products-list--item--description--sold">
+                            <span class="main__main__products-list--item--description--sold" aria-label="number of products sold">
                                 99+ Sold
                             </span>
 
-                            <span class="main__main__products-list--item--description--available">
+                            <span class="main__main__products-list--item--description--available" aria-label="number of products available">
                                 More than 99+ available
                             </span>
 
                             <span class="main__main__products-list--item--description--spacer"></span>
 
                             <span class="main__main__products-list--item--description-buttons">
-                                <button class="main__main__products-list--item--description-buttons-add">Stock</button>
-                                <button class="main__main__products-list--item--description-buttons-edit">Edit</button>
-                                <button class="main__main__products-list--item--description-buttons-delete">Delete</button>
+                                <button class="main__main__products-list--item--description-buttons-add" aria-label="control, Add to stock">Stock</button>
+                                <button class="main__main__products-list--item--description-buttons-edit" aria-label="control, edit product">Edit</button>
+                                <button class="main__main__products-list--item--description-buttons-delete" aria-label="control, delete product">Delete</button>
                             </span>
-
 
                         </div>
                     </div>

@@ -41,14 +41,26 @@ body {
 
     --product-list-text: #565959;
     --product-rating-blue: #007185;
+    --active-link: #c45500;
     /* #f4e40a */
 
     --button-yellow: #FFD814;
     --button-yellow-border: #FCD200;
     --button-yellow-hover: #f7cb00;
     --button-yellow-hover-border: #f2c300;
-
     --button-yellow2: #ffea00;
+
+    --button-white-border: #d5d9e1;
+    --button-white: #fff;
+    --button-white-hover: #f7fafa;
+    --button-white-hover-border: #d5d9d9;
+
+
+
+    --orders-search-field-border: #888C8C;
+    --orders-search-field-hover-border: #c9f4fa;
+    --orders-search-field-hover-bg: #f7feff;
+
 
 
 }
