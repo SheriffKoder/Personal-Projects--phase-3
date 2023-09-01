@@ -86,11 +86,11 @@
         <div class="main__main__wrapper">
             <div class="main__main__content">
 
-                <div class="main__main__content__top-link--container">
+                <nav class="main__main__content__top-link--container" aria-label="site navigation">
                     <a href="" class="main_link">Your Account</a>
-                    >
+                    <span aria-hidden="true">></span>
                     <a href="" class="main_link active_link">Your Orders</a>
-                </div>
+                </nav>
 
                 <div class="main__main__content__orders-header">
                     <h1 class="main__main__content__orders-header--header">Your Orders</h1>
@@ -100,8 +100,10 @@
                                 
                             <i class="main__main__content__orders-header--search--logo"></i>
                             </div>
-                            <div class="main__main__content__orders-header--search--field--container2">
-                            <input type="search" class="main__main__content__orders-header--search--field" placeholder="Search orders">
+                            <div class="main__main__content__orders-header--search--field--container2" aria-label="Search your orders">
+                            <span class="main__main__content__orders-header--search--field">
+                            <input type="search" placeholder="Search orders">
+                            </span>
                             <button type="button" class="main__main__content__orders-header--search--button">Search Orders</button>
                             </div>
                         </span>
@@ -109,7 +111,7 @@
                 </div>
 
                 <div class="main__main__content__orders__page-tabs">
-                    <ul class="page-tabs__list">
+                    <ul class="page-tabs__list" aria-label="View orders with a specific status">
                         <li><a href="" class="page-tabs__tab page-tabs__tab-active">Orders</a></li>
                         <li><a href="" class="page-tabs__tab">Buy it again</a></li>
                         <li><a href="" class="page-tabs__tab">Not yet dispatched</a></li>
@@ -119,11 +121,11 @@
 
 
                 <div class="main__main__content__orders__orders-amount">
-                    <span class="order-amount__count">
-                        <b>17 orders</b> placed in
+                    <span class="order-amount__count" aria-label="Amount of recent orders">
+                        <b>17 orders</b> <span aria-hidden="true">placed in</span>
                     </span>
                     <span class="orders_amount__filter__container">
-                        <select class="orders_amount__filter">
+                        <select class="orders_amount__filter" aria-label="select the history duration for the orders displayed">
                             <option>past three months</option>
                         </select>
                         <i class="order_amount__filter--logo"></i>
@@ -133,27 +135,27 @@
 
                 <div class="main__main__content__orders__results__wrapper">
 
-                        <div class="main__main__content__orders__result__container">
+                        <div class="main__main__content__orders__result__container" aria-label="order group">
                             <div class="orders__result--header-area">
-                                <ul class="orders__result--header--list">
-                                    <li class="orders__result--header--list--item">
+                                <ul class="orders__result--header--list" aria-label="order details">
+                                    <li class="orders__result--header--list--item" aria-label="Order date">
                                         <h3>Order placed</h3>
                                         <p>16 August 2023</p>
                                     </li>
-                                    <li class="orders__result--header--list--item">
+                                    <li class="orders__result--header--list--item" aria-label="Order's total cost">
                                         <h3>Total</h3>
                                         <p>EGP 472.0</p>
                                     </li>
-                                    <li class="orders__result--header--list--item">
+                                    <li class="orders__result--header--list--item" aria-label="Order's delivery destination">
                                         <h3>Ship to</h3>
                                         <p>Sherif Khodeir</p>
                                     </li>
-                                    <li class="orders__result--header--list--item">
+                                    <li class="orders__result--header--list--item" aria-label="Order's number and invoice">
                                         <h3>ORDER # 404-0361719-9468379</h3>
                                         <span class="orders__result--header--list--item--order-details">
-                                            <a href="">View order details</a>
+                                            <a href="" class="main_link">View order details</a>
                                             <span aria-hidden="true" class="orders__result--header--list--item--order-details--separator"> | </span>
-                                            <a href="">Invoice</a>
+                                            <a href="" class="main_link">Invoice</a>
                                         </span>
                                     </li>
 
@@ -161,19 +163,19 @@
                             </div>
 
                             <div class="orders__result--items--container">
-                                <div class="orders__result--items--header">
+                                <div class="orders__result--items--header" aria-label="delivery information">
                                     <h2>Delivered 18 August</h2>
                                     <p>Your package was handed off directly</p>
                                 </div>
 
-                                <div class="orders__result--items">
+                                <div class="orders__result--items" aria-label="order's items list">
 
 
-                                    <div class="orders_result--item">
+                                    <div class="orders_result--item" aria-label="item">
                                         <a href="" class="orders__result--item--image">
                                             <img src="./img/product-image.jpg" alt="screen protector">
                                         </a>
-                                        <div class="orders__result--item--description">
+                                        <div class="orders__result--item--description" aria-label="items's description">
                                             <a href="" class="orders__result--item--description--title">
                                              Cleaning gel for car, car cleaning kit universal detailing automotive dust
                                             </a>
@@ -186,32 +188,34 @@
                                         </div>
                                     </div>
 
-                                    <div class="orders_result--item">
+                                    <div class="orders_result--item" aria-label="item">
                                         <a href="" class="orders__result--item--image">
                                             <img src="./img/product-image.jpg" alt="screen protector">
                                         </a>
-                                        <div class="orders__result--item--description">
+                                        <div class="orders__result--item--description" aria-label="items's description">
                                             <a href="" class="orders__result--item--description--title">
                                              Cleaning gel for car, car cleaning kit universal detailing automotive dust
                                             </a>
                                             <p class="orders__result--item--description--note">Return or replace items eligible</p>
                                             <div class="orders__result--item--description--links">
+                                                <!-- <i src="./img/buy-again.png"></i> -->
                                                 <button type="button" class="yellow-button">Buy it again</button>
                                                 <button type="button" class="white-button">View your item</button>
                                             </div>
                                         </div>
                                     </div>
 
-                                    <div class="orders_result--item">
+                                    <div class="orders_result--item" aria-label="item">
                                         <a href="" class="orders__result--item--image">
                                             <img src="./img/product-image.jpg" alt="screen protector">
                                         </a>
-                                        <div class="orders__result--item--description">
+                                        <div class="orders__result--item--description" aria-label="items's description">
                                             <a href="" class="orders__result--item--description--title">
                                              Cleaning gel for car, car cleaning kit universal detailing automotive dust
                                             </a>
                                             <p class="orders__result--item--description--note">Return or replace items eligible</p>
                                             <div class="orders__result--item--description--links">
+                                                <!-- <i src="./img/buy-again.png"></i> -->
                                                 <button type="button" class="yellow-button">Buy it again</button>
                                                 <button type="button" class="white-button">View your item</button>
                                             </div>
@@ -220,7 +224,7 @@
 
 
                                 </div>
-                                <div class="orders__result--control-links">
+                                <div class="orders__result--control-links" aria-label="order's action links">
                                     <a href="" class="orders__result--control-links--link white-button">Track package</a>
                                     <a href="" class="orders__result--control-links--link white-button">Track package</a>
                                     <a href="" class="orders__result--control-links--link white-button">Leave seller feedback</a>
