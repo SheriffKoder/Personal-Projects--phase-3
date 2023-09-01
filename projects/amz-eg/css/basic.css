@@ -55,11 +55,14 @@ body {
     --button-white-hover: #f7fafa;
     --button-white-hover-border: #d5d9d9;
 
-
-
     --orders-search-field-border: #888C8C;
     --orders-search-field-hover-border: #c9f4fa;
     --orders-search-field-hover-bg: #f7feff;
+
+    --cart_bg: #EAEDED;
+    --available-text: #007600;
+    --not-available-text: #B12704;
+    --qualified-text: #007500;
 
 
 
