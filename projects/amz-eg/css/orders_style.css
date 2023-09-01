@@ -55,11 +55,13 @@ Row 1
 .main_link:hover {
     text-decoration: underline;
     color: var(--active-link);
+    /* color: #c45500; */
 
 }
 
 .active_link {
     color: var(--active-link);
+    /* color: #c45500; */
     pointer-events: none;
 }
 
@@ -146,19 +148,44 @@ Row 2
     box-shadow: 0 1px 2px rgba(15,17,17,.15) inset;
     /* -webkit-appearance: textfield; */
     border-radius: 4px;
+    -webkit-border-radius: 4px;
     /* width: 100%; */
     /* max-width: 331px; */
-    /* position: relative; */
     min-width: 60vw;
     flex: 1;
 
+    position: relative;
 
 }
 
-.main__main__content__orders-header--search--field:focus {
+.main__main__content__orders-header--search--field:focus-within {
 
     background-color: var(--orders-search-field-hover-bg);
-    outline: 2px solid var(--orders-search-field-hover-border);
+    /* outline: 2px solid var(--orders-search-field-hover-border);   */
+}
+
+.main__main__content__orders-header--search--field:focus-within::before {
+    position: absolute;
+    content: "";
+    border: 2px solid var(--orders-search-field-hover-border);
+    top: -3px;
+    bottom: -3px;
+    right: -3px;
+    left: -3px;
+    border-radius: 6px;
+    z-index: -1;
+}
+
+.main__main__content__orders-header--search--field input {
+    appearance: none;
+    -webkit-appearance: none;
+    height: 100%;
+    width: 100%;
+    border: 0px;
+    outline: 0px;
+    background-color: transparent;
+
+
 }
 
 
@@ -321,7 +348,10 @@ top header
 .orders__result--header-area {
     background-color: var(--sort-button-grey);
     padding: min(2vw,1rem) min(2vw, 1.5rem);
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
 
+    
 }
 
 .orders__result--header--list {
@@ -597,6 +627,26 @@ Row 5
         font-size: 0.9rem;
     }
     
+
+    button.yellow-button {
+        position: relative;
+        padding-left: 3rem;
+    }
+
+    button.yellow-button::before {
+        content: "";
+        background-image: url("../img/buy-again.png");
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
+        height: 1.8rem;
+        width: 1.8rem;
+        top: 0.15rem;
+        left: 0.2rem;
+        position: absolute;
+        z-index: 2;
+    }
+
         
 }
 
@@ -767,25 +817,6 @@ Row 5
 
 .page-tabs__tab {
     padding: 0.75rem;
-}
-
-button.yellow-button {
-    position: relative;
-    padding-left: 3rem;
-}
-
-button.yellow-button::before {
-    content: "";
-    background-image: url("../img/buy-again.png");
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
-    height: 1.9rem;
-    width: 1.9rem;
-    top: 0.1rem;
-    left: 0.2rem;
-    position: absolute;
-    z-index: 2;
 }
 
 
