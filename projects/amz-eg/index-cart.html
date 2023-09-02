@@ -7,7 +7,7 @@
     <title>Amazon.eg</title>
 
     <style>
-        @import url('https://fonts.cdnfonts.com/css/amazon-ember');
+        /* @import url('https://fonts.cdnfonts.com/css/amazon-ember'); */
         main {
             height: 130vh;
         }
@@ -22,7 +22,6 @@
 
 
 
-
 </head>
 <body>
 
@@ -30,6 +29,8 @@
         <nav id="main-navigation" aria-label="the main">
             <div class="main-navigation__wrapper">
             <div class="main-navigation__container">
+                <a href="#main" aria-label="skip navigation and search and move to the main area" class="sr-only">next</a>
+
                 <ul class="main-navigation__List-1">
                     <li class="main-navigation__List-1-link-small not_desktop"><a href="" id="header-menu" aria-label="browse categories">=</a></li>
                     <li class="main-navigation__List-1-link-logo"><a href="" id="header-logo" aria-label="Amazon egypt home"></a><a href="" id="header-logo--text" aria-label="country selection, currently browsing amazon egypt shop">.eg</a></li>
@@ -82,180 +83,249 @@
         </nav>
     </header>
 
-    <main>
+    <main id="main">
 
         <div class="main__main__wrapper"> <!--100vw-->
             <div class="main__main__content"> <!--min/max width-->
-                <form class="main__main__content__row1"> <!--contains cart/total-->
-                    <div class="main__main__content__row1--cart">
+                <form class="main__main__content__row1" id="cart_items_form"> <!--contains cart/total-->
+                    <section class="main__main__content__row1--cart" aria-label="Shopping cart">
 
                         <div class="main__main__content__row1--cart--header">
                             <h1>Shopping Cart</h1>
+                            <a href="#saved_items_area" aria-label="skip the cart and move to next area" class="sr-only">next</a>
+
                             <a>Deselect all items</a>
                         </div>
 
-                        <ul class="main__main__content__row1--cart--list">
-                            <li class="main__main__content__row1--cart--list--item--container">
-                                <label><input type="checkbox" for="item1"></label>
+                        <ul class="main__main__content__row1--cart--list" aria-label="cart items list">
+                            <a href="#cart_proceed_area" aria-label="skip cart items list and go to the proceed area" class="sr-only">proceed</a>
+
+                            <li class="main__main__content__row1--cart--list--item--container" aria-label="cart item">
+                                <label><input type="checkbox" for="item1" aria-label="remove item from checkout"></label>
                                 <div id="item1" class="main__main__content__row1--cart--list--item">
-                                    <div class="cart--list--item--image">
-                                        <img src="../amz-eg/img/product-image.jpg">
+                                    <div class="cart--list--item--image" aria-label="item's image">
+                                        <img src="../amz-eg/img/product-image.jpg" alt="screen protector">
                                     </div>
-                                    <div class="cart--list--item--description">
-                                        <h2 class="cart--list--item--description--name">
+                                    <div class="cart--list--item--description" aria-label="item's description">
+                                        <h2 class="cart--list--item--description--name" aria-label="item's title">
                                             Wireless Mouse And Mice 2.4g Receiver, Super Slim Mouse
                                         </h2>
-                                        <p class="cart--list--item--description--price">
+                                        <p class="cart--list--item--description--price" aria-label="item's price">
                                             EGP 140.00
                                         </p>
-                                        <p class="cart--list--item--description--availability available_green">
+                                        <p class="cart--list--item--description--availability available_green" aria-label="item's availability">
                                             In Stock
                                         </p>
-                                        <p class="cart--list--item--description--delivery">
+                                        <p class="cart--list--item--description--delivery" aria-label="item's delivery option">
                                             Eligible for free delivery
                                         </p>
-                                        <h2 class="cart--list--item--description--actions">
-                                            <select><option>Qty: 1</option></select>
-                                            <button>Delete</button>
-                                            <button>Save for later</button>
-                                            <button>Share</button>
-                                        </h2>
+                                        <div class="cart--list--item--description--actions" aria-label="item's control buttons" tabindex="0">
+                                            <select aria-label="item's count"><option>Qty: 1</option></select>
+                                            <button aria-label="delete item from cart">Delete</button>
+                                            <button aria-label="move item to 'save for later' list">Save for later</button>
+                                            <button aria-label="share item">Share</button>
+                                        </div>
                                     </div>
                                 </div>
                             </li>
 
-                            <li class="main__main__content__row1--cart--list--item--container">
-                                <label><input type="checkbox" for="item1"></label>
+                            <li class="main__main__content__row1--cart--list--item--container" aria-label="cart item">
+                                <label><input type="checkbox" for="item1" aria-label="remove item from checkout"></label>
                                 <div id="item1" class="main__main__content__row1--cart--list--item">
-                                    <div class="cart--list--item--image">
-                                        <img src="../amz-eg/img/product-image.jpg">
+                                    <div class="cart--list--item--image" aria-label="item's image">
+                                        <img src="../amz-eg/img/product-image.jpg" alt="screen protector">
                                     </div>
-                                    <div class="cart--list--item--description">
-                                        <h2 class="cart--list--item--description--name">
+                                    <div class="cart--list--item--description" aria-label="item's description">
+                                        <h2 class="cart--list--item--description--name" aria-label="item's title">
                                             Wireless Mouse And Mice 2.4g Receiver, Super Slim Mouse
                                         </h2>
-                                        <p class="cart--list--item--description--price">
+                                        <p class="cart--list--item--description--price" aria-label="item's price">
                                             EGP 140.00
                                         </p>
-                                        <p class="cart--list--item--description--availability available_green">
+                                        <p class="cart--list--item--description--availability available_green" aria-label="item's availability">
                                             In Stock
                                         </p>
-                                        <p class="cart--list--item--description--delivery">
+                                        <p class="cart--list--item--description--delivery" aria-label="item's delivery option">
                                             Eligible for free delivery
                                         </p>
-                                        <h2 class="cart--list--item--description--actions">
-                                            <select><option>Qty: 1</option></select>
-                                            <button>Delete</button>
-                                            <button>Save for later</button>
-                                            <button>Share</button>
-                                        </h2>
+                                        <div class="cart--list--item--description--actions" aria-label="item's control buttons" tabindex="0">
+                                            <select aria-label="item's count"><option>Qty: 1</option></select>
+                                            <button aria-label="delete item from cart">Delete</button>
+                                            <button aria-label="move item to 'save for later' list">Save for later</button>
+                                            <button aria-label="share item">Share</button>
+                                        </div>
                                     </div>
                                 </div>
                             </li>
 
-                            <li class="main__main__content__row1--cart--list--item--container">
-                                <label><input type="checkbox" for="item1"></label>
+                            <li class="main__main__content__row1--cart--list--item--container" aria-label="cart item">
+                                <label><input type="checkbox" for="item1" aria-label="remove item from checkout"></label>
                                 <div id="item1" class="main__main__content__row1--cart--list--item">
-                                    <div class="cart--list--item--image">
-                                        <img src="../amz-eg/img/product-image.jpg">
+                                    <div class="cart--list--item--image" aria-label="item's image">
+                                        <img src="../amz-eg/img/product-image.jpg" alt="screen protector">
                                     </div>
-                                    <div class="cart--list--item--description">
-                                        <h2 class="cart--list--item--description--name">
+                                    <div class="cart--list--item--description" aria-label="item's description">
+                                        <h2 class="cart--list--item--description--name" aria-label="item's title">
                                             Wireless Mouse And Mice 2.4g Receiver, Super Slim Mouse
                                         </h2>
-                                        <p class="cart--list--item--description--price">
+                                        <p class="cart--list--item--description--price" aria-label="item's price">
                                             EGP 140.00
                                         </p>
-                                        <p class="cart--list--item--description--availability available_green">
+                                        <p class="cart--list--item--description--availability available_green" aria-label="item's availability">
                                             In Stock
                                         </p>
-                                        <p class="cart--list--item--description--delivery">
+                                        <p class="cart--list--item--description--delivery" aria-label="item's delivery option">
                                             Eligible for free delivery
                                         </p>
-                                        <h2 class="cart--list--item--description--actions">
-                                            <select><option>Qty: 1</option></select>
-                                            <button>Delete</button>
-                                            <button>Save for later</button>
-                                            <button>Share</button>
-                                        </h2>
+                                        <div class="cart--list--item--description--actions" aria-label="item's control buttons" tabindex="0">
+                                            <select aria-label="item's count"><option>Qty: 1</option></select>
+                                            <button aria-label="delete item from cart">Delete</button>
+                                            <button aria-label="move item to 'save for later' list">Save for later</button>
+                                            <button aria-label="share item">Share</button>
+                                        </div>
                                     </div>
                                 </div>
                             </li>
-
 
                         </ul>
-                        <p class="right-text-align row1--extra--proceed-confirm-total ">Subtotal (6 items): <span class="row1--extra--proceed-confirm-total-price"> EGP 2,449.98</span></p>
+                        <p class="right-text-align row1--extra--proceed-confirm-total" aria-label="Cart's total price">Subtotal (6 items): <span class="row1--extra--proceed-confirm-total-price"> EGP 2,449.98</span></p>
 
 
-                    </div>
-                    <div class="main__main__content__row1--extra">
+                    </section>
+                    <section class="main__main__content__row1--extra" id="cart_proceed_area" aria-label="proceed to checkout area">
                         <div class="row1--extra--proceed">
                             <div class="row1--extra--proceed--qualify">
                                 <span class="proceed-qualified-1">Part of your order qualifies for FREE Shipping.</span>
                                 <span class="proceed-qualified-2">Choose this option at checkout.</span>
-                                <a href="">See details</a>
+                                <a href="" aria-label="more details about free shipping">See details</a>
                             </div>
                             <div class="row1--extra--proceed-confirm">
-                            <p class="row1--extra--proceed-confirm-total">Subtotal (6 items): <span class="row1--extra--proceed-confirm-total-price"> EGP 2,449.98</span></p>
-                            <button type="submit" class="yellow-button row1--extra--proceed-submit">Proceed to Buy</button>
+                            <p class="row1--extra--proceed-confirm-total" aria-label="Cart's total price">Subtotal (6 items): <span class="row1--extra--proceed-confirm-total-price"> EGP 2,449.98</span></p>
+                            <button type="submit" class="yellow-button row1--extra--proceed-submit" aria-label="proceed to checkout">Proceed to Buy</button>
                             </div>
                         </div>
-                    </div>
+                    </section>
 
                 </form>
                 
-                <div class="main__main__content__row2">
+                <section class="main__main__content__row2" aria-label="saved for later area" id="saved_items_area">
+
                     <h1>Your items</h1>
-                    <div class="main__main__content__row2--tabs">
-                        <a href="" class="cart--active-tab">Saved for later</a>
-                        <a href="" class="cart--not-active-tab">Buy it again</a>
+                    <a href="#frequently_purchased_area" aria-label="skip saved items and move to the next area" class="sr-only">next</a>
+                    <nav class="main__main__content__row2--tabs" aria-label="list navigation tabs">
+                        <a class="cart--active-tab row2-tab" aria-label="view the saved for later items" id="saved" >Saved for later</a>
+                        <a class="cart--not-active-tab row2-tab" aria-label="view previously purchased items to add to cart" id="buy-again">Buy it again</a>
+                    </nav>
+
+
+                    <div class="row2--saved-items--wrapper" aria-label="saved for later items list" tabindex="0">
+                        <h2>Saved items</h2>
+                        <ul class="row2--saved-items--container">
+                            <li class="saved-item" aria-label="saved item">
+                                <div class="saved-item--image-container" aria-label="saved item's image">
+                                    <img src="./img/product-image.jpg" alt="screen protector">
+                                </div>
+                                <div class="saved-item--description" aria-label="saved item's description area">
+                                    <p href="" class="saved-item--description--title" aria-label="saved item's title">Screen protector</p>
+                                    <p href="" class="saved-item--description--seller" aria-label="saved item's seller">seller</p>
+                                    <p class="saved-item--description--availability not_available_red" aria-label="saved item's availability">currently unavailable</p>
+                                    <span class="saved-item--description-controls" aria-label="saved item's control links">
+                                        <a href="" aria-label="delete from the saved items list">Delete</a>
+                                        <a href="" aria-label="Add again to cart items">Add to list</a>
+                                    </span>
+                                </div>
+                            </li>
+
+                            <li class="saved-item">
+                                <div class="saved-item--image-container">
+                                    <img src="./img/product-image.jpg">
+                                </div>
+                                <div class="saved-item--description">
+                                    <a href="" class="saved-item--description--title">Screen protector</a>
+                                    <a href="" class="saved-item--description--seller">seller</a>
+                                    <span class="saved-item--description--availability not_available_red">currently unavailable</span>
+                                    <span class="saved-item--description-controls">
+                                        <a href="">Delete</a>
+                                        <a href="">Add to list</a>
+                                    </span>
+                                </div>
+                            </li>
+                        </ul>
+
                     </div>
 
+                    <div class="row2--buy-again-items--wrapper" aria-label="saved for later items list" tabindex="0">
 
-                    <div class="row2--items-container">
-                        <div class="saved-item">
-                            <div class="saved-item--image-container">
-                                <img src="./img/product-image.jpg">
-                            </div>
-                            <div class="saved-item--description">
-                                <a href="" class="saved-item--description--title">Screen protector</a>
-                                <a href="" class="saved-item--description--seller">seller</a>
-                                <span class="saved-item--description--availability not_available_red">currently unavailable</span>
-                                <span class="saved-item--description-controls">
-                                    <a href="">Delete</a>
-                                    <a href="">Add to list</a>
-                                </span>
-                            </div>
-                        </div>
+                        <h2>Previously purchased</h2>
 
-                        <div class="saved-item">
-                            <div class="saved-item--image-container">
-                                <img src="./img/product-image.jpg">
-                            </div>
-                            <div class="saved-item--description">
-                                <a href="" class="saved-item--description--title">Screen protector</a>
-                                <a href="" class="saved-item--description--seller">seller</a>
-                                <span class="saved-item--description--availability not_available_red">currently unavailable</span>
-                                <span class="saved-item--description-controls">
-                                    <a href="">Delete</a>
-                                    <a href="">Add to list</a>
-                                </span>
-                            </div>
-                        </div>
+                        <ul class="row2--buy-again-items-container" aria-label="previously purchased items list">
+                            <li class="buy-again-item" aria-label="previously purchased item">
+                                <div class="buy-again-item--image-container" aria-label="previously bought item's image">
+                                    <img src="./img/product-image.jpg" alt="screen protector">
+                                </div>
+                                <div class="buy-again-item--description" aria-label="previously bought item's description area">
+                                    <p href="" class="buy-again-item--description--title" aria-label="previously bought item's title">Screen protector for Samsung S Ultra</p>
+                                    <span class="buy-again-item--description--rating" aria-label="previously bought item's rating">Stars</span>
+                                    <p class="buy-again-item--description--price" aria-label="previously bought item's price">EGP 310.00</p>
+                                    <p class="buy-again-item--description--only" aria-label="previously bought item's availability">Only 4 left in stock - order soon</p>
+                                    <button class="yellow-button buy-again-item--description--button" aria-label="add this previously bought item to cart">Add to Cart</button>
+                                </div>
+                            </li>
+
+                            <li class="recommended-item">
+                                <div class="recommended-item--image-container">
+                                    <img src="./img/product-image.jpg">
+                                </div>
+                                <div class="recommended-item--description">
+                                    <a href="" class="recommended-item--description--title">Screen protector for Samsung S Ultra</a>
+                                    <span class="recommended-item--description--rating">Stars</span>
+                                    <span class="recommended-item--description--price">EGP 310.00</span>
+                                    <span class="recommended-item--description--only">Only 4 left ins stock - order soon</span>
+                                    <button class="yellow-button recommended-item--description--button">Add to Cart</button>
+                                </div>
+                            </li>
+
+                            <li class="recommended-item">
+                                <div class="recommended-item--image-container">
+                                    <img src="./img/product-image.jpg">
+                                </div>
+                                <div class="recommended-item--description">
+                                    <a href="" class="recommended-item--description--title">Screen protector for Samsung S Ultra</a>
+                                    <span class="recommended-item--description--rating">Stars</span>
+                                    <span class="recommended-item--description--price">EGP 310.00</span>
+                                    <span class="recommended-item--description--only">Only 4 left ins stock - order soon</span>
+                                    <button class="yellow-button recommended-item--description--button">Add to Cart</button>
+                                </div>
+                            </li>
+                        </ul>
 
                     </div>
                     
-                </div>
+                </section>
 
 
             </div>
 
-            <div class="main__main__content__row3__wrapper">
+            <section class="main__main__content__row3__wrapper" id="frequently_purchased_area" aria-label="frequently purchased items on amazon">
                 <div class="main__main__content__row3">
                 <h2>Frequently purchased</h2>
+                <a href="#cart_items_form" aria-label="move to the beginning of page and skip this area" class="sr-only">next</a>
 
-                <div class="row3--items-container">
-                    <div class="recommended-item">
+                <ul class="row3--items-container" aria-label="recommended items list">
+                    <li class="recommended-item" aria-label="recommended item">
+                        <div class="recommended-item--image-container" aria-label="recommended-item's image">
+                            <img src="./img/product-image.jpg" alt="screen protector">
+                        </div>
+                        <div class="recommended-item--description" aria-label="recommended-item's description area">
+                            <p href="" class="recommended-item--description--title" aria-label="recommended-item's title">Screen protector for Samsung S Ultra</p>
+                            <span class="recommended-item--description--rating" aria-label="recommended-item's rating">Stars</span>
+                            <p class="recommended-item--description--price" aria-label="recommended-item's price">EGP 310.00</p>
+                            <p class="recommended-item--description--only" aria-label="recommended-item's availability">Only 4 left in stock - order soon</p>
+                            <button class="yellow-button recommended-item--description--button" aria-label="add this recommended-item to cart">Add to Cart</button>
+                        </div>
+                    </li>
+
+                    <li class="recommended-item">
                         <div class="recommended-item--image-container">
                             <img src="./img/product-image.jpg">
                         </div>
@@ -266,9 +336,9 @@
                             <span class="recommended-item--description--only">Only 4 left ins stock - order soon</span>
                             <button class="yellow-button recommended-item--description--button">Add to Cart</button>
                         </div>
-                    </div>
+                    </li>
 
-                    <div class="recommended-item">
+                    <li class="recommended-item">
                         <div class="recommended-item--image-container">
                             <img src="./img/product-image.jpg">
                         </div>
@@ -279,28 +349,15 @@
                             <span class="recommended-item--description--only">Only 4 left ins stock - order soon</span>
                             <button class="yellow-button recommended-item--description--button">Add to Cart</button>
                         </div>
-                    </div>
-
-                    <div class="recommended-item">
-                        <div class="recommended-item--image-container">
-                            <img src="./img/product-image.jpg">
-                        </div>
-                        <div class="recommended-item--description">
-                            <a href="" class="recommended-item--description--title">Screen protector for Samsung S Ultra</a>
-                            <span class="recommended-item--description--rating">Stars</span>
-                            <span class="recommended-item--description--price">EGP 310.00</span>
-                            <span class="recommended-item--description--only">Only 4 left ins stock - order soon</span>
-                            <button class="yellow-button recommended-item--description--button">Add to Cart</button>
-                        </div>
-                    </div>
+                    </li>
 
 
 
 
-                </div>
+                </ul>
                 
                 </div>
-            </div>
+            </section>
         </div>
 
 
@@ -556,7 +613,7 @@
     <a href="#main-footer" aria-label="return to the beginning of the footer" class="sr-only">repeat</a>
 
     <script src="./js/code.jquery.com_jquery-3.7.0.js"></script>
-    <script src="./js/main_login.js"></script>
+    <script src="./js/main_cart.js"></script>
 
 </body>
 </html>
