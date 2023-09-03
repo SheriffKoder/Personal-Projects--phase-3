@@ -91,6 +91,10 @@ main {
     order: 1; /**/
 }
 
+input[type="checkbox"] {
+ accent-color: var(--product-rating-blue);   
+}
+
 img {
     /* height: 180px; */
     /* width: 180px; */
