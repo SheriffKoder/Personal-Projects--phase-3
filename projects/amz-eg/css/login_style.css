@@ -1,4 +1,6 @@
-
+input[type="checkbox"], input[type="radio"] {
+    accent-color: var(--product-rating-blue);   
+}
 
 .main__login__wrapper {
     width: 100vw;
