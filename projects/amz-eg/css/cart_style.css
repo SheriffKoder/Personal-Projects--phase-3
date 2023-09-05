@@ -10,8 +10,7 @@ main {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: #EAEDED;
-    background-color: var(--cart_bg);
+    background-color: var(--cart_bg, #EAEDED);
 
 }
 

@@ -40,6 +40,7 @@ body {
 
 
     --product-list-text: #565959;
+    --product-list-text-opacity: #56595981;
     --product-rating-blue: #007185;
     --active-link: #c45500;
     /* #f4e40a */
@@ -49,6 +50,11 @@ body {
     --button-yellow-hover: #f7cb00;
     --button-yellow-hover-border: #f2c300;
     --button-yellow2: #ffea00;
+
+    --button-orange: #fca41e;
+    --button-orange-border: #fb8f01;
+    --button-orange-hover: #fa8901;
+    --button-orange-hover-border: #d5d9d9;
 
     --button-white-border: #d5d9e1;
     --button-white: #fff;
@@ -63,6 +69,7 @@ body {
     --available-text: #007600;
     --not-available-text: #B12704;
     --qualified-text: #007500;
+    --red-label: #cc0d39;
 
 
 
@@ -92,6 +99,12 @@ body {
 }
   
 .sr-only {
-    color: transparent;
-    display: none;
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
 }
