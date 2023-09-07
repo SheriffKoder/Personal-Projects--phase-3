@@ -98,15 +98,15 @@
                 </div>
 
                 <div class="desktop_1 content__item__image--wrapper">
-                    <div class="content__item__image--container">
-                        <img src="./img/product-image.jpg" alt="screen protector">
+                    <div class="content__item__image--container content__item__image--container--image">
+                        <div id="img"></div>
                         <a href="www.google.com" class="content__item__image--container-after"></a>
                     </div>
                     <div class="content__item__image--slider" aria-label="image slider">
-                        <button class="content__item__image--slider--button slider--active"></button>
-                        <button class="content__item__image--slider--button slider--inactive"></button>
-                        <button class="content__item__image--slider--button slider--inactive"></button>
-                        <button class="content__item__image--slider--button slider--inactive"></button>
+                        <button class="content__item__image--slider--button slider--active" id="slider_1"></button>
+                        <button class="content__item__image--slider--button slider--inactive" id="slider_2"></button>
+                        <button class="content__item__image--slider--button slider--inactive" id="slider_3"></button>
+                        <button class="content__item__image--slider--button slider--inactive" id="slider_4"></button>
                     </div>
                 </div>
 
@@ -415,116 +415,193 @@
 
                     </div>
 
-                    <div class="content__item__reviews">
-                        <h3>Customer Reviews</h3>
-                        <div class="content__item__reviews--star-container">
-                            <i src="" class="star-small stars-three-half"></i>
-                            <span>3.1 out of 5</span>
-                            <div>28 global ratings</div>
-                        </div>
 
-                        <div class="content__item__reviews--container">
-                            <h4>Top reviews on Amazon</h4>
-                            <div class="content__item__reviews--customer-review">
-                                <div class="customer-name">
-                                    <i class="customer-logo"></i>
-                                    <span>John Smith</span>
-                                </div>
-                                <div class="customer-rating">
-                                    <span class="customer-rating-star-container">
-                                        <i src="" class="star-small stars-four-half"></i>
-                                    </span>
-                                    <span>Verified Purchase</span>        
-                                </div>
-                                <div class="customer-review-title">
-                                    Works Well !
-                                </div>
-                                <div class="customer-review-date">
-                                    Reviewed in Egypt on 31 July 2023
-                                </div>
-                                <div class="customer-review-selection">
-                                    Color: Black
-                                </div>
-                                <div class="customer-review-note">
-                                    This item works very well
-                                </div>
-                                <div class="custmer-review-buttons">
-                                    <button class="white-button review-button">Helpful</button>
-                                    
-                                    <a href="" class="review-report">Report</a>
-                                </div>
+                    <div class="full_width__border content__item__reviews--wrapper">
+
+                        <div class="content__item__reviews__rating desktop-only">
+                            <h3>Customer Reviews</h3>
+                            <div class="content__item__reviews__rating--stars-container">
+                                <i class="reviews__rating--stars star-medium stars-three-half"></i>
+                                <span>3.5 out of 5</span>
                             </div>
-
-                            <div class="content__item__reviews--customer-review">
-                                <div class="customer-name">
-                                    <i class="customer-logo"></i>
-                                    <span>John Smith</span>
-                                </div>
-                                <div class="customer-rating">
-                                    <span class="customer-rating-star-container">
-                                        <i src="" class="star-small stars-four-half"></i>
-                                    </span>
-                                    <span>Verified Purchase</span>        
-                                </div>
-                                <div class="customer-review-title">
-                                    Works Well !
-                                </div>
-                                <div class="customer-review-date">
-                                    Reviewed in Egypt on 31 July 2023
-                                </div>
-                                <div class="customer-review-selection">
-                                    Color: Black
-                                </div>
-                                <div class="customer-review-note">
-                                    This item works very well
-                                </div>
-                                <div class="custmer-review-buttons">
-                                    <button class="white-button review-button">Helpful</button>
-                                    
-                                    <a href="" class="review-report">Report</a>
-                                </div>
-                            </div>
-
-                            <div class="content__item__reviews--customer-review">
-                                <div class="customer-name">
-                                    <i class="customer-logo"></i>
-                                    <span>John Smith</span>
-                                </div>
-                                <div class="customer-rating">
-                                    <span class="customer-rating-star-container">
-                                        <i src="" class="star-small stars-four-half"></i>
-                                    </span>
-                                    <span>Verified Purchase</span>        
-                                </div>
-                                <div class="customer-review-title">
-                                    Works Well !
-                                </div>
-                                <div class="customer-review-date">
-                                    Reviewed in Egypt on 31 July 2023
-                                </div>
-                                <div class="customer-review-selection">
-                                    Color: Black
-                                </div>
-                                <div class="customer-review-note">
-                                    This item works very well
-                                </div>
-                                <div class="custmer-review-buttons">
-                                    <button class="white-button review-button">Helpful</button>
-                                    
-                                    <a href="" class="review-report">Report</a>
-                                </div>
-                            </div>
-
-
-                        </div>
-
-                        <div class="full_width__border"></div>
+                            <span class="content__item__reviews__rating--total-ratings">134 global ratings</span>
                             
-                        <a class="full_width__border content__item__reviews--all-reviews">
-                            See more reviews
-                        </a>
+                            <div class="reviews__rating--stars-percent--wrapper">
+
+                                <span class="reviews__rating--stars-percent--unit">
+                                        <a>5 Star</a>
+                                        <span id="reviews__rating--stars-percent--box">
+                                            <span style="width:50%" class="reviews__rating--stars-percent--box--fill"></span>
+                                        </span>
+                                        <a>43%</a>
+                                </span>
+
+                                <span class="reviews__rating--stars-percent--unit">
+                                    <a>4 Star</a>
+                                    <span id="reviews__rating--stars-percent--box">
+                                        <span style="width:50%" class="reviews__rating--stars-percent--box--fill"></span>
+                                    </span>
+                                    <a>43%</a>
+                                </span>
+
+                                <span class="reviews__rating--stars-percent--unit">
+                                    <a>3 Star</a>
+                                    <span id="reviews__rating--stars-percent--box">
+                                        <span style="width:50%" class="reviews__rating--stars-percent--box--fill"></span>
+                                    </span>
+                                    <a>43%</a>
+                                </span>
+
+
+                                <span class="reviews__rating--stars-percent--unit">
+                                    <a>2 Star</a>
+                                    <span id="reviews__rating--stars-percent--box">
+                                        <span style="width:50%" class="reviews__rating--stars-percent--box--fill"></span>
+                                    </span>
+                                    <a>43%</a>
+                                </span>
+
+                                <span class="reviews__rating--stars-percent--unit">
+                                    <a>1 Star</a>
+                                    <span id="reviews__rating--stars-percent--box">
+                                        <span style="width:50%" class="reviews__rating--stars-percent--box--fill"></span>
+                                    </span>
+                                    <a>43%</a>
+                                </span>
+
+                            </div>
+
+                            <details>
+                                To calculate the overall star rating and percentage breakdown by star, we don’t use a simple average. Instead, our system considers things like how recent a review is and if the reviewer bought the item on Amazon. It also analyses reviews to verify trustworthiness.
+                                <summary>
+                                    How are ratings calculated?
+                                </summary>
+                            </details>
+
+                            <div class="reviews__rating--post">
+                                <h3>Review this product</h3>
+                                <span>Share your thoughts with other customers</span>
+                                <button type="button" class="white-button">
+                                    Write a customer review
+                                </button>
+                            </div>
+
+
+                        </div>
+
+                        <div class="content__item__reviews">
+                            <h3>Customer Reviews</h3>
+                            <div class="content__item__reviews--star-container">
+                                <i src="" class="star-small stars-three-half"></i>
+                                <span>3.1 out of 5</span>
+                                <div>28 global ratings</div>
+                            </div>
+    
+                            <div class="content__item__reviews--container">
+                                <h4>Top reviews on Amazon</h4>
+                                <div class="content__item__reviews--customer-review">
+                                    <div class="customer-name">
+                                        <i class="customer-logo"></i>
+                                        <span>John Smith</span>
+                                    </div>
+                                    <div class="customer-rating">
+                                        <span class="customer-rating-star-container">
+                                            <i src="" class="star-small stars-four-half"></i>
+                                        </span>
+                                        <span>Verified Purchase</span>        
+                                    </div>
+                                    <div class="customer-review-title">
+                                        Works Well !
+                                    </div>
+                                    <div class="customer-review-date">
+                                        Reviewed in Egypt on 31 July 2023
+                                    </div>
+                                    <div class="customer-review-selection">
+                                        Color: Black
+                                    </div>
+                                    <div class="customer-review-note">
+                                        This item works very well
+                                    </div>
+                                    <div class="custmer-review-buttons">
+                                        <button class="white-button review-button">Helpful</button>
+                                        
+                                        <a href="" class="review-report">Report</a>
+                                    </div>
+                                </div>
+    
+                                <div class="content__item__reviews--customer-review">
+                                    <div class="customer-name">
+                                        <i class="customer-logo"></i>
+                                        <span>John Smith</span>
+                                    </div>
+                                    <div class="customer-rating">
+                                        <span class="customer-rating-star-container">
+                                            <i src="" class="star-small stars-four-half"></i>
+                                        </span>
+                                        <span>Verified Purchase</span>        
+                                    </div>
+                                    <div class="customer-review-title">
+                                        Works Well !
+                                    </div>
+                                    <div class="customer-review-date">
+                                        Reviewed in Egypt on 31 July 2023
+                                    </div>
+                                    <div class="customer-review-selection">
+                                        Color: Black
+                                    </div>
+                                    <div class="customer-review-note">
+                                        This item works very well
+                                    </div>
+                                    <div class="custmer-review-buttons">
+                                        <button class="white-button review-button">Helpful</button>
+                                        
+                                        <a href="" class="review-report">Report</a>
+                                    </div>
+                                </div>
+    
+                                <div class="content__item__reviews--customer-review">
+                                    <div class="customer-name">
+                                        <i class="customer-logo"></i>
+                                        <span>John Smith</span>
+                                    </div>
+                                    <div class="customer-rating">
+                                        <span class="customer-rating-star-container">
+                                            <i src="" class="star-small stars-four-half"></i>
+                                        </span>
+                                        <span>Verified Purchase</span>        
+                                    </div>
+                                    <div class="customer-review-title">
+                                        Works Well !
+                                    </div>
+                                    <div class="customer-review-date">
+                                        Reviewed in Egypt on 31 July 2023
+                                    </div>
+                                    <div class="customer-review-selection">
+                                        Color: Black
+                                    </div>
+                                    <div class="customer-review-note">
+                                        This item works very well
+                                    </div>
+                                    <div class="custmer-review-buttons">
+                                        <button class="white-button review-button">Helpful</button>
+                                        
+                                        <a href="" class="review-report">Report</a>
+                                    </div>
+                                </div>
+    
+    
+                            </div>
+    
+                            <div class="full_width__border"></div>
+                                
+                            <a class="content__item__reviews--all-reviews">
+                                See more reviews
+                            </a>
+    
+                        </div>
 
                     </div>
+
 
                 </div>
 
@@ -542,6 +619,9 @@
                     <a href="">In-Ear Headphones</a>
 
                 </div>
+
+
+
 
 
             </div>
@@ -801,7 +881,7 @@
     <a href="#main-footer" aria-label="return to the beginning of the footer" class="sr-only">repeat</a>
 
     <script src="./js/code.jquery.com_jquery-3.7.0.js"></script>
-    <script src="./js/main_login.js"></script>
+    <script src="./js/main_item.js"></script>
 
 </body>
 </html>
