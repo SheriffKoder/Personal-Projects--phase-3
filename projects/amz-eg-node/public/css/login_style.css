@@ -1,0 +1,378 @@
+input[type="checkbox"], input[type="radio"] {
+    accent-color: var(--product-rating-blue);   
+}
+
+.main__login__wrapper {
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem 0.5rem;
+}
+
+.main__login__container {
+    width: 100%;
+    /* background-color: red; */
+    max-width: 450px;
+    min-width: 335px;
+
+    margin-left:  auto;
+
+    
+}
+
+.main__login__container--header {
+    padding-bottom: 0.5rem;
+    font-size: 1.5rem;
+    font-weight: 400;
+}
+
+.main__login__container--fields-container {
+    width: 100%;
+    border: 1px solid var(--sort-button-grey);
+    box-shadow: 1px 1px 5px var(--sort-button-grey);
+    
+}
+
+
+.main__login__container__fields-container--signup,
+.main__login__container__fields-container--login {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+}
+
+
+
+.main__login__container__fields-container--signup--label,
+.main__login__container__fields-container--login--label {
+    width: 100%;
+    padding: 1em;
+
+}
+
+
+
+
+.main__login__container__fields-container--signup--content,
+.main__login__container__fields-container--login--content {
+    padding: 1em;
+    height: 100px;
+    display: block;
+}
+
+.main__login__container__fields-container--signup--content {
+    display: none;
+}
+
+.main__login__container__fields-container--signup {
+    background-color: var(--sort-button-grey);
+
+}
+
+
+
+
+
+/*///////////////////////////////////////////////////////////////*/
+
+
+.main__login__container__fields-container--login {
+
+}
+
+.login__header, .signup__header {
+    margin-left: 0.5rem;
+    font-weight: 500;
+}
+
+.login__header2, .signup__header2 {
+    font-size: 0.9rem;
+}
+
+.login__email--container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    /* border: 1px dashed black; */
+    min-height: 15em;
+
+}
+
+
+.login__email--label h2, .signup__name-label h2, .signup__telephone-label h2, .signup__password-label h2 {
+    margin-left: 0.5rem;
+    font-size: 1rem;
+}
+
+#login__email--field, #signup__name--field, #signup__password--field, #signup__telephone--input {
+    padding: 0.75rem;
+    border: 1px solid rgb(190,190,190,0.9);
+    border-radius: 3px;
+    width: 100%;
+
+}
+
+#login__email--continue, #signup__verify-button {
+    margin-top: 0.5rem;
+    height: 2.7rem;
+    border-radius: 7px;
+    border: 1px;
+    border-color: var(--button-yellow2);
+    background-color: var(--button-yellow2);
+    font-weight: 400;
+    box-shadow:  2px 2px 4px 1px rgba(245, 245, 245, 0.5);
+
+}
+
+.login__email--agreement, .signup__agreement {
+    font-weight: 400;
+    margin-top: 0.2rem;
+
+}
+
+.login__email--agreement a, .login__email--help-links a,
+.signup__agreement a {
+    text-decoration: none;
+    color: var(--product-rating-blue);
+}
+
+
+.login__email--help-links {
+    display: flex;
+    flex-direction: column;
+    padding: 1.1rem;
+    margin-top: -0.8rem;
+    gap: 0.2rem;
+}
+
+.login__email--help-details {
+    color: var(--product-rating-blue);
+}
+
+.main__login__container__fields-container--login--content {
+    height: 100% !important;    /*jQuery adds a fixed html inline height so the summary does not extend the container*/
+}
+
+
+/*//////////////////////////////*/
+
+
+.login__password--container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    /* border: 1px dashed black; */
+    min-height: 15em;
+}
+
+.login__password--container--wrapper {
+    display: none;
+
+}
+
+.login__password--header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+}
+
+
+.login__password--label h2 {
+    margin-left: 0.5rem;
+    font-size: 1rem;
+}
+
+#login__password--field {
+    padding: 0.75em;
+    border: inset 0.2px solid black;
+
+}
+
+#login__password--login-link {
+    margin-top: 0.5rem;
+    height: 2.7rem;
+    border-radius: 7px;
+    border: 1px;
+    border-color: var(--button-yellow);
+    background-color: var(--button-yellow-border);
+    font-weight: 400;
+    margin-top: auto;
+}
+
+
+.login__password--options {
+    display: flex;
+    flex-direction: row;
+}
+
+.login__password--options-side1 {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+
+.login__password--options-side2 {
+    margin-left: auto;
+}
+
+
+.login__password--options a {
+    text-decoration: none;
+    color: var(--product-rating-blue);
+    font-size: 0.95rem;
+}
+
+
+.login__password--options-side1 label span {
+    padding-left: 0.5rem;
+}
+
+
+.login__password--current-phone--change {
+    color: var(--product-rating-blue);
+    cursor: pointer;
+    font-size: 0.95rem;
+
+
+}
+
+
+
+
+/*///////////////////////////////////////////////////////////////*/
+
+
+.main__login__container__fields-container--signup--content {
+    display: none;
+    height: auto;
+
+}
+
+.main__signup__container__fields-container--signup--form {
+
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    min-height: 15em;
+    padding: 1em;
+
+}
+
+
+
+
+
+.signup__telephone__content {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.signup__telephone-label {
+    width: 100%;
+}
+
+#signup__telephone--input {
+    flex: 1;
+    margin-left: 0.5rem;
+}
+
+.signup__telephone--region {
+    padding: 0.75rem;
+    width: 9rem;
+    padding: 0 0.5rem;
+    border-radius: 6px;
+    border: 0.5px solid rgb(190, 190, 190, 0.3);
+    box-shadow:  2px 2px 4px 1px rgba(245, 245, 245, 0.7);
+    font-weight: 300;
+}
+
+
+.signup__input-field {  /*wrapper*/
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.signup__password--field {
+    width: 100%;
+}
+
+.signup__password--notify {
+    color: var(--product-list-text);
+}
+
+.signup__password--notify em {
+    color: var(--product-rating-blue);
+}
+
+
+
+
+
+.login__email--field--message, .login__password--field--message, 
+.signup__email--field--message, .signup__telephone--field--message, .signup__password--field--message {
+    height: 15px;
+    color: var(--footer-text-grey3);
+    font-size: 0.9rem;
+    font-style: italic;
+}
+
+.signup--label-wrapper {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    width: 100%;
+}
+
+.login__password--field--message {
+    margin: 0.1em 0.2em;
+}
+
+.signup__telephone--field--message {
+    white-space: nowrap;
+}
+
+
+
+.signup__telephone--field--message, .signup__email--field--message, .signup__password--field--message {
+
+    top: 2.4rem;
+    right: 0.5rem;
+    -webkit-transform: translate(0%,-9%);
+    -moz-transform: translate(0%,25%);
+
+}
+
+#login__password--login-link:enabled:hover, #login__password--login-link:enabled:focus,
+#login__email--continue:enabled:hover, #login__email--continue:enabled:focus,
+#signup__verify-button:enabled:hover, #signup__verify-button:enabled:focus
+ {
+    background-color: var(--button-yellow-hover);
+    border: 1px solid var(--button-yellow-hover-border);
+    cursor: pointer;
+}
+
+
+
+
+
+@media screen and (min-width: 650px) {
+    .main__login__wrapper {
+        padding: 3rem 0.5rem;
+    }
+    
+}
+
+/*not cause below 360 to have the form clipped from left*/
+@media screen and (max-width: 360px) {
+    .main__login__wrapper {
+        display: block;
+    }
+    
+}
