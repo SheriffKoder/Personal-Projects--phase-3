@@ -65,12 +65,23 @@ function App () {
 };
 */
 
+// Components
+import Header from "./components/Header"; //h2
+import Home from "./components/Home";
 
+import { GlobalStyle } from "./GlobalStyle";  //h2
 
 const App = () => {
   return (
+
     <div className="App">
-      Start here.
+
+      <Header />
+
+      <Home />
+
+      <GlobalStyle />
+
     </div>
   );
 }
