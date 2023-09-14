@@ -80,7 +80,7 @@ whats new ?
 
 
 //hour 2
-//////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
 //
 /*
 
@@ -212,11 +212,12 @@ and return the states
 
 what's new ?
 - styled-components lib GlobalStyle
-- create header and its sub style components and put into App.js (main)
-- style the header sub style-components
-- create an empty home component
-- add fetching logic to the home component
-- move the fetching logic to a custom hook (external file) where it returns its states (2.1)
+= create header and its sub style components and put into App.js (main)
+= style the header sub style-components
+- when styling a style-component, can nest its children in the css and give them media query
+= create an empty Home component (main)
+= add fetching logic to the home component
+= move the fetching logic to a custom hook (external file) where it returns its states (2.1)
 
 
 */
@@ -225,11 +226,13 @@ what's new ?
 
 
 //hour 3
-//////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
 //
 /*
 
-//Create the hero image
+
+//////////////////////////////////////
+//Create the hero image component and pass props to it
 
 will grab a background image and text from the database API
 
@@ -243,13 +246,167 @@ as before,
 >> add in the text component h1 and p tags
 >> pass to Wrapper and h1, p tags props for image, title and text
 
+>> import and return the HeroImage component in Home.js
+>> wrap HeroImage in Home.js with return, return null if no first result
+>> pass props as needed in the component from the results array
+
+
+//style the hero image component
+
+now as we have the component ready, it needs some sub styles-components styling
+
+
+
+//////////////////////////////////////
+//the thumbnail grid (organizer container)
+
+will skip the search bar for now, and work on the thumbnail grid
+
+> create components > Grid folder
+> create index.js and Grid.styles.js
+> add sub components style placeholder (empty)
+> import in index.js the sub style components
+> create a Grid component and wrap the sub style components
+> pass props to the sub components in the Grid component
+    > a header and the "children" props
+
+> import into Home.js
+> add to the return block
+>> in a div will map the state.results to get each title
+>> this will be the children property
+
+the console warns that each child in a list should have a unique key prop
+as react uses this internally to diff stuff and optimize itself
+>> so will give to the div an attribute of key={movie.id}
+or can use a random number
+
+
+//styling the grid
+now we have the movie titles after each other on the page
+so we have our grid, time to style it
+go to Grid.styles.css to add paddings and the grid
+
+
+//////////////////////////////////////
+//adding the thumbnails
+
+> create components > Thumb folder
+> create index.js, Thumb.styles.js
+> add sub components style placeholder (empty)
+> import in index.js the sub style components
+> put in a Thumb component div, 
+> pass to the thumb component, props of image, movieId, clickable
+to use as img src
+
+> import Thumb component into Home.js
+> we will replace this Thumb component with the movie.title in the map method
+    and pass the needed props
+
+//styling the thumbnails
+add entering animation opacity
+
+
+//////////////////////////////////////
+//Spinner
+
+> create components > Spinner folder
+> create index.js, Spinner.styles.js
+> add sub components style placeholder (empty)
+> import in index.js the sub style components
+> will not put in a Spinner component div, will just export it right away
+
+//add styling to the spinner
+> place at the bottom of the return block in Home.js for now
+
+//will make the spinner only appear when fetching from the api later
+
+
+////////////////////////////////////////////////////////////////////////////
+//create Search bar
+
+will type a movie name and display results
+
+> create components > SearchBar folder
+> create index.js, SearchBar.styles.js
+> add sub components style placeholder (empty)
+> import in index.js the sub style components, searchIcon image, React hooks
+
+> in a SearchBar component, return the styled sub components wrapped
+with img, input tags
+
+> import and put in Home.js 
+
+//////////////////////////////////////
+//Search bar functionality
+
+will make it a controlled component
+a component that react controls
+the input value is going to be based on a state that we create
+and when this state changes, will also change the value in the input box
+using onChange setState and value={state}
+
+the state in sync with the actual value in the input field
+
+
+////Search bar functionality 2
+
+now we want to do something with this state value of the input
+go to useHomeFetch.js 
+> define a state constant
+> export with the hook function
+> import in Home.js
+> pass this import to the SearchBar component as a prop
+
+when this state triggers what this will do is 
+change the state in the hook function (upwards?) passed down to the component to be changed
+and use it in the fetched results (display specific results?)
+
+
+//we also want a delay before displaying the results
+this is why we have dual states (in SearchBar index and in useHomeFetch)
+> for that will use the useEffect timer **
+
+> now go to the useHomeFetch
+console searchTerm, will find the entered input text
+
+
+//we also want to trigger this useEffect when the user types something in
+not on the initial render
+> for that will use the useRef in the SearchBar index
+which we can mutate (set value directly)
+
+//////////////////////////////////////
+////Styling the SearchBar
+
+
+////////////////////////////////////////////////////////////////////////////
+//Logic
+
+
+
+
+
+# vscode-styles-components plugin
+
+
+
+
+
+
 
 
 what is new ?
-- use props on the imported wrapped sub style components in index.js
-
-
-
+= create the hero image component, sub components
+= use props on the imported wrapped sub style components in index.js
+= pass these props from the Home.js and use them in the styles.component file
+= create the thumbnail grid component
+- children property, takes all nested inside the component in Home.js as a property
+- use map on the state.results to return an array of movie.titles
+= create thumbnail images Thumb component to be placed in the mapped grid
+- can use nested &:hover { } into a styled-component directly
+= create the spinner component
+= create the search bar component
+= work on the search bar functionality to take the input to the custom hook (to filter results later)
 
 
 

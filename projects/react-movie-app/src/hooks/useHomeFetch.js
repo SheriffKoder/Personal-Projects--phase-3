@@ -20,6 +20,11 @@ const initialState = {
 //(2)
 export const useHomeFetch = () => {
 
+    //(3) and export at the end
+    const [searchTerm, setSearchTerm] = useState("");
+
+    console.log(searchTerm);
+
     //state that will hold all the movies (1)
     //setting three states will trigger a re-render 3 times
     //would find movies consoled three times, but react will diff these outputs
@@ -69,7 +74,7 @@ export const useHomeFetch = () => {
 
     }, []);
 
-    //(2.1)
-    return { state, loading, error };
+    //(2.1) //(3)
+    return { state, loading, error, setSearchTerm };
 
 }
