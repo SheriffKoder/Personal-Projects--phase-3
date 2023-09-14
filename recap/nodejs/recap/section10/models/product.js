@@ -1,64 +1,44 @@
 
 
-const cartModel = require("./cart.js");
-const db = require("../util/database.js");
+//will return a class or constructor function when defined with capital S
+const Sequelize = require("sequelize");
+
+//fully configured sqlz environment that also has a connection pool and features of the sqlz package
+const sequelize = require("../util/database");
 
 
+//define a model that will be managed by sqlz
+//arguments: modelName, structure of our model and the auto constructed db table
+//in the structure we define the fields our product should have
+//find more on defining the structure in the official docs/model-definition
+const Product = sequelize.define("product", {
 
+    id: {
+        type: Sequelize.INTEGER,
+        autoIncrement: true,
+        allowNull: false,
+        primaryKey: true
+    },
 
-const getProductsFromFile = (in_cb) => {
-    fs.readFile(myDataFilePath, (error, fileContent) => {
-        if(!error) {
-            in_cb(JSON.parse(fileContent));
-        }
-    });
-};
+    //can set the type directly without an object, however can use obj to add allowNull: false
+    title: Sequelize.STRING,
 
+    price: {
+        type: Sequelize.DOUBLE,
+        allowNull: false
+    },
 
+    imageUrl: {
+        type: Sequelize.STRING,
+        allowNull: false
+    },
 
-
-module.exports = class Product {
-    constructor (id, title1, imageUrl1, price1, description1) {
-        this.id = id;
-        this.title = title1;
-        this.imageUrl = imageUrl1;
-        this.description = description1;
-        this.price = price1;
+    description: {
+        type: Sequelize.STRING,
+        allowNull: false
     }
+    
 
-    save () {
+});
 
-        //fields should be like the order in the database
-        //no need to specify the id because it will be specified automatically by the db engine
-        //values can be unsafe to specify directly
-        //so will add "?" and then specify the values for db engine to handle that replacement 
-        return db.execute("INSERT INTO products (title, price, description, imageURL) VALUES (?,?,?,?",
-         [this.title, this.price, this.description, this.imageUrl]   
-        );
-
-    }
-
-    static deleteById(id) {
-
-    };
-
-
-
-    static fetchAll() {
-        return db.execute("SELECT * FROM products");
-    }
-
-
-
-
-    static findMyId(id) {
-        //using "?" make it secure to get/send values
-        //selects the whole row of this id
-        return db.execute("SELECT * FROM products WHERE products.id = ?", [id])
-
-    };
-
-
-
-
-}
+module.exports = Product;

@@ -197,7 +197,7 @@ SELECT * FROM products WHERE products.id = ?", [id]
 */
 
 ////Code
-
+/*
 
 //npm init
 //npm install --save express body-parser
@@ -291,6 +291,211 @@ app.use(errorController.get404);
 
 ////(2)listen to server
 app.listen(8000);
+
+*/
+
+
+//////////////////////////////////////////////////////////////////////
+//mySQL (Sequelize library)
+
+
+//can you start directly with Sequelize ?
+//work on the ejs, app.js, controller, router skeleton then implement the sql like below
+
+////Introduction
+/*
+Sequelize: a third-party library to not use sql syntax
+does sql code behind the scenes for the convenience methods it provide
+which automatically creates tables, set relations for tables,
+allows to create new elements to the database, edit, delete, find, connect them
+and allows to work with js objects 
+
+the js object of user with name,age,email,password
+can be mapped to a database table by Sequelize using a method
+
+from  >  "INSERT INTO table (field1, field2,..) VALUES (?, ?, ..)", [value1, value2, ..]
+to    >  const user = User.create({value1: "..", value2: ".."});
+
+- Instances: const user = User.build()
+- Queries: User.findAll()
+- Associations: User.hasMany(Product)
+
+*/
+
+
+
+////setup
+/*
+go to mySQL.com and download the community edition
+mySQL community server, mySQL workbench (virtual client to interact with the DB)
+or a combined installer for windows MySQL (installer & tools)
+
+> connect to a database in the workbench
+> create a new schema (now will have tables)
+
+
+////setup the database (do not add, explore how fields are defined will add with code)
+in the workbench, right click tables, create table > products
+add fields then click apply
+id > with datatype INT and checkmarks for PK, NN, UQ, UN, AI
+title > with type VARCHAR(45) which is basically a string
+and edit the 45 to 255 characters long (longer titles will be cut off)
+check NN
+price > type double (so we can enter decimal) check NN
+description > type TEXT, check NN
+imageUrl > type VARCHAR(255) (means longer urls will not work), check NN
+*/
+
+
+
+/*
+
+
+////Code setup
+
+- install mysql2 and Sequelize via npm
+- define a Sequelize connection pool in the database file
+    and import in app.js as sequelize
+
+- work on the product model file (a new syntax not class like mySQL or MVC)
+    where we define a table, fields (inspired from the workbench)
+
+- use //sequelize.sync({force: true} ) in app.js and refresh the workbench
+if the table exists it will not overwrite it by default except if we told it to do so
+to proof its from sqlz, will find fields of createdAt, updatedAt
+
+
+////Using sequelize in the controllers
+
+(1) Add a product to database
+    controllers > admin.js > postAddProduct
+    to create a product use ProductClassModel.create({
+
+(2) Fetch products from database for index, All products, Admin Products
+    ProductClassModel.findAll().then((products)) render
+
+(3) Fetch a Single Product
+    >>ProductClassModel.findByPk(prodId)
+    //findAll always gives multiple items in an array even if it is only one element
+    >>ProductClassModel.findAll({where: {id: prodId}})
+    both are the same but will use findByPk
+
+(4) getEditProduct
+    ProductClassModel.findByPk(prodId) to pass the product to page for re-fill
+
+(5) postEditProduct
+    ProductClassModel.findByPk(prodId) to update then save the product
+
+(6) postDeleteProduct
+    ProductClassModel.findByPk(prodId) return product.destroy();
+
+
+
+
+
+
+
+
+
+
+
+
+*/
+
+//npm init
+//npm install --save express body-parser
+//npm install --save ejs
+
+
+//allows to write and execute SQL code and interact with a database
+//# npm install --save mysql2
+//# npm install --save sequelize
+
+
+
+
+
+//////////////////////////////////////////////////////////////////////////////////
+//Section 6: Templating engines
+//Section 7: MVC
+//Section 10: mySQL
+
+
+////(1) starting modules
+const express = require("express");
+const app = express();
+const path = require("path");
+
+const bodyParser = require("body-parser");
+app.use(bodyParser.urlencoded({extended:false}));
+
+
+
+//(7) setup the templating engine
+app.set("view engine", "ejs");
+app.set("views", "views");
+
+
+
+//Section11: Sequelize
+
+const sequelize = require("./util/database");
+sequelize.sync();
+
+
+
+
+////(4) import route files to use
+const adminJsRoutes = require("./routes/admin.js");
+const shopJsRoutes = require("./routes/shop.js");
+
+
+////(6) access static files like css
+//so will change in the html the css links to /css/file (omit public)
+app.use(express.static(path.join(__dirname, "public")));
+
+
+////(5) activate the route files
+//app.use(adminJsRoutes.router);
+app.use(shopJsRoutes);
+
+
+////(5.1)filtering mechanism
+app.use("/admin", adminJsRoutes);
+//only routes starting with /admin (ex. /admin/add-page)
+//will be executed from this code 
+//do not add the /admin in the "route" files's paths
+//but add /admin to html links/forms
+// "./admin" will be placed before any path
+//so place /product in the .js file use's
+//and enter /admin/product url for this to work
+//but the .js file's form should have a path with "/admin/add-product"
+
+
+
+// (3) undefined paths
+// no url parameter, will catch all un-used urls
+// app.use((req, res, next) => {
+//     //res.status(404).sendFile(path.join(__dirname, "views", "404.html"));
+//     res.status(404).render("404", {myTitle: "404 Page"});
+
+// });
+
+const errorController = require("./controllers/errorController.js");
+app.use(errorController.get404);
+
+
+
+
+////(2)listen to server
+app.listen(8000);
+
+
+
+
+
+
+
 
 
 

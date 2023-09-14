@@ -1,7 +1,9 @@
 
 
 //Vanilla mySQL to connect to the workbench Database
+//////////////////////////////////////////////////////////////////////////////////////////
 
+/*
 const mysql = require("mysql2");
 
 
@@ -27,3 +29,22 @@ const pool = mysql.createPool({
 //create a promise from the returned pool
 //to handle on the app.js
 module.exports = pool.promise();
+*/
+
+
+//Sequelize
+//////////////////////////////////////////////////////////////////////////////////////////
+
+const Sequelize = require("sequelize");
+//schema name, root name, password
+//dialect makes sure we connect to mysql database, for using the correct syntax
+//host, by default it is set to localhost but we will set it here
+
+const sequelize = new Sequelize("SQL-Recap1", "root", "Blackvulture_92", {
+    dialect: "mysql",
+    host: "localhost"
+});
+
+module.exports = sequelize;
+
+

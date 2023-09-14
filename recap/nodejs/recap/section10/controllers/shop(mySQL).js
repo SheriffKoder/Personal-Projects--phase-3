@@ -8,14 +8,12 @@ const { products } = require("../routes/admin");
 
 exports.getProducts = (req, res, next) => {
 
-    //Sequelize (2)
-    ProductClassModel.findAll()
-    .then((products)=>{
-        res.render("shop/index.ejs", {prods: products, myTitle: "Shop page", path:"/"});
+    //mySQL
+    ProductClassModel.fetchAll()
+    .then(([rows, fieldData]) => {
+        res.render("shop/product-list", { prods: rows, myTitle: "All Products page", path: "/products"});
     })
-    .catch((err) => {
-        console.log(err);
-    });
+    .catch(err => console.log(err));
 
 };
 
@@ -28,13 +26,11 @@ exports.getProduct = (req, res, next) => {
 
     //mySQL
     //use [0] because the returned value is an "array" with the product inside it
-    ProductClassModel.findByPk(prodId)
-    .then((product) => {
-        res.render("shop/product-details", { product: product, myTitle: product.title, path: "/products"});
+    ProductClassModel.findMyId(prodId)
+    .then(([product]) => {
+        res.render("shop/product-details", { product: product[0], myTitle: product[0].title, path: "/products"});
     })
-    .catch((err) => {
-        console.log(err);
-    });
+    .catch(err => console.log(err));
 
 };
 
@@ -44,14 +40,12 @@ exports.getProduct = (req, res, next) => {
 
 exports.getIndex = (req, res, next) => {
 
-    //Sequelize (2)
-    ProductClassModel.findAll()
-    .then((products)=>{
-        res.render("shop/index.ejs", {prods: products, myTitle: "Shop page", path:"/"});
+    //mySQL
+    ProductClassModel.fetchAll()
+    .then(([rows, fieldData]) => {
+        res.render("shop/index.ejs", {prods: rows, myTitle: "Shop page", path: "/"});
     })
-    .catch((err) => {
-        console.log(err);
-    });
+    .catch(err => console.log(err));
 
 
 
