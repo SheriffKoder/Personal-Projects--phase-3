@@ -12,6 +12,8 @@ import Grid from "./Grid"; //(3)
 import Thumb from "./Thumb"; //(3)
 import Spinner from "./Spinner"; //(3)
 import SearchBar from "./SearchBar"; //(3)
+import Button from "./Button"; //(4)
+
 
 //Hook
 import { useHomeFetch } from "../hooks/useHomeFetch" //(2.1)
@@ -25,12 +27,14 @@ const Home = () => {
 
 
     //(2.1) destruct our custom hook
-    const {state, loading, error, setSearchTerm} = useHomeFetch();
+    const {state, loading, error, setSearchTerm, searchTerm, setIsLoadingMore} = useHomeFetch();
 
 
     //(2)
     console.log(state);
 
+    //if we got an error (state) will display this instead of the below return
+    if (error) return <div>Something went wrong ...</div>
 
     //(3)
     //fragments, <>, sometimes we do not want to create a div
@@ -45,7 +49,9 @@ const Home = () => {
                 <HeroImage />
             } */}
 
-            {state.results[0] ? (
+            {/* {state.results[0] ? ( */}
+            {/* //(4) */}
+            {!searchTerm && state.results[0] ? (
                 <HeroImage 
                     image={`${IMAGE_BASE_URL}${BACKDROP_SIZE}${state.results[0].backdrop_path}`} 
                     title={state.results[0].original_title}
@@ -56,7 +62,9 @@ const Home = () => {
 
             <SearchBar setSearchTerm={setSearchTerm}/>
 
-            <Grid header="Popular Movies">
+            {/* <Grid header="Popular Movies"> */}
+            {/* //(4) */}
+            <Grid header={searchTerm ? "Search Result" : "Popular Movies"}>
                 {state.results.map(movie => (
                     // <div key={movie.id}>{movie.title}</div>
                     <Thumb 
@@ -67,7 +75,15 @@ const Home = () => {
                     />
                 ))}
             </Grid>
-            <Spinner />
+            {/* <Spinner /> */}
+            {/* //(4) */}
+            {loading && <Spinner />}
+
+            {/* (4) we do not want to show the button if we reach the last page of movies 
+            and not loading (spinner instead, short circuit */}
+            {state.page < state.total_pages && !loading && (
+                <Button text="Load More" callback={() => setIsLoadingMore(true)}/>
+            )};
 
         </>
     );

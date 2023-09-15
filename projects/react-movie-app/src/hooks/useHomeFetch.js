@@ -34,6 +34,8 @@ export const useHomeFetch = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
 
+    const [isLoadingMore, setIsLoadingMore] = useState(false); //(4) Button
+
     //(2)
     //fetch from the API and await the data
     const fetchMovies = async(page, searchTerm ="" ) => {
@@ -65,16 +67,45 @@ export const useHomeFetch = () => {
     }
 
     //(2)
-    //trigger this only when we mount the home component, on the initial run
+    // //trigger this only when we mount the home component, on the initial run
+    // useEffect(() => {
+
+    //     //call the function we defined above
+    //     fetchMovies(1);
+
+
+    // }, []);
+
+    //(4) initial and search
+    //trigger on initial and when the search term changes
     useEffect(() => {
 
+        //we also want to wipeout the old search state before making a new search
+        setState(initialState);
+
         //call the function we defined above
-        fetchMovies(1);
+        //the search term on initial render will be an empty string
+        //so on the initial render will still fetch the popular movies
+        fetchMovies(1, searchTerm);
 
 
-    }, []);
+    }, [searchTerm]);
 
-    //(2.1) //(3)
-    return { state, loading, error, setSearchTerm };
+
+    //(4) Button
+    //only cause this useEffect to trigger when we are loading more
+    useEffect(() => {
+        //if not loading more, just return
+        if (!isLoadingMore) return;
+
+        //want to load the next page, and searchTerm if we are in a search
+        fetchMovies(state.page + 1, searchTerm)
+        setIsLoadingMore(false);
+
+    },[isLoadingMore, searchTerm, state.page]);
+    
+
+    //(2.1) //(3) //(4) pass the state down to the button
+    return { state, loading, error, setSearchTerm, searchTerm , setIsLoadingMore};
 
 }

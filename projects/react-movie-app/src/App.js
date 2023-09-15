@@ -65,25 +65,55 @@ function App () {
 };
 */
 
+// Routing //(4)
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
+
 // Components
 import Header from "./components/Header"; //h2
 import Home from "./components/Home";
+import Movie from "./components/Movie"; //(4)
+import NotFound from "./components/NotFound"; //(4)
 
+
+// Styles
 import { GlobalStyle } from "./GlobalStyle";  //h2
 
-const App = () => {
-  return (
+// const App = () => (
+//     <div className="App">
+//       <Header />
+//       <Home />
+//       <GlobalStyle />
+//     </div>
+// );
 
-    <div className="App">
 
-      <Header />
+//(4)
+//Router: wrap our complete application
+//Routes: wrap our routes, can have routes in different components
+//Route: to create your route
+  //Path, the place to show a specific component
+  //now any /324234234 id will display the movie component
+  //when we need a movie, we will send the movie id, params
+  //will create a link in the thumbnail with an id, and grab that id in the movie component
+  //*, show the component on any other route that we did not define like /id/id not /id
+const App = () => (
 
-      <Home />
+  <Router>
 
-      <GlobalStyle />
+    <Header />
 
-    </div>
-  );
-}
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/:movieId" element={<Movie />} />
+      <Route path="/*" element={<NotFound />} />
+    </Routes>
+
+
+    <GlobalStyle />
+
+  </Router>
+
+);
 
 export default App;

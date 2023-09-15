@@ -411,3 +411,189 @@ what is new ?
 
 
 */
+
+
+
+////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
+//Part2
+
+//hour 4
+////////////////////////////////////////////////////////////////////////////
+//
+/*
+
+//////////////////////////////////////
+//////////////////////////////////////
+//Search Bar Logic
+
+
+in useHomeFetch.js
+we want to trigger the useEffect not only on mount
+but also when the user searches for something
+
+we have the searchTerm state, will use that as the trigger
+
+clear the previous search state
+
+in Home.js
+remove the hero image on search
+in the return
+
+change the grid header to Search result if there is a searchTerm
+
+!! now the search bar displays the search movies grid
+
+
+
+//////////////////////////////////////
+//////////////////////////////////////
+//Load more button
+
+
+> create components > Button folder
+> create index.js and Button.styles.js
+> add sub components style placeholder (empty)
+> import in index.js the sub style components
+> wrap the styled component in a Button const with props of text, onClick callback
+
+> import the index export into home.js
+> put conditionally below the grid and spinner with a prop of text="load more"
+
+will use the short circuit &&
+to load the spinner when loading
+when not loading and not last page display the button
+
+//style the button styled component
+
+
+//Logic for the Button
+go to the "useHomeFetch"
+add a new state, will act as a true/false flag when we click on a button
+and then will trigger a useEffect
+export state
+
+import state in "Home.js"
+add to the button in Home.js a callback to change this state to true
+
+back to the "useHomeFetch"
+will add another useEffect
+
+Pro tip: you should have one combined hook for the initial fetch and search
+not one for each
+
+!! now we press the button, the loading spinner activates then displays next movie page
+?? the previous page disappears ?
+
+
+
+//////////////////////////////////////
+//////////////////////////////////////
+//Routing
+
+React Router v6
+https://reacttraining.com/blog/react-router-v6-pre
+
+> create in the components folder
+NotFound.js, Movie.js
+
+> define a component that just return a div and export
+
+> go to App.js and import some router library modules
+> also import the NotFound.js, Movie.js
+> create a router structure
+
+> go to the header component index.js
+> import the link module from react-router-rom
+> wrap the logo in a link component
+
+> go to the Thumb component index.js
+> import the link module from react-router-rom
+> wrap the image in a link component inside a clickable ternary operator
+
+//now when we click on a thumbnail, we will go to a url /movie.id
+
+
+//////////////////////////////////////
+//////////////////////////////////////
+//work on the movie page component
+> in the movie.js import the configs, grid and spinner components, NoImage image
+
+
+//fetch the data from the API so we can have something to work with
+> create in the Hook folder useMovieFetch.js
+here we put the function inside the useEffect, if we put it outside
+we will need to put it as a dependency and also wrap it in a useCallback
+(as useEffect will create the function on every re-render and get into an infinity loop and also put the movieId as dependency in the useCallback)
+> import into movie.js
+> get the states from the hook using destructuring
+
+! rename from destructure, state to be named movie
+const {state: movie, loading, error } = useMovieFetch(movieId);
+
+>> we want the movieId as it is provided from the router
+> import useParams in Movie.js
+
+
+//////////////////////////////////////
+//add the breadcrumb component to the movie component
+
+> add a components > BreadCrumb folder
+create index and BreadCrumb.styles.js
+> add the empty styled components in the BreadCrumb.styles
+> import in index.js the styled components
+> create in index.js BreadCrumb component and wrap these components
+> import router link and add to the BreadCrumb component
+
+> go to the movie component
+> import the BreadCrumb component
+> add the if loading and if error to return the spinner component or a div
+> in the return, return the breadcrumb instead of the text div
+
+//style the breadcrumb
+
+
+
+
+
+What is new ?
+= work on the load more button
+= Routing with React-Router v6
+- import { BrowserRouter as Router } lets change name to use with
+- Routing Link module
+= work on the movie page component
+= work on the movie page (breadcrumb) component
+
+
+
+*/
+
+
+
+
+
+
+//>hour 5
+////////////////////////////////////////////////////////////////////////////
+//
+/*
+
+
+//////////////////////////////////////
+//work on the movie info component
+
+
+
+
+
+
+
+*/
+
+
+
+
+
+
+
