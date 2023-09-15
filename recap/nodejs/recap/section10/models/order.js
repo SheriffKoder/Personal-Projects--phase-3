@@ -1,11 +1,11 @@
-
 const Sequelize = require("sequelize");
 
 const sequelize = require("../util/database");
 
 
-//(11)
-const Cart = sequelize.define("cart", {
+//(19)
+const Order = sequelize.define("Order", {
+
     id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
@@ -14,4 +14,4 @@ const Cart = sequelize.define("cart", {
     }
 });
 
-module.exports = Cart;
+module.exports = Order;

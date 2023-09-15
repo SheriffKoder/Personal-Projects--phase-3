@@ -300,7 +300,7 @@ app.listen(8000);
 
 
 //can you start directly with Sequelize ?
-//work on the ejs, app.js, controller, router skeleton then implement the sql like below
+//work on the ejs, app.js (without the sequelize blocks), router, controller skeleton then implement the sql like below
 
 ////Introduction
 /*
@@ -390,12 +390,96 @@ to proof its from sqlz, will find fields of createdAt, updatedAt
     ProductClassModel.findByPk(prodId) return product.destroy();
 
 
+until now we started with the ejs, app.js, router, controller skeleton 
+then implement the sequelize methods to fetch/add/delete from a products model
+now we want to assign the added products to some user
 
 
 
 
 
 
+//Create a User model/data and set relation to product
+
+(7) create a user model, import the user/product model in app.js
+        and set relation between the user/product
+
+(8) change the sequelize.sync in app.js to find a user with id = 1
+        if no user with id=1, create a new user (which will be given id=1 from the model config)
+    so i can create users from a form with this method **
+
+(9) add a app.use middleware in app.js before calling the shop/admin routes
+    to find a user with id=1 and call the next(); in order to pass the user
+    to next middlewares (will use in postAddProduct)
+    set sequelize.sync({force: true} ) if encounter an error then remove it
+
+(10) in getEditProduct controller, use .getProducts (sqlz rel method) instead of findByPk
+    in postEditProduct controller use req.uer.createProduct
+
+
+
+
+
+////The Cart
+//set relations, use the relation methods
+
+(11) create a Cart model, that has an id field
+
+(12) create a cart-item model, because a user can have many carts
+    which also has id field and (new) quantity
+
+the cart should be related to the user, with a product or many and quantity
+a product can belong to many carts
+each user has only one cart
+(13) import in app.js and 
+        set the relation between the Cart/User and Cart/Product through the CartItem
+
+(14) in the sequelize.sync add user.createCart after the user is created
+
+(15) in the getCart controller
+        req.user.getCart() > cart.getProducts() as defined in the app.js relations
+
+(16) in the postCart controller
+        req.user.getCart(), cart.getProducts()({where: {id: prodId}})
+        to check if product exist, increase quantity
+        if not exist quantity = 1
+        fetchedCart.addProduct (sqlz rel method)
+
+(17) in cart.ejs adjust p.productData.title to p.title
+    p.qty to p.cartItem.quantity, as products have in between relation by cartItem and quantity named quantity
+
+(18) delete item from cart
+        req.user.getCart, cart.getProducts where id:prodId, product.cartItem.destroy();
+
+
+
+////Checkout
+
+(19) create a order.js model and order-item.js model
+    import into app.js
+
+(20) set relations between orders and users/products through the order-item
+an order is an "in between table" between User (order owner) and Products (part of order)
+these products have quantity attached to them
+
+(21) add the Order now button in cart.ejs
+
+(22) work on getOrder controller 
+    req.user.getOrders
+
+(23) work on the postOrder controller
+        req.user.getCart() > cart.getProducts() > {products}
+        req.user.createOrder() > order.addProducts({products.map} )
+    then clear cart
+
+(24) work on the orders.ejs and add routes to getOrder, postOrder
+
+
+
+
+
+
+needs proper user identification
 
 
 
@@ -437,14 +521,6 @@ app.set("views", "views");
 
 
 
-//Section11: Sequelize
-
-const sequelize = require("./util/database");
-sequelize.sync();
-
-
-
-
 ////(4) import route files to use
 const adminJsRoutes = require("./routes/admin.js");
 const shopJsRoutes = require("./routes/shop.js");
@@ -453,6 +529,25 @@ const shopJsRoutes = require("./routes/shop.js");
 ////(6) access static files like css
 //so will change in the html the css links to /css/file (omit public)
 app.use(express.static(path.join(__dirname, "public")));
+
+
+////Sequelize(9)
+app.use((req, res, next) => {
+    User.findByPk(1).then(user => {
+        //gives an object, can use methods on
+        //this returned user will be stored in req.user
+        //which will be used in "next" middleware
+        //which is postAddProduct
+
+        req.user = user;
+        next();
+    })
+    .catch(err => {
+        console.log(err);
+    })
+
+});
+
 
 
 ////(5) activate the route files
@@ -485,6 +580,65 @@ const errorController = require("./controllers/errorController.js");
 app.use(errorController.get404);
 
 
+/////////////////////////////////////////
+/////////////////////////////////////////
+////Section11: Sequelize
+
+//relating models (7)
+const Product = require("./models/product");
+const User = require("./models/user");
+const Cart = require("./models/cart");
+const CartItem = require("./models/cart-item");
+
+const Order = require("./models/order.js"); //(20)
+const OrderItem = require("./models/order-item.js"); //(20)
+
+//can learn about more association usage in the documentation/association
+//configure some options, onDelete: on delete, the relation should be also deleted for "Product"
+//so if we delete a user, all products related to the user would also be gone
+Product.belongsTo(User, {constraints: true, onDelete: "CASCADE"});
+User.hasMany(Product);
+
+//(13)
+User.hasOne(Cart);
+Cart.belongsTo(User); //inverse to the above, thus two directions, one direction is enough
+//many-to-many relation
+Cart.belongsToMany(Product, {through: CartItem });    //the through key, telling where these connections should be stored
+Product.belongsToMany(Cart, {through: CartItem});
+
+//(20)
+Order.belongsTo(User);
+User.hasMany(Order);
+Order.belongsToMany(Product, {through: OrderItem});
+//can include the reverse that a product belongs to many orders
+
+
+
+const sequelize = require("./util/database");   //(0)
+//sequelize.sync(); //(0)
+
+//(8)
+sequelize.sync()
+        .then(() => {
+            return User.findByPk(1);
+        })
+        .then((user) =>{
+            if (!user) {
+                return User.create({name: "John", "email": "test@email.com"})
+            }
+            return user;
+        })
+        .then(user => {
+            user.createCart(); //(14)
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+    
+
+
+/////////////////////////////////////////
+/////////////////////////////////////////
 
 
 ////(2)listen to server

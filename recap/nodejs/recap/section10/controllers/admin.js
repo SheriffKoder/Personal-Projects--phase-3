@@ -21,21 +21,15 @@ exports.getAddProduct = (req, res, next) => {
 exports.postAddProduct = (req, res, next) => {
 
     const title = req.body.productAdded;
-    const imageUrl = req.body.imageUrl;
     const price = req.body.price;
+    const imageUrl = req.body.imageUrl;
     const description = req.body.description;
 
 
-    const product = new ProductClassModel(
-        null,
-        title,
-        imageUrl,
-        price,
-        description
-    );
 
     //(1)
-    ProductClassModel.create({
+    // ProductClassModel.create({
+    req.user.createProduct({
         title: title,
         price: price,
         imageUrl: imageUrl,
@@ -64,7 +58,8 @@ exports.getEditProduct = (req, res, next) => {
 
 
     //Sequelize (4)
-    ProductClassModel.findByPk(prodId)
+    //ProductClassModel.findByPk(prodId)
+    req.user.getProducts({ where: {id:prodId} }) //(10) //getProducts is given by sequelize automatically to find in the product model, as we did set a hasMany(product) relation in app.js!
     .then((product) => {
         if (!product) {
             console.log("product does not exist to be edited");
@@ -97,8 +92,8 @@ exports.postEditProduct = (req, res, next) => {
 
     const prodId = req.body.productId;
     const updatedTitle = req.body.productAdded;
-    const updatedImageUrl = req.body.imageUrl;
     const updatedPrice = req.body.price;
+    const updatedImageUrl = req.body.imageUrl;
     const updatedDescription = req.body.description;
 
 
@@ -106,9 +101,9 @@ exports.postEditProduct = (req, res, next) => {
     ProductClassModel.findByPk(prodId)
     .then((product) => {
         //this will not change the data in our db, but will change them locally
-        product.title = updatedTitle;   
+        product.title = updatedTitle;  
+        product.price = updatedPrice;             
         product.imageUrl = updatedImageUrl;
-        product.price = updatedPrice;            
         product.description = updatedDescription;
 
         return product.save();
