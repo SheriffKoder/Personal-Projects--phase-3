@@ -4,6 +4,9 @@ import {useState, useEffect} from "react";
 // API (2)
 import API from "../API";
 
+// Helpers
+import { isPersistedState } from "../helpers";
+
 //(2.1)
 //to reset stuff, will need that later
 //same as the movie object fetched from the API
@@ -76,9 +79,28 @@ export const useHomeFetch = () => {
 
     // }, []);
 
+
+
     //(4) initial and search
     //trigger on initial and when the search term changes
     useEffect(() => {
+
+        //(5.1)
+        //homeState is the property we will write to the session storage
+        //not check if we have anything in the session storage if we are in a search
+        if (!searchTerm) {
+            const sessionState = isPersistedState("homeState");
+
+            if (sessionState) {
+                console.log("Grabbing from sessionStorage");
+                setState(sessionState);
+                //return and not do anything else/not fetch from the API
+                return;
+            }
+
+        }
+
+        console.log("Grabbing from API");
 
         //we also want to wipeout the old search state before making a new search
         setState(initialState);
@@ -104,6 +126,19 @@ export const useHomeFetch = () => {
 
     },[isLoadingMore, searchTerm, state.page]);
     
+
+    //(5.1)
+    // Write to sessionStorage
+    // dependency array to write when the searchTerm/state changes
+    useEffect(() => {
+
+        if(!searchTerm) {
+            sessionStorage.setItem("homeState", JSON.stringify(state));
+        }
+
+
+    }, [searchTerm, state])
+
 
     //(2.1) //(3) //(4) pass the state down to the button
     return { state, loading, error, setSearchTerm, searchTerm , setIsLoadingMore};

@@ -79,6 +79,8 @@ whats new ?
 */
 
 
+//Use PropTypes
+
 //hour 2
 ////////////////////////////////////////////////////////////////////////////
 //
@@ -576,17 +578,75 @@ What is new ?
 
 //>hour 5
 ////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
 //
 /*
 
 
 //////////////////////////////////////
-//work on the movie info component
+//work on the Movie component > Movie info component
+
+> create folder in components named MovieInfo
+> create Index.js and MovieInfo.styles.js
+
+> MovieInfo.styles.js empty styled components
+> in index.js import configs, image, styled-components
+and the previously made thumb component (component reuse)
+
+> import into movie.js
+> add in movie.js below the BreadCrumb
+> back to MovieInfo index.js, add the text component and put some JSX that displays properties from the movie prop
+{movie.directors.map(director => (
+
+//style the MovieInfo.styles components
 
 
+//////////////////////////////////////
+//work on the Movie component > Movie info bar component
+
+> create folder in components named MovieInfoBar
+> create Index.js and MovieInfoBar.styles.js
+
+> MovieInfoBar.styles.js empty styled components
+> in index.js import styled-components
+> in index.js import some of the helper functions
+> in index.js add the component and wrap the styled-components
+> put in the styled components some jsx divs that calls the helper functions
+> the helper functions takes arguments from the component props
+
+> to the Movie.js file
+> import the MovieInfoBar index.js
+> add the MovieInfoBar below the MovieInfo component in return
+> pass the time/budget/revenue props from the movie state
+
+//style the MovieInfoBar.styles components
 
 
+//////////////////////////////////////
+//Work on the actors grid for the movie page
 
+> create folder in components named Actor
+> create Index.js and Actor.styles.js
+
+> Actor.styles.js empty styled components
+> in index.js import styled-components
+> in index.js add the component and wrap the styled-components
+> add jsx image, h3, p tags that takes props as children and attr values
+
+> to the Movie.js file
+> import the Actor index.js
+> add the Actor below the MovieInfoBar in a Grid component in the return
+> pass the props from the movie state
+
+//style the Actor.styles components
+
+
+what is new ?
+- component reuse (allow to reuse components with just changing their passing props)
+- use JSX elements and give classNames, classNames to be defined in the styled component and nest in them html elements
+= Movie info
+= Movie info bar
+= Movie info Actors
 
 
 */
@@ -594,6 +654,87 @@ What is new ?
 
 
 
+//>hour 5.1 (cont)
+////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
+//
+/*
+
+
+////////////////////////////////////////////////////////////////////////////
+//Prop Types
+
+can be used to type check the props you send into components
+can use if not using Typescript
+a tool to use when in development mode
+
+Capitalized when importing and using on a prop.type
+but on a component, is lowercase
+
+
+check the docs for options:
+https://www.npmjs.com/package/prop-types
+
+//can define inside an object
+ObjectProp: PropTypes.shape({
+    color: PropTypes.string,
+    fontSize: PropTypes.number
+}),
+
+//Using propTypes
+
+will start with the actor component and all the way down through the components
+
+> Actor index.js
+> BreadCrumb index.js
+> Button index.js
+
+import PropTypes from "prop-types";
+
+componentName.propTypes = {
+    propName: PropTypes.type
+}
+
+types: string, func, object, bool
+
+do not need to check on the children property as it is a built in prop
+
+
+////////////////////////////////////////////////////////////////////////////
+//How to Persist state in the session storage
+
+until this point, we always fetch from the API
+even when we go back to the same page
+
+in the browser we have local storage(until delete) and session storage(until browser close)
+we will utilize the session storage to store the data we already retrieved
+
+Dev tools > Application 
+
+will use the session storage, as the movie list, details continuously changes or can change
+
+will create a function we can use to read from the session storage
+
+//Read a Session (main page)
+> go to Helpers.js
+> define isPersistedState which returns the requested session storage as a string
+> go to useHomeFetch.js
+there we will check if we have a session state and we are not in search, before we retrieve anything from the API
+in the useEffect, to retrieve the session instead of fetching
+
+//Write to the Session (main page)
+> go to useHomeFetch.js
+> below the second useEffect will write a third useEffect
+which activates on searchTerm and state (i.e movies fetched)
+and writes to the session in JSON the state (movies fetched)
+
+
+//for each individual movie
+> go to useMovieFetch.js
 
 
 
+
+
+
+*/

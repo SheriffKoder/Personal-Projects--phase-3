@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import PropTypes from "prop-types";
 
 //useState for a control component
     //input field that is going to be controller by react
@@ -53,5 +54,10 @@ const SearchBar = ({ setSearchTerm}) => {
     );
 
 };
+
+SearchBar.propTypes = {
+    callBack: PropTypes.func,
+}
+
 
 export default SearchBar;

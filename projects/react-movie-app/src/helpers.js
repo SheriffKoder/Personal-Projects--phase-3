@@ -13,3 +13,17 @@ export const convertMoney = money => {
   });
   return formatter.format(money);
 };
+
+//Session Storage //(5.1)
+export const isPersistedState = (stateName) => {
+
+  //get the item from the session storage with the name that we will provide
+  //will return the state from the session storage if there is a state
+  //otherwise it will return null
+  const sessionState = sessionStorage.getItem(stateName)
+
+  //return the right key, if not there, will return the left (null)
+  //if there is something in the session state, will run what is in the right
+  return sessionState && JSON.parse(sessionState);
+
+}
