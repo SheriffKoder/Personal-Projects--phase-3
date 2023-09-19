@@ -3,6 +3,84 @@
 <link rel="stylesheet" href="./css/item_style.css">
 
 
+<%
+
+let starFunction2 (rating) {
+
+    let x;
+    let y;
+
+    if (rating < 0.5 || rating > 5) {
+        return "none";
+    }
+    else if (rating >= 0.5 && rating < 1) {
+        return "half";
+    }
+
+    else if (rating >=1 && rating < 1.5) {
+        return "one";
+    }
+
+    else if (rating >= 1.5 && rating < 2) {
+        return "one-half";
+    }
+    else if (rating >=2 && rating < 2.5) {
+        return "two";
+    }
+
+    else if (rating >= 2.5 && rating < 3) {
+        return "two-half";
+    }
+
+    else if (rating >= 3 && rating < 3.5) {
+        return "three";
+    }
+
+    else if (rating >= 3.5 && rating < 4) {
+        return "three-half";
+    }
+    else if (rating >=4 && rating < 4.5) {
+        return "four";
+    }
+
+    else if (rating >= 4.5 && rating < 5) {
+        return "four-half";
+    }
+
+    else if (rating > 4.5 && rating <= 5  ) {
+        return "five";
+    }
+}
+
+%>
+
+<% 
+
+let starFunction = (rating) = {
+
+    if (rating > 5) {
+        return "none";
+    }
+
+    const arr = ["none", "two", "three", "four", "five"];
+
+    const x = rating.split(".")[0];
+    const y = rating.split(".")[1];
+    
+    //rating 4.7
+    //4 will be "four"
+    //7 will be "half" , 2 will be ""
+    const a = arr[x];
+    const b = (y >= 5) ? "half" : "";
+
+    return a+""+b;
+
+}
+
+%>
+
+
+
 
 
 <%- include("../includes/html-start.ejs") %>
@@ -15,14 +93,15 @@
         <div class="main__main__wrapper">
             <div class="main__main__content">
 
+                
                 <div class="content__item__header item-header--mobile">
-                    <a href="">Brand: Other</a>
+                    <a href="">Brand:<%=product.brand%></a>
                     <span class="content__item__header--rating">
-                        <span class="header--rating--rate">3.1</span>
-                        <i class="header--rating--stars star-smaller stars-three-half"></i>
-                        <a href="" class="header--rating-reviews">28</a>
+                        <span class="header--rating--rate"><%=product.ratingScore%></span>
+                        <i class="header--rating--stars star-smaller stars-<%starFunction(product.ratingScore)%>"></i>
+                        <a href="" class="header--rating-reviews"><%=product.ratingCount%></a>
                     </span>
-                    <h1>Wireless Mouse And Mice 2.4g Receiver, Super Slim Mouse</h1>
+                    <h1><%=product.title%></h1>
                 </div>
 
                 <div class="desktop_1 content__item__image--wrapper">
@@ -43,27 +122,31 @@
 
 
                 <div class="content__item__header item-header--desktop">
-                    <a href="">Brand: Other</a>
+                    <a href=""><%=product.brand%></a>
                     <span class="content__item__header--rating">
-                        <span class="header--rating--rate">3.1</span>
-                        <i class="header--rating--stars star-smaller stars-three-half"></i>
-                        <a href="" class="header--rating-reviews">28<span> ratings</span></a>
+                        <span class="header--rating--rate"><%=product.ratingScore%></span>
+                        <i class="header--rating--stars star-smaller stars-<%starFunction(product.ratingScore)%>"></i>
+                        <a href="" class="header--rating-reviews"><%=product.ratingCount%></a>
                     </span>
-                    <h1>Wireless Mouse And Mice 2.4g Receiver, Super Slim Mouse</h1>
+                    <h1><%=product.title%></h1>
                 </div>
 
                 <div class="content__item__pricing">
-                    <span class="content__item__pricing--discount">-42%</span>
+                    <% if (product.prevPrice < product.price) {%>
+                    <span class="content__item__pricing--discount">-<%(product.prevPrice/product.price)*100%>%</span>
+                    <% } %>
                     <span class="content__item__pricing--price">
                         <span class="content__item__pricing--price--currency">EGP</span>
-                        <span class="content__item__pricing--price--price">599</span>
-                        <span class="content__item__pricing--price--cents">00</span>
+                        <span class="content__item__pricing--price--price"><%=product.price.split(".")[0]%></span>
+                        <span class="content__item__pricing--price--cents"><%=product.price.split(".")[1]%></span>
                     </span>
+                    <% if (product.prevPrice < product.price) {%>
                     <div class="content__item__pricing--price--original-price">
                         List Price: 
-                        <span class="original-price--price"> EGP1,041.55</span>
+                        <span class="original-price--price"> EGP<%=product.prevPrice%></span>
                         <span class="original-price--info">i</span>
                     </div>
+                    <% } %>
                 </div>
 
 
@@ -71,11 +154,11 @@
                     <a href="">FREE Returns</a>
                     <p class="content__item__delivery--vat">All prices include VAT.</p>
                     <span>
-                        Buy with installments and pay EGP 15.25 for 60 months with select banks.
+                        Buy with installments and pay EGP <% (product.price/60)%> for 60 months with select banks.
                         <a href="">Learn more</a>
                     </span>
-                    <span class="content__item__delivery--date"><a href="">FREE delivery</a>Friday, 8 September</span>
-                    <span>Or fastest delivery Thursday, 7 September</span>
+                    <span class="content__item__delivery--date"><a href=""><% (product.deliveryFees === "free")  "FREE" : "+"product.deliveryFees %> delivery</a><%Date.now().toLocalString()%></span>
+                    <span>Or fastest delivery <%Date.now().toLocalString()%></span>
                     <a href="" class="content__item__delivery--destination">
                         <i></i>
                         Deliver to Egypt
@@ -91,16 +174,16 @@
 
                         <span class="content__item__ordering--price desktop-only">
                             <span class="content__item__ordering--price--currency">EGP</span>
-                            <span class="content__item__ordering--price--price">599</span>
-                            <span class="content__item__ordering--price--cents">00</span>
+                            <span class="content__item__ordering--price--price"><%=product.price.split(".")[0]%></span>
+                            <span class="content__item__ordering--price--cents"><%=product.price.split(".")[1]%></span>
                         </span>
     
                         <a class="content__item__ordering--returns-link desktop-only">Free Returns</a>
 
 
                         <div>
-                            <a class="content__item__ordering--delivery-link">Free Delivery</a>
-                            <span class="content__item__ordering--delivery-date">Saturday, 9 September</span>
+                            <a class="content__item__ordering--delivery-link"><% (product.deliveryFees === "free")  "FREE" : "+"product.deliveryFees %> Delivery</a>
+                            <span class="content__item__ordering--delivery-date"><%Date.now().toLocalString()%></span>
                         </div>
                             <div class="content__item__ordering--delivery-fast">Or fastest delivery <b>Today by 10 PM.</b> Order within
                             <span class="content__item__ordering--delivery-fast--time">
@@ -114,14 +197,31 @@
                     </div>
 
 
-                    <span class="content__item__ordering--stock available_green">In Stock</span>
-                    <span class="content__item__ordering--select">
-                        <select><option>Qty: 1 </option></select>
-                        <i class="content__item__ordering--select--logo"></i>
+                    <span class="content__item__ordering--stock <%product.availability ? "available_green" : "not_available_red"%> >
+                        <%product.availability ? "In Stock" : "Out of Stock"%>
                     </span>
-                    <button class="content__item__ordering--yellow-button yellow-button">Add to Cart</button>
-                    <button class="content__item__ordering--orange-button orange-button">Buy Now</button>
-                
+
+                    <form action="/cart" method="POST">
+                        <span class="content__item__ordering--select">
+                            <select name="count">
+                                <option>1 </option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                                <option>6</option>
+                                <option>7</option>
+                                <option>8</option>
+                                <option>9</option>
+                                <option>10</option>
+                            </select>
+                            <i class="content__item__ordering--select--logo"></i>
+                        </span>
+                            <button class="content__item__ordering--yellow-button yellow-button" type="submit">Add to Cart</button>
+                            <button class="content__item__ordering--orange-button orange-button" type="submit">Buy Now</button>
+                            <input type="hidden" name="productId" value="<%= product.id %>">
+                    </form>
+
                 
                     <div class="content__item__other-info">
                         <div>
@@ -166,7 +266,7 @@
                         <input type="checkbox" class="content__item__protection-plan--content--check">
                         <div class="content__item__protection-plan--content--info">
                             <div>1 Year Extended Warranty Plan for</div>
-                            <div>EGP 61.00</div>
+                            <div>EGP <%product.price*0.1%></div>
                         </div>
                     </a>
 
@@ -228,55 +328,70 @@
                 <div class="content__item__details-list full_width__border">
                     <h3>Details</h3>
                     <ul>
+                        <%if (product.brand) { %>
                         <li>
                             <span>Brand Name</span>
-                            <span>Joyroom</span>
+                            <span><%=product.brand%> ></span>
                         </li>
+                        <%}%>
 
+                        <%if (product.model) { %>
                         <li>
                             <span>Model Name</span>
-                            <span>JR-T03S</span>
+                            <span><%=product.model%></span>
                         </li>
+                        <%}%>
 
+
+                        <%if (product.color) { %>
                         <li>
                             <span>Color</span>
-                            <span>White</span>
+                            <span><%=product.color%></span>
                         </li>
+                        <%}%>
 
+                        <%if (product.type) { %>
                         <li>
                             <span>Type</span>
-                            <span>In Ear</span>
+                            <span><%=product.type%></span>
                         </li>
+                        <%}%>
 
+                        <%if (product.tech) { %>
                         <li>
-                            <span>Connectivity Technology</span>
-                            <span>Wireless</span>
+                            <span>Technology</span>
+                            <span><%=product.tech%></span>
                         </li>
+                        <%}%>
 
-                        <li>
-                            <span>Wireless Communication Technology</span>
-                            <span>Bluetooth</span>
-                        </li>
-
+                        <%if (product.specialFeature) { %>
                         <li>
                             <span>Special Features</span>
-                            <span>Lightweight</span>
+                            <span><%=product.specialFeature%></span>
                         </li>
+                        <%}%>
 
+                        <%if (product.includedComponents) { %>
                         <li>
                             <span>Included Components</span>
-                            <span>Ear Cushions</span>
+                            <span><%=product.includedComponents%></span>
                         </li>
+                        <%}%>
 
+                        <%if (product.age) { %>
                         <li>
                             <span>Age Range Description</span>
-                            <span>Adult</span>
+                            <span><%=product.age%></span>
                         </li>
+                        <%}%>
 
+
+                        <%if (product.material) { %>
                         <li>
                             <span>Material</span>
-                            <span>Plastic</span>
+                            <span><%=product.material%></span>
                         </li>
+                        <%}%>
                     </ul>
                 </div>
 
@@ -290,18 +405,18 @@
 
                         <div class="content__item__manufacturer-notes--intro full_width__border">
                             <div class="content__item__manufacturer-notes--intro--image">
-                                <img src="./img/product-image.jpg" alt="screen protector">
+                                <img src="<%= product.imageUrl>" alt="<%= product.imageAlt>">
                             </div>
 
+                            
                             <div class="content__item__manufacturer-notes--intro--text">
-                                COMFORTABLE, RESISTANT AND COMPATIBLE: Joyroom has taken into account the ear canal studies of thousands of people to develop earphones for greater comfort, stability and passive noise isolation.
+                                <%= product.notesIntro>
                             </div>
                         </div>
 
                         <div class="content__item__manufacturer-notes--description full_width__border">
                             <h4>Description</h4>
-                            COMFORTABLE, RESISTANT AND COMPATIBLE: Joyroom has taken into account the ear canal studies of thousands of people to develop earphones for greater comfort, stability and passive noise isolation.
-                            COMFORTABLE, RESISTANT AND COMPATIBLE: Joyroom has taken into account the ear canal studies of thousands of people to develop earphones for greater comfort, stability and passive noise isolation.
+                            <%= product.notesDescription>
 
                         </div>
 
@@ -310,12 +425,12 @@
                             <dl>
                                 <li>
                                     <span>
-                                    COMFORTABLE, RESISTANT AND COMPATIBLE: Joyroom has taken into account the ear canal studies of thousands of people to develop earphones for greater comfort, stability and passive noise isolation.
+                                        <%= product.notesFeature1>
                                     </span>
                                 </li>
                                 <li>
                                     <span>
-                                    COMFORTABLE, RESISTANT AND COMPATIBLE: Joyroom has taken into account the ear canal studies of thousands of people to develop earphones for greater comfort, stability and passive noise isolation.
+                                        <%= product.notesFeature2>
                                     </span>
                                 </li>
                             </dl>
@@ -323,11 +438,11 @@
 
                         <div class="content__item__manufacturer-notes--information-table">
                             <table>
-                                <tr><td>Manufacturer</td><td>Joyroom</td></tr>
-                                <tr><td>Country of origin</td><td>Samoa (Independent)</td></tr>
-                                <tr><td>Item model number</td><td>JR-T03S</td></tr>
-                                <tr><td>Package Dimensions</td><td>16.8 x 9.3 x 5.3 cm; 100 Grams</td></tr>
-                                <tr><td>ASIN</td><td>B09Y4K9CGP</td></tr>
+                                <tr><td>Manufacturer</td><td><%=product.brand%></td></tr>
+                                <tr><td>Country of origin</td><td><%=product.country%></td></tr>
+                                <tr><td>Item model number</td><td><%=product.modelNumber%></td></tr>
+                                <tr><td>Package Dimensions</td><td><%=product.size%> cm; <%=product.weight%> Grams</td></tr>
+                                <tr><td>ASIN</td><td><%=product.serial%></td></tr>
                             </table>
                         </div>
 
@@ -538,13 +653,11 @@
 
                 <div class="desktop_4 content__item__nav full_width__border">
                     <h4>You are here</h4>
-                    <a href="">Electronics</a>
+                    <a href=""><%=product.department%></a>
                     >
-                    <a href="">Headphones, Earbuds & Accessories</a>
+                    <a href=""><%=product.section%></a>
                     >
-                    <a href="">Headphones & Earbuds</a>
-                    >
-                    <a href="">In-Ear Headphones</a>
+                    <a href=""><%=product.category%></a>
 
                 </div>
 

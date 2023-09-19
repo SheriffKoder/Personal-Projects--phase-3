@@ -24,95 +24,61 @@
                             <a>Deselect all items</a>
                         </div>
 
+                        <% if (products.length > 0) { %>
                         <ul class="main__main__content__row1--cart--list" aria-label="cart items list">
                             <a href="#cart_proceed_area" aria-label="skip cart items list and go to the proceed area" class="sr-only">proceed</a>
 
-                            <li class="main__main__content__row1--cart--list--item--container" aria-label="cart item">
-                                <label><input type="checkbox" for="item1" aria-label="remove item from checkout"></label>
-                                <div id="item1" class="main__main__content__row1--cart--list--item">
-                                    <div class="cart--list--item--image" aria-label="item's image">
-                                        <img src="../amz-eg/img/product-image.jpg" alt="screen protector">
-                                    </div>
-                                    <div class="cart--list--item--description" aria-label="item's description">
-                                        <h2 class="cart--list--item--description--name" aria-label="item's title">
-                                            Wireless Mouse And Mice 2.4g Receiver, Super Slim Mouse
-                                        </h2>
-                                        <p class="cart--list--item--description--price" aria-label="item's price">
-                                            EGP 140.00
-                                        </p>
-                                        <p class="cart--list--item--description--availability available_green" aria-label="item's availability">
-                                            In Stock
-                                        </p>
-                                        <p class="cart--list--item--description--delivery" aria-label="item's delivery option">
-                                            Eligible for free delivery
-                                        </p>
-                                        <div class="cart--list--item--description--actions" aria-label="item's control buttons" tabindex="0">
-                                            <select aria-label="item's count"><option>Qty: 1</option></select>
-                                            <button aria-label="delete item from cart">Delete</button>
-                                            <button aria-label="move item to 'save for later' list">Save for later</button>
-                                            <button aria-label="share item">Share</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
+                            <% products.forEach(p) => { %>
 
                             <li class="main__main__content__row1--cart--list--item--container" aria-label="cart item">
                                 <label><input type="checkbox" for="item1" aria-label="remove item from checkout"></label>
                                 <div id="item1" class="main__main__content__row1--cart--list--item">
                                     <div class="cart--list--item--image" aria-label="item's image">
-                                        <img src="../amz-eg/img/product-image.jpg" alt="screen protector">
+                                        <img src="<%=p.imageUrl%>" alt="<%=p.imageAlt%>">
                                     </div>
                                     <div class="cart--list--item--description" aria-label="item's description">
                                         <h2 class="cart--list--item--description--name" aria-label="item's title">
-                                            Wireless Mouse And Mice 2.4g Receiver, Super Slim Mouse
+                                            <%=p.title%>
                                         </h2>
                                         <p class="cart--list--item--description--price" aria-label="item's price">
-                                            EGP 140.00
+                                            EGP<%=p.price%>
                                         </p>
-                                        <p class="cart--list--item--description--availability available_green" aria-label="item's availability">
-                                            In Stock
+                                        <p class="cart--list--item--description--availability 
+                                        <%= p.availability ? "available_green" : "not_available_red" %>
+                                        aria-label="item's availability">
+                                            <%= p.availability%> ? "In Stock" : "Out of stock" %>
                                         </p>
                                         <p class="cart--list--item--description--delivery" aria-label="item's delivery option">
-                                            Eligible for free delivery
+                                            <%= p.deliveryFees === "free"%> ? "Eligible for free delivery" : "p.deliveryFees" %>
                                         </p>
+
+                                        <form action="/cart-delete-item" method="POST">
                                         <div class="cart--list--item--description--actions" aria-label="item's control buttons" tabindex="0">
-                                            <select aria-label="item's count"><option>Qty: 1</option></select>
-                                            <button aria-label="delete item from cart">Delete</button>
+                                            <select aria-label="item's count" name="count">
+                                                <option>Qty: <%= p.cartItem.quantity %></option>
+                                                <% (p.cartItem.quantity !== 1) <option>1</option> : ""%>
+                                                <option>2</option>
+                                                <option>3</option>
+                                                <option>4</option>
+                                                <option>5</option>
+                                                <option>6</option>
+                                                <option>7</option>
+                                                <option>8</option>
+                                                <option>9</option>
+                                                <option>10</option>
+                                            </select>
+                                            <input type="hidden" value="<%= p.id%>" name="productId">
+                                            <button aria-label="delete item from cart" type="submit">Delete</button>
                                             <button aria-label="move item to 'save for later' list">Save for later</button>
                                             <button aria-label="share item">Share</button>
                                         </div>
+                                        </form>
                                     </div>
                                 </div>
                             </li>
 
-                            <li class="main__main__content__row1--cart--list--item--container" aria-label="cart item">
-                                <label><input type="checkbox" for="item1" aria-label="remove item from checkout"></label>
-                                <div id="item1" class="main__main__content__row1--cart--list--item">
-                                    <div class="cart--list--item--image" aria-label="item's image">
-                                        <img src="../amz-eg/img/product-image.jpg" alt="screen protector">
-                                    </div>
-                                    <div class="cart--list--item--description" aria-label="item's description">
-                                        <h2 class="cart--list--item--description--name" aria-label="item's title">
-                                            Wireless Mouse And Mice 2.4g Receiver, Super Slim Mouse
-                                        </h2>
-                                        <p class="cart--list--item--description--price" aria-label="item's price">
-                                            EGP 140.00
-                                        </p>
-                                        <p class="cart--list--item--description--availability available_green" aria-label="item's availability">
-                                            In Stock
-                                        </p>
-                                        <p class="cart--list--item--description--delivery" aria-label="item's delivery option">
-                                            Eligible for free delivery
-                                        </p>
-                                        <div class="cart--list--item--description--actions" aria-label="item's control buttons" tabindex="0">
-                                            <select aria-label="item's count"><option>Qty: 1</option></select>
-                                            <button aria-label="delete item from cart">Delete</button>
-                                            <button aria-label="move item to 'save for later' list">Save for later</button>
-                                            <button aria-label="share item">Share</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
+
+
 
                         </ul>
                         <p class="right-text-align row1--extra--proceed-confirm-total" aria-label="Cart's total price">Subtotal (6 items): <span class="row1--extra--proceed-confirm-total-price"> EGP 2,449.98</span></p>
@@ -122,13 +88,24 @@
                     <section class="main__main__content__row1--extra" id="cart_proceed_area" aria-label="proceed to checkout area">
                         <div class="row1--extra--proceed">
                             <div class="row1--extra--proceed--qualify">
+                                <% if (p.deliveryFees === "free") { %>
                                 <span class="proceed-qualified-1">Part of your order qualifies for FREE Shipping.</span>
                                 <span class="proceed-qualified-2">Choose this option at checkout.</span>
+                                <% } %>
                                 <a href="" aria-label="more details about free shipping">See details</a>
                             </div>
                             <div class="row1--extra--proceed-confirm">
-                            <p class="row1--extra--proceed-confirm-total" aria-label="Cart's total price">Subtotal (6 items): <span class="row1--extra--proceed-confirm-total-price"> EGP 2,449.98</span></p>
-                            <button type="submit" class="yellow-button row1--extra--proceed-submit" aria-label="proceed to checkout">Proceed to Buy</button>
+                            <p class="row1--extra--proceed-confirm-total" aria-label="Cart's total price">
+                                Subtotal (<%products.length%>items): 
+                                <span class="row1--extra--proceed-confirm-total-price"> 
+                                    EGP<% products.reduce(prev, cur => {
+                                        return prev + cur.price * cur.quantity, 0)
+                                    }) %>
+                                </span>
+                            </p>
+                            <form action="/create-order" method="POST" >
+                                <button type="submit" class="yellow-button row1--extra--proceed-submit" aria-label="proceed to checkout">Proceed to Buy</button>
+                            </form>
                             </div>
                         </div>
                     </section>

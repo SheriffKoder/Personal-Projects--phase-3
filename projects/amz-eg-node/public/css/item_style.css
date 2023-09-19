@@ -157,6 +157,10 @@ a {
 .stars-one {
     background-image: url(../img/stars-one.png);
 }
+
+.stars-none-half {
+    background-image: url(../img/stars-none.png);
+}
 .stars-none {
     background-image: url(../img/stars-none.png);
 }

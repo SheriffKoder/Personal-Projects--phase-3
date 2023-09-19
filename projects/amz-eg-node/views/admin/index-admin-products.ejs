@@ -75,67 +75,75 @@
 
                     </div>
     
-                    
-                    <div class="main__main__products-list--item" aria-label="product number one">
-                        
-                        <a href="" class="main__main__products-list--item--image--container">
-                            <img src="./img/product-image.jpg" class="main__main__products-list--item--image" alt="phone screen protector">
-                        </a>                        
-                        <div class="main__main__products-list--item--description" aria-label="product's details">
+                    <% if (prods.length) > 0 %>
+                    <% for (let product of prods) { %>
+                        <% let i = 1;>
+                        <div class="main__main__products-list--item" aria-label="product number <%i%> ">
                             
-                            <span aria-label="product's name">
-                            <a href="" class="main__main__products-list--item--description--header-link"">
-                                USB Power Cable to Adapter Jack 5.5×2.1mm 5V to 8.4V
-                            </a>
-                            </span>
-                            
-                            <span class="main__main__products-list--item--description--color" aria-label="product's color">
-                                blue
-                            </span>
-                            
-                            <span class="main__main__products-list--item--description--rating" aria-label="product's rating">
-                                <span class="main__main__products-list--item--description--rating--rate" aria-label="current product's rating from 5">
-                                    4.9
+                            <a href="" class="main__main__products-list--item--image--container">
+                                <img src="<%=product.imageUrl>" class="main__main__products-list--item--image" alt="<%=product.imageAlt%> ">
+                            </a>                        
+                            <div class="main__main__products-list--item--description" aria-label="product's details">
+                                
+                                <span aria-label="product's name">
+                                <a href="" class="main__main__products-list--item--description--header-link"">
+                                    <%= product.title %>
+                                </a>
                                 </span>
-                                <span class="main__main__products-list--item--description--rating--stars" aria-hidden="true">
-                                    &#11088; &#11088; &#11088; &#11088; &#11088;
+                                
+                                <span class="main__main__products-list--item--description--color" aria-label="product's color">
+                                    <%= product.color %>
+
                                 </span>
-                                <span class="main__main__products-list--item--description--rating--number" aria-label="number of ratings given by customers">
-                                    (2)
+                                
+                                <span class="main__main__products-list--item--description--rating" aria-label="product's rating">
+                                    <span class="main__main__products-list--item--description--rating--rate" aria-label="current product's rating from 5">
+                                        <%= product.ratingScore %>
+
+                                    </span>
+                                    <span class="main__main__products-list--item--description--rating--stars" aria-hidden="true">
+                                        &#11088; &#11088; &#11088; &#11088; &#11088;
+                                    </span>
+                                    <span class="main__main__products-list--item--description--rating--number" aria-label="number of ratings given by customers">
+                                        <%= product.ratingCount %>
+
+                                    </span>
                                 </span>
-                            </span>
-                            
-                            <span class="main__main__products-list--item--description--price" aria-label="product's price">
-                                <span class="main__main__products-list--item--description--price--currency" aria-label="currency">
-                                EGP
+                                
+                                <span class="main__main__products-list--item--description--price" aria-label="product's price">
+                                    <span class="main__main__products-list--item--description--price--currency" aria-label="currency">
+                                        EGP
+                                    </span>
+                                    <p class="main__main__products-list--item--description--price--number" aria-label="egyptian pounds">
+                                        <%=product.price.split(".")[0]%>
+                                    </p>
+                                    <span class="main__main__products-list--item--description--price--decimal" aria-label="cents">
+                                        <%=product.price.split(".")[1]%>
+                                    </span>
                                 </span>
-                                <p class="main__main__products-list--item--description--price--number" aria-label="egyptian pounds">
-                                100
-                                </p>
-                                <span class="main__main__products-list--item--description--price--decimal" aria-label="cents">
-                                00
+
+                                <span class="main__main__products-list--item--description--sold" aria-label="number of products sold">
+                                    <% (product.sold) ? product.sold : 99+ sold %>
                                 </span>
-                            </span>
 
-                            <span class="main__main__products-list--item--description--sold" aria-label="number of products sold">
-                                99+ Sold
-                            </span>
+                                <span class="main__main__products-list--item--description--available" aria-label="number of products available">
+                                    <% (product.available) ? product.available : More than 99+ available %>
+                                </span>
 
-                            <span class="main__main__products-list--item--description--available" aria-label="number of products available">
-                                More than 99+ available
-                            </span>
+                                <span class="main__main__products-list--item--description--spacer"></span>
 
-                            <span class="main__main__products-list--item--description--spacer"></span>
+                                <span class="main__main__products-list--item--description-buttons">
+                                    <button class="main__main__products-list--item--description-buttons-add" aria-label="control, Add to stock">Stock</button>
+                                    <button class="main__main__products-list--item--description-buttons-edit" aria-label="control, edit product">Edit</button>
+                                    <button class="main__main__products-list--item--description-buttons-delete" aria-label="control, delete product">Delete</button>
+                                </span>
 
-                            <span class="main__main__products-list--item--description-buttons">
-                                <button class="main__main__products-list--item--description-buttons-add" aria-label="control, Add to stock">Stock</button>
-                                <button class="main__main__products-list--item--description-buttons-edit" aria-label="control, edit product">Edit</button>
-                                <button class="main__main__products-list--item--description-buttons-delete" aria-label="control, delete product">Delete</button>
-                            </span>
-
+                            </div>
                         </div>
-                    </div>
 
+                    <% i = i+1;%>
+                    <% } %>
+                    <% } %>
                     
 
 

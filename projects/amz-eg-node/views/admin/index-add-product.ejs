@@ -1,0 +1,175 @@
+<%- include("../includes/html-head.ejs") %>
+
+<link rel="stylesheet" href="./css/add-product_style.css">
+
+
+
+
+<%- include("../includes/html-start.ejs") %>
+
+
+    <%- include("../includes/index-header.ejs") %>
+
+
+    <main>
+
+        <form class="main__main__wrapper">
+            <h1>Add a Product</h1>
+
+            <div class="main__main--input-container">
+                <div class="">
+                <h2>Main Information</h2>
+                    <label for="productTitle">Product's title</label>
+                    <input type="text" placeholder="product's title" name="productTitle">
+
+                    <label for="productPrice">Product's price</label>
+                    <input type="text" placeholder="product's price" name="productPrice">
+
+                    <div>
+                        <h3>Product's Image</h3>
+                        <label for="productTitle">Select Image</label>
+                        <input type="text" placeholder="product's title" name="productTitle">
+            
+                        <label for="productTitle">Image's Description</label>
+                        <input type="text" placeholder="product's title" name="productTitle">        
+                    </div>
+
+                </div>
+
+                <div class="">
+                    <h3>Stock</h3>
+                    <label for="productColor">How many items available</label>
+                    <input type="number" placeholder="product's color" name="productAvailability">
+
+                    <!-- <label for="productColor">How many items sold</label>
+                    <input type="text" placeholder="product's color" name="productColor"> -->
+
+                    <!-- <label for="productColor">Product's Availability</label>
+                    <input type="text" placeholder="product's color" name="productColor"> -->
+
+                    <h3>Product's customer delivery</h3>
+                    <div id="delivery_options">
+                        <label for="delivery_included">Delivery Included</label>
+                        <input type="checkbox" name="productColor">
+
+                        <label for="delivery_not_included">Delivery Not Included</label>
+                        <input type="checkbox" name="productColor">
+
+
+                    </div>
+
+                </div>
+            </div>
+
+
+            <div class="main__main--input-container">
+                <div>
+                <h2>Product's Description</h2>
+                <label for="productTitle">Product's Short Introduction</label>
+                <input type="text" placeholder="product's title" name="productTitle">        
+
+                <label for="productDescriptionText">Product's Description</label>
+                <textarea id="productDescriptionText" name="productDescriptionText">
+                    Description text
+                </textarea>
+
+                <label for="productTitle">Product's Feature 1</label>
+                <input type="text" placeholder="product's title" name="productTitle">        
+
+                <label for="productTitle">Product's Feature 2</label>
+                <input type="text" placeholder="product's title" name="productTitle">        
+
+                <label for="productTitle">Product's Feature 3</label>
+                <input type="text" placeholder="product's title" name="productTitle">        
+
+                </div>
+
+                <div class="">
+                    <h2>Product's Categories</h2>
+
+                    <label for="productColor">Product's age category</label>
+                    <select>
+                        <option>Adult</option>
+                        <option>Child</option>
+                    </select>
+        
+                    <label for="productColor">Product's Department </label>
+                    <select>
+                        <option>Electronics</option>
+                        <option>Clothing</option>
+                    </select>
+        
+                    <label for="productColor">Product's Electronics Section </label>
+                    <select>
+                        <option>Speakers</option>
+                        <option>Phones</option>
+                    </select>
+        
+                    <label for="productColor">Product's Clothing Section </label>
+                    <select>
+                        <option>Watches</option>
+                        <option>Garments</option>
+                    </select>
+                </div>
+
+            </div>
+
+
+            <div class="main__main--input-container">
+                <div class="">
+                    <h2>Product's Details</h2>
+                    <label for="productColor">Product's brand</label>
+                    <input type="text" placeholder="product's color" name="productColor">
+
+                    <label for="productColor">Product's model</label>
+                    <input type="text" placeholder="product's color" name="productColor">
+
+                    <label for="productColor">Product's type</label>
+                    <input type="text" placeholder="product's color" name="productColor">
+
+                    <label for="productColor">Product's color</label>
+                    <input type="text" placeholder="product's color" name="productColor">
+
+                    <label for="productColor">Product's technology</label>
+                    <input type="text" placeholder="product's color" name="productColor">
+
+                    <label for="productColor">Product's special features</label>
+                    <input type="text" placeholder="product's color" name="productColor">
+
+                    <label for="productColor">Product's included components</label>
+                    <input type="text" placeholder="product's color" name="productColor">
+
+                    <label for="productColor">Product's material</label>
+                    <input type="text" placeholder="product's color" name="productColor">
+                </div>
+
+                    <div class="">
+                        <h2>Manufacturing Details</h2>
+
+                        <label for="productColor">Manufacturing countrty</label>
+                        <input type="text" placeholder="product's color" name="productColor">
+
+                        <label for="productColor">Model Number</label>
+                        <input type="text" placeholder="product's color" name="productColor">
+
+                        <label for="productColor">Package's size L x H x W</label>
+                        <input type="text" placeholder="product's color" name="productColor">
+
+                        <label for="productColor">Package's weight</label>
+                        <input type="text" placeholder="product's color" name="productColor">
+
+                        <label for="productColor">Item's serial number</label>
+                        <input type="text" placeholder="product's color" name="productColor">
+                    </div>
+
+            </div>
+
+        </form>
+
+
+    </main>
+
+<%- include("../includes/index-footer.ejs") %>
+
+    
+<%- include("../includes/html-end.ejs") %>
