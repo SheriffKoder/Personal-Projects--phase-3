@@ -97,7 +97,9 @@ import { GlobalStyle } from "./GlobalStyle";  //h2
   //when we need a movie, we will send the movie id, params
   //will create a link in the thumbnail with an id, and grab that id in the movie component
   //*, show the component on any other route that we did not define like /id/id not /id
-const App = () => (
+
+//component of type react functional component
+const App: React.FC = () => (
 
   <Router>
 

@@ -1,5 +1,5 @@
 import React from "react";
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 
 // Components
 import Thumb from "../Thumb";
@@ -13,10 +13,15 @@ import NoImage from "../../images/no_image.jpg";
 // Styles
 import {Wrapper, Content, Text} from "./MovieInfo.styles";
 
+// Types
+import { MovieState } from "../../hooks/useMovieFetch";
+
+type Props = {
+    movie: MovieState;
+}
 
 
-
-const MovieInfo = ({ movie }) => (
+const MovieInfo: React.FC<Props> = ({ movie }) => (
 
     <Wrapper backdrop={movie.backdrop_path}>
         <Content>
@@ -54,9 +59,9 @@ const MovieInfo = ({ movie }) => (
 );
 
 
-MovieInfo.propTypes = {
-    movie: PropTypes.object,
-};
+// MovieInfo.propTypes = {
+//     movie: PropTypes.object,
+// };
 
 
 export default MovieInfo;

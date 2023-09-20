@@ -657,7 +657,7 @@ what is new ?
 //>hour 5.1 (cont)
 ////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////
-//
+//Deploy, refactor to class
 /*
 
 
@@ -733,6 +733,274 @@ and writes to the session in JSON the state (movies fetched)
 > go to useMovieFetch.js
 
 
+
+
+
+
+*/
+
+
+//>hour 6
+////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
+//
+/*
+
+////////////////////////////////////////////////////////////////////////////
+//Deploying the Application
+
+once done with the project, run in the terminal
+# npm run build
+
+will now have a build folder in our project
+
+to make the routing work properly when deploying
+> create inside the build folder  the file "_redirects"
+and just put /* /index.html 200
+
+Method1: drop
+> drop the build folder inside the website
+
+Method2: netlify cli:
+//install the CLI
+
+# npm install netlify-cli -g
+# netlify deploy
+
+you will be given options
+and then will have a website draft url
+then to deploy
+# netlify deploy --prod
+set publish directory to ./build
+
+////////////////////////////////////////////////////////////////////////////
+//Deploy with continuous deployment Netlify&Github
+
+when push to github it is going to be deployed automatically
+
+> move the _redirects ot the public folder
+
+build command: npm run build
+publish directory: build/
+show advanced > new variable
+to add the .env variables
+Deploy
+
+
+////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
+//Refactoring to class components
+
+will create class components from the SearchBar, Home, Movie
+components as they include states
+
+>> go to searchBar > index.js 
+
+> import Component from react
+> change the function header to class extends
+> will have a one state component
+> we do also have the three Lifecycle methods: componentDidMount, componentDidUpdate, componentWillUnmount
+set the componentDidUpdate
+move the logic (timer) from useEffect to the componentDidUpdate
+> put the return jsx in a render method, change the syntax of the props
+
+
+>> go to Home.js
+
+> remove the hook, import the API
+> import the component module from react
+> change the function header to class extends
+> copy the initial state object from the useHomeFetch Hook
+> copy the fetchMovies function from the useHomeFetch
+    > setState, move the movies and results into movies object in the other setState and change loading: false
+> define the handleSearch, handleLoadMore
+> put the return jsx in a render method, change the syntax of the props
+    > destructure some things from state, change state.results to movies.results
+> add component did mount
+
+
+>> go to Movie.js
+
+the functionality of react router has been removed from the class component
+so before exporting will work on MovieWithParams const
+
+> remove the hook, import the API
+> change the function header to class extends
+> move the return into a render method
+> add states
+> from the movie fetchHook copy the fetchMovie function
+> in the fetchMovie do variable name formatting to set state the correct way
+    define states this.state instead of state
+> add componentDidMount
+
+
+
+
+*/
+
+
+
+//>hour 6.1
+////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
+//Typescript
+/*
+
+an extension to js, adds types to js
+gives types and strictness
+lets write a more error prone code
+
+
+//Setup
+> create a new react app with typescript support
+# npx create-react-app my-app --template typescript
+
+> install the styled components and its types
+npm i styled-components @types/styled-components
+
+> install react router and its types
+npm i history react-router-dom @types/react-router-dom
+
+//Copy files
+> in ./src
+just keep the index.tsx and react-app-env.tx
+copy all the filed from the original project except the index.js
+copy the .env / .gitignore
+
+//
+> comment out the un needed lines in src/index.tsx
+
+the create-react-app with typescript bootstraps the project with configurations in tsconfig.json
+
+
+////////////////////////////////////////////////////////////////////////////
+//Refactoring
+
+rename the .js files in ./src to .ts
+but App.js to App.tsx because we are using jsx
+
+>> we will start working on the API.ts
+- can export the types to use them in another files like Movies type
+always export your types, you never know when you need them
+
+//with TS installed, just name the file and add the : types, no imports for TS
+
+//(TS) prop types, return a promise of type Movies we will create
+fetchMovie: async (movieId: number): Promise<Movie> => {
+export const calcTime = (time: number) : string => {
+
+//Movie will be a defined type, results an array of elements of type type Movie
+export type Movies = {
+  page: number;
+  results: Movie[];
+  total_pages: number;
+  total_results: number
+  
+};
+
+if all the properties in a type are same type
+
+export type Cast = {
+    //property of string will be type of string
+  [property: string]: string;
+
+}
+
+
+>> App.tsx
+
+to ignore a line-warning in .ts file, type in the line before it
+// @ts-ignore
+
+//component of type react functional component
+const App: React.FC = () => (
+
+
+>> config.ts
+
+//if have more than one value
+const API_KEY : string | undefined
+
+>> helpers.ts
+
+/////////////////////////////////////
+//working on components (of Home component)
+only need for index.tsx to set React.FC and if there is props define a type
+
+
+>> hooks > useHomefetch.ts
+import the {Movie} type from API
+
+searchTerm = " " as a function parameter no need to specify a type
+
+//results is an empty array but should be interpreted as a Movie array
+    results: [] as Movie[],
+
+
+>> components / Home.tsx
+
+>> Button index.tsx
+
+//callback is a function that does not return anything
+type Props = {
+    text: string;
+    callback: () => void;
+    children: React.ReactNode;
+}
+
+//react function component with props of type Props
+//define what the prop object will look like
+const Button: React.FC<Props> = ({ text, callback }) => (
+
+
+>> Header index.tsx
+//do not need types in style files
+unless using a prop var, define a type and 
+export const Wrapper = styled.div<Props>`
+
+>> SearchBar index.tsx
+
+//this is a callback but what is the type ?
+//if we hovered on the setSearchTerm in Home.tsx we will get its type
+type Props = {
+    setSearchTerm: React.Dispatch<React.SetStateAction<string>>;
+}
+
+/////////////////////////////////////
+//working on components (of Movie component and NotFound)
+
+>> Movie.tsx
+just add the React.FC, then it complains about variables
+to fix that go to the hook which imports them useMovieFetch
+
+//gets a string of movieid from the hook so convert it to a number
+const {state: movie, loading, error } = useMovieFetch(Number(movieId));
+
+
+>> useMovieFetch.ts
+import API, {Movie, Cast, Crew} from "../API";
+
+
+//create a type object with movie type and merge the actors and directors into this new type
+export type MovieState = Movie & { actors: Cast[], directors: Crew[]};
+
+// const [state, setState] = useState<MovieState | {}>({});
+const [state, setState] = useState<MovieState>({} as MovieState);
+
+const sessionState = isPersistedState(movieId.toString())
+
+
+//////Components
+
+>> Actor
+>> BreadCrumb
+>> MovieInfo
+    <Thumb error Property 'movieId' is missing in type '{ image: string; clickable: false; }' but required in type 'Props'.ts(2741)
+    as we are not providing movieId for it, so go to Thumb index.js
+    set movieid to optional
+    movieId?: number;
+    styles has export const Wrapper = styled.div<Props>`
+>> MovieInfoBar
 
 
 

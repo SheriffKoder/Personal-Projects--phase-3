@@ -11,7 +11,7 @@ import { Wrapper, Content, LogoImg, TMDBLogoImg } from "./Header.styles";
 
 //implicit return
 //Link wrapper was added in (4)
-const Header = () => (
+const Header: React.FC = () => (
     <Wrapper>
         <Content>
             <Link to="/">

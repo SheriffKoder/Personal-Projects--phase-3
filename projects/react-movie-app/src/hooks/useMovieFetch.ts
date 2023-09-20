@@ -2,14 +2,20 @@
 //(4)
 import { useState, useEffect } from "react";
 
-import API from "../API";
+//API
+import API, {Movie, Cast, Crew} from "../API";
 
 // Helpers (5.1)
 import { isPersistedState } from "../helpers";
 
+// Types
+//create a type object with movie type and merge the actors and directors into this new type
+export type MovieState = Movie & { actors: Cast[], directors: Crew[]};
 
-export const useMovieFetch = (movieId) => {
-    const [state, setState] = useState({});
+
+export const useMovieFetch = (movieId: string) => {
+    // const [state, setState] = useState<MovieState | {}>({});
+    const [state, setState] = useState<MovieState>({} as MovieState);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
 

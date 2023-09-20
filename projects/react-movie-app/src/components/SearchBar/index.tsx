@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 
 //useState for a control component
     //input field that is going to be controller by react
@@ -14,11 +14,17 @@ import searchIcon from "../../images/search-icon.svg";
 //Styles
 import { Wrapper, Content} from "./SearchBar.styles";
 
+// Types
+
+//this is a callback but what is the type ?
+//if we hovered on the setSearchTerm in Home.tsx we will get its type
+type Props = {
+    setSearchTerm: React.Dispatch<React.SetStateAction<string>>;
+}
 
 
 
-
-const SearchBar = ({ setSearchTerm}) => {
+const SearchBar:React.FC<Props> = ({ setSearchTerm }) => {
 
     const [state, setState] = useState("");
     const initial = useRef(true);
@@ -55,9 +61,9 @@ const SearchBar = ({ setSearchTerm}) => {
 
 };
 
-SearchBar.propTypes = {
-    callBack: PropTypes.func,
-}
+// SearchBar.propTypes = {
+//     callBack: PropTypes.func,
+// }
 
 
 export default SearchBar;
