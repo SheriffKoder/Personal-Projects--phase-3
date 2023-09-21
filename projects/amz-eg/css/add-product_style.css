@@ -7,6 +7,8 @@ main {
     padding: 1rem;
 }
 
+
+
 .main__main__wrapper {
     max-width: 1000px;
     min-width: 335px;
@@ -219,3 +221,12 @@ input[type=text]:focus, input[type=number]:focus, textarea:focus, select:focus {
     }
     
 }
+
+
+
+
+
+
+
+
+
