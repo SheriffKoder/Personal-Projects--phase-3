@@ -10,164 +10,251 @@
 
     <%- include("../includes/index-header.ejs") %>
 
-
     <main>
 
         <form class="main__main__wrapper">
             <h1>Add a Product</h1>
 
             <div class="main__main--input-container">
-                <div class="">
                 <h2>Main Information</h2>
-                    <label for="productTitle">Product's title</label>
-                    <input type="text" placeholder="product's title" name="productTitle">
-
-                    <label for="productPrice">Product's price</label>
-                    <input type="text" placeholder="product's price" name="productPrice">
+                <div class="main__main--input-field-wrapper">
+                    <h3>Name and Price</h3>
+                    
+                    <div>
+                        <label for="productTitle">Product's title <small>(required)</small></label>
+                        <input required type="text" placeholder="product's title" name="productTitle">
+                    </div>
 
                     <div>
-                        <h3>Product's Image</h3>
-                        <label for="productTitle">Select Image</label>
-                        <input type="text" placeholder="product's title" name="productTitle">
-            
-                        <label for="productTitle">Image's Description</label>
-                        <input type="text" placeholder="product's title" name="productTitle">        
+                        <label for="productPrice">Product's price <small>(required)</small></label>
+                        <input required type="text" placeholder="product's price" name="productPrice">
                     </div>
+                </div>
+
+                <div class="main__main--input-field-wrapper">
+                    <h3>Product's Image</h3>
+
+                    <div>
+                        <label for="productTitle">Select Image <small>(required)</small></label>
+                        <input required type="text" placeholder="product's title" name="productTitle">
+                    </div>
+                    
+                    <div>
+                        <label for="productTitle">Image's Description <small>(required)</small></label>
+                        <input required type="text" placeholder="product's title" name="productTitle"> 
+                    </div>    
 
                 </div>
 
-                <div class="">
-                    <h3>Stock</h3>
-                    <label for="productColor">How many items available</label>
-                    <input type="number" placeholder="product's color" name="productAvailability">
 
+                <div class="main__main--input-field-wrapper">
+                    <h3>Stock</h3>
+                    <div>
+                        <label for="productColor">How many items available <small>(required)</small></label>
+                        <input required type="number" placeholder="product's color" name="productAvailability">
+                    </div>
                     <!-- <label for="productColor">How many items sold</label>
                     <input type="text" placeholder="product's color" name="productColor"> -->
 
                     <!-- <label for="productColor">Product's Availability</label>
                     <input type="text" placeholder="product's color" name="productColor"> -->
+                </div>
 
-                    <h3>Product's customer delivery</h3>
-                    <div id="delivery_options">
+                <div class="main__main--input-field-wrapper check-box--wrapper">
+                    <h3>Customer delivery Option <small>(required)</small></h3>
+                    <p>Does the product's price include the delivery fees ?</p>
+                    <div class="check-box--container">
+                        <input required type="radio" name="productColor">
                         <label for="delivery_included">Delivery Included</label>
-                        <input type="checkbox" name="productColor">
-
+                    </div>
+                    <div class="check-box--container">
+                        <input required type="radio" name="productColor">
                         <label for="delivery_not_included">Delivery Not Included</label>
-                        <input type="checkbox" name="productColor">
-
-
                     </div>
-
                 </div>
+
+
             </div>
 
 
             <div class="main__main--input-container">
-                <div>
                 <h2>Product's Description</h2>
-                <label for="productTitle">Product's Short Introduction</label>
-                <input type="text" placeholder="product's title" name="productTitle">        
 
-                <label for="productDescriptionText">Product's Description</label>
-                <textarea id="productDescriptionText" name="productDescriptionText">
-                    Description text
-                </textarea>
+                <div class="main__main--input-field-wrapper">
+                    <h3>Description and Features</h3>
 
-                <label for="productTitle">Product's Feature 1</label>
-                <input type="text" placeholder="product's title" name="productTitle">        
+                    <div class="input-field-container">
+                        <label for="productTitle">Product's Short Introduction <small>(required)</small></label>
+                        <input required type="text" placeholder="product's title" name="productTitle">        
+                    </div>
 
-                <label for="productTitle">Product's Feature 2</label>
-                <input type="text" placeholder="product's title" name="productTitle">        
+                    <div>
+                        <label for="productDescriptionText">Product's Description <small>(required)</small></label>
+                        <textarea required id="productDescriptionText" name="productDescriptionText" placeholder="Describe your product"></textarea>
+                    </div>
 
-                <label for="productTitle">Product's Feature 3</label>
-                <input type="text" placeholder="product's title" name="productTitle">        
+                    <div>
+                        <label for="productTitle">Product's Feature 1 <small>(required)</small></label>
+                        <input required type="text" placeholder="product's title" name="productTitle">        
+                    </div>
+
+                    <div>
+                        <label for="productTitle">Product's Feature 2<small>(optional)</small></label>
+                        <input type="text" placeholder="product's title" name="productTitle">        
+                    </div>
+
+                    <div>
+                        <label for="productTitle">Product's Feature 3 <small>(optional)</small></label>
+                        <input type="text" placeholder="product's title" name="productTitle">        
+                    </div>
 
                 </div>
 
-                <div class="">
-                    <h2>Product's Categories</h2>
+                <div class="main__main--input-field-wrapper">
+                    <h3>Categories</h3>
 
-                    <label for="productColor">Product's age category</label>
-                    <select>
-                        <option>Adult</option>
-                        <option>Child</option>
-                    </select>
-        
-                    <label for="productColor">Product's Department </label>
-                    <select>
-                        <option>Electronics</option>
-                        <option>Clothing</option>
-                    </select>
-        
-                    <label for="productColor">Product's Electronics Section </label>
-                    <select>
-                        <option>Speakers</option>
-                        <option>Phones</option>
-                    </select>
-        
-                    <label for="productColor">Product's Clothing Section </label>
-                    <select>
-                        <option>Watches</option>
-                        <option>Garments</option>
-                    </select>
+                    <div class="input-field">
+                        <label for="productColor">Product's age category <small>(required)</small></label>
+                        <select required>
+                            <option>Adult</option>
+                            <option>Child</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="productColor">Product's Department <small>(required)</small></label>
+                        <select required>
+                            <option>Electronics</option>
+                            <option>Clothing</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="productColor">Product's Electronics Section <small>(required)</small></label>
+                        <select required>
+                            <option>Speakers</option>
+                            <option>Phones</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="productColor">Product's Clothing Section <small>(required)</small></label>
+                        <select required>
+                            <option>Watches</option>
+                            <option>Garments</option>
+                        </select>
+                    </div>
+
                 </div>
 
             </div>
 
 
             <div class="main__main--input-container">
-                <div class="">
-                    <h2>Product's Details</h2>
-                    <label for="productColor">Product's brand</label>
-                    <input type="text" placeholder="product's color" name="productColor">
+                <h2>Product's Specifications</h2>
+                <div class="main__main--input-field-wrapper">
+                    <h3>Product's Details</h3>
 
-                    <label for="productColor">Product's model</label>
-                    <input type="text" placeholder="product's color" name="productColor">
+                    <div class="input-field-container">
+                        <label for="productColor">Product's brand <small>(required)</small></label>
+                        <input required type="text" placeholder="product's color" name="productColor">
+                    </div>
 
-                    <label for="productColor">Product's type</label>
-                    <input type="text" placeholder="product's color" name="productColor">
-
-                    <label for="productColor">Product's color</label>
-                    <input type="text" placeholder="product's color" name="productColor">
-
-                    <label for="productColor">Product's technology</label>
-                    <input type="text" placeholder="product's color" name="productColor">
-
-                    <label for="productColor">Product's special features</label>
-                    <input type="text" placeholder="product's color" name="productColor">
-
-                    <label for="productColor">Product's included components</label>
-                    <input type="text" placeholder="product's color" name="productColor">
-
-                    <label for="productColor">Product's material</label>
-                    <input type="text" placeholder="product's color" name="productColor">
-                </div>
-
-                    <div class="">
-                        <h2>Manufacturing Details</h2>
-
-                        <label for="productColor">Manufacturing countrty</label>
-                        <input type="text" placeholder="product's color" name="productColor">
-
-                        <label for="productColor">Model Number</label>
-                        <input type="text" placeholder="product's color" name="productColor">
-
-                        <label for="productColor">Package's size L x H x W</label>
-                        <input type="text" placeholder="product's color" name="productColor">
-
-                        <label for="productColor">Package's weight</label>
-                        <input type="text" placeholder="product's color" name="productColor">
-
-                        <label for="productColor">Item's serial number</label>
+                    <div class="input-field-container">
+                        <label for="productColor">Product's model <small>(optional)</small></label>
                         <input type="text" placeholder="product's color" name="productColor">
                     </div>
 
+                    <div class="input-field-container">
+                        <label for="productColor">Product's type <small>(optional)</small></label>
+                        <input type="text" placeholder="product's color" name="productColor">
+                    </div>
+
+                    <div class="input-field-container">
+                        <label for="productColor">Product's color <small>(optional)</small></label>
+                        <input type="text" placeholder="product's color" name="productColor">
+                    </div>
+
+                    <div class="input-field-container">
+                        <label for="productColor">Product's technology <small>(optional)</small></label>
+                        <input type="text" placeholder="product's color" name="productColor">
+                    </div>
+
+                    <div class="input-field-container">
+                        <label for="productColor">Product's main special features <small>(optional)</small></label>
+                        <input type="text" placeholder="product's color" name="productColor">
+                    </div>
+
+                    <div class="input-field-container">
+                        <label for="productColor">Product's included components <small>(optional)</small></label>
+                        <input type="text" placeholder="product's color" name="productColor">
+                    </div>
+
+                    <div class="input-field-container">
+                        <label for="productColor">Product's material <small>(required)</small></label>
+                        <input required type="text" placeholder="product's color" name="productColor">
+                    </div>
+
+                </div>
+
+                    <div class="main__main--input-field-wrapper">
+                        <h3>Manufacturing Details</h3>
+
+                        <div class="input-field-container">
+                            <label for="productColor">Manufacturing country <small>(required)</small></label>
+                            <input required type="text" placeholder="product's color" name="productColor">
+                        </div>
+
+                        <div class="input-field-container">
+                            <label for="productColor">Model Number <small>(required)</small></label>
+                            <input required type="text" placeholder="product's color" name="productColor">
+                        </div>
+
+                        <div class="input-field-container">
+                            <label for="productColor">Item's serial number <small>(required)</small></label>
+                            <input required type="text" placeholder="product's color" name="productColor">
+                        </div>
+
+                        <div class="input-field-container--size">
+
+                            <div class="input-field-container--size--input-container">
+                                <label for="productColor">Package's weight:</label>
+                                <div for="productColor">in (KG)</div>
+                                <input required type="text" placeholder="product's color" name="productColor">
+                                <span><small>required*</small></span>
+                            </div>
+
+                            <h4 for="productColor">Package's size: <small>all fields are required* in centimeters*</small></h4>
+
+                            <div class="input-field-container--size--input-container">
+                                <label for="productColor">Length:</label>
+                                <input required type="text" placeholder="product's color" name="productColor">
+                            </div>
+
+                            <div class="input-field-container--size--input-container">
+                                <label for="productColor">Height:</label>
+                                <input required type="text" placeholder="product's color" name="productColor">
+                            </div>
+
+                            <div class="input-field-container--size--input-container">
+                                <label for="productColor">Width:</label>
+                                <input required type="text" placeholder="product's color" name="productColor">
+                            </div>
+                        </div>
+
+                    </div>
+
+            </div>
+
+            <div class="submit-form--button--container">
+                <button class="submit-form--button"type="submit">Add Product to Amazon</button>
             </div>
 
         </form>
 
 
     </main>
+
 
 <%- include("../includes/index-footer.ejs") %>
 

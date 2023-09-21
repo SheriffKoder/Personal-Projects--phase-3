@@ -69,10 +69,13 @@
                         <h1 class="main__main__products-list--text--header" aria-hidden="true">
                         Results
                         </h1>
-                        <p class="main__main__products-list--text--notify" aria-label="note">
-                        Price and other details may vary, based on product size and colour.
-                        </p>
-
+                        <div class="main__main__products-list--text--content-wrapper">
+                            <p class="main__main__products-list--text--notify" aria-label="note">
+                            All active products added and active
+                            </p>
+                            <a href="./index-add-product.html"class="add-new-product-link">Add a new Product</a>
+                        </div>
+    
                     </div>
     
                     <% if (prods.length) > 0 %>
@@ -133,9 +136,12 @@
                                 <span class="main__main__products-list--item--description--spacer"></span>
 
                                 <span class="main__main__products-list--item--description-buttons">
-                                    <button class="main__main__products-list--item--description-buttons-add" aria-label="control, Add to stock">Stock</button>
+                                    <!-- <button class="main__main__products-list--item--description-buttons-add" aria-label="control, Add to stock">Stock</button>
                                     <button class="main__main__products-list--item--description-buttons-edit" aria-label="control, edit product">Edit</button>
-                                    <button class="main__main__products-list--item--description-buttons-delete" aria-label="control, delete product">Delete</button>
+                                    <button class="main__main__products-list--item--description-buttons-delete" aria-label="control, delete product">Delete</button> -->
+                                    <button class="white-button" aria-label="control, Add to stock">Stock</button>
+                                    <button class="white-button" aria-label="control, edit product">Edit</button>
+                                    <button class="white-button" aria-label="control, delete product">Delete</button>
                                 </span>
 
                             </div>
