@@ -30,58 +30,65 @@
 
                             <% products.forEach(p) => { %>
 
-                            <li class="main__main__content__row1--cart--list--item--container" aria-label="cart item">
-                                <label><input type="checkbox" for="item1" aria-label="remove item from checkout"></label>
-                                <div id="item1" class="main__main__content__row1--cart--list--item">
-                                    <div class="cart--list--item--image" aria-label="item's image">
-                                        <img src="<%=p.imageUrl%>" alt="<%=p.imageAlt%>">
-                                    </div>
-                                    <div class="cart--list--item--description" aria-label="item's description">
-                                        <h2 class="cart--list--item--description--name" aria-label="item's title">
-                                            <%=p.title%>
-                                        </h2>
-                                        <p class="cart--list--item--description--price" aria-label="item's price">
-                                            EGP<%=p.price%>
-                                        </p>
-                                        <p class="cart--list--item--description--availability 
-                                        <%= p.availability ? "available_green" : "not_available_red" %>
-                                        aria-label="item's availability">
-                                            <%= p.availability%> ? "In Stock" : "Out of stock" %>
-                                        </p>
-                                        <p class="cart--list--item--description--delivery" aria-label="item's delivery option">
-                                            <%= p.deliveryFees === "free"%> ? "Eligible for free delivery" : "p.deliveryFees" %>
-                                        </p>
-
-                                        <form action="/cart-delete-item" method="POST">
-                                        <div class="cart--list--item--description--actions" aria-label="item's control buttons" tabindex="0">
-                                            <select aria-label="item's count" name="count">
-                                                <option>Qty: <%= p.cartItem.quantity %></option>
-                                                <% (p.cartItem.quantity !== 1) <option>1</option> : ""%>
-                                                <option>2</option>
-                                                <option>3</option>
-                                                <option>4</option>
-                                                <option>5</option>
-                                                <option>6</option>
-                                                <option>7</option>
-                                                <option>8</option>
-                                                <option>9</option>
-                                                <option>10</option>
-                                            </select>
-                                            <input type="hidden" value="<%= p.id%>" name="productId">
-                                            <button aria-label="delete item from cart" type="submit">Delete</button>
-                                            <button aria-label="move item to 'save for later' list">Save for later</button>
-                                            <button aria-label="share item">Share</button>
+                                <li class="main__main__content__row1--cart--list--item--container" aria-label="cart item">
+                                    <label><input type="checkbox" for="item1" aria-label="remove item from checkout"></label>
+                                    <div id="item1" class="main__main__content__row1--cart--list--item">
+                                        <div class="cart--list--item--image" aria-label="item's image">
+                                            <img src="<%=p.imageUrl%>" alt="<%=p.imageAlt%>">
                                         </div>
-                                        </form>
+                                        <div class="cart--list--item--description" aria-label="item's description">
+                                            <h2 class="cart--list--item--description--name" aria-label="item's title">
+                                                <%=p.title%>
+                                            </h2>
+                                            <p class="cart--list--item--description--price" aria-label="item's price">
+                                                EGP<%=p.price%>
+                                            </p>
+                                            <p class="cart--list--item--description--availability 
+                                            <%= p.availability ? "available_green" : "not_available_red" %>
+                                            aria-label="item's availability">
+                                                <%= p.availability%> ? "In Stock" : "Out of stock" %>
+                                            </p>
+                                            <p class="cart--list--item--description--delivery" aria-label="item's delivery option">
+                                                <%= p.deliveryFees === "free"%> ? "Eligible for free delivery" : "p.deliveryFees" %>
+                                            </p>
+
+                                            <form action="/cart-delete-item" method="POST">
+                                            <div class="cart--list--item--description--actions" aria-label="item's control buttons" tabindex="0">
+                                                <select aria-label="item's count" name="count">
+                                                    <option>Qty: <%= p.cartItem.quantity %></option>
+                                                    <% (p.cartItem.quantity !== 1) <option>1</option> : ""%>
+                                                    <option>2</option>
+                                                    <option>3</option>
+                                                    <option>4</option>
+                                                    <option>5</option>
+                                                    <option>6</option>
+                                                    <option>7</option>
+                                                    <option>8</option>
+                                                    <option>9</option>
+                                                    <option>10</option>
+                                                </select>
+                                                <input type="hidden" value="<%= p.id%>" name="productId">
+                                                <button aria-label="delete item from cart" type="submit">Delete</button>
+                                                <button aria-label="move item to 'save for later' list">Save for later</button>
+                                                <button aria-label="share item">Share</button>
+                                            </div>
+                                            </form>
+                                        </div>
                                     </div>
-                                </div>
-                            </li>
+                                </li>
 
 
 
 
                         </ul>
-                        <p class="right-text-align row1--extra--proceed-confirm-total" aria-label="Cart's total price">Subtotal (6 items): <span class="row1--extra--proceed-confirm-total-price"> EGP 2,449.98</span></p>
+                        <p class="right-text-align row1--extra--proceed-confirm-total" aria-label="Cart's total price">
+                            Subtotal (<%products.length%>items): 
+                            <span class="row1--extra--proceed-confirm-total-price"> 
+                                EGP<% products.reduce(prev, cur => {
+                                    return prev + cur.price * cur.quantity, 0)
+                                }) %>
+                        </span>
+                        </p>
 
 
                     </section>
@@ -270,5 +277,8 @@
     <%- include("../includes/index-footer.ejs") %>
 
     
+    <script src="./public/js/code.jquery.com_jquery-3.7.0.js"></script>
+    <script src="./public/js/main_cart.js"></script>
+
 <%- include("../includes/html-end.ejs") %>
 
