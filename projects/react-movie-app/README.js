@@ -850,8 +850,6 @@ an extension to js, adds types to js
 gives types and strictness
 lets write a more error prone code
 
-
-//Setup
 > create a new react app with typescript support
 # npx create-react-app my-app --template typescript
 
@@ -861,147 +859,173 @@ npm i styled-components @types/styled-components
 > install react router and its types
 npm i history react-router-dom @types/react-router-dom
 
-//Copy files
 > in ./src
 just keep the index.tsx and react-app-env.tx
 copy all the filed from the original project except the index.js
-copy the .env / .gitignore
-
-//
-> comment out the un needed lines in src/index.tsx
-
-the create-react-app with typescript bootstraps the project with configurations in tsconfig.json
 
 
+
+
+
+
+
+*/
+
+//>hour 7
 ////////////////////////////////////////////////////////////////////////////
-//Refactoring
+////////////////////////////////////////////////////////////////////////////
+//Login and Voting
+/*
 
-rename the .js files in ./src to .ts
-but App.js to App.tsx because we are using jsx
+on the API website
+//Movies > Post > Rate Movie
 
->> we will start working on the API.ts
-- can export the types to use them in another files like Movies type
-always export your types, you never know when you need them
+by posting to /movie/{movie_id}/rating
 
-//with TS installed, just name the file and add the : types, no imports for TS
-
-//(TS) prop types, return a promise of type Movies we will create
-fetchMovie: async (movieId: number): Promise<Movie> => {
-export const calcTime = (time: number) : string => {
-
-//Movie will be a defined type, results an array of elements of type type Movie
-export type Movies = {
-  page: number;
-  results: Movie[];
-  total_pages: number;
-  total_results: number
-  
-};
-
-if all the properties in a type are same type
-
-export type Cast = {
-    //property of string will be type of string
-  [property: string]: string;
-
-}
+in the Query string
+we have to provide a api_key and session_id
 
 
->> App.tsx
+To login
+//Authentication > GET > Create Request Token
+//Authentication > POST > Create Session
 
-to ignore a line-warning in .ts file, type in the line before it
-// @ts-ignore
+the idea of this hour is
+how to create a global context
+and store the user in it
 
-//component of type react functional component
-const App: React.FC = () => (
+we will login with our own account here
+later you can make your own api where users can login
+with this method
 
+> go to API.js 
+will find the bonus material
 
->> config.ts
+////////////////////////////////////
+//to login
+we will get the requestToken
+authenticate the request token
+then get the session id
 
-//if have more than one value
-const API_KEY : string | undefined
+rateMovie will send a rate score to the API
+and return success
 
->> helpers.ts
-
-/////////////////////////////////////
-//working on components (of Home component)
-only need for index.tsx to set React.FC and if there is props define a type
-
-
->> hooks > useHomefetch.ts
-import the {Movie} type from API
-
-searchTerm = " " as a function parameter no need to specify a type
-
-//results is an empty array but should be interpreted as a Movie array
-    results: [] as Movie[],
-
-
->> components / Home.tsx
-
->> Button index.tsx
-
-//callback is a function that does not return anything
-type Props = {
-    text: string;
-    callback: () => void;
-    children: React.ReactNode;
-}
-
-//react function component with props of type Props
-//define what the prop object will look like
-const Button: React.FC<Props> = ({ text, callback }) => (
+////////////////////////////////////
+//Setup Context
+> create inside the src folder > context.js
+to setup a globalContext and the state want to access globally
 
 
->> Header index.tsx
-//do not need types in style files
-unless using a prop var, define a type and 
-export const Wrapper = styled.div<Props>`
+> go to the App.js file
+import the userProvider and wrap the complete return in the 
+userProvider component
+so the complete application will have access to the state we have created
 
->> SearchBar index.tsx
+in a component can use
+//grab the user from the context
+const [user] = useContext();
 
-//this is a callback but what is the type ?
-//if we hovered on the setSearchTerm in Home.tsx we will get its type
-type Props = {
-    setSearchTerm: React.Dispatch<React.SetStateAction<string>>;
-}
+////////////////////////////////////////////////////////////////////////
+//now we will start on the login page
 
-/////////////////////////////////////
-//working on components (of Movie component and NotFound)
+> create inside the components folder > Login.js and Login.Styles.js
+create the styled component skeleton
 
->> Movie.tsx
-just add the React.FC, then it complains about variables
-to fix that go to the hook which imports them useMovieFetch
-
-//gets a string of movieid from the hook so convert it to a number
-const {state: movie, loading, error } = useMovieFetch(Number(movieId));
+> in Login.js import the styled-component
+> return the styled-component wrapping around a label and input components
+    with value of "state value" for now, we will use later our context state
 
 
->> useMovieFetch.ts
-import API, {Movie, Cast, Crew} from "../API";
+//now we want to use this component
+so will create a new route for it
+and will do that in the App.js file
+
+> go to Login, import
+> in App.js   import the login, put in the routes
+
+> go to Login.js, 
+set states, grab the context, use the navigate hook
+
+now want to make the input fields controlled by this component
+so will hook them up with state like we did in the search bar
+
+change the input value attr to username, password
+when these input fields change, we can make this change in the handle input
+
+> work on the handleInput method
+
+!! now we have our controlled components, can type in the inputs
 
 
-//create a type object with movie type and merge the actors and directors into this new type
-export type MovieState = Movie & { actors: Cast[], directors: Crew[]};
+////////////////////////////////////
+now want to grab something from the API
+so will use the "handleSubmit" function
 
-// const [state, setState] = useState<MovieState | {}>({});
-const [state, setState] = useState<MovieState>({} as MovieState);
-
-const sessionState = isPersistedState(movieId.toString())
+!! now when logging with the api username/password sk 12 , 
+will get the session id and success will be true
 
 
-//////Components
+> in the return above the label
+add the error component
 
->> Actor
->> BreadCrumb
->> MovieInfo
-    <Thumb error Property 'movieId' is missing in type '{ image: string; clickable: false; }' but required in type 'Props'.ts(2741)
-    as we are not providing movieId for it, so go to Thumb index.js
-    set movieid to optional
-    movieId?: number;
-    styles has export const Wrapper = styled.div<Props>`
->> MovieInfoBar
 
+
+////////////////////////////////////
+//style the styled-component Login.styles.js
+
+
+
+////////////////////////////////////////////////////////////////////////
+//header (login user and login button)
+
+
+> go to the header component index.js
+
+import the context, useContext, 
+grab the user from context
+
+!! now we have the session id again, username,
+
+> go to the header component index.js
+add the logged in as span to the return
+
+!can store the user information in the sessionStorage or LocalStorage
+
+//video: backend and setup json web tokens and login system in react application
+
+
+> in header.styles.js
+add the a tag and color in content
+
+return
+<span className="">
+<span>
+
+
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+//the rate component
+
+
+> create a new folder in components > Rate
+
+> create the component and return the range slider input 
+
+> import into the movie info index.js and add the rate component to the returns
+
+//when we press the rating button, send the rating number to the API and rate the movie
+
+> in the movie info index.js, import the context and define the handle rating
+
+
+shortcircuit
+//if user, will use this component
+{user && (<myComponent)}
+
+//next point is to set a logout button
+by wiping out the globalContext state and remove the user from the state
+
+one monokey 80
 
 
 

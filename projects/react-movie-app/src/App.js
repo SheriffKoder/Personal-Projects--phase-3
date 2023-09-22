@@ -74,7 +74,10 @@ import Header from "./components/Header"; //h2
 import Home from "./components/Home";
 import Movie from "./components/Movie"; //(4)
 import NotFound from "./components/NotFound"; //(4)
+import Login from "./components/Login"; //(7)
 
+// Context //(7)
+import UserProvider from "./context";
 
 // Styles
 import { GlobalStyle } from "./GlobalStyle";  //h2
@@ -97,22 +100,26 @@ import { GlobalStyle } from "./GlobalStyle";  //h2
   //when we need a movie, we will send the movie id, params
   //will create a link in the thumbnail with an id, and grab that id in the movie component
   //*, show the component on any other route that we did not define like /id/id not /id
-
-//component of type react functional component
-const App: React.FC = () => (
+const App = () => (
 
   <Router>
 
-    <Header />
+    {/* //(7) */}
+    <UserProvider>
 
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/:movieId" element={<Movie />} />
-      <Route path="/*" element={<NotFound />} />
-    </Routes>
+      <Header />
+
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="login" element={<Login />} />
+        <Route path="/:movieId" element={<Movie />} />
+        <Route path="/*" element={<NotFound />} />
+      </Routes>
 
 
-    <GlobalStyle />
+      <GlobalStyle />
+
+    </UserProvider>
 
   </Router>
 

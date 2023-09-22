@@ -2,7 +2,7 @@ import {useState, useEffect} from "react";
 //we do not need React as we are not using here any JSX
 
 // API (2)
-import API, {Movie} from "../API";
+import API from "../API";
 
 // Helpers
 import { isPersistedState } from "../helpers";
@@ -10,10 +10,9 @@ import { isPersistedState } from "../helpers";
 //(2.1)
 //to reset stuff, will need that later
 //same as the movie object fetched from the API
-//results is an empty array but should be interpreted as a Movie array
 const initialState = {
     page: 0,
-    results: [] as Movie[],
+    results: [],
     total_pages: 0,
     total_results: 0
 
@@ -42,7 +41,7 @@ export const useHomeFetch = () => {
 
     //(2)
     //fetch from the API and await the data
-    const fetchMovies = async(page: number, searchTerm = "" ) => {
+    const fetchMovies = async(page, searchTerm ="" ) => {
         try {
             setError(false);    //set any pre-set errors to false again as we are trying to fetch
             setLoading(true);   //as now we are fetching, set flag to true, to keep track when we are actually fetching and show the loading spinner

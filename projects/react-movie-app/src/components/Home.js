@@ -23,7 +23,7 @@ import { useHomeFetch } from "../hooks/useHomeFetch" //(2.1)
 //can name the image any name
 import NoImage from "../images/no_image.jpg";
 
-const Home: React.FC = () => {
+const Home = () => {
 
 
     //(2.1) destruct our custom hook

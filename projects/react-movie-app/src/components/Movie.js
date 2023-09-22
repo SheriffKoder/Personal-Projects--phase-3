@@ -21,12 +21,11 @@ import NoImage from "../images/no_image.jpg";
 
 // const Movie = () => <div>Movie</div>;
 
-const Movie: React.FC = () => {
+const Movie = () => {
 
     //movieId as named in the App.js file
     const { movieId } = useParams();
 
-    //gets a string of movieid from the hook so convert it to a number
     const {state: movie, loading, error } = useMovieFetch(movieId);
 
     if (loading) return <Spinner />
