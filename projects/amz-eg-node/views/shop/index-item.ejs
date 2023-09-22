@@ -441,7 +441,8 @@ let starFunction = (rating) = {
                                 <tr><td>Manufacturer</td><td><%=product.brand%></td></tr>
                                 <tr><td>Country of origin</td><td><%=product.country%></td></tr>
                                 <tr><td>Item model number</td><td><%=product.modelNumber%></td></tr>
-                                <tr><td>Package Dimensions</td><td><%=product.size%> cm; <%=product.weight%> Grams</td></tr>
+                                <tr><td>Package Dimensions</td><td>Length: <%=product.size.length%> cm x Height: <%=product.size.height%> x Width: <%=product.size.width%></td></tr>
+                                <tr><td>Package Weight</td><td><%=product.weight%> Kilograms</td></tr>
                                 <tr><td>ASIN</td><td><%=product.serial%></td></tr>
                             </table>
                         </div>
@@ -675,6 +676,8 @@ let starFunction = (rating) = {
 
 
     <%- include("../includes/index-footer.ejs") %>
+
+    <script src="./public/js/main_item.js"></script>
 
     
 <%- include("../includes/html-end.ejs") %>
