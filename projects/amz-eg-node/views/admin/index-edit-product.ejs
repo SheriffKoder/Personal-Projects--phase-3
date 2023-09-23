@@ -12,7 +12,12 @@
 
     <main>
 
-        <form class="main__main__wrapper" action="admin/product" method="POST">
+        <form 
+            class="main__main__wrapper" 
+            action="<% if (editing) { %> /admin/edit-product <% } else { %> /admin/product <% } %> " 
+            method="POST"
+        >
+            
             <h1>Add a Product</h1>
 
             <div class="main__main--input-container">
@@ -22,12 +27,16 @@
                     
                     <div>
                         <label for="productTitle">Product's title <small>(required)</small></label>
-                        <input required type="text" placeholder="product's title" name="productTitle" id="productTitle">
+                        <input required type="text" placeholder="product's title" name="productTitle" id="productTitle"
+                        value="<% if (editing) { %> <%=product.title%><%}%>"
+                        >
                     </div>
 
                     <div>
                         <label for="productPrice">Product's price <small>(required)</small></label>
-                        <input required type="text" placeholder="product's price" name="productPrice" id="productPrice">
+                        <input required type="text" placeholder="product's price" name="productPrice" id="productPrice"
+                        value="<% if (editing) { %> <%=product.price%><%}%>"
+                        >
                     </div>
                 </div>
 
@@ -36,12 +45,16 @@
 
                     <div>
                         <label for="productImage">Select Image <small>(required)</small></label>
-                        <input required type="text" placeholder="product's image url" name="productImage" id="productImage">
+                        <input required type="text" placeholder="product's image url" name="productImage" id="productImage"
+                        value="<% if (editing) { %> <%=product.imageUrl%><%}%>"
+                        >
                     </div>
                     
                     <div>
                         <label for="productImageAlt">Image's Description <small>(required)</small></label>
-                        <input required type="text" placeholder="product's image description" name="productImageAlt" id="productImageAlt"> 
+                        <input required type="text" placeholder="product's image description" name="productImageAlt" id="productImageAlt"
+                        value="<% if (editing) { %> <%=product.imageAlt%><%}%>"
+                        > 
                     </div>    
 
                 </div>
@@ -51,7 +64,9 @@
                     <h3>Stock</h3>
                     <div>
                         <label for="productAvailability">How many items available <small>(required)</small></label>
-                        <input required type="number" placeholder="product's availability" name="productAvailability" id="productAvailability">
+                        <input required type="number" placeholder="product's availability" name="productAvailability" id="productAvailability"
+                        value="<% if (editing) { %> <%=product.availability%><%}%>"
+                        >
                     </div>
                     <!-- <label for="productColor">How many items sold</label>
                     <input type="text" placeholder="product's color" name="productColor"> -->
@@ -64,11 +79,15 @@
                     <h3>Customer delivery Option <small>(required)</small></h3>
                     <p>Does the product's price include the delivery fees ?</p>
                     <div class="check-box--container">
-                        <input required type="radio" name="productFreeDelivery" id="productFreeDelivery">
+                        <input required type="radio" name="productFreeDelivery" id="productFreeDelivery"
+                        checked="<%!product.deliveryFees%>"
+                        >
                         <label for="productFreeDeliveryivery">Delivery Included</label>
                     </div>
                     <div class="check-box--container">
-                        <input required type="radio" name="productNotFreeDelivery" id="productNotFreeDelivery">
+                        <input required type="radio" name="productNotFreeDelivery" id="productNotFreeDelivery"
+                        checked="<%product.deliveryFees%>"
+                        >
                         <label for="productNotFreeDelivery">Delivery Not Included</label>
                     </div>
                 </div>
@@ -85,27 +104,38 @@
 
                     <div class="input-field-container">
                         <label for="productIntro">Product's Short Introduction <small>(required)</small></label>
-                        <input required type="text" placeholder="introduction" name="productIntro" id="productIntro" >        
+                        <input required type="text" placeholder="introduction" name="productIntro" id="productIntro" 
+                        value="<% if (editing) { %> <%=product.notesIntro%><%}%>"
+                        >        
                     </div>
 
                     <div>
                         <label for="productDescriptionText">Product's Description <small>(required)</small></label>
-                        <textarea required id="productDescriptionText" name="productDescriptionText" placeholder="Describe your product"></textarea>
+                        <textarea required id="productDescriptionText" name="productDescriptionText" placeholder="Describe your product">
+                            <% if (editing) { %> <%=product.notesIntro%><%}%>
+                    </textarea>
                     </div>
 
                     <div>
                         <label for="productFeature1">Product's Feature 1 <small>(required)</small></label>
-                        <input required type="text" placeholder="feature 1" name="productFeature1" id="productFeature1">        
+                        <input required type="text" placeholder="feature 1" name="productFeature1" id="productFeature1"
+                        value="<% if (editing) { %> <%=product.specialFeature1%><%}%>"
+                        >        
                     </div>
 
                     <div>
                         <label for="productFeature2">Product's Feature 2<small>(optional)</small></label>
-                        <input type="text" placeholder="feature 2" name="productFeature2" id="productFeature2">        
+                        <input type="text" placeholder="feature 2" name="productFeature2" id="productFeature2"
+                        value="<% if (editing) { %> <%=product.specialFeature2%><%}%>"
+
+                        >        
                     </div>
 
                     <div>
                         <label for="productFeature3">Product's Feature 3 <small>(optional)</small></label>
-                        <input type="text" placeholder="feature 3" name="productFeature3" id="productFeature3">        
+                        <input type="text" placeholder="feature 3" name="productFeature3" id="productFeature3"
+                        value="<% if (editing) { %> <%=product.specialFeature3%><%}%>"
+                        >        
                     </div>
 
                 </div>
@@ -116,32 +146,32 @@
                     <div class="input-field">
                         <label for="productAge">Product's age category <small>(required)</small></label>
                         <select required id="productAge" name="productAge">
-                            <option>Adult</option>
-                            <option>Child</option>
+                            <option <% (product.age === "Adult") ? selected : "" %> >Adult</option>
+                            <option <% (product.age === "Child") ? selected : "" %> >Child</option>
                         </select>
                     </div>
 
                     <div>
                         <label for="productDepartment">Product's Department <small>(required)</small></label>
                         <select required id="productDepartment" name="productDepartment">
-                            <option>Electronics</option>
-                            <option>Clothing</option>
+                            <option <% (product.department === "Electronics") ? selected : "" %> >Electronics</option>
+                            <option <% (product.department === "Clothing") ? selected : "" %>>Clothing</option>
                         </select>
                     </div>
 
-                    <div class="productSection_Electronics__container">
+                    <div class="productSection_Electronics__container" <% (product.department === "Electronics") ? style="display:inline" : "" %> >
                         <label for="productSection_Electronics">Product's Electronics Section <small>(required)</small></label>
                         <select required id="productSection_Electronics" name="productSection_Electronics">
-                            <option>Speakers</option>
-                            <option>Phones</option>
+                            <option <% (product.section === "Speakers") ? selected : "" %> >Speakers</option>
+                            <option <% (product.section === "Phones") ? selected : "" %>>Phones</option>
                         </select>
                     </div>
 
-                    <div class="productSection_Clothing__container">
+                    <div class="productSection_Clothing__container" <% (product.department === "Clothing") ? style="display:inline" : "" %> >
                         <label for="productSection_Clothing">Product's Clothing Section <small>(required)</small></label>
                         <select required id="productSection_Clothing" name="productSection_Clothing">
-                            <option>Watches</option>
-                            <option>Garments</option>
+                            <option <% (product.section === "Watches") ? selected : "" %> >Watches</option>
+                            <option <% (product.section === "Garments") ? selected : "" %> >Garments</option>
                         </select>
                     </div>
 
@@ -157,42 +187,58 @@
 
                     <div class="input-field-container">
                         <label for="productBrand">Product's brand <small>(required)</small></label>
-                        <input required type="text" placeholder="brand name" name="productBrand" id="productBrand">
+                        <input required type="text" placeholder="brand name" name="productBrand" id="productBrand"
+                        value="<% if (editing) { %> <%=product.brand%><%}%>"
+                        >
                     </div>
 
                     <div class="input-field-container">
                         <label for="productModel">Product's model <small>(optional)</small></label>
-                        <input type="text" placeholder="model's reference" name="productModel" id="productModel">
+                        <input type="text" placeholder="model's reference" name="productModel" id="productModel"
+                        value="<% if (editing) { %> <%=product.model%><%}%>"
+                        >
                     </div>
 
                     <div class="input-field-container">
                         <label for="productType">Product's type <small>(optional)</small></label>
-                        <input type="text" placeholder="product's type" name="productType" id="productType">
+                        <input type="text" placeholder="product's type" name="productType" id="productType"
+                        value="<% if (editing) { %> <%=product.type%><%}%>"
+                        >
                     </div>
 
                     <div class="input-field-container">
                         <label for="productColor">Product's color <small>(optional)</small></label>
-                        <input type="text" placeholder="main item's color" name="productColor" id="productColor">
+                        <input type="text" placeholder="main item's color" name="productColor" id="productColor"
+                        value="<% if (editing) { %> <%=product.color%><%}%>"
+                        >
                     </div>
 
                     <div class="input-field-container">
                         <label for="productTechnology">Product's technology <small>(optional)</small></label>
-                        <input type="text" placeholder="technology involved" name="productTechnology" id="productTechnology">
+                        <input type="text" placeholder="technology involved" name="productTechnology" id="productTechnology"
+                        value="<% if (editing) { %> <%=product.tech%><%}%>"
+                        >
                     </div>
 
                     <div class="input-field-container">
                         <label for="productSpecialFeature">Product's main special features <small>(optional)</small></label>
-                        <input type="text" placeholder="main special feature" name="productSpecialFeature" id="productSpecialFeature">
+                        <input type="text" placeholder="main special feature" name="productSpecialFeature" id="productSpecialFeature"
+                        value="<% if (editing) { %> <%=product.specialFeatures%><%}%>"
+                        >
                     </div>
 
                     <div class="input-field-container">
                         <label for="productComponents">Package's included components <small>(optional)</small></label>
-                        <input type="text" placeholder="mention the components in the package delivered to customer" name="productComponents" id="productComponents">
+                        <input type="text" placeholder="mention the components in the package delivered to customer" name="productComponents" id="productComponents"
+                        value="<% if (editing) { %> <%=product.components%><%}%>"
+                        >
                     </div>
 
                     <div class="input-field-container">
                         <label for="productMaterial">Product's material <small>(required)</small></label>
-                        <input required type="text" placeholder="main item's material type" name="productMaterial" id="productMaterial">
+                        <input required type="text" placeholder="main item's material type" name="productMaterial" id="productMaterial"
+                        value="<% if (editing) { %> <%=product.material%><%}%>"
+                        >
                     </div>
 
                 </div>
@@ -202,25 +248,32 @@
 
                         <div class="input-field-container">
                             <label for="productCountry">Manufacturing country <small>(required)</small></label>
-                            <input required type="text" placeholder="country name" name="productCountry" id="productCountry">
+                            <input required type="text" placeholder="country name" name="productCountry" id="productCountry"
+                            value="<% if (editing) { %> <%=product.country%><%}%>"
+                            >
                         </div>
 
                         <div class="input-field-container">
                             <label for="productModelNumber">Model Number <small>(required)</small></label>
-                            <input required type="text" placeholder="model number" name="productModelNumber" id="productModelNumber">
+                            <input required type="text" placeholder="model number" name="productModelNumber" id="productModelNumber"
+                            value="<% if (editing) { %> <%=product.modelNumber%><%}%>"
+                            >
                         </div>
 
                         <div class="input-field-container">
                             <label for="productSerial">Item's serial number <small>(required)</small></label>
-                            <input required type="text" placeholder="serial number" name="productSerial" id="productSerial">
+                            <input required type="text" placeholder="serial number" name="productSerial" id="productSerial"
+                            value="<% if (editing) { %> <%=product.serial%><%}%>"
+                            >
                         </div>
 
                         <div class="input-field-container--size">
-
                             <div class="input-field-container--size--input-container">
                                 <label for="productWeight">Package's weight:</label>
                                 <div>in (grams)</div>
-                                <input required type="text" placeholder="weight in grams" name="productWeight" id="productWeight">
+                                <input required type="text" placeholder="weight in grams" name="productWeight" id="productWeight"
+                                value="<% if (editing) { %> <%=product.weight%><%}%>"
+                                >
                                 <span><small>required*</small></span>
                             </div>
 
@@ -228,17 +281,23 @@
 
                             <div class="input-field-container--size--input-container">
                                 <label for="productSizeLength">Length:</label>
-                                <input required type="text" placeholder="cm" name="productSizeLength" id="productSizeLength">
+                                <input required type="text" placeholder="cm" name="productSizeLength" id="productSizeLength"
+                                value="<% if (editing) { %> <%=product.size.length%><%}%>"
+                                >
                             </div>
 
                             <div class="input-field-container--size--input-container">
                                 <label for="productSizeHeight">Height:</label>
-                                <input required type="text" placeholder="cm" name="productSizeHeight" id="productSizeHeight">
+                                <input required type="text" placeholder="cm" name="productSizeHeight" id="productSizeHeight"
+                                value="<% if (editing) { %> <%=product.size.height%><%}%>"
+                                >
                             </div>
 
                             <div class="input-field-container--size--input-container">
                                 <label for="productSizeWidth">Width:</label>
-                                <input required type="text" placeholder="cm" name="productSizeWidth" id="productSizeWidth">
+                                <input required type="text" placeholder="cm" name="productSizeWidth" id="productSizeWidth"
+                                value="<% if (editing) { %> <%=product.size.width%><%}%>"
+                                >
                             </div>
                         </div>
 
