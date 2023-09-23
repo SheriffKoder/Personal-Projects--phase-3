@@ -442,7 +442,18 @@ let starFunction = (rating) = {
                                 <tr><td>Country of origin</td><td><%=product.country%></td></tr>
                                 <tr><td>Item model number</td><td><%=product.modelNumber%></td></tr>
                                 <tr><td>Package Dimensions</td><td>Length: <%=product.size.length%> cm x Height: <%=product.size.height%> x Width: <%=product.size.width%></td></tr>
-                                <tr><td>Package Weight</td><td><%=product.weight%> Kilograms</td></tr>
+                                <tr><td>Package Weight</td>
+                                    <td>
+                                    <% if (product.weight) > 1000) {
+                                        let totalWeight=(product.weight/1000).toString(); 
+                                    %> 
+                                    <%=totalWeight.split(".")[0]%> Kilograms and
+                                    <%=totalWeight.split(".")[0]*1000%> grams
+                                    <% } else if (product.weight < 1000) %>
+                                        <%=product.weight%> grams
+                                    <% } %>
+                                    </td>
+                                </tr>
                                 <tr><td>ASIN</td><td><%=product.serial%></td></tr>
                             </table>
                         </div>
