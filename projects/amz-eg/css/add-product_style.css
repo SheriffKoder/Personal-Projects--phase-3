@@ -116,6 +116,10 @@ input[type="checkbox"], input[type="radio"] {
 
 }
 
+#productSection_Electronics, #productSection_Clothing {
+    display: none;
+}
+
 .input-field-container--size {
     display: flex;
     flex-direction: column;

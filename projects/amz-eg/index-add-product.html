@@ -31,8 +31,11 @@
             <div class="main-navigation__wrapper">
             <div class="main-navigation__container">
                 <ul class="main-navigation__List-1">
-                    <li class="main-navigation__List-1-link-small not_desktop"><a href="" id="header-menu" aria-label="browse categories">=</a></li>
-                    <li class="main-navigation__List-1-link-logo"><a href="" id="header-logo" aria-label="Amazon egypt home"></a><a href="" id="header-logo--text" aria-label="country selection, currently browsing amazon egypt shop">.eg</a></li>
+                    <li class="main-navigation__List-1-link-small not_desktop">
+                        <a id="header-menu" aria-label="browse categories">=</a>
+                    
+                    </li>
+                    <li class="main-navigation__List-1-link-logo"><a href="./index-all.html" id="header-logo" aria-label="Amazon egypt home"></a><a href="" id="header-logo--text" aria-label="country selection, currently browsing amazon egypt shop">.eg</a></li>
                     <li class="main-navigation__List-1-link not_mobile"><a href="" aria-label="choose delivery destination country">Deliver to</a></li>
                 </ul>
 
@@ -40,7 +43,56 @@
 
                 <ul class="main-navigation__List-2">
                     <li class="main-navigation__List-2-link not_mobile"><a href="">Language</a></li>
-                    <li class="main-navigation__List-2-link"><a href="">Login</a></li>
+                    <li class="main-navigation__List-2-link login-link">
+                        <a href="" class="">Login</a>
+                        <span id="login-link--hover-menu">
+                            <div class="login-link--hover-menu--section1">
+                                <ul class="login-link--hover-menu--section--buy-again">
+                                    <li class="hover-menu__item--header">
+                                        <h4>Buy it Again</h4>
+                                        <a href="">View All & Manage</a></li>
+                                    <li>
+                                        <div class="hover-menu__item-container">
+                                            <div class="hover-menu__item-container--image-container">
+                                                <img src="./img/product-image.jpg">
+                                            </div>
+                                            <div class="hover-menu__item-container--info-container">
+                                                <a href="">Zeina asdasd wqeqweqwe adasdasd</a>
+                                                <p class="">EGP 78.00</p>
+                                                <button class="yellow-button">Add to Cart</button>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="login-link--hover-menu--section2">
+                                <ul>
+                                    <li><h4>Your Lists</h4></li>
+                                    <li><a href="">Favorites</a></li>
+                                    <li><a href="">Create a List</a></li>
+
+                                </ul>
+
+                            </div>
+                            <div class="login-link--hover-menu--section3">
+                                <ul>
+                                    <li>
+                                        <h4>Your Account</h4>
+                                        <span class="mobile-menu-close--container">
+                                            <button class="mobile-menu-close">x</button>
+                                        </span>
+                                    </li>
+                                    <li><a href="./index.html">Your Products on Sale</a></li>
+                                    <li><a href="./index-add-product.html">Add a Product</a></li>
+                                    <li><a href="./index-orders.html">Your Orders</a></li>
+                                    <li><a href="">Logout</a></li>
+
+                                </ul>
+
+                            </div>
+
+                        </span>
+                    </li>
                     <li class="main-navigation__List-2-link not_mobile"><a href="">Orders</a></li>
                     <li class="main-navigation__List-2-link-small"><a href="">Cart</a></li>
                 </ul>
@@ -82,7 +134,7 @@
         </nav>
     </header>
 
-    <main>
+    <main class="">
 
         <form class="main__main__wrapper">
             <h1>Add a Product</h1>
@@ -195,13 +247,14 @@
 
                     <div>
                         <label for="productColor">Product's Department <small>(required)</small></label>
-                        <select required>
+                        <select required id="productDepartment">
+                            <option>Select Department</option>
                             <option>Electronics</option>
                             <option>Clothing</option>
                         </select>
                     </div>
 
-                    <div>
+                    <div id="productSection_Electronics">
                         <label for="productColor">Product's Electronics Section <small>(required)</small></label>
                         <select required>
                             <option>Speakers</option>
@@ -209,7 +262,7 @@
                         </select>
                     </div>
 
-                    <div>
+                    <div id="productSection_Clothing">
                         <label for="productColor">Product's Clothing Section <small>(required)</small></label>
                         <select required>
                             <option>Watches</option>
@@ -574,7 +627,8 @@
     <a href="#main-footer" aria-label="return to the beginning of the footer" class="sr-only">repeat</a>
 
     <script src="./js/code.jquery.com_jquery-3.7.0.js"></script>
-    <script src="./js/main_login.js"></script>
+    <script src="./js/main_header.js"></script>
+    <script src="./js/main_add-product.js"></script>
 
 </body>
 </html>
