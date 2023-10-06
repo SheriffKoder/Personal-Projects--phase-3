@@ -1,0 +1,110 @@
+
+
+html { 
+    box-sizing: border-box; 
+    font-size: 14px;
+
+}
+
+*, *::before, *::after { 
+    box-sizing: inherit;
+    margin: 0; padding: 0; 
+    font-family: 'Amazon Ember', Arial, sans-serif;
+
+}
+
+body {
+}
+
+
+
+:root {
+    --dark-blue: #131921;
+    --light-blue: #232f3e;
+    --search-yellow: #febd69;
+    --search-cat-bg: #e6e6e6;
+    --search-cat-border: #cdcdcd;
+    --search-cat-text: #5a5b5b;
+    --link-color-to-top: #37485b;
+    --link-color-to-top-hover: #48586a;
+
+    --footer-text-grey1: #dddddd;
+    --footer-text-grey2: #cccccc;
+    --footer-text-grey3: #999999;
+
+    --grey-shadow1: #dddddd8f;
+    --sort-button-grey: #F0F2F2;
+    --sort-button-grey-hover: #e8e4e4;
+    --sort-button-grey-border: #D5D9D9;
+    --sort-button-text: #0F1111;
+
+
+    --product-list-text: #565959;
+    --product-list-text-opacity: #56595981;
+    --product-rating-blue: #007185;
+    --active-link: #c45500;
+    /* #f4e40a */
+
+    --button-yellow: #FFD814;
+    --button-yellow-border: #FCD200;
+    --button-yellow-hover: #f7cb00;
+    --button-yellow-hover-border: #f2c300;
+    --button-yellow2: #ffea00;
+
+    --button-orange: #fca41e;
+    --button-orange-border: #fb8f01;
+    --button-orange-hover: #fa8901;
+    --button-orange-hover-border: #d5d9d9;
+
+    --button-white-border: #d5d9e1;
+    --button-white: #fff;
+    --button-white-hover: #f7fafa;
+    --button-white-hover-border: #d5d9d9;
+
+    --orders-search-field-border: #888C8C;
+    --orders-search-field-hover-border: #c9f4fa;
+    --orders-search-field-hover-bg: #f7feff;
+
+    --cart_bg: #EAEDED;
+    --available-text: #007600;
+    --not-available-text: #B12704;
+    --qualified-text: #007500;
+    --red-label: #cc0d39;
+
+
+
+}
+
+
+.caret-up-white {
+    border-left: solid 4px transparent; 
+    border-right: solid 4px transparent; 
+    border-bottom: solid 4px #fff; 
+    height: 0; 
+    width: 0;
+}
+
+.select-caret-down::after {
+    content: "";
+    position: absolute;
+    top: -1px;
+    right: 0.25rem;
+    border-left: solid 4px transparent; 
+    border-right: solid 4px transparent; 
+    border-top: solid 4px var(--search-cat-text); 
+}
+
+.select-caret-down {
+    position: relative;
+}
+  
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
