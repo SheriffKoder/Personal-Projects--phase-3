@@ -1,5 +1,5 @@
 
-const HoverLink = document.querySelector(".login-link a");
+const HoverLink = document.querySelector(".login-link");
 const HoverMenu = document.querySelector("#login-link--hover-menu");
 const CloseMenu = document.querySelector(".mobile-menu-close");
 const OpenMenu = document.querySelector(".main-navigation__List-1-link-small");
