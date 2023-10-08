@@ -114,6 +114,4 @@ exports.getAddProduct = (req, res, next) => {
         editing: false, //editing passed variable for form action=""
     });
 
-}
-
-
+};

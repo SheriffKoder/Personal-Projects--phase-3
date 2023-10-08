@@ -51,9 +51,9 @@ app.set("views", "views");
 
 //Routes
 const adminJSRoutes = require("./routes/admin.js");
-// const shopJSRoutes = require("./routes/shop");
+const shopJSRoutes = require("./routes/shop");
 
-// app.use(shopJSRoutes);
+app.use(shopJSRoutes);
 app.use("/admin", adminJSRoutes);
 
 
@@ -73,3 +73,6 @@ mongoose.connect(process.env.MongoDbUri)
 //import user model
 //app.use user
 //user in mongoose connect
+
+
+//2) all products page, getAllProducts controller, router, activate in app.js
