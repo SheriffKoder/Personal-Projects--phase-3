@@ -3,7 +3,7 @@
 //Set all required text in <small> tags to to red
 let smallElementsArray = document.querySelectorAll("small");
 
-console.log(smallElementsArray);
+//console.log(smallElementsArray);
 //(required), required*
 
 smallElementsArray.forEach(tag => {
@@ -17,8 +17,8 @@ smallElementsArray.forEach(tag => {
 
 //View related select section depending on the selected department
 const DepartmentSelect = document.querySelector("#productDepartment");
-const SelectSection_Electronics = document.querySelector("#productSection_Electronics");
-const SelectSection_Clothing = document.querySelector("#productSection_Clothing");
+const SelectSection_Electronics = document.querySelector(".productSection_Electronics__container");
+const SelectSection_Clothing = document.querySelector(".productSection_Clothing__container");
 
 
 DepartmentSelect.addEventListener("change", (e)=> {

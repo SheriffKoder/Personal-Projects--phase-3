@@ -33,7 +33,7 @@ const productSchema = new Schema({
         required: true
     },
     availability: {
-        type: Boolean,
+        type: Number,
         required: true
     },
     deliveryFees: {
@@ -74,7 +74,7 @@ const productSchema = new Schema({
         type: String,
         required: true
     },
-    section: {
+    department_section: {
         type: String,
         required: true
     },
@@ -108,7 +108,7 @@ const productSchema = new Schema({
     },
     components: {
         type: String,
-        required: true
+        required: false
     },
     material: {
         type: String,
