@@ -78,11 +78,13 @@
                         <% if (prods.length > 0) { %>
                             <% let i = 1%>
                             <% for (let product of prods) { %>
+                                <a href="/products/<%= product._id%>" class="btn"> Details</a>
+
                             <div class="main__main__products-list--item" aria-label="product number <%=i%>">
                                 <!-- <div class="main__main__products-list--item" aria-label="product number x"> -->
 
                                 
-                                <a href="" class="main__main__products-list--item--image--container">
+                                <a href="" class="main__main__products-list--item--image--container" href="">
                                     <img src="<%= product.imageUrl %>" class="main__main__products-list--item--image" alt="<%= product.imageAlt %>">
                                 </a>                        
                                 <div class="main__main__products-list--item--description" aria-label="product's details">
@@ -134,10 +136,10 @@
                                                 <% const today = new Date(); %>
                                                 <% const month = ["January","February","March","April","May","June","July","August","September","October","November","December"]; %>
                                                 <% const day = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]; %>
-                                                <%= day[today.getDay()+2]%>
+                                                <%= day[today.getDay()+1]%>
                                                 ,
                                                 <%= today.getDate() %>
-                                                <%= month[today.getMonth()+2]%>
+                                                <%= month[today.getMonth()]%>
 
                                             </b>
                                         </p>

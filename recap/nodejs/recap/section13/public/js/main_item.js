@@ -40,14 +40,14 @@ slider_buttons.forEach(button => {
 
             //wait for image to go off-screen to change the background
             setTimeout(()=> {
-                image.style["background-image"] = `url('./img/product_images/product_image_${index}.png')`;
-            }, 750);
+                image.style["background-image"] = `url('/img/product_images/product_image_${index}.png')`;
+            }, 450);
 
 
             //remove the animation to allow another animation to occur
             setTimeout(()=> {
                 image.classList.remove("animate1");
-            }, 2000);
+            }, 1500);
         }
 
 

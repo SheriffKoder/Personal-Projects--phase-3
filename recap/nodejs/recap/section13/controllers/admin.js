@@ -46,9 +46,9 @@ exports.postAddProduct = (req, res, next) => {
         width: req.body.productSizeWidth
     };
 
-    // const ratingScore =
-    // const ratingCount =
-    // const prevPrice =
+    const ratingScore = 0;
+    const ratingCount = 0;
+    const prevPrice = 0;
     
 
     const product = new ProductClassModel(
