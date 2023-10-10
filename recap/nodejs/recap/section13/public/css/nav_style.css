@@ -800,8 +800,8 @@ media queries menu
         /* left: 0; */
         transform: translate(-23.25%, 60%);
     
-        /* display: none; */
-        display: flex;
+        display: none;
+        /* display: flex; */
         flex-direction: row;
         justify-content:unset;
 
