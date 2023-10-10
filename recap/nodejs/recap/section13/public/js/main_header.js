@@ -120,3 +120,20 @@ document.querySelector("main").addEventListener("click", () => {
         document.querySelector("main").classList.remove("dark");
     }
 });
+
+
+//Add an outline on all colored buttons on any page that has a header (mostly all pages)
+//the class is in basic.css
+let genericButton = document.querySelectorAll(".yellow-button, .orange-button, .white-button");
+
+genericButton.forEach(button => {
+    button.addEventListener("click", (e)=> {
+        e.target.classList.add("button-clicked");
+    });
+});
+
+genericButton.forEach(button => {
+    button.addEventListener("blur", (e)=> {
+        e.target.classList.remove("button-clicked");
+    });
+});

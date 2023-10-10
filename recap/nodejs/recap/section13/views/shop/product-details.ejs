@@ -29,7 +29,7 @@
             <a href="">Brand:<%=product.brand%></a>
             <span class="content__item__header--rating">
                 <span class="header--rating--rate"><%=product.ratingScore%></span>
-                <i class="header--rating--stars star-smaller stars-<%starFunction(product.ratingScore)%>"></i>
+                <i class="header--rating--stars star-smaller stars-<%=starFunction(product.ratingScore)%>"></i>
                 <a href="" class="header--rating-reviews"><%=product.ratingCount%></a>
             </span>
             <h1><%=product.title%></h1>
@@ -154,7 +154,7 @@
                     
                 <!-- <form action="/cart" method="POST"> -->
                     <span class="content__item__ordering--select">
-                        <select name="count">
+                        <select name="requestedCount">
                             <option>1 </option>
                             <option>2</option>
                             <option>3</option>
@@ -190,10 +190,11 @@
 
 
             <div class="content__item__free-shipping">
+                <!--TODO: button links to amazon prime-->
                 <button type="button" class="white-button">Yes, I want FREE Shipping with Amazon Prime</button>
 
                 <div class="free-shipping--checkbox--container desktop-only">
-                    <input type="checkbox" id="free-shipping--checkbox">
+                    <input type="checkbox" id="free-shipping--checkbox" name="wantFreeDelivery">
                     <label for="free-shipping--checkbox desktop-only">
                         Yes, I want Free Delivery
                     </label>
@@ -213,7 +214,7 @@
                 <div>Add a Protection Plan</div>
 
                 <a href="" class="content__item__protection-plan--content">
-                    <input type="checkbox" class="content__item__protection-plan--content--check">
+                    <input type="checkbox" class="content__item__protection-plan--content--check" name="addProtection">
                     <div class="content__item__protection-plan--content--info">
                         <div>1 Year Extended Warranty Plan for</div>
                         <div>EGP <%= Math.round(product.price*0.1*100)/100%></div>
@@ -406,10 +407,17 @@
                 <div class="content__item__manufacturer-notes--additional-info">
                     <h4>Additional Information</h4>
                     <div>
-                        <span><b>Best Sellers Rank:</b></span>
-                        <span>#45 in Electronics </span>
-                        (<a href="">See Top 100 in Electronics</a>)
-                        <div>#8 in <a href="">See Top 100 in Electronics</a>                            </div>
+                        <div>
+                            <b>Best Sellers Rank:</b>
+                            <span>#45 in <%=product.department%> </span>
+                            (<a href="">See Top 100 in <%=product.department%></a>)
+                        </div>
+                        
+                        <div>
+                            <b>Product Rank in <%=product.department%> department:</b>
+                            <span>#8 in </span>
+                            (<a href="">See Top 100 in <%=product.department%></a>)
+                        </div>
                     </div>
                 </div>
 
@@ -421,10 +429,10 @@
                 <div class="content__item__reviews__rating desktop-only">
                     <h3>Customer Reviews</h3>
                     <div class="content__item__reviews__rating--stars-container">
-                        <i class="reviews__rating--stars star-medium stars-three-half"></i>
-                        <span><%= (product.rating > 0) ? "product.rating+ out of 5" : "no ratings yet"%> </span>
+                        <i class="reviews__rating--stars star-medium stars-<%=starFunction(product.ratingScore)%>"></i>
+                        <span><%= (product.ratingScore > 0) ? "product.ratingScore+ out of 5" : "no ratings yet"%> </span>
                     </div>
-                    <span class="content__item__reviews__rating--total-ratings">134 global ratings</span>
+                    <span class="content__item__reviews__rating--total-ratings"><%=product.ratingCount%> global ratings</span>
                     
                     <div class="reviews__rating--stars-percent--wrapper">
 
@@ -492,9 +500,9 @@
                 <div class="content__item__reviews">
                     <h3>Customer Reviews</h3>
                     <div class="content__item__reviews--star-container">
-                        <i src="" class="star-small stars-three-half"></i>
-                        <span>3.1 out of 5</span>
-                        <div>28 global ratings</div>
+                        <i src="" class="star-small stars-<%=starFunction(product.ratingScore)%>"></i>
+                        <span><%= (product.ratingScore > 0) ? "product.ratingScore+ out of 5" : "no ratings yet"%> </span>
+                        <div><%=product.ratingCount%> global ratings</div>
                     </div>
 
                     <div class="content__item__reviews--container">

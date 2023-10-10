@@ -75,5 +75,3 @@ mongoose.connect(process.env.MongoDbUri)
 //user in mongoose connect
 
 
-//2) all products page, getAllProducts controller, router, activate in app.js
-//3) the product details page, getProduct controller, router

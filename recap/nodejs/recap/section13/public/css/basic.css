@@ -71,6 +71,11 @@ body {
     --qualified-text: #007500;
     --red-label: #cc0d39;
 
+    --link-click-outline1: #186f80;
+    --link-click-outline2: #c9f4fa;
+    --link-click-outline2-shadow: #e0fbff;
+
+
 
 
 }
@@ -107,4 +112,13 @@ body {
     overflow: hidden;
     clip: rect(0, 0, 0, 0);
     border: 0;
+}
+
+.button-clicked {
+    outline:2px solid var(--link-click-outline2);
+    outline-offset:  3px;
+    box-shadow: 
+    0px 0px 5px 4px #fff,
+    0px 0px 1px 4px var(--link-click-outline1),
+    0px 0px 2px 7px var(--link-click-outline2-shadow);
 }

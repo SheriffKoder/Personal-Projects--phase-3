@@ -1,4 +1,8 @@
 
+
+
+
+
 let slider_buttons = document.querySelectorAll(".content__item__image--slider--button");
 let image = document.querySelector("#img");
 
