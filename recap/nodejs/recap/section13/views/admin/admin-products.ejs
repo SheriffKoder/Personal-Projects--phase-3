@@ -134,8 +134,13 @@
                                     </span>
                                 </span>
 
-
-                                <span class="main__main__products-list--item--description--sold" aria-label="number of products sold">
+                                
+                                <% let soldColor = (product.sold <= 0) ? "var(--not-available-text)" : "var(--available-text)" %>
+                                <span 
+                                class="main__main__products-list--item--description--sold"
+                                style="color: <%=soldColor%>;"
+                                aria-label="number of products sold"
+                                >
                                     <%= (product.sold <= 0) ? "Nothing sold yet" : "" %>
                                     <%= (product.sold > 0 && product.sold < 100) ? product.sold+" items sold" : "" %>
                                     <%= (product.sold >=100) ? "More than 99+ sold" : "" %>
@@ -150,17 +155,16 @@
 
                                 <span class="main__main__products-list--item--description--spacer"></span>
 
-                                <span class="main__main__products-list--item--description-buttons">
+                                <form class="main__main__products-list--item--description-buttons"
+                                action="/admin/delete-product" method="POST">
                                     <!-- <button class="main__main__products-list--item--description-buttons-add" aria-label="control, Add to stock">Stock</button>
                                     <button class="main__main__products-list--item--description-buttons-edit" aria-label="control, edit product">Edit</button>
                                     <button class="main__main__products-list--item--description-buttons-delete" aria-label="control, delete product">Delete</button> -->
-                                    <button class="white-button" aria-label="control, Add to stock"><a href="/admin/edit-product/<%=product._id%>?edit=true">Stock</a></button>
-                                    <button class="white-button" aria-label="control, edit product"><a href="/admin/edit-product/<%=product._id%>?edit=true">Edit</a></button>
-                                    <form action="/admin/delete-product" method="POST">
+                                    <button class="white-button-admin" aria-label="control, Add to stock"><a href="/admin/edit-product/<%=product._id%>?edit=true">Stock</a></button>
+                                    <button class="white-button-admin" aria-label="control, edit product"><a href="/admin/edit-product/<%=product._id%>?edit=true">Edit</a></button>
                                         <input type="hidden" value="<%= product._id%>" name="productId">
-                                        <button type="submit" class="white-button" aria-label="control, delete product"><a>Delete</a></button>
-                                    </form>
-                                </span>
+                                        <button type="submit" class="white-button-admin" aria-label="control, delete product"><a>Delete</a></button>
+                                </form>
 
 
 
@@ -193,6 +197,20 @@
     <%- include("../includes/index-footer.ejs") %>
 
 
+    <script>
+        const controlButtons = document.querySelectorAll(".main__main__products-list--item--description-buttons button");
+        
+        controlButtons.forEach(button => {
+            button.addEventListener("click", (e) => {
+            e.target.classList.add("white-button-admin--clicked");
+            })
 
+            button.addEventListener("blur", (e) => {
+            e.target.classList.remove("white-button-admin--clicked");
+            })
+
+        })
+    
+    </script>
 
 <%- include("../includes/html-end.ejs") %>
