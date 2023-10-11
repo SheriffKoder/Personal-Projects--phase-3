@@ -86,12 +86,12 @@ now work on the ejs of the admin page
 (b)now the edit link will take us to the Edit page
 !! req.query.edit is the value of the inserted ?edit=true in the link url
 
-//Edit-product page (+2h)
+//Edit-product page (+2.5h)
 (a)work on the getEditProduct controller/router
 (b)add the if editing in the edit-product ejs to inject values depending
 (c)add these pages links to the header
 
-(d)the post edit-product controller
+(d)the post edit-product controller, postDeleteProduct
 
 
 >> add the link to this page

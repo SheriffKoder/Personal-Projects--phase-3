@@ -266,3 +266,21 @@ exports.postEditProduct = (req, res, next) => {
     
     
 };
+
+
+
+
+exports.postDeleteProduct = (req, res, next) =>  {
+
+    const prodId = req.body.productId;
+
+    ProductClassModel.findByIdAndRemove(prodId)
+    .then((result) => {
+        console.log("removed product");
+        res.redirect("/admin/products");
+    })
+    .catch((err) => {
+        console.log(err);
+    });
+
+}

@@ -85,13 +85,13 @@
                         <div class="main__main__products-list--item" aria-label="product number <%=i%> ">
 
 
-                            <a href="" class="main__main__products-list--item--image--container">
+                            <a href="/products/<%=product._id%>" class="main__main__products-list--item--image--container">
                                 <img src="<%=product.imageUrl%>" class="main__main__products-list--item--image" alt="<%=product.title%> ">
                             </a>                        
                             <div class="main__main__products-list--item--description" aria-label="product's details">
 
                                 <span aria-label="product's name">
-                                    <a href="" class="main__main__products-list--item--description--header-link"">
+                                    <a href="/products/<%=product._id%>" class="main__main__products-list--item--description--header-link"">
                                         <%= product.title %>
                                     </a>
                                 </span>
