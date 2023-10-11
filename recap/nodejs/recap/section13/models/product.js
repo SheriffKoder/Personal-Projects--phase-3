@@ -152,7 +152,10 @@ const productSchema = new Schema({
         type: Number,
         required: false
     },
-
+    sold: {
+        type: Number,
+        required: false
+    },
 
     // userId: {
     //     //as it is a reference to the user (_id) //(9)

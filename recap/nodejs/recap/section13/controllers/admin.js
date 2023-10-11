@@ -46,9 +46,10 @@ exports.postAddProduct = (req, res, next) => {
         width: req.body.productSizeWidth
     };
 
-    const ratingScore = 0;
-    const ratingCount = 0;
-    const prevPrice = 0;
+    // const ratingScore = 0;
+    // const ratingCount = 0;
+    // const prevPrice = 0;
+    // const Sold = 0;
     
 
     const product = new ProductClassModel(
@@ -85,6 +86,11 @@ exports.postAddProduct = (req, res, next) => {
             serial: serial,
             size: size,
 
+            ratingScore: 0,
+            ratingCount: 0,
+            prevPrice: 0,
+            sold: 0,
+
             // userId: req.user //however can just use req.user and mongoose will pick the id from that object
 
 
@@ -115,3 +121,44 @@ exports.getAddProduct = (req, res, next) => {
     });
 
 };
+
+
+
+exports.getAdminProducts = (req, res, next) => {
+    ProductClassModel.find()
+    .then((products) => {
+        res.render("admin/admin-products.ejs", {prods: products, myTitle: "Your Items"});
+
+    })
+    .catch((err)=> {
+        console.log(err);
+    })
+}
+
+
+exports.getEditProduct = (req, res, next) => {
+
+    const editMode = req.query.edit;
+
+    if (!editMode || editMode === "false") {
+        return res.redirect("/admin/admin-products");
+    }
+
+    const prodId = req.params.productId;
+
+
+
+    ProductClassModel.findById(prodId)
+    .then((product) => {
+        if (!product) {
+            console.log("product does not exist to be edited");
+            return res.redirect("/admin/admin-products");
+        }
+        res.render("admin/edit-product", { product: product, myTitle: "Edit "+product.title, editing: editMode})
+    })
+    .catch((err) => {
+        console.log(err);
+    });
+
+
+}

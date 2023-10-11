@@ -1,0 +1,198 @@
+
+<%- include("../includes/html-head.ejs") %>
+
+<link rel="stylesheet" href="/css/admin-products.css">
+
+
+
+
+<%- include("../includes/html-start.ejs") %>
+
+
+    <%- include("../includes/index-header.ejs") %>
+
+    <main aria-label="Seller products page">
+
+        <aside class="main__main__top-bar" aria-label="products amount and sort by">
+            <span class="main__main__top-bar-container">
+                <span><span aria-label="number of pages the results are spread">1–16 </span>of over 4,000 results</span>
+                <select class="main__main__top-bar--sort" aria-label="sort products drop down select">
+                    <option>Sort by: Featured</option>
+                </select>
+            </span>
+            <span class="select-caret-down"></span>
+
+        </aside>
+        
+
+
+        <div class="main__main__wrapper">
+
+
+            <div class="main__main__content">
+                <aside class="main__main__side-list">
+                    <h2 class="main__main__side-list--header">
+                        Brand
+                    </h2>
+                    <ul class="main__main__side-list--list">
+                        <li class="main__main__side-list--list-item">
+                            <a href="" class="main__main__side-list--list--item-link"> Link</a>
+                        </li>
+
+                        <li class="main__main__side-list--list-item">
+                            <a href="" class="main__main__side-list--list--item-link"> Link</a>
+                        </li>
+
+                        <li class="main__main__side-list--list-item">
+                            <a href="" class="main__main__side-list--list--item-link"> Link</a>
+                        </li>
+
+                        <li class="main__main__side-list--list-item">
+                            <a href="" class="main__main__side-list--list--item-link"> Link</a>
+                        </li>
+
+                        <li class="main__main__side-list--list-item">
+                            <a href="" class="main__main__side-list--list--item-link"> Link</a>
+                        </li>
+
+                        <li class="main__main__side-list--list-item">
+                            <a href="" class="main__main__side-list--list--item-link"> Link</a>
+                        </li>
+
+                    </ul>
+                </aside>
+
+
+                <div class="main__main__products-list" aria-label="all products list">
+                    
+                    <div class="main__main__products-list--text">
+                        <h1 class="main__main__products-list--text--header" aria-hidden="true">
+                        Results
+                        </h1>
+                        <div class="main__main__products-list--text--content-wrapper">
+                            <p class="main__main__products-list--text--notify" aria-label="note">
+                            All active products added and active
+                            </p>
+                            <a href="/admin/add-product" class="add-new-product-link">Add a new Product</a>
+                        </div>
+    
+                    </div>
+    
+                    <% if (prods.length > 0) { %>
+                        <% let i = 1%>
+                        <% for (let product of prods) { %>
+
+                        <div class="main__main__products-list--item" aria-label="product number <%=i%> ">
+
+
+                            <a href="" class="main__main__products-list--item--image--container">
+                                <img src="<%=product.imageUrl%>" class="main__main__products-list--item--image" alt="<%=product.imageAlt%> ">
+                            </a>                        
+                            <div class="main__main__products-list--item--description" aria-label="product's details">
+
+                                <span aria-label="product's name">
+                                    <a href="" class="main__main__products-list--item--description--header-link"">
+                                        <%= product.title %>
+                                    </a>
+                                </span>
+    
+
+                                <% if ( product.color) { %>
+                                    <span class="main__main__products-list--item--description--color" aria-label="product's color">
+                                        <%= product.color %>
+
+                                    </span>
+                                <%}%>
+
+
+                                <span class="main__main__products-list--item--description--rating" aria-label="product's rating">
+                                    <span class="main__main__products-list--item--description--rating--rate" aria-label="current product's rating from 5">
+                                        <%= product.ratingScore %>
+                                    </span>
+
+                                    <span class="main__main__products-list--item--description--rating--stars" aria-hidden="true">
+                                        &#11088; &#11088; &#11088; &#11088; &#11088;
+                                    </span>
+
+                                    <span class="main__main__products-list--item--description--rating--number" aria-label="number of ratings given by customers">
+                                        <%= product.ratingCount %>
+
+                                    </span>
+                                </span>
+
+
+
+                                <span class="main__main__products-list--item--description--price" aria-label="product's price">
+                                    <span class="main__main__products-list--item--description--price--currency" aria-label="currency">
+                                        EGP
+                                    </span>
+                                    <p class="main__main__products-list--item--description--price--number" aria-label="egyptian pounds">
+                                        <%= product.price.toString().split(".")[0] %>
+                                    </p>
+                                    <span class="main__main__products-list--item--description--price--decimal" aria-label="cents">
+                                        <%= product.price.toString().split(".")[1] %>
+                                    </span>
+                                </span>
+
+
+                                <span class="main__main__products-list--item--description--sold" aria-label="number of products sold">
+                                    <%= (product.sold <= 0) ? "Nothing sold yet" : "" %>
+                                    <%= (product.sold > 0 && product.sold < 100) ? product.sold+" items sold" : "" %>
+                                    <%= (product.sold >=100) ? "More than 99+ sold" : "" %>
+
+                                </span>
+
+                                <span class="main__main__products-list--item--description--available" aria-label="number of products available">                                    
+                                    <%= (product.availability <= 0) ? "Out of stock" : "" %>
+                                    <%= (product.availability > 0 && product.availability < 100) ? product.availability+" items still available" : "" %>
+                                    <%= (product.availability >=100) ? "More than 99+ available" : "" %>
+                                </span>
+
+                                <span class="main__main__products-list--item--description--spacer"></span>
+
+                                <span class="main__main__products-list--item--description-buttons">
+                                    <!-- <button class="main__main__products-list--item--description-buttons-add" aria-label="control, Add to stock">Stock</button>
+                                    <button class="main__main__products-list--item--description-buttons-edit" aria-label="control, edit product">Edit</button>
+                                    <button class="main__main__products-list--item--description-buttons-delete" aria-label="control, delete product">Delete</button> -->
+                                    <button class="white-button" aria-label="control, Add to stock"><a href="/admin/edit-product/<%=product._id%>?edit=true">Stock</a></button>
+                                    <button class="white-button" aria-label="control, edit product"><a href="/admin/edit-product/<%=product._id%>?edit=true">Edit</a></button>
+                                    <form action="/admin/delete-product" method="POST">
+                                        <input type="hidden" value="<%= product._id%>" name="productId">
+                                        <button type="submit" class="white-button" aria-label="control, delete product"><a>Delete</a></button>
+                                    </form>
+                                </span>
+
+
+
+
+                            </div>
+                        </div>
+
+                    <% i = i+1;%>
+                    <% } %>
+                    <% } %>
+                    
+
+
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+    </main>
+
+    <%- include("../includes/index-footer.ejs") %>
+
+
+
+
+<%- include("../includes/html-end.ejs") %>

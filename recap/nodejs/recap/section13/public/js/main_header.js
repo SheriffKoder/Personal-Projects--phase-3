@@ -28,7 +28,6 @@ window.addEventListener("resize",() => {
 
 
 
-
 //FIXED: resizing to desktop while animation slideOut not finished, will keep the slideOut till come back again to mobile
 window.addEventListener("resize",() => {
     if (window.outerWidth > 900 ) {
