@@ -28,10 +28,10 @@ const productSchema = new Schema({
         type: String,
         required: true
     },
-    imageAlt: {
-        type: String,
-        required: true
-    },
+    // imageAlt: {
+    //     type: String,
+    //     required: true
+    // },
     availability: {
         type: Number,
         required: true

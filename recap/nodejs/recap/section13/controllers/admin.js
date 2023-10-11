@@ -9,7 +9,7 @@ exports.postAddProduct = (req, res, next) => {
     const title = req.body.productTitle;
     const price = req.body.productPrice;
     const imageUrl =  req.body.productImage;
-    const imageAlt = req.body.productImageAlt;
+    // const imageAlt = req.body.productImageAlt;
     const availability = req.body.productAvailability;
 
     let deliveryFees = null;
@@ -57,7 +57,7 @@ exports.postAddProduct = (req, res, next) => {
             title: title,
             price: price,
             imageUrl: imageUrl,
-            imageAlt: imageAlt,
+            // imageAlt: imageAlt,
             availability: availability,
             deliveryFees: deliveryFees,
 
