@@ -303,13 +303,23 @@
 
             </div>
 
+            <% if (editing) { %>
+                <input type="hidden" value="<%=product._id%>" name="productId">
+            <%}%>
+
+
             <div class="submit-form--button--container">
-                <button class="submit-form--button"type="submit">Add Product to Amazon</button>
+                <button class="submit-form--button" type="submit">
+                    <% if (editing) {%>
+                        Update Product Details
+                    <% } else { %>
+                        Add Product to Amazon
+                    <% } %>
+                </button>
             </div>
 
+
         </form>
-
-
     </main>
 
 

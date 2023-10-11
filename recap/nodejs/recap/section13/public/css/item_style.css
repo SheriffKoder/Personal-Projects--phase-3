@@ -347,7 +347,7 @@ a {
 /*/////////////////////////////////*/
 
 
-.content__item__pricing::before {
+.content__item__pricing--discount::before {
     content: "Deal";
     background-color: var(--red-label, #cc0d39);
     position: absolute;
@@ -422,6 +422,7 @@ a {
     flex-direction: column;
     gap: 0.25rem;
     font-weight: 400;
+    margin-top: 0.5rem;
 }
 
 .content__item__delivery--vat {
@@ -439,6 +440,7 @@ a {
 
 .content__item__delivery--destination {
     margin-top: 0.5rem;
+    display: block;
 
 }
 

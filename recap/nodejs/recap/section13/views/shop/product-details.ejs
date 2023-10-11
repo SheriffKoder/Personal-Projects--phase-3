@@ -65,15 +65,15 @@
             </div>
 
             <div class="content__item__pricing">
-                <% if (product.prevPrice != 0 && product.prevPrice < product.price) {%>
-                <span class="content__item__pricing--discount">-<%=(product.prevPrice/product.price)*100%>%</span>
+                <% if (product.prevPrice > 0) {%>
+                <span class="content__item__pricing--discount">-<%=Math.round((product.price/product.prevPrice*100)*1)/1%>%</span>
                 <% } %>
                 <span class="content__item__pricing--price">
                     <span class="content__item__pricing--price--currency">EGP</span>
                     <span class="content__item__pricing--price--price"><%=product.price.toString().split(".")[0]%></span>
                     <span class="content__item__pricing--price--cents"><%=product.price.toString().split(".")[1]%></span>
                 </span>
-                <% if (product.prevPrice != 0 && product.prevPrice < product.price) {%>
+                <% if (product.prevPrice > 0) {%>
                 <div class="content__item__pricing--price--original-price">
                     List Price: 
                     <span class="original-price--price"> EGP<%=product.prevPrice%></span>
