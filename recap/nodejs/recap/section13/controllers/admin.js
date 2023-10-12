@@ -102,7 +102,7 @@ exports.postAddProduct = (req, res, next) => {
             prevPrice: 0,
             sold: 0,
 
-            // userId: req.user //however can just use req.user and mongoose will pick the id from that object
+            userId: req.user,   //6
 
 
         }
@@ -245,12 +245,13 @@ exports.postEditProduct = (req, res, next) => {
         product.weight = weight;
         product.serial = serial;
         product.size = size;
+        
 
         // ratingScore = 0;
-        // ratingCount = 0;
+        //ß ratingCount = 0;
         // sold = 0;
 
-        // userId = req.user //however can just use req.user and mongoose will pick the id from that object
+        // product.userId = req.user;   //6
 
         return product.save();      //return to chain another then
 

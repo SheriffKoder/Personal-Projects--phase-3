@@ -49,6 +49,7 @@ exports.getProduct = (req, res, next) => {
 
 
     ProductClassModel.findById(prodId)
+    .populate("userId", "name") //6
     .then((product)=> {
         res.render("shop/product-details", {product: product, myTitle: product.title, starFunction: starFunction});
 
@@ -60,3 +61,18 @@ exports.getProduct = (req, res, next) => {
 }
 
 
+//7.b
+exports.postCart = (req, res, next) => {
+    const prodId = req.body.productId;
+    const requestedCount = req.body.requestedCount;
+    ProductClassModel.findById(prodId)
+    .then(product => {
+        return req.user.addToCart(product, requestedCount);
+    })
+    .then(result => {
+        console.log("product added to cart");
+        console.log(requestedCount);
+        // res.redirect("/");
+
+    })
+}

@@ -157,20 +157,21 @@ const productSchema = new Schema({
         required: false
     },
 
-    // userId: {
-    //     //as it is a reference to the user (_id) //(9)
-    //     type: Schema.Types.ObjectId,
-    //     //ref takes a string, which other mongoose model is related to the data in this field
-    //     //the "User model" as written in mongoose.model("User"..
-    //     ref: "User",
-    //     required: true
-    // }
+    userId: {
+        //as it is a reference to the user (_id) //(9)
+        type: Schema.Types.ObjectId,
+        //ref takes a string, which other mongoose model is related to the data in this field
+        //the "User model" as written in mongoose.model("User"..
+        ref: "User",
+        required: true
+    },
 
 
 
 
 
 });
+
 
 
 //mongoose will take the "Product" turns into lower-case and make plural
