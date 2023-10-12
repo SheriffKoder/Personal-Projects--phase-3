@@ -65,14 +65,53 @@ exports.getProduct = (req, res, next) => {
 exports.postCart = (req, res, next) => {
     const prodId = req.body.productId;
     const requestedCount = req.body.requestedCount;
+    const increaseQtyAction = true;
+    const changeQtyAction = false;
     ProductClassModel.findById(prodId)
     .then(product => {
-        return req.user.addToCart(product, requestedCount);
+        return req.user.addToCart(product, requestedCount, increaseQtyAction, changeQtyAction);
     })
     .then(result => {
         console.log("product added to cart");
         console.log(requestedCount);
         // res.redirect("/");
+
+    })
+}
+
+
+//7
+exports.getCart = (req, res, next) => {
+    req.user
+    .populate("cart.items.productId") //populate the id with all the item's data from the product model
+    .then(user => { //still working with the req.user, user has full cart details stored in products
+        const products = user.cart.items;
+        console.log(products);
+
+        res.render("shop/cart", {
+            products: products,
+            myTitle: "Cart"
+        })
+    })
+    .catch(err => {
+        console.log(err);
+    })
+};
+
+
+exports.changeQuantity = (req, res, next) => {
+    const prodId = req.body.productId;
+    const requestedCount = req.body.requestedCount;
+    const increaseQtyAction = false;
+    const changeQtyAction = true;
+    ProductClassModel.findById(prodId)
+    .then(product => {
+        return req.user.addToCart(product, requestedCount, increaseQtyAction, changeQtyAction);
+    })
+    .then(result => {
+        console.log("product quantity updated to cart");
+        // console.log(requestedCount);
+        res.redirect("back");
 
     })
 }

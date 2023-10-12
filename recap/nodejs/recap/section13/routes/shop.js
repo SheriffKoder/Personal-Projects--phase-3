@@ -13,7 +13,11 @@ router.get("/products/:productId", shopController.getProduct);
 
 //7
 router.post("/cart", shopController.postCart);
+router.post("/changeQuantity", shopController.changeQuantity);
 
+
+//7
+router.get("/cart", shopController.getCart);
 
 
 module.exports = router;

@@ -227,11 +227,28 @@ img {
 
 .proceed-qualified-1 {
     color: var(--qualified-text);
+    /* font-size: 0.8rem; */
+    word-spacing: 1rem;
 }
 
 .proceed-qualified-2 {
     color: var(--sort-button-text);
+    /* font-size: 0.8rem; */
+    word-spacing: 0.1rem;
+    margin-bottom: 0.5rem;
+
 }
+
+.proceed-qualified-1, .proceed-qualified-2 {
+    word-spacing: 0.05rem;
+}
+
+.proceed-qualified-3 {
+    font-size: 0.85rem;
+    word-spacing: 0.05rem;
+
+}
+
 
 .row1--extra--proceed--qualify a {
     color: var(--product-rating-blue);
@@ -671,3 +688,7 @@ img {
     }
 
 }
+
+
+
+

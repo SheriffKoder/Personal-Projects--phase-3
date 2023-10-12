@@ -102,51 +102,30 @@ mongoose.connect(process.env.MongoDbUri)
         console.log("mongoose connect error :: " + err);
     });
 
-//import user model
-//app.use user
-//user in mongoose connect
+
+
 
 /*
-we want to work on the edit product,
-for that we have to reach the admin page
-and the edit link
-
-//4 Admin Page (+2h)
-(a) the admin page, getAdminProducts controller/router
-now work on the ejs of the admin page
-
-(b)now the edit link will take us to the Edit page
-!! req.query.edit is the value of the inserted ?edit=true in the link url
-
-//5 Edit-product page (+3h)
-(a)work on the getEditProduct controller/router
-(b)add the if editing in the edit-product ejs to inject values depending
-(c)add these pages links to the header
-
-(d)the post edit-product controller, postDeleteProduct
-
-///////////////////
-
-
-//6 Adding a user - seller name in product details (+0.5h)
-
-create a user model
-create and save, and find in app.js
-now put the user in PostAddProduct controller, product model
-
-now we can populate the product's userId with the user's name
-in the getProducts controller
-in controller     ProductClassModel.findById(prodId).populate("userId", "name").then(..)
-in ejs <%=product.userId.name%>
-also .select("title")    //this will output the "product" with title only no price etc
-
 
 //7 shopping cart (+0.75h)
 
+/1- post item to user's cart
 (a) add in the user model, addToCart method
 (b) add the postCart controller
 but we want the select input to assist in giving x quantity
 (c) take the select element from ejs to the controller, pass to the method to update with
+
+/2- cart page (+2.0h)
+adjust the ejs, controllers, routers and interactions
+
+
+
+
+
+
+
+
+
 
 
 */
