@@ -65,16 +65,12 @@
                                                 <form action="/changeQuantity" method="POST" id="changeQtyForm">
                                                     <select aria-label="item's count" name="requestedCount" onchange="document.getElementById('changeQtyForm').submit();">
                                                         <option>Qty: <%= p.quantity %></option>
-                                                        <% if (p.quantity !== 1) { %> <option>1</option> <% } %>
-                                                        <option>2</option>
-                                                        <option>3</option>
-                                                        <option>4</option>
-                                                        <option>5</option>
-                                                        <option>6</option>
-                                                        <option>7</option>
-                                                        <option>8</option>
-                                                        <option>9</option>
-                                                        <option>10</option>
+                                                        <!--continue adding other qty options depending on availability and not exceed 10-->
+                                                        <% for(i=1; i<= p.productId.availability && i < 11; i++) { %>
+                                                            <% if (i !== p.quantity) { %>
+                                                                <option><%=i%></option>
+                                                            <%}%>
+                                                        <%}%>
                                                     </select>
                                                     <input type="hidden" value="<%= p.productId._id%>" name="productId">
                                                 </form>

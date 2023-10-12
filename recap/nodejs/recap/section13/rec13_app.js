@@ -117,7 +117,8 @@ but we want the select input to assist in giving x quantity
 
 /2- cart page (+2.0h)
 adjust the ejs, controllers, routers and interactions
-
+- add functionality to display shipping text depending on the amount reach from the free delivery minimum total cost
+- add functionality to change the user's cart item's quantity from the cart page
 
 
 
