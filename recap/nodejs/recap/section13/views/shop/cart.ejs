@@ -8,7 +8,6 @@
 
 
     <%- include("../includes/index-header.ejs") %>
-
     <main id="main">
 
         <div class="main__main__wrapper"> <!--100vw-->
@@ -47,7 +46,7 @@
                                                 <%=p.productId.title%>
                                             </h2>
                                             <p class="cart--list--item--description--price" aria-label="item's price">
-                                                EGP <%=p.productId.price%>
+                                                <span class="globalCurrency"></span> <%=p.productId.price%>
                                             </p>
                                             <p class="cart--list--item--description--availability 
                                             <%= (p.productId.availability > 0) ? 'available_green' : 'not_available_red' %>"
@@ -55,7 +54,7 @@
                                                 <%= (p.productId.availability > 0) ? "In Stock" : "Out of stock" %>
                                             </p>
                                             <p class="cart--list--item--description--delivery" aria-label="item's delivery option">
-                                                <%= (p.productId.deliveryFees === false) ? "Eligible for free delivery" : "26 EGP Delivery" %>
+                                                <% if (p.productId.deliveryFees === false) { %> Eligible for FREE delivery <% } else { %> Delivery <span class="deliveryFees"></span> <span class="globalCurrency"></span> <%}%>
                                             </p>
 
 
@@ -104,7 +103,7 @@
                         <p class="right-text-align row1--extra--proceed-confirm-total" aria-label="Cart's total price">
                             Subtotal (<%=totalQuantity%> items): 
                             <span class="row1--extra--proceed-confirm-total-price"> 
-                                EGP <%=totalPrice%>
+                                <span class="globalCurrency"></span> <%=totalPrice%>
                         </span>
                         </p>
 
@@ -125,7 +124,7 @@
                                     <span class="proceed-qualified-3">
                                         Add 
                                         <span class="not_available_red">
-                                            EGP <%=Math.round((450 - FreeDeliveryEligible)*100)/100 %>
+                                            <span class="globalCurrency"></span> <%=Math.round((450 - FreeDeliveryEligible)*100)/100 %>
                                         </span>
                                         of eligible items to your order to qualify for FREE Shipping.
                                     </span>
@@ -136,7 +135,7 @@
                             <p class="row1--extra--proceed-confirm-total" aria-label="Cart's total price">
                                 Subtotal (<%=totalQuantity%> items): 
                                 <span class="row1--extra--proceed-confirm-total-price"> 
-                                    EGP <%=totalPrice%>
+                                    <span class="globalCurrency"></span> <%=totalPrice%>
                                 </span>
                             </p>
                             <form action="/create-order" method="POST" style="width: 100%">
@@ -206,7 +205,7 @@
                                 <div class="buy-again-item--description" aria-label="previously bought item's description area">
                                     <p href="" class="buy-again-item--description--title" aria-label="previously bought item's title">Screen protector for Samsung S Ultra</p>
                                     <span class="buy-again-item--description--rating" aria-label="previously bought item's rating">Stars</span>
-                                    <p class="buy-again-item--description--price" aria-label="previously bought item's price">EGP 310.00</p>
+                                    <p class="buy-again-item--description--price" aria-label="previously bought item's price"><span class="globalCurrency"></span> 310.00</p>
                                     <p class="buy-again-item--description--only" aria-label="previously bought item's availability">Only 4 left in stock - order soon</p>
                                     <button class="yellow-button buy-again-item--description--button" aria-label="add this previously bought item to cart">Add to Cart</button>
                                 </div>
@@ -219,7 +218,7 @@
                                 <div class="recommended-item--description">
                                     <a href="" class="recommended-item--description--title">Screen protector for Samsung S Ultra</a>
                                     <span class="recommended-item--description--rating">Stars</span>
-                                    <span class="recommended-item--description--price">EGP 310.00</span>
+                                    <span class="recommended-item--description--price"><span class="globalCurrency"></span> 310.00</span>
                                     <span class="recommended-item--description--only">Only 4 left ins stock - order soon</span>
                                     <button class="yellow-button recommended-item--description--button">Add to Cart</button>
                                 </div>
@@ -232,7 +231,7 @@
                                 <div class="recommended-item--description">
                                     <a href="" class="recommended-item--description--title">Screen protector for Samsung S Ultra</a>
                                     <span class="recommended-item--description--rating">Stars</span>
-                                    <span class="recommended-item--description--price">EGP 310.00</span>
+                                    <span class="recommended-item--description--price"><span class="globalCurrency"></span> 310.00</span>
                                     <span class="recommended-item--description--only">Only 4 left ins stock - order soon</span>
                                     <button class="yellow-button recommended-item--description--button">Add to Cart</button>
                                 </div>
@@ -259,7 +258,7 @@
                         <div class="recommended-item--description" aria-label="recommended-item's description area">
                             <p href="" class="recommended-item--description--title" aria-label="recommended-item's title">Screen protector for Samsung S Ultra</p>
                             <span class="recommended-item--description--rating" aria-label="recommended-item's rating">Stars</span>
-                            <p class="recommended-item--description--price" aria-label="recommended-item's price">EGP 310.00</p>
+                            <p class="recommended-item--description--price" aria-label="recommended-item's price"><span class="globalCurrency"></span> 310.00</p>
                             <p class="recommended-item--description--only" aria-label="recommended-item's availability">Only 4 left in stock - order soon</p>
                             <button class="yellow-button recommended-item--description--button" aria-label="add this recommended-item to cart">Add to Cart</button>
                         </div>
@@ -272,7 +271,7 @@
                         <div class="recommended-item--description">
                             <a href="" class="recommended-item--description--title">Screen protector for Samsung S Ultra</a>
                             <span class="recommended-item--description--rating">Stars</span>
-                            <span class="recommended-item--description--price">EGP 310.00</span>
+                            <span class="recommended-item--description--price"><span class="globalCurrency"></span> 310.00</span>
                             <span class="recommended-item--description--only">Only 4 left ins stock - order soon</span>
                             <button class="yellow-button recommended-item--description--button">Add to Cart</button>
                         </div>
@@ -285,7 +284,7 @@
                         <div class="recommended-item--description">
                             <a href="" class="recommended-item--description--title">Screen protector for Samsung S Ultra</a>
                             <span class="recommended-item--description--rating">Stars</span>
-                            <span class="recommended-item--description--price">EGP 310.00</span>
+                            <span class="recommended-item--description--price"><span class="globalCurrency"></span> 310.00</span>
                             <span class="recommended-item--description--only">Only 4 left ins stock - order soon</span>
                             <button class="yellow-button recommended-item--description--button">Add to Cart</button>
                         </div>
@@ -308,6 +307,8 @@
     
     <script src="/js/code.jquery.com_jquery-3.7.0.js"></script>
     <script src="/js/main_cart.js"></script>
+    <script src="/js/globalValues.js"></script> <!--deferred-->>
+
 
 <%- include("../includes/html-end.ejs") %>
 

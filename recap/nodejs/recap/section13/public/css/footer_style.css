@@ -74,7 +74,8 @@ footer {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    gap: 1em;
+    gap: 1.5em;
+    padding-right: 2rem;
 
 
 }
@@ -91,16 +92,16 @@ footer {
 
 
 .main-footer__content-links2-list-item1 {
-    padding: 0.5rem 1rem;
+    /* padding: 0.5rem 1rem; */
 
 }
 
 .main-footer__content-links2-list-item2 {
-    padding: 0.5rem 1rem;
+    /* padding: 0.5rem 1rem; */
 
 }
 
-.main-footer__content-links2-list-item1::before,
+/* .main-footer__content-links2-list-item1::before,
 .main-footer__content-links2-list-item2::before {
 
     content: '';
@@ -109,27 +110,53 @@ footer {
     position: absolute;
     left: 0;
     top: 20%;
-}
+} */
 
-.main-footer__content-links2-list-item1::before {
+/* .main-footer__content-links2-list-item1::before { */
+.globalLanguageIcon {
+    display: inline-block;
+    height: 1.15rem;
+    width: 1.15rem;
+    /* background-color: red; */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
     background-image: url("../img/globe-icon.png");
-    background-size: contain;
+    /* background-size: contain;
     translate: -30% 10%;  
-    -moz-transform: translate(-0%,0%);
+    -moz-transform: translate(-0%,0%); */
  
-
 }
-.main-footer__content-links2-list-item2::before {
+
+.main-footer__content-links2-list-item1, .main-footer__content-links2-list-item2 {
+    display: flex;
+    align-content: center;
+    gap: 0.4rem;
+}
+.globalCountryFlag {
+    display: inline-block;
+    height: 1.15rem;
+    width: 1.15rem;
+    /* background-color: red; */
     background-image: url("../img/country-flag.png");
-    background-size: contain;
-    translate: -30% 20%;  
-    -moz-transform: translate(-0%,0%);
-    border-radius: 1px; 
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    /* translate: -30% 20%;   */
+    /* -moz-transform: translate(-0%,0%); */
+    border-radius: 1px;
+    /* border: 1px solid blue; */
 
 }
+
 
 .main-footer__content-links2-list-item1 .select-caret-down {
     display: none;
+}
+
+.select-caret-down {
+    margin: 0 0rem 0 0.575rem ;
 }
 
 /*///////////////////////////////////////////////////////////////*/
@@ -267,30 +294,32 @@ footer {
         border: 1px solid var(--footer-text-grey1);
         border-radius: 3px;
 
-        padding: 0.5rem 0.75em 0.5em 2.25em;
+        padding: 0.5rem 0.75em 0.5em 0.75em;
         display: flex;
         flex-direction: row;
         justify-content: flex-end;
         align-items: center;
-        gap: 1.2rem;
+        gap: 1rem;
     }
 
     .main-footer__content-links2-list-item2 {
         border: 1px solid var(--footer-text-grey1);
         border-radius: 3px;
 
-        padding: 0.5rem 0.75em 0.5em 2.25em;
+        padding: 0.5rem 0.75em 0.5em 0.75em;
         display: flex;
+        gap: 1rem;
+
 
     }
-    .main-footer__content-links2-list-item1::before {
+    /* .main-footer__content-links2-list-item1::before {
         translate: 50% 10%;   
     
-    }
-    .main-footer__content-links2-list-item2::before {
+    } */
+    /* .main-footer__content-links2-list-item2::before {
         translate: 50% 20%;  
     
-    }
+    } */
 
     .fa-sort {
         color: var(--footer-text-grey1);
