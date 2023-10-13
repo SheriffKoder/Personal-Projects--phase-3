@@ -11,7 +11,19 @@ const orderSchema = new Schema({
     user: [{
         name: {type: String, required: true},
         userId: {type: Schema.Types.ObjectId, required: true, ref: "User"}
-    }]
+    }],
+    date: {
+        type: String,
+        required: true
+    },
+    total: {
+        type: Number,
+        required: true
+    },
+    status: {
+        type: String,
+        required: false
+    },
 })
 
 

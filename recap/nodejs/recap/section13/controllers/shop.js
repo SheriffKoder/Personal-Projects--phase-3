@@ -144,12 +144,28 @@ exports.postOrder = (req, res, next) => {
             return {quantity: item.quantity, product: {...item.productId._doc}};
         })
 
+        //Generate required data info
+        const today = new Date();
+        const Year = today.getFullYear();
+        let Month = today.getMonth() + 1;
+        let Day = today.getDate();
+        if (Day < 10) dd = '0' + dd;
+        if (Month < 10) mm = '0' + mm;
+
+        //Generate required total cost info
+        console.log(user.cart.items);
+
+
         const order = new OrderClassModel({
             user: {
                 name: req.user.name,
                 userId: req.user
             },
-            products: products
+            products: products,
+            date: Day+" "+Month+""+Year,
+            totalCost: "100",
+
+
         });
         return order.save();
 
@@ -180,7 +196,7 @@ exports.getOrders = (req, res, next) => {
 
         res.render("shop/orders", {
             orders: orders,
-            myTitle: "Amazon: Orders",
+            myTitle: "Your Orders",
         })
     })
     .catch(err => {
