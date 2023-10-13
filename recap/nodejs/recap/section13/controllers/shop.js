@@ -115,3 +115,75 @@ exports.changeQuantity = (req, res, next) => {
 
     })
 }
+
+
+//7.d
+exports.postCartDeleteProduct = (req, res, next) => {
+    const prodId = req.body.productId;
+
+    req.user.removeFromCart(prodId)
+    .then(result => {
+        res.redirect("back");
+    })
+    .catch(err => {
+        console.log(err);
+    })
+}
+
+
+//8
+const OrderClassModel = require("../models/order.js");
+
+exports.postOrder = (req, res, next) => {
+    req.user
+    .populate("cart.items.productId")
+    .then(user => {
+        const products = user.cart.items.map(item => {
+            //using the spread operator and a special function 
+            //._doc to access just the data without meta data and pull out all the product data into a new object
+            return {quantity: item.quantity, product: {...item.productId._doc}};
+        })
+
+        const order = new OrderClassModel({
+            user: {
+                name: req.user.name,
+                userId: req.user
+            },
+            products: products
+        });
+        return order.save();
+
+
+    })
+    .then(result => {
+        req.user.clearCart();
+    })
+    .then(() => {   //clearCart is returned in the model so can add .then
+        res.redirect("/orders");
+    })
+    .catch(err => {
+        console.log(err);
+    })
+
+
+
+
+
+}
+
+exports.getOrders = (req, res, next) => {
+
+    //get all orders that belong to that user
+    Order.find({"user.userId": req.user._id})
+    .then(orders => {
+        console.log(orders);
+
+        res.render("shop/orders", {
+            orders: orders,
+            myTitle: "Amazon: Orders",
+        })
+    })
+    .catch(err => {
+        console.log(err);
+    })
+}

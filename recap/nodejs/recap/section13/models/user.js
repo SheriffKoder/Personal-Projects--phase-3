@@ -35,7 +35,6 @@ const userSchema = new Schema({
 
 
 
-
 //7.a
 userSchema.methods.addToCart = function (product, requestedCount, increaseQtyAction, changeQtyAction) {
 
@@ -69,6 +68,22 @@ userSchema.methods.addToCart = function (product, requestedCount, increaseQtyAct
 
 }
 
+
+//7.d
+userSchema.methods.removeFromCart = function (productId) {
+    const updatedCartItems = this.cart.items.filter(item => {
+        return item.productId.toString() !== productId.toString();
+    })
+    this.cart.items = updatedCartItems;
+    return this.save();
+}
+
+
+//8
+userSchema.methods.clearCart = function () {
+    this.cart = {items: []};
+    return this.save();
+}
 
 
 

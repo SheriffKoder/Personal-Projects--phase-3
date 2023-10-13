@@ -17,10 +17,18 @@
                     <section class="main__main__content__row1--cart" aria-label="Shopping cart">
 
                         <div class="main__main__content__row1--cart--header">
+                            <% if (products.length > 0) { %>
                             <h1>Shopping Cart</h1>
                             <a href="#saved_items_area" aria-label="skip the cart and move to next area" class="sr-only">next</a>
 
                             <a>Deselect all items</a>
+                            <%} else { %>
+                                <h1>Your Amazon Cart is empty.</h1>
+                                <p style="margin-top: 0.5rem">
+                                    Your shopping basket lives to serve. Give it purpose – fill it with groceries, clothing, household supplies, electronics and more.
+                                    Continue shopping on the <a>amazon.eg homepage</a>, learn about <a>Today's Deals</a>, or visit your <a>Wish List</a>.
+                                </p>
+                            <%}%>    
                         </div>
 
                         <% let FreeDeliveryEligible = 0 %>
@@ -100,15 +108,18 @@
 
 
                         </ul>
+                        <% if (products.length > 0) { %>
                         <p class="right-text-align row1--extra--proceed-confirm-total" aria-label="Cart's total price">
                             Subtotal (<%=totalQuantity%> items): 
                             <span class="row1--extra--proceed-confirm-total-price"> 
                                 <span class="globalCurrency"></span> <%=totalPrice%>
                         </span>
                         </p>
+                        <%}%>
 
 
                     </section>
+                    <% if (products.length > 0) { %>
                     <section class="main__main__content__row1--extra" id="cart_proceed_area" aria-label="proceed to checkout area">
                         <div class="row1--extra--proceed">
                             <div class="row1--extra--proceed--qualify">
@@ -138,12 +149,13 @@
                                     <span class="globalCurrency"></span> <%=totalPrice%>
                                 </span>
                             </p>
-                            <form action="/create-order" method="POST" style="width: 100%">
+                            <form action="/create-order" method="POST" style="width: 100%; display: flex;">
                                 <button type="submit" class="yellow-button row1--extra--proceed-submit" aria-label="proceed to checkout">Proceed to Buy</button>
                             </form>
                             </div>
                         </div>
                     </section>
+                    <%}%>
 
                 </div>
                 

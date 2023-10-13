@@ -120,10 +120,20 @@ adjust the ejs, controllers, routers and interactions
 - add functionality to display shipping text depending on the amount reach from the free delivery minimum total cost
 - add functionality to change the user's cart item's quantity from the cart page
 
+/addons- (+2h)
+- better quantity select options based on what is already selected
+- add global currency values
+
+(d) delete from cart on the cart page
+- go to the user model and add a method
 
 
+//8 Order 0.75+
+- define an order model
+- postOrder controller which saves a blueprint of the order model
+- define the clearCart in the user model
 
-
+- define the getOrders shop controller, add the "ejs", route
 
 
 
