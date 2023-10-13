@@ -20,5 +20,8 @@ router.post("/create-order", shopController.postOrder);
 //7
 router.get("/cart", shopController.getCart);
 
+//8
+router.get("/orders", shopController.getOrders);
+
 
 module.exports = router;

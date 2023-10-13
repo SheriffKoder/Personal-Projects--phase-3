@@ -128,12 +128,13 @@ adjust the ejs, controllers, routers and interactions
 - go to the user model and add a method
 
 
-//8 Order 0.75+
+//8 Order 0.75+1.5
 - define an order model
 - postOrder controller which saves a blueprint of the order model
 - define the clearCart in the user model
 
-- define the getOrders shop controller, add the "ejs", route
+- define the getOrders shop controller, add the ejs, route
+- found out that the order needs more data inputs that will be displayed on the ejs
 
 
 

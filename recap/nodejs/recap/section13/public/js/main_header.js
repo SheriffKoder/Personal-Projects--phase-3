@@ -123,7 +123,7 @@ document.querySelector("main").addEventListener("click", () => {
 
 //Add an outline on all colored buttons on any page that has a header (mostly all pages)
 //the class is in basic.css
-let genericButton = document.querySelectorAll(".yellow-button, .orange-button, .white-button, .add-new-product-link");
+let genericButton = document.querySelectorAll(".yellow-button, .orange-button, .white-button, .add-new-product-link, .main__main__content__orders-header--search--button");
 
 genericButton.forEach(button => {
     button.addEventListener("click", (e)=> {

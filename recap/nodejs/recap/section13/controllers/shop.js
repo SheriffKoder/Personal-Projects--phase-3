@@ -147,13 +147,17 @@ exports.postOrder = (req, res, next) => {
         //Generate required data info
         const today = new Date();
         const Year = today.getFullYear();
-        let Month = today.getMonth() + 1;
+        let Month = today.getMonth();
         let Day = today.getDate();
-        if (Day < 10) dd = '0' + dd;
-        if (Month < 10) mm = '0' + mm;
+        if (Day < 10) Day = '0' + Day;
+        const monthName = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+
 
         //Generate required total cost info
-        console.log(user.cart.items);
+        let totalCost1 = 0;
+        user.cart.items.forEach(item => {
+            totalCost1 = totalCost1 + (item.productId.price * item.quantity);
+        })
 
 
         const order = new OrderClassModel({
@@ -162,8 +166,10 @@ exports.postOrder = (req, res, next) => {
                 userId: req.user
             },
             products: products,
-            date: Day+" "+Month+""+Year,
-            totalCost: "100",
+            date: {Day:Day, Month: monthName[Month], Year:Year},
+            totalCost: totalCost1,
+            deliveredDate: {Day:Day, Month: monthName[Month], Year:Year},
+            deliveredMethod: "Handed off directly to a resident"
 
 
         });
@@ -190,10 +196,9 @@ exports.postOrder = (req, res, next) => {
 exports.getOrders = (req, res, next) => {
 
     //get all orders that belong to that user
-    Order.find({"user.userId": req.user._id})
+    OrderClassModel.find({"user.userId": req.user._id})
     .then(orders => {
-        console.log(orders);
-
+        
         res.render("shop/orders", {
             orders: orders,
             myTitle: "Your Orders",

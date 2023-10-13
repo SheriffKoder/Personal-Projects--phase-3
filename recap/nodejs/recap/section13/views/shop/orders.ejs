@@ -64,25 +64,25 @@
 
                 <div class="main__main__content__orders__results__wrapper">
 
-                    <% if (orders.length) > 0 { %>
+                    <% if (orders.length > 0) { %>
                         <% orders.forEach(order => { %>
                         <div class="main__main__content__orders__result__container" aria-label="order group">
                             <div class="orders__result--header-area">
                                 <ul class="orders__result--header--list" aria-label="order details">
                                     <li class="orders__result--header--list--item" aria-label="Order date">
                                         <h3>Order placed</h3>
-                                        <p><%=order.date></p>
+                                        <p><%=order.date.Day%> <%=order.date.Month%> <%=order.date.Year%></p>
                                     </li>
                                     <li class="orders__result--header--list--item" aria-label="Order's total cost">
                                         <h3>Total</h3>
-                                        <p>EGP<%=order.cost></p>
+                                        <p>EGP <%=order.totalCost%></p>
                                     </li>
                                     <li class="orders__result--header--list--item" aria-label="Order's delivery destination">
                                         <h3>Ship to</h3>
-                                        <p>Sherif Khodeir</p>
+                                        <p><%=order.user[0].name%></p>
                                     </li>
                                     <li class="orders__result--header--list--item" aria-label="Order's number and invoice">
-                                        <h3>ORDER # <%=order.id></h3>
+                                        <h3>ORDER # <%=order._id.toString().substring(0,3)%>-<%=order._id.toString().substring(3,10)%>-<%=order._id.toString().substring(10)%></h3>
                                         <span class="orders__result--header--list--item--order-details">
                                             <a href="" class="main_link">View order details</a>
                                             <span aria-hidden="true" class="orders__result--header--list--item--order-details--separator"> | </span>
@@ -96,43 +96,43 @@
 
                             <div class="orders__result--items--container">
                                 <div class="orders__result--items--header" aria-label="delivery information">
-                                    <h2>Delivered <%=order.deliveredDate %></h2>
+                                    <h2>Delivered <%=order.deliveredDate.Day+1%> <%=order.deliveredDate.Month%> <%=order.deliveredDate.Year%></h2>
                                     <p>Your package was <%=order.deliveredMethod %></p>
                                 </div>
 
                                 <div class="orders__result--items" aria-label="order's items list">
 
-                                    <% orders.products.forEach(product => { %>
+                                    <% order.products.forEach(p => { %>
 
                                     <div class="orders_result--item" aria-label="item">
-                                        <a href="" class="orders__result--item--image">
-                                            <img src="<%= product.imageUrl%>" alt="<%= product.imageAlt%>">
+                                        <a href="/products/<%=p.product._id%>" class="orders__result--item--image">
+                                            <img src="<%= p.product.imageUrl%>" alt="<%= p.product.title%>">
+                                            <% if (p.quantity > 1) { %> 
+                                            <span class="order-item--quantity"><%=p.quantity%></span>
+                                            <%}%>
                                         </a>
                                         <div class="orders__result--item--description" aria-label="items's description">
-                                            <a href="" class="orders__result--item--description--title">
-                                                <%= product.title%>
+                                            <a href="/products/<%=p.product._id%>" class="orders__result--item--description--title">
+                                                <%= p.product.title%>
                                             </a>
                                             <p class="orders__result--item--description--note">Return or replace items eligible</p>
                                             <div class="orders__result--item--description--links">
-                                                <!-- <i src="./img/buy-again.png"></i> -->
                                                 <button type="button" class="yellow-button">Buy it again</button>
-                                                <button type="button" class="white-button">View your item</button>
+                                                <button type="button" class="white-button"><a href="/products/<%=p.product._id%>" style="text-decoration: none; color: black;">View your item</a></button>
                                             </div>
                                         </div>
                                     </div>
 
-                                    <% } %>
-
-
-
+                                    <% }) %>
                                 </div>
+
+                                
                                 <div class="orders__result--control-links" aria-label="order's action links">
                                     <a href="" class="orders__result--control-links--link white-button">Track package</a>
-                                    <a href="" class="orders__result--control-links--link white-button">Track package</a>
+                                    <a href="" class="orders__result--control-links--link white-button">Return or replace items</a>
+                                    <a href="" class="orders__result--control-links--link white-button">Get Help</a>
                                     <a href="" class="orders__result--control-links--link white-button">Leave seller feedback</a>
-                                    <a href="" class="orders__result--control-links--link white-button">Leave seller feedback</a>
-                                    <a href="" class="orders__result--control-links--link white-button">Leave seller feedback</a>
-
+                                    <a href="" class="orders__result--control-links--link white-button">Write a product review</a>
                                 </div>            
                                 
                                 
@@ -140,7 +140,7 @@
                             </div>
                         </div>
 
-                        <% )} %>
+                        <% }) %>
                     <% } %>
 
 

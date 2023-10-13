@@ -201,6 +201,7 @@ Row 2
     font-weight: 600;
     min-width: 7.7rem;
     flex: 0;
+    font-size: 0.9rem;
 
 
 }
@@ -469,6 +470,7 @@ items area
     /* border: 1px solid red; */
     max-width: 90px;
     max-height: 90px;
+    position: relative;
 
 }
 
@@ -477,6 +479,22 @@ items area
     max-width: 100%;
 }
 
+.order-item--quantity {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255,255,255,.9);
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 0.8rem;
+    text-align: center;
+    padding-top: 0.2rem;
+    padding-left: 0.1rem;
+
+    height: 20px;
+    min-width: 20px;
+
+}
 
 .orders__result--item--description {
     /* flex: 2; */

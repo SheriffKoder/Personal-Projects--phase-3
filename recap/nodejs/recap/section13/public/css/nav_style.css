@@ -164,6 +164,7 @@ main.dark::after {
     color: white;
     padding-bottom: 0.6em;
     font-size: 0.7rem;
+    text-decoration: none;
 }
 
 .main-navigation__search {
