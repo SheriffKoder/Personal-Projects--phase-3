@@ -1,10 +1,9 @@
-
-const mongoose = require("mongoose");
-
-const Schema = mongoose.Schema;
-
-const userSchema = new Schema({
-
+"use strict";
+// const mongoose = require("mongoose");
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.UserClassModel = void 0;
+const mongoose_1 = require("mongoose"); //TS
+const userSchema = new mongoose_1.Schema({
     name: {
         type: String,
         required: true
@@ -13,7 +12,7 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
-    seller: {                   //true or false
+    seller: {
         type: Boolean,
         required: true
     },
@@ -25,68 +24,50 @@ const userSchema = new Schema({
     cart: {
         items: [
             {
-                productId: {type: Schema.Types.ObjectId, ref: "Product", required: true},
-                quantity: {type: Number, required: true}
+                productId: { type: Object, ref: "Product", required: true },
+                quantity: { type: Number, required: true }
             }
         ]
     }
-    
 });
-
-
-
 //7.a
 userSchema.methods.addToCart = function (product, requestedCount, increaseQtyAction, changeQtyAction) {
-
     //string method
-    const cartProductIndex = this.cart.items.findIndex(cp => {
+    const cartProductIndex = this.cart.items.findIndex((cp) => {
         return cp.productId.toString() === product._id.toString();
-    })
-
+    });
     let newQuantity = requestedCount;
     const updatedCartItems = [...this.cart.items];
-
     if (cartProductIndex >= 0) {
         if (increaseQtyAction) {
             newQuantity = this.cart.items[cartProductIndex].quantity + +requestedCount;
-        } else if (changeQtyAction) {
+        }
+        else if (changeQtyAction) {
             newQuantity = +requestedCount;
         }
         updatedCartItems[cartProductIndex].quantity = newQuantity;
-    } else {
-        updatedCartItems.push({productId: product._id, quantity: newQuantity});
     }
-
-
+    else {
+        updatedCartItems.push({ productId: product._id, quantity: newQuantity });
+    }
     const updatedCart = {
         items: updatedCartItems
-    }
-
+    };
     this.cart = updatedCart;
     return this.save();
-
-
-}
-
-
+};
 //7.d
 userSchema.methods.removeFromCart = function (productId) {
-    const updatedCartItems = this.cart.items.filter(item => {
+    const updatedCartItems = this.cart.items.filter((item) => {
         return item.productId.toString() !== productId.toString();
-    })
+    });
     this.cart.items = updatedCartItems;
     return this.save();
-}
-
-
+};
 //8
 userSchema.methods.clearCart = function () {
-    this.cart = {items: []};
+    this.cart = { items: [] };
     return this.save();
-}
-
-
-
-
-
-module.exports = mongoose.model("User", userSchema);
+};
+const UserClassModel = (0, mongoose_1.model)("User", userSchema);
+exports.UserClassModel = UserClassModel;

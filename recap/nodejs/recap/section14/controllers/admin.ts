@@ -1,14 +1,14 @@
-const mongodb = require("mongodb");
+// const mongodb = require("mongodb");
 
 // const ProductClassModel = require("../models/product.js");
 
-import { ProductClassModel, IProduct } from '../models/product';
-import { IUser } from '../models/user';
+import { ProductClassModel } from '../models/product';
+import { IUserWithMethods } from '../models/user';
 import {Request, Response, NextFunction} from 'express';
-import {Schema, Model, Document} from "mongoose";
 
+//to use req.user
 interface Request_With_reqUser extends Request {
-    user: IUser;
+    user: IUserWithMethods;
 }
 
 exports.getAddProduct = (req: Request, res: Response, next: NextFunction) => {

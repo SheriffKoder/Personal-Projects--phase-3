@@ -6,8 +6,10 @@ import { Schema, Types, model } from "mongoose"; //TS
 
 import { IProduct } from "./product";   //TS interface
 
+type ID_or_Data = Types.ObjectId | IProduct;
+
 interface IItems {
-    productId: Types.ObjectId;
+    productId: any;
     quantity: number;
 }
 
@@ -16,13 +18,26 @@ interface ICart {
 }
 
 interface IUser {
+    _id: Types.ObjectId;
     name: string;
     email: string;
     seller: boolean;
     UserRating: number;
     cart: ICart;
+    addToCart: (product: IProduct, requestedCount: number, increaseQtyAction: boolean, changeQtyAction: boolean) => Promise<IUser>;
+    removeFromCart: (productId: string) => Promise<IUser>;
+    clearCart: () => Promise<IUser>;
+
 }
 
+//https://millo-l.github.io/Typescript-mongoose-methods-statics/
+//will use IUserWithMethods to be able to attach these methods to the user model exported
+interface IUserWithMethods extends IUser {
+    addToCart: (product: IProduct, requestedCount: number, increaseQtyAction: boolean, changeQtyAction: boolean) => Promise<IUser>;
+    removeFromCart: (productId: string) => Promise<IUser>;
+    clearCart: () => Promise<IUser>;
+    
+}
 
 
 const userSchema = new Schema<IUser>({
@@ -47,7 +62,7 @@ const userSchema = new Schema<IUser>({
     cart: {
         items: [
             {
-                productId: {type: Schema.Types.ObjectId, ref: "Product", required: true},
+                productId: {type: Object, ref: "Product", required: true},
                 quantity: {type: Number, required: true}
             }
         ]
@@ -118,5 +133,6 @@ export {
     IItems,
     ICart,
     IUser,
+    IUserWithMethods,
     UserClassModel,
 }

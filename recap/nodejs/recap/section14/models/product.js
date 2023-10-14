@@ -1,20 +1,11 @@
-const mongoose = require("mongoose");
-
-//allows to create new schemas
-const Schema = mongoose.Schema;
-
-
-//we have the flexibility to deviate from that and not use all keys
-//or can use the required key and give up this flexibility
-//no need to put _id as it will be added automatically as an object it
-//user id will be added later
-
-
-
-
+"use strict";
+// const mongoose = require("mongoose");
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ProductClassModel = void 0;
+const mongoose_1 = require("mongoose"); //TS
+;
 //Schema/blueprint define
-const productSchema = new Schema({
-
+const productSchema = new mongoose_1.Schema({
     //from the html file, sorted by display order
     title: {
         type: String,
@@ -40,9 +31,6 @@ const productSchema = new Schema({
         type: Boolean,
         required: true
     },
-
-
-
     notesIntro: {
         type: String,
         required: true
@@ -63,9 +51,6 @@ const productSchema = new Schema({
         type: String,
         required: false
     },
-
-
-
     age: {
         type: String,
         required: true
@@ -78,10 +63,6 @@ const productSchema = new Schema({
         type: String,
         required: true
     },
-
-
-
-
     brand: {
         type: String,
         required: true
@@ -114,9 +95,6 @@ const productSchema = new Schema({
         type: String,
         required: true
     },
-
-
-
     country: {
         type: String,
         required: true
@@ -137,8 +115,6 @@ const productSchema = new Schema({
         type: Object,
         required: true
     },
-
-
     //may be needed later
     ratingScore: {
         type: Number,
@@ -156,24 +132,16 @@ const productSchema = new Schema({
         type: Number,
         required: false
     },
-
     userId: {
         //as it is a reference to the user (_id) //(9)
-        type: Schema.Types.ObjectId,
+        type: mongoose_1.Schema.Types.ObjectId,
         //ref takes a string, which other mongoose model is related to the data in this field
         //the "User model" as written in mongoose.model("User"..
         ref: "User",
         required: true
     },
-
-
-
-
-
 });
-
-
-
 //mongoose will take the "Product" turns into lower-case and make plural
 //this is how the "products" collection name came from
-module.exports = mongoose.model("Product", productSchema)
+const ProductClassModel = (0, mongoose_1.model)("Product", productSchema);
+exports.ProductClassModel = ProductClassModel;
