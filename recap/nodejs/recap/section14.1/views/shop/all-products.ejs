@@ -1,0 +1,203 @@
+<%- include("../includes/html-head.ejs") %>
+
+<link rel="stylesheet" href="/css/all-products.css">
+
+
+
+
+<%- include("../includes/html-start.ejs") %>
+
+
+    <%- include("../includes/index-header.ejs") %>
+
+    <main>
+
+        <aside class="main__main__top-bar" aria-label="products amount and sort by">
+            <span class="main__main__top-bar-container">
+                <span><span aria-label="number of pages the results are spread">1–16 </span>of over 4,000 results</span>
+                <select class="main__main__top-bar--sort" aria-label="sort products drop down select">
+                    <option>Sort by: Featured</option>
+                </select>
+            </span>
+            <span class="select-caret-down"></span>
+
+        </aside>
+        
+
+
+        <div class="main__main__wrapper">
+
+
+            <div class="main__main__content">
+                <aside class="main__main__side-list">
+                    <h2 class="main__main__side-list--header">
+                        Brand
+                    </h2>
+                    <ul class="main__main__side-list--list">
+                        <li class="main__main__side-list--list-item">
+                            <a href="" class="main__main__side-list--list--item-link"> Link</a>
+                        </li>
+
+                        <li class="main__main__side-list--list-item">
+                            <a href="" class="main__main__side-list--list--item-link"> Link</a>
+                        </li>
+
+                        <li class="main__main__side-list--list-item">
+                            <a href="" class="main__main__side-list--list--item-link"> Link</a>
+                        </li>
+
+                        <li class="main__main__side-list--list-item">
+                            <a href="" class="main__main__side-list--list--item-link"> Link</a>
+                        </li>
+
+                        <li class="main__main__side-list--list-item">
+                            <a href="" class="main__main__side-list--list--item-link"> Link</a>
+                        </li>
+
+                        <li class="main__main__side-list--list-item">
+                            <a href="" class="main__main__side-list--list--item-link"> Link</a>
+                        </li>
+
+                    </ul>
+                </aside>
+
+
+                <div class="main__main__products-list" aria-label="all products page">
+                    
+                    <div class="main__main__products-list--text">
+                        <h1 class="main__main__products-list--text--header" aria-hidden="true">
+                        Results
+                        </h1>
+                        <p class=main__main__products-list--text--notify" aria-label="note">
+                        Price and other details may vary, based on product size and colour.
+                        </p>
+                    </div>
+
+                    <div class="main__main__products-list--container" aria-label="products matching the search result">
+                        
+                        <% if (prods.length > 0) { %>
+                            <% let i = 1%>
+                            <% for (let product of prods) { %>
+                                <!-- <a href="/products/<%= product._id%>" class="btn"> Details</a> -->
+
+                            <div class="main__main__products-list--item" aria-label="product number <%=i%>">
+                                <!-- <div class="main__main__products-list--item" aria-label="product number x"> -->
+
+                                
+                                <a href="/products/<%= product._id%>" class="main__main__products-list--item--image--container" href="">
+                                    <img src="<%= product.imageUrl %>" class="main__main__products-list--item--image" alt="<%= product.title %>">
+                                </a>                        
+                                <div class="main__main__products-list--item--description" aria-label="product's details">
+                                    
+                                    <span aria-label="product's name">
+                                        <a href="/products/<%= product._id%>" class="main__main__products-list--item--description--header-link">
+                                            <%= product.title %>
+                                        </a>
+                                    </span>
+                                    
+                                    <% if (product.color) { %>
+                                    <span class="main__main__products-list--item--description--color" aria-label="product's color">
+                                        <%= product.color %>
+                                    </span>
+                                    <% } %>
+                                    
+                                    <span class="main__main__products-list--item--description--rating" aria-label="product's rating">
+                                        <span class="main__main__products-list--item--description--rating--rate" aria-label="current product's rating from 5">
+                                            <%= product.ratingScore %>
+                                        </span>
+                                        <span class="main__main__products-list--item--description--rating--stars" aria-hidden="true">
+                                            &#11088; &#11088; &#11088; &#11088; &#11088;
+                                        </span>
+                                        <span class="main__main__products-list--item--description--rating--number" aria-label="total ratings given by customers">
+                                            <%= product.ratingCount %>
+                                        </span>
+                                    </span>
+                                    
+                                    <span class="main__main__products-list--item--description--price" aria-label="product's price">
+                                        <span class="main__main__products-list--item--description--price--currency" aria-label="currency">
+                                        EGP
+                                        </span>
+                                        <p class="main__main__products-list--item--description--price--number" aria-label="egyptian pounds">
+                                            <%= product.price.toString().split(".")[0] %>
+                                        </p>
+                                        <span class="main__main__products-list--item--description--price--decimal" aria-label="cents">
+                                            <%= product.price.toString().split(".")[1] %>
+                                        </span>
+                                    </span>
+
+                                    <span class="main__main__products-list--item--description--offer" aria-label="applicable offers">
+                                        Extra 20% off with ValU
+                                    </span>
+
+                                    <span class="main__main__products-list--item--description--delivery" aria-label="shipping details">
+                                        <p aria-label="shipping time">
+                                            <span aria-hidden="true">Get it as soon as</span>
+                                            <b> 
+                                                <% const today = new Date(); %>
+                                                <% const month = ["January","February","March","April","May","June","July","August","September","October","November","December"]; %>
+                                                <% const day = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]; %>
+                                                <%= day[today.getDay()+1]%>
+                                                ,
+                                                <%= today.getDate() %>
+                                                <%= month[today.getMonth()]%>
+
+                                            </b>
+                                        </p>
+                                        <p aria-label="shipping cost">
+                                            <%= (product.deliveryFees) ? "EGP 26" : "Fulfilled by Amazon - FREE" %> 
+                                            <span aria-hidden="true">shipping</span>
+                                        </p>
+                                    </span>
+
+                                    <span class="main__main__products-list--item--description--choices" aria-label="more buying choices for this item">
+                                        <p class="main__main__products-list--item--description--choices--text" aria-hidden="true">
+                                            More Buying Choices
+                                        </p>
+                                        <p class="main__main__products-list--item--description--choices--price" aria-label="more choices starting">
+                                            EGP 130.00 <a href="" aria-label="view offers">(4 new offers)</a> 
+                                        </p>
+                                    </span>
+
+                                    <span class="main__main__products-list--item--description--spacer"></span>
+
+                                    <span class="main__main__products-list--item--description-buttons">
+                                        <form action="/cart" method="POST">
+                                        <button class="main__main__products-list--item--description-buttons-add-to-cart" arial-label="Add product to cart" type="submit">Add to Cart</button>
+                                        <input type="hidden" name="productId" value="<%= product.id %>">
+                                        <form>
+                                    </span>
+
+
+                                </div>
+                            </div>
+
+                            <% i = i + 1 %>
+                            <% } %>
+                            <% } else { %>
+                                <h1>No Products Found!</h1>
+                            <% } %>
+        
+
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+    </main>
+
+    <%- include("../includes/index-footer.ejs") %>
+    
+<%- include("../includes/html-end.ejs") %>
+
