@@ -12,6 +12,14 @@ interface Request_With_reqUser extends Request {
     isLoggedIn: boolean;
 }
 
+//to use isLoggedIn on req.session
+declare module 'express-session' {
+    interface SessionData {
+        isLoggedIn: boolean;
+    }
+}
+
+
 exports.getAddProduct = (req: Request_With_reqUser, res: Response, next: NextFunction) => {
 
     res.render("admin/edit-product",
@@ -19,7 +27,8 @@ exports.getAddProduct = (req: Request_With_reqUser, res: Response, next: NextFun
         myTitle: "Add a Product",
         path: "/admin/add-product",
         editing: false, //editing passed variable for form action=""
-        isAuthenticated: req.isLoggedIn
+        // isAuthenticated: req.isLoggedIn  //cookies //9.1
+        isAuthenticated: req.session.isLoggedIn //sessions //9.2
 
     });
 
@@ -143,7 +152,8 @@ exports.getAdminProducts = (req: Request_With_reqUser, res: Response, next: Next
         {
             prods: products, 
             myTitle: "Your Items",
-            isAuthenticated: req.isLoggedIn
+            // isAuthenticated: req.isLoggedIn  //cookies //9.1
+            isAuthenticated: req.session.isLoggedIn //sessions //9.2
         });
 
     })
@@ -175,7 +185,8 @@ exports.getEditProduct = (req: Request_With_reqUser, res: Response, next: NextFu
             product: product, 
             myTitle: "Edit "+product.title, 
             editing: editMode,         
-            isAuthenticated: req.isLoggedIn
+            // isAuthenticated: req.isLoggedIn  //cookies //9.1
+            isAuthenticated: req.session.isLoggedIn //sessions //9.2
     })
     })
     .catch((err) => {

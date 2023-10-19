@@ -24,6 +24,10 @@
 // require("dotenv").config();
 // > replace values with process.env.variableName
 
+// npm install --save express-session //9.2
+// npm install --save connect-mongodb-session
+// npm install --save @types/express-session    //for TS
+
 
 
 
@@ -39,11 +43,43 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({extended: false}));
 
+
 // const User = require("./models/user");  //6
 import { UserClassModel } from './models/user';
 
 //public directory
 app.use(express.static(path.join(__dirname, "public")));
+
+
+/////////////////////////////////////////////////
+////Sessions //9
+// const session = require("express-session");
+import session from 'express-session';
+
+const mongoDBStore = require("connect-mongodb-session")(session);
+
+const store = new mongoDBStore({
+    uri: process.env.MongoDbUri,
+    collection: "sessions"
+});
+
+//secret: key
+//re-save: re-save on every request, false for only when something changes - for better performance
+//saveUninitialized; false for no session save for no changes requests
+//can configure the session cookie for maxAge, expires
+//can add cookie related configuration ,cookie {..}
+
+app.use(session(
+    {
+        secret: "my secret",
+        resave: false,
+        saveUninitialized: false,
+        store: store
+    }
+));
+
+
+/////////////////////////////////////////////////
 
 
 //set the templating engine
@@ -56,7 +92,7 @@ const adminJSRoutes = require("./routes/admin.js");
 const shopJSRoutes = require("./routes/shop");
 const authJSRoutes = require("./routes/auth");
 
-/////TS////
+////////////////////TS//////////
 import { HydratedDocument } from 'mongoose';    //used in connect and create user
 import {Request, Response, NextFunction} from 'express';
 import { IUser } from './models/user';
@@ -65,7 +101,44 @@ interface Request_With_reqUser extends Request {
     isLoggedIn: boolean;
 }
 
+//declaration merging - to make req.session.user work
+declare module 'express-session' {
+    interface SessionData {
+        user: { [key: string]: any};
+    }
+}
+////////////////////end of TS//////////
 
+
+/////////////////////////////////////////////////
+//pass a user and session //9.2
+app.use((req: Request_With_reqUser, res: Response, next: NextFunction) => {                   //9
+
+    if (!req.session.user) {
+        console.log("not logged in")
+        return next();
+    }
+
+    UserClassModel.findById(req.session.user._id)
+    .then(user => {
+        console.log("logged in")
+        if (user) {
+            req.user = user;
+        }
+
+        next();
+
+    }).catch(err => {
+        console.log(err);
+    })
+
+
+});
+
+
+/////////////////////////////////////////////////
+//pass a user and cookies //9.1
+/*
 app.use((req: Request_With_reqUser, res: Response, next: NextFunction) => {                   //6
     UserClassModel.findById("652725974ad26fc2ae8f8433")
     .then(user => {
@@ -73,7 +146,7 @@ app.use((req: Request_With_reqUser, res: Response, next: NextFunction) => {     
             req.user = user;
 
             /////////////////////////////////////////
-            //using cookies sec14.1
+            //using cookies sec14.1 //9
             //// res.setHeader("Set-Cookie", "isLoggedIn=True");
             let myCookies = req.get("Cookie");  //cookies in a string format separated by spaces
             // console.log(typeof myCookies);
@@ -107,6 +180,10 @@ app.use((req: Request_With_reqUser, res: Response, next: NextFunction) => {     
         console.log(err);
     })
 })
+*/
+
+
+
 
 app.use(shopJSRoutes);
 app.use("/admin", adminJSRoutes);
@@ -154,22 +231,10 @@ mongoose.connect(process.env.MongoDbUri)
 
 /*
 
-Cookies and Sessions
-store data in memory or even on the client side
 
-Cookies are stored on the client side
 
-//9 work on a login
 
-//cookies
-- add a login link to header(will style it later)
-- add a getLogin controller, router, import router into app.js
-- add the ejs auth/login.ejs
-- add a postLogin controller to redirect to "/products" when login clicked
 
-- add         isAuthenticated: req.isLoggedIn
-to all get controllers
-- add a postLogin controller sets req.isLoggedIn = true;
 
 
 

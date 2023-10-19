@@ -8,7 +8,8 @@ exports.getAddProduct = (req, res, next) => {
         myTitle: "Add a Product",
         path: "/admin/add-product",
         editing: false,
-        isAuthenticated: req.isLoggedIn
+        // isAuthenticated: req.isLoggedIn  //cookies //9.1
+        isAuthenticated: req.session.isLoggedIn //sessions //9.2
     });
 };
 exports.postAddProduct = (req, res, next) => {
@@ -99,7 +100,8 @@ exports.getAdminProducts = (req, res, next) => {
         res.render("admin/admin-products.ejs", {
             prods: products,
             myTitle: "Your Items",
-            isAuthenticated: req.isLoggedIn
+            // isAuthenticated: req.isLoggedIn  //cookies //9.1
+            isAuthenticated: req.session.isLoggedIn //sessions //9.2
         });
     })
         .catch((err) => {
@@ -122,7 +124,8 @@ exports.getEditProduct = (req, res, next) => {
             product: product,
             myTitle: "Edit " + product.title,
             editing: editMode,
-            isAuthenticated: req.isLoggedIn
+            // isAuthenticated: req.isLoggedIn  //cookies //9.1
+            isAuthenticated: req.session.isLoggedIn //sessions //9.2
         });
     })
         .catch((err) => {

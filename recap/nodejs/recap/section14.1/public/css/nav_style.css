@@ -631,7 +631,9 @@ media queries menu
 
 }
 
-.login-link--hover-menu--section2 ul li a, .login-link--hover-menu--section3 ul li a  {
+.login-link--hover-menu--section2 ul li a, 
+.login-link--hover-menu--section3 ul li a,
+.login-link--hover-menu--section3 ul li form button  {
     padding: 0;
     margin: 0;
     border: 0;
@@ -639,6 +641,8 @@ media queries menu
     color: black;
     font-weight: 400;
     font-size: 0.9rem;
+    background-color: transparent;
+    cursor: pointer;
 }
 
 .login-link--hover-menu--section1 ul li a:hover,
@@ -650,7 +654,13 @@ media queries menu
     color: var(--product-rating-blue);
 }
 
+.login-link--hover-menu--section1 form {
+    width: 50%;
+}
 
+.login-link--hover-menu--section1 form button {
+    width: 100%;
+}
 
 .login-link--hover-menu--section--buy-again {
 
@@ -735,9 +745,27 @@ media queries menu
 
 .login-link--hover-menu--section3 li:first-child {
     display: flex;
+    flex-wrap: wrap;
     flex-direction: row;
     justify-content: space-between;
 }
+
+.nav-menu--username__container {
+    width: 100%;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--footer-text-grey2);
+    display: flex;
+    flex-direction: row;
+
+}
+
+.nav-menu--username {
+    font-size: 1.5rem;
+    display: inline;
+}
+
+.login-link--hover-menu--section3 li:first-child
 
 .mobile-menu-close {
     background-color: var(--red-label);
@@ -748,7 +776,7 @@ media queries menu
     border-radius: 7px;
     padding-left: 0.1rem;
     /* padding-bottom: 0.2rem; */
-    padding-top: 0.25rem;
+    padding-top: 0.1rem;
     text-align: center;
     border: 0;
     margin-left: auto;
@@ -788,6 +816,11 @@ media queries menu
         animation-timing-function: ease-in;    
         animation-fill-mode: forwards;
 
+    }
+
+
+    .login-link--hover-menu li:last-child{
+        margin-bottom: 2rem;
     }
 
     .login-link--hover-menu--section1--unlogged {
@@ -832,6 +865,7 @@ media queries menu
         border-top: 1px solid var(--sort-button-grey);
     }
 
+    
 
 }
 
@@ -843,10 +877,11 @@ media queries menu
     }
 
     
-    .mobile-menu-close {
+    .mobile-menu-close, .nav-menu--username__container {
         display: none;    
     }
     
+
     .login-link--hover-menu--logged {
         height: 250px;
         width: 700px;
@@ -934,11 +969,16 @@ media queries menu
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 0.25rem;
+        gap: 0.5rem;
         height: 25%;
         padding: 0.5rem;
     }
 
+    .login-link--hover-menu--section1 form {
+        width: 50%;
+        margin: 0 auto;
+    }
+    
 
     .login-link--hover-menu--section1--unlogged button {
         width: 50%;
@@ -1027,3 +1067,4 @@ media queries menu
         width: 140px;
     }
 }
+

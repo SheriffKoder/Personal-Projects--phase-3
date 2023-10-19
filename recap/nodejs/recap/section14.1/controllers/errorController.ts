@@ -12,6 +12,7 @@ exports.get404 = (req: Request_With_reqUser, res: Response, next: NextFunction) 
     {
         myTitle: "404 Page", 
         path: "/404",
-        isAuthenticated: req.isLoggedIn
+        // isAuthenticated: req.isLoggedIn  //cookies //9.1
+        isAuthenticated: req.session.isLoggedIn //sessions //9.2
     });
 };

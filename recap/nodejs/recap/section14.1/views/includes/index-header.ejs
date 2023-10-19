@@ -17,7 +17,7 @@
                     <li class="main-navigation__List-2-link"><a href="">Language</a></li>
                     <li class="main-navigation__List-2-link login-link-container">
                         <% if (isAuthenticated) { %>
-                            <a href="" class="not_mobile login-link"><div class="login-link-text1">Hello, $username</div><div class="login-link-text2">Accounts & Lists</div></a>
+                            <a href="" class="not_mobile login-link"><div class="login-link-text1">Hello, <%=user.name.split(" ")[0]%></div><div class="login-link-text2">Accounts & Lists</div></a>
                         <% }else if (!isAuthenticated) { %>
                             <a href="" class="not_mobile login-link-anchor login-link"><div class="login-link-text1">Hello, sign-in</div><div class="login-link-text2">Accounts & Lists</div></a>
                         <%}%>
@@ -27,7 +27,9 @@
 
                             <% if (!isAuthenticated) { %>
                             <div class="login-link--hover-menu--section1 login-link--hover-menu--section1--unlogged">
-                                <button class="yellow-button"> <a href="/login">Login here</a></button>
+                                <form action="/login" method="GET">
+                                    <button class="yellow-button" type="submit">Login here</button>
+                                </form>
                                 <span>New customer? <a href="/login">Start here</a></span>
                                     <span class="mobile-menu-close">x</span> 
                             </div>
@@ -65,16 +67,23 @@
                             <div class="login-link--hover-menu--section3 <%=(!isAuthenticated) ? 'login-link--hover-menu--section3--unlogged' : 'login-link--hover-menu--section3--logged'%> ">
                                 <ul>
                                     <li>
-                                        <h4>Your Account</h4>
                                         <% if (isAuthenticated) { %>
+                                        <span class="not_desktop nav-menu--username__container">
+                                            <h4 class="nav-menu--username">Hello, <%=user.name.split(" ")[0]%></h4>
                                             <span class="mobile-menu-close">x</span> 
-                                        <%} %>    
+                                        </span>
+                                        <%}%>
+                                        <h4>Your Account</h4>
                                     </li>
                                     <li><a href=<%= (isAuthenticated) ? "/admin/products": "/login"%> >Your Products on Sale</a></li>
                                     <li><a href=<%= (isAuthenticated) ? "/admin/add-product": "/login"%>>Add a Product</a></li>
                                     <li><a href=<%= (isAuthenticated) ? "/orders": "/login"%> >Your Orders</a></li>
                                     <% if (isAuthenticated) { %>
-                                        <li><a href="">Logout</a></li>
+                                    <li>
+                                        <form action="/logout" method="POST">
+                                            <button type="submit">Logout</button>
+                                        </form>
+                                    </li>
                                     <%}%>
                                     
 

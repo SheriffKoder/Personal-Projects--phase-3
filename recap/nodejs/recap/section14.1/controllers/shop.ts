@@ -23,7 +23,8 @@ exports.getProducts = (req: Request_With_reqUser, res: Response, next: NextFunct
         {
             prods: products, 
             myTitle: "All Products Page",
-            isAuthenticated: req.isLoggedIn
+        // isAuthenticated: req.isLoggedIn  //cookies //9.1
+        isAuthenticated: req.session.isLoggedIn //sessions //9.2
         });
     })
     .catch((err) => {
@@ -72,7 +73,8 @@ exports.getProduct = (req: Request_With_reqUser, res: Response, next: NextFuncti
                 product: product, 
                 myTitle: product.title, 
                 starFunction: starFunction,
-                isAuthenticated: req.isLoggedIn
+                // isAuthenticated: req.isLoggedIn  //cookies //9.1
+                isAuthenticated: req.session.isLoggedIn //sessions //9.2
             });
         }
     })
@@ -118,7 +120,8 @@ exports.getCart = (req: Request_With_reqUser, res: Response, next: NextFunction)
         res.render("shop/cart", {
             products: products,
             myTitle: "Cart",
-            isAuthenticated: req.isLoggedIn
+            // isAuthenticated: req.isLoggedIn  //cookies //9.1
+            isAuthenticated: req.session.isLoggedIn //sessions //9.2
 
         })
     })
@@ -245,7 +248,8 @@ exports.getOrders = (req: Request_With_reqUser, res: Response, next: NextFunctio
         res.render("shop/orders", {
             orders: orders,
             myTitle: "Your Orders",
-            isAuthenticated: req.isLoggedIn
+            // isAuthenticated: req.isLoggedIn  //cookies //9.1
+            isAuthenticated: req.session.isLoggedIn //sessions //9.2
         })
     })
     .catch(err => {
