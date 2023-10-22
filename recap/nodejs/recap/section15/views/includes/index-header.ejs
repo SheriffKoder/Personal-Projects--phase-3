@@ -1,0 +1,138 @@
+
+
+    <header>
+        <nav id="main-navigation" aria-label="the main">
+            <div class="main-navigation__wrapper">
+            <div class="main-navigation__container">
+                <ul class="main-navigation__List-1">
+                    <li class="main-navigation__List-1-link-small not_desktop"><a id="header-menu" aria-label="browse categories">=</a></li>
+                    <!-- <li class="main-navigation__List-1-link-logo"><a href="" id="header-logo" aria-label="Amazon egypt home"></a><a href="" id="header-logo--text" aria-label="country selection, currently browsing amazon egypt shop" class="globalUrlExt"></a></li> -->
+                    <li class="main-navigation__List-1-link-logo"><a href="/products" id="header-logo"></a><a href="" id="header-logo--text" class="globalUrlExt"></a></li>
+                    <li class="main-navigation__List-1-link not_mobile"><a id="header-destination" href="" aria-label="choose delivery destination country">Deliver to<p></p></a></li>
+                </ul>
+
+                <div class="main-navigation__container-separator"></div>
+
+                <ul class="main-navigation__List-2">
+                    <li class="main-navigation__List-2-link"><a href="">Language</a></li>
+                    <li class="main-navigation__List-2-link login-link-container">
+                        <% if (isAuthenticated) { %>
+                            <a href="" class="not_mobile login-link"><div class="login-link-text1">Hello, <%=user.name.split(" ")[0]%></div><div class="login-link-text2">Accounts & Lists</div></a>
+                        <% }else if (!isAuthenticated) { %>
+                            <a href="" class="not_mobile login-link-anchor login-link"><div class="login-link-text1">Hello, sign-in</div><div class="login-link-text2">Accounts & Lists</div></a>
+                        <%}%>
+
+                        <span id="login-link--hover-menu" class="login-link--hover-menu <%= (!isAuthenticated) ? 'login-link--hover-menu--unlogged' : 'login-link--hover-menu--logged'%> ">
+
+
+                            <% if (!isAuthenticated) { %>
+                            <div class="login-link--hover-menu--section1 login-link--hover-menu--section1--unlogged">
+                                <form action="/login" method="GET">
+                                    <button class="yellow-button" type="submit">Login here</button>
+                                </form>
+                                <span>New customer? <a href="/login">Start here</a></span>
+                                    <span class="mobile-menu-close">x</span> 
+                            </div>
+                            <% }else if (isAuthenticated) { %>
+                                <div class="login-link--hover-menu--section1 <%= (!isAuthenticated) ? 'login-link--hover-menu--section1--unlogged' : 'login-link--hover-menu--section1--logged'%> ">
+                                    <ul class="login-link--hover-menu--section--buy-again">
+                                        <li class="hover-menu__item--header">
+                                            <h4>Buy it Again</h4>
+                                            <a href="">View All & Manage</a></li>
+                                        <li>
+                                            <div class="hover-menu__item-container">
+                                                <div class="hover-menu__item-container--image-container">
+                                                    <img src="/img/product-image.jpg">
+                                                </div>
+                                                <div class="hover-menu__item-container--info-container">
+                                                    <a href="">Zeina asdasd wqeqweqwe adasdasd</a>
+                                                    <p class="">EGP 78.00</p>
+                                                    <button class="yellow-button">Add to Cart</button>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            <%}%>
+
+                            <div class="login-link--hover-menu--section2 <%= (!isAuthenticated) ? 'login-link--hover-menu--section2--unlogged' : 'login-link--hover-menu--section2--logged'%> ">
+                                <ul>
+                                    <li><h4>Your Lists</h4></li>
+                                    <li><a href="">Favorites</a></li>
+                                    <li><a href="">Create a List</a></li>
+
+                                </ul>
+
+                            </div>
+                            <div class="login-link--hover-menu--section3 <%=(!isAuthenticated) ? 'login-link--hover-menu--section3--unlogged' : 'login-link--hover-menu--section3--logged'%> ">
+                                <ul>
+                                    <li>
+                                        <% if (isAuthenticated) { %>
+                                        <span class="not_desktop nav-menu--username__container">
+                                            <h4 class="nav-menu--username">Hello, <%=user.name.split(" ")[0]%></h4>
+                                            <span class="mobile-menu-close">x</span> 
+                                        </span>
+                                        <%}%>
+                                        <h4>Your Account</h4>
+                                    </li>
+                                    <li><a href=<%= (isAuthenticated) ? "/admin/products": "/login"%> >Your Products on Sale</a></li>
+                                    <li><a href=<%= (isAuthenticated) ? "/admin/add-product": "/login"%>>Add a Product</a></li>
+                                    <li><a href=<%= (isAuthenticated) ? "/orders": "/login"%> >Your Orders</a></li>
+                                    <% if (isAuthenticated) { %>
+                                    <li>
+                                        <form action="/logout" method="POST">
+                                            <!-- //10 -->
+                                            <input type="hidden" name="_csrf" value="<%=csrfToken%>">
+                                            <button type="submit">Logout</button>
+                                        </form>
+                                    </li>
+                                    <%}%>
+                                    
+
+
+                                </ul>
+
+                            </div>
+
+                        </span>
+                    </li>
+                    <li class="orders-link main-navigation__List-2-link not_mobile"><a href="">Orders</a></li>
+                    <li class="main-navigation__List-2-link-small"><a href="/cart">Cart</a></li>
+                </ul>
+
+                <div class="main-navigation__search">
+                    <form id="main-navigation__search-form" aria-label="the search area">
+                        <select id="main-navigation__search-categories" aria-label="Browse categories">
+                            <option>
+                            All Categories
+                        </option>
+                            <optgroup label="category1">
+                                <option>Electronics</option>
+                                <option>Home</option>
+                            </optgroup>
+                        </select>
+                        <span class="select-caret-down"></span>
+                        <input type="search" id="main-navigation__search-box" placeholder="Search Amazon" autocomplete="off" aria-label="Search Amazon" spellcheck="false" >
+                        <button type="submit" id="main-navigation__search-button" aria-label="Submit search"></button>
+                    </form>
+                </div>
+
+            </div>
+            </div>
+            <div class="sub_navigation__wrapper">
+            <div class="sub-navigation__container">
+                <ul class="sub_navigation__list-1" aria-label="list of recommended categories">
+                    <li class="sub_navigation__list-1-link"><a href="">= All</a></li>
+                    <li class="sub_navigation__list-1-link"><a href="">Today's Deals</a></li>
+                    <li class="sub_navigation__list-1-link"><a href="">Fashion</a></li>
+                    <li class="sub_navigation__list-1-link"><a href="">Mobile Phones</a></li>
+                    <li class="sub_navigation__list-1-link"><a href="">Prime</a></li>
+                    <li class="sub_navigation__list-1-link"><a href="">Electronics</a></li>
+                    <li class="sub_navigation__list-1-link"><a href="">Grocery</a></li>
+                    <li class="sub_navigation__list-1-link"><a href="">Home</a></li>
+
+                </ul>
+            </div>
+        </div>
+        </nav>
+    </header>
