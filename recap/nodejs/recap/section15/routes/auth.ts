@@ -15,6 +15,13 @@ authRouter.post("/logout", authController.postLogout);
 authRouter.get('/signup', authController.getSignUp);
 authRouter.post('/signup', authController.postSignUp);
 
+//10.2
+authRouter.get("/reset", authController.getReset);
+authRouter.post("/reset", authController.postReset);
+
+//10.2
+authRouter.get("/reset/:token", authController.getNewPassword);
+authRouter.post("/new-password/", authController.postNewPassword);
 
 
 

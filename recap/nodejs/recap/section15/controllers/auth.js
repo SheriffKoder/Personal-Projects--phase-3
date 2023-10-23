@@ -44,10 +44,10 @@ exports.postLogin = (req, res, next) => {
     //9.1 cookie set
     // res.setHeader("Set-Cookie", "isLoggedIn=True");
     // res.redirect("/products");
-    // const loginEmailOrPhone: string = req.body.loginEmailOrPhone;
-    // const loginPassword = req.body.loginPassword;
-    const loginEmailOrPhone = "test@test.com";
-    const loginPassword = "12121212";
+    const loginEmailOrPhone = req.body.loginEmailOrPhone;
+    const loginPassword = req.body.loginPassword;
+    // const loginEmailOrPhone = "test@test.com"
+    // const loginPassword = "12121212";
     //check loginEmailOrPhone
     //find a not a number
     const isEmail = loginEmailOrPhone.split("").filter((p) => {
@@ -191,5 +191,124 @@ exports.postSignUp = (req, res, next) => {
     })
         .catch((err) => {
         console.log("user login err: " + err);
+    });
+};
+//10.2
+exports.getReset = (req, res, next) => {
+    res.render("auth/reset", {
+        myTitle: "Reset your password",
+    });
+};
+//give a random and unique token for this iteration
+//save token to user
+//send token with the email url
+exports.postReset = (req, res, next) => {
+    console.log("Reset submitted");
+    crypto.randomBytes(32, (err, buffer) => {
+        if (err) {
+            console.log(err);
+            return res.redirect("/reset");
+        }
+        const token = buffer.toString("hex");
+        user_1.UserClassModel.findOne({ email: req.body.email })
+            .then((user) => {
+            //give random token to user
+            if (user) {
+                console.log("reset user found with email");
+                user.resetToken = token;
+                //+1 hour from now
+                user.resetTokenExpiration = Date.now() + 360000;
+                return user.save();
+            }
+        })
+            .then(() => {
+            res.redirect("/");
+            console.log("sending mail");
+            const mailOptions = {
+                from: "kodersheriff@gmail.com",
+                to: "kodersheriff@gmail.com",
+                subject: "(TEST) NODE AMZ: Password Reset!",
+                html: `
+                    <p> You requested a password reset </p>
+                    <a href="http://localhost:3000/reset/${token}"> Reset your password link </a>
+                    `
+            };
+            //Send the email
+            return transporter.sendMail(mailOptions, (error, info) => {
+                if (error) {
+                    console.log("Email Error: ", error);
+                }
+                else {
+                    console.log("Email sent: ", info.response);
+                }
+            });
+        })
+            .catch((err) => {
+            console.log(err);
+        });
+    });
+};
+//= (req: Request, res: Response, next: NextFunction) =>
+//the token in the url will get the user to new-password page
+//a user can access /reset url is from the link
+//find a user with this token and still a valid expiry
+//if so view the reset page 
+//with passed userId/token - used when posting to find this user
+exports.getNewPassword = (req, res, next) => {
+    const token = req.params.token;
+    //$gt special sign operator stands for greater than
+    //find a user with expiration time space still greater than Date.now()
+    console.log("getting new password page");
+    user_1.UserClassModel.findOne({ resetToken: token })
+        .then((user) => {
+        if (user) {
+            console.log("user requesting password change found");
+            res.render("auth/new-password", {
+                myTitle: "Reset Password",
+                userId: user._id.toString(),
+                passwordToken: token
+            });
+        }
+        else {
+            console.log("user requesting password change not found");
+        }
+    })
+        .catch((err) => {
+        console.log(err);
+    });
+};
+//find user with token, expiration and id
+//if found, hash the new req.body.password
+//save into user variable and save
+exports.postNewPassword = (req, res, next) => {
+    const newPassword = req.body.password;
+    const userId = req.body.userId;
+    const passwordToken = req.body.passwordToken;
+    let resetUser;
+    user_1.UserClassModel.findOne({
+        resetToken: passwordToken,
+        // resetTokenExpiration: {$gt: Date.now()},
+        _id: userId
+    })
+        .then((user) => {
+        if (user) {
+            resetUser = user;
+            return bcrypt.hash(newPassword, 12);
+        }
+    })
+        .then((hashedPassword) => {
+        console.log("hashed password: " + hashedPassword);
+        resetUser.pass = hashedPassword;
+        resetUser.resetToken = "";
+        resetUser.resetTokenExpiration = Date.now();
+        return resetUser.save();
+    })
+        .then(() => {
+        console.log("password has been reset");
+        //send mail
+        res.redirect("/login");
+    })
+        .catch((err) => {
+        console.log(err);
     });
 };
