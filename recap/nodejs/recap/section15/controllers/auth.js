@@ -3,7 +3,21 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const user_1 = require("../models/user");
 //10
 const bcrypt = require("bcryptjs");
+// (req: Request, res: Response, next: NextFunction) => {
+//10.1
+//build in library, creating secure/unique random values
 const crypto = require("crypto");
+const nodemailer = require("nodemailer");
+// create a transporter using your STMP credentials
+const transporter = nodemailer.createTransport({
+    host: process.env.EmailHost,
+    port: process.env.EmailPort,
+    secure: false,
+    auth: {
+        user: process.env.EmailUser,
+        pass: process.env.EmailPass
+    }
+});
 exports.getLogin = (req, res, next) => {
     console.log("user is " + req.session.user);
     console.log("getLogin");
@@ -24,9 +38,6 @@ exports.getLogin = (req, res, next) => {
         // isAuthenticated: req.session.isLoggedIn //sessions //9.2
         errorMessage: errorMessage
     });
-};
-exports.trialLogin = () => {
-    console.log("trial");
 };
 exports.postLogin = (req, res, next) => {
     console.log("postLogin");
@@ -124,5 +135,61 @@ exports.postLogout = (req, res, next) => {
     req.session.destroy((err) => {
         console.log(err);
         res.redirect("/products");
+    });
+};
+//10.2
+exports.getSignUp = (req, res, next) => {
+    res.render("auth/login", {
+        myTitle: "Login to Amazon",
+    });
+};
+exports.postSignUp = (req, res, next) => {
+    const signUpFullName = req.body.signUpFullName;
+    const signUpEmail = req.body.signUpEmail;
+    const signUpPhoneNumber = req.body.signUpPhoneNumber;
+    const signUpPassword = req.body.signUpPassword;
+    user_1.UserClassModel.findOne({ email: signUpEmail })
+        .then((user) => {
+        if (user) {
+            req.flash("error", "Email already exists, please choose a different email");
+            return res.redirect("/login");
+        }
+        //if no user, create user
+        return bcrypt.hash(signUpPassword, 12)
+            .then((hashedPassword) => {
+            const user = new user_1.UserClassModel({
+                name: signUpFullName,
+                email: signUpEmail,
+                phone: signUpPhoneNumber,
+                pass: hashedPassword,
+                cart: { items: [] },
+            });
+            return user.save();
+        })
+            .then(() => {
+            console.log("user created, now sending email");
+            res.redirect("/login");
+            const mailOptions = {
+                from: process.env.MyEmail,
+                to: process.env.MyEmail,
+                subject: "AMZ sign-up Email",
+                html: `<h1>Hello ${signUpFullName} and Welcome to Amazon, your account has been created!</h1>`
+            };
+            //Send the email
+            return transporter.sendMail(mailOptions, (error, info) => {
+                if (error) {
+                    console.log("Email Error: ", error);
+                }
+                else {
+                    console.log("Email sent: ", info.response);
+                }
+            });
+        })
+            .catch((err) => {
+            console.log("transporter returns: " + err);
+        });
+    })
+        .catch((err) => {
+        console.log("user login err: " + err);
     });
 };

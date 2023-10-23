@@ -193,7 +193,7 @@ $ (function() {
     const invalid_tel_message_signup = $(".signup__telephone--field--message");
 
     //// Disable the verify-mobile-number button
-    signup_button.prop("disabled", true);
+    signup_button.prop("disabled", false);
 
     //// variables will be used, if all of them are true, then all inputs are valid
     //// so can enable the button and activate the form

@@ -22,11 +22,11 @@ const userSchema = new mongoose_1.Schema({
     },
     seller: {
         type: Boolean,
-        required: true
+        required: false
     },
     UserRating: {
         type: Number,
-        required: true
+        required: false
     },
     //cart contains items, each item has a productId and quantity definitions
     cart: {
@@ -36,6 +36,15 @@ const userSchema = new mongoose_1.Schema({
                 quantity: { type: Number, required: true }
             }
         ]
+    },
+    //10.2
+    resetToken: {
+        type: String,
+        required: false,
+    },
+    resetTokenExpiration: {
+        type: Number,
+        required: false,
     }
 });
 //7.a

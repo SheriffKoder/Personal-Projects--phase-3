@@ -28,16 +28,27 @@
                         </label>
                         
                         <div class="main__login__container__fields-container--signup--content" id="signup_content">
-                            <form class="main__signup__container__fields-container--signup--form" id="signup_content" aria-label="Sign up">
+                            <form action="/signup" method="POST" class="main__signup__container__fields-container--signup--form" id="signup_content" aria-label="Sign up">
                                 
                                 <span class="signup__input-field">
                                     <span class="signup--label-wrapper">
                                         <label for="signup__name--field" class="signup__name-label">
                                             <h2>First and last name</h2>
                                         </label>
+                                        <!-- <span class="signup__email--field--message" aria-live="polite"></span> -->
+                                    </span>
+                                <input type="text" name="signUpFullName" class="signup__name--field" id="signup__name--field" aria-label="required, enter your first and last name" required>
+                                </span>
+
+
+                                <span class="signup__input-field">
+                                    <span class="signup--label-wrapper">
+                                        <label for="signup__name--field" class="signup__name-label">
+                                            <h2>Your email</h2>
+                                        </label>
                                         <span class="signup__email--field--message" aria-live="polite"></span>
                                     </span>
-                                <input type="text" class="signup__name--field" id="signup__name--field" aria-label="required, enter an email address in a valid form" required>
+                                <input type="text" name="signUpEmail" class="signup__name--field" id="signup__name--field" aria-label="required, enter an email address in a valid form" required>
                                 </span>
 
                                 <span class="signup__telephone__content">
@@ -49,7 +60,7 @@
                                     </span>
     
                                     <select class="signup__telephone--region" aria-label="country telephone number first two digits selection"><option>EG +20</option></select>
-                                    <input type="tel" id="signup__telephone--input" aria-label="required, enter an 11 digit telephone number" required>
+                                    <input type="tel" name="signUpPhoneNumber" id="signup__telephone--input" aria-label="required, enter an 11 digit telephone number" required>
                                 </span>
 
                                 <span class="signup__input-field">
@@ -60,8 +71,8 @@
                                         <span class="signup__password--field--message" aria-live="polite"></span>
                                     </span>
 
-                                <input type="password" class="signup__password--field" id="signup__password--field" aria-label="required, enter a password not less than 8 characters, may be letters, numbers or symbols" required>
-                                <p class="signup__password--notify" aria-hidden="true" ><em>i</em> Passwords must be at least 8 characters</p>
+                                    <input type="password" name="signUpPassword" class="signup__password--field" id="signup__password--field" aria-label="required, enter a password not less than 8 characters, may be letters, numbers or symbols" required>
+                                    <p class="signup__password--notify" aria-hidden="true" ><em>i</em> Passwords must be at least 8 characters</p>
                                 </span>
 
                                 <p class="signup--notice" >
@@ -69,6 +80,7 @@
                                     with a temporary code. Message and data rates may apply.
                                 </p>
 
+                                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                                 <button type="submit" class="signup__verify-button" id="signup__verify-button" aria-label="this button is available only in case all inputs are valid">Verify mobile number</button>
 
                                 <p class="signup__agreement">
@@ -162,7 +174,7 @@
                                         </label>
                                         </div>
                                         <div class="login__password--options-side2">
-                                            <a href="" class="login__password--forgot-link" aria-label="click here if you forgot your password and want to reset">Forgot password?</a>
+                                            <a href="/reset" class="login__password--forgot-link" aria-label="click here if you forgot your password and want to reset">Forgot password?</a>
                                         </div>
                                     </div>
                                         <!-- //10 -->

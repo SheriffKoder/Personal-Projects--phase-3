@@ -29,6 +29,8 @@ interface IUser {
     addToCart: (product: IProduct, requestedCount: number, increaseQtyAction: boolean, changeQtyAction: boolean) => Promise<IUser>;
     removeFromCart: (productId: string) => Promise<IUser>;
     clearCart: () => Promise<IUser>;
+    resetToken: string;
+    resetTokenExpiration: number;
 
 }
 
@@ -62,11 +64,11 @@ const userSchema = new Schema<IUser>({
     },
     seller: {                   //true or false
         type: Boolean,
-        required: true
+        required: false
     },
     UserRating: {
         type: Number,
-        required: true
+        required: false
     },
     //cart contains items, each item has a productId and quantity definitions
     cart: {
@@ -76,7 +78,18 @@ const userSchema = new Schema<IUser>({
                 quantity: {type: Number, required: true}
             }
         ]
+    },
+
+    //10.2
+    resetToken: {
+        type: String,
+        required: false,
+    },
+    resetTokenExpiration: {
+        type: Number,
+        required: false,
     }
+
     
 });
 
