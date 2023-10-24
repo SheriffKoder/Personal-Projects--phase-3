@@ -31,6 +31,7 @@ interface IUser {
     clearCart: () => Promise<IUser>;
     resetToken: string;
     resetTokenExpiration: number;
+    country: string;
 
 }
 
@@ -64,7 +65,7 @@ const userSchema = new Schema<IUser>({
     },
     seller: {                   //true or false
         type: Boolean,
-        required: false
+        required: true
     },
     UserRating: {
         type: Number,
@@ -88,6 +89,10 @@ const userSchema = new Schema<IUser>({
     resetTokenExpiration: {
         type: Number,
         required: false,
+    },
+    country: {
+        type: String,
+        required: true,
     }
 
     

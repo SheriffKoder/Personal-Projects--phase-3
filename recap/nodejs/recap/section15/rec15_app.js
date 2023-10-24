@@ -204,99 +204,25 @@ mongoose.connect(process.env.MongoDbUri)
 
 //User authentication
 
-//10.1
+//10.2
 
 //password resetting mechanism
-confirmation email
+//confirmation email
 
-
-
-> import nodemailer and the mailchimp transporter in the auth controller
-> create transporter
-> transporter.sendMail before postSignIn redirection
-
-AWS
-
-//reset from our reset button (check the reset.ejs)
-add a link with href="/reset" in the login ejs
-reset controller,
-
-create a unique token with an expiry date stored in the database
-the link will include that token so we can verify that
-the user received the link from us
-password is changed only through links containing that token
-
-//postReset
-import the nodejs crypto lib
-convert to string
->> in the user model add resetToken, resetTokenExpiration of type Date
-store that token on the user we wish to reset
-then send email with that token embedded in a link
-
->> now when we press the reset, we will receive a token
-in the reset link in the email and in the database's user
-
-//password form
-new-password.ejs
-auth controller, getNewPassword
-
-url param token is taken
-find user with that token and date
-
-will be redirected to /reset through the email
-getNewPassword router will be /reset/token
-
-postNewPassword controller in auth.js
-
-
-~ app.js is clear, start from auth.js down
-~ will need to make a reset password page
-
-
-
-
-
-
-//////nodemailer in auth.js
-////auth.js controller and router
-////signup
-//get and post reset password
-//get and post new password
-
-
-- auto signup page not login on signup
-- add a seller option
-- work on the verify button disabliliy, the fullname ejs needs work
-- work later on SMS confirm
-- flash email exists
+= auto signup container on signup redirect not login on signup
+   = also need a proper regex for email
+= signup link new to amazon
+= replicate email field style to email
+= add user.seller=true when adding a product "admin.js and false on initial user creation"
+= add user country code to phone and country
+= work on the verify button disabliliy, the fullname ejs needs work
+- work later on SMS confirm sign-up/reset (later)
+= flash email exists on signup/login, incorrect,
+= flash password incorrect
+- work on date.now in the controllers
 
 - reset password page
 - reset link page
-
-
-
-//10.2
-
-in auth.js controller
-import crypto, install and import nodemailer
-define transporter
-work on the getSignUp and postSignUp controllers
-add to routes
-
-
-reset
-get => view the page
-post => generate crypto token and save to user with expiry, send token with email url that leads /reset
-
-new-password
-get => find a user with this token and still valid expiry and pass to the ejs
-post => find the user again with token, valid expiry, id - save user with new input password
-
-
-
-
-
-
 
 
 

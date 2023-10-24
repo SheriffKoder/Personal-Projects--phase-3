@@ -289,6 +289,20 @@ mongoose.connect(process.env.MongoDbUri)
 //password resetting mechanism
 //confirmation email
 
+= auto signup container on signup redirect not login on signup
+   = also need a proper regex for email
+= signup link new to amazon
+= replicate email field style to email
+= add user.seller=true when adding a product "admin.js and false on initial user creation"
+= add user country code to phone and country
+= work on the verify button disabliliy, the fullname ejs needs work
+- work later on SMS confirm sign-up/reset (later)
+= flash email exists on signup/login, incorrect,
+= flash password incorrect
+- work on date.now in the controllers
+
+- reset password page
+- reset link page
 
 
 

@@ -3,6 +3,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 // const ProductClassModel = require("../models/product.js");
 const product_1 = require("../models/product");
+const user_1 = require("../models/user");
 exports.getAddProduct = (req, res, next) => {
     res.render("admin/edit-product", {
         myTitle: "Add a Product",
@@ -89,6 +90,16 @@ exports.postAddProduct = (req, res, next) => {
         .then((result) => {
         console.log("product created");
         // console.log("result");
+        user_1.UserClassModel.findById(req.user._id)
+            .then(user => {
+            if (user) {
+                user.seller = true;
+                return user.save();
+            }
+        });
+    })
+        .then(() => {
+        console.log("user is now a seller");
         res.redirect("/admin/products");
     })
         .catch((err) => {

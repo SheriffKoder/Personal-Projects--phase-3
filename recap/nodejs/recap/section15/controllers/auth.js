@@ -30,14 +30,24 @@ exports.getLogin = (req, res, next) => {
     else {
         errorMessage = null;
     }
-    res.render("auth/login", {
-        path: "/login",
-        myTitle: "Login to your account",
-        user: req.session.user,
-        // isAuthenticated: req.isLoggedIn  //cookies //9.1
-        // isAuthenticated: req.session.isLoggedIn //sessions //9.2
-        errorMessage: errorMessage
-    });
+    if (req.user) {
+        res.status(403).render("404", {
+            myTitle: "404 Page",
+            path: "/404",
+            text: "You are already logged in"
+        });
+    }
+    else {
+        res.render("auth/login", {
+            path: "/login",
+            myTitle: "Login to your account",
+            user: req.session.user,
+            // isAuthenticated: req.isLoggedIn  //cookies //9.1
+            // isAuthenticated: req.session.isLoggedIn //sessions //9.2
+            errorMessage: errorMessage,
+            isLogin: true,
+        });
+    }
 };
 exports.postLogin = (req, res, next) => {
     console.log("postLogin");
@@ -59,7 +69,7 @@ exports.postLogin = (req, res, next) => {
         //9.2 sessions
         //this is the code from app.js
         // UserClassModel.findById("652725974ad26fc2ae8f8433")
-        user_1.UserClassModel.findOne({ email: loginEmailOrPhone })
+        user_1.UserClassModel.findOne({ email: loginEmailOrPhone.toLowerCase() })
             .then((user) => {
             console.log("found email for user");
             if (user) {
@@ -78,10 +88,12 @@ exports.postLogin = (req, res, next) => {
                             res.redirect("/products");
                         });
                     }
-                    //if not match
-                    console.log("password did not match");
-                    req.flash("error", "This email is not associated with an account, please enter a valid email");
-                    res.redirect("/login");
+                    else if (!doMatch) {
+                        //if not match
+                        console.log("password did not match");
+                        req.flash("error", "incorrect password");
+                        res.redirect("/login");
+                    }
                 });
             }
             else if (!user) {
@@ -113,15 +125,18 @@ exports.postLogin = (req, res, next) => {
                             res.redirect("/products");
                         });
                     }
-                    //if not match
-                    req.flash("error", "This phone number is not associated with an account, please enter a valid phone number");
-                    res.redirect("/login");
+                    else if (!doMatch) {
+                        //if not match
+                        console.log("password did not match");
+                        req.flash("error", " incorrect password");
+                        res.redirect("/login");
+                    }
                 });
             }
             else if (!user) {
                 //user not found
                 console.log("not found phone for user");
-                req.flash("error", "This phone number is not associated with an account, please enter a valid phone number");
+                req.flash("error", "This phone number is not associated with an account, please enter a correct account's phone number");
                 res.redirect("/login");
             }
         })
@@ -139,29 +154,57 @@ exports.postLogout = (req, res, next) => {
 };
 //10.2
 exports.getSignUp = (req, res, next) => {
-    res.render("auth/login", {
-        myTitle: "Login to Amazon",
-    });
+    let errorMessage;
+    let message = req.flash("error");
+    if (message[0] !== "") {
+        errorMessage = message[0];
+    }
+    else {
+        errorMessage = null;
+    }
+    if (req.user) {
+        res.status(403).render("404", {
+            myTitle: "404 Page",
+            path: "/404",
+            text: "You are already logged in, please logout to create another account"
+        });
+    }
+    else {
+        res.render("auth/login", {
+            myTitle: "Login to Amazon",
+            isLogin: false,
+            errorMessage: errorMessage,
+        });
+    }
 };
 exports.postSignUp = (req, res, next) => {
     const signUpFullName = req.body.signUpFullName;
     const signUpEmail = req.body.signUpEmail;
     const signUpPhoneNumber = req.body.signUpPhoneNumber;
     const signUpPassword = req.body.signUpPassword;
+    const countryCode = req.body.countryCode;
+    console.log(countryCode);
+    const userCountry = countryCode.split(" ")[0].trim();
+    const userCountryCode = Number(countryCode.split(" ")[1].substring(1).trim());
+    console.log("userCountry : ", userCountry);
+    console.log("userCountryCode : ", userCountryCode);
     user_1.UserClassModel.findOne({ email: signUpEmail })
         .then((user) => {
         if (user) {
             req.flash("error", "Email already exists, please choose a different email");
-            return res.redirect("/login");
+            console.log("this email is already associated with another account");
+            return res.redirect("/signup");
         }
         //if no user, create user
         return bcrypt.hash(signUpPassword, 12)
             .then((hashedPassword) => {
             const user = new user_1.UserClassModel({
                 name: signUpFullName,
-                email: signUpEmail,
-                phone: signUpPhoneNumber,
+                email: signUpEmail.toLowerCase(),
+                phone: userCountryCode + "" + signUpPhoneNumber,
                 pass: hashedPassword,
+                country: userCountry,
+                seller: false,
                 cart: { items: [] },
             });
             return user.save();
@@ -169,21 +212,20 @@ exports.postSignUp = (req, res, next) => {
             .then(() => {
             console.log("user created, now sending email");
             res.redirect("/login");
-            const mailOptions = {
-                from: process.env.MyEmail,
-                to: process.env.MyEmail,
-                subject: "AMZ sign-up Email",
-                html: `<h1>Hello ${signUpFullName} and Welcome to Amazon, your account has been created!</h1>`
-            };
-            //Send the email
-            return transporter.sendMail(mailOptions, (error, info) => {
-                if (error) {
-                    console.log("Email Error: ", error);
-                }
-                else {
-                    console.log("Email sent: ", info.response);
-                }
-            });
+            // const mailOptions = {
+            //     from: process.env.MyEmail,
+            //     to: process.env.MyEmail,
+            //     subject: "AMZ sign-up Email",
+            //     html: `<h1>Hello ${signUpFullName} and Welcome to Amazon, your account has been created!</h1>`
+            // };
+            // //Send the email
+            // return transporter.sendMail(mailOptions, (error: any, info: any) => {
+            //     if (error) {
+            //         console.log("Email Error: ", error);
+            //     } else {
+            //         console.log("Email sent: ", info.response);
+            //     }
+            // });
         })
             .catch((err) => {
             console.log("transporter returns: " + err);
@@ -217,7 +259,7 @@ exports.postReset = (req, res, next) => {
                 console.log("reset user found with email");
                 user.resetToken = token;
                 //+1 hour from now
-                user.resetTokenExpiration = Date.now() + 360000;
+                user.resetTokenExpiration = Date.now() + 90000;
                 return user.save();
             }
         })
@@ -230,7 +272,8 @@ exports.postReset = (req, res, next) => {
                 subject: "(TEST) NODE AMZ: Password Reset!",
                 html: `
                     <p> You requested a password reset </p>
-                    <a href="http://localhost:3000/reset/${token}"> Reset your password link </a>
+                    <p> The link below can be used to change the password, valid for 15 minutes </p>
+                    <a href="http://localhost:3000/reset/${token}"> Change Password </a>
                     `
             };
             //Send the email
@@ -271,6 +314,10 @@ exports.getNewPassword = (req, res, next) => {
         }
         else {
             console.log("user requesting password change not found");
+            res.status(403).render("404", {
+                myTitle: "Reset Password",
+                text: "This link is not usable. Please request a new password change link"
+            });
         }
     })
         .catch((err) => {
@@ -292,8 +339,16 @@ exports.postNewPassword = (req, res, next) => {
     })
         .then((user) => {
         if (user) {
-            resetUser = user;
-            return bcrypt.hash(newPassword, 12);
+            if (user.resetTokenExpiration >= Date.now()) {
+                resetUser = user;
+                return bcrypt.hash(newPassword, 12);
+            }
+            else if (user.resetTokenExpiration < Date.now()) {
+                res.status(403).render("404", {
+                    myTitle: "Reset Password",
+                    text: "The reset Link has been expired, Please request another reset email with a new link"
+                });
+            }
         }
     })
         .then((hashedPassword) => {

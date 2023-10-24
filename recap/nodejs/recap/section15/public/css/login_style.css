@@ -66,8 +66,10 @@ input[type="checkbox"], input[type="radio"] {
     display: none;
 }
 
+/*hideSignUp*/
 .main__login__container__fields-container--signup {
-    background-color: var(--sort-button-grey);
+    /* background-color: var(--sort-button-grey); */
+    /* background-color: white; */
 
 }
 
@@ -78,9 +80,6 @@ input[type="checkbox"], input[type="radio"] {
 /*///////////////////////////////////////////////////////////////*/
 
 
-.main__login__container__fields-container--login {
-
-}
 
 .login__header, .signup__header {
     margin-left: 0.5rem;
@@ -101,12 +100,12 @@ input[type="checkbox"], input[type="radio"] {
 }
 
 
-.login__email--label h2, .signup__name-label h2, .signup__telephone-label h2, .signup__password-label h2 {
+.login__email--label h2, .signup__email-label h2,.signup__name-label h2, .signup__telephone-label h2, .signup__password-label h2 {
     margin-left: 0.5rem;
     font-size: 1rem;
 }
 
-#login__email--field, #signup__name--field, #signup__password--field, #signup__telephone--input {
+#login__email--field, #signup__name--field, #signup__email--field, #signup__password--field, #signup__telephone--input {
     padding: 0.75rem;
     border: 1px solid rgb(190,190,190,0.9);
     border-radius: 3px;
@@ -169,6 +168,7 @@ input[type="checkbox"], input[type="radio"] {
 
 .login__password--container--wrapper {
     display: none;
+    width: 100%;
 
 }
 
@@ -231,6 +231,9 @@ input[type="checkbox"], input[type="radio"] {
     padding-left: 0.5rem;
 }
 
+/* .login__password--current-phone--number {
+    width: auto;
+} */
 
 .login__password--current-phone--change {
     color: var(--product-rating-blue);
@@ -246,11 +249,28 @@ input[type="checkbox"], input[type="radio"] {
 /*///////////////////////////////////////////////////////////////*/
 
 
-.main__login__container__fields-container--signup--content {
+/* .main__login__container__fields-container--signup--content  */
+.hideForm {
     display: none;
     height: auto;
 
 }
+/* .main__login__container__fields-container--signup--content, */
+.showForm {
+    display: flex;
+    height: auto;
+
+}
+
+.greyBG {
+    background-color: var(--sort-button-grey);
+}
+
+.whiteBG {
+    background-color: white;
+}
+
+
 
 .main__signup__container__fields-container--signup--form {
 
@@ -316,7 +336,7 @@ input[type="checkbox"], input[type="radio"] {
 
 
 .login__email--field--message, .login__password--field--message, 
-.signup__email--field--message, .signup__telephone--field--message, .signup__password--field--message {
+.signup__name--field--message, .signup__email--field--message, .signup__telephone--field--message, .signup__password--field--message {
     height: 15px;
     color: var(--footer-text-grey3);
     font-size: 0.9rem;
@@ -340,12 +360,13 @@ input[type="checkbox"], input[type="radio"] {
 
 
 
-.signup__telephone--field--message, .signup__email--field--message, .signup__password--field--message {
+.signup__telephone--field--message, .signup__name--field--message, .signup__email--field--message, .signup__password--field--message {
 
     top: 2.4rem;
     right: 0.5rem;
     -webkit-transform: translate(0%,-9%);
     -moz-transform: translate(0%,25%);
+    transform: translate(0%, -9%);
 
 }
 

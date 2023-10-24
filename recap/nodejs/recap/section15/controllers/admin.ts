@@ -5,6 +5,7 @@
 import { ProductClassModel } from '../models/product';
 import { IUserWithMethods } from '../models/user';
 import {Request, Response, NextFunction} from 'express';
+import { IUser, UserClassModel } from '../models/user';
 
 //to use req.user and isLoggedIn
 interface Request_With_reqUser extends Request {
@@ -133,8 +134,18 @@ exports.postAddProduct = (req: Request_With_reqUser, res: Response, next: NextFu
     .then((result: Object) => {
         console.log("product created");
         // console.log("result");
-        res.redirect("/admin/products");
 
+        UserClassModel.findById(req.user._id)
+        .then(user => {
+            if (user) {
+                user.seller = true;
+                return user.save();
+            }
+        })
+    })
+    .then(() => {
+        console.log("user is now a seller");
+        res.redirect("/admin/products");
     })
     .catch((err) => {
         console.log(err);

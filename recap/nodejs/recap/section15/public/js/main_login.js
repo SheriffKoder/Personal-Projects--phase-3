@@ -88,13 +88,19 @@ $ (function() {
     const signIn_button = $("#login__password--login-link");
 
     const patterns = {
-        telephone: /^\d{11}$/ ,         // only, 11 digits
+        telephone: /^\d{12}$/ ,         // only, 10 digits
         password: /^[\w@-]{8,20}$/,     //the pattern is repeated, looking for (a-z A-Z also 0-9 and _)or @ or -
-        email: /^([a-z\d\.-]+)@([a-z\d-]+)\.([a-z]{2,8})\.?([a-z]{2,8})?$/               //also dots \.
+        email: /^([a-zA-Z\d\.-\_]+)@([a-zA-Z\d-]+)\.([a-z]{2,8})\.?([a-z]{2,8})?$/,               //also dots \.
                // domain with . - .. @ .. domain .. dot .. com ..  .uk(optional)
+        name: /^([a-zA-Z]{3,15})\s([a-zA-Z]{3,15})\s?([a-zA-Z]{3,15})?$/
     };
 
     //// validation functions to be used in the mouseleave events
+    function validName(input) {
+        var regex = patterns["name"];
+        return regex.test(input);
+    }
+
     function validEmail(input) {
         var regex = patterns["email"];
         return regex.test(input);
@@ -129,7 +135,7 @@ $ (function() {
 
             
         } else if(!validEmail(input) && !validPhone(input)) {
-            invalid_email_message.text("the email should be in a valid format or an 11 digit phone number");
+            invalid_email_message.text("the email should be in a valid format or a phone number of country code+10 digits");
             login_email_continue_button.prop("disabled", true);
             $(this).css("border", "1px solid red");
 
@@ -160,7 +166,7 @@ $ (function() {
     password_input.on("blur keyup", function (e) {
 
         if(!validPassword($(this).val())) {
-            invalid_password_message.text("incorrect password");
+            invalid_password_message.text("password should be from 8-20 characters");
             $(this).css({"border": "1px solid red;"});
             signIn_button.prop("disabled", true);
             signIn_button.on("click", function (e) {
@@ -184,20 +190,23 @@ $ (function() {
     ////////////////////////////////////////////////////////////////////////
 
     const signup_name = $(".signup__name--field");
+    const signup_email = $(".signup__email--field");
     const signup_tel = $("#signup__telephone--input");
     const signup_password = $(".signup__password--field");
     const signup_button = $("#signup__verify-button")
     const form = $(".main__signup__container__fields-container--signup--form");
+    const invalid_name_message_signup = $(".signup__name--field--message");
     const invalid_email_message_signup = $(".signup__email--field--message");
     const invalid_password_message_signup = $(".signup__password--field--message");
     const invalid_tel_message_signup = $(".signup__telephone--field--message");
 
     //// Disable the verify-mobile-number button
-    signup_button.prop("disabled", false);
+    signup_button.prop("disabled", true);
 
     //// variables will be used, if all of them are true, then all inputs are valid
     //// so can enable the button and activate the form
     let passName;
+    let passEmail;
     let passTel;
     let passPassword;
 
@@ -205,7 +214,7 @@ $ (function() {
     //// these functions will be called in the suitable response
     //// add the button disable/enable line as it is used multiple times
     function enable_button_form() {
-        if (passName && passTel && passPassword) {
+        if (passName && passEmail && passTel && passPassword) {
             signup_button.prop("disabled", false);
             form.off(); //activate form, remove all events on the form, i.e the form.on(submit) that preventDefault
         }
@@ -223,21 +232,34 @@ $ (function() {
     //// the valid icon requires a normal text and positioning to be displayed as needed
     //// so will manually adjust to italic again and remove positioning
     //// if valid will store a value to be used when checking on all three values together to activate the button and form
-    signup_name.on("blur keyup", function () {
+    signup_email.on("blur keyup", function () {
         if (!validEmail($(this).val())) {
             invalid_email_message_signup.css({"font-style": "italic", "position": "static"}).text("the email should be in a valid format*");
             disable_button_form($(this));
         } else {
             $(this).css("border", "1px solid green");
             invalid_email_message_signup.css({"font-style": "normal", position: "relative"}).html("&#x2705;");
+            passEmail = true;
+            enable_button_form();
+        }
+    });
+
+    signup_name.on("blur keyup", function () {
+        if (!validName($(this).val())) {
+            invalid_name_message_signup.css({"font-style": "italic", "position": "static"}).text("full name should consist of two or three separated names each more than 3 alphabetic characters*");
+            disable_button_form($(this));
+        } else {
+            $(this).css("border", "1px solid green");
+            invalid_name_message_signup.css({"font-style": "normal", position: "relative"}).html("&#x2705;");
             passName = true;
             enable_button_form();
         }
     });
 
+
     signup_tel.on("blur keyup", function () {
         if (!validPhone($(this).val())) {
-            invalid_tel_message_signup.css({"font-style": "italic", "position": "static"}).text("the phone number entered is not 11 digits*")
+            invalid_tel_message_signup.css({"font-style": "italic", "position": "static"}).text("the phone number should be the country code+10 digits*")
             disable_button_form($(this));
         } else {
             invalid_tel_message_signup.css({"font-style": "normal", position: "relative"}).html("&#x2705;");

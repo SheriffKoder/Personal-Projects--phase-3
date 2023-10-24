@@ -22,7 +22,7 @@ const userSchema = new mongoose_1.Schema({
     },
     seller: {
         type: Boolean,
-        required: false
+        required: true
     },
     UserRating: {
         type: Number,
@@ -45,6 +45,10 @@ const userSchema = new mongoose_1.Schema({
     resetTokenExpiration: {
         type: Number,
         required: false,
+    },
+    country: {
+        type: String,
+        required: true,
     }
 });
 //7.a

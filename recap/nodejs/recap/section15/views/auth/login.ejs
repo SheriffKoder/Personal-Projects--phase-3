@@ -21,13 +21,13 @@
                     <div class="main__login__container__fields-container--signup" id="signup_container">
                         
                         
-                        <label for="radio_signup" class="main__login__container__fields-container--signup--label"> 
-                            <input type="radio" class="main__login__container__fields-container--signup--selection" id="radio_signup" name="log_user_select">
+                        <label for="radio_signup" class="main__login__container__fields-container--signup--label <%=(isLogin===true) ? 'greyBG' : 'whiteBG'%>"> 
+                            <input type="radio" class="main__login__container__fields-container--signup--selection" id="radio_signup" name="log_user_select" <% if (isLogin === true) { %> "" <%} else { %> checked <%}%> >
                             <span class="signup__header">Create account. <span class="signup__header2">New to Amazon?</span></span>
 
                         </label>
                         
-                        <div class="main__login__container__fields-container--signup--content" id="signup_content">
+                        <div class="main__login__container__fields-container--signup--content  <%=(isLogin===true) ? 'hideForm' : 'showForm'%>" id="signup_content">
                             <form action="/signup" method="POST" class="main__signup__container__fields-container--signup--form" id="signup_content" aria-label="Sign up">
                                 
                                 <span class="signup__input-field">
@@ -35,20 +35,20 @@
                                         <label for="signup__name--field" class="signup__name-label">
                                             <h2>First and last name</h2>
                                         </label>
-                                        <!-- <span class="signup__email--field--message" aria-live="polite"></span> -->
+                                        <span class="signup__name--field--message" aria-live="polite"></span>
                                     </span>
-                                <input type="text" name="signUpFullName" class="signup__name--field" aria-label="required, enter your first and last name" required>
+                                <input type="text" name="signUpFullName" id="signup__name--field" class="signup__name--field" aria-label="required, enter your first and last name" required>
                                 </span>
 
 
                                 <span class="signup__input-field">
                                     <span class="signup--label-wrapper">
-                                        <label for="signup__name--field" class="signup__name-label">
+                                        <label for="signup__email--field" class="signup__email-label">
                                             <h2>Your email</h2>
                                         </label>
-                                        <span class="signup__email--field--message" aria-live="polite"></span>
+                                        <span class="signup__email--field--message" aria-live="polite"><%=errorMessage%></span>
                                     </span>
-                                <input type="text" name="signUpEmail" class="signup__name--field" id="signup__name--field" aria-label="required, enter an email address in a valid form" required>
+                                <input type="text" name="signUpEmail" id="signup__email--field" class="signup__email--field"aria-label="required, enter an email address in a valid form" required>
                                 </span>
 
                                 <span class="signup__telephone__content">
@@ -59,7 +59,7 @@
                                         <span class="signup__telephone--field--message" aria-live="polite"></span>
                                     </span>
     
-                                    <select class="signup__telephone--region" aria-label="country telephone number first two digits selection"><option>EG +20</option></select>
+                                    <select class="signup__telephone--region" aria-label="country telephone number first two digits selection" name="countryCode"><option>EG +20</option></select>
                                     <input type="tel" name="signUpPhoneNumber" id="signup__telephone--input" aria-label="required, enter an 11 digit telephone number" required>
                                 </span>
 
@@ -81,7 +81,7 @@
                                 </p>
 
                                 <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-                                <button type="submit" class="signup__verify-button" id="signup__verify-button" aria-label="this button is available only in case all inputs are valid">Verify mobile number</button>
+                                <button type="submit" class="signup__verify-button" id="signup__verify-button" aria-label="this button is available only in case all inputs are valid">Create account & Verify mobile number</button>
 
                                 <p class="signup__agreement">
                                     By creating and account, you agree to Amazon's
@@ -101,13 +101,13 @@
                     <div class="main__login__container__fields-container--login" id="login_container">
                         
                         
-                        <label for="radio_login" class="main__login__container__fields-container--login--label"> 
-                            <input type="radio" class="main__login__container__fields-container--login--selection" id="radio_login" checked name="log_user_select">
+                        <label for="radio_login" class="main__login__container__fields-container--login--label <%=(isLogin===true) ? 'whiteBG' : 'greyBG' %>"> 
+                            <input type="radio" class="main__login__container__fields-container--login--selection" id="radio_login" name="log_user_select" <% if (isLogin === true) { %> checked <%} else { %> "" <%}%>>
                             <span class="login__header">Sign in. <span class="login__header2">Already a customer?</span></span>
                         </label>
                         
                         <!-- <form></form> -->
-                        <form class="main__login__container__fields-container--login--content" id="login_content" aria-label="login" action="/login" method="POST">
+                        <form class="main__login__container__fields-container--login--content <%=(isLogin===true) ? 'showForm' : 'hideForm' %>" id="login_content" aria-label="login" action="/login" method="POST">
 
                             <span class="login__email--container--wrapper">
 
@@ -117,6 +117,7 @@
                                         </label>
                                     <input type="text" id="login__email--field" name="loginEmailOrPhone" aria-label="required, enter your phone number or your email" placeholder="" required>
                                     <span class="login__email--field--message" aria-live="true">
+                                        <%=errorMessage%>
                                     </span>
 
                                     <button type="button" id="login__email--continue" aria-label="this button proceed to enter a password and is available in case entered an email or phone number related to an existing account">Continue</button>
@@ -146,8 +147,8 @@
                                         <label for="login__password--field" class="login__password--label"><h2>Amazon password</h2></label>
 
                                         <div class="login__password--current-phone" aria-label="click the following link to re-enter the email or phone number">
-                                            for
-                                            <span class="login__password--current-phone--number"> +20101234567</span>
+                                            <span>for</span>
+                                            <span class="login__password--current-phone--number"></span>
                                             <a class="login__password--current-phone--change"> Change</a>
                                         </div>
                                     </div>
