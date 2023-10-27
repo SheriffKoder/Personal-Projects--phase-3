@@ -63,13 +63,13 @@ exports.getLogin = (req: Request_With_reqUser, res: Response, next: NextFunction
 
     console.log("getLogin");
     //10
-    let errorMessage;
-    let message = req.flash("error");
-    if ( message[0] !== "" ) {
-        errorMessage = message[0];
-    } else {
-        errorMessage = null;
-    }
+    // let errorMessage;
+    // let message = req.flash("error");
+    // if ( message[0] !== "" ) {
+    //     errorMessage = message[0];
+    // } else {
+    //     errorMessage = null;
+    // }
 
     if (req.user) {
         
@@ -86,8 +86,12 @@ exports.getLogin = (req: Request_With_reqUser, res: Response, next: NextFunction
             user: req.session.user,
             // isAuthenticated: req.isLoggedIn  //cookies //9.1
             // isAuthenticated: req.session.isLoggedIn //sessions //9.2
-            errorMessage: errorMessage,
+            oldInput: {},
+            loginErrorMessage: "",
+            signUpErrorMessage: "",
             isLogin: true,
+            validationErrors: [],
+            invalidEmailOrPhone: false,
         })
     }
 };
@@ -112,19 +116,30 @@ exports.postLogin = (req: Request_With_reqUser, res: Response, next: NextFunctio
         return isNaN(p);
     })
 
-    //11-start
+
     const errors = validationResult(req);
+    console.log(errors.errors);
+    let loginValidationErrors: object[] = [];
     if (!errors.isEmpty()) {
-        return res.status(422).render("auth/login", {
-            myTitle: "Login to your Amazon account",
-            loginErrorMessage: errors.array()[0].msg,
-            oldInput: {
-                loginEmail: loginEmailOrPhone,
-                loginPassword: loginPassword
-            },
-            validationErrors: errors.array()
-        });
+        loginValidationErrors = errors.errors;
     }
+
+
+    // //11-start
+    // const errors = validationResult(req);
+    // if (!errors.isEmpty()) {
+    //     return res.status(422).render("auth/login", {
+    //         myTitle: "Login to your Amazon account",
+    //         loginErrorMessage: errors.array()[0].msg,
+    //         signUpErrorMessage: "",
+    //         oldInput: {
+    //             loginEmail: loginEmailOrPhone,
+    //             loginPassword: loginPassword
+    //         },
+    //         validationErrors: errors.errors,
+    //         isLogin: true,
+    //     });
+    // }
     //11-end
 
 
@@ -137,6 +152,9 @@ exports.postLogin = (req: Request_With_reqUser, res: Response, next: NextFunctio
         UserClassModel.findOne({email: loginEmailOrPhone.toLowerCase()})
         .then((user) => {
             console.log("found email for user");
+
+
+
 
             if (user) {
                 // console.log("found email for user2");
@@ -165,12 +183,15 @@ exports.postLogin = (req: Request_With_reqUser, res: Response, next: NextFunctio
                         return res.status(422).render("auth/login", {
                             myTitle: "Login to your Amazon account",
                             loginErrorMessage: "incorrect password",
+                            signUpErrorMessage: "",
                             oldInput: {
                                 loginEmail: loginEmailOrPhone,
                                 loginPassword: loginPassword
                             },
-                            validationErrors: [],
+                            validationErrors: [{path: "loginPassword"}],
                             invalidEmailOrPhone: true,
+                            isLogin: true,
+
                         });
 
                     }
@@ -195,12 +216,14 @@ exports.postLogin = (req: Request_With_reqUser, res: Response, next: NextFunctio
                 return res.status(422).render("auth/login", {
                     myTitle: "Login to your Amazon account",
                     loginErrorMessage: "This email is not associated with an account, please enter a valid email",
+                    signUpErrorMessage: "",
                     oldInput: {
                         loginEmail: loginEmailOrPhone,
                         loginPassword: loginPassword
                     },
-                    validationErrors: [],
+                    validationErrors: [{path: "loginEmailOrPhone"}],
                     invalidEmailOrPhone: true,
+                    isLogin: true
 
                 });
 
@@ -252,12 +275,14 @@ exports.postLogin = (req: Request_With_reqUser, res: Response, next: NextFunctio
                         return res.status(422).render("auth/login", {
                             myTitle: "Login to your Amazon account",
                             loginErrorMessage: "incorrect password",
+                            signUpErrorMessage: "",
                             oldInput: {
                                 loginEmail: loginEmailOrPhone,
                                 loginPassword: loginPassword
                             },
-                            validationErrors: [],
+                            validationErrors: [{path: "loginPassword"}],
                             invalidEmailOrPhone: true,
+                            isLogin: true,
                         });
 
 
@@ -282,13 +307,14 @@ exports.postLogin = (req: Request_With_reqUser, res: Response, next: NextFunctio
                 //11- will use validation-messages instead of flash-messages
                 return res.status(422).render("auth/login", {
                     myTitle: "Login to your Amazon account",
-                    errorMessage: "This phone number is not associated with an account, please enter a correct account's phone number",
+                    loginErrorMessage: "This phone number is not associated with an account, please enter a correct account's phone number",
                     oldInput: {
                         loginEmail: loginEmailOrPhone,
                         loginPassword: loginPassword
                     },
-                    validationErrors: [],
+                    validationErrors: [{path: "loginEmailOrPhone"}],
                     invalidEmailOrPhone: true,
+                    isLogin: true,
                 });
                 
 
@@ -329,13 +355,13 @@ exports.postLogout = (req: Request, res: Response, next: NextFunction) => {
 //10.2
 exports.getSignUp = (req: Request_With_reqUser, res: Response, next: NextFunction) => {
     
-    let errorMessage;
-    let message = req.flash("error");
-    if ( message[0] !== "" ) {
-        errorMessage = message[0];
-    } else {
-        errorMessage = null;
-    }
+    // let errorMessage;
+    // let message = req.flash("error");
+    // if ( message[0] !== "" ) {
+    //     errorMessage = message[0];
+    // } else {
+    //     errorMessage = null;
+    // }
 
     if (req.user) {
 
@@ -348,8 +374,14 @@ exports.getSignUp = (req: Request_With_reqUser, res: Response, next: NextFunctio
     } else {
         res.render("auth/login", {
             myTitle: "Login to Amazon",
+            // errorMessage: errorMessage,
+            oldInput: {},
+            loginErrorMessage: "",
+            signUpErrorMessage: "",
             isLogin: false,
-            errorMessage: errorMessage,
+            validationErrors: [],
+            invalidEmailOrPhone: false,
+
         })    
     }
 
@@ -374,17 +406,24 @@ exports.postSignUp = (req: Request, res: Response, next: NextFunction) => {
 
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-        console.log(errors.array());
-        return res.status(422).render("auth/signup", {
+        
+        // console.log(errors.errors);
+        //errors array of objects each has a path, msg
+        return res.status(422).render("auth/login", {
             myTitle: "Sign up to Amazon",
-            signUpErrorMessage: errors.array()[0].msg,
             oldInput: {
                 name: signUpFullName,
                 signUpEmail: signUpEmail,
                 signUpPassword: signUpPassword,
                 phone: signUpPhoneNumber,
                 country: userCountry,
-            }
+            },
+            loginErrorMessage: "",
+            // signUpErrorMessage: errors,
+            isLogin: false,
+            validationErrors: errors.errors,
+            invalidEmailOrPhone: false,
+
         })
     }
 

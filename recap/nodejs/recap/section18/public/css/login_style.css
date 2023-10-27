@@ -343,6 +343,7 @@ input[type="checkbox"], input[type="radio"] {
     font-style: italic;
 }
 
+
 .signup--label-wrapper {
     display: flex;
     justify-content: space-between;
@@ -396,4 +397,12 @@ input[type="checkbox"], input[type="radio"] {
         display: block;
     }
     
+}
+
+.signup__telephone--field--message, .signup__name--field--message {
+    height: 2rem;
+}
+
+.signup__telephone-label, .signup__name-label {
+    margin-top: auto;
 }

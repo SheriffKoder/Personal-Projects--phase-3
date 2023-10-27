@@ -64,9 +64,9 @@ $ (function() {
         $(`#${current}_content`).stop().slideDown(400);
         // console.log($(`#${current}_content`));
         $(`#${other}_content`).stop().slideUp(400);
-        $(`#${current}_container`).css("background-color", "white");
-        $(`#${other}_container`).css("background-color", "var(--sort-button-grey)");
-
+        $(`.main__login__container__fields-container--${current}--label`).css("background-color", "white");
+        $(`.main__login__container__fields-container--${other}--label`).css("background-color", "var(--sort-button-grey)");
+        
     }) 
 
 
@@ -88,7 +88,8 @@ $ (function() {
     const signIn_button = $("#login__password--login-link");
 
     const patterns = {
-        telephone: /^\d{12}$/ ,         // only, 10 digits
+        telephone: /^\d{12}$/ ,         // only, country code+10 digits - login
+        telephoneShort: /^\d{10}$/ ,         // only, 10 digits - signup
         password: /^[\w@-]{8,20}$/,     //the pattern is repeated, looking for (a-z A-Z also 0-9 and _)or @ or -
         email: /^([a-zA-Z\d\.-\_]+)@([a-zA-Z\d-]+)\.([a-z]{2,8})\.?([a-z]{2,8})?$/,               //also dots \.
                // domain with . - .. @ .. domain .. dot .. com ..  .uk(optional)
@@ -111,14 +112,69 @@ $ (function() {
         return regex.test(input);
     }
 
+    function validPhoneShort(input) {
+        var regex = patterns["telephoneShort"];
+        return regex.test(input);
+    }
+
     function validPassword(input) {
         var regex = patterns["password"];
         return regex.test(input);
     }
 
+    function flip () {
+    ////////////////////////////////////////////////////////////////////////
+        //flip through the email and password fields
+        login_email_continue_button.on("click", function () {
+            login_password_container.stop().fadeIn(700);
+            login_email_container.stop().css("display", "none");
+            login_email_continue_button.off();
+        });
+
+        login_password_change_number_button.on("click", function () {
+            login_email_container.stop().fadeIn(700);
+            login_password_container.stop().css("display", "none");
+            login_password_change_number_button.off();
+        });
+    ////////////////////////////////////////////////////////////////////////
+    }
+
     //// grey out the buttons of the sign-in area, email and the sign-in(which posts to form)
     login_email_continue_button.prop("disabled", true);
     signIn_button.prop("disabled", true);
+
+
+
+    //if the email input value is auto-filled
+    //when its container displayed/hovered, watch for input 
+    login_email_container.on("focus mouseenter", function() {
+        const input = email_input.val();
+
+        if (validEmail(input) || validPhone(input)) {
+            email_input.css("border", "1px solid green");
+            invalid_email_message.text("");
+            login_email_continue_button.prop("disabled", false);
+        }
+        flip();
+
+    })
+
+    //if the password input value is auto-filled
+    //when its container displayed/hovered, watch for input 
+    login_password_container.on("focus mouseenter", function() {
+        const input = password_input.val();
+
+        if (validPassword(input)) {
+            password_input.css("border", "1px solid green");
+            invalid_password_message.text("");
+            signIn_button.prop("disabled", false);
+            signIn_button.on("click", function (e) {
+                $(this).off();
+            })
+        }
+
+    })
+
 
 
     //// the event on the sign-in first input field
@@ -127,6 +183,9 @@ $ (function() {
     email_input.on("blur keyup", function () {
 
         const input = $(this).val();
+
+        flip();
+
 
         if (validEmail(input) || validPhone(input)) {
             $(this).css("border", "1px solid green");
@@ -141,20 +200,6 @@ $ (function() {
 
 
 
-            ////////////////////////////////////////////////////////////////////////
-            //flip through the email and password fields
-            login_email_continue_button.on("click", function () {
-                login_password_container.stop().fadeIn(700);
-                login_email_container.stop().css("display", "none");
-                login_email_continue_button.off();
-            });
-
-            login_password_change_number_button.on("click", function () {
-                login_email_container.stop().fadeIn(700);
-                login_password_container.stop().css("display", "none");
-                login_password_change_number_button.off();
-            });
-            ////////////////////////////////////////////////////////////////////////
             
             login_password_number_view.empty().text(`${input}`);
 
@@ -258,7 +303,7 @@ $ (function() {
 
 
     signup_tel.on("blur keyup", function () {
-        if (!validPhone($(this).val())) {
+        if (!validPhoneShort($(this).val())) {
             invalid_tel_message_signup.css({"font-style": "italic", "position": "static"}).text("the phone number should be the country code+10 digits*")
             disable_button_form($(this));
         } else {
