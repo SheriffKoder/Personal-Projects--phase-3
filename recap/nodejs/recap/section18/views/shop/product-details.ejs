@@ -1,0 +1,653 @@
+<%- include("../includes/html-head.ejs") %>
+
+<link rel="stylesheet" href="/css/item_style.css">
+
+
+
+
+
+
+<% const today = new Date(); %>
+<% const month = ["January","February","March","April","May","June","July","August","September","October","November","December"]; %>
+<% const day = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]; %>
+
+
+
+<%- include("../includes/html-start.ejs") %>
+
+
+    <%- include("../includes/index-header.ejs") %>
+
+    
+    <main>
+
+<div class="main__main__wrapper">
+    <div class="main__main__content">
+
+        
+        <div class="content__item__header item-header--mobile">
+            <a href="">Brand:<%=product.brand%></a>
+            <span class="content__item__header--rating">
+                <span class="header--rating--rate"><%=product.ratingScore%></span>
+                <i class="header--rating--stars star-smaller stars-<%=starFunction(product.ratingScore)%>"></i>
+                <a href="" class="header--rating-reviews"><%=product.ratingCount%></a>
+            </span>
+            <h1><%=product.title%></h1>
+        </div>
+
+        <div class="desktop_1 content__item__image--wrapper">
+            <div class="content__item__image--container content__item__image--container--image">
+                <div id="img" style="background-image: url('<%=product.imageUrl%>');"></div>
+                <a href="www.google.com" class="content__item__image--container-after"></a>
+            </div>
+            <div class="content__item__image--slider" aria-label="image slider">
+                <button class="content__item__image--slider--button slider--active" id="slider_1"></button>
+                <button class="content__item__image--slider--button slider--inactive" id="slider_2"></button>
+                <button class="content__item__image--slider--button slider--inactive" id="slider_3"></button>
+                <button class="content__item__image--slider--button slider--inactive" id="slider_4"></button>
+            </div>
+        </div>
+
+
+
+        <div class="desktop_2">
+
+
+
+            <div class="content__item__header item-header--desktop">
+                <a href=""><%=product.brand%></a>
+                <span class="content__item__header--rating">
+                    <span class="header--rating--rate"><%=product.ratingScore%></span>
+                    <i class="header--rating--stars star-smaller stars-<%=starFunction(product.ratingScore)%>"></i>
+                    <a href="" class="header--rating-reviews">(<%=product.ratingCount%>)</a>
+                </span>
+                <h1><%=product.title%></h1>
+            </div>
+
+            <div class="content__item__pricing">
+                <% if (product.prevPrice > 0) {%>
+                <span class="content__item__pricing--discount">-<%=Math.round((product.price/product.prevPrice*100)*1)/1%>%</span>
+                <% } %>
+                <span class="content__item__pricing--price">
+                    <span class="content__item__pricing--price--currency">EGP</span>
+                    <span class="content__item__pricing--price--price"><%=product.price.toString().split(".")[0]%></span>
+                    <span class="content__item__pricing--price--cents"><%=product.price.toString().split(".")[1]%></span>
+                </span>
+                <% if (product.prevPrice > 0) {%>
+                <div class="content__item__pricing--price--original-price">
+                    List Price: 
+                    <span class="original-price--price"> EGP<%=product.prevPrice%></span>
+                    <span class="original-price--info">i</span>
+                </div>
+                <% } %>
+            </div>
+
+
+            <div class="content__item__delivery">
+                <a href="">FREE Returns</a>
+                <p class="content__item__delivery--vat">All prices include VAT.</p>
+                <span>
+                    Buy with installments and pay EGP <%= Math.round((product.price/60)*100)/100%> for 60 months with select banks.
+                    <a href="">Learn more</a>
+                </span>
+                <span class="content__item__delivery--date">
+                    <span>
+                        <%= (product.deliveryFees === "free") ? "FREE" : "26 EGP " %> delivery, by</a>
+                        <%= day[today.getDay()+2]%>
+                        
+                        <%= today.getDate() %>
+                        <%= month[today.getMonth()]%>
+                    </span>
+                <span>Or fastest delivery                                                 
+                    <%= day[today.getDay()+1]%>
+                    
+                    <%= today.getDate() %>
+                    <%= month[today.getMonth()]%>
+                </span>
+                <a href="" class="content__item__delivery--destination">
+                    <i></i>
+                    Deliver to Egypt
+                </a>
+            </div>
+
+            <form class="content__item__ordering--form-container" action="/cart" method="POST">
+
+                <div class="content__item__ordering">
+
+
+                    <div class="content__item__ordering--delivery desktop-only">
+
+                        <span class="content__item__ordering--price desktop-only">
+                            <span class="content__item__ordering--price--currency">EGP</span>
+                            <span class="content__item__ordering--price--price"><%=product.price.toString().split(".")[0]%></span>
+                            <span class="content__item__ordering--price--cents"><%=product.price.toString().split(".")[1]%></span>
+                        </span>
+
+                        <a class="content__item__ordering--returns-link desktop-only">Free Returns</a>
+
+
+                        <div>
+                            <a class="content__item__ordering--delivery-link"><%= (product.deliveryFees) ?  "FREE" : "26 EGP " %> Delivery</a>
+                            <span class="content__item__ordering--delivery-date">
+                                <%= day[today.getDay()+1]%>
+                                ,
+                                <%= today.getDate() %>
+                                <%= month[today.getMonth()]%>
+                            </span>
+                        </div>
+                        <!-- <%= today.getTime().toLocaleString()%> -->
+                            <div class="content__item__ordering--delivery-fast">Or fastest delivery <b>Today by 10 PM.</b> Order within
+                                <span class="content__item__ordering--delivery-fast--time">
+                                    10 hrs 5 mins
+                                </span>
+                            </div>
+                        <a href="" class="content__item__ordering--destination desktop-only">
+                            <i></i>
+                            Deliver to John Smith - Street name, building, etc.
+                        </a>    
+                    </div>
+
+
+                    <span class="content__item__ordering--stock <%=(product.availability > 0) ? 'available_green' : 'not_available_red'%>" >
+                        <%= (product.availability > 0) ? "In Stock" : "Out of Stock"%>
+                    </span>
+                    
+                <!-- <form action="/cart" method="POST"> -->
+                    <span class="content__item__ordering--select">
+                        <select name="requestedCount">
+                            <option selected>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                            <option>6</option>
+                            <option>7</option>
+                            <option>8</option>
+                            <option>9</option>
+                            <option>10</option>
+                        </select>
+                        <i class="content__item__ordering--select--logo"></i>
+                    </span>
+                        <button class="content__item__ordering--yellow-button yellow-button" type="submit">Add to Cart</button>
+                        <button class="content__item__ordering--orange-button orange-button" type="submit">Buy Now</button>
+                        <input type="hidden" name="productId" value="<%= product.id %>">
+                <!-- </form> -->
+
+            
+                <div class="content__item__other-info">
+                    <div>
+                        <span>Payment</span>
+                        <span><a href="">Secure transition</a></span></div>
+                    <div>
+                        <span>Ships from</span>
+                        <span>Amazon.eg</span></div>
+                    <div>
+                        <span>Sold by</span>
+                        <span><a href=""><%=product.userId.name%></a></span></div>
+                </div>
+
+            </div>
+
+
+            <div class="content__item__free-shipping">
+                <!--TODO: button links to amazon prime-->
+                <button type="button" class="white-button">Yes, I want FREE Shipping with Amazon Prime</button>
+
+                <div class="free-shipping--checkbox--container desktop-only">
+                    <input type="checkbox" id="free-shipping--checkbox" name="wantFreeDelivery">
+                    <label for="free-shipping--checkbox desktop-only">
+                        Yes, I want Free Delivery
+                    </label>
+                </div>
+                <div class="free-shipping--title desktop-only">Enjoy FREE & FAST delivery with</div>
+                <a class="free-shipping--link desktop-only">Amazon Prime</a>
+                <div class="free-shipping--logo--container desktop-only">
+                    <img src="/img/logo--amazon-prime.png">
+                </div>
+            </div>
+            
+
+            <div class="content__item__ordering">
+
+            <div class="content__item__protection-plan full_width__border">
+
+                <div>Add a Protection Plan</div>
+
+                <a href="" class="content__item__protection-plan--content">
+                    <input type="checkbox" class="content__item__protection-plan--content--check" name="addProtection">
+                    <div class="content__item__protection-plan--content--info">
+                        <div>1 Year Extended Warranty Plan for</div>
+                        <div>EGP <%= Math.round(product.price*0.1*100)/100%></div>
+                    </div>
+                </a>
+
+                <div class="content__item__protection-plan--content--add-list">
+                    <a href="">Add to List</a>
+                </div>
+
+            </div>
+
+            </form>
+        </div>
+
+        <div href="" class="content__item__seller-options--container">
+            <h3>Other sellers on Amazon</h3>
+            <a href="" class="content__item__seller-options full_width__border">
+                <div>Compare New & Used (5) from</div>
+                <div class="price-text--seller-options">
+                    <span class="">EGP</span>
+                    <span class="">599</span>
+                    <span class="">00</span>
+                </div>
+                <div>FREE Shipping</div>    
+            </a>
+
+            <div class="content__item__seller-options-note full_width__border">
+                Available at a lower price from
+                <a href="">other sellers</a>
+                that may not offer free Prime Shipping
+            </div>
+        </div>
+
+        <div class="content__item__icons full_width__border">
+            <a href="">
+                <img src="https://m.media-amazon.com/images/G/42/A2I-Convert/mobile/IconFarm/icon-cod._CB638858551_.png">
+                <span>Cash on Delivery</span>
+            </a>
+
+            <a href="">
+                <img src="https://m.media-amazon.com/images/G/42/A2I-Convert/mobile/IconFarm/icon-returns._CB403797073_.png">
+                <span>15 days Returnable</span>
+            </a>
+
+            <a href="">
+                <img src="https://m.media-amazon.com/images/G/42/A2I-Convert/mobile/IconFarm/trust_icon_free_shipping_81px._CB590597072_.png">
+                <span>Free Delivery</span>
+            </a>
+
+            <a href="">
+                <img src="https://m.media-amazon.com/images/G/42/A2I-Convert/mobile/IconFarm/icon-amazon-delivered._CB403797073_.png">
+                <span>Delivered by Amazon</span>
+            </a>
+        </div>
+
+
+        <div class="content__item__details-list full_width__border">
+            <h3>Details</h3>
+            <ul>
+                <%if (product.brand) { %>
+                <li>
+                    <span>Brand Name</span>
+                    <span><%=product.brand%></span>
+                </li>
+                <%}%>
+
+                <%if (product.model) { %>
+                <li>
+                    <span>Model Name</span>
+                    <span><%=product.model%></span>
+                </li>
+                <%}%>
+
+
+                <%if (product.color) { %>
+                <li>
+                    <span>Color</span>
+                    <span><%=product.color%></span>
+                </li>
+                <%}%>
+
+                <%if (product.type) { %>
+                <li>
+                    <span>Type</span>
+                    <span><%=product.type%></span>
+                </li>
+                <%}%>
+
+                <%if (product.tech) { %>
+                <li>
+                    <span>Technology</span>
+                    <span><%=product.tech%></span>
+                </li>
+                <%}%>
+
+                <%if (product.specialFeature) { %>
+                <li>
+                    <span>Special Features</span>
+                    <span><%=product.specialFeature%></span>
+                </li>
+                <%}%>
+
+                <%if (product.includedComponents) { %>
+                <li>
+                    <span>Included Components</span>
+                    <span><%=product.includedComponents%></span>
+                </li>
+                <%}%>
+
+                <%if (product.age) { %>
+                <li>
+                    <span>Age Range Description</span>
+                    <span><%=product.age%></span>
+                </li>
+                <%}%>
+
+
+                <%if (product.material) { %>
+                <li>
+                    <span>Material</span>
+                    <span><%=product.material%></span>
+                </li>
+                <%}%>
+            </ul>
+        </div>
+
+    </div>
+
+
+        <div class="desktop_3">
+            <div class="content__item__manufacturer-notes full_width__border">
+                <h3>From the Manufacturer</h3>
+
+                <div class="content__item__manufacturer-notes--intro full_width__border">
+                    <div class="content__item__manufacturer-notes--intro--image">
+                        <img src="<%= product.imageUrl%>" alt="<%= product.title%>">
+                    </div>
+
+                    
+                    <div class="content__item__manufacturer-notes--intro--text">
+                        <%= product.notesIntro%>
+                    </div>
+                </div>
+
+                <div class="content__item__manufacturer-notes--description full_width__border">
+                    <h4>Description</h4>
+                    <%= product.notesDescription%>
+
+                </div>
+
+                <div class="content__item__manufacturer-notes--features">
+                    <h4>Features and Details</h4>
+                    <dl>
+                        <li>
+                            <span>
+                                <%= product.notesFeature1%>
+                            </span>
+                        </li>
+                        <li>
+                            <span>
+                                <%= product.notesFeature2%>
+                            </span>
+                        </li>
+                    </dl>
+                </div>
+
+                <div class="content__item__manufacturer-notes--information-table">
+                    <table>
+                        <tr><td>Manufacturer</td><td><%=product.brand%></td></tr>
+                        <tr><td>Country of origin</td><td><%=product.country%></td></tr>
+                        <tr><td>Item model number</td><td><%=product.modelNumber%></td></tr>
+                        <tr><td>Package Dimensions</td><td>Length: <%=product.size.length%> cm x Height: <%=product.size.height%> x Width: <%=product.size.width%></td></tr>
+                        <tr><td>Package Weight</td>
+                            <td>
+                            <% if (product.weight > 1000) { %>
+                            <% let totalWeight=(product.weight/1000).toString(); %>
+                            
+                            <%=totalWeight.split(".")[0]%> Kilograms and
+                            <%=totalWeight.split(".")[1]*1000%> grams
+                            <% } else if (product.weight < 1000) { %>
+                                <%=product.weight%> grams
+                            <% } %>
+                            </td>
+                        </tr>
+                        <tr><td>ASIN</td><td><%=product.serial%></td></tr>
+                    </table>
+                </div>
+
+                <div class="content__item__manufacturer-notes--additional-info">
+                    <h4>Additional Information</h4>
+                    <div>
+                        <div>
+                            <b>Best Sellers Rank:</b>
+                            <span>#45 in <%=product.department%> </span>
+                            (<a href="">See Top 100 in <%=product.department%></a>)
+                        </div>
+                        
+                        <div>
+                            <b>Product Rank in <%=product.department%> department:</b>
+                            <span>#8 in </span>
+                            (<a href="">See Top 100 in <%=product.department%></a>)
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="full_width__border content__item__reviews--wrapper">
+
+                <div class="content__item__reviews__rating desktop-only">
+                    <h3>Customer Reviews</h3>
+                    <div class="content__item__reviews__rating--stars-container">
+                        <i class="reviews__rating--stars star-medium stars-<%=starFunction(product.ratingScore)%>"></i>
+                        <span><%= (product.ratingScore > 0) ? "product.ratingScore+ out of 5" : "no ratings yet"%> </span>
+                    </div>
+                    <span class="content__item__reviews__rating--total-ratings"><%=product.ratingCount%> global ratings</span>
+                    
+                    <div class="reviews__rating--stars-percent--wrapper">
+
+                        <span class="reviews__rating--stars-percent--unit">
+                                <a>5 Star</a>
+                                <span id="reviews__rating--stars-percent--box">
+                                    <span style="width:50%" class="reviews__rating--stars-percent--box--fill"></span>
+                                </span>
+                                <a>43%</a>
+                        </span>
+
+                        <span class="reviews__rating--stars-percent--unit">
+                            <a>4 Star</a>
+                            <span id="reviews__rating--stars-percent--box">
+                                <span style="width:50%" class="reviews__rating--stars-percent--box--fill"></span>
+                            </span>
+                            <a>43%</a>
+                        </span>
+
+                        <span class="reviews__rating--stars-percent--unit">
+                            <a>3 Star</a>
+                            <span id="reviews__rating--stars-percent--box">
+                                <span style="width:50%" class="reviews__rating--stars-percent--box--fill"></span>
+                            </span>
+                            <a>43%</a>
+                        </span>
+
+
+                        <span class="reviews__rating--stars-percent--unit">
+                            <a>2 Star</a>
+                            <span id="reviews__rating--stars-percent--box">
+                                <span style="width:50%" class="reviews__rating--stars-percent--box--fill"></span>
+                            </span>
+                            <a>43%</a>
+                        </span>
+
+                        <span class="reviews__rating--stars-percent--unit">
+                            <a>1 Star</a>
+                            <span id="reviews__rating--stars-percent--box">
+                                <span style="width:50%" class="reviews__rating--stars-percent--box--fill"></span>
+                            </span>
+                            <a>43%</a>
+                        </span>
+
+                    </div>
+
+                    <details>
+                        To calculate the overall star rating and percentage breakdown by star, we don’t use a simple average. Instead, our system considers things like how recent a review is and if the reviewer bought the item on Amazon. It also analyses reviews to verify trustworthiness.
+                        <summary>
+                            How are ratings calculated?
+                        </summary>
+                    </details>
+
+                    <div class="reviews__rating--post">
+                        <h3>Review this product</h3>
+                        <span>Share your thoughts with other customers</span>
+                        <button type="button" class="white-button">
+                            Write a customer review
+                        </button>
+                    </div>
+
+
+                </div>
+
+                <div class="content__item__reviews">
+                    <h3>Customer Reviews</h3>
+                    <div class="content__item__reviews--star-container">
+                        <i src="" class="star-small stars-<%=starFunction(product.ratingScore)%>"></i>
+                        <span><%= (product.ratingScore > 0) ? "product.ratingScore+ out of 5" : "no ratings yet"%> </span>
+                        <div><%=product.ratingCount%> global ratings</div>
+                    </div>
+
+                    <div class="content__item__reviews--container">
+                        <h4>Top reviews on Amazon</h4>
+                        <div class="content__item__reviews--customer-review">
+                            <div class="customer-name">
+                                <i class="customer-logo"></i>
+                                <span>John Smith</span>
+                            </div>
+                            <div class="customer-rating">
+                                <span class="customer-rating-star-container">
+                                    <i src="" class="star-small stars-four-half"></i>
+                                </span>
+                                <span>Verified Purchase</span>        
+                            </div>
+                            <div class="customer-review-title">
+                                Works Well !
+                            </div>
+                            <div class="customer-review-date">
+                                Reviewed in Egypt on 31 July 2023
+                            </div>
+                            <div class="customer-review-selection">
+                                Color: Black
+                            </div>
+                            <div class="customer-review-note">
+                                This item works very well
+                            </div>
+                            <div class="custmer-review-buttons">
+                                <button class="white-button review-button">Helpful</button>
+                                
+                                <a href="" class="review-report">Report</a>
+                            </div>
+                        </div>
+
+                        <div class="content__item__reviews--customer-review">
+                            <div class="customer-name">
+                                <i class="customer-logo"></i>
+                                <span>John Smith</span>
+                            </div>
+                            <div class="customer-rating">
+                                <span class="customer-rating-star-container">
+                                    <i src="" class="star-small stars-four-half"></i>
+                                </span>
+                                <span>Verified Purchase</span>        
+                            </div>
+                            <div class="customer-review-title">
+                                Works Well !
+                            </div>
+                            <div class="customer-review-date">
+                                Reviewed in Egypt on 31 July 2023
+                            </div>
+                            <div class="customer-review-selection">
+                                Color: Black
+                            </div>
+                            <div class="customer-review-note">
+                                This item works very well
+                            </div>
+                            <div class="custmer-review-buttons">
+                                <button class="white-button review-button">Helpful</button>
+                                
+                                <a href="" class="review-report">Report</a>
+                            </div>
+                        </div>
+
+                        <div class="content__item__reviews--customer-review">
+                            <div class="customer-name">
+                                <i class="customer-logo"></i>
+                                <span>John Smith</span>
+                            </div>
+                            <div class="customer-rating">
+                                <span class="customer-rating-star-container">
+                                    <i src="" class="star-small stars-four-half"></i>
+                                </span>
+                                <span>Verified Purchase</span>        
+                            </div>
+                            <div class="customer-review-title">
+                                Works Well !
+                            </div>
+                            <div class="customer-review-date">
+                                Reviewed in Egypt on 31 July 2023
+                            </div>
+                            <div class="customer-review-selection">
+                                Color: Black
+                            </div>
+                            <div class="customer-review-note">
+                                This item works very well
+                            </div>
+                            <div class="custmer-review-buttons">
+                                <button class="white-button review-button">Helpful</button>
+                                
+                                <a href="" class="review-report">Report</a>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <div class="full_width__border"></div>
+                        
+                    <a class="content__item__reviews--all-reviews">
+                        See more reviews
+                    </a>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+        <div class="desktop_4 content__item__nav full_width__border">
+            <h4>You are here</h4>
+            <a href=""><%=product.department%></a>
+            >
+            <a href=""><%=product.department_section%></a>
+            <!-- >
+            <a href=""><%=product.category%></a> -->
+
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+
+
+</main>
+
+
+
+
+
+    <%- include("../includes/index-footer.ejs") %>
+
+    <script src="/js/code.jquery.com_jquery-3.7.0.js"></script>
+    <script src="/js/main_item.js"></script>
+
+    
+<%- include("../includes/html-end.ejs") %>
+
+
