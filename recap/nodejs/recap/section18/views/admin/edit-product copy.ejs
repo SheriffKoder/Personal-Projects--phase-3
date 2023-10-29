@@ -6,94 +6,20 @@
     .invalid {
         outline: 1px solid red;
         outline-offset: 2px;
-        /* position: relative; */
-    }
-
-    .tooltip-container {
-        /* background-color: red; */
-        /* height: 100%; */
-        /* width: 20px; */
-    }
-
-    label {
-        width: 100%;
-        display: block;
         position: relative;
     }
-
-    .tooltip-parent {
-        position: relative;
-    }
-    
 
     .input-container-tooltip {
-        /* position: absolute; */
         position: absolute;
-        height: auto;
-        width: 200px;
-        background-color: rgb(246, 246, 196);
-        bottom: 0;
+        height: 10px;
+        width: 10px;
+        background-color: yellow;
+        top: 0;
         right: 0;  
-        color: rgb(39, 39, 39);
-        padding: 0.5rem;
-        border-radius: 7px;
-        border: 1px solid rgba(214, 214, 141, 0.72);
-        /* text-align: center; */
-    }
-
-    .input-container-tooltip::after {
-        content: "x";
-        position: absolute;
-        top: 0.25rem;
-        right: 0.75rem;
-        color: rgb(39, 39, 39);
-        background-color: transparent;
-        height: 0.25rem;
-        width: 0.25rem;
-    }
-
-
-    
-    .user-message--error {
-        margin-top: 1rem;
-        width: 100%;
-        height: 2rem;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .user-message--error > span {
-        background-color: rgb(246, 246, 196, 0.5);
-        border: 1px solid rgba(214, 214, 141, 0.72);
-        border-radius: 7px;
-        color: rgb(39, 39, 39);
-        padding: 0.5rem;
-
-    }
-
-    .fadeOut {
-        animation-name: fadeOutAnimation;
-        animation-duration: 0.5s;
-        animation-timing-function: ease-in-out;
-        animation-fill-mode: forwards;
-    }
-
-    @keyframes fadeOutAnimation {
-        from {
-            opacity: 1;
-        }
-
-        to {
-            opacity: 0;
-            display: none;
-        }
-
     }
 
 
 </style>
-
 
 
 
@@ -102,17 +28,11 @@
 
     <%- include("../includes/index-header.ejs") %>
 
-    <% if (errorMessage) { %>
-        <div class="user-message user-message--error">
-            <span>
-                <%=errorMessage%>
-            </span>
-        </div>
-    <% } %>
-
     <main>
 
-
+        <% if (errorMessage) { %>
+            <div class="user-message user-message--error"><%=errorMessage%></div>
+        <% } %>
 
         <form class="main__main__wrapper" <%= (editing) ? action='/admin/edit-product' : action='/admin/add-product'%> method="POST">
             <h1>Add a Product</h1>
@@ -123,79 +43,62 @@
                     <h3>Name and Price</h3>
                     
                     <div>
-                        <% let titleError =""; %>
-                        <% validationErrors.forEach(error => { if (error.path === 'productTitle') { titleError = error.msg; } }) %>
-
-                        <label for="productTitle">Product's title <small>(required)</small>
-                            <% if (titleError !=="") {%>
-                                    <span class="input-container-tooltip">
-                                        <%=titleError%> 
-                                    </span>
-                            <%}%>
-    
-                        </label>
-                        
+                        <label for="productTitle">Product's title <small>(required)</small></label>
+                            <% let titleError =""; %>
+                            <% validationErrors.forEach(error => { if (error.path === 'productTitle') { titleError = error.msg; } }) %>
                         <input 
-                        class="<%= validationErrors.find(e => e.path === 'productTitle') ? 'invalid' : '' %>"
-                        <% if (editing || hasError) { %> value="<%=product.title%>" <%}%>
-                        required type="text" 
-                        placeholder="product's title"
-                        name="productTitle" id="productTitle"
+                            class="<%= validationErrors.find(e => e.path === 'productTitle') ? 'invalid' : '' %>"
+                            <% if (editing || hasError) { %> value="<%=product.title%>" <%}%>
+                            required type="text" 
+                            placeholder="product's title"
+                            name="productTitle" id="productTitle"
                         >
-    
                     </div>
+                    <% if (titleError !=="") {%>
+                        <span class="input-container-tooltip">
+                            <%=titleError%> 
+                        </span>
+                    <%}%>
 
 
                     <div>
+                        <label for="productPrice">Product's price <small>(required)</small></label>
                         <% let priceError =""; %>
                         <% validationErrors.forEach(error => { if (error.path === 'productPrice') { priceError = error.msg; } }) %>
-
-                        <label for="productPrice">Product's price <small>(required)</small>
-                            <% if (priceError !=="") {%>
-                                <span class="tooltip-container">
-                                <span class="input-container-tooltip">
-                                    <%=priceError%> 
-                                </span>
-                                </span>
-                            <%}%>
-                        </label>
-                        
                         <input 
                         class="<%= validationErrors.find(e => e.path === 'productPrice') ? 'invalid' : '' %>"
                         <% if (editing || hasError) { %> value="<%=product.price%>" <%}%>
                         required type="text" 
                         placeholder="product's price"
                         name="productPrice" id="productPrice">
-    
                     </div>
-                </div>
+                <% if (priceError !=="") {%>
+                    <span class="input-container-tooltip">
+                        <%=priceError%> 
+                    </span>
+                <%}%>
+            </div>
+
 
                 <div class="main__main--input-field-wrapper">
                     <h3>Product's Image</h3>
 
                     <div>
+                        <label for="productImage">Select Image <small>(required)</small></label>
                         <% let imageError =""; %>
                         <% validationErrors.forEach(error => { if (error.path === 'productImage') { imageError = error.msg; } }) %>
-
-                        <label for="productImage">Select Image <small>(required)</small>
-                            <% if (imageError !=="") {%>
-                                <span class="tooltip-container">
-                                <span class="input-container-tooltip">
-                                    <%=imageError%> 
-                                </span>
-                                </span>
-                            <%}%>
-                        </label>
-
                         <input 
                         class="<%= validationErrors.find(e => e.path === 'productImage') ? 'invalid' : '' %>"
                         <% if (editing || hasError) { %> value="<%=product.imageUrl%>" <%}%>
                         required type="text" 
                         placeholder="product's image"
                         name="productImage" id="productImage">
-
-    
                     </div>
+                    <% if (imageError !=="") {%>
+                    <span class="input-container-tooltip">
+                        <%=imageError%> 
+                    </span>
+                    <%}%>
                     
                     <!-- <div>
                         <label for="productImageAlt">Image's Description <small>(required)</small></label>
@@ -208,27 +111,22 @@
                 <div class="main__main--input-field-wrapper">
                     <h3>Stock</h3>
                     <div>
+                        <label for="productAvailability">How many items available <small>(required)</small></label>
                         <% let availableError =""; %>
                         <% validationErrors.forEach(error => { if (error.path === 'productAvailability') { availableError = error.msg; } }) %>
-
-                        <label for="productAvailability">How many items available <small>(required)</small>
-                            <% if (availableError !=="") {%>
-                                <span class="tooltip-container">
-                                <span class="input-container-tooltip">
-                                    <%=availableError%> 
-                                </span>
-                                </span>
-                            <%}%>    
-                        </label>
-                        
                         <input 
                         class="<%= validationErrors.find(e => e.path === 'productAvailability') ? 'invalid' : '' %>"
                         <% if (editing || hasError) { %> value="<%=product.availability%>" <%}%>
                         required type="number" 
                         placeholder="product's availability"
                         name="productAvailability" id="productAvailability" min="1" max="100">
-                    
                     </div>
+                    <% if (availableError !=="") {%>
+                    <span class="input-container-tooltip">
+                        <%=availableError%> 
+                    </span>
+                    <%}%>
+                    
                     <!-- <label for="productColor">How many items sold</label>
                     <input type="text" placeholder="product's color" name="productColor"> -->
 
@@ -264,114 +162,89 @@
                     <h3>Description and Features</h3>
 
                     <div class="input-field-container">
+                        <label for="productIntro">Product's Short Introduction <small>(required)</small></label>
                         <% let introError =""; %>
                         <% validationErrors.forEach(error => { if (error.path === 'productIntro') { introError = error.msg; } }) %>
-
-
-                        <label for="productIntro tooltip-parent">Product's Short Introduction <small>(required)</small>
-                            <% if (introError !=="") {%>
-                                <span class="tooltip-container">
-                                <span class="input-container-tooltip">
-                                    <%=introError%> 
-                                </span>
-                                </span>
-                            <%}%>        
-                        </label>
                         <input 
                         <% if (editing || hasError) { %> value="<%=product.notesIntro%>" <%}%>
                         class="<%= validationErrors.find(e => e.path === 'productIntro') ? 'invalid' : '' %>"
                         required type="text" 
                         placeholder="introduction" 
                         name="productIntro" id="productIntro" >        
-                    
                     </div>
+                    <% if (productIntro !=="") {%>
+                    <span class="input-container-tooltip">
+                        <%=productIntro%> 
+                    </span>
+                    <%}%>
+
+                    
 
                     <div>
+                        <label for="productDescriptionText">Product's Description <small>(required)</small></label>
                         <% let descriptionError =""; %>
                         <% validationErrors.forEach(error => { if (error.path === 'productDescriptionText') { descriptionError = error.msg; } }) %>
-
-                        <label for="productDescriptionText tooltip-parent">Product's Description <small>(required)</small>
-                            <% if (descriptionError !=="") {%>
-                                <span class="tooltip-container">    
-                                   <span class="input-container-tooltip">
-                                       <%=descriptionError%> 
-                                    </span>
-                                </span>
-                            <%}%>     
-                        </label>
-                        
-
                         <textarea required id="productDescriptionText" name="productDescriptionText" 
                         placeholder="products's description"
-                        class="<%= validationErrors.find(e => e.path === 'productDescriptionText') ? 'invalid' : '' %>"><% if (editing || hasError) { %><%=product.notesDescription%><%}%></textarea>
-                    
-   
+                        class="<%= validationErrors.find(e => e.path === 'productDescriptionText) ? 'invalid' : '' %>"
+                        >
+                            <% if (editing || hasError) { %><%=product.notesDescription%><%}%>
+                        </textarea>
                     </div>
+                    <% if (descriptionError !=="") {%>
+                    <span class="input-container-tooltip">
+                        <%=descriptionError%> 
+                    </span>
+                    <%}%>
+
 
                     <div>
+                        <label for="productFeature1">Product's Feature 1 <small>(required)</small></label>
                         <% let feature1Error =""; %>
                         <% validationErrors.forEach(error => { if (error.path === 'productFeature1') { feature1Error = error.msg; } }) %>
-
-                        <label for="productFeature1">Product's Feature 1 <small>(required)</small>
-                        
-                            <% if (feature1Error !=="") {%>
-                                <span class="tooltip-container">
-                                <span class="input-container-tooltip">
-                                    <%=feature1Error%> 
-                                </span>
-                                </span>
-                            <%}%>    
-
-                        </label>
-
                         <input 
                         class="<%= validationErrors.find(e => e.path === 'notesFeature1') ? 'invalid' : '' %>"
                         <% if (editing || hasError) { %> value="<%=product.notesFeature1%>" <%}%>
                         required type="text" placeholder="feature 1" name="productFeature1" id="productFeature1">        
-                    
                     </div>
+                    <% if (feature1Error !=="") {%>
+                    <span class="input-container-tooltip">
+                        <%=feature1Error%> 
+                    </span>
+                    <%}%>
+
 
                     <div>
+                        <label for="productFeature2">Product's Feature 2<small>(optional)</small></label>
                         <% let feature2Error =""; %>
                         <% validationErrors.forEach(error => { if (error.path === 'productFeature2') { feature2Error = error.msg; } }) %>
-
-                        <label for="productFeature2">Product's Feature 2<small>(optional)</small>
-                            <% if (feature2Error !=="") {%>
-                                <span class="tooltip-container">
-                                <span class="input-container-tooltip">
-                                    <%=feature2Error%> 
-                                </span>
-                                </span>
-                            <%}%>    
-                        </label>
-
                         <input 
                         class="<%= validationErrors.find(e => e.path === 'notesFeature2') ? 'invalid' : '' %>"
                         <% if (editing || hasError) { %> value="<%=product.notesFeature2%>" <%}%>
                         type="text" placeholder="feature 2" name="productFeature2" id="productFeature2">        
-                    
                     </div>
+                    <% if (feature2Error !=="") {%>
+                    <span class="input-container-tooltip">
+                        <%=feature2Error%> 
+                    </span>
+                    <%}%>
+
 
                     <div>
+                        <label for="productFeature3">Product's Feature 3 <small>(optional)</small></label>
                         <% let feature3Error =""; %>
                         <% validationErrors.forEach(error => { if (error.path === 'productFeature3') { feature3Error = error.msg; } }) %>
-
-                        <label for="productFeature3">Product's Feature 3 <small>(optional)</small>
-                            
-                            <% if (feature3Error !=="") {%>
-                                <span class="tooltip-container">
-                                    <span class="input-container-tooltip">
-                                        <%=feature3Error%> 
-                                    </span>
-                                </span>
-                            <%}%>
-                        </label>
-    
                         <input 
                         class="<%= validationErrors.find(e => e.path === 'notesFeature3') ? 'invalid' : '' %>"
                         <% if (editing || hasError) { %> value="<%=product.notesFeature3%>" <%}%>
                         type="text" placeholder="feature 3" name="productFeature3" id="productFeature3">        
                     </div>
+                    <% if (feature3Error !=="") {%>
+                        <span class="input-container-tooltip">
+                            <%=feature3Error%> 
+                        </span>
+                    <%}%>
+
 
                 </div>
 
@@ -405,18 +278,19 @@
                     </div>
                     <%}%>
 
-                    <div class="productSection_Clothing__container">
+                    <% if (editing || hasError && (product.department === "Clothing")) { %>
+                    <div class="productSection_Clothing__container" style="display: inline-block">
                         <label for="productSection_Clothing">Product's Clothing Section <small>(required)</small></label>
                         <select required id="productSection_Clothing" name="productSection_Clothing">
+                            <option>Watches</option>
+                            <option>Garments</option>
                             <option <% if ( !editing || ((editing || hasError) && (product.department_section === "Watches"))) { %> selected <%}%>>Watches</option>
                             <option <% if ((editing || hasError) && (product.department_section === "Garments")) { %> selected <%}%>>Garments</option>
                         </select>
                     </div>
+                    <%}%>
 
                 </div>
-
-            </div>
-
 
             </div>
 
@@ -511,27 +385,21 @@
                         <div class="input-field-container--size">
 
                             <div class="input-field-container--size--input-container">
-                                <% let weightError =""; %>
-                                <% validationErrors.forEach(error => { if (error.path === 'productWeight') { weightError = error.msg; } }) %>        
-
                                 <label for="productWeight">Package's weight:</label>
                                 <span>in (grams)</span>
+                                <% let weightError =""; %>
+                                <% validationErrors.forEach(error => { if (error.path === 'productWeight') { weightError = error.msg; } }) %>        
                                 <input 
                                 class="<%= validationErrors.find(e => e.path === 'productWeight') ? 'invalid' : '' %>"
                                 <% if ((editing || hasError) && product.weight) { %> value="<%=product.weight%>" <%}%>
                                 required type="text" placeholder="weight in grams" name="productWeight" id="productWeight">
-                                
-                                <span class="tooltip-parent"><small>required*</small>
-                                    <% if (weightError !=="") {%>
-                                        <span class="tooltip-container">
-                                        <span class="input-container-tooltip">
-                                            <%= weightError%> 
-                                        </span>
-                                        </span>
-                                    <%}%>        
-                                </span>
-
+                                <span><small>required*</small></span>
                             </div>
+                            <% if (weightError !=="") {%>
+                                <span class="input-container-tooltip">
+                                    <%= weightError%> 
+                                </span>
+                            <%}%>
 
                             <h4>Package's size: <small>all fields are required* in centimeters*</small></h4>
 
@@ -541,31 +409,27 @@
                                 <% validationErrors.forEach(error => { if (error.path === 'productSizeLength') { sizeLengthError = error.msg; } }) %>        
                                 <input 
                                 class="<%= validationErrors.find(e => e.path === 'productSizeLength') ? 'invalid' : '' %>"
-                                <% if ((editing || hasError) && product.size.length) { %> value="<%=product.size.length%>" <%}%>
+                                <% if ((editing || hasError) && product.size.Length) { %> value="<%=product.size.length%>" <%}%>
                                 required type="text" placeholder="cm" name="productSizeLength" id="productSizeLength">
                             </div>
                             <% if (sizeLengthError !=="") {%>
-                                <span class="tooltip-parent">
-                                    <span class="input-container-tooltip">
-                                        <%= sizeLengthError%> 
-                                    </span>
+                                <span class="input-container-tooltip">
+                                    <%= sizeLengthError%> 
                                 </span>
                             <%}%>
 
                             <div class="input-field-container--size--input-container">
                                 <label for="productSizeHeight">Height:</label>
                                 <% let sizeHeightError =""; %>
-                                <% validationErrors.forEach(error => { if (error.path === 'productSizeHeight') { sizeHeightError = error.msg; } }) %>        
+                                <% validationErrors.forEach(error => { if (error.path === 'productSizeHeight { sizeHeightError = error.msg; } }) %>        
                                 <input 
                                 class="<%= validationErrors.find(e => e.path === 'productSizeHeight') ? 'invalid' : '' %>"
                                 <% if ((editing || hasError) && product.size.height) { %> value="<%=product.size.height%>" <%}%>
                                 required type="text" placeholder="cm" name="productSizeHeight" id="productSizeHeight">
                             </div>
                             <% if (sizeHeightError !=="") {%>
-                                <span class="tooltip-parent">
-                                    <span class="input-container-tooltip">
-                                        <%= sizeHeightError%> 
-                                    </span>
+                                <span class="input-container-tooltip">
+                                    <%= sizeHeightError%> 
                                 </span>
                             <%}%>
 
@@ -573,17 +437,15 @@
                             <div class="input-field-container--size--input-container">
                                 <label for="productSizeWidth">Width:</label>
                                 <% let sizeWidthError =""; %>
-                                <% validationErrors.forEach(error => { if (error.path === 'productSizeWidth') { sizeWidthError = error.msg; } }) %>        
+                                <% validationErrors.forEach(error => { if (error.path === 'productSizeWidth{ sizeWidthError = error.msg; } }) %>        
                                 <input 
                                 class="<%= validationErrors.find(e => e.path === 'productSizeWidth') ? 'invalid' : '' %>"
                                 <% if ((editing || hasError) && product.size.width) { %> value="<%=product.size.width%>" <%}%>
                                 required type="text" placeholder="cm" name="productSizeWidth" id="productSizeWidth">
                             </div>
                             <% if (sizeWidthError !=="") {%>
-                                <span class="tooltip-parent">
-                                    <span class="input-container-tooltip">
-                                    <%= sizeWidthError%> 
-                                    </span>
+                                <span class="input-container-tooltip">
+                                <%= sizeWidthError%> 
                                 </span>
                             <%}%>
                         </div>

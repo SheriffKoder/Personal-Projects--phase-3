@@ -10,9 +10,14 @@ exports.getAddProduct = (req, res, next) => {
     res.render("admin/edit-product", {
         myTitle: "Add a Product",
         path: "/admin/add-product",
-        editing: false, //editing passed variable for form action=""
+        editing: false,
         // isAuthenticated: req.isLoggedIn  //cookies //9.1
         // isAuthenticated: req.session.isLoggedIn //sessions //9.2
+        //11
+        hasError: false,
+        product: [],
+        errorMessage: "",
+        validationErrors: []
     });
 };
 exports.postAddProduct = (req, res, next) => {
@@ -24,7 +29,7 @@ exports.postAddProduct = (req, res, next) => {
     let deliveryFees = false;
     (req.body.productFreeDelivery === "included") ? deliveryFees = false : deliveryFees = true;
     const notesIntro = req.body.productIntro;
-    const notesDescription = req.body.productDescriptionText;
+    const notesDescription = (req.body.productDescriptionText).trim();
     const notesFeature1 = req.body.productFeature1;
     const notesFeature2 = req.body.productFeature2;
     const notesFeature3 = req.body.productFeature3;
@@ -57,6 +62,7 @@ exports.postAddProduct = (req, res, next) => {
     //11
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
+        console.log(errors.errors);
         return res.status(422).render("admin/edit-product", {
             myTitle: "Add a product",
             editing: false,
@@ -90,8 +96,8 @@ exports.postAddProduct = (req, res, next) => {
                 serial: serial,
                 size: size,
             },
-            errorMessage: errors.array()[0].msg,
-            validationErrors: errors.array()
+            errorMessage: "Please check your inputs again, some may have been placed incorrectly",
+            validationErrors: errors.errors
         });
     }
     const product = new product_1.ProductClassModel({
@@ -185,7 +191,12 @@ exports.getEditProduct = (req, res, next) => {
         .then((product) => {
         if (!product) {
             console.log("product does not exist to be edited");
-            return res.redirect("/admin/admin-products");
+            // return res.redirect("/admin/admin-products");
+            //11
+            return res.status(404).render("404", {
+                myTitle: "404 Page",
+                text: "Product does not exist to be edited"
+            });
         }
         res.render("admin/edit-product", {
             product: product,
@@ -193,6 +204,9 @@ exports.getEditProduct = (req, res, next) => {
             editing: editMode,
             // isAuthenticated: req.isLoggedIn  //cookies //9.1
             // isAuthenticated: req.session.isLoggedIn //sessions //9.2
+            hasError: false,
+            errorMessage: "",
+            validationErrors: []
         });
     })
         .catch((err) => {
@@ -213,7 +227,7 @@ exports.postEditProduct = (req, res, next) => {
     let deliveryFees = false;
     (req.body.productFreeDelivery === "included") ? deliveryFees = false : deliveryFees = true;
     const notesIntro = req.body.productIntro;
-    const notesDescription = req.body.productDescriptionText;
+    const notesDescription = (req.body.productDescriptionText).trim();
     const notesFeature1 = req.body.productFeature1;
     const notesFeature2 = req.body.productFeature2;
     const notesFeature3 = req.body.productFeature3;
@@ -278,8 +292,8 @@ exports.postEditProduct = (req, res, next) => {
                 serial: serial,
                 size: size,
             },
-            errorMessage: errors.array()[0].msg,
-            validationErrors: errors.array()
+            errorMessage: "Please check your inputs again, some may have been placed incorrectly",
+            validationErrors: errors.errors
         });
     }
     product_1.ProductClassModel.findById(prodId)

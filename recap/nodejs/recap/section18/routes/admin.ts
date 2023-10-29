@@ -53,7 +53,7 @@ adminRouter.post("/add-product",
 
     body("productDescriptionText", "Please enter a more descriptive description about the product")
     .isString()
-    .isLength({min: 20})
+    .isLength({min: 19})
     ,
 
     body("productFeature1", "please use a shorter text")

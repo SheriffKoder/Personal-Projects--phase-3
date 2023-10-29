@@ -37,3 +37,16 @@ DepartmentSelect.addEventListener("change", (e)=> {
     }
 
 });
+
+
+//////////////////////////////////////////////////////////////
+
+//hide validation error tooltips on hover
+let tooltips = document.querySelectorAll(".input-container-tooltip");
+
+tooltips.forEach(tooltip => {
+    tooltip.addEventListener("mouseenter focus", function (e) {
+        // console.log(e.target);
+        e.target.classList.add("fadeOut");
+    })
+})
