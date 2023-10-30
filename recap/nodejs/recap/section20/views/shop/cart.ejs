@@ -70,6 +70,7 @@
                                                 
                                                 <!--will wrap in a form with action/route to update quantity-->
                                                 <form action="/changeQuantity" method="POST" id="changeQtyForm">
+                                                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                                                     <select aria-label="item's count" name="requestedCount" onchange="document.getElementById('changeQtyForm').submit();">
                                                         <option>Qty: <%= p.quantity %></option>
                                                         <!--continue adding other qty options depending on availability and not exceed 10-->
@@ -84,6 +85,7 @@
 
                                                 <form action="/cart-delete-item" method="POST">
                                                     <input type="hidden" value="<%= p.productId._id%>" name="productId">
+                                                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                                                     <button aria-label="delete item from cart" type="submit">Delete</button>
                                                 </form>    
 
@@ -150,6 +152,7 @@
                                 </span>
                             </p>
                             <form action="/create-order" method="POST" style="width: 100%; display: flex;">
+                                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                                 <button type="submit" class="yellow-button row1--extra--proceed-submit" aria-label="proceed to checkout">Proceed to Buy</button>
                             </form>
                             </div>

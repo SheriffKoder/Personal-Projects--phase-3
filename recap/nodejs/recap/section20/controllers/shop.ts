@@ -1,7 +1,7 @@
 
 const mongoose = require('mongoose'); 
 
-import { ProductClassModel } from '../models/product';
+import { IProduct, ProductClassModel } from '../models/product';
 import { IUserWithMethods, IUser, IItems } from '../models/user';
 import {Request, Response, NextFunction} from 'express';
 import { HydratedDocument } from 'mongoose';
@@ -169,7 +169,7 @@ exports.postCartDeleteProduct = (req: Request_With_reqUser, res: Response, next:
 
 
 //8
-import {OrderClassModel} from "../models/order.js";
+import {IOrder, IOrderProduct, OrderClassModel} from "../models/order.js";
 import { truncate } from 'fs/promises';
 
 exports.postOrder = (req: Request_With_reqUser, res: Response, next: NextFunction) => {
@@ -256,4 +256,110 @@ exports.getOrders = (req: Request_With_reqUser, res: Response, next: NextFunctio
     .catch(err => {
         console.log(err);
     })
+}
+
+
+
+//12.1
+const fs = require("fs");
+const path = require("path");
+const PDFDocument = require("pdfkit");
+
+interface Error_With_Status extends Error {
+    code: number;
+}
+
+
+exports.getInvoice = (req: Request_With_reqUser, res: Response, next: NextFunction) => {
+
+    const orderId = req.params.orderId;
+
+    OrderClassModel.findById(orderId)
+    .then((order) => {
+
+        if (order) {
+
+            if (order.user[0].userId.toString() !== req.user._id.toString()) {
+                const error = new Error("Not Authorized") as Error_With_Status;
+                error.code = 403;
+                //throw error - for sync, return next for async then/catch
+                return next (error);    
+            }
+
+            //create pdf and write to pc
+            const invoiceName = "invoice-"+orderId+".pdf";
+            const invoicePath = path.join("data", "invoices", invoiceName)
+            
+            const pdfDoc = new PDFDocument();
+
+            ////declare file name
+            res.setHeader("Content-Type", "application/pdf");
+            res.setHeader("Content-Disposition", `inline; filename="+${invoiceName}+"`);
+
+            ////declare file paths
+            //path to writeStream where want to write
+            //also get stored on the server files + served to client
+            pdfDoc.pipe(fs.createWriteStream(invoicePath));
+            //return/serve to client
+            pdfDoc.pipe(res);
+
+            //now when adding anything to the document
+            //will be forwarded to this file path/name and res
+
+            ////////////////////////////////////////////////////
+            ////write the pdf
+            pdfDoc.fontSize(26).text("Invoice", {underline: true});
+            pdfDoc.fontSize(14).text("---------------------------");
+
+            //write each product to file with incrementing the total price
+            let totalPrice = 0;
+            order.products.forEach((prod: IOrderProduct) => {
+                totalPrice = totalPrice + (prod.quantity * prod.product.price)
+
+                pdfDoc.fontSize(14).text(
+                    prod.product.title +
+                    " - " +
+                    prod.quantity +
+                    " x " +
+                    "$" +
+                    prod.product.price
+                )
+
+            });
+            //end of loop
+
+            pdfDoc.fontSize(14).text("---------------------------");
+            pdfDoc.fontSize(18).text("Total Price : $"+totalPrice);
+            pdfDoc.end();
+            ////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+        }
+        else if (!order) {
+            //11
+            const error = new Error("No order found") as Error_With_Status;
+            error.code = 404;
+            //throw error - for sync, return next for async then/catch
+            return next (error);
+
+        }
+
+
+    })
+    .catch((err) => {
+        //next an error to use the default error handling function
+        next(err);
+    })
+
+
+
+
+
+
 }

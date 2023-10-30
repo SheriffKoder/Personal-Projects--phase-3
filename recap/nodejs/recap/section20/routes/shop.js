@@ -17,4 +17,6 @@ shopRouter.post("/create-order", isAuthShop, shopController.postOrder);
 shopRouter.get("/cart", isAuthShop, shopController.getCart);
 //8
 shopRouter.get("/orders", isAuthShop, shopController.getOrders);
+//12.1
+shopRouter.get("/orders/:orderId", isAuthShop, shopController.getInvoice);
 module.exports = shopRouter;

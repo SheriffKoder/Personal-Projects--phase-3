@@ -5,9 +5,10 @@
 
 
 import { Schema, Types, model } from 'mongoose'; //TS
+import { IProduct } from './product';
 
 interface IOrderProduct {
-    product: object;
+    product: IProduct;
     quantity: number;
 }
 

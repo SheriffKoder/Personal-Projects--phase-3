@@ -191,3 +191,67 @@ exports.getOrders = (req, res, next) => {
         console.log(err);
     });
 };
+//12.1
+const fs = require("fs");
+const path = require("path");
+const PDFDocument = require("pdfkit");
+exports.getInvoice = (req, res, next) => {
+    const orderId = req.params.orderId;
+    order_js_1.OrderClassModel.findById(orderId)
+        .then((order) => {
+        if (order) {
+            if (order.user[0].userId.toString() !== req.user._id.toString()) {
+                const error = new Error("Not Authorized");
+                error.code = 403;
+                //throw error - for sync, return next for async then/catch
+                return next(error);
+            }
+            //create pdf and write to pc
+            const invoiceName = "invoice-" + orderId + ".pdf";
+            const invoicePath = path.join("data", "invoices", invoiceName);
+            const pdfDoc = new PDFDocument();
+            ////declare file name
+            res.setHeader("Content-Type", "application/pdf");
+            res.setHeader("Content-Disposition", `inline; filename="+${invoiceName}+"`);
+            ////declare file paths
+            //path to writeStream where want to write
+            //also get stored on the server files + served to client
+            pdfDoc.pipe(fs.createWriteStream(invoicePath));
+            //return/serve to client
+            pdfDoc.pipe(res);
+            //now when adding anything to the document
+            //will be forwarded to this file path/name and res
+            ////////////////////////////////////////////////////
+            ////write the pdf
+            pdfDoc.fontSize(26).text("Invoice", { underline: true });
+            pdfDoc.fontSize(14).text("---------------------------");
+            //write each product to file with incrementing the total price
+            let totalPrice = 0;
+            order.products.forEach((prod) => {
+                totalPrice = totalPrice + (prod.quantity * prod.product.price);
+                pdfDoc.fontSize(14).text(prod.product.title +
+                    " - " +
+                    prod.quantity +
+                    " x " +
+                    "$" +
+                    prod.product.price);
+            });
+            //end of loop
+            pdfDoc.fontSize(14).text("---------------------------");
+            pdfDoc.fontSize(18).text("Total Price : $" + totalPrice);
+            pdfDoc.end();
+            ////////////////////////////////////////////////////
+        }
+        else if (!order) {
+            //11
+            const error = new Error("No order found");
+            error.code = 404;
+            //throw error - for sync, return next for async then/catch
+            return next(error);
+        }
+    })
+        .catch((err) => {
+        //next an error to use the default error handling function
+        next(err);
+    });
+};

@@ -70,7 +70,7 @@ exports.postAddProduct = (req, res, next) => {
     let imageUrl = "";
     console.log("image is :" + image);
     if (!image) {
-        allErrors = [...allErrors, { path: "productImage", msg: "please select a valid image type" }];
+        allErrors = [...allErrors, { path: "productImage", msg: "please select a valid image type jpeg/jpg/png" }];
     }
     else if (image) {
         imageUrl = image.path; //12
@@ -273,16 +273,16 @@ exports.postEditProduct = (req, res, next) => {
     // const prevPrice = 0;
     // const Sold = 0;
     //11
-    let errors = validationResult(req);
+    let allErrors = validationResult(req).errors;
     let imageUrl = "";
     //12
     if (!image) {
-        errors = [...errors, { path: "imageUrl", msg: "please select a valid image type" }];
+        allErrors = [...allErrors, { path: "productImage", msg: "please select a valid image type jpeg/jpg/png" }];
     }
     else if (image) {
         imageUrl = "/" + image.path; //12
     }
-    if (!errors.isEmpty()) {
+    if (allErrors.length > 0) {
         return res.status(422).render("admin/edit-product", {
             myTitle: "Add a product",
             editing: true,
@@ -317,7 +317,7 @@ exports.postEditProduct = (req, res, next) => {
                 size: size,
             },
             errorMessage: "Please check your inputs again, some may have been placed incorrectly",
-            validationErrors: errors.errors
+            validationErrors: allErrors
         });
     }
     product_1.ProductClassModel.findById(prodId)
