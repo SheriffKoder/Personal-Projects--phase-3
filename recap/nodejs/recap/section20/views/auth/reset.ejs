@@ -1,0 +1,25 @@
+<%- include("../includes/html-head.ejs") %>
+
+<link rel="stylesheet" href="/css/login_style.css">
+
+
+
+
+<%- include("../includes/html-start.ejs") %>
+
+
+    <%- include("../includes/index-header.ejs") %>
+
+    <main>
+        <form class="login-form" action="/reset" method="POST">
+            <div class="form-control">
+                <label for="emal">E-Mail</label>
+                <input type="email" name="email" id="title">
+            </div>
+
+            <input type="hidden" name="_csrf" value="<%=csrfToken%>">
+            <button class="btn" type="submit">Reset Password</button>
+        </form>
+    </main>
+    <%- include("../includes/index-footer.ejs") %>
+<%- include("../includes/html-end.ejs") %>
