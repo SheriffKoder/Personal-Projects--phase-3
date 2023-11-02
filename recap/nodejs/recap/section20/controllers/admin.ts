@@ -15,6 +15,10 @@ const { validationResult } = require("express-validator");
 const fileHelper = require("../util/file");
 
 
+//12.2
+const ITEMS_PER_PAGE = 2;
+
+
 
 //to use req.user and isLoggedIn
 interface Request_With_reqUser extends Request {
@@ -253,7 +257,29 @@ exports.postAddProduct = (req: Request_With_reqUser, res: Response, next: NextFu
 
 exports.getAdminProducts = (req: Request_With_reqUser, res: Response, next: NextFunction) => {
     // ProductClassModel.find()
-    ProductClassModel.find({userId: req.user._id})
+        //12.2
+        let page: number;
+        if (req.query.page) {
+            page = +req.query.page;
+        } else {
+            page = 1;
+        }
+        let totalItems: number;
+    
+    
+        //12.2
+    ProductClassModel.find({userId: req.user._id}).countDocuments()
+    .then((numProducts: number) => {
+        totalItems = numProducts;
+
+        //page 1 1-1 * 2 = skip 0, limit 2 -- get 0-2
+        //page 2 2-1 * 2 = skip 2, limit 2 -- get 2-4
+        //page 3 3-1 * 2 = skip 4, limit 2 -- get 4-6
+        return ProductClassModel.find({userId: req.user._id})
+        .skip((page-1)*ITEMS_PER_PAGE)
+        .limit(ITEMS_PER_PAGE)
+
+    })
     .then((products) => {
         res.render("admin/admin-products.ejs", 
         {
@@ -261,6 +287,22 @@ exports.getAdminProducts = (req: Request_With_reqUser, res: Response, next: Next
             myTitle: "Your Items",
             // isAuthenticated: req.isLoggedIn  //cookies //9.1
             // isAuthenticated: req.session.isLoggedIn //sessions //9.2
+
+            //give the view-page these properties to display to user
+            currentPage: page,
+            totalProducts: totalItems,
+
+            //2 * page (1) < have 4 products .. true
+            hasNextPage: (ITEMS_PER_PAGE * page) < totalItems,
+            hasPreviousPage: page > 1,
+
+            nextPage: page + 1,
+            previousPage: page - 1,
+
+            //ceil makes 5.5 = 6, 11/2 = 6 not 5.5
+            lastPage: Math.ceil(totalItems / ITEMS_PER_PAGE)
+        
+        
         });
 
     })

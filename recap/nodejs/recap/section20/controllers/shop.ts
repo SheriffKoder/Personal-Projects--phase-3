@@ -15,9 +15,34 @@ interface Request_With_reqUser extends Request {
 }
 
 
+const ITEMS_PER_PAGE = 2;
+const ORDERS_PER_PAGE = 2;
+
 exports.getProducts = (req: Request_With_reqUser, res: Response, next: NextFunction) => {
 
-    ProductClassModel.find()
+    //12.2
+    let page: number;
+    if (req.query.page) {
+        page = +req.query.page;
+    } else {
+        page = 1;
+    }
+    let totalItems: number;
+
+
+    //12.2
+    ProductClassModel.find().countDocuments()
+    .then((numProducts: number) => {
+        totalItems = numProducts;
+
+        //page 1 1-1 * 2 = skip 0, limit 2 -- get 0-2
+        //page 2 2-1 * 2 = skip 2, limit 2 -- get 2-4
+        //page 3 3-1 * 2 = skip 4, limit 2 -- get 4-6
+        return ProductClassModel.find()
+        .skip((page-1)*ITEMS_PER_PAGE)
+        .limit(ITEMS_PER_PAGE)
+
+    })
     .then((products)=> {
         res.render("shop/all-products.ejs",
         {
@@ -25,6 +50,23 @@ exports.getProducts = (req: Request_With_reqUser, res: Response, next: NextFunct
             myTitle: "All Products Page",
             // isAuthenticated: req.isLoggedIn  //cookies //9.1
             // isAuthenticated: req.session.isLoggedIn //sessions //9.2
+
+            //give the view-page these properties to display to user
+            currentPage: page,
+            totalProducts: totalItems,
+
+            //2 * page (1) < have 4 products .. true
+            hasNextPage: (ITEMS_PER_PAGE * page) < totalItems,
+            hasPreviousPage: page > 1,
+
+            nextPage: page + 1,
+            previousPage: page - 1,
+
+            //ceil makes 5.5 = 6, 11/2 = 6 not 5.5
+            lastPage: Math.ceil(totalItems / ITEMS_PER_PAGE)
+
+
+
         });
     })
     .catch((err) => {
@@ -242,8 +284,30 @@ exports.postOrder = (req: Request_With_reqUser, res: Response, next: NextFunctio
 
 exports.getOrders = (req: Request_With_reqUser, res: Response, next: NextFunction) => {
 
+    let page: number;
+    if (req.query.page) {
+        page = +req.query.page;
+    } else {
+        page = 1;
+    }
+    let totalOrders: number;
+
+
     //get all orders that belong to that user
     OrderClassModel.find({"user.userId": req.user._id})
+    .countDocuments()
+    .then((numOrders: number) => {
+        totalOrders = numOrders;
+
+        //page 1 1-1 * 2 = skip 0, limit 2 -- get 0-2
+        //page 2 2-1 * 2 = skip 2, limit 2 -- get 2-4
+        //page 3 3-1 * 2 = skip 4, limit 2 -- get 4-6
+        return OrderClassModel.find({"user.userId": req.user._id})
+        .skip((page-1)*ORDERS_PER_PAGE)
+        .limit(ORDERS_PER_PAGE)
+
+    })
+
     .then(orders => {
         
         res.render("shop/orders", {
@@ -251,6 +315,21 @@ exports.getOrders = (req: Request_With_reqUser, res: Response, next: NextFunctio
             myTitle: "Your Orders",
             // isAuthenticated: req.isLoggedIn  //cookies //9.1
             // isAuthenticated: req.session.isLoggedIn //sessions //9.2
+                    //give the view-page these properties to display to user
+            currentPage: page,
+            totalOrders: totalOrders,
+
+            //2 * page (1) < have 4 products .. true
+            hasNextPage: (ORDERS_PER_PAGE * page) < totalOrders,
+            hasPreviousPage: page > 1,
+
+            nextPage: page + 1,
+            previousPage: page - 1,
+
+            //ceil makes 5.5 = 6, 11/2 = 6 not 5.5
+            lastPage: Math.ceil(totalOrders / ORDERS_PER_PAGE)
+        
+        
         })
     })
     .catch(err => {

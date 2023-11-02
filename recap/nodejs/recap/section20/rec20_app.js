@@ -238,3 +238,170 @@ mongoose.connect(process.env.MongoDbUri)
     .catch((err) => {
     console.log("mongoose connect error :: " + err);
 });
+/*
+
+//section 20
+
+//12
+using multer library to use image files
+to store on the filesystem and their paths on the database
+
+skip on edit or replace images
+downloading files with fs read
+setting headers for naming
+streaming data
+deleting files with product delete
+
+
+
+
+
+
+////ejs
+//edit-product
+add a file picker instead of url text
+input type=file
+
+//other ejs that uses the image
+<img src="<%= product.imageUrl %>"
+
+
+
+add to form
+enctype="multipart/form-data" ("www-formUrlEncoded" text only)
+tells the server that this submission/request
+will not contain just plain text, but mixed data, text and binary data
+
+
+////controller
+postAddProduct, req.body.image > req.file
+store image path with / at the begining
+
+
+
+////router
+remove imageUrl validation
+
+
+////app.js
+body-parser cannot other than text data
+so will use multer for (text and files)
+
+fileStorage (destination), fileFilter(type set) in app.js
+use multer
+
+serve the images folder in a "static way"
+duplicate the express.static in app.js to share the images folder
+"/images", express.static - for /images folder not the root
+
+
+
+
+- let us start with the
+- router ==
+- controller postEdit, postAdd, postDelete
+- app.js
+- util/file
+- ejs
+
+
+////admin.ts router
+remove the imageUrl validations
+
+////admin.ts controller
+import the fileHelper
+
+postEdit, postAddProduct
+if there is no image (did not pass filter), pass an error message ?
+add "/"+image.path to the imageUrl stored in DB
+
+- check on how the imageUrl is passed to the ejs
+- delete image from fs before product save ? #459
+- in postDelete, find the product with id, delete the image for that product
+using the fileHelper.deleteFile, then delete product from DB
+
+
+////app.js
+//add another express.static for the /images folder
+//import multer and ts types
+//set fileStorage destination/filename
+//set fileFilter
+//use multer
+
+
+//util/file.ts
+add a function that deletes the file needed
+by fs.unlink file-path
+
+//ejs
+edit-product
+add to form: enctype="multipart/form-data"
+input type
+
+
++3h
+
+--probably will use this section at the start when configuring the ejs's
+
+- use multer to filter image file types, and set file destination
+- allow to show a message error when posting the form with a wrong type of file (not an image)
+
+
+//12.1
+
+# npm install --save pdfkit
+
+use PDFKit to generate pdf
+- add lnk for order# to be "/orders/<%=order._id>"
+
+- import pdfKit
+- getInvoice controller, router
+- create pdf with pdfKit with looping over each product in the order
+- create this folder root/data/invoices
+
+
+
+
+
+using the req.params can attach the order id to the pdf
+only users with that order (authenticated) can request this invoice
+
+fs.readFile : read the entire content into memory
+so will use streaming
+
+want to:
+add a label to display previous image file name
+do returned catch error messages get displayed to user ?
+
+
+
+
+//12.2 - page numbering
+
+//ejs
+- index.ejs add links with query parameters
+- actually in a separate include to use in other pages
+
+//logic
+- in the all-products/idex controller, will limit the product.find
+to skip and limit
+totalItems to have a range of page links
+
+as we used .countDocuments() that does not retrieve all
+which only counts them (faster than retrieving them)
+
+and .skip() .limit() provided by mongoDB
+which does not do server side filtering on the data
+it re-filters the data on the database server
+
+
+- shop controllers
+- ejs
+
+
+
+
+
+
+
+*/

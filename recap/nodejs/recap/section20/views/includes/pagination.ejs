@@ -1,0 +1,71 @@
+
+<div class="pagination__container">
+
+    <!-- //adding a link without / will concatenate this string
+    to the current link -->
+
+        <% if (currentPage !==1) { %>
+            <div>
+                <a href="?page=1" class="">First</a> 
+            </div>
+        <%}%>
+
+
+    <div>
+        <%if (hasPreviousPage) {%>
+            <a href="?page=<%=previousPage%>" class="availablePagination">
+                < Previous 
+            </a>
+        <%} else {%>
+            <a class="notAvailablePagination">
+                < Previous
+            </a>
+        <%}%>
+    </div>
+
+
+    <!-- //want to display page 1,2,3,4 till 7
+    //i have 1
+    //want 2 also -->
+
+
+    <div>
+        <% for (i=currentPage; i <=currentPage+2 && i<=lastPage; i++) { %>
+            <a href="?page=<%=i%>" class="<%= (i=== currentPage)? 'activePagination' : ''%>">
+                <%=i%>
+            </a>
+        <%}%>    
+    </div>
+
+
+
+
+    <!-- <div>
+        <%if (hasNextPage) {%>
+            <a href="?page=<%=nextPage%>" class="availablePagination">
+                <%=nextPage%>
+            </a>
+        <%}%>
+
+    </div> -->
+    <!-- <div>
+        <%if (hasNextPage) {%>
+            <a href="?page=<%=hasNextPage%>" class="availablePagination">
+                Next >
+            </a>
+        <%} else if (!hasNextPage) {%>
+            <a class="notAvailablePagination">
+                Next >
+            </a>
+        <%}%>
+    </div> -->
+
+        <%if (lastPage !== currentPage && nextPage !== lastPage) {%>
+            <div>
+                <a href="?page=<%=lastPage%>" >
+                    Last
+                </a>
+            </div>
+        <%}%>
+
+</div>

@@ -8,6 +8,8 @@ const user_1 = require("../models/user");
 const { validationResult } = require("express-validator");
 //12
 const fileHelper = require("../util/file");
+//12.2
+const ITEMS_PER_PAGE = 2;
 exports.getAddProduct = (req, res, next) => {
     res.render("admin/edit-product", {
         myTitle: "Add a Product",
@@ -178,13 +180,42 @@ exports.postAddProduct = (req, res, next) => {
 };
 exports.getAdminProducts = (req, res, next) => {
     // ProductClassModel.find()
-    product_1.ProductClassModel.find({ userId: req.user._id })
+    //12.2
+    let page;
+    if (req.query.page) {
+        page = +req.query.page;
+    }
+    else {
+        page = 1;
+    }
+    let totalItems;
+    //12.2
+    product_1.ProductClassModel.find({ userId: req.user._id }).countDocuments()
+        .then((numProducts) => {
+        totalItems = numProducts;
+        //page 1 1-1 * 2 = skip 0, limit 2 -- get 0-2
+        //page 2 2-1 * 2 = skip 2, limit 2 -- get 2-4
+        //page 3 3-1 * 2 = skip 4, limit 2 -- get 4-6
+        return product_1.ProductClassModel.find({ userId: req.user._id })
+            .skip((page - 1) * ITEMS_PER_PAGE)
+            .limit(ITEMS_PER_PAGE);
+    })
         .then((products) => {
         res.render("admin/admin-products.ejs", {
             prods: products,
             myTitle: "Your Items",
             // isAuthenticated: req.isLoggedIn  //cookies //9.1
             // isAuthenticated: req.session.isLoggedIn //sessions //9.2
+            //give the view-page these properties to display to user
+            currentPage: page,
+            totalProducts: totalItems,
+            //2 * page (1) < have 4 products .. true
+            hasNextPage: (ITEMS_PER_PAGE * page) < totalItems,
+            hasPreviousPage: page > 1,
+            nextPage: page + 1,
+            previousPage: page - 1,
+            //ceil makes 5.5 = 6, 11/2 = 6 not 5.5
+            lastPage: Math.ceil(totalItems / ITEMS_PER_PAGE)
         });
     })
         .catch((err) => {

@@ -1,6 +1,7 @@
 <%- include("../includes/html-head.ejs") %>
 
 <link rel="stylesheet" href="/css/orders_style.css">
+<link rel="stylesheet" href="/css/pagination.css">
 
 
 
@@ -51,7 +52,7 @@
 
                 <div class="main__main__content__orders__orders-amount">
                     <span class="order-amount__count" aria-label="Amount of recent orders">
-                        <b><%= orders.length%></b> <span aria-hidden="true">placed in</span>
+                        <b><%=totalOrders%></b> <span aria-hidden="true">placed in</span>
                     </span>
                     <span class="orders_amount__filter__container">
                         <select class="orders_amount__filter" aria-label="select the history duration for the orders displayed">
@@ -142,6 +143,16 @@
 
                         <% }) %>
                     <% } %>
+
+                    <%- include('../includes/pagination.ejs', 
+                    {
+                        currentPage: currentPage,
+                        nextPage: nextPage,
+                        previousPage: previousPage,
+                        lastPage: lastPage,
+                        hasNextPage, hasNextPage,
+                        hasPreviousPage: hasPreviousPage
+                    }) %>
 
 
                 </div>

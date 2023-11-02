@@ -1,8 +1,7 @@
 <%- include("../includes/html-head.ejs") %>
 
 <link rel="stylesheet" href="/css/all-products.css">
-
-
+<link rel="stylesheet" href="/css/pagination.css">
 
 
 <%- include("../includes/html-start.ejs") %>
@@ -14,7 +13,7 @@
 
         <aside class="main__main__top-bar" aria-label="products amount and sort by">
             <span class="main__main__top-bar-container">
-                <span><span aria-label="number of pages the results are spread">1–16 </span>of over 4,000 results</span>
+                <span><span aria-label="number of pages the results are spread">Page <%=currentPage%> of <%=lastPage%></span>, displaying <%=totalProducts%> products</span>
                 <select class="main__main__top-bar--sort" aria-label="sort products drop down select">
                     <option>Sort by: Featured</option>
                 </select>
@@ -173,13 +172,24 @@
 
                             <% i = i + 1 %>
                             <% } %>
-                            <% } else { %>
-                                <h1>No Products Found!</h1>
-                            <% } %>
-        
+
+                        <% } else { %>
+                            <h1>No Products Found!</h1>
+                        <% } %>
 
 
                     </div>
+
+                    <%- include('../includes/pagination.ejs', 
+                    {
+                        currentPage: currentPage,
+                        nextPage: nextPage,
+                        previousPage: previousPage,
+                        lastPage: lastPage,
+                        hasNextPage, hasNextPage,
+                        hasPreviousPage: hasPreviousPage
+                    }) %>
+
 
                 </div>
             </div>
