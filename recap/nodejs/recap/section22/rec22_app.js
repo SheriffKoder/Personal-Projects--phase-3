@@ -313,11 +313,12 @@ but with two important differences
 - router
     adminRouter.delete("/product/:productId", isAuthAdmin, adminController.deleteProduct);
 - controller
+        change req.body.prodId to req.params.prodId
         res.status(200).json({
             "message": "Success!"
         });
 - add the admin-async.js
-    get the prodId, csrfToken of the elements near this button
+    get the prodId, csrfToken of the elements near this button node
     open a fetch method that refers to the prodId and has csrfToken in the header
     then (promise resolved), .json the result(response body) and then delete the item from dom
 

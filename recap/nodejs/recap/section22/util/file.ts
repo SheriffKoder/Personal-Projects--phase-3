@@ -11,3 +11,5 @@ const deleteFile = (filePath: string) => {
         }
     })
 }
+
+exports.deleteFile = deleteFile;

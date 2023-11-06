@@ -23,7 +23,7 @@ const deleteProduct = (btn) => {
         //the csrf token looks in the req body as well as 
         //the query parameters and the headers, so we could add it there
         //you can find all the keys will be looked in the csurf Github docs
-        if (prodId && csrf) {
+        if (csrf) {
             //fetch
             fetch("/admin/products/" + prodId, {
                 method: "DELETE",
@@ -33,14 +33,14 @@ const deleteProduct = (btn) => {
             })
                 .then((result) => {
                 //response body
-                // return result.json();
+                return result.json(); //to display message on user's browser console
             })
                 .then((data) => {
-                // console.log(data);
-                // if (productElement?.parentNode) {
-                //productElement.remove(); //will work on all modern browsers but not IE
-                // productElement.parentNode.removeChild(productElement); //will work on all modern browsers
-                // }
+                console.log(data);
+                if (productElement === null || productElement === void 0 ? void 0 : productElement.parentNode) {
+                    // productElement.remove(); //will work on all modern browsers but not IE
+                    productElement.parentNode.removeChild(productElement); //will work on all modern browsers
+                }
             });
         }
     }

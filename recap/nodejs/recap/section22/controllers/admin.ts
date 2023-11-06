@@ -551,10 +551,12 @@ exports.postEditProduct = (req: Request_With_reqUser, res: Response, next: NextF
 //13 - edits
 exports.deleteProduct = (req: Request_With_reqUser, res: Response, next: NextFunction) =>  {
 
-    const prodId = req.body.productId;
+    // const prodId = req.body.productId;
+    const prodId = req.params.productId;
+
 
     // ProductClassModel.findByIdAndRemove(prodId)
-
+    console.log(prodId);
     //12
     ProductClassModel.findById(prodId)
     .then((product) => {
@@ -562,12 +564,15 @@ exports.deleteProduct = (req: Request_With_reqUser, res: Response, next: NextFun
             const error = new Error("Product not found to be deleted") as Error_With_Status;
             return next (error);
         }
+        if (product) {
+            console.log(product.imageUrl.slice(1));
+            fileHelper.deleteFile(product.imageUrl.slice(1));
+        }
 
-        return fileHelper.deleteFile(product.imageUrl.slice(1));
+    })
+    .then(() => {
+        return ProductClassModel.deleteOne({_id: prodId, userId: req.user._id});
 
-    }).then(() => {
-        
-        return ProductClassModel.deleteOne({_id: prodId, userId: req.user._id})
     })
     
     // ProductClassModel.deleteOne({_id: prodId, userId: req.user._id})
