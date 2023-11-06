@@ -46,7 +46,11 @@
 // npm install --save @types/multer
 
 //12.1
-//# npm install --save pdfkit
+// npm install --save pdfkit
+
+//13.1
+// npm install --save stripe
+
 
 
 //module imports
@@ -351,4 +355,66 @@ mongoose.connect(process.env.MongoDbUri)
     });
 
 //Async js requests //13
+//Payments //13.1
 
+/*
+///////////////////////////////////////////////////////////////////
+//The JSON Format
+
+just like a js object 
+but with two important differences
+1) all the keys have to be wrapped in ""
+2) key values can be nested objects and arrays
+
+{
+    "name": "your name",
+    "age": 29,
+    "active": true
+    courses: ["node-js", "react"],
+    profile: { "joined: 2017-05-21", "courses": 2}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+*/
+
+
+//Payments
+
+/*
+
+stripe sends back a confirmation token to the node app
+we send a charge object to stripe
+
+////stripe
+site > developers tab > test key API
+make a name, click new business at top left
+
+>> grow your online business with payments > read the docs
+this will take us to the stripe documentation
+https://strp.com/docs/payments
+there you can learn about all the different ways of collecting payments
+
+on the docs page > web tab > integrate strp js tab
+however new site is
+strp.com/docs/payment/quickstart
+
+//13.1
+
+
+
+
+
+*/

@@ -14,7 +14,7 @@ interface IItems {
 }
 
 interface ICart {
-    items: IItems;
+    items: IItems[];
 }
 
 interface IUser {

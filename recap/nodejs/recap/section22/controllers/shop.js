@@ -154,7 +154,9 @@ exports.postCartDeleteProduct = (req, res, next) => {
 };
 //8
 const order_js_1 = require("../models/order.js");
-exports.postOrder = (req, res, next) => {
+// exports.postOrder = (req: Request_With_reqUser, res: Response, next: NextFunction) => {
+//-13.1
+exports.getCheckoutSuccess = (req, res, next) => {
     if (req.user) {
         req.user
             .populate("cart.items.productId")
@@ -312,5 +314,55 @@ exports.getInvoice = (req, res, next) => {
         .catch((err) => {
         //next an error to use the default error handling function
         next(err);
+    });
+};
+//13.1
+const stripe = require("stripe")(process.env.stripe_sec_test_k);
+exports.getCheckout = (req, res, next) => {
+    let products;
+    let total = 0;
+    req.user.populate("cart.items.productId")
+        .then((user) => {
+        products = user.cart.items;
+        products.forEach(p => {
+            total = total + (p.quantity * p.productId.price);
+        });
+        return stripe.checkout.sessions.create({
+            payment_method_types: ["card"],
+            mode: "payment",
+            line_items: products.map(p => {
+                return {
+                    quantity: p.quantity,
+                    price_data: {
+                        currency: "egp",
+                        unit_amount: p.productId.price * 100,
+                        product_data: {
+                            name: p.productId.title,
+                            description: p.productId.description
+                        }
+                    }
+                };
+            }),
+            //req.get("host") will give us our host address (localhost:3000) on development
+            // > http://localhost:3000/checkout/success
+            //create routes
+            success_url: req.protocol + "://" + req.get("host") + "/checkout/success",
+            cancel_url: req.protocol + "://" + req.get("host") + "/checkout/cancel",
+        });
+    })
+        .then((session) => {
+        res.render("shop/checkout", {
+            myTitle: "Checkout",
+            products: products,
+            totalSum: total,
+            sessionId: session.id,
+            Pub_Test_K: process.env.stripe_pub_test_k
+        });
+    })
+        .catch((err) => {
+        const error = new Error(err);
+        error.code = 500;
+        //throw error - for sync, return next for async then/catch
+        return next(error);
     });
 };

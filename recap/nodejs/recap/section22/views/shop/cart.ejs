@@ -151,7 +151,7 @@
                                     <span class="globalCurrency"></span> <%=totalPrice%>
                                 </span>
                             </p>
-                            <form action="/create-order" method="POST" style="width: 100%; display: flex;">
+                            <form action="/checkout" method="POST" style="width: 100%; display: flex;">
                                 <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                                 <button type="submit" class="yellow-button row1--extra--proceed-submit" aria-label="proceed to checkout">Proceed to Buy</button>
                             </form>
