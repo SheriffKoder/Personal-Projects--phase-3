@@ -1,0 +1,328 @@
+<%- include("../includes/html-head.ejs") %>
+
+    <link rel="stylesheet" href="/css/cart_style.css">
+
+
+
+<%- include("../includes/html-start.ejs") %>
+
+
+    <%- include("../includes/index-header.ejs") %>
+    <main id="main">
+
+        <div class="main__main__wrapper"> <!--100vw-->
+            <div class="main__main__content"> <!--min/max width-->
+                <!--form for the deselect etc. -->
+                <div class="main__main__content__row1" id="cart_items_form"> <!--contains cart/total-->
+                    <section class="main__main__content__row1--cart" aria-label="Shopping cart">
+
+                        <div class="main__main__content__row1--cart--header">
+                            <% if (products.length > 0) { %>
+                            <h1>Shopping Cart</h1>
+                            <a href="#saved_items_area" aria-label="skip the cart and move to next area" class="sr-only">next</a>
+
+                            <a>Deselect all items</a>
+                            <%} else { %>
+                                <h1>Your Amazon Cart is empty.</h1>
+                                <p style="margin-top: 0.5rem">
+                                    Your shopping basket lives to serve. Give it purpose – fill it with groceries, clothing, household supplies, electronics and more.
+                                    Continue shopping on the <a>amazon.eg homepage</a>, learn about <a>Today's Deals</a>, or visit your <a>Wish List</a>.
+                                </p>
+                            <%}%>    
+                        </div>
+
+                        <% let FreeDeliveryEligible = 0 %>
+                        <% let totalPrice = 0 %>
+                        <% let totalQuantity = 0 %>
+                        <% let PaidDeliveryItems = 0 %>
+
+                        <% if (products.length > 0) { %>
+                        <ul class="main__main__content__row1--cart--list" aria-label="cart items list">
+                            <a href="#cart_proceed_area" aria-label="skip cart items list and go to the proceed area" class="sr-only">proceed</a>
+
+                            <% let i = 1 %>
+                            <% products.forEach(p => { %>
+                                
+                                <li class="main__main__content__row1--cart--list--item--container" aria-label="cart item <%=i%>">
+                                    <label><input type="checkbox" for="item1" aria-label="remove item from checkout"></label>
+                                    <div id="item1" class="main__main__content__row1--cart--list--item">
+                                        <div class="cart--list--item--image" aria-label="item's image">
+                                            <img src="<%=p.productId.imageUrl%>" alt="<%=p.productId.title%>">
+                                        </div>
+                                        <div class="cart--list--item--description" aria-label="item's description">
+                                            <h2 class="cart--list--item--description--name" aria-label="item's title">
+                                                <%=p.productId.title%>
+                                            </h2>
+                                            <p class="cart--list--item--description--price" aria-label="item's price">
+                                                <span class="globalCurrency"></span> <%=p.productId.price%>
+                                            </p>
+                                            <p class="cart--list--item--description--availability 
+                                            <%= (p.productId.availability > 0) ? 'available_green' : 'not_available_red' %>"
+                                            aria-label="item's availability">
+                                                <%= (p.productId.availability > 0) ? "In Stock" : "Out of stock" %>
+                                            </p>
+                                            <p class="cart--list--item--description--delivery" aria-label="item's delivery option">
+                                                <% if (p.productId.deliveryFees === false) { %> Eligible for FREE delivery <% } else { %> Delivery <span class="deliveryFees"></span> <span class="globalCurrency"></span> <%}%>
+                                            </p>
+
+
+                                            <div class="cart--list--item--description--actions" aria-label="item's control buttons" tabindex="0">
+                                                
+                                                <!--will wrap in a form with action/route to update quantity-->
+                                                <form action="/changeQuantity" method="POST" id="changeQtyForm">
+                                                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                                                    <select aria-label="item's count" name="requestedCount" onchange="document.getElementById('changeQtyForm').submit();">
+                                                        <option>Qty: <%= p.quantity %></option>
+                                                        <!--continue adding other qty options depending on availability and not exceed 10-->
+                                                        <% for(i=1; i<= p.productId.availability && i < 11; i++) { %>
+                                                            <% if (i !== p.quantity) { %>
+                                                                <option><%=i%></option>
+                                                            <%}%>
+                                                        <%}%>
+                                                    </select>
+                                                    <input type="hidden" value="<%= p.productId._id%>" name="productId">
+                                                </form>
+
+                                                <form action="/cart-delete-item" method="POST">
+                                                    <input type="hidden" value="<%= p.productId._id%>" name="productId">
+                                                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                                                    <button aria-label="delete item from cart" type="submit">Delete</button>
+                                                </form>    
+
+                                                <!--will wrap in forms with respective actions-->
+                                                <button aria-label="move item to 'save for later' list">Save for later</button>
+                                                <button aria-label="share item">Share</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <% totalPrice = totalPrice + (p.productId.price * p.quantity) %>
+                                <% totalQuantity = totalQuantity + p.quantity %>
+                                <% if (p.productId.deliveryFees === true) { %>
+                                    <% PaidDeliveryItems = PaidDeliveryItems + 1; %>
+                                    
+                                <% } else { %>
+                                    <% FreeDeliveryEligible = FreeDeliveryEligible + (p.productId.price * p.quantity) %>
+                                <%}%>
+                            <%})%>
+                            <%}%>
+
+
+
+                        </ul>
+                        <% if (products.length > 0) { %>
+                        <p class="right-text-align row1--extra--proceed-confirm-total" aria-label="Cart's total price">
+                            Subtotal (<%=totalQuantity%> items): 
+                            <span class="row1--extra--proceed-confirm-total-price"> 
+                                <span class="globalCurrency"></span> <%=totalPrice%>
+                        </span>
+                        </p>
+                        <%}%>
+
+
+                    </section>
+                    <% if (products.length > 0) { %>
+                    <section class="main__main__content__row1--extra" id="cart_proceed_area" aria-label="proceed to checkout area">
+                        <div class="row1--extra--proceed">
+                            <div class="row1--extra--proceed--qualify">
+                                <% if (FreeDeliveryEligible >= 450) { %>
+                                    <% if (PaidDeliveryItems >= 1) { %>
+                                    <span class="proceed-qualified-1">Part of your order qualifies for FREE Shipping.</span>
+                                    <%}%>
+                                    <% if (PaidDeliveryItems < 1) { %>
+                                        <span class="proceed-qualified-1">Your order qualifies for FREE Shipping.</span>
+                                        <%}%>    
+                                    <span class="proceed-qualified-2">Choose this option at checkout.</span>
+                                <% } else if (FreeDeliveryEligible < 450) { %>
+                                    <span class="proceed-qualified-3">
+                                        Add 
+                                        <span class="not_available_red">
+                                            <span class="globalCurrency"></span> <%=Math.round((450 - FreeDeliveryEligible)*100)/100 %>
+                                        </span>
+                                        of eligible items to your order to qualify for FREE Shipping.
+                                    </span>
+                                <% } %>
+                                <a href="" aria-label="more details about free shipping">See details</a>
+                            </div>
+                            <div class="row1--extra--proceed-confirm">
+                            <p class="row1--extra--proceed-confirm-total" aria-label="Cart's total price">
+                                Subtotal (<%=totalQuantity%> items): 
+                                <span class="row1--extra--proceed-confirm-total-price"> 
+                                    <span class="globalCurrency"></span> <%=totalPrice%>
+                                </span>
+                            </p>
+                            <form action="/create-order" method="POST" style="width: 100%; display: flex;">
+                                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                                <button type="submit" class="yellow-button row1--extra--proceed-submit" aria-label="proceed to checkout">Proceed to Buy</button>
+                            </form>
+                            </div>
+                        </div>
+                    </section>
+                    <%}%>
+
+                </div>
+                
+                <section class="main__main__content__row2" aria-label="saved for later area" id="saved_items_area">
+
+                    <h1>Your items</h1>
+                    <a href="#frequently_purchased_area" aria-label="skip saved items and move to the next area" class="sr-only">next</a>
+                    <nav class="main__main__content__row2--tabs" aria-label="list navigation tabs">
+                        <a class="cart--active-tab row2-tab" aria-label="view the saved for later items" id="saved" >Saved for later</a>
+                        <a class="cart--not-active-tab row2-tab" aria-label="view previously purchased items to add to cart" id="buy-again">Buy it again</a>
+                    </nav>
+
+
+                    <div class="row2--saved-items--wrapper" aria-label="saved for later items list" tabindex="0">
+                        <h2>Saved items</h2>
+                        <ul class="row2--saved-items--container">
+                            <li class="saved-item" aria-label="saved item">
+                                <div class="saved-item--image-container" aria-label="saved item's image">
+                                    <img src="/img/product-image.jpg" alt="screen protector">
+                                </div>
+                                <div class="saved-item--description" aria-label="saved item's description area">
+                                    <p href="" class="saved-item--description--title" aria-label="saved item's title">Screen protector</p>
+                                    <p href="" class="saved-item--description--seller" aria-label="saved item's seller">seller</p>
+                                    <p class="saved-item--description--availability not_available_red" aria-label="saved item's availability">currently unavailable</p>
+                                    <span class="saved-item--description-controls" aria-label="saved item's control links">
+                                        <a href="" aria-label="delete from the saved items list">Delete</a>
+                                        <a href="" aria-label="Add again to cart items">Add to list</a>
+                                    </span>
+                                </div>
+                            </li>
+
+                            <li class="saved-item">
+                                <div class="saved-item--image-container">
+                                    <img src="/img/product-image.jpg">
+                                </div>
+                                <div class="saved-item--description">
+                                    <a href="" class="saved-item--description--title">Screen protector</a>
+                                    <a href="" class="saved-item--description--seller">seller</a>
+                                    <span class="saved-item--description--availability not_available_red">currently unavailable</span>
+                                    <span class="saved-item--description-controls">
+                                        <a href="">Delete</a>
+                                        <a href="">Add to list</a>
+                                    </span>
+                                </div>
+                            </li>
+                        </ul>
+
+                    </div>
+
+                    <div class="row2--buy-again-items--wrapper" aria-label="saved for later items list" tabindex="0">
+
+                        <h2>Previously purchased</h2>
+
+                        <ul class="row2--buy-again-items-container" aria-label="previously purchased items list">
+                            <li class="buy-again-item" aria-label="previously purchased item">
+                                <div class="buy-again-item--image-container" aria-label="previously bought item's image">
+                                    <img src="/img/product-image.jpg" alt="screen protector">
+                                </div>
+                                <div class="buy-again-item--description" aria-label="previously bought item's description area">
+                                    <p href="" class="buy-again-item--description--title" aria-label="previously bought item's title">Screen protector for Samsung S Ultra</p>
+                                    <span class="buy-again-item--description--rating" aria-label="previously bought item's rating">Stars</span>
+                                    <p class="buy-again-item--description--price" aria-label="previously bought item's price"><span class="globalCurrency"></span> 310.00</p>
+                                    <p class="buy-again-item--description--only" aria-label="previously bought item's availability">Only 4 left in stock - order soon</p>
+                                    <button class="yellow-button buy-again-item--description--button" aria-label="add this previously bought item to cart">Add to Cart</button>
+                                </div>
+                            </li>
+
+                            <li class="recommended-item">
+                                <div class="recommended-item--image-container">
+                                    <img src="/img/product-image.jpg">
+                                </div>
+                                <div class="recommended-item--description">
+                                    <a href="" class="recommended-item--description--title">Screen protector for Samsung S Ultra</a>
+                                    <span class="recommended-item--description--rating">Stars</span>
+                                    <span class="recommended-item--description--price"><span class="globalCurrency"></span> 310.00</span>
+                                    <span class="recommended-item--description--only">Only 4 left ins stock - order soon</span>
+                                    <button class="yellow-button recommended-item--description--button">Add to Cart</button>
+                                </div>
+                            </li>
+
+                            <li class="recommended-item">
+                                <div class="recommended-item--image-container">
+                                    <img src="/img/product-image.jpg">
+                                </div>
+                                <div class="recommended-item--description">
+                                    <a href="" class="recommended-item--description--title">Screen protector for Samsung S Ultra</a>
+                                    <span class="recommended-item--description--rating">Stars</span>
+                                    <span class="recommended-item--description--price"><span class="globalCurrency"></span> 310.00</span>
+                                    <span class="recommended-item--description--only">Only 4 left ins stock - order soon</span>
+                                    <button class="yellow-button recommended-item--description--button">Add to Cart</button>
+                                </div>
+                            </li>
+                        </ul>
+
+                    </div>
+                    
+                </section>
+
+
+            </div>
+
+            <section class="main__main__content__row3__wrapper" id="frequently_purchased_area" aria-label="frequently purchased items on amazon">
+                <div class="main__main__content__row3">
+                <h2>Frequently purchased</h2>
+                <a href="#cart_items_form" aria-label="move to the beginning of page and skip this area" class="sr-only">next</a>
+
+                <ul class="row3--items-container" aria-label="recommended items list">
+                    <li class="recommended-item" aria-label="recommended item">
+                        <div class="recommended-item--image-container" aria-label="recommended-item's image">
+                            <img src="/img/product-image.jpg" alt="screen protector">
+                        </div>
+                        <div class="recommended-item--description" aria-label="recommended-item's description area">
+                            <p href="" class="recommended-item--description--title" aria-label="recommended-item's title">Screen protector for Samsung S Ultra</p>
+                            <span class="recommended-item--description--rating" aria-label="recommended-item's rating">Stars</span>
+                            <p class="recommended-item--description--price" aria-label="recommended-item's price"><span class="globalCurrency"></span> 310.00</p>
+                            <p class="recommended-item--description--only" aria-label="recommended-item's availability">Only 4 left in stock - order soon</p>
+                            <button class="yellow-button recommended-item--description--button" aria-label="add this recommended-item to cart">Add to Cart</button>
+                        </div>
+                    </li>
+
+                    <li class="recommended-item">
+                        <div class="recommended-item--image-container">
+                            <img src="/img/product-image.jpg">
+                        </div>
+                        <div class="recommended-item--description">
+                            <a href="" class="recommended-item--description--title">Screen protector for Samsung S Ultra</a>
+                            <span class="recommended-item--description--rating">Stars</span>
+                            <span class="recommended-item--description--price"><span class="globalCurrency"></span> 310.00</span>
+                            <span class="recommended-item--description--only">Only 4 left ins stock - order soon</span>
+                            <button class="yellow-button recommended-item--description--button">Add to Cart</button>
+                        </div>
+                    </li>
+
+                    <li class="recommended-item">
+                        <div class="recommended-item--image-container">
+                            <img src="/img/product-image.jpg">
+                        </div>
+                        <div class="recommended-item--description">
+                            <a href="" class="recommended-item--description--title">Screen protector for Samsung S Ultra</a>
+                            <span class="recommended-item--description--rating">Stars</span>
+                            <span class="recommended-item--description--price"><span class="globalCurrency"></span> 310.00</span>
+                            <span class="recommended-item--description--only">Only 4 left ins stock - order soon</span>
+                            <button class="yellow-button recommended-item--description--button">Add to Cart</button>
+                        </div>
+                    </li>
+
+
+
+
+                </ul>
+                
+                </div>
+            </section>
+        </div>
+
+
+    </main>
+
+    <%- include("../includes/index-footer.ejs") %>
+
+    
+    <script src="/js/code.jquery.com_jquery-3.7.0.js"></script>
+    <script src="/js/main_cart.js"></script>
+
+
+<%- include("../includes/html-end.ejs") %>
+
