@@ -12,7 +12,10 @@ import {signIn, signOut, useSession, getProviders} from "next-auth/react";
 export const Nav = () => {
 
   // dummy user authentication
-  const isUserLoggedIn = true;
+  // const isUserLoggedIn = true;
+
+  //02.05
+  const {data: session} = useSession();
 
   //for mobile menu //01.05
   const [toggleDropdown, setToggleDropdown] = useState(false);
@@ -21,11 +24,11 @@ export const Nav = () => {
   const [providers, setProviders] = useState(null);
   //set providers, run only at start []
   useEffect(()=> {
-    const setProviders = async () => {
+    const setUpProviders = async () => {
       const response = await getProviders();
       setProviders(response);
     }
-    setProviders(); //not called anywhere, so call it here, allow us to sign in using google and next auth
+    setUpProviders(); //not called anywhere, so call it here, allow us to sign in using google and next auth
   }, []);
 
 
@@ -45,10 +48,14 @@ export const Nav = () => {
         <p className="logo_text">Promtopia</p>
       </Link>
 
+      {/* //02.05 */}
+      {/* {alert(session?.user)}  //will say undefined, so it is false */}
+      {/* {alert(providers)} //says null */}
+
     {/* Desktop navigation, visible/flex on smaller devices, hidden by default */}
     <div className="sm:flex hidden">
-      
-      {isUserLoggedIn ? (
+      {/* {isUserLoggedIn ? ( //-02.05*/}
+      {session?.user ? (
           <div class="flex gap-3 md:gap-5">
 
             <Link href="/create-prompt" className="black_btn">
@@ -60,7 +67,8 @@ export const Nav = () => {
             </button>
 
             <Link href="/profile">
-              <Image src="/images/logo.svg" width={37} height={37} className="rounded-full" alt="profile" />
+            {/* // 02.06  */}
+              <Image src={session?.user.image}  width={37} height={37} className="rounded-full" alt="profile" />
             </Link>
           
           </div> 
@@ -74,12 +82,12 @@ export const Nav = () => {
           purpose: show all the different providers and show the buttons for the sign up
           in our case will use only one provider, google-auth*/}
           {providers && 
-            Object.values(providers).map((provider) => {
+            Object.values(providers).map((provider) => (
               <button type="button" key={provider.name} onClick={() => signIn(provider.id)} className="black_btn">
                 Sign In
 
               </button>
-            })
+            ))
           }
           </>
       )}
@@ -89,10 +97,11 @@ export const Nav = () => {
     {/* Mobile navigation */}
     {/* //01.05 */}
     <div className="sm:hidden flex relative">
-          {isUserLoggedIn ? (
+          {/* {isUserLoggedIn ? ( //-02.05*/}
+          {session?.user ? (
             <div className="flex">
                <Image 
-                  src="/images/logo.svg" 
+                  src={session?.user.image}
                   alt="profile" 
                   width={37} 
                   height={37}
@@ -131,12 +140,12 @@ export const Nav = () => {
             //01.04
             <>
               {providers && 
-                Object.values(providers).map((provider) => {
+                Object.values(providers).map((provider) => (
                   <button type="button" key={provider.name} onClick={() => signIn(provider.id)} className="black_btn">
                     Sign In
 
                   </button>
-                })
+                ))
               }
             </>
           )}

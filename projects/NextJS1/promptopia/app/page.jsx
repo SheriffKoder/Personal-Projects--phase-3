@@ -22,7 +22,7 @@ const Home = () => {
             discover, create and share creative prompts
         </p>
 
-        {/* the feed component, not created yet so will leave a comment */}
+        {/* when the feed component, not created yet so will leave a comment */}
         {/* feed */}
         {/* //01.02 */}
         <Feed />

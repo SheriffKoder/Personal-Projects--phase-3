@@ -7,7 +7,7 @@ import { Schema, model, models } from "mongoose";
 //this prevents redefining the model and ensures that the existing model is reused
 
 
-const UserSchema = newSchema({
+const UserSchema = new Schema({
     email: {
         type: String,
         unique: [true, "Email already exists"], //message if it fails (not true)
