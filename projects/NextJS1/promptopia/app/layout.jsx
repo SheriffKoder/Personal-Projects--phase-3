@@ -19,18 +19,20 @@ const RootLayout = ({ children }) => {
     return (
         <html lang="en">
             <body>
-                <div className="main">
-                    <div className="gradient">
-                        {/* changes background */}
+                {/* //02.01 Provider*/}
+                <Provider>
+                    <div className="main">
+                        <div className="gradient">
+                            {/* changes background */}
+                        </div>
                     </div>
-                </div>
 
-                <main className="app">
-                    <Nav />
-                    {/* this will hold the page.jsx */}
-                    {children}
-                </main>
-
+                    <main className="app">
+                        <Nav />
+                        {/* this will hold the page.jsx */}
+                        {children}
+                    </main>
+                </Provider>
             </body>
         </html>
     )
