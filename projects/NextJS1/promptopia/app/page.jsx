@@ -34,23 +34,3 @@ const Home = () => {
 export default Home;
 
 
-
-/*
-tailwind allows to use utility classes shortcuts like
-w-full for full width etc.
-
-class-name << tailwind
-class_name << custom css
-
-max-md: hidden
-hide on large devices but break content on smaller devices
-
-
-
-** what can i use from tailwind while developing
-** css: orange_gradient, main/gradient
-
-
-
-
-*/
