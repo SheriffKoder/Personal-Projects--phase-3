@@ -18,6 +18,9 @@ import Profile from "@components/Profile";
 //pass the prompts as an array into data
 const MyProfile = () => {
 
+    //05.08
+    const router = useRouter();
+
     //04.02, 05.03
     // [] to use it at the start, initially when the page loads
     const { data: session } = useSession();
@@ -35,14 +38,33 @@ const MyProfile = () => {
     },[]);
 
 
-    //05.02
-    const handleEdit = () => {
-
+    //05.02 //05.08
+    const handleEdit = (post) => {
+        router.push(`/update-prompt?id=${post._id}`);
     }
 
-    //05.02
-    const handleDelete = async () => {
+    //05.02 //05.11
+    const handleDelete = async (post) => {
+        //check if the user really wants to delete
+        //confirm() is available in the browser api
+        const hasConfirmed = confirm("Are you sure you want to delete this prompt?");
 
+        if (hasConfirmed) {
+            try {
+                await fetch(`/api/prompt/${post._id.toString()}`, {
+                    method: "DELETE"
+                });
+
+                //get all the posts but without the deleted post
+                const filteredPosts = posts.filter((p) => p._id !== post._id);
+
+                //set state
+                setPosts(filteredPosts);
+
+            } catch (error) {
+                console.log(error);
+            }
+        }
     }
 
 
