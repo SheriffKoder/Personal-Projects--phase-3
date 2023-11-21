@@ -63,6 +63,9 @@ const DarkModeToggle = () => {
         //not need to cause a re-render
         //on initial render set to light
         // sessionStorage.setItem("theme", "light");
+
+        //use the correct theme from the start of page view
+        //based on the inserted theme in jsx or the present session variable to avoid any starting bugs
         if (sessionStorage.theme === "light" || sessionStorage.theme === "dark") {
             window.document.documentElement.classList.add(sessionStorage.theme);
         } else if (sessionStorage.theme ==  undefined && window.document.documentElement.classList.contains("dark")) {
@@ -71,7 +74,6 @@ const DarkModeToggle = () => {
             sessionStorage.theme = "light";
         }
         // console.log("re-render");
-        //use the correct theme from the start of page view
         handleToggle();
     });
 
