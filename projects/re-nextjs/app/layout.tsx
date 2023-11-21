@@ -15,7 +15,7 @@ const RootLayout = ({ children }: { children: React.ReactNode}) => {
   
 
   return (
-    <html className="light" lang="en">
+    <html className="dark" lang="en">
       {/* <body className="antialiased text-slate-500 dark:text-slate-400 bg-white dark:bg-slate-900"> */}
       <body>
 

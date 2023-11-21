@@ -60,11 +60,20 @@ const DarkModeToggle = () => {
 
     useEffect(() => {
 
+        //not need to cause a re-render
         //on initial render set to light
-        sessionStorage.setItem("theme", "light");
-        window.document.documentElement.classList.add(sessionStorage.theme);
-
-    },[]);
+        // sessionStorage.setItem("theme", "light");
+        if (sessionStorage.theme === "light" || sessionStorage.theme === "dark") {
+            window.document.documentElement.classList.add(sessionStorage.theme);
+        } else if (sessionStorage.theme ==  undefined && window.document.documentElement.classList.contains("dark")) {
+            sessionStorage.theme = "dark";
+        } else if (sessionStorage.theme ==  undefined && window.document.documentElement.classList.contains("light")) {
+            sessionStorage.theme = "light";
+        }
+        // console.log("re-render");
+        //use the correct theme from the start of page view
+        handleToggle();
+    });
 
     return (
 
