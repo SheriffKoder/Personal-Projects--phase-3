@@ -24,7 +24,7 @@ img {
 
 .myMain {
   min-height: 140vh;
-  width: 100vw;
+  width: 100%;
   position: relative;
   pointer-events: none;
 
@@ -85,14 +85,14 @@ background-image: linear-gradient(62deg, #8ec5fca2 0%, #e0c3fc22 100%);
 
 }
 
-.toggle-animation {
+.toggle-animation-light {
   width: 100%;
   transition-property: width;
   transition-duration: 0.15s;
   transition-timing-function: linear;
 }
 
-.toggle-animation2 {
+.toggle-animation-dark {
   width: 1.5rem;
   transition-property: width;
   transition-duration: 0.15s;
@@ -151,6 +151,31 @@ background-image: linear-gradient(62deg, #8ec5fca2 0%, #e0c3fc22 100%);
 
   }
 }
+
+.nav-user-menu {
+  /* display: flex; */
+  flex-direction: column;
+  height: auto;
+  width: 150px;
+  /* background-color: #43434386; */
+  position:absolute;
+  top: 3.25rem;
+  right: 4rem;
+  /* transform: translate(-70%, 115%); */
+  border: 0;
+  border-radius: 17px;
+  /* padding: 0.5rem 0.75rem; */
+  align-items: center;
+}
+
+
+.hidden-style {
+  opacity: 0.2;
+}
+.agentNavIcon_background {
+  @apply bg-gray-200 dark:bg-[#4f4f4f2e];
+}
+
 
 @media screen and (max-width: 640px) {
   .main {

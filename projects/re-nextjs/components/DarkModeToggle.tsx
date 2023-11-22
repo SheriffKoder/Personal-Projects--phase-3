@@ -16,44 +16,78 @@ const DarkModeToggle = () => {
 
 
         if (sessionStorage.theme === "light") {
-            sessionStorage.setItem("theme", "dark");
-            window.document.documentElement.classList.remove("light");
-            window.document.documentElement.classList.add("dark");
-            toggleBG?.classList.add("bg-[#8080802e]");
-            toggleBT?.classList.remove("bg-[url('/icons/moon-custom.svg')]");
 
-            toggleBT?.classList.add("bg-[url('/icons/sun-custom.svg')]");
-            // toggleBT?.classList.remove("toggle-animation-right");
+            setTheme("dark");
+            // sessionStorage.setItem("theme", "dark");
+            // window.document.documentElement.classList.remove("light");
+            // window.document.documentElement.classList.add("dark");
+            // toggleBG?.classList.add("bg-[#8080802e]");
+            // toggleBT?.classList.remove("bg-[url('/icons/moon-custom.svg')]");
 
-            // toggleBT?.classList.add("toggle-animation-left");
-            toggleSp?.classList.remove("toggle-animation2");
+            // toggleBT?.classList.add("bg-[url('/icons/sun-custom.svg')]");
+            // // toggleBT?.classList.remove("toggle-animation-right");
 
-            toggleSp?.classList.add("toggle-animation");
+            // // toggleBT?.classList.add("toggle-animation-left");
+            // toggleSp?.classList.remove("toggle-animation2");
 
-            console.log(sessionStorage.theme);
+            // toggleSp?.classList.add("toggle-animation");
+
+            // console.log(sessionStorage.theme);
 
 
         } else if (sessionStorage.theme === "dark") {
-            sessionStorage.setItem("theme", "light");
-            window.document.documentElement.classList.remove("dark");
-            window.document.documentElement.classList.add("light");
-            toggleBG?.classList.add("g-gray-200");
-            toggleBT?.classList.remove("bg-[url('/icons/sun-custom.svg')]");
 
-            toggleBT?.classList.add("bg-[url('/icons/moon-custom.svg')]");
-            // toggleBT?.classList.remove("toggle-animation-left");
+            setTheme("light");
+            // sessionStorage.setItem("theme", "light");
+            // window.document.documentElement.classList.remove("dark");
+            // window.document.documentElement.classList.add("light");
+            // toggleBG?.classList.add("g-gray-200");
+            // toggleBT?.classList.remove("bg-[url('/icons/sun-custom.svg')]");
+
+            // toggleBT?.classList.add("bg-[url('/icons/moon-custom.svg')]");
+            // // toggleBT?.classList.remove("toggle-animation-left");
             
    
-            // toggleBT?.classList.add("toggle-animation-right");
-            toggleSp?.classList.remove("toggle-animation");
+            // // toggleBT?.classList.add("toggle-animation-right");
+            // toggleSp?.classList.remove("toggle-animation");
 
-            toggleSp?.classList.add("toggle-animation2");
+            // toggleSp?.classList.add("toggle-animation2");
       
 
             
-            console.log(sessionStorage.theme);
+            // console.log(sessionStorage.theme);
 
         }
+    }
+
+    function setTheme (theme: string) {
+
+        console.log("input is "+theme);
+        // const toggleBG = document.querySelector("#toggleBG");
+        const toggleBT = document.querySelector("#toggleBT");
+        const toggleSp = document.querySelector("#mySpan");
+
+        let nextTheme :string;
+        let toggleBGColor: string;
+
+        (theme === "light") ? nextTheme = "dark" : nextTheme = "light";
+
+
+        sessionStorage.setItem("theme", theme);
+        window.document.documentElement.classList.remove(nextTheme);
+        window.document.documentElement.classList.add(theme);
+
+        toggleBT?.classList.remove(`bg-[url('/icons/${theme}-theme-icon.svg')]`);
+        toggleBT?.classList.add(`bg-[url('/icons/${nextTheme}-theme-icon.svg')]`);
+        // toggleBT?.classList.remove("toggle-animation-right");
+
+        // toggleBT?.classList.add("toggle-animation-left");
+        toggleSp?.classList.remove(`toggle-animation-${nextTheme}`);
+
+        toggleSp?.classList.add(`toggle-animation-${theme}`);
+
+        console.log(sessionStorage.theme);
+
     }
 
   
@@ -70,25 +104,28 @@ const DarkModeToggle = () => {
             window.document.documentElement.classList.add(sessionStorage.theme);
         } else if (sessionStorage.theme ==  undefined && window.document.documentElement.classList.contains("dark")) {
             sessionStorage.theme = "dark";
+            console.log("undefined theme");
         } else if (sessionStorage.theme ==  undefined && window.document.documentElement.classList.contains("light")) {
             sessionStorage.theme = "light";
+            console.log("undefined theme");
+
         }
         // console.log("re-render");
-        handleToggle();
+        setTheme(sessionStorage.theme);
     });
 
     return (
 
         <div 
         id="toggleBG"
-        className="relative flex flex-row rounded-full border-0 bg-[#8080802e] h-8 w-16 cursor-pointer p-1">
+        className="relative flex flex-row rounded-full border-0 bg-gray-200 dark:bg-[#4f4f4f2e] h-8 w-16 cursor-pointer p-1">
 
             <span id="mySpan" className="flex flex-row justify-end w-6">
                 <button
                 id="toggleBT"
-                className="h-6 w-6 text-gray-400 bg-white rounded-full
-                bg-[length:13px_13px] bg-center bg-no-repeat
-                bg-[url('/icons/moon-custom.svg')]"
+                aria-label="toggle the web site's theme"
+                className="hover:brightness-95 dark:hover:brightness-75 h-6 w-6 dark:bg-[#e6e5e57a] bg-white rounded-full dark:invert
+                bg-[length:13px_13px] bg-center bg-no-repeat"
                 onClick={handleToggle}>
                     
                 </button>
