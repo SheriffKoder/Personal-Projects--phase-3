@@ -46,7 +46,7 @@ const Nav = () => {
 
 
   return (
-    <nav className=" w-full px-2 sm:px-12  max-w-7xl sticky top-8">
+    <nav className="w-full px-2 sm:px-12  max-w-7xl">
       {/* <ul className="bg-[#ffffffd3] text-[#d6003580] flex flex-row gap-3 border-0 border-[] 
       rounded-2xl py-2 px-4 w-full backdrop-blur-sm shadow-l 
       ">
@@ -54,7 +54,7 @@ const Nav = () => {
         <li>Text2</li>
 
       </ul> */}
-      <span className="dark:bg-[#31313175] dark:text-[#cc2750d3] bg-[#ffffffd3] text-[#d6003580] flex flex-row gap-3 border-0 border-[] 
+      <span className=" dark:bg-[#31313175] bg-[#ffffffd3] text-theme-text-bright dark:text-theme-text-dark flex flex-row gap-3 border-0 border-[] 
       rounded-full px-2 backdrop-blur-sm shadow-l  text-sm mx-auto
       ">
         <ul className="flex flex-row items-center gap-3 ml-2 h-12">

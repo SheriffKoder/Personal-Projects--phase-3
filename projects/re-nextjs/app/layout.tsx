@@ -17,22 +17,32 @@ const RootLayout = ({ children }: { children: React.ReactNode}) => {
   return (
     <html className="light" lang="en">
       {/* <body className="antialiased text-slate-500 dark:text-slate-400 bg-white dark:bg-slate-900"> */}
-      <body className="w-full">
+      <body className="w-full flex justify-center">
 
-        {/* <div className="myMain">
-                
-        </div> */}
-        <div className="myMain dark:brightness-10">
-                
+        
+
+        <div className="myMain dark:brightness-10 relative">
+          
+          {/* background image, blur, color gradient */}
+         
         </div>
 
-          <main className="w-full min-h-full flex flex-col py-8 items-center justify-start 
-          absolute top-0">
+
+
+        <div className="absolute top-0 z-[3] w-full h-full max-w-7xl">
+          <div className="w-full h-auto sticky top-8 my-8 z-[4] flex justify-center">
             <Nav />
-            {/* this will hold the Home component in app>page.jsx */}
-            {children}
-            <Footer />
-          </main>
+          </div>
+
+          <main className="w-full min-h-full flex flex-col justify-start 
+            absolute top-0">
+              {/* this will hold the Home component in app>page.jsx */}
+              {children}
+              {/* <Footer /> */}
+            </main>
+        </div>
+
+
 
 
       </body>

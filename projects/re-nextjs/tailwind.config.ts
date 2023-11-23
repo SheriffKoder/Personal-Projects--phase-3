@@ -23,6 +23,10 @@ const config: Config = {
       },
       colors: {
         'primary-orange': '#FF5722',
+        'theme-text-brightest': '#ea003b',
+        'theme-text-brighter': '#d60035ea',
+        'theme-text-bright': '#d6003580',
+        'theme-text-dark': '#cc2750d3'
       }      
     },
   },
