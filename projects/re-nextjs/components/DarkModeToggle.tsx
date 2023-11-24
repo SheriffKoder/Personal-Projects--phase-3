@@ -72,13 +72,21 @@ const DarkModeToggle = () => {
 
         (theme === "light") ? nextTheme = "dark" : nextTheme = "light";
 
+        if (theme === "light") {
+
+        toggleBT?.classList.remove(`bg-[url('/icons/light-theme-icon.svg')]`);
+        toggleBT?.classList.add(`bg-[url('/icons/dark-theme-icon.svg')]`);
+        } else {
+            toggleBT?.classList.remove(`bg-[url('/icons/dark-theme-icon.svg')]`);
+            toggleBT?.classList.add(`bg-[url('/icons/light-theme-icon.svg')]`);  
+        }
 
         sessionStorage.setItem("theme", theme);
         window.document.documentElement.classList.remove(nextTheme);
         window.document.documentElement.classList.add(theme);
 
-        toggleBT?.classList.remove(`bg-[url('/icons/${theme}-theme-icon.svg')]`);
-        toggleBT?.classList.add(`bg-[url('/icons/${nextTheme}-theme-icon.svg')]`);
+        // toggleBT?.classList.remove(`bg-[url('/icons/${theme}-theme-icon.svg')]`);
+        // toggleBT?.classList.add(`bg-[url('/icons/${nextTheme}-theme-icon.svg')]`);
         // toggleBT?.classList.remove("toggle-animation-right");
 
         // toggleBT?.classList.add("toggle-animation-left");

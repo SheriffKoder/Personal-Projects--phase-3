@@ -2,7 +2,7 @@
 
 import Hero from "@components/Home/Hero";
 import HomeText from "@components/Home/HomeText";
-
+import Home_Rec from "@components/Home/Home_Rec";
 import Feed from "@/components/Feed";
 
 //01.01
@@ -25,8 +25,8 @@ const Home = () => {
 
 
       <Hero />
-
       <HomeText />
+      <Home_Rec/>
 
       {/* <Feed /> */}
 

@@ -54,7 +54,9 @@ const Nav = () => {
         <li>Text2</li>
 
       </ul> */}
-      <span className=" dark:bg-[#31313175] bg-[#ffffffd3] text-theme-text-bright dark:text-theme-text-dark flex flex-row gap-3 border-0 border-[] 
+      <span className=" dark:bg-[#31313175] bg-[#ffffffd3]
+       text-theme-text-bright dark:text-theme-text-dark 
+       flex flex-row gap-3 border-0 border-[] 
       rounded-full px-2 backdrop-blur-sm shadow-l  text-sm mx-auto
       ">
         <ul className="flex flex-row items-center gap-3 ml-2 h-12">

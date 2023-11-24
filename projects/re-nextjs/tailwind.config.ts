@@ -23,6 +23,8 @@ const config: Config = {
       },
       colors: {
         'primary-orange': '#FF5722',
+        'text-accent-bright': '#a82b4b',
+        'text-accent-dark': '#912540',
         'theme-text-brightest': '#ea003b',
         'theme-text-brighter': '#d60035ea',
         'theme-text-bright': '#d6003580',
