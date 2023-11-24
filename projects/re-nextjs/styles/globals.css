@@ -307,10 +307,39 @@ background-image: linear-gradient(62deg, #8ec5fca2 0%, #e0c3fc22 100%);
   100% {
     opacity: 1;
   }
-
-
 }
 
+.fadeOut_animation {
+  animation-name: fadeOut_keyframe;
+  animation-duration: 0.6s;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+
+@keyframes fadeOut_keyframe {
+  0% { 
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.fadeIn_animation {
+  animation-name: fadeIn_keyframe;
+  animation-duration: 0.6s;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+
+@keyframes fadeIn_keyframe {
+  0% { 
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
 
 
 @media screen and (max-width: 640px) {

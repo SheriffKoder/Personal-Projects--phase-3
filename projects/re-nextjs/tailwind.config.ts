@@ -29,7 +29,8 @@ const config: Config = {
         'theme-text-brighter': '#d60035ea',
         'theme-text-bright': '#d6003580',
         'theme-text-dark': '#cc2750d3'
-      }      
+      },
+            
     },
   },
   plugins: [],
