@@ -273,7 +273,7 @@ const Home_Main = () => {
 
   return (
 
-    <div className="w-[95%] lg:flex lg:flex-row justify-center">
+    <div className="w-[95%] lg:flex lg:flex-row justify-center mx-auto">
 
       <div className=" bg-white rounded-[17px]
       glass-container-background-2 
@@ -297,7 +297,6 @@ const Home_Main = () => {
                     bg-[#fffffff0] focus:bg-[#ffffff] hover:bg-[#ffffff] 
                     dark:bg-[#ffffff07] dark:hover:bg-[#ffffff0a] dark:focus:bg-[#ffffff0a]
                     flex flex-col rounded-[17px] box-shadow-1 p-4 border border-[rgba(255,255,255,0.02)]
-        
                     text_shadow-2
                     ">
                         <p className="flex flex-row items-baseline font-bold uppercase">
@@ -314,7 +313,7 @@ const Home_Main = () => {
                           </span>
                         </span>
 
-                        <span className="flex flex-row items-baseline mt-auto">
+                        <span className="flex flex-row items-baseline mt-2">
                           <span className="inline-block shrink-0 h-3 w-3 bg-[rgba(0,89,255,0.7)] rounded-full mr-4"></span>
                           <span className="w-full text-start font-light text-sm
                           lowercase flex flex-row items-center">

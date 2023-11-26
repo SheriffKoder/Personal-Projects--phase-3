@@ -46,7 +46,7 @@ const Nav = () => {
 
 
   return (
-    <nav className="w-full px-2 sm:px-12  max-w-7xl">
+    <nav className="w-full px-2 md:px-12  max-w-7xl">
       {/* <ul className="bg-[#ffffffd3] text-[#d6003580] flex flex-row gap-3 border-0 border-[] 
       rounded-2xl py-2 px-4 w-full backdrop-blur-sm shadow-l 
       ">

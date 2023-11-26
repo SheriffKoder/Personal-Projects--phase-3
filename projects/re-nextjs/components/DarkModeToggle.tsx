@@ -126,7 +126,7 @@ const DarkModeToggle = () => {
 
         <div 
         id="toggleBG"
-        className="relative flex flex-row rounded-full border-0 bg-gray-200 dark:bg-[#4f4f4f2e] h-8 w-16 cursor-pointer p-1">
+        className="relative flex flex-row rounded-full border-0 bg-[#bebebe2e] dark:bg-[#4f4f4f2e] h-8 w-16 cursor-pointer p-1">
 
             <span id="mySpan" className="flex flex-row justify-end w-6">
                 <button

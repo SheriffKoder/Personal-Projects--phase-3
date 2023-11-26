@@ -117,7 +117,7 @@ const Home_Rec = () => {
     function animationCombination (slider__container: any) {
 
         // //stop current timers to not overlap
-        clearInterval(tm.current);
+        stopTimer();
 
         fadeOutAnimation(slider__container);
         delayAnimation(slider__container); //with handle fade change
@@ -125,13 +125,22 @@ const Home_Rec = () => {
         fadeInAnimation(slider__container);
 
         //start the auto animation timer after first render or again after caret click
+        startTimer();
+
+    }
+
+
+    function stopTimer () {
+        clearInterval(tm.current);
+
+    }
+
+    function startTimer () {
         tm.current = window.setInterval(() => {
             // console.log("timer");
             setPrevFade(fade); setFade(fade-1);
         }, 6000);
-
     }
-
 
 
 
@@ -156,7 +165,7 @@ const Home_Rec = () => {
     aria-label="recommended properties">
 
         <h2 className="text-white text-[min(calc(1rem+2vw),(2.5rem))] font-semibold  mb-12
-        text-center text_shadow-3">
+        text-center text_shadow-2">
             Our Recommendations
         </h2>
 
@@ -175,6 +184,7 @@ const Home_Rec = () => {
             "
             id="slider__container">
                 <Image src={slider.property_image} fill={true} alt={slider.property_title}
+                onMouseEnter={stopTimer} onMouseLeave={startTimer}
                 className="rounded-[17px] border-0 opacity-90 hover:opacity-100 dark:opacity-75 dark:hover:opacity-90"></Image>
 
                 <div className=" flex flex-col justify-start absolute bottom-0 left-0 
