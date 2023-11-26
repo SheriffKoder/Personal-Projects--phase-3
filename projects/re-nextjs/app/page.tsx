@@ -3,12 +3,13 @@
 import Hero from "@components/Home/Hero";
 import HomeText from "@components/Home/HomeText";
 import Home_Rec from "@components/Home/Home_Rec";
+import Home_Main from "@components/Home/Home_Main";
 import Feed from "@/components/Feed";
 
 //01.01
 const Home = () => {
   return (
-    <section className="w-full flex-center flex-col">
+    <section className="w-full flex flex-col">
 
       {/* <h1 className="head_text text-center">
         Discover & Share
@@ -27,6 +28,8 @@ const Home = () => {
       <Hero />
       <HomeText />
       <Home_Rec/>
+      <Home_Main />
+
 
       {/* <Feed /> */}
 

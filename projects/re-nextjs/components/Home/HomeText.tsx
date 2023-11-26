@@ -3,10 +3,10 @@
 const HomeText = () => {
   return (
     <div className="glass-container-background-1 
-    border rounded-full backdrop-blur-10 py-7 px-7 
+    border rounded-full backdrop-blur-10 p-7 px-7 
     dark:bg-[#ffffff04] dark:border-[#ffffff05]
     text-white dark:text-[#e5e5e5] mx-6 text-center text-l flex flex-col gap-1
-    bg-">
+    text_shadow-1">
         <p className="font-semibold">
             Looking for your dream home with the best pricing ?
         </p>

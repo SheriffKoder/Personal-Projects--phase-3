@@ -56,8 +56,9 @@ const Nav = () => {
       </ul> */}
       <span className=" dark:bg-[#31313175] bg-[#ffffffd3]
        text-theme-text-bright dark:text-theme-text-dark 
-       flex flex-row gap-3 border-0 border-[] 
+       flex flex-row gap-3 
       rounded-full px-2 backdrop-blur-sm shadow-l  text-sm mx-auto
+      glass-container-background-3
       ">
         <ul className="flex flex-row items-center gap-3 ml-2 h-12">
         <li className="h-full">
@@ -112,7 +113,7 @@ const Nav = () => {
           </span >
 
             {isUserLoggedIn && (
-            <div className="nav-user-menu hidden bg-gray-200 dark:bg-[#4f4f4f5d]"
+            <div className="nav-user-menu  hidden bg-gray-200 dark:bg-[#4f4f4f5d]"
             onMouseLeave={()=>handleDropDownIcon("leave")}
             >
                 <ul className=" flex flex-col items-center justify-center w-full">

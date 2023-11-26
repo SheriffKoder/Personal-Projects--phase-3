@@ -11,6 +11,7 @@ interface propertyInterface {
 
     property_image : string,
     property_title : string,
+    property_id : number,
 
     property_beds : number,
     property_baths : number,
@@ -20,27 +21,17 @@ interface propertyInterface {
     property_listing_type : string,
     property_recommended: boolean
 
+
 }
 
 
 const Home_Rec = () => {
 
-    // let slider__container = document.querySelector("#slider__container");
-
-    // let property_image = "/images/furniture.avif"
-    // let property_title = "furniture"
-
-    // let property_beds = "3";
-    // let property_baths = "2";
-    // let property_area = "190";
-    // let property_location = "NYC";
-    // let property_type = "apartment"
-    // let property_listing_type = "rent"
-
     let properties: propertyInterface[] = [
         {
             property_image : "/images/furniture.avif",
             property_title : "furniture",
+            property_id : 1,
         
             property_beds : 3,
             property_baths : 2,
@@ -54,6 +45,8 @@ const Home_Rec = () => {
         {
             property_image : "/images/furniture.avif",
             property_title : "furniture",
+            property_id : 2,
+
         
             property_beds : 2,
             property_baths : 1,
@@ -65,45 +58,7 @@ const Home_Rec = () => {
         }
     ];
 
-
-
     let slider : propertyInterface;
-    // slider = {...properties[sliderIndex]};
-
-
-
-    //would like to get only recommended properties
-    // clearInitialTimer0 = setTimeout(()=> {
-    //     slider__container?.classList.add("slideAnimation");
-
-    //     clearInitialTimer1 = setTimeout(()=> {
-
-    //         // console.log(slider__container);
-    //         slider = {...properties[sliderIndex]};
-
-    //         if (sliderIndex < properties.length-1) {
-    //             setSliderIndex(sliderIndex+1);
-    
-    //         } else {
-    //             setSliderIndex(0);
-    //         }
-
-    //         clearInitialTimer2 = setTimeout(()=> {
-    //             slider__container?.classList.remove("slideAnimation");
-    //         }, 500);
-
-    //     }, 650);
-
-    // },5000);
-
-
-        
-        // setTimeout(()=> {
-
-        // },5000);
-
-        let timeOutObj:any;
-
 
 
     function fadeOutAnimation (slider__container: any) {
@@ -197,10 +152,11 @@ const Home_Rec = () => {
 
 
   return (
-    <div id="rec" className="w-full h-auto border-[#ffffff15] mt-24 px-6">
+    <div id="rec" className="w-full h-auto border-[#ffffff15] mt-24 px-6"
+    aria-label="recommended properties">
 
         <h2 className="text-white text-[min(calc(1rem+2vw),(2.5rem))] font-semibold  mb-12
-        text-center">
+        text-center text_shadow-3">
             Our Recommendations
         </h2>
 
@@ -219,7 +175,7 @@ const Home_Rec = () => {
             "
             id="slider__container">
                 <Image src={slider.property_image} fill={true} alt={slider.property_title}
-                className="rounded-[17px] border-0 opacity-50"></Image>
+                className="rounded-[17px] border-0 opacity-90 hover:opacity-100 dark:opacity-75 dark:hover:opacity-90"></Image>
 
                 <div className=" flex flex-col justify-start absolute bottom-0 left-0 
                 w-full bg-[#0000005d] p-[min(calc(1rem+0.5vw),(2rem))] text-white box-shadow-1
