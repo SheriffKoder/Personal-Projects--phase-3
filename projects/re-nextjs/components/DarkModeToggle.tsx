@@ -110,7 +110,8 @@ const DarkModeToggle = () => {
         //based on the inserted theme in jsx or the present session variable to avoid any starting bugs
         if (sessionStorage.theme === "light" || sessionStorage.theme === "dark") {
             window.document.documentElement.classList.add(sessionStorage.theme);
-        } else if (sessionStorage.theme ==  undefined && window.document.documentElement.classList.contains("dark")) {
+        } 
+        else if (sessionStorage.theme ==  undefined && window.document.documentElement.classList.contains("dark")) {
             sessionStorage.theme = "dark";
             console.log("undefined theme");
         } else if (sessionStorage.theme ==  undefined && window.document.documentElement.classList.contains("light")) {

@@ -164,8 +164,8 @@ const PropertyCard = (property: propertyInterface) => {
   return (
     <div className="latest_property bg-[#fffffff3] dark:bg-[rgba(255,255,255,0.03)]
                 flex flex-col justify-between items-center 
-                w-[80%] max-w-[390px] h-auto md:w-[45%]
-                xl:flex-row lg:w-[45%]
+                w-[80%] max-w-[390px] h-auto
+                xl:flex-row md:w-[45%]
                 rounded-[17px] box-shadow-1 p-1 relative
                 border border-[rgba(255,255,255,0.02)]
                 dark:opacity-75 dark:hover:opacity-90 opacity-90 hover:opacity-100

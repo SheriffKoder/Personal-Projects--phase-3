@@ -24,7 +24,6 @@ const Home = () => {
           discover, create and share creative prompts
       </p> */}
 
-
       <Hero />
       <HomeText />
       <Home_Rec/>

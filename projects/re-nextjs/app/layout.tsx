@@ -1,10 +1,13 @@
 
+
+
 import "@styles/globals.css"; //import the css to the entire application
 
 //import layout components
 import Nav from "@components/Nav";
 import Provider from "@components/Provider";
 import Footer from "@components/Footer";
+import Loading from "@components/Home/Loading";
 
 export const metadata = {
   title: 'RE Website',
@@ -15,11 +18,10 @@ const RootLayout = ({ children }: { children: React.ReactNode}) => {
   
 
   return (
-    <html className="light" lang="en">
+    <html className="" lang="en">
       {/* <body className="antialiased text-slate-500 dark:text-slate-400 bg-white dark:bg-slate-900"> */}
-      <body className="w-full h-auto flex justify-center">
+      <body className="w-full h-auto flex justify-center relative">
 
-        
 
         {/* <div className="myMain dark:brightness-10 relative"> */}
           
@@ -29,11 +31,19 @@ const RootLayout = ({ children }: { children: React.ReactNode}) => {
 
 
 
-        <div className="absolute top-0 z-[3] w-full h-full max-w-full ">
+        <div className="absolute top-0 z-[3] w-full h-full max-w-full"
+        id="main__main-container">
 
 
           <main className="myMain2 dark:before:bg-[#000000e3] w-full min-h-full flex flex-col justify-start 
-            absolute top-0 box-shadow-1 h-auto">
+            absolute top-0 box-shadow-1 h-auto ">
+
+
+            <div className="w-full sticky top-0 z-[99]">
+              <Loading />
+            </div>
+            
+
             <div className="w-full h-auto sticky top-8 my-0 z-[6] flex justify-center">
               <Nav />
             </div>
