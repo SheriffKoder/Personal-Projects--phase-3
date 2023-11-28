@@ -393,11 +393,33 @@ img {
 }
 
 .dot-text {
+  overflow: hidden;
+  display: -webkit-box;
+  /* -webkit-line-clamp: 3; */
+  -webkit-box-orient: vertical;
+}
+
+.dot-text-3 {
     overflow: hidden;
     display: -webkit-box;
-    -webkit-line-clamp: 3;
+    /* -webkit-line-clamp: 3; */
     -webkit-box-orient: vertical;
 }
+
+.dot-text-6 {
+  overflow: hidden;
+  display: -webkit-box;
+  /* -webkit-line-clamp: 6; */
+  -webkit-box-orient: vertical;
+}
+
+.dot-text-8 {
+  overflow: hidden;
+  display: -webkit-box;
+  /* -webkit-line-clamp: 7; */
+  -webkit-box-orient: vertical;
+}
+
 
 .right_caret {
   background-image: url("/icons/arrow-right.svg");

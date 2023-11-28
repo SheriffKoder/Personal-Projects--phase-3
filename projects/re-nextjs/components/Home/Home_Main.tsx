@@ -281,9 +281,10 @@ const Home_Main = () => {
       dark:bg-[#68585806] dark:border-[#ffffff05]
       text-[#000000b3] dark:text-[#ffffffb0] text-center text-l flex flex-col gap-1
       lg:max-w-[300px] lg:order-2
-      ">
+      "
+      id="home-news">
             {/* here is the posts */}
-            <h4 className="text_shadow-w">Latest market news</h4>
+            <h4 className="text_shadow-3">Latest market news</h4>
 
             {/* posts container */}
             <div className="flex flex-col gap-6 my-6">
@@ -308,7 +309,7 @@ const Home_Main = () => {
                         
                         <span className="flex flex-row items-baseline mt-2">
                           <span className="inline-block  shrink-0 h-3 w-3 bg-green-500 opacity-80 rounded-full mr-4"></span>
-                          <span className="text-start max-h-[4rem] max-w-[900px] text-sm dot-text">
+                          <span className="text-start max-h-[4rem] max-w-[900px] text-sm dot-text-3">
                             {post.content}
                           </span>
                         </span>
@@ -331,6 +332,12 @@ const Home_Main = () => {
               }
 
             </div>
+            <Link href="/news" className="bg-theme-text-brighter dark:bg-theme-text-dark text-white 
+                rounded-full py-1.5 px-3 w-[80%] max-w-[200px] text_shadow-3
+                opacity-80 hover:opacity-90 mx-auto">
+                        Check all news 
+          </Link>
+
             
       </div>
 
@@ -365,7 +372,7 @@ const Home_Main = () => {
 
           </div>
           <Link href="/properties" className="bg-theme-text-brighter dark:bg-theme-text-dark text-white 
-                rounded-full py-1.5 px-3
+                rounded-full py-1.5 px-3 w-[80%] max-w-[200px]
                 opacity-80 hover:opacity-90 mx-auto">
                         view all properties 
           </Link>
