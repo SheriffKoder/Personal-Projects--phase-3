@@ -47,7 +47,7 @@ const Login_component = () => {
                     </div>
 
                     <form className=" mt-2 flex flex-col items-center w-full gap-4">
-                        <h3 className="mb-2 text_shadow-w">Login to your Account</h3>
+                        <h3 className="mb-2 text_shadow-2 opacity-80">Login to your Account</h3>
                         
                         <label className="label_field flex flex-row items-center gap-6 w-[80%]
                         bg-[#ffffff07] rounded-[6px] border-2 border-[#ffffff02] pl-4

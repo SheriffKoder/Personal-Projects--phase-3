@@ -31,10 +31,10 @@ const SignUp_component = () => {
         id="signUp__container">
 
             {/* the box */}
-            <div className="z-[6] flex items-center justify-center">
+            <div className="z-[6] flex items-center justify-center max-w-[80%]">
                 <div className="flex items-center flex-col
-                rounded-[17px] w-[500px] h-auto pb-10
-                bg-[#fffffff0] dark:bg-[#ffffff10]
+                rounded-[17px] md:w-[500px] h-auto pb-10
+                bg-[#fffffff0]  dark:bg-[#ffffff10]
                 p-2 border border-[rgba(255,255,255,0.02)]
                 dark:text-[#ffffffde] shadow-2xl dark:shadow-inner
                 ">
@@ -47,18 +47,18 @@ const SignUp_component = () => {
                         </button>
                     </div>
 
-                    <form className=" mt-2 flex flex-col items-center w-full gap-4">
+                    <form className=" mt-2 flex flex-col items-center justify-center w-full gap-4">
                         <span className="flex flex-row gap-1">
                             <span className="opacity-60">Welcome. </span>
-                            <h3 className="mb-2 text_shadow-w">Sign-up to a new Account</h3>
+                            <h3 className="mb-2 text_shadow-2 opacity-80">Sign-up to a new Account</h3>
                         </span>
                         
                         <label className="label_field flex flex-row items-center gap-6 w-[80%]
                         bg-[#ffffff07] rounded-[6px] border-2 border-[#ffffff02] pl-4
                         h-10">
                             <span className="w-[20%] text_shadow-2 opacity-80 dark:opacity-90">username</span>
-                            <input className="input_field border-0 flex-1 rounded-r-[6px] 
-                            dark:bg-[#ffffff09] dark:focus:bg-[#ffffff02]  px-2
+                            <input className="input_field border-0 rounded-r-[6px] 
+                            dark:bg-[#ffffff09] dark:focus:bg-[#ffffff02]  px-2 
                             h-full border-[rgba(255,255,255,0.02)]" type="text" />
                         </label>
 
@@ -66,7 +66,7 @@ const SignUp_component = () => {
                         bg-[#ffffff07] rounded-[6px] border-2 border-[#ffffff02] pl-4
                         h-10">
                             <span className="w-[20%] text_shadow-2 opacity-80 dark:opacity-90">e-mail</span>
-                            <input className="input_field border-0 flex-1 rounded-r-[6px]
+                            <input className="input_field border-0 rounded-r-[6px]
                             dark:bg-[#ffffff09] dark:focus:bg-[#ffffff02]  px-2                                                    
                             h-full border-[rgba(255,255,255,0.02)]" type="text" />
                         </label>
@@ -75,19 +75,19 @@ const SignUp_component = () => {
                         <label className="label_field flex flex-row items-center gap-6 w-[80%]
                         bg-[#ffffff07] rounded-[6px] border-2 border-[#ffffff02] pl-4
                         h-10">
-                            <span className="w-[20%] text_shadow-2 opacity-80 dark:opacity-90">password</span>
-                            <input className="input_field border-0 flex-1 rounded-r-[6px]
+                            <span className="flex-1 text_shadow-2 opacity-80 dark:opacity-90">password</span>
+                            <input className="input_field border-0 rounded-r-[6px] flex-5
                             dark:bg-[#ffffff09] dark:focus:bg-[#ffffff02]  px-2
                             h-full border-[rgba(255,255,255,0.02)]" type="password" />
                         </label>
 
 
-                        <label className="label_field flex flex-row items-center gap-6 w-[80%]
+                        <label className="label_field flex flex-row items-center gap-6
                         bg-[#d6002709] rounded-[6px] border-2 border-[#ffffff02] pl-4
-                        h-10">
-                            <span className="w-[20%] text_shadow-2 opacity-80 dark:opacity-90">Admin no.</span>
-                            <input className="input_field border-0 flex-1 rounded-r-[6px]
-                            dark:bg-[#ffffff09] dark:focus:bg-[#ffffff02]  px-2
+                        h-10 mx-2 w-[90%]">
+                            <span className=" flex-1 text_shadow-2 opacity-80 dark:opacity-90 whitespace-nowrap">Admin pass.</span>
+                            <input className="input_field border-0 rounded-r-[6px]
+                            dark:bg-[#ffffff09] dark:focus:bg-[#ffffff02]  px-2 flex-5
                             h-full border-[rgba(255,255,255,0.02)]" type="password" />
                         </label>
 

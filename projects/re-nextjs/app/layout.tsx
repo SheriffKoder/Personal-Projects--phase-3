@@ -62,6 +62,11 @@ const RootLayout = ({ children }: { children: React.ReactNode}) => {
                 {children}
                 {/* <Footer /> */}
               </div>
+
+              <div className="z-[5]">
+                <Footer />
+              </div>
+
           </main>
         </div>
 
