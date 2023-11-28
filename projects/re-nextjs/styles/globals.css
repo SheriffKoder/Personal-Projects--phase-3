@@ -482,7 +482,7 @@ img {
 .label_field:focus-within {
   /* border: 1px solid rgb(190,190,190,0.9); */
   outline: 2px solid #d6003580;
-  outline-offset:  3px;
+  outline-offset:  1px;
 }
 
 .label_field {

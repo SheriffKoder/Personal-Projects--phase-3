@@ -36,14 +36,32 @@ const Nav = () => {
 
   function showLogin () {
     let loginComponent = document.getElementById("login__container");
+    let signUpComponent = document.getElementById("signUp__container");
+
+    if (signUpComponent?.style.display === "flex") {
+      signUpComponent!.style.display = "none";
+    }
 
     loginComponent!.style.display = "flex";
+
+    document.querySelector(".nav-user-menu")?.classList.remove("flex");
+    document.querySelector(".nav-user-menu")?.classList.add("hidden");
+
   }
 
   function showSignUp () {
     let signUpComponent = document.getElementById("signUp__container");
+    let loginComponent = document.getElementById("login__container");
+
+    if (loginComponent?.style.display === "flex") {
+      loginComponent!.style.display = "none";
+    }
 
     signUpComponent!.style.display = "flex";
+
+    document.querySelector(".nav-user-menu")?.classList.remove("flex");
+    document.querySelector(".nav-user-menu")?.classList.add("hidden");
+
   }
 
 
