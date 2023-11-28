@@ -3,7 +3,7 @@
 "use client";
 
 import { useEffect } from "react";
-
+import { bodyNoScroll, bodyScroll } from "@utils/bodyNoScroll";
 
 
 
@@ -23,6 +23,11 @@ function Loading() {
         let loading_icon = document.getElementById("loading_icon");
         let main_container = document.getElementById("main__main-container");
         let loading_container = document.getElementById("loading_icon__container");
+        // let body = document.querySelector("body");
+
+        // if (sessionStorage.active !== "true") {
+        //     console.log("first render");
+
 
         if (loading_container?.classList.contains("fadeOut_loading")) {
             loading_container?.classList.remove("fadeOut_loading");
@@ -32,10 +37,15 @@ function Loading() {
             loading_icon?.classList.remove("pulse_loading");
         }
 
+        // body!.style.overflow = "hidden";
+        bodyNoScroll();
         loading_icon!.classList.add("pulse_loading");
 
         setTimeout(()=> {
             loading_container!.classList.add("fadeOut_loading");
+            // body!.style.overflow = "auto";
+            bodyScroll();
+
         },500);
 
         setTimeout(()=> {
@@ -49,14 +59,18 @@ function Loading() {
 
             loading_container!.style.display ="none";
 
-            if (main_container) {
-                main_container!.style.display="block";
-            }
+            // if (main_container) {
+            //     main_container!.style.display="block";
+            // }
         }, 1500)
 
-        return(()=>{
-           
-        });
+        // sessionStorage.setItem("active", "true");
+
+        // } else {
+        //     loading_container!.style.display ="none";
+        // }
+
+
 
     },[])
 

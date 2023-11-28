@@ -8,6 +8,8 @@ import Nav from "@components/Nav";
 import Provider from "@components/Provider";
 import Footer from "@components/Footer";
 import Loading from "@components/Home/Loading";
+import Login_component from "@components/Auth/Login";
+import SignUp_component from "@components/Auth/SignUp";
 
 export const metadata = {
   title: 'RE Website',
@@ -16,6 +18,7 @@ export const metadata = {
 
 const RootLayout = ({ children }: { children: React.ReactNode}) => {
   
+
 
   return (
     <html className="" lang="en">
@@ -44,9 +47,16 @@ const RootLayout = ({ children }: { children: React.ReactNode}) => {
             </div>
             
 
-            <div className="w-full h-auto sticky top-8 my-0 z-[6] flex justify-center">
+            <div className="w-full h-auto sticky top-0 my-0 z-[7] flex justify-center">
               <Nav />
+              <div className="w-full absolute top-0 z-[8]">
+                <Login_component />
+                <SignUp_component />
+              </div>
             </div>
+
+
+
               {/* this will hold the Home component in app>page.jsx */}
               <div className="z-[5]">
                 {children}

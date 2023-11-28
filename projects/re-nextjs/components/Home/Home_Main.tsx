@@ -331,6 +331,7 @@ const Home_Main = () => {
               }
 
             </div>
+            
       </div>
 
 
@@ -363,6 +364,12 @@ const Home_Main = () => {
 
 
           </div>
+          <Link href="/properties" className="bg-theme-text-brighter dark:bg-theme-text-dark text-white 
+                rounded-full py-1.5 px-3
+                opacity-80 hover:opacity-90 mx-auto">
+                        view all properties 
+          </Link>
+
       </div>
 
     </div>

@@ -12,6 +12,7 @@ import Image from "next/image";
 import {useState, useEffect, use} from "react";
 import {signIn, signOut, useSession, getProviders} from "next-auth/react";
 
+import { bodyNoScroll } from "@utils/bodyNoScroll";
 
 const Nav = () => {
 
@@ -31,11 +32,29 @@ const Nav = () => {
 
       // setToggleDropDown((prev)=>!prev);
   }
+
+
+  function showLogin () {
+    let loginComponent = document.getElementById("login__container");
+
+    loginComponent!.style.display = "flex";
+  }
+
+  function showSignUp () {
+    let signUpComponent = document.getElementById("signUp__container");
+
+    signUpComponent!.style.display = "flex";
+  }
+
+
   //01.04
   // const [providers, setProviders] = useState(null);
 
+
+  
   const [toggleDropDown, setToggleDropDown] = useState(true);
-  let isUserLoggedIn = true;
+  let isUserLoggedIn = false;
+  
   useEffect(()=> {
    
     console.log("re-render");
@@ -46,7 +65,7 @@ const Nav = () => {
 
 
   return (
-    <nav className="w-full px-2 md:px-12  max-w-7xl">
+    <nav className="w-full px-2 md:px-12  max-w-7xl absolute z-[9] my-8">
       {/* <ul className="bg-[#ffffffd3] text-[#d6003580] flex flex-row gap-3 border-0 border-[] 
       rounded-2xl py-2 px-4 w-full backdrop-blur-sm shadow-l 
       ">
@@ -148,10 +167,16 @@ const Nav = () => {
             >
                 <ul className="flex flex-col items-center justify-center w-full">
 
-                  <li className=" py-2 w-full text-center dark:hover:bg-[#ffffff16]  hover:bg-[#dbdee5] rounded-[17px]">
-                    <Link href="agent/sign-in" className="w-full flex justify-center">
-                      Sign in
-                    </Link>
+                  <li className=" py-2 w-full text-center dark:hover:bg-[#ffffff16]  hover:bg-[#dbdee5] rounded-t-[17px]">
+                    <button onClick={() => {bodyNoScroll(); showLogin()}} className="w-full flex justify-center">
+                      Login
+                    </button>
+                  </li>
+
+                  <li className=" py-2 w-full text-center dark:hover:bg-[#ffffff16]  hover:bg-[#dbdee5] rounded-b-[17px]">
+                    <button onClick={() => {bodyNoScroll(); showSignUp()}} className="w-full flex justify-center">
+                      Sign up
+                    </button>
                   </li>
 
                 </ul>

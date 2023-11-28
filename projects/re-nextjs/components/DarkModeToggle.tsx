@@ -118,8 +118,12 @@ const DarkModeToggle = () => {
             sessionStorage.theme = "light";
             console.log("undefined theme");
 
+        } else {
+            sessionStorage.theme = "light";
+            window.document.documentElement.classList.add(sessionStorage.theme);
+
         }
-        // console.log("re-render");
+
         setTheme(sessionStorage.theme);
     });
 

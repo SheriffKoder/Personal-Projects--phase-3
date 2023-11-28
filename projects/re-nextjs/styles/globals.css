@@ -89,7 +89,7 @@ img {
 .myMain2::after {
   content: "";
   background-color: #8ec5fc29;
-background-image: linear-gradient(62deg, #8ec5fca2 0%, #e0c3fc22 100%);
+  background-image: linear-gradient(62deg, #8ec5fca2 0%, #e0c3fc22 100%);
   /* opacity: 0.6; */
 
   width: 100%;
@@ -476,6 +476,27 @@ background-image: linear-gradient(62deg, #8ec5fca2 0%, #e0c3fc22 100%);
   100% {
     opacity: 0;
   }
+}
+
+
+.label_field:focus-within {
+  /* border: 1px solid rgb(190,190,190,0.9); */
+  outline: 2px solid #d6003580;
+  outline-offset:  3px;
+}
+
+.label_field {
+  box-shadow: inset 0px 0px 4px 2px rgba(0, 0, 0, 0.1);
+}
+.input_field {
+  box-shadow: inset -1px 0px 4px 1px rgba(0, 0, 0, 0.15);
+}
+
+.input_field:focus {
+  /* all: unset; */
+  border: 0;
+  outline: 0px;
+  
 }
 
 
