@@ -521,6 +521,46 @@ img {
   
 }
 
+/*/////////////////////////////////////////////////////////*/
+/* posts */
+
+.slide_right__text__animation {
+  overflow: hidden;
+  width: 100%;
+}
+
+.slide_right__text__animation > * {
+  opacity: 0;
+  animation-name: slide_right__text;
+  animation-duration: 1s;
+  animation-delay: 1s;
+  animation-timing-function: ease-in;
+  animation-fill-mode: forwards;
+
+}
+
+@keyframes slide_right__text {
+  0% {
+    opacity:0;
+    margin-left: -300px;
+    /* width: 300%; */
+  }
+  50%{
+    opacity: 0.2;
+    margin-left: -150px;
+  }
+  100% {
+    opacity: 1;
+    margin-left: 0px;
+    /* width: 100%; */
+  }
+}
+
+/* .slide_right__text__animation2 {
+  overflow: clip;
+  width: 100%;
+} */
+
 
 
 @media screen and (max-width: 640px) {

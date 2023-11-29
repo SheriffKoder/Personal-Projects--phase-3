@@ -283,7 +283,7 @@ const Home_Main = () => {
       lg:max-w-[300px] lg:order-2
       "
       id="home-news">
-            {/* here is the posts */}
+            {/* here are the posts */}
             <h4 className="text_shadow-3">Latest market news</h4>
 
             {/* posts container */}
@@ -309,7 +309,7 @@ const Home_Main = () => {
                         
                         <span className="flex flex-row items-baseline mt-2">
                           <span className="inline-block  shrink-0 h-3 w-3 bg-green-500 opacity-80 rounded-full mr-4"></span>
-                          <span className="text-start max-h-[4rem] max-w-[900px] text-sm dot-text-3">
+                          <span className="text-start max-h-[4rem] max-w-[900px] text-sm dot-text line-clamp-3">
                             {post.content}
                           </span>
                         </span>
@@ -349,7 +349,7 @@ const Home_Main = () => {
           text-[#000000b3] dark:text-[#ffffffb0] text-center text-l flex flex-col gap-1
           lg:max-w-[930px]
       ">
-            {/* here is the properties */}
+            {/* here are the properties */}
             <h4 className="text_shadow-3">Check out our latest properties</h4>
 
           {/* latest properties container */}

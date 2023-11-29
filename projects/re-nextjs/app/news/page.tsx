@@ -68,7 +68,7 @@ const page = () => {
           
           <Link className=""href="/#home-news">Home</Link>
           >
-          <Link className="text-theme-text-brighter" href="/">News</Link>
+          <span className="text-theme-text-brighter">News</span>
         </div>
 
         <div className="bg-white rounded-[17px]
@@ -77,7 +77,7 @@ const page = () => {
       dark:bg-[#68585806] dark:border-[#ffffff05]
       text-[#000000b3] dark:text-[#ffffffb0] text-center text-l flex flex-col gap-1
         ">
-            {/* here is the posts */}
+            {/* here are the posts */}
             <h4 className="text_shadow-3">Latest market news</h4>
 
             {/* posts container */}
