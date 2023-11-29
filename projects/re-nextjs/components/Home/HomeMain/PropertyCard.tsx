@@ -7,59 +7,28 @@ import { useRef } from "react";
 
 interface propertyInterface {
 
-    property_images : string[],
-    property_title : string,
-    property_id : number,
+  property_images : string[],        
+  property_id : number,
+
+  property_country: string,
+  property_city: string,
+  property_district: string,
+
+  property_type: string,
+  property_area: number,
+  property_beds: number,
+  property_baths: number,
   
-    property_beds : number,
-    property_baths : number,
-    property_area : number,
-    property_location : string,
-    property_type : string,
-    property_listing_type : string,
-    property_recommended: boolean,
-    property_price: number,
-  
-  
+  property_listing_type: string,
+  property_availability: boolean,
+  property_recommended: boolean,
+  property_price: number,
+
 }
 
-// let properties: propertyInterface[] = [
-//     {
-//         property_images : ["/images/furniture.avif", "/images/logo.svg"],
-//         property_title : "furniture",
-//         property_id : 1,
-    
-//         property_beds : 3,
-//         property_baths : 2,
-//         property_area : 190,
-//         property_location : "NYC",
-//         property_type : "apartment",
-//         property_listing_type : "rent",
-//         property_recommended: true,
-  
-//     },
-//     {
-//         property_images : ["/images/furniture.avif", "/images/logo.svg"],
-//         property_title : "furniture",
-//         property_id : 2,
-  
-    
-//         property_beds : 2,
-//         property_baths : 1,
-//         property_area : 110,
-//         property_location : "NYC",
-//         property_type : "apartment",
-//         property_listing_type : "sale",
-//         property_recommended: true,
-//     }
-// ];
+const PropertyCard = (property_prop: propertyInterface) => {
 
-
-// import React from 'react'
-
-const PropertyCard = (property: propertyInterface) => {
-
-
+    let property: propertyInterface = property_prop;
 
     // let property = properties[0];
 
@@ -164,15 +133,15 @@ const PropertyCard = (property: propertyInterface) => {
   return (
     <div className="latest_property bg-[#fffffff3] dark:bg-[rgba(255,255,255,0.03)]
                 flex flex-col justify-between items-center 
-                w-[80%] h-auto
-                xl:flex-row md:w-[45%] max-w-[335px]
+                h-auto w-full
+                xl:flex-row gap-1
                 rounded-[17px] box-shadow-1 p-1 relative
                 border border-[rgba(255,255,255,0.02)]
                 dark:opacity-75 dark:hover:opacity-90 opacity-90 hover:opacity-100
                 focus:opacity-100 dark:focus:opacity-90
                 ">
 
-                <div className="relative flex flex-row items-center text-start">
+                <div className="relative flex flex-row items-center text-start xl:max-w-[50%]">
                   <button 
                     onClick={()=>{setPrevFade1(fade1); setFade1(fade1-1);}}
                     className="absolute bg-[#0a0a0a7d] left-1 rounded-[3px]
@@ -180,7 +149,7 @@ const PropertyCard = (property: propertyInterface) => {
                   </button>
 
                   <Link href={"/posts/"+property.property_id} key={property.property_id}>
-                    <Image src={property.property_images[imageReference]} height={300} width={300} alt={property.property_title}
+                    <Image src={property.property_images[imageReference]} height={400} width={400} alt={property.property_type+" "+property.property_country+" "+property.property_city+" "+property.property_district+" "+property.property_area+" "+property.property_beds+" bedrooms "+property.property_baths+" bathrooms "+property.property_listing_type}
                     id={property.property_id.toString()}
                     className="border-0 rounded-t-[10px] w-full max-h-8.5rem
                     xl:rounded-l-[10px] xl:rounded-tr-none
@@ -199,9 +168,12 @@ const PropertyCard = (property: propertyInterface) => {
                 <Link href={"/posts/"+property.property_id} key={property.property_id}
                 className="w-full text_shadow-2">
                   <div className="flex flex-col items-start px-2 py-1 text-sm text-start">
-                    <div className="dark:text-[#ffffffde] capitalize">{property.property_type} in {property.property_location}</div>
-                    <div className="">with {property.property_beds} beds, {property.property_baths} bath</div>
-                    <div className="font-light text-sm">Available for Rent for {property.property_price}</div>
+                    <div className="dark:text-[#ffffffde] capitalize">{property.property_type} for {property.property_listing_type}</div>
+                    {/* <div className="dark:text-[#ffffffde] capitalize">In {property.property_country}, {property.property_city}</div> */}
+                    <div className="dark:text-[#ffffffde] capitalize">in {property.property_city}, {property.property_district}</div>
+                    <div className="">{property.property_beds} beds / {property.property_baths} bath</div>
+                    <div className="">Area: {property.property_area} sqm</div>
+                    <div className="font-light text-sm">Price: {property.property_price}</div>
                   </div>
                 </Link>
 

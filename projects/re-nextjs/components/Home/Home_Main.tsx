@@ -18,23 +18,28 @@ interface postsInterface {
 }
 
 
+
 interface propertyInterface {
 
-  property_images : string[],
-  property_title : string,
+  property_images : string[],        
   property_id : number,
 
-  property_beds : number,
-  property_baths : number,
-  property_area : number,
-  property_location : string,
-  property_type : string,
-  property_listing_type : string,
+  property_country: string,
+  property_city: string,
+  property_district: string,
+
+  property_type: string,
+  property_area: number,
+  property_beds: number,
+  property_baths: number,
+  
+  property_listing_type: string,
+  property_availability: boolean,
   property_recommended: boolean,
   property_price: number,
 
-
 }
+
 
 
 import PropertyCard from "./HomeMain/PropertyCard";
@@ -78,102 +83,107 @@ const Home_Main = () => {
   
   let properties: propertyInterface[] = [
     {
-        property_images : ["/images/furniture.avif", "/images/logo.svg"],
-        property_title : "furniture",
+        property_images : ["/images/furniture.avif", "/images/logo.svg"],        
         property_id : 1,
-    
-        property_beds : 3,
-        property_baths : 2,
-        property_area : 190,
-        property_location : "NYC",
-        property_type : "apartment",
-        property_listing_type : "rent",
-        property_recommended: true,
-        property_price: 10000,
 
-  
-    },
-    {
-        property_images : ["/images/furniture.avif", "/images/logo.svg"],
-        property_title : "furniture",
-        property_id : 2,
-  
-    
-        property_beds : 2,
-        property_baths : 1,
-        property_area : 110,
-        property_location : "NYC",
-        property_type : "apartment",
-        property_listing_type : "sale",
+        property_country: "Egypt",
+        property_city: "Giza",
+        property_district: "Zayed",
+
+        property_type: "Apartment",
+        property_area: 110,
+        property_beds: 2,
+        property_baths: 1,
+        
+        property_listing_type: "rent",
+        property_availability: true,
         property_recommended: true,
         property_price: 6000,
 
     },
+ 
     {
-      property_images : ["/images/furniture.avif", "/images/logo.svg"],
-      property_title : "furniture",
-      property_id : 1,
-  
-      property_beds : 3,
-      property_baths : 2,
-      property_area : 190,
-      property_location : "NYC",
-      property_type : "apartment",
-      property_listing_type : "rent",
-      property_recommended: true,
-      property_price: 10000,
+        property_images : ["/images/furniture.avif", "/images/logo.svg"],        
+        property_id : 1,
 
+        property_country: "Egypt",
+        property_city: "Giza",
+        property_district: "Zayed",
 
-    },
-    {
-        property_images : ["/images/furniture.avif", "/images/logo.svg"],
-        property_title : "furniture",
-        property_id : 2,
-
-    
-        property_beds : 2,
-        property_baths : 1,
-        property_area : 110,
-        property_location : "NYC",
-        property_type : "apartment",
-        property_listing_type : "sale",
+        property_type: "Apartment",
+        property_area: 110,
+        property_beds: 2,
+        property_baths: 1,
+        
+        property_listing_type: "rent",
+        property_availability: true,
         property_recommended: true,
         property_price: 6000,
 
     },
+
     {
-      property_images : ["/images/furniture.avif", "/images/logo.svg"],
-      property_title : "furniture",
-      property_id : 1,
-  
-      property_beds : 3,
-      property_baths : 2,
-      property_area : 190,
-      property_location : "NYC",
-      property_type : "apartment",
-      property_listing_type : "rent",
-      property_recommended: true,
-      property_price: 10000,
+        property_images : ["/images/furniture.avif", "/images/logo.svg"],        
+        property_id : 1,
 
+        property_country: "Egypt",
+        property_city: "Giza",
+        property_district: "Zayed",
 
-    },
-    {
-        property_images : ["/images/furniture.avif", "/images/logo.svg"],
-        property_title : "furniture",
-        property_id : 2,
-
-    
-        property_beds : 2,
-        property_baths : 1,
-        property_area : 110,
-        property_location : "NYC",
-        property_type : "apartment",
-        property_listing_type : "sale",
+        property_type: "Apartment",
+        property_area: 110,
+        property_beds: 2,
+        property_baths: 1,
+        
+        property_listing_type: "rent",
+        property_availability: true,
         property_recommended: true,
         property_price: 6000,
 
-    }
+    },
+
+    {
+        property_images : ["/images/furniture.avif", "/images/logo.svg"],        
+        property_id : 1,
+
+        property_country: "Egypt",
+        property_city: "Giza",
+        property_district: "Zayed",
+
+        property_type: "Apartment",
+        property_area: 110,
+        property_beds: 2,
+        property_baths: 1,
+        
+        property_listing_type: "rent",
+        property_availability: true,
+        property_recommended: true,
+        property_price: 6000,
+
+    },
+
+    {
+        property_images : ["/images/furniture.avif", "/images/logo.svg"],        
+        property_id : 1,
+
+        property_country: "Egypt",
+        property_city: "Giza",
+        property_district: "Zayed",
+
+        property_type: "Apartment",
+        property_area: 110,
+        property_beds: 2,
+        property_baths: 1,
+        
+        property_listing_type: "rent",
+        property_availability: true,
+        property_recommended: true,
+        property_price: 6000,
+
+    },
+
   ];
+    
   
   
   // let property = properties[0];
@@ -344,22 +354,26 @@ const Home_Main = () => {
 
       <div className=" bg-white rounded-[17px] h-auto
           glass-container-background-2 
-          border backdrop-blur-10 py-7 px-7 mx-6 my-20
+          border backdrop-blur-10 py-7 px-7 my-20
           dark:bg-[#68585806] dark:border-[#ffffff05] 
           text-[#000000b3] dark:text-[#ffffffb0] text-center text-l flex flex-col gap-1
-          lg:max-w-[930px]
+          lg:max-w-[930px] w-[100%] mx-auto
       ">
             {/* here are the properties */}
             <h4 className="text_shadow-3">Check out our latest properties</h4>
 
           {/* latest properties container */}
-          <div className="flex flex-row gap-6 my-6 flex-wrap justify-center">
+          <div className="flex flex-row gap-6 my-6 flex-wrap justify-center lg:justify-start mx-auto">
 
           {/* property */}
           {properties ? (
             <>
               {properties.map((property) => (
-                <PropertyCard {...property}/>
+                <div className="
+                
+                h-auto xl:w-[48%] md:w-[46%] lg:w-[47%] w-[100%] max-w-[390px] xl:max-w-[900px]">
+                  <PropertyCard {...property}/>
+                </div>
               )
               )}
             </>

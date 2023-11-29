@@ -59,14 +59,14 @@ const page = () => {
   ]
   
   return (
-    <div className="flex flex-col pb-6 pt-28">
+    <div className="flex flex-col pb-6 pt-28 px-8">
 
 
       <div className="mx-auto max-w-[1230px]">
 
         <div className="dark:text-white text-black text-shadow-3 w-full text-xs flex flex-row gap-1 opacity-70">
           
-          <Link className=""href="/#home-news">Home</Link>
+          <Link className=""href="/">Home</Link>
           >
           <span className="text-theme-text-brighter">News</span>
         </div>
