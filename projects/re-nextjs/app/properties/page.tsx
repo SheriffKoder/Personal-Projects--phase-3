@@ -193,7 +193,7 @@ const page = () => {
     dark:bg-[#68585806] dark:border-[#ffffff05]
     text-[#000000b3] dark:text-[#ffffffb0] text-center text-l flex flex-col gap-1
     ">
-        
+
         {/* here are the posts */}
         <h4 className="text_shadow-3">All properties</h4>
 
@@ -204,7 +204,7 @@ const page = () => {
             {properties ? (
             <>
                 {properties.map((property) => (
-                <div className="h-auto w-full max-w-[375px] md:w-[47%] md2:w-[31.5%] xl:max-w-[390px] xl:w-[31.9%]">
+                <div className="h-auto w-full max-w-[390px] md:w-[calc(50%-16px)] md2:w-[calc(33.3%-16px)] mx-auto md2:mx-0">
                     <PropertyCard {...property}/>
                 </div>
                 )

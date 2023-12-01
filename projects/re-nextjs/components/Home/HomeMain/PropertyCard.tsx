@@ -26,9 +26,12 @@ interface propertyInterface {
 
 }
 
-const PropertyCard = (property_prop: propertyInterface) => {
 
-    let property: propertyInterface = property_prop;
+const PropertyCard = ({...property}) => {
+
+    // let currentPage = props.currentPage;
+    // let property: propertyInterface = props.property;
+    // let currentPage = "property";
 
     // let property = properties[0];
 
@@ -129,31 +132,34 @@ const PropertyCard = (property_prop: propertyInterface) => {
   // dark:hover:outline-[#d600352c] dark:hover:outline-offset-[0px]
   // dark:focus:outline-[#d600352c] dark:focus:outline-offset-[0px] 
 
+  // let page = "property";
 
   return (
-    <div className="latest_property bg-[#fffffff3] dark:bg-[rgba(255,255,255,0.03)]
+    <div className={`latest_property bg-[#fffffff3] dark:bg-[rgba(255,255,255,0.03)]
                 flex flex-col justify-between items-center 
                 h-auto w-full
-                xl:flex-row gap-1
+                ${property.currentPage === 'property' ? 'xl-flex-col' : 'xl:flex-row'} 
+                gap-1
                 rounded-[17px] box-shadow-1 p-1 relative
                 border border-[rgba(255,255,255,0.02)]
                 dark:opacity-75 dark:hover:opacity-90 opacity-90 hover:opacity-100
                 focus:opacity-100 dark:focus:opacity-90
-                ">
+                `}>
 
-                <div className="relative flex flex-row items-center text-start xl:max-w-[50%]">
+                <div className={`relative flex flex-row items-center text-start 
+                ${property.currentPage === 'property' ? '' : 'xl:max-w-[50%]'} `}>
                   <button 
                     onClick={()=>{setPrevFade1(fade1); setFade1(fade1-1);}}
                     className="absolute bg-[#0a0a0a7d] left-1 rounded-[3px]
                     bg-[url('/icons/arrow-left.svg')] h-4 w-4 bg-no-repeat bg-contain">
                   </button>
 
-                  <Link href={"/posts/"+property.property_id} key={property.property_id}>
+                  <Link href={"/properties/"+property.property_id} key={property.property_id}>
                     <Image src={property.property_images[imageReference]} height={400} width={400} alt={property.property_type+" "+property.property_country+" "+property.property_city+" "+property.property_district+" "+property.property_area+" "+property.property_beds+" bedrooms "+property.property_baths+" bathrooms "+property.property_listing_type}
                     id={property.property_id.toString()}
-                    className="border-0 rounded-t-[10px] w-full max-h-8.5rem
-                    xl:rounded-l-[10px] xl:rounded-tr-none
-                    ">
+                    className={`border-0 rounded-t-[10px] w-full max-h-8.5rem
+                    ${property.currentPage === 'property' ? '' : 'xl:rounded-l-[10px] xl:rounded-tr-none'}
+                    `}>
                     </Image>
                   </Link>
 
@@ -165,7 +171,7 @@ const PropertyCard = (property_prop: propertyInterface) => {
                 </div>
                 
 
-                <Link href={"/posts/"+property.property_id} key={property.property_id}
+                <Link href={"/properties/"+property.property_id} key={property.property_id}
                 className="w-full text_shadow-2">
                   <div className="flex flex-col items-start px-2 py-1 text-sm text-start">
                     <div className="dark:text-[#ffffffde] capitalize">{property.property_type} for {property.property_listing_type}</div>
