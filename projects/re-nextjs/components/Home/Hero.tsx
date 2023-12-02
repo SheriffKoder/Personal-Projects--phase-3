@@ -31,7 +31,7 @@ const Hero = () => {
                     Your preferred real estate hub
                 </h1>
 
-                <Link href="/properties" className=" text-[min(calc(1.0rem+0.2vw),(1.2rem))]
+                <Link href="/about#contact" className=" text-[min(calc(1.0rem+0.2vw),(1.2rem))]
                 mt-3 bg-theme-text-brighter dark:bg-theme-text-dark text-white 
                 rounded-full py-1.5 pr-3 pl-4 w-fit flex flex-row items-center justify-center
                 opacity-80 hover:opacity-90">

@@ -127,7 +127,7 @@ const Nav = () => {
           </li>
 
           <li className="h-full">
-            <Link href="/about" aria-label="more information about our company" className="hover:opacity-80 flex items-center h-full">
+            <Link href="/about#about-us" aria-label="more information about our company" className="hover:opacity-80 flex items-center h-full">
               About
             </Link>
           </li>
