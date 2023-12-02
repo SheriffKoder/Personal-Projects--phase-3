@@ -161,7 +161,7 @@ const Home_Rec = () => {
 
 
   return (
-    <div id="rec" className="w-full h-auto border-[#ffffff15] mt-24 px-6"
+    <div id="rec" className="w-full md:w-[97vw] md:mx-auto h-auto border-[#ffffff15] mt-24 px-6"
     aria-label="recommended properties">
 
         <h2 className="text-white text-[min(calc(1rem+2vw),(2.5rem))] font-semibold  mb-12
@@ -169,23 +169,25 @@ const Home_Rec = () => {
             Our Recommendations
         </h2>
 
-        <div className="flex flex-row items-center justify-center gap-8">
+        <div className="flex flex-row items-center justify-center gap-2 md:gap-8 h-[50vw] max-h-[500px] ">
             <button 
                 onClick={()=>{setPrevFade(fade); setFade(fade-1);}}
                 // onClick={()=>{prevFade=fade; fade=fade-1; animationCombination(slider__container);}}
-                className="bg-[url('/icons/arrow-left.svg')] h-10 w-10 bg-no-repeat bg-contain">
+                className="bg-[url('/icons/arrow-left.svg')] h-[3vw] w-[3vw] max-h-[40px] max-w-[40px] 
+                min-w-[20px] min-h-[20px] bg-no-repeat bg-contain">
             </button>
 
             {/* maintain 16:9 aspect ratio */}
             <div className="rounded-[17px] border-0
-            w-[calc(16*6vmin)] lg:h-[calc(9*6vmin)] h-[calc(9*5vmin)] 
-            max-h-[80%] max-w-[80%]
+            w-full h-[calc(50vw)] max-h-[500px] max-w-[833px]
             relative 
             "
             id="slider__container">
                 <Image src={slider.property_image} fill={true} alt={slider.property_title}
                 onMouseEnter={stopTimer} onMouseLeave={startTimer}
-                className="rounded-[17px] border-0 opacity-90 hover:opacity-100 dark:opacity-75 dark:hover:opacity-90"></Image>
+                className="rounded-[17px] border-0 opacity-90 hover:opacity-100 dark:opacity-75 dark:hover:opacity-90 
+                w-full h-[calc(50vw)] max-h-[500px] max-w-[833px]"
+                style={{objectFit:'cover'}}></Image>
 
                 <div className=" flex flex-col justify-start absolute bottom-0 left-0 
                 w-full bg-[#0000005d] p-[min(calc(1rem+0.5vw),(2rem))] text-white box-shadow-1
@@ -199,7 +201,8 @@ const Home_Rec = () => {
             <button 
                 onClick={()=>{setPrevFade(fade); setFade(fade+1);}}
                 // onClick={()=>{prevFade=fade; fade=fade+1; animationCombination(slider__container);}}
-                className="bg-[url('/icons/arrow-right.svg')] h-10 w-10 bg-no-repeat bg-contain">
+                className="bg-[url('/icons/arrow-right.svg')]                             h-[3vw] w-[3vw] max-h-[40px] max-w-[40px] 
+                min-w-[20px] min-h-[20px] bg-no-repeat bg-contain">
             </button> 
 
         </div>

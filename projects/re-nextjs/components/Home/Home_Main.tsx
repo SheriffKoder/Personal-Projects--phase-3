@@ -283,14 +283,14 @@ const Home_Main = () => {
 
   return (
 
-    <div className="w-[95%] lg:flex lg:flex-row justify-center mx-auto">
+    <div className="w-[95%] lg:flex lg:flex-row justify-center mx-auto ">
 
       <div className=" bg-white rounded-[17px]
       glass-container-background-2 
-      border backdrop-blur-10 py-7 px-7 mx-6 my-20
+      border backdrop-blur-10 py-7 px-7 w-[95%] mx-auto lg:ml-6 my-20
       dark:bg-[#68585806] dark:border-[#ffffff05]
       text-[#000000b3] dark:text-[#ffffffb0] text-center text-l flex flex-col gap-1
-      lg:max-w-[300px] lg:order-2
+      lg:max-w-[300px] lg:order-2 h-fit
       "
       id="home-news">
             {/* here are the posts */}
@@ -344,7 +344,7 @@ const Home_Main = () => {
             </div>
             <Link href="/news" className="bg-theme-text-brighter dark:bg-theme-text-dark text-white 
                 rounded-full py-1.5 px-3 w-[80%] max-w-[200px] text_shadow-3
-                opacity-80 hover:opacity-90 mx-auto">
+                opacity-80 hover:opacity-90 mx-auto mt-auto">
                         Check all news 
           </Link>
 
@@ -357,7 +357,7 @@ const Home_Main = () => {
           border backdrop-blur-10 py-7 px-7 my-20
           dark:bg-[#68585806] dark:border-[#ffffff05] 
           text-[#000000b3] dark:text-[#ffffffb0] text-center text-l flex flex-col gap-1
-          lg:max-w-[930px] w-[100%] mx-auto
+          lg:max-w-[930px] w-[95%] mx-auto lg:mx-0 lg:ml-auto
       ">
             {/* here are the properties */}
             <h4 className="text_shadow-3">Check out our latest properties</h4>
@@ -387,7 +387,7 @@ const Home_Main = () => {
           </div>
           <Link href="/properties" className="bg-theme-text-brighter dark:bg-theme-text-dark text-white 
                 rounded-full py-1.5 px-3 w-[80%] max-w-[200px]
-                opacity-80 hover:opacity-90 mx-auto">
+                opacity-80 hover:opacity-90 mx-auto mt-auto">
                         view all properties 
           </Link>
 

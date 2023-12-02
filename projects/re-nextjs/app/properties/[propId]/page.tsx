@@ -1,7 +1,10 @@
 // import React from 'react'
 
+"use client"
+
 import Link from "next/link";
 import Image from "next/image";
+import { useState, useEffect } from "react";
 
 import PropertyCard from "@components/Home/HomeMain/PropertyCard";
 
@@ -176,6 +179,100 @@ const page = () => {
   
     let property_title = thisProperty.property_type+" for "+thisProperty.property_listing_type+" in <"+thisProperty.property_country+" "+thisProperty.property_city+" "+thisProperty.property_district+"> "+thisProperty.property_area+"sqm "+thisProperty.property_beds+" bedrooms / "+thisProperty.property_baths+" bathrooms";    
 
+    function fadeOutAnimation (slider__container: any) {
+
+
+        //[fadeOut]
+        slider__container?.classList.add("fadeOut_animation");
+        
+    }
+    
+    function delayAnimation (slider__container: any){
+    //give [delay], after fadeOut(600ms) finishes
+    setTimeout(()=> {
+        handleSliderIndex(fade1);
+    
+    },600);
+    }
+    
+    function handleSliderIndex (direction: number) {
+    
+    if (direction === prevFade1-1) {
+        // console.log("left");
+        (imageReference > 0) ? setImageReference(imageReference-1) : setImageReference(thisProperty.property_images.length-1);
+        // setPrevFade1(fade1);
+        // setImageReference(imageReference-1);
+
+    } else if (direction === prevFade1+1) {
+        // console.log("right");
+        (imageReference < thisProperty.property_images.length-1) ? setImageReference(imageReference+1) : setImageReference(0);
+
+    } else {
+        setImageReference(direction)
+    }
+    
+    }
+    
+    function fadeInAnimation (slider__container: any) {
+    
+    //[fadeIn] after fadeout(600ms) and delay(200ms) finish
+    setTimeout(()=> {
+        slider__container?.classList.add("fadeIn_animation");
+    },800);
+    
+    //after fadeOut,delay,fadeIn finish, remove to be re-applied
+    setTimeout(()=> {
+        slider__container?.classList.remove("fadeOut_animation");
+        slider__container?.classList.remove("fadeIn_animation");
+    },1400);
+    
+    
+    
+    
+    }
+    
+    function animationCombination1 (slider__container: any) {
+    
+    //prevent the animation from playing on the initial render, plays only on caret icon click
+    if (initialRender !== 0 ) {
+        // //stop current timers to not overlap
+        // clearInterval(tm.current);
+
+        fadeOutAnimation(slider__container);
+        delayAnimation(slider__container); //with handle fade change
+        
+        fadeInAnimation(slider__container);        
+    }
+    else {
+        setInitialRender(initialRender+1);
+    }
+    
+    //start the auto animation timer after first render or again after caret click
+    // tm.current = window.setInterval(() => {
+    //     // console.log("timer");
+    //     setPrevFade(fade); setFade(fade-1);
+    // }, 6000);
+    
+    }
+    
+
+    const [prevFade1, setPrevFade1] = useState(0);
+    const [fade1, setFade1] = useState(0);
+    const [initialRender, setInitialRender] = useState(0);
+    // slider1 = {...properties[sliderIndex1]};
+
+    // const propertiesRefCount = useRef(0);
+    const [imageReference, setImageReference] = useState(0);
+    // const [propertiesCounter, setPropertiesCounter] = useState([]);
+
+
+    useEffect(()=> {
+        let slider__container = document.getElementById(thisProperty.property_id.toString());        
+
+        animationCombination1(slider__container);
+
+    },[fade1]);
+
 
   return (
     <div className="flex flex-col pb-6 pt-28 px-3">
@@ -237,7 +334,7 @@ const page = () => {
                 text_shadow-2 max-w-[100%]
                 ">
 
-                    <div className="">
+                    {/* <div className="">
                         <Image src={thisProperty.property_images[0]} height={600} width={600} alt={property_title}
                         id={thisProperty.property_id.toString()}
                         className="border-0 w-full
@@ -245,6 +342,43 @@ const page = () => {
                         
                         ">
                         </Image>
+                    </div> */}
+
+                    <div className="flex flex-row items-center justify-center relative
+                    h-[45vw] w-full
+                    ">
+                        <button 
+                            onClick={()=>{setPrevFade1(fade1); setFade1(fade1-1);}}
+                            // onClick={()=>{prevFade=fade; fade=fade-1; animationCombination(slider__container);}}
+                            className="
+                            absolute left-[1rem]
+                            bg-[#0a0a0a7d] rounded-[3px]
+                            bg-[url('/icons/arrow-left.svg')] 
+                            h-[3vw] w-[3vw] max-h-[40px] max-w-[40px] 
+                            min-w-[20px] min-h-[20px]
+                            bg-no-repeat bg-contain">
+                        </button>
+
+
+                            <Image src={thisProperty.property_images[imageReference]} height={600} width={600} alt={property_title}
+                            id={thisProperty.property_id.toString()}
+                            className="border-0
+                            rounded-[10px] w-full h-[calc(45vw-0.25rem)]"
+                            style={{objectFit:'cover'}}
+                            >
+                            </Image>
+
+                        <button 
+                            onClick={()=>{setPrevFade1(fade1); setFade1(fade1+1);}}                            // onClick={()=>{prevFade=fade; fade=fade+1; animationCombination(slider__container);}}
+                            className="
+                            absolute right-[1rem]
+                            bg-[#0a0a0a7d] rounded-[3px]
+                            bg-[url('/icons/arrow-right.svg')] 
+                            h-[3vw] w-[3vw] max-h-[40px] max-w-[40px] 
+                            min-w-[20px] min-h-[20px]
+                            bg-no-repeat bg-contain">
+                        </button> 
+
                     </div>
                     
                 </div>
@@ -253,19 +387,48 @@ const page = () => {
                 bg-[#fffffff0] focus:bg-[#ffffff] hover:bg-[#ffffff] 
                 glass-container-background-2 backdrop-blur-10
                 dark:bg-[#ffffff07] dark:hover:bg-[#ffffff0a] dark:focus:bg-[#ffffff0a]
-                flex flex-col rounded-[17px] box-shadow-1 p-2 border border-[rgba(255,255,255,0.02)]
-                text_shadow-2 max-w-[100%]
+                flex flex-col rounded-[7px] box-shadow-1 p-2 border border-[rgba(255,255,255,0.02)]
+                text_shadow-2 max-w-[100%]  mt-[-1rem] mb-[0rem] md2:mt-[-0.5rem] md2:mb-[1rem]
                 ">
-                    <div className="p-2">
-                    
-                    <span className="flex flex-row items-baseline">
-                        <span className="text-start max-w-[900px] text-sm ">
+                    <div className="flex flex-row gap-4 w-full items-center">
+                        {thisProperty.property_images.map((image:string) => (
+                            
+                            
+                            <button 
+                            className="border-0
+                            rounded-[7px] max-w-[50px] w-[10%]
+                            h-[99%]"
+                            onClick={()=>{setPrevFade1(fade1); setFade1(thisProperty.property_images.findIndex(i => i === image));}}>
 
-                                <div className="flex flex-col justify-center items-start gap-2">
+                                <Image src={image} height={300} width={300} alt={property_title}
+                                className="
+                                border-0
+                                rounded-[7px] max-w-[50px] w-full
+                                h-[100%]
+                                "
+                                style={{objectFit:'cover'}}
+                                >
+                                </Image>
+                            </button>          
+                        ))}
+                    </div>
+                </div>
+
+                <div className="h-auto w-full 
+                bg-[#fffffff0] focus:bg-[#ffffff] hover:bg-[#ffffff] 
+                glass-container-background-2 backdrop-blur-10
+                dark:bg-[#ffffff07] dark:hover:bg-[#ffffff0a] dark:focus:bg-[#ffffff0a]
+                flex flex-col rounded-[17px] box-shadow-1 p-4 border border-[rgba(255,255,255,0.02)]
+                text_shadow-3 max-w-[100%]
+                ">
+
+                                <div className="w-full
+                                flex flex-col justify-center items-start gap-2 text-sm">
 
                                     <div>
-                                        <div className="font-semibold mb-2">                             
-                                            <span className="inline-block shrink-0 h-3 w-3 bg-green-500 opacity-80 rounded-full mr-2"></span>
+                                        <div className="font-semibold mb-2 text-base">                             
+                                            <span className="inline-block shrink-0 h-3 w-3 bg-green-500 
+                                            opacity-80 rounded-full mr-2"></span>
                                             Property Details
                                         </div>
                                         <div>Country: {thisProperty.property_country}</div>
@@ -282,11 +445,12 @@ const page = () => {
                                             </span>
                                             {thisProperty.property_availability ? 
                                                 (
-                                                <span className="text-green-500">
+                                                <span className="text-[#279b72] dark:text-[#32b084]">
                                                     Available                                
                                                 </span>
+                                                
                                                 ) : (
-                                                <span className="text-red-500">
+                                                <span className="dark:text-[#be2e60] text-[#be2e52]">
                                                     Not Available
                                                 </span>
                                             )}
@@ -306,17 +470,32 @@ const page = () => {
                                         <div>{thisProperty.property_description}</div>
                                     </div>
 
-                                    <div>
-                                        <div>Agent Name: {thisProperty.property_author}</div>
-                                        <div>Agent Contact Number: 01054354353</div>
+                                    <div className="my-2 mx-auto ">
+                                        <button className="outline-2 outline-offset-4 dark:hover:outline-[#fffd] outline dark:outline-[#ffffff2b]
+                                        outline-[#0000000f] hover:outline-[#0000002a]
+                                        px-2 py-1 border-0 rounded-[7px] opacity-70 dark:hover:opacity-90 hover:opacity-100
+                                        bg-[#279b72] dark:bg-[#32b084] text-white">
+                                        
+                                        {thisProperty.property_availability ? 
+                                        (
+
+                                            "Book a visit"                 
+                                        ) : (
+
+                                            "Contact us for alternatives"
+                                        )}                                        
+                                        
+                                        </button>
+                                        {/* <button className="outline-2 outline-offset-4 hover:outline-[#fffd] outline outline-[#ffffff2b]
+                                            px-2 py-1 border-0 rounded-[7px] opacity-80 hover:opacity-90
+                                        bg-theme-text-brighter dark:bg-theme-text-dark text-white">
+                                        Contact us for alternatives
+                                        </button> */}
                                     </div>
 
                                 </div>
 
 
-                        </span>
-                    </span>
-                </div>
                 </div>
 
             </div>

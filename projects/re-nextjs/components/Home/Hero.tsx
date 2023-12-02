@@ -13,7 +13,7 @@ const Hero = () => {
         </Image>
         
         <div className="main__hero flex flex-col justify-center
-        before:opacity-[0.3] dark:before:opacity-[0.05] max-w-[1550px]
+        before:opacity-[0.3] dark:before:opacity-[0.05] max-w-[1550px] max-h-[1000px]
         ">
             <header className="main__hero__text-container
             flex flex-col justify-center items-center lg:items-start
