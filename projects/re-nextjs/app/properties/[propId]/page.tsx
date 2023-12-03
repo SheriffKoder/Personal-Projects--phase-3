@@ -345,7 +345,7 @@ const page = () => {
                     </div> */}
 
                     <div className="flex flex-row items-center justify-center relative
-                    h-[45vw] w-full
+                    h-[45vw] w-full max-h-[600px]
                     ">
                         <button 
                             onClick={()=>{setPrevFade1(fade1); setFade1(fade1-1);}}
@@ -363,7 +363,7 @@ const page = () => {
                             <Image src={thisProperty.property_images[imageReference]} height={600} width={600} alt={property_title}
                             id={thisProperty.property_id.toString()}
                             className="border-0
-                            rounded-[10px] w-full h-[calc(45vw-0.25rem)]"
+                            rounded-[10px] w-full h-[calc(45vw-0.25rem)] max-h-[100%]"
                             style={{objectFit:'cover'}}
                             >
                             </Image>

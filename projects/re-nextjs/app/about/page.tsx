@@ -1,9 +1,32 @@
 // import React from 'react'
 
+"use client";
+
 import Link from "next/link"
 import Image from "next/image"
+import { useState } from "react";
+
+//npm install @vis.gl/react-google-maps
+
+import {
+  APIProvider,
+  Map,
+  AdvancedMarker,
+  Pin,
+  InfoWindow
+} from "@vis.gl/react-google-maps";
+
 
 const page = () => {
+
+  //put in process.env, define in next.config.js
+  const Map_Key: string = process.env.GG_Maps_AP ?? "false"
+  const position = {lat:51.5007042, lng:-0.1245721}
+  const Map_Style = process.env.GG_Maps_MapId ?? "false";
+  
+  const [open, setOpen] = useState(false);
+
+  
   return (
 
 
@@ -38,7 +61,7 @@ const page = () => {
           </div>
 
           <Image src="/images/furniture.avif" alt="text" width={300} height={300}
-          className="border-0 rounded-sm w-full md2:max-w-[300px]">
+          className="border-0 rounded-[7px] w-full md2:max-w-[300px]">
 
           </Image>
 
@@ -49,7 +72,7 @@ const page = () => {
         {/* contact */}
         <div id="contact" className="bg-white rounded-[7px]
         glass-container-background-2 min-w-[100%]
-        border backdrop-blur-10 py-8 px-10 mt-8
+        border backdrop-blur-10 py-8 px-10 mt-8 pb-12
         dark:bg-[#68585806] dark:border-[#ffffff05]
         text-[#000000b3] dark:text-[#ffffffb0] text-l flex flex-col gap-8
          text-sm md2:flex-row
@@ -134,11 +157,11 @@ const page = () => {
               </div>
 
               <div className="flex flex-col gap-0 md2:gap-0 md2:flex-row md2:h-7 h-14 items-center">
-                <span className="w-[10rem] inline-block">
+                <span className="md2:w-[10rem] inline-block">
                 
                 </span>
 
-                <div className="md2:flex-1 flex w-full justify-center">
+                <div className="md2:flex-1 flex w-full justify-center max-w-[500px]">
                   <button type="submit" 
                 className="bg-theme-text-brighter dark:bg-theme-text-dark text-white 
                   rounded-full py-1.5 px-3 w-[80%] max-w-[200px]
@@ -155,16 +178,32 @@ const page = () => {
             </form>
           </div>
 
-          <div className=" min-h-[100%] md2:ml-auto flex flex-col">
+          <div className=" min-h-[100%] md2:ml-auto flex flex-col w-full md2:max-w-[300px] max-w-[500px] mx-auto">
 
           <h1 className="font-semibold text-base text-center mb-4">Our location</h1>
-            <Image src="/images/furniture.avif" alt="text" width={300} height={300}
-            className="border-0 rounded-sm mx-auto md2:ml-auto flex-1 w-full md2:max-w-[300px] max-w-[500px]"
-            style={{objectFit:'cover'}}
-            >
+            <APIProvider apiKey={Map_Key}>
+            <div 
+            className="border-0 mx-auto md2:ml-auto md2:flex-1 w-full h-[400px] 
+            bg-gray-500 dark:grayscale-[0.7] dark:invert rounded-[7px] overflow-hidden"
+            >          
+              <Map zoom={12} center={position} mapId={Map_Style}>
+                <AdvancedMarker position={position} onClick={()=> setOpen(true)}>
+                  <Pin background={"red"} borderColor={"black"} glyphColor={"maroon"}/>
+                </AdvancedMarker>
 
-            </Image>
+                {open && 
+                <InfoWindow position={position} onCloseClick={()=>setOpen(false)}>
+                  <p className="text-black opacity-70">Our location</p>
+                </InfoWindow>
+                }
 
+              </Map>
+            </div>
+
+          </APIProvider>
+
+          
+            
           </div>
           
 
