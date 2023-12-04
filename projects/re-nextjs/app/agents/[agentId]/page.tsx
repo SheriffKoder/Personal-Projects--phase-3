@@ -5,6 +5,8 @@ import Link from "next/link";
 import Image from "next/image";
 
 import PropertyCard from "@components/Home/HomeMain/PropertyCard";
+import { bodyNoScroll, showEdit } from "@utils/bodyNoScroll";
+
 
 interface propertyInterface {
 
@@ -26,6 +28,7 @@ interface propertyInterface {
     property_price: number,
 
     property_date: string,
+    property_update: string,
     property_author: string,
     property_description: string,
   
@@ -68,6 +71,7 @@ const page = () => {
             property_price: 6000,
 
             property_date: "25 Dec 2023",
+            property_update: "26 Dec 2023",
             property_author: "John",
             property_description: "World Class property in a friendly neighborhood contains all facilities"
 
@@ -92,6 +96,7 @@ const page = () => {
             property_price: 7000,
 
             property_date: "25 Dec 2023",
+            property_update: "26 Dec 2023",
             property_author: "John",
             property_description: "World Class property in a friendly neighborhood contains all facilities"
 
@@ -117,6 +122,7 @@ const page = () => {
             property_price: 8000,
 
             property_date: "25 Dec 2023",
+            property_update: "26 Dec 2023",
             property_author: "John",
             property_description: "World Class property in a friendly neighborhood contains all facilities"
 
@@ -142,6 +148,7 @@ const page = () => {
             property_price: 9000,
 
             property_date: "25 Dec 2023",
+            property_update: "26 Dec 2023",
             property_author: "John",
             property_description: "World Class property in a friendly neighborhood contains all facilities"
 
@@ -167,6 +174,7 @@ const page = () => {
             property_price: 10000,
 
             property_date: "25 Dec 2023",
+            property_update: "26 Dec 2023",
             property_author: "John",
             property_description: "World Class property in a friendly neighborhood contains all facilities"
 
@@ -222,6 +230,7 @@ const page = () => {
         flex-wrap gap-8 mb-8 px-4 md2:px-8">
         
 
+
             {/* nav links */}
             <div className="dark:text-white text-black text-shadow-3 w-full text-xs flex flex-row gap-1 opacity-70">        
                 <Link className=""href="/">Home</Link>
@@ -231,7 +240,7 @@ const page = () => {
 
             
             {/* container 1 */}
-            <h1 className="text_shadow-3 font-bold text-3xl text-[#000000d5] dark:text-[#ffffffe2] capitalize w-full
+            <h1 className="text_shadow-3 font-bold text-3xl text-[#000000c7] dark:text-[#ffffffe2] capitalize w-full
             text-center md2:text-start">
                 Hello, {agent.fullName.split(" ")[0]}
             </h1>
@@ -279,8 +288,8 @@ const page = () => {
                         items-center max-w-[500px]"
                         >
 
-                        <h2 className="text_shadow-3 font-semibold text-lg text-white w-full
-                        text-center md2:text-start mb-2 mt-2 text-[#000000d5] dark:text-[#ffffffe2]">Your information</h2>
+                        <h2 className="text_shadow-3 font-semibold text-lg  w-full
+                        text-center md2:text-start mb-2 mt-2 text-[#000000c7] dark:text-[#ffffffe2]">Your information</h2>
 
                             <div className="capitalize
                             flex flex-row flex-wrap w-full justify-center md2:justify-start items-baseline">
@@ -451,11 +460,22 @@ const page = () => {
             ">
 
                 {/* here are the properties */}
-                <h4 className="text_shadow-3 font-semibold text-lg text-white md2:text-start
-                text-[#000000d5] dark:text-[#ffffffe2]
-                ">
-                    Your properties
-                </h4>
+                <div className="w-full flex flex-row justify-center h-[2rem]">
+                    <h4 className="text_shadow-3 font-semibold text-lg md2:text-start
+                    text-[#000000c7] dark:text-[#ffffffe2]
+                    ">
+                        Your properties
+                    </h4>
+
+                    <button type="button" 
+                    onClick={() => {bodyNoScroll(); showEdit("Add")}}
+                    className="
+                    bg-theme-text-brighter dark:bg-theme-text-dark text-white 
+                    rounded-[17px] text-sm py-1 px-3
+                    opacity-60 hover:opacity-90 ml-auto">
+                        Add a Property 
+                    </button>
+                </div>
 
                 {/* properties container */}
                 <div className="flex flex-row gap-6 my-6 flex-wrap justify-center md:justify-start mx-auto last-of-type:mr-auto">
@@ -483,6 +503,13 @@ const page = () => {
             </div>
 
 
+            {/* container 3 */}
+            { agent.role === "admin" ? (
+                ""
+            ):(
+                ""
+            )}
+            
 
 
         </div>

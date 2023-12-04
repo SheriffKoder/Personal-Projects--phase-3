@@ -10,6 +10,8 @@ import Footer from "@components/Footer";
 import Loading from "@components/Home/Loading";
 import Login_component from "@components/Auth/Login";
 import SignUp_component from "@components/Auth/SignUp";
+import PropertyAdd_Component from "@components/PropertyEdit/PropertyAdd";
+import PropertyEdit_Component from "@components/PropertyEdit/PropertyEdit";
 
 export const metadata = {
   title: 'RE Website',
@@ -52,8 +54,13 @@ const RootLayout = ({ children }: { children: React.ReactNode}) => {
               <div className="w-full absolute top-0 z-[8]">
                 <Login_component />
                 <SignUp_component />
+                <PropertyAdd_Component />
+                <PropertyEdit_Component />
+
+                
               </div>
             </div>
+
 
 
 

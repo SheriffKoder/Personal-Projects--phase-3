@@ -5,6 +5,8 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useRef } from "react";
 
+import { bodyNoScroll, showEdit } from "@utils/bodyNoScroll";
+
 interface propertyInterface {
 
   property_images : string[],        
@@ -24,7 +26,13 @@ interface propertyInterface {
   property_recommended: boolean,
   property_price: number,
 
+  property_date: string,
+  property_update: string,
+  property_author: string,
+  property_description: string,
+
 }
+
 
 
 const PropertyCard = ({...property}) => {
@@ -108,7 +116,8 @@ const PropertyCard = ({...property}) => {
     // }, 6000);
     
     }
-    
+
+
 
     const [prevFade1, setPrevFade1] = useState(0);
     const [fade1, setFade1] = useState(0);
@@ -173,45 +182,51 @@ const PropertyCard = ({...property}) => {
                   </button>
                 </div>
                 
+                <div className="w-full text_shadow-2">
 
-                <Link href={"/properties/"+property.property_id} key={property.property_id}
-                className="w-full text_shadow-2">
-                  <div className="flex flex-col items-start px-2 py-1 text-sm text-start">
-                    <div className="dark:text-[#ffffffde] capitalize">{property.property_type} for {property.property_listing_type}</div>
-                    {/* <div className="dark:text-[#ffffffde] capitalize">In {property.property_country}, {property.property_city}</div> */}
-                    <div className="dark:text-[#ffffffde] capitalize">in {property.property_city}, {property.property_district}</div>
-                    <div className="">{property.property_beds} beds / {property.property_baths} bath</div>
-                    <div className="">Area: {property.property_area} sqm</div>
-                    <div className="font-light text-sm">Price: {property.property_price}</div>
-                    {property.currentPage === 'agent' ? (
-                      <div>               
-                        <div className="font-light text-sm">Added On: {property.property_date}</div>
 
-                        <div className="text-sm font-light w-full flex flex-row gap-2 justify-start mt-2 mb-1">
+                  <Link href={"/properties/"+property.property_id} key={property.property_id}
+                  className="w-full">
+                    <div className="flex flex-col items-start px-2 pt-1 text-sm text-start">
+                      <div className="dark:text-[#ffffffde] capitalize">{property.property_type} for {property.property_listing_type}</div>
+                      {/* <div className="dark:text-[#ffffffde] capitalize">In {property.property_country}, {property.property_city}</div> */}
+                      <div className="dark:text-[#ffffffde] capitalize">in {property.property_city}, {property.property_district}</div>
+                      <div className="">{property.property_beds} beds / {property.property_baths} bath</div>
+                      <div className="">Area: {property.property_area} sqm</div>
+                      <div className="font-light text-sm">Price: {property.property_price}</div>
 
-                          <button type="button"
-                            onClick={()=>{}} 
-                            className="bg-theme-text-brighter dark:bg-theme-text-dark text-white 
-                            rounded-full w-[65px]
-                            opacity-40 hover:opacity-90 text-center">
-                                Edit
-                            </button>
 
-                          <button type="submit"
-                            className="bg-theme-text-brighter dark:bg-theme-text-dark text-white 
-                            rounded-full w-[65px]
-                            opacity-40 hover:opacity-90 text-center">
-                                Delete
-                            </button>
+                    </div>
+                  </Link>
+                  {property.currentPage === 'agent' ? (
+                        <div className="flex flex-col items-start px-2 pb-1 text-sm text-start">               
+                          <div className="font-light text-sm">Added: {property.property_date}</div>
+                          <div className="font-light text-sm">Updated: {property.property_update}</div>
 
+                          <div className="text-sm font-light w-full flex flex-row gap-2 justify-start mt-2 mb-1">
+
+                            <button type="button"
+                              onClick={() => {bodyNoScroll(); showEdit("Edit")}}
+                              className="bg-theme-text-brighter dark:bg-theme-text-dark text-white 
+                              rounded-full w-[65px]
+                              opacity-40 hover:opacity-90 text-center">
+                                  Edit
+                              </button>
+
+                            <button type="submit"
+                              className="bg-theme-text-brighter dark:bg-theme-text-dark text-white 
+                              rounded-full w-[65px]
+                              opacity-40 hover:opacity-90 text-center">
+                                  Delete
+                              </button>
+
+                          </div>
                         </div>
-                      </div>
-                    ):(
-                      ""
-                    )}
+                      ):(
+                        ""
+                      )}
+                </div>
 
-                  </div>
-                </Link>
 
 
 
