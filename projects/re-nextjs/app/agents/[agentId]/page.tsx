@@ -4,6 +4,8 @@
 import Link from "next/link";
 import Image from "next/image";
 
+import PropertyCard from "@components/Home/HomeMain/PropertyCard";
+
 interface propertyInterface {
 
     property_images : string[],        
@@ -29,6 +31,7 @@ interface propertyInterface {
   
   }
 
+
 interface agentInterface {
     fullName: string,
     phone: number,
@@ -36,6 +39,7 @@ interface agentInterface {
     avatar: string,
     password: string,
     position: string,
+    role: string,
 }
 
 
@@ -43,6 +47,7 @@ interface agentInterface {
 
 const page = () => {
 
+    // let properties: propertyInterface[] = [];
     let properties: propertyInterface[] = [
         {
             property_images : ["/images/furniture.avif", "/images/logo.svg"],        
@@ -170,13 +175,15 @@ const page = () => {
 
     ];
 
+
     let agent: agentInterface = {
         fullName: "sherif koder",
         phone: 10423131353,
         email: "sheriff@gmail.com",
         avatar: "/images/furniture.avif",
         password: "eekrsmwr24sa",
-        position: "senior advisor"
+        position: "senior advisor",
+        role: "admin"
 
     }
 
@@ -210,11 +217,21 @@ const page = () => {
 
 
     return (
-        <div className="mt-32 mx-auto w-[90%] max-w-[1230px] flex flex-row items-center 
-        flex-wrap gap-8 mb-8">
+        <div className="mt-28 mx-auto w-full max-w-[1230px] flex flex-row items-center
+        md2:items-stretch
+        flex-wrap gap-8 mb-8 px-4 md2:px-8">
         
+
+            {/* nav links */}
+            <div className="dark:text-white text-black text-shadow-3 w-full text-xs flex flex-row gap-1 opacity-70">        
+                <Link className=""href="/">Home</Link>
+                >
+                <span className="text-theme-text-brighter">Your Profile</span>
+            </div>
+
             
-            <h1 className="text_shadow-3 font-bold text-3xl text-white capitalize w-full
+            {/* container 1 */}
+            <h1 className="text_shadow-3 font-bold text-3xl text-[#000000d5] dark:text-[#ffffffe2] capitalize w-full
             text-center md2:text-start">
                 Hello, {agent.fullName.split(" ")[0]}
             </h1>
@@ -228,7 +245,7 @@ const page = () => {
                 dark:bg-[#68585806] dark:border-[#ffffff05]
                 text-[#000000b3] dark:text-[#ffffffb0] text-center text-l 
                 flex flex-col items-center justify-center flex-wrap capitalize h-full
-                w-full md2:w-auto 
+                w-full md2:w-auto
                 ">
 
                     <h3 className="text-base font-semibold">{agent.fullName}</h3>
@@ -253,36 +270,37 @@ const page = () => {
                 dark:bg-[#68585806] dark:border-[#ffffff05]
                 text-[#000000b3] dark:text-[#ffffffb0]
                 flex-1 flex flex-col md:gap-2 gap-4 justify-center md2:justify-end
-                w-full
+                w-full items-center md2:items-start
                 "
                 >
         
                     {/* info container */}
-                        <div className="w-full flex flex-col md:gap-2 gap-4 justify-center"
+                        <div className="w-full flex flex-col md:gap-2 gap-4 justify-center
+                        items-center max-w-[500px]"
                         >
 
                         <h2 className="text_shadow-3 font-semibold text-lg text-white w-full
-                        text-center md2:text-start mb-2 mt-2">Your information</h2>
+                        text-center md2:text-start mb-2 mt-2 text-[#000000d5] dark:text-[#ffffffe2]">Your information</h2>
 
-                            <div className="
-                            flex flex-row flex-wrap w-full justify-start items-baseline">
+                            <div className="capitalize
+                            flex flex-row flex-wrap w-full justify-center md2:justify-start items-baseline">
 
                                 <span className="
-                                font-medium capitalize text-start mb-2 mr-4 w-full md:w-[6rem]">
+                                font-medium  text-start mb-2 mr-4 w-full md:w-[6rem]">
                                     full name:
                                 </span>
                                 
                                     <div className="flex flex-row w-full md:w-[70%]">
                                         <input readOnly={true} className="bg-transparent caret-theme-text-bright focus:outline-theme-text-bright 
                                         focus:outline focus:outline-2 outline-offset-1 rounded-[7px]
-                                        mr-2 max-w-[65%]
+                                        mr-2 max-w-[65%] 
                                         " 
                                         placeholder={agent.fullName}/>
 
                                         <button type="button" onClick={(e)=>allowInput(e)} 
                                         className="bg-theme-text-brighter dark:bg-theme-text-dark text-white 
                                         rounded-full min-w-[100px]
-                                        opacity-40 hover:opacity-90 text-center">
+                                        opacity-40 hover:opacity-90 text-center ml-auto">
                                             edit
                                         </button>
                                     </div>
@@ -290,7 +308,7 @@ const page = () => {
 
 
                             <div className="
-                            flex flex-row flex-wrap w-full justify-start items-baseline">
+                            flex flex-row flex-wrap w-full justify-center md2:justify-start items-baseline">
 
                                 <span className="
                                 font-medium capitalize text-start mb-2 mr-4 w-full md:w-[6rem]">
@@ -307,7 +325,7 @@ const page = () => {
                                         <button type="button" onClick={(e)=>allowInput(e)} 
                                         className="bg-theme-text-brighter dark:bg-theme-text-dark text-white 
                                         rounded-full min-w-[100px]
-                                        opacity-40 hover:opacity-90 text-center">
+                                        opacity-40 hover:opacity-90 text-center ml-auto">
                                             edit
                                         </button>
                                     </div>
@@ -316,7 +334,7 @@ const page = () => {
                             </div>
 
                             <div className="
-                            flex flex-row flex-wrap w-full justify-start items-baseline">
+                            flex flex-row flex-wrap w-full justify-center md2:justify-start items-baseline">
 
                                 <span className="
                                 font-medium capitalize text-start mb-2 mr-4 w-full md:w-[6rem]">
@@ -333,7 +351,7 @@ const page = () => {
                                         <button type="button" onClick={(e)=>allowInput(e)} 
                                         className="bg-theme-text-brighter dark:bg-theme-text-dark text-white 
                                         rounded-full min-w-[100px]
-                                        opacity-40 hover:opacity-90 text-center">
+                                        opacity-40 hover:opacity-90 text-center ml-auto">
                                             edit
                                         </button>
                                     </div>
@@ -342,7 +360,7 @@ const page = () => {
                             </div>
 
                             <div className="
-                            flex flex-row flex-wrap w-full justify-start items-baseline">
+                            flex flex-row flex-wrap w-full justify-center md2:justify-start items-baseline">
 
                                 <span className="
                                 font-medium capitalize text-start mb-2 mr-4 w-full md:w-[6rem]">
@@ -359,26 +377,43 @@ const page = () => {
                                         <button type="button" onClick={(e)=>allowInput(e)} 
                                         className="bg-theme-text-brighter dark:bg-theme-text-dark text-white 
                                         rounded-full min-w-[100px]
-                                        opacity-40 hover:opacity-90 text-center ">
+                                        opacity-40 hover:opacity-90 text-center ml-auto">
                                             edit
                                         </button>
                                     </div>
                             </div>
 
-                            <div className="
-                            flex flex-row flex-wrap w-full justify-start items-baseline">
+                            { agent.role === "admin" ? (
 
-                                <span className="
-                                font-medium capitalize text-start mb-2 mr-4 w-full md:w-[6rem]">
+                                <div className="capitalize
+                                flex flex-row flex-wrap w-full justify-center md2:justify-start items-baseline">
 
-                                </span>
-                                
-                                    <div className="flex flex-row w-full md:w-[70%] ml-[-116px]">
-                                        <input readOnly={true} className="bg-transparent caret-theme-text-bright focus:outline-theme-text-bright 
-                                        focus:outline focus:outline-2 outline-offset-1 rounded-[7px]
-                                        mr-2 max-w-[65%] opacity-0
-                                        " 
-                                        />
+                                    <span className="
+                                    font-medium  text-start mb-2 mr-4 w-full md:w-[6rem]">
+                                        Position:
+                                    </span>
+                                    
+                                        <div className="flex flex-row w-full md:w-[70%]">
+                                            <input readOnly={true} className="bg-transparent caret-theme-text-bright focus:outline-theme-text-bright 
+                                            focus:outline focus:outline-2 outline-offset-1 rounded-[7px]
+                                            mr-2 max-w-[65%]
+                                            " 
+                                            placeholder={agent.position}/>
+
+                                            <button type="button" onClick={(e)=>allowInput(e)} 
+                                            className="bg-theme-text-brighter dark:bg-theme-text-dark text-white 
+                                            rounded-full min-w-[100px]
+                                            opacity-40 hover:opacity-90 text-center ml-auto">
+                                                edit
+                                            </button>
+                                        </div>
+                                </div>
+
+                            ): ("")}
+
+                            <div className="mt-8 md2:mt-0 h-[1.5rem]
+                            flex flex-row flex-wrap w-full justify-center md2:justify-end items-baseline md2:mr-[4.65rem]">
+
 
                                         <button type="button" id="infoCancel_button"
                                         onClick={(e)=>disableInput(e)} 
@@ -396,84 +431,55 @@ const page = () => {
                                         </button>
 
 
-                                    </div>
                             </div>
                         </div>
 
-{/* 
-                        <div className="capitalize">
-                            <span className="mr-2 min-w-[6rem] inline-block text-start">Profile Photo</span>
-
-                            <input className="w-[17rem] inline-block text-start
-                            mr-8 px-2 bg-transparent caret-theme-text-bright focus:outline-theme-text-bright focus:outline focus:outline-2 outline-offset-1 rounded-[7px]" 
-                            
-                            type="file"/>
-
-                            <button type="button" onClick={(e)=>allowInput(e)} 
-                            className="bg-theme-text-brighter dark:bg-theme-text-dark text-white 
-                            rounded-full w-[100px]
-                            opacity-40 hover:opacity-90 text-center">
-                                change
-                            </button>
-                        </div>
-
-
-                        <div className="">
-                            <span className="mr-2 capitalize min-w-[6rem] inline-block text-start">email:</span>
-                            <input readOnly={true} className="w-[17rem] inline-block text-start
-                            
-                            mr-8 px-2 bg-transparent caret-theme-text-bright focus:outline-theme-text-bright focus:outline focus:outline-2 outline-offset-1 rounded-[7px]" 
-                            placeholder={agent.email}/>
-                            <button type="button" onClick={(e)=>allowInput(e)} 
-                            className="bg-theme-text-brighter dark:bg-theme-text-dark text-white 
-                            rounded-full w-[100px]
-                            opacity-40 hover:opacity-90 text-center">
-                                edit
-                            </button>
-                        </div>
-
-                        <div className="">
-                            <span className="mr-2 capitalize min-w-[6rem] inline-block text-start">phone:</span>
-                            <input readOnly={true} className="w-[17rem] inline-block text-start
-                            
-                            mr-8 px-2 bg-transparent caret-theme-text-bright focus:outline-theme-text-bright focus:outline focus:outline-2 outline-offset-1 rounded-[7px]" 
-                            placeholder={agent.phone.toString()}/>
-                            <button type="button" onClick={(e)=>allowInput(e)} 
-                            className="bg-theme-text-brighter dark:bg-theme-text-dark text-white 
-                            rounded-full w-[100px]
-                            opacity-40 hover:opacity-90 text-center">
-                                edit
-                            </button>
-
-                        </div>
-
-                        <div className="">
-                            <span className="mr-2 capitalize min-w-[6rem] inline-block text-start">password:</span>
-                            <input readOnly={true} className="w-[17rem] inline-block text-start
-                            
-                            mr-8 px-2 bg-transparent caret-theme-text-bright focus:outline-theme-text-bright focus:outline focus:outline-2 outline-offset-1 rounded-[7px]" 
-                            placeholder={agent.password}/>
-                            <button type="button" onClick={(e)=>allowInput(e)} 
-                            className="bg-theme-text-brighter dark:bg-theme-text-dark text-white 
-                            rounded-full w-[100px]
-                            opacity-40 hover:opacity-90 text-center">
-                                change
-                            </button>
-
-                        </div>
-
-                        <div className="w-full flex flex-row items-center justify-end h-[1rem]">
-                        <button type="submit" id="infoApply_button"
-                                className="bg-theme-text-brighter dark:bg-theme-text-dark text-white 
-                                rounded-full w-[100px]
-                                opacity-80 hover:opacity-90 text-center hidden">
-                                        apply
-                        </button>
-                        </div> */}
 
                 </div>
 
 
+            </div>
+
+
+
+            {/* container 2 */}
+            <div className="bg-white rounded-[17px]
+            glass-container-background-2 min-w-[100%]
+            border backdrop-blur-10 pt-7 pb-8 px-4 mt-8
+            dark:bg-[#68585806] dark:border-[#ffffff05]
+            text-[#000000b3] dark:text-[#ffffffb0] text-center text-l flex flex-col gap-1
+            ">
+
+                {/* here are the properties */}
+                <h4 className="text_shadow-3 font-semibold text-lg text-white md2:text-start
+                text-[#000000d5] dark:text-[#ffffffe2]
+                ">
+                    Your properties
+                </h4>
+
+                {/* properties container */}
+                <div className="flex flex-row gap-6 my-6 flex-wrap justify-center md:justify-start mx-auto last-of-type:mr-auto">
+
+                    {/* property */}
+                    {properties.length > 0 ? (
+                    <>
+                        {properties.map((property: propertyInterface) => (
+                        <div className="h-auto w-full max-w-[390px] md:w-[calc(50%-16px)] md2:w-[calc(33.3%-16px)] ">
+                            <PropertyCard {...property as propertyInterface} currentPage = "agent" />
+                    
+                            
+
+                        </div>
+                        )
+                        )}
+                    </>
+                    ) : (
+                    <><h1 className="text_shadow-3">You do not have any properties yet</h1></>
+                    )
+                    }
+
+                </div>
+                
             </div>
 
 

@@ -136,17 +136,18 @@ const PropertyCard = ({...property}) => {
 
   return (
     <div className={`latest_property bg-[#fffffff3] dark:bg-[rgba(255,255,255,0.03)]
-                flex flex-col justify-between items-center 
-                h-auto w-full
-                ${property.currentPage === 'property' ? 'xl-flex-col' : 'xl:flex-row'} 
-                gap-1
-                rounded-[17px] box-shadow-1 p-1 relative
-                border border-[rgba(255,255,255,0.02)]
-                dark:opacity-75 dark:hover:opacity-90 opacity-90 hover:opacity-100
-                focus:opacity-100 dark:focus:opacity-90
-                `}>
+          flex flex-col 
+           
+          h-auto w-full
+          ${property.currentPage === 'property' ? 'xl-flex-col' : 'xl:flex-row'} 
+          gap-1
+          rounded-[17px] box-shadow-1 p-1 relative
+          border border-[rgba(255,255,255,0.02)]
+          dark:opacity-75 dark:hover:opacity-90 opacity-90 hover:opacity-100
+          focus:opacity-100 dark:focus:opacity-90
+          `}>
 
-                <div className={`relative flex flex-row items-center text-start 
+                <div className={`relative flex flex-row items-center justify-start text-start
                 ${property.currentPage === 'property' ? '' : 'xl:max-w-[50%]'} `}>
                   <button 
                     onClick={()=>{setPrevFade1(fade1); setFade1(fade1-1);}}
@@ -154,12 +155,14 @@ const PropertyCard = ({...property}) => {
                     bg-[url('/icons/arrow-left.svg')] h-4 w-4 bg-no-repeat bg-contain">
                   </button>
 
-                  <Link href={"/properties/"+property.property_id} key={property.property_id}>
+                  <Link href={"/properties/"+property.property_id} key={property.property_id}
+                  className="h-[100%]">
                     <Image src={property.property_images[imageReference]} height={400} width={400} alt={property.property_type+" "+property.property_country+" "+property.property_city+" "+property.property_district+" "+property.property_area+" "+property.property_beds+" bedrooms "+property.property_baths+" bathrooms "+property.property_listing_type}
                     id={property.property_id.toString()}
-                    className={`border-0 rounded-t-[10px] w-full max-h-8.5rem
+                    className={`border-0 rounded-t-[10px] w-full max-h-8.5rem min-h-[100%]
                     ${property.currentPage === 'property' ? '' : 'xl:rounded-l-[10px] xl:rounded-tr-none'}
-                    `}>
+                    `}
+                    style={{objectFit:'fill'}}>
                     </Image>
                   </Link>
 
@@ -180,8 +183,37 @@ const PropertyCard = ({...property}) => {
                     <div className="">{property.property_beds} beds / {property.property_baths} bath</div>
                     <div className="">Area: {property.property_area} sqm</div>
                     <div className="font-light text-sm">Price: {property.property_price}</div>
+                    {property.currentPage === 'agent' ? (
+                      <div>               
+                        <div className="font-light text-sm">Added On: {property.property_date}</div>
+
+                        <div className="text-sm font-light w-full flex flex-row gap-2 justify-start mt-2 mb-1">
+
+                          <button type="button"
+                            onClick={()=>{}} 
+                            className="bg-theme-text-brighter dark:bg-theme-text-dark text-white 
+                            rounded-full w-[65px]
+                            opacity-40 hover:opacity-90 text-center">
+                                Edit
+                            </button>
+
+                          <button type="submit"
+                            className="bg-theme-text-brighter dark:bg-theme-text-dark text-white 
+                            rounded-full w-[65px]
+                            opacity-40 hover:opacity-90 text-center">
+                                Delete
+                            </button>
+
+                        </div>
+                      </div>
+                    ):(
+                      ""
+                    )}
+
                   </div>
                 </Link>
+
+
 
               </div>
 

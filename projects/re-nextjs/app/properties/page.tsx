@@ -143,7 +143,7 @@ const page = () => {
 
     <div className="dark:text-white text-black text-shadow-3 w-full text-xs flex flex-row gap-1 opacity-70">
         
-        <Link className=""href="/#home-news">Home</Link>
+        <Link className=""href="/">Home</Link>
         >
         <span className="text-theme-text-brighter">Properties</span>
     </div>
@@ -198,13 +198,13 @@ const page = () => {
         <h4 className="text_shadow-3">All properties</h4>
 
         {/* posts container */}
-        <div className="flex flex-row gap-6 my-6 flex-wrap justify-center md:justify-start mx-auto">
+        <div className="flex flex-row gap-6 my-6 flex-wrap justify-center md:justify-start mx-auto last-of-type:mr-auto">
 
             {/* post */}
-            {properties ? (
+            {properties.length > 0 ? (
             <>
                 {properties.map((property) => (
-                <div className="h-auto w-full max-w-[390px] md:w-[calc(50%-16px)] md2:w-[calc(33.3%-16px)] mx-auto md2:mx-0">
+                <div className="h-auto w-full max-w-[390px] md:w-[calc(50%-16px)] md2:w-[calc(33.3%-16px)]">
                     <PropertyCard {...property}/>
                 </div>
                 )

@@ -366,7 +366,7 @@ const Home_Main = () => {
           <div className="flex flex-row gap-6 my-6 flex-wrap justify-center lg:justify-start mx-auto">
 
           {/* property */}
-          {properties ? (
+          {properties.length > 0 ? (
             <>
               {properties.map((property) => (
                 <div className="
