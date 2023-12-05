@@ -36,6 +36,7 @@ interface propertyInterface {
 
 
 interface agentInterface {
+    id: number
     fullName: string,
     phone: number,
     email: string,
@@ -43,6 +44,8 @@ interface agentInterface {
     password: string,
     position: string,
     role: string,
+    properties: propertyInterface[],
+    update: string,
 }
 
 
@@ -191,9 +194,306 @@ const page = () => {
         avatar: "/images/furniture.avif",
         password: "eekrsmwr24sa",
         position: "senior advisor",
-        role: "admin"
+        role: "admin",
+        properties: [
+            {
+                property_images : ["/images/furniture.avif", "/images/logo.svg"],        
+                property_id : 1,
+    
+                property_country: "Egypt",
+                property_city: "Giza",
+                property_district: "Zayed",
+    
+                property_type: "Apartment",
+                property_area: 110,
+                property_beds: 2,
+                property_baths: 1,
+                
+                property_listing_type: "rent",
+                property_availability: true,
+                property_recommended: true,
+                property_price: 6000,
+    
+                property_date: "25 Dec 2023",
+                property_update: "26 Dec 2023",
+                property_author: "John",
+                property_description: "World Class property in a friendly neighborhood contains all facilities"
+    
+            },
+        ],
+        update: "26 Dec 2023"
 
     }
+
+    let agents : agentInterface[] = [
+        {
+            id: 1,
+            fullName: "sherif koder",
+            phone: 10423131353,
+            email: "sheriff@gmail.com",
+            avatar: "/images/furniture.avif",
+            password: "eekrsmwr24sa",
+            position: "senior advisor",
+            role: "admin",
+            properties: [
+                {
+                    property_images : ["/images/furniture.avif", "/images/logo.svg"],        
+                    property_id : 1,
+        
+                    property_country: "Egypt",
+                    property_city: "Giza",
+                    property_district: "Zayed",
+        
+                    property_type: "Apartment",
+                    property_area: 110,
+                    property_beds: 2,
+                    property_baths: 1,
+                    
+                    property_listing_type: "rent",
+                    property_availability: true,
+                    property_recommended: true,
+                    property_price: 6000,
+        
+                    property_date: "25 Dec 2023",
+                    property_update: "26 Dec 2023",
+                    property_author: "John",
+                    property_description: "World Class property in a friendly neighborhood contains all facilities"
+        
+                },
+            ],
+            update: "26 Dec 2023",
+    
+        },
+        {
+            id: 2,
+            fullName: "john smith",
+            phone: 10423131353,
+            email: "sheriff@gmail.com",
+            avatar: "/images/furniture.avif",
+            password: "eekrsmwr24sa",
+            position: "senior advisor",
+            role: "agent",
+            properties: [
+                {
+                    property_images : ["/images/furniture.avif", "/images/logo.svg"],        
+                    property_id : 1,
+        
+                    property_country: "Egypt",
+                    property_city: "Giza",
+                    property_district: "Zayed",
+        
+                    property_type: "Apartment",
+                    property_area: 110,
+                    property_beds: 2,
+                    property_baths: 1,
+                    
+                    property_listing_type: "rent",
+                    property_availability: true,
+                    property_recommended: true,
+                    property_price: 6000,
+        
+                    property_date: "25 Dec 2023",
+                    property_update: "26 Dec 2023",
+                    property_author: "John",
+                    property_description: "World Class property in a friendly neighborhood contains all facilities"
+        
+                },
+            ],
+            update: "26 Dec 2023",
+    
+        },
+        {
+            id: 1,
+            fullName: "sherif koder",
+            phone: 10423131353,
+            email: "sheriff@gmail.com",
+            avatar: "/images/furniture.avif",
+            password: "eekrsmwr24sa",
+            position: "senior advisor",
+            role: "admin",
+            properties: [
+                {
+                    property_images : ["/images/furniture.avif", "/images/logo.svg"],        
+                    property_id : 1,
+        
+                    property_country: "Egypt",
+                    property_city: "Giza",
+                    property_district: "Zayed",
+        
+                    property_type: "Apartment",
+                    property_area: 110,
+                    property_beds: 2,
+                    property_baths: 1,
+                    
+                    property_listing_type: "rent",
+                    property_availability: true,
+                    property_recommended: true,
+                    property_price: 6000,
+        
+                    property_date: "25 Dec 2023",
+                    property_update: "26 Dec 2023",
+                    property_author: "John",
+                    property_description: "World Class property in a friendly neighborhood contains all facilities"
+        
+                },
+            ],
+            update: "26 Dec 2023",
+    
+        },
+        {
+            id: 2,
+            fullName: "john smith",
+            phone: 10423131353,
+            email: "sheriff@gmail.com",
+            avatar: "/images/furniture.avif",
+            password: "eekrsmwr24sa",
+            position: "senior advisor",
+            role: "admin",
+            properties: [
+                {
+                    property_images : ["/images/furniture.avif", "/images/logo.svg"],        
+                    property_id : 1,
+        
+                    property_country: "Egypt",
+                    property_city: "Giza",
+                    property_district: "Zayed",
+        
+                    property_type: "Apartment",
+                    property_area: 110,
+                    property_beds: 2,
+                    property_baths: 1,
+                    
+                    property_listing_type: "rent",
+                    property_availability: true,
+                    property_recommended: true,
+                    property_price: 6000,
+        
+                    property_date: "25 Dec 2023",
+                    property_update: "26 Dec 2023",
+                    property_author: "John",
+                    property_description: "World Class property in a friendly neighborhood contains all facilities"
+        
+                },
+            ],
+            update: "26 Dec 2023",
+    
+        },
+        {
+            id: 1,
+            fullName: "sherif koder",
+            phone: 10423131353,
+            email: "sheriff@gmail.com",
+            avatar: "/images/furniture.avif",
+            password: "eekrsmwr24sa",
+            position: "senior advisor",
+            role: "admin",
+            properties: [
+                {
+                    property_images : ["/images/furniture.avif", "/images/logo.svg"],        
+                    property_id : 1,
+        
+                    property_country: "Egypt",
+                    property_city: "Giza",
+                    property_district: "Zayed",
+        
+                    property_type: "Apartment",
+                    property_area: 110,
+                    property_beds: 2,
+                    property_baths: 1,
+                    
+                    property_listing_type: "rent",
+                    property_availability: true,
+                    property_recommended: true,
+                    property_price: 6000,
+        
+                    property_date: "25 Dec 2023",
+                    property_update: "26 Dec 2023",
+                    property_author: "John",
+                    property_description: "World Class property in a friendly neighborhood contains all facilities"
+        
+                },
+            ],
+            update: "26 Dec 2023",
+    
+        },
+        {
+            id: 2,
+            fullName: "john smith",
+            phone: 10423131353,
+            email: "sheriff@gmail.com",
+            avatar: "/images/furniture.avif",
+            password: "eekrsmwr24sa",
+            position: "senior advisor",
+            role: "admin",
+            properties: [
+                {
+                    property_images : ["/images/furniture.avif", "/images/logo.svg"],        
+                    property_id : 1,
+        
+                    property_country: "Egypt",
+                    property_city: "Giza",
+                    property_district: "Zayed",
+        
+                    property_type: "Apartment",
+                    property_area: 110,
+                    property_beds: 2,
+                    property_baths: 1,
+                    
+                    property_listing_type: "rent",
+                    property_availability: true,
+                    property_recommended: true,
+                    property_price: 6000,
+        
+                    property_date: "25 Dec 2023",
+                    property_update: "26 Dec 2023",
+                    property_author: "John",
+                    property_description: "World Class property in a friendly neighborhood contains all facilities"
+        
+                },
+            ],
+            update: "26 Dec 2023",
+    
+        },
+        {
+            id: 1,
+            fullName: "sherif koder",
+            phone: 10423131353,
+            email: "sheriff@gmail.com",
+            avatar: "/images/furniture.avif",
+            password: "eekrsmwr24sa",
+            position: "senior advisor",
+            role: "admin",
+            properties: [
+                {
+                    property_images : ["/images/furniture.avif", "/images/logo.svg"],        
+                    property_id : 1,
+        
+                    property_country: "Egypt",
+                    property_city: "Giza",
+                    property_district: "Zayed",
+        
+                    property_type: "Apartment",
+                    property_area: 110,
+                    property_beds: 2,
+                    property_baths: 1,
+                    
+                    property_listing_type: "rent",
+                    property_availability: true,
+                    property_recommended: true,
+                    property_price: 6000,
+        
+                    property_date: "25 Dec 2023",
+                    property_update: "26 Dec 2023",
+                    property_author: "John",
+                    property_description: "World Class property in a friendly neighborhood contains all facilities"
+        
+                },
+            ],
+            update: "26 Dec 2023",
+    
+        },
+
+    ]
 
 
     const currentPage : string = "agent";
@@ -202,6 +502,10 @@ const page = () => {
     function allowInput (e:any) {
         console.log(e.target.previousSibling);
         e.target.previousSibling.removeAttribute("readOnly");
+
+        if (e.target.previousSibling.getAttribute("type") === "password") {
+            e.target.previousSibling.setAttribute("type", "text");
+        }
         // e.target.previousSibling.removeAttribute("value");
         e.target.previousSibling.focus();
         document.getElementById("infoApply_button")!.style.display = "block";
@@ -216,6 +520,10 @@ const page = () => {
             if (!input.getAttribute("readOnly")) {
                 input.setAttribute("readOnly", "true");
             }
+            if (input.previousElementSibling?.textContent === "Password:") {
+                input.previousElementSibling.setAttribute("type", "password");
+            }
+
         })
         document.getElementById("infoApply_button")!.style.display = "none";
         document.getElementById("infoCancel_button")!.style.display = "none";
@@ -242,7 +550,11 @@ const page = () => {
             {/* container 1 */}
             <h1 className="text_shadow-3 font-bold text-3xl text-[#000000c7] dark:text-[#ffffffe2] capitalize w-full
             text-center md2:text-start">
-                Hello, {agent.fullName.split(" ")[0]}
+                { agent.role === "admin" ? 
+                ( `Viewing ${agent.fullName} as admin`
+                ):(
+                `Hello, ${agent.fullName.split(" ")[0]}`
+                )}
             </h1>
 
             <div className="flex flex-row flex-wrap gap-4 w-full">
@@ -257,7 +569,7 @@ const page = () => {
                 w-full md2:w-auto
                 ">
 
-                    <h3 className="text-base font-semibold">{agent.fullName}</h3>
+                    <h3 className="text-lg font-semibold">{agent.fullName}</h3>
                     <p className="text-xs font-light">{agent.position}</p>
                     <div className="h-[11.75rem] w-[11.75rem] bg-white overflow-hidden
                     rounded-full flex items-center justify-center dark:text-black
@@ -288,8 +600,9 @@ const page = () => {
                         items-center max-w-[500px]"
                         >
 
-                        <h2 className="text_shadow-3 font-semibold text-lg  w-full
-                        text-center md2:text-start mb-2 mt-2 text-[#000000c7] dark:text-[#ffffffe2]">Your information</h2>
+                        <h2 className="text_shadow-3 font-semibold text-xl  w-full
+                        text-center md2:text-start mb-2 mt-2 text-[#000000c7] dark:text-[#ffffffe2]">
+                            { agent.role === "admin" ? ("Information"): ("Your information")}</h2>
 
                             <div className="capitalize
                             flex flex-row flex-wrap w-full justify-center md2:justify-start items-baseline">
@@ -302,9 +615,9 @@ const page = () => {
                                     <div className="flex flex-row w-full md:w-[70%]">
                                         <input readOnly={true} className="bg-transparent caret-theme-text-bright focus:outline-theme-text-bright 
                                         focus:outline focus:outline-2 outline-offset-1 rounded-[7px]
-                                        mr-2 max-w-[65%] 
+                                        mr-2 max-w-[65%] px-2 text-[#0000007d] dark:text-[#ffffff9e]
                                         " 
-                                        placeholder={agent.fullName}/>
+                                        defaultValue={agent.fullName}/>
 
                                         <button type="button" onClick={(e)=>allowInput(e)} 
                                         className="bg-theme-text-brighter dark:bg-theme-text-dark text-white 
@@ -315,6 +628,31 @@ const page = () => {
                                     </div>
                             </div>
 
+                            <div className="
+                            flex flex-row flex-wrap w-full justify-center md2:justify-start items-baseline">
+
+                                <span className="
+                                font-medium capitalize text-start mb-2 mr-4 w-full md:w-[6rem]">
+                                    Photo:
+                                </span>
+                                
+                                    <div className="flex flex-row w-full md:w-[70%]">
+                                        <input readOnly={true} className="bg-transparent caret-theme-text-bright focus:outline-theme-text-bright 
+                                        focus:outline focus:outline-2 outline-offset-1
+                                        mr-2 max-w-[65%] text-[#0000007d] dark:text-[#ffffff9e]
+                                        " 
+                                        type="file"/>
+
+                                        <button type="button" onClick={(e)=>allowInput(e)} 
+                                        className="bg-theme-text-brighter dark:bg-theme-text-dark text-white 
+                                        rounded-full min-w-[100px] max-h-[24px]
+                                        opacity-40 hover:opacity-90 text-center ml-auto">
+                                            edit
+                                        </button>
+                                    </div>
+
+
+                            </div>
 
                             <div className="
                             flex flex-row flex-wrap w-full justify-center md2:justify-start items-baseline">
@@ -327,9 +665,9 @@ const page = () => {
                                     <div className="flex flex-row w-full md:w-[70%]">
                                         <input readOnly={true} className="bg-transparent caret-theme-text-bright focus:outline-theme-text-bright 
                                         focus:outline focus:outline-2 outline-offset-1 rounded-[7px]
-                                        mr-2 max-w-[65%]
+                                        mr-2 max-w-[65%] px-2 text-[#0000007d] dark:text-[#ffffff9e]
                                         " 
-                                        placeholder={agent.phone.toString()}/>
+                                        defaultValue={agent.phone}/>
 
                                         <button type="button" onClick={(e)=>allowInput(e)} 
                                         className="bg-theme-text-brighter dark:bg-theme-text-dark text-white 
@@ -353,9 +691,9 @@ const page = () => {
                                     <div className="flex flex-row w-full md:w-[70%]">
                                         <input readOnly={true} className="bg-transparent caret-theme-text-bright focus:outline-theme-text-bright 
                                         focus:outline focus:outline-2 outline-offset-1 rounded-[7px]
-                                        mr-2 max-w-[65%]
+                                        mr-2 max-w-[65%] px-2 text-[#0000007d] dark:text-[#ffffff9e]
                                         " 
-                                        placeholder={agent.email}/>
+                                        defaultValue={agent.email}/>
 
                                         <button type="button" onClick={(e)=>allowInput(e)} 
                                         className="bg-theme-text-brighter dark:bg-theme-text-dark text-white 
@@ -379,9 +717,10 @@ const page = () => {
                                     <div className="flex flex-row w-full md:w-[70%]">
                                         <input readOnly={true} className="bg-transparent caret-theme-text-bright focus:outline-theme-text-bright 
                                         focus:outline focus:outline-2 outline-offset-1 rounded-[7px]
-                                        mr-2 max-w-[65%]
+                                        mr-2 max-w-[65%] px-2 text-[#0000007d] dark:text-[#ffffff9e]
                                         " 
-                                        placeholder={agent.password}/>
+                                        defaultValue={agent.password}
+                                        type="password"/>
 
                                         <button type="button" onClick={(e)=>allowInput(e)} 
                                         className="bg-theme-text-brighter dark:bg-theme-text-dark text-white 
@@ -405,9 +744,9 @@ const page = () => {
                                         <div className="flex flex-row w-full md:w-[70%]">
                                             <input readOnly={true} className="bg-transparent caret-theme-text-bright focus:outline-theme-text-bright 
                                             focus:outline focus:outline-2 outline-offset-1 rounded-[7px]
-                                            mr-2 max-w-[65%]
+                                            mr-2 max-w-[65%] px-2 text-[#0000007d] dark:text-[#ffffff9e]
                                             " 
-                                            placeholder={agent.position}/>
+                                            defaultValue={agent.position}/>
 
                                             <button type="button" onClick={(e)=>allowInput(e)} 
                                             className="bg-theme-text-brighter dark:bg-theme-text-dark text-white 
@@ -461,10 +800,10 @@ const page = () => {
 
                 {/* here are the properties */}
                 <div className="w-full flex flex-row justify-center h-[2rem]">
-                    <h4 className="text_shadow-3 font-semibold text-lg md2:text-start
+                    <h4 className="text_shadow-3 font-semibold text-xl md2:text-start
                     text-[#000000c7] dark:text-[#ffffffe2]
                     ">
-                        Your properties
+                        { agent.role === "admin" ? ("Properties") : ("Your properties")}
                     </h4>
 
                     <button type="button" 
@@ -505,7 +844,94 @@ const page = () => {
 
             {/* container 3 */}
             { agent.role === "admin" ? (
-                ""
+                <div className="bg-white rounded-[17px]
+                glass-container-background-2 min-w-[100%]
+                border backdrop-blur-10 pt-7 pb-8 px-4 mt-8
+                dark:bg-[#68585806] dark:border-[#ffffff05]
+                text-[#000000b3] dark:text-[#ffffffb0] text-center text-l flex flex-col gap-1
+                ">
+
+                    <h4 className="text_shadow-3 font-semibold text-xl md2:text-start
+                    text-[#000000c7] dark:text-[#ffffffe2] capitalize
+                    ">
+                        The Team
+                    </h4>
+
+                    <div className="flex flex-row gap-6 my-6 w-full flex-wrap justify-center last-of-type:mr-auto">
+                    {agents.length > 0 ? (
+                    <>
+                        {agents.map((agent: agentInterface) => (
+                        // <div className="h-auto w-full max-w-[390px] md:w-[calc(50%-16px)] md2:w-[calc(33.3%-16px)] ">
+                            
+                            <div className="bg-white rounded-[17px]
+                            glass-container-background-2
+                            border backdrop-blur-10 pt-4 pb-4 px-4
+                            dark:bg-[#68585806] dark:border-[#ffffff05]
+                            text-[#000000dd] dark:text-[#ffffffd3]  
+                            opacity-80 hover:opacity-100
+                            flex flex-col items-center justify-center text-center capitalize text-l 
+                            md2:w-[calc(33.3%-16px)] w-full sm:w-[calc(50%-16px)] lg:w-[calc(24%-16px)]
+                            
+                            ">
+
+                                <h3 className="text-base font-semibold">{agent.fullName}</h3>
+                                <p className="text-xs font-light">{agent.position}</p>
+
+                                <div className="h-[30vw] w-[30vw] max-w-[100px] max-h-[100px]
+                                bg-white overflow-hidden
+                                rounded-full flex items-center justify-center dark:text-black
+                                mt-4 mb-4">
+                                
+                                    <Image src={agent.avatar} height={150} width={150} alt=""
+                                    className="flex-1 h-full "
+                                    style={{objectFit:'cover'}}
+                                    ></Image>
+
+                                </div>
+
+                                <p className="text-xs font-light">Last Update {agent.update}</p>
+                                <p className="text-xs font-light">Properties [{agent.properties.length}]</p>
+
+                                <div className="mt-2 flex flex-row items-center justify-center">
+                                    <Link href={"/agents/"+agent.id} type="button" 
+                                    className="border border-1
+                                    dark:bg-[#68585806] bg-[#ffffffd3] 
+                                    dark:border-[#ffffff19] dark:hover:border-[#ffffff36]
+                                    text-[#000000dd] dark:text-[#ffffffd3] 
+                                    rounded-[17px] text-sm  w-[65px]
+                                    opacity-90 hover:opacity-100">
+                                        View
+                                    </Link>
+
+                                    <form method="post" action="" className="inline">
+                                    <button type="submit" 
+                                    className="border border-1
+                                    dark:bg-[#68585806] bg-[#ffffffd3] 
+                                    dark:border-[#ffffff19] dark:hover:border-[#ffffff36]
+                                    text-[#000000dd] dark:text-[#ffffffd3] 
+                                    rounded-[17px] text-sm  w-[65px] ml-2
+                                    opacity-90 hover:opacity-100">
+                                        Remove
+                                    </button>
+                                    </form>
+                                </div>
+                                    
+                            </div>
+                            
+
+                        // </div>
+                        )
+                        )}
+                    </>
+                    ) : (
+                    <><h1 className="text_shadow-3">No agents exist yet</h1></>
+                    )
+                    }
+
+                    </div>
+
+
+                </div>
             ):(
                 ""
             )}
