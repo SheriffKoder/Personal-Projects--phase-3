@@ -1,8 +1,9 @@
 
 //02.03
+//02X
 import mongoose from "mongoose";
 
-let isConnected = false; //allow us to track the connection status
+let isConnected: typeof mongoose; //allow us to track the connection status
 
 export const connectToDB = async () => {
     mongoose.set("strictQuery", true);
@@ -14,15 +15,9 @@ export const connectToDB = async () => {
 
 
     try {
-        if (process.env.MONGODB_URI) {
-            await mongoose.connect(process.env.MONGODB_URI, {
-                dbName: "re-next",
-                // useNewUrlParser: true,
-                // useUnifiedTopology: true,
-            })
-            isConnected = true;
-            console.log("MongoDB is now connected");        
-        }
+        isConnected = await mongoose.connect(process.env.MONGODB_URI as string)
+        console.log("MongoDB is now connected");        
+        
 
     } catch (error) {
         console.log(error);

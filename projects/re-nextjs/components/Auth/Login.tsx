@@ -2,10 +2,57 @@
 "use client";
 
 import { bodyScroll } from "@utils/bodyNoScroll";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 
+//02X.01
+import { ChangeEventHandler, FormEventHandler } from "react";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
+
 const Login_component = () => {
+
+    //02X.01
+    //this is set to true when handling the submit 
+    //so it changes the button style if the app is currently busy accessing the database
+    const [busy, setBusy] = useState(false);
+    const [error, setError] = useState("");
+    const router = useRouter();
+
+
+    //02X.01
+    const [agentInfo, setAgentInfo] = useState({
+        email: "",
+        password: "",
+    });
+
+    //02X.01
+    const {email, password} = agentInfo;
+
+    //02X
+    const handleChange: ChangeEventHandler<HTMLInputElement> = ({target}) => {
+        const {name, value} = target;
+
+        setAgentInfo({...agentInfo, [name]: value});
+    }
+
+    //02X
+    const handleSubmit: FormEventHandler<HTMLFormElement> = async(e) => {
+        setBusy(true);
+        e.preventDefault();
+        //send the request to the backend api
+        const res = await signIn("credentials", {
+            email,
+            password,
+            redirect: false,    //avoid default redirect
+        })
+        //if there is an error, update the error state and return the process
+        if (res?.error) return setError(res.error);
+        setBusy(false);
+        //navigate the user to their page
+        router.replace("/");
+    }
+
 
 
 
@@ -57,17 +104,19 @@ const Login_component = () => {
                 <form className="flex flex-col gap-1 lg:gap-4 items-center
                 w-[90%] md:px-[5%]
                 
-                ">
+                "
+                onSubmit={handleSubmit}>
 
                     <label className="w-[100%] flex flex-row justify-center text-center
                     label_field
                     bg-[#ffffff07] rounded-[7px] border-2 border-[#ffffff02]
                     
                     ">
-                        <span className="min-w-[7rem] px-2 py-1 text_shadow-2 opacity-80 dark:opacity-90">username</span>
+                        <span className="min-w-[7rem] px-2 py-1 text_shadow-2 opacity-80 dark:opacity-90">E-Mail</span>
                         <input className="w-full input_field border-0 rounded-r-[6px] 
                             dark:bg-[#ffffff09] dark:focus:bg-[#ffffff02]  px-2 
-                            border-[rgba(255,255,255,0.02)]" type="text"
+                            border-[rgba(255,255,255,0.02)]" type="email"
+                        name={email} onChange={handleChange}
                         />
                         
                     </label>
@@ -81,16 +130,22 @@ const Login_component = () => {
                         <input className="w-full input_field border-0 rounded-r-[6px] 
                             dark:bg-[#ffffff09] dark:focus:bg-[#ffffff02]  px-2 
                             border-[rgba(255,255,255,0.02)]" type="password"
+                            name={password} onChange={handleChange}
                         />
                         
                     </label>
 
-                    <div className="flex w-full pr-2">
+                    <div className="w-full pr-2 flex flex-row">
                             <Link href="/" 
                             className="ml-auto text-sm hover:text-[#d33660]">
                                 forgot password ?
                             </Link>
+                            
+                            {error ? (
+                                <span>{error}</span>
+                            ): (null)}
                     </div>
+
 
                     <div className="mt-1 lg:mt-4 w-[80%] flex">
                             <button type="submit" className="

@@ -15,12 +15,10 @@ import { bodyNoScroll } from "@utils/bodyNoScroll";
 
 //02.05
 import {signIn, signOut, useSession, getProviders} from "next-auth/react";
-import { agentInterface } from "@models/user";
+
 
 
 const Nav = () => {
-
-
 
   function handleDropDownIcon (input : string) {
       document.querySelector(".nav-user-icon")?.classList.toggle("agentNavIcon_background");
@@ -79,20 +77,7 @@ const Nav = () => {
   const [toggleDropDown, setToggleDropDown] = useState(true);
   let isUserLoggedIn = false;
   
-  //02.05
-  const {data: session} = useSession();
-
-  //02.05
-  const [providers, setProviders] = useState<any | null>(null);
-  
-  //02.05
   useEffect(()=> {
-    const setUpProviders = async () => {
-      const response = await getProviders();
-        setProviders(response);
-    }
-    setUpProviders();
-
    
     console.log("re-render");
   })
@@ -103,7 +88,6 @@ const Nav = () => {
 
   return (
     <nav className="w-full px-2 md:px-12  max-w-7xl absolute z-[9] my-8">
-
       {/* <ul className="bg-[#ffffffd3] text-[#d6003580] flex flex-row gap-3 border-0 border-[] 
       rounded-2xl py-2 px-4 w-full backdrop-blur-sm shadow-l 
       ">
@@ -111,7 +95,6 @@ const Nav = () => {
         <li>Text2</li>
 
       </ul> */}
-
       <span className=" dark:bg-[#31313175] bg-[#ffffffd3]
        text-theme-text-bright dark:text-theme-text-dark 
        flex flex-row gap-3 
@@ -170,9 +153,7 @@ const Nav = () => {
             </Link>
           </span >
 
-            {/* {isUserLoggedIn && ( */}
-            {/* //02.05 */}
-            {session?.user && (
+            {isUserLoggedIn && (
             <div className="nav-user-menu  hidden bg-gray-200 dark:bg-[#4f4f4f5d]"
             onMouseLeave={()=>handleDropDownIcon("leave")}
             >
@@ -202,20 +183,16 @@ const Nav = () => {
             </div>
           )}
 
-          {/*{!isUserLoggedIn && ( */}
-            {/* //02.05 */}
-            {providers && (
+          {!isUserLoggedIn && (
             <div className="nav-user-menu hidden bg-gray-200 dark:bg-[#4f4f4f5d]"
             onMouseLeave={()=>handleDropDownIcon("leave")}
             >
                 <ul className="flex flex-col items-center justify-center w-full">
 
                   <li className=" py-2 w-full text-center dark:hover:bg-[#ffffff16]  hover:bg-[#dbdee5] rounded-t-[17px]">
-                    {Object.values(providers).map((provider: any) => (
-                    <button onClick={() => {bodyNoScroll(); showLogin(); signIn(provider.id)}} className="w-full flex justify-center">
+                    <button onClick={() => {bodyNoScroll(); showLogin()}} className="w-full flex justify-center">
                       Login
                     </button>
-                    ))}
                   </li>
 
                   <li className=" py-2 w-full text-center dark:hover:bg-[#ffffff16]  hover:bg-[#dbdee5] rounded-b-[17px]">

@@ -2,9 +2,49 @@
 "use client";
 
 import { bodyScroll } from "@utils/bodyNoScroll";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+
+//02X
+import { ChangeEventHandler, FormEventHandler } from "react";
 
 const SignUp_component = () => {
+
+    //02X
+    //this is set to true when handling the submit 
+    //so it changes the button style if the app is currently busy accessing the database
+    const [busy, setBusy] = useState(false);
+
+    //02X
+    const [agentInfo, setAgentInfo] = useState({
+        fullName: "",
+        email: "",
+        password: "",
+        phone: "",
+        adminId: ""
+    });
+
+    //02X
+    const {fullName, phone ,email, password, adminId} = agentInfo;
+
+    //02X
+    const handleChange: ChangeEventHandler<HTMLInputElement> = ({target}) => {
+        const {name, value} = target;
+
+        setAgentInfo({...agentInfo, [name]: value});
+    }
+
+    //02X
+    const handleSubmit: FormEventHandler<HTMLFormElement> = async(e) => {
+        setBusy(true);
+        e.preventDefault();
+        //send the request to the backend api
+        const res = await fetch("/api/auth/agents", {
+            method: "POST",
+            body: JSON.stringify(agentInfo),
+        }).then(res => res.json());
+        console.log(res);
+        setBusy(false);
+    }
 
 
 
@@ -14,12 +54,12 @@ const SignUp_component = () => {
         signUpComponent!.style.display = "none";
         }
 
-    useEffect (() => {
+    // useEffect (() => {
         // let LoginComponent = document.getElementById("signIn__container");
 
         // LoginComponent!.style.display = "flex";
             
-    },[])
+    // },[])
         
 
     return (
@@ -57,8 +97,9 @@ const SignUp_component = () => {
 
                 <form className="flex flex-col gap-1 lg:gap-4 items-center
                 w-[90%] md:px-[5%]
-                
-                ">
+                "
+                onSubmit={handleSubmit}>
+                {/* //02X */}
 
                     <label className="w-[100%] flex flex-row justify-center text-center
                     label_field
@@ -69,6 +110,21 @@ const SignUp_component = () => {
                         <input className="w-full input_field border-0 rounded-r-[6px] 
                             dark:bg-[#ffffff09] dark:focus:bg-[#ffffff02]  px-2 
                             border-[rgba(255,255,255,0.02)]" type="text"
+                            name="fullName" value={fullName} onChange={handleChange}
+                        />
+                        
+                    </label>
+
+                    <label className="w-[100%] flex flex-row justify-center text-center
+                    label_field
+                    bg-[#ffffff07] rounded-[7px] border-2 border-[#ffffff02]
+                    
+                    ">
+                        <span className="min-w-[7rem] px-2 py-1 text_shadow-2 opacity-80 dark:opacity-90">Phone</span>
+                        <input className="w-full input_field border-0 rounded-r-[6px] 
+                            dark:bg-[#ffffff09] dark:focus:bg-[#ffffff02]  px-2 
+                            border-[rgba(255,255,255,0.02)]" type="tel"
+                            name="phone" value={phone} onChange={handleChange}
                         />
                         
                     </label>
@@ -82,6 +138,7 @@ const SignUp_component = () => {
                         <input className="w-full input_field border-0 rounded-r-[6px] 
                             dark:bg-[#ffffff09] dark:focus:bg-[#ffffff02]  px-2 
                             border-[rgba(255,255,255,0.02)]" type="email"
+                            name="email" value={email} onChange={handleChange}
                         />
                         
                     </label>
@@ -95,6 +152,7 @@ const SignUp_component = () => {
                         <input className="w-full input_field border-0 rounded-r-[6px] 
                             dark:bg-[#ffffff09] dark:focus:bg-[#ffffff02]  px-2 
                             border-[rgba(255,255,255,0.02)]" type="password"
+                            name="password" value={password} onChange={handleChange}
                         />
                         
                     </label>
@@ -110,6 +168,7 @@ const SignUp_component = () => {
                             dark:bg-[#ffffff09] dark:focus:bg-[#ffffff02]  px-2 
                             border-[rgba(255,255,255,0.02)]
                             " type="password"
+                            name="adminId" value={adminId} onChange={handleChange}
                         />
                         
                     </label>
@@ -118,7 +177,9 @@ const SignUp_component = () => {
                             <button type="submit" className="
                             bg-theme-text-brighter dark:bg-theme-text-dark text-white 
                             rounded-[9px] py-1 px-3 w-full
-                            opacity-80 hover:opacity-90 mx-auto">
+                            opacity-80 hover:opacity-90 mx-auto"
+                            disabled={busy}
+                            style={{opacity: busy? 0.5 : 1}}>
                                 Create Account
                             </button>
                     </div>
