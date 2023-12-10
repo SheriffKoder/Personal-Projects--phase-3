@@ -46,19 +46,22 @@ const SignUp_component = () => {
         console.log(res);
         setBusy(false);
 
-        //if the response returned signUp as true, sign-in and redirect user to their account
-        if (res.signUp) {
-            await signIn("credentials", {
-                email,
-                password,
-                redirect: false,
+        //02X.07
+        //login automatically after a successful sign-up
+        if (res) {
+            console.log("we can sign in");
+            //send the request to the backend api
+            const res = await signIn("credentials", {
+            email,
+            password,
+            redirect: false, //avoid default redirect
             });
-            router.replace(`/agents/${res.user.id}`);
-            hideSignUp();
-            hideDropDownMenu();
+            console.log("signed in");
         }
+        hideSignUp();
+        hideDropDownMenu();
+    }
 
-    };
 
         
 

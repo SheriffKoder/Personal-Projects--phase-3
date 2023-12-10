@@ -8,6 +8,9 @@ import PropertyCard from "@components/Home/HomeMain/PropertyCard";
 import { bodyNoScroll, showEdit } from "@utils/bodyNoScroll";
 
 
+import { useSession } from "next-auth/react";
+import { UserDocument } from "@models/userModel";
+
 interface propertyInterface {
 
     property_images : string[],        
@@ -51,9 +54,59 @@ interface agentInterface {
 
 
 
+
+
 const page = () => {
 
+    const { data: session, status } = useSession();      //get the session.user
+
+//    let agent: UserDocument = {
+//         id: 1,
+//         fullName: "sherif koder",
+//         phone: 10423131353,
+//         email: "sheriff@gmail.com",
+//         avatar: "/images/furniture.avif",
+//         password: "eekrsmwr24sa",
+//         position: "senior advisor",
+//         role: "admin",
+//         properties: [
+//             {
+//                 property_images : ["/images/furniture.avif", "/images/logo.svg"],        
+//                 property_id : 1,
+    
+//                 property_country: "Egypt",
+//                 property_city: "Giza",
+//                 property_district: "Zayed",
+    
+//                 property_type: "Apartment",
+//                 property_area: 110,
+//                 property_beds: 2,
+//                 property_baths: 1,
+                
+//                 property_listing_type: "rent",
+//                 property_availability: true,
+//                 property_recommended: true,
+//                 property_price: 6000,
+    
+//                 property_date: "25 Dec 2023",
+//                 property_update: "26 Dec 2023",
+//                 property_author: "John",
+//                 property_description: "World Class property in a friendly neighborhood contains all facilities"
+    
+//             },
+//         ],
+//         update: "26 Dec 2023"
+
+//     }
+
+    // if (session?.user) {
+    //     agent = session?.user as UserDocument;
+    // }
+        
+
     // let properties: propertyInterface[] = [];
+    
+    
     let properties: propertyInterface[] = [
         {
             property_images : ["/images/furniture.avif", "/images/logo.svg"],        
@@ -187,43 +240,7 @@ const page = () => {
     ];
 
 
-    let agent: agentInterface = {
-        fullName: "sherif koder",
-        phone: 10423131353,
-        email: "sheriff@gmail.com",
-        avatar: "/images/furniture.avif",
-        password: "eekrsmwr24sa",
-        position: "senior advisor",
-        role: "admin",
-        properties: [
-            {
-                property_images : ["/images/furniture.avif", "/images/logo.svg"],        
-                property_id : 1,
-    
-                property_country: "Egypt",
-                property_city: "Giza",
-                property_district: "Zayed",
-    
-                property_type: "Apartment",
-                property_area: 110,
-                property_beds: 2,
-                property_baths: 1,
-                
-                property_listing_type: "rent",
-                property_availability: true,
-                property_recommended: true,
-                property_price: 6000,
-    
-                property_date: "25 Dec 2023",
-                property_update: "26 Dec 2023",
-                property_author: "John",
-                property_description: "World Class property in a friendly neighborhood contains all facilities"
-    
-            },
-        ],
-        update: "26 Dec 2023"
-
-    }
+ 
 
     let agents : agentInterface[] = [
         {
@@ -533,6 +550,7 @@ const page = () => {
 
 
     return (
+
         <div className="mt-28 mx-auto w-full max-w-[1230px] flex flex-row items-center
         md2:items-stretch
         flex-wrap gap-8 mb-8 px-4 md2:px-8">
@@ -546,14 +564,15 @@ const page = () => {
                 <span className="text-theme-text-brighter">Your Profile</span>
             </div>
 
-            
+            {session?.user ? (
+                <>
             {/* container 1 */}
             <h1 className="text_shadow-3 font-bold text-3xl text-[#000000c7] dark:text-[#ffffffe2] capitalize w-full
             text-center md2:text-start">
-                { agent.role === "admin" ? 
-                ( `Viewing ${agent.fullName} as admin`
+                { session?.user.role === "admin" ? 
+                ( `Viewing ${session?.user.name} as admin`
                 ):(
-                `Hello, ${agent.fullName.split(" ")[0]}`
+                `Hello, ${session?.user.name.split(" ")[0]}`
                 )}
             </h1>
 
@@ -569,13 +588,13 @@ const page = () => {
                 w-full md2:w-auto
                 ">
 
-                    <h3 className="text-lg font-semibold">{agent.fullName}</h3>
-                    <p className="text-xs font-light">{agent.position}</p>
+                    <h3 className="text-lg font-semibold">{session?.user.name}</h3>
+                    <p className="text-xs font-light">{session?.user.position}</p>
                     <div className="h-[11.75rem] w-[11.75rem] bg-white overflow-hidden
                     rounded-full flex items-center justify-center dark:text-black
                     mt-4">
                     
-                        <Image src={agent.avatar} height={150} width={150} alt=""
+                        <Image src={session?.user.avatar} height={150} width={150} alt=""
                         className="flex-1 h-full"
                         style={{objectFit:'cover'}}
                         ></Image>
@@ -602,7 +621,7 @@ const page = () => {
 
                         <h2 className="text_shadow-3 font-semibold text-xl  w-full
                         text-center md2:text-start mb-2 mt-2 text-[#000000c7] dark:text-[#ffffffe2]">
-                            { agent.role === "admin" ? ("Information"): ("Your information")}</h2>
+                            { session?.user.role === "admin" ? ("Information"): ("Your information")}</h2>
 
                             <div className="capitalize
                             flex flex-row flex-wrap w-full justify-center md2:justify-start items-baseline">
@@ -617,7 +636,7 @@ const page = () => {
                                         focus:outline focus:outline-2 outline-offset-1 rounded-[7px]
                                         mr-2 max-w-[65%] px-2 text-[#0000007d] dark:text-[#ffffff9e]
                                         " 
-                                        defaultValue={agent.fullName}/>
+                                        defaultValue={session?.user.name}/>
 
                                         <button type="button" onClick={(e)=>allowInput(e)} 
                                         className="bg-theme-text-brighter dark:bg-theme-text-dark text-white 
@@ -667,7 +686,7 @@ const page = () => {
                                         focus:outline focus:outline-2 outline-offset-1 rounded-[7px]
                                         mr-2 max-w-[65%] px-2 text-[#0000007d] dark:text-[#ffffff9e]
                                         " 
-                                        defaultValue={agent.phone}/>
+                                        defaultValue={session?.user.phone}/>
 
                                         <button type="button" onClick={(e)=>allowInput(e)} 
                                         className="bg-theme-text-brighter dark:bg-theme-text-dark text-white 
@@ -693,7 +712,7 @@ const page = () => {
                                         focus:outline focus:outline-2 outline-offset-1 rounded-[7px]
                                         mr-2 max-w-[65%] px-2 text-[#0000007d] dark:text-[#ffffff9e]
                                         " 
-                                        defaultValue={agent.email}/>
+                                        defaultValue={session?.user.email}/>
 
                                         <button type="button" onClick={(e)=>allowInput(e)} 
                                         className="bg-theme-text-brighter dark:bg-theme-text-dark text-white 
@@ -719,7 +738,7 @@ const page = () => {
                                         focus:outline focus:outline-2 outline-offset-1 rounded-[7px]
                                         mr-2 max-w-[65%] px-2 text-[#0000007d] dark:text-[#ffffff9e]
                                         " 
-                                        defaultValue={agent.password}
+                                        defaultValue={session?.user.password}
                                         type="password"/>
 
                                         <button type="button" onClick={(e)=>allowInput(e)} 
@@ -731,7 +750,7 @@ const page = () => {
                                     </div>
                             </div>
 
-                            { agent.role === "admin" ? (
+                            { session?.user.role === "admin" ? (
 
                                 <div className="capitalize
                                 flex flex-row flex-wrap w-full justify-center md2:justify-start items-baseline">
@@ -746,7 +765,7 @@ const page = () => {
                                             focus:outline focus:outline-2 outline-offset-1 rounded-[7px]
                                             mr-2 max-w-[65%] px-2 text-[#0000007d] dark:text-[#ffffff9e]
                                             " 
-                                            defaultValue={agent.position}/>
+                                            defaultValue={session?.user.position}/>
 
                                             <button type="button" onClick={(e)=>allowInput(e)} 
                                             className="bg-theme-text-brighter dark:bg-theme-text-dark text-white 
@@ -803,7 +822,7 @@ const page = () => {
                     <h4 className="text_shadow-3 font-semibold text-xl md2:text-start
                     text-[#000000c7] dark:text-[#ffffffe2]
                     ">
-                        { agent.role === "admin" ? ("Properties") : ("Your properties")}
+                        { session?.user.role === "admin" ? ("Properties") : ("Your properties")}
                     </h4>
 
                     <button type="button" 
@@ -820,9 +839,9 @@ const page = () => {
                 <div className="flex flex-row gap-6 my-6 flex-wrap justify-center md:justify-start mx-auto last-of-type:mr-auto">
 
                     {/* property */}
-                    {properties.length > 0 ? (
+                    {session?.user.properties.length > 0 ? (
                     <>
-                        {properties.map((property: propertyInterface) => (
+                        {session?.user.properties.map((property: propertyInterface) => (
                         <div className="h-auto w-full max-w-[390px] md:w-[calc(50%-16px)] md2:w-[calc(33.3%-16px)] ">
                             <PropertyCard {...property as propertyInterface} currentPage = "agent" />
                     
@@ -843,7 +862,7 @@ const page = () => {
 
 
             {/* container 3 */}
-            { agent.role === "admin" ? (
+            { session?.user.role === "admin" ? (
                 <div className="bg-white rounded-[17px]
                 glass-container-background-2 min-w-[100%]
                 border backdrop-blur-10 pt-7 pb-8 px-4 mt-8
@@ -935,10 +954,11 @@ const page = () => {
             ):(
                 ""
             )}
-            
+            </>) : ("")}
 
 
         </div>
+        
     )
 }
 

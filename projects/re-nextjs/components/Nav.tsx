@@ -23,8 +23,8 @@ const Nav = () => {
   //get the session object
   //destructure out the data and status the data will be the user (if successfully signed in)
   // according to different status can render different UI
-  const { data, status } = useSession();
-  const isAuth = status === "authenticated";
+  const { data: session, status } = useSession();      //get the status
+  const isAuth = status === "authenticated";  //use the status
   const router = useRouter();
 
 
@@ -97,6 +97,7 @@ const Nav = () => {
         <li>Text2</li>
 
       </ul> */}
+
       <span className=" dark:bg-[#31313175] bg-[#ffffffd3]
        text-theme-text-bright dark:text-theme-text-dark 
        flex flex-row gap-3 
@@ -155,9 +156,12 @@ const Nav = () => {
             </Link>
           </span >
 
-            {isAuth && (
+
+          {/* {isAuth && ( */}
+          {session?.user && (
             <div className="nav-user-menu  hidden bg-gray-200 dark:bg-[#4f4f4f5d]"
-            onMouseLeave={()=>handleDropDownIcon("leave")}
+            // onMouseLeave={()=>handleDropDownIcon("leave")}
+            onMouseLeave={()=>{handleDropDownIcon("leave"); console.log(session?.user);}}
             >
                 <ul className=" flex flex-col items-center justify-center w-full">
 
@@ -174,22 +178,25 @@ const Nav = () => {
                       Add Property
                     </Link>
                   </li>
+                  
                   {/* 02X.4 */}
+                  {/* //02X.07 */}
                   <li className=" py-2 w-full text-center dark:hover:bg-[#ffffff16]  hover:bg-[#dbdee5] rounded-b-[17px] ">
-                  <Link href="agent/sign-out" className="w-full flex justify-center"
-                  // onClick={()=>{signOut({ redirect: false }).then(()=> {router.push("/");})}}
-                  onClick={()=>signOut()}
+                  <button type="button" className="w-full flex justify-center"
+                  onClick={()=>{signOut({ redirect: false }).then(()=> {router.push("/");})}}
+                  // onClick={()=>signOut()}
 
                   >
                       Sign out
-                    </Link>
+                    </button>
                   </li>
 
                 </ul>
             </div>
           )}
 
-          {!isAuth && (
+          {/* {!isAuth && ( */}
+          {!session?.user && (
             <div className="nav-user-menu hidden bg-gray-200 dark:bg-[#4f4f4f5d]"
             onMouseLeave={()=>handleDropDownIcon("leave")}
             >

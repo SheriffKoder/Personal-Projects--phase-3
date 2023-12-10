@@ -34,9 +34,7 @@ export const authOptions: NextAuthOptions = {
                 const passwordMatch = await user.comparePassword(password) ;
                 if (!passwordMatch) throw Error("email/password mismatch");
 
-                //if all pass, return the user object
-                //this is the object received from session?.user in front end
-                //which is returned from the session callback below,
+                //if all pass, return the user object?
                 return {
                     name: user.name,
                     email: user.email,
@@ -46,7 +44,7 @@ export const authOptions: NextAuthOptions = {
                     properties: user.properties,
                     update: user.update,
                     position: user.position,
-                    phone: user.phone,
+                    phone: user.phone
                 }
                 
             }
@@ -57,41 +55,22 @@ export const authOptions: NextAuthOptions = {
     // add the callbacks
     //these functions inside it will run the first time we send the request
     callbacks: {
-        // jwt(params: any) {
-        //     if (params.user?.role) {
-        //         //if this is an agent, assign the role and id
-        //         params.token.role = params.user.role;
-        //         params.token.id = params.user.id;
-
-        //     }
-        //     //return final_token
-        //     return params.token;
-        // },
-        // async session({ session, token }) {
-        //     if (session.user) {
-        //         (session.user as {id: string}).id = token.id as string;
-        //         (session.user as {role: string}).role = token.role as string;
-        //         //02.02
-        //         // const sessionUser = await UserModel.findOne({email:session.user.email});
-        //         // session.user.id = sessionUser?._id.toString();
-        //     }
-        //     return session;
-        // },
-        
-        //02X.07
-        //https://stackoverflow.com/questions/64576733/where-and-how-to-change-session-user-object-after-signing-in
-        //this one provides the whole user, so its properties can be used in the front-end
-        jwt: async ({ token, user }) => {
-            user && (token.user = user)
-            return token;
+        jwt(params: any) {
+            if (params.user?.role) {
+                //if this is an agent, assign the role and id
+                params.token.role = params.user.role;
+                params.token.id = params.user.id;
+            }
+            //return final_token
+            return params.token;
         },
-        session: async ({ session, token }) => {
-            if (session) {
-                (session.user as object) = token.user as object;
+        session({ session, token}) {
+            if (session.user) {
+                (session.user as {id: string}).id = token.id as string;
+                (session.user as {role: string}).role = token.role as string;
             }
             return session;
-        },
-
+        }
     }
 
 };

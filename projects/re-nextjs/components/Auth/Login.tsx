@@ -2,21 +2,50 @@
 "use client";
 
 import { hideDropDownMenu, hideLogin } from "@utils/bodyNoScroll";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 
 //02X.01
 import { ChangeEventHandler, FormEventHandler } from "react";
-import { signIn } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+
+
+//02X.07
+import type { DefaultSession } from 'next-auth';
+import { propertyInterface } from "@models/property";
+//02X.07
+//to use the user.id in the useEffect
+//and also it is public anywhere, do apply on agent page's ts
+declare module 'next-auth' {
+  interface Session {
+    user: DefaultSession['user'] & {
+    //   user: object & {
+    id: string;
+    email: string;
+    name: string;
+    password: string;
+    role: "admin" | "user";
+    phone: number;
+    avatar: string;
+    position: string;
+    properties: propertyInterface[];
+    update: string;
+    //   };
+    };
+  }
+}
+
+
 
 const Login_component = () => {
 
+    const { data: session, status } = useSession();      //get the status
    
     //////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////
 
-    //02X.01
+    //02X.02
     //this is set to true when handling the submit 
     //so it changes the button style if the app is currently busy accessing the database
     const [busy, setBusy] = useState(false);
@@ -28,17 +57,17 @@ const Login_component = () => {
     });
     const router = useRouter();
 
-    //02X.01
+    //02X.02
     const { email, password } = userInfo;
 
-    //02X
+    //02X.02
     const handleChange: ChangeEventHandler<HTMLInputElement> = ({ target }) => {
         const { name, value } = target;
 
         setUserInfo({ ...userInfo, [name]:value});
     }
 
-    //02X
+    //02X.02
     const handleSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
         setBusy(true);
         e.preventDefault();
@@ -49,15 +78,31 @@ const Login_component = () => {
             redirect: false, //avoid default redirect
         });
         //if there is an error, update the error state and return the process
-        if (res?.error) return setError(res.error);
-        console.log(res);
+        if (res?.error) { 
+            setError(res.error)
+        } else {
+            // console.log(res);
+            // console.log("signed in");
+            hideLogin();
+            hideDropDownMenu();
+        }
         setBusy(false);
-        router.replace(`/`);
-        hideLogin();
-        hideDropDownMenu();
+
     };
     //////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////
+
+    //02X.07
+    //when the user is logged into session, the useEffect redirects to their page
+    //wether after login or the sign-up's login
+    useEffect(() => {
+        // console.log(session?.user);
+        // console.log(session?.user.id);
+        if (session?.user.id) {
+            let agentId = (session?.user.id);
+          router.push(`/agents/${agentId}`);
+        }
+      }, [session, router]);
 
 
         

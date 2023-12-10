@@ -3,6 +3,7 @@ import UserModel from "@models/userModel";
 import { connectToDB } from "@utils/database";
 import { NextResponse } from "next/server";
 
+//02X.01
 
 // data requested from user on initial render / data from the front-end
 //the data will pass to create the user
