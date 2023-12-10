@@ -1,8 +1,8 @@
 // import React from 'react'
 "use client";
 
-import { bodyScroll } from "@utils/bodyNoScroll";
-import { useEffect, useState } from "react";
+import { hideDropDownMenu, hideLogin } from "@utils/bodyNoScroll";
+import { useState } from "react";
 import Link from "next/link";
 
 //02X.01
@@ -12,62 +12,54 @@ import { useRouter } from "next/navigation";
 
 const Login_component = () => {
 
+   
+    //////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////
+
     //02X.01
     //this is set to true when handling the submit 
     //so it changes the button style if the app is currently busy accessing the database
     const [busy, setBusy] = useState(false);
+
     const [error, setError] = useState("");
-    const router = useRouter();
-
-
-    //02X.01
-    const [agentInfo, setAgentInfo] = useState({
+    const [userInfo, setUserInfo] = useState({
         email: "",
         password: "",
     });
+    const router = useRouter();
 
     //02X.01
-    const {email, password} = agentInfo;
+    const { email, password } = userInfo;
 
     //02X
-    const handleChange: ChangeEventHandler<HTMLInputElement> = ({target}) => {
-        const {name, value} = target;
+    const handleChange: ChangeEventHandler<HTMLInputElement> = ({ target }) => {
+        const { name, value } = target;
 
-        setAgentInfo({...agentInfo, [name]: value});
+        setUserInfo({ ...userInfo, [name]:value});
     }
 
     //02X
-    const handleSubmit: FormEventHandler<HTMLFormElement> = async(e) => {
+    const handleSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
         setBusy(true);
         e.preventDefault();
         //send the request to the backend api
         const res = await signIn("credentials", {
             email,
             password,
-            redirect: false,    //avoid default redirect
-        })
+            redirect: false, //avoid default redirect
+        });
         //if there is an error, update the error state and return the process
         if (res?.error) return setError(res.error);
+        console.log(res);
         setBusy(false);
-        //navigate the user to their page
-        router.replace("/");
-    }
+        router.replace(`/`);
+        hideLogin();
+        hideDropDownMenu();
+    };
+    //////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////
 
 
-
-
-    function hideLogin () {
-        let LoginComponent = document.getElementById("login__container");
-
-        LoginComponent!.style.display = "none";
-        }
-
-    useEffect (() => {
-        // let LoginComponent = document.getElementById("signIn__container");
-
-        // LoginComponent!.style.display = "flex";
-            
-    },[])
         
 
     return (
@@ -76,7 +68,7 @@ const Login_component = () => {
         "
         id="login__container">
 
-<div className="
+        <div className="
             z-[3] w-[90%] h-auto
             flex flex-col items-center gap-1 lg:gap-4  p-3 max-w-[500px]
             rounded-[17px] bg-[#ffffffbd]  dark:bg-[#ffffff10]
@@ -87,7 +79,7 @@ const Login_component = () => {
                 <div className="text-center relative w-full flex flex-col">
                     <div className="absolute right-0">
                         <button 
-                        onClick={()=> {hideLogin(); bodyScroll();}}
+                        onClick={()=> {hideLogin();}}
                         className="
                         ml-auto bg-theme-text-brighter opacity-80 hover:opacity-100 dark:opacity-100 dark:bg-[#912642] dark:hover:bg-[#9f2545] h-5 w-5 rounded-[6px] text-white flex items-center justify-center">
                         <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" className="bi bi-x-lg" viewBox="0 0 16 16"> <path fill-rule="evenodd" d="M13.854 2.146a.5.5 0 0 1 0 .708l-11 11a.5.5 0 0 1-.708-.708l11-11a.5.5 0 0 1 .708 0Z"/> <path fill-rule="evenodd" d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z"/> </svg>
@@ -105,7 +97,8 @@ const Login_component = () => {
                 w-[90%] md:px-[5%]
                 
                 "
-                onSubmit={handleSubmit}>
+                onSubmit={handleSubmit}
+                >
 
                     <label className="w-[100%] flex flex-row justify-center text-center
                     label_field
@@ -116,7 +109,7 @@ const Login_component = () => {
                         <input className="w-full input_field border-0 rounded-r-[6px] 
                             dark:bg-[#ffffff09] dark:focus:bg-[#ffffff02]  px-2 
                             border-[rgba(255,255,255,0.02)]" type="email"
-                        name={email} onChange={handleChange}
+                        name="email" value={email} onChange={handleChange}
                         />
                         
                     </label>
@@ -130,7 +123,7 @@ const Login_component = () => {
                         <input className="w-full input_field border-0 rounded-r-[6px] 
                             dark:bg-[#ffffff09] dark:focus:bg-[#ffffff02]  px-2 
                             border-[rgba(255,255,255,0.02)]" type="password"
-                            name={password} onChange={handleChange}
+                            name="password" value={password} onChange={handleChange}
                         />
                         
                     </label>
@@ -151,7 +144,9 @@ const Login_component = () => {
                             <button type="submit" className="
                             bg-theme-text-brighter dark:bg-theme-text-dark text-white 
                             rounded-[9px] py-1 px-3 w-full
-                            opacity-80 hover:opacity-90 mx-auto">
+                            opacity-80 hover:opacity-90 mx-auto"
+                            disabled={busy}
+                            style={{opacity: busy? 0.5 : 1}}>
                                 Sign in 
                             </button>
                     </div>

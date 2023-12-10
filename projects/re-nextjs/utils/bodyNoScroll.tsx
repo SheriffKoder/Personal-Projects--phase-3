@@ -33,14 +33,37 @@ const showEdit = function (currentPage:string) {
     document.querySelector(".nav-user-menu")?.classList.remove("flex");
     document.querySelector(".nav-user-menu")?.classList.add("hidden");
 
-  }
+}
   
 
-  const hideEdit = function (currentPage: string) {
-    let propertyEdit_component = document.getElementById(`property${currentPage}__container`);
+const hideEdit = function (currentPage: string) {
+  let propertyEdit_component = document.getElementById(`property${currentPage}__container`);
 
-    propertyEdit_component!.style.display = "none";
-    }
+  propertyEdit_component!.style.display = "none";
+}
 
 
-export {bodyNoScroll, bodyScroll, showEdit, hideEdit};
+const hideDropDownMenu = function () {
+  document.querySelector(".nav-user-menu")?.classList.remove("flex");
+  document.querySelector(".nav-user-menu")?.classList.add("hidden");
+}
+
+const hideSignUp = function () {
+  let signUpComponent = document.getElementById("signUp__container");
+
+  signUpComponent!.style.display = "none";
+  bodyScroll();
+}
+
+
+const hideLogin = function () {
+  let LoginComponent = document.getElementById("login__container");
+
+  LoginComponent!.style.display = "none";
+  bodyScroll();
+
+}
+
+
+
+export {bodyNoScroll, bodyScroll, showEdit, hideEdit, hideDropDownMenu, hideSignUp, hideLogin};

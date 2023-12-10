@@ -13,8 +13,9 @@ import PropertyAdd_Component from "@components/PropertyEdit/PropertyAdd";
 import PropertyEdit_Component from "@components/PropertyEdit/PropertyEdit";
 
 //02X.03
-// import { SessionProvider } from "next-auth/react";
+import { SessionProvider } from "next-auth/react";
 import AuthProvider from "@components/AuthProvider";
+// import AuthProvider from "@components/AuthProvider";
 
 export const metadata = {
   title: 'RE Website',
@@ -26,11 +27,12 @@ const RootLayout = ({ children }: { children: React.ReactNode}) => {
 
 
   return (
+    <AuthProvider>
+
     <html className="" lang="en">
       {/* <body className="antialiased text-slate-500 dark:text-slate-400 bg-white dark:bg-slate-900"> */}
       <body className="w-full h-auto flex justify-center relative">
 
-        <AuthProvider>
 
           {/* <div className="myMain dark:brightness-10 relative"> */}
             
@@ -81,11 +83,12 @@ const RootLayout = ({ children }: { children: React.ReactNode}) => {
             </main>
           </div>
 
-        </AuthProvider>
 
 
       </body>
     </html>
+    </AuthProvider>
+
   )
 }
 

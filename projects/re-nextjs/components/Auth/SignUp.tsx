@@ -1,65 +1,65 @@
 // import React from 'react'
 "use client";
 
-import { bodyScroll } from "@utils/bodyNoScroll";
-import { useEffect, useState } from "react";
+import { hideDropDownMenu, hideSignUp } from "@utils/bodyNoScroll";
+import { useState } from "react";
 
 //02X
 import { ChangeEventHandler, FormEventHandler } from "react";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 const SignUp_component = () => {
 
-    //02X
+     //02X
     //this is set to true when handling the submit 
     //so it changes the button style if the app is currently busy accessing the database
     const [busy, setBusy] = useState(false);
 
     //02X
-    const [agentInfo, setAgentInfo] = useState({
-        fullName: "",
+    const [userInfo, setUserInfo] = useState({
+        name: "",
         email: "",
         password: "",
         phone: "",
-        adminId: ""
+        adminId: "",
     });
 
-    //02X
-    const {fullName, phone ,email, password, adminId} = agentInfo;
+    const { name, email, password, phone, adminId } = userInfo;
 
-    //02X
-    const handleChange: ChangeEventHandler<HTMLInputElement> = ({target}) => {
-        const {name, value} = target;
-
-        setAgentInfo({...agentInfo, [name]: value});
+    const handleChange: ChangeEventHandler<HTMLInputElement> = ({ target }) => {
+        const { name, value } = target;
+        setUserInfo({ ...userInfo, [name]:value});
     }
 
-    //02X
-    const handleSubmit: FormEventHandler<HTMLFormElement> = async(e) => {
+    const router = useRouter();
+
+    const handleSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
         setBusy(true);
+
         e.preventDefault();
-        //send the request to the backend api
-        const res = await fetch("/api/auth/agents", {
+        const res = await fetch("/api/auth/users", {
             method: "POST",
-            body: JSON.stringify(agentInfo),
-        }).then(res => res.json());
+            body: JSON.stringify(userInfo),
+
+        }).then((res) => res.json());
         console.log(res);
         setBusy(false);
-    }
 
-
-
-    function hideSignUp () {
-        let signUpComponent = document.getElementById("signUp__container");
-
-        signUpComponent!.style.display = "none";
+        //if the response returned signUp as true, sign-in and redirect user to their account
+        if (res.signUp) {
+            await signIn("credentials", {
+                email,
+                password,
+                redirect: false,
+            });
+            router.replace(`/agents/${res.user.id}`);
+            hideSignUp();
+            hideDropDownMenu();
         }
 
-    // useEffect (() => {
-        // let LoginComponent = document.getElementById("signIn__container");
+    };
 
-        // LoginComponent!.style.display = "flex";
-            
-    // },[])
         
 
     return (
@@ -81,7 +81,7 @@ const SignUp_component = () => {
                 lg:flex-col">
                     <div className="absolute right-0">
                         <button 
-                        onClick={()=> {hideSignUp(); bodyScroll();}}
+                        onClick={()=> {hideSignUp();}}
                         className="
                         ml-auto bg-theme-text-brighter opacity-80 hover:opacity-100 dark:opacity-100 dark:bg-[#912642] dark:hover:bg-[#9f2545] h-5 w-5 rounded-[6px] text-white flex items-center justify-center">
                         <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" className="bi bi-x-lg" viewBox="0 0 16 16"> <path fill-rule="evenodd" d="M13.854 2.146a.5.5 0 0 1 0 .708l-11 11a.5.5 0 0 1-.708-.708l11-11a.5.5 0 0 1 .708 0Z"/> <path fill-rule="evenodd" d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z"/> </svg>
@@ -110,7 +110,7 @@ const SignUp_component = () => {
                         <input className="w-full input_field border-0 rounded-r-[6px] 
                             dark:bg-[#ffffff09] dark:focus:bg-[#ffffff02]  px-2 
                             border-[rgba(255,255,255,0.02)]" type="text"
-                            name="fullName" value={fullName} onChange={handleChange}
+                            name="name" value={name} onChange={handleChange}
                         />
                         
                     </label>
@@ -174,12 +174,14 @@ const SignUp_component = () => {
                     </label>
 
                     <div className="mt-1 lg:mt-4 w-[80%] flex">
-                            <button type="submit" className="
+                            <button type="submit" 
+                            className="
                             bg-theme-text-brighter dark:bg-theme-text-dark text-white 
                             rounded-[9px] py-1 px-3 w-full
                             opacity-80 hover:opacity-90 mx-auto"
                             disabled={busy}
-                            style={{opacity: busy? 0.5 : 1}}>
+                            style={{opacity: busy? 0.5 : 1}}
+                            >
                                 Create Account
                             </button>
                     </div>

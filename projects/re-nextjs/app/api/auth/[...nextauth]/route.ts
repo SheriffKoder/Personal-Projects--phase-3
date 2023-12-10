@@ -2,8 +2,8 @@
 import NextAuth, { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { connectToDB } from "@utils/database";
-import AgentModel from "@models/agent";
-
+import UserModel from "@models/userModel";
+import { NextResponse } from "next/server";
 
 export const authOptions: NextAuthOptions = {
     session: {
@@ -15,7 +15,7 @@ export const authOptions: NextAuthOptions = {
         CredentialsProvider({
             type: "credentials",
             credentials: {},    //empty because we do not want to use their UI
-            async authorize(credentials, req) {
+            async authorize(credentials, req){
                 //the credentials will be empty as we use {} but will cast its type anyway
                 const {email, password} = credentials as {
                     email: string,
@@ -24,27 +24,28 @@ export const authOptions: NextAuthOptions = {
                 };
 
                 await connectToDB();
-                const agent = await AgentModel.findOne({email: "11@gmail.com"});
+                const user = await UserModel.findOne({email});
 
                 //if no agent, throw an error
-                if (!agent) throw Error("no agent");
+                if (!user) throw Error("no user found with this email");
 
                 //if agent
-                const passwordMatch = await AgentModel.comparePassword(password) ;
+                const passwordMatch = await user.comparePassword(password) ;
                 if (!passwordMatch) throw Error("email/password mismatch");
 
-                //if all pass, return the user object
+                //if all pass, return the user object?
                 return {
-                    fullName: agent.fullName,
-                    email: agent.email,
-                    id: agent._id,
-                    role: agent.role,
-                    avatar: agent.avatar,
-                    properties: agent.properties,
-                    update: agent.update,
-                    position: agent.position,
-                    phone: agent.phone
+                    name: user.name,
+                    email: user.email,
+                    id: user._id,
+                    role: user.role,
+                    avatar: user.avatar,
+                    properties: user.properties,
+                    update: user.update,
+                    position: user.position,
+                    phone: user.phone
                 }
+                
             }
         })
         
@@ -54,10 +55,10 @@ export const authOptions: NextAuthOptions = {
     //these functions inside it will run the first time we send the request
     callbacks: {
         jwt(params: any) {
-            if (params.agent?.role) {
+            if (params.user?.role) {
                 //if this is an agent, assign the role and id
-                params.token.role = params.agent.role;
-                params.token.id = params.agent.id;
+                params.token.role = params.user.role;
+                params.token.id = params.user.id;
             }
             //return final_token
             return params.token;

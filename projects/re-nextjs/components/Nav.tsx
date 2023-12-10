@@ -9,16 +9,24 @@ import DarkModeToggle from "./DarkModeToggle"
 //01.03
 import Link, { LinkProps } from "next/link";
 import Image from "next/image";
-import {useState, useEffect, use} from "react";
+import {useState, useEffect} from "react";
 
 import { bodyNoScroll } from "@utils/bodyNoScroll";
 
-//02.05
-import {signIn, signOut, useSession, getProviders} from "next-auth/react";
-
-
+//02X.04
+import { useSession, signOut } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 const Nav = () => {
+
+  //02X.04
+  //get the session object
+  //destructure out the data and status the data will be the user (if successfully signed in)
+  // according to different status can render different UI
+  const { data, status } = useSession();
+  const isAuth = status === "authenticated";
+  const router = useRouter();
+
 
   function handleDropDownIcon (input : string) {
       document.querySelector(".nav-user-icon")?.classList.toggle("agentNavIcon_background");
@@ -75,13 +83,7 @@ const Nav = () => {
 
   
   const [toggleDropDown, setToggleDropDown] = useState(true);
-  let isUserLoggedIn = false;
-  
-  useEffect(()=> {
-   
-    console.log("re-render");
-  })
-
+  // let isUserLoggedIn = false;
 
 
 
@@ -153,7 +155,7 @@ const Nav = () => {
             </Link>
           </span >
 
-            {isUserLoggedIn && (
+            {isAuth && (
             <div className="nav-user-menu  hidden bg-gray-200 dark:bg-[#4f4f4f5d]"
             onMouseLeave={()=>handleDropDownIcon("leave")}
             >
@@ -172,9 +174,13 @@ const Nav = () => {
                       Add Property
                     </Link>
                   </li>
-
+                  {/* 02X.4 */}
                   <li className=" py-2 w-full text-center dark:hover:bg-[#ffffff16]  hover:bg-[#dbdee5] rounded-b-[17px] ">
-                  <Link href="agent/sign-out" className="w-full flex justify-center">
+                  <Link href="agent/sign-out" className="w-full flex justify-center"
+                  // onClick={()=>{signOut({ redirect: false }).then(()=> {router.push("/");})}}
+                  onClick={()=>signOut()}
+
+                  >
                       Sign out
                     </Link>
                   </li>
@@ -183,7 +189,7 @@ const Nav = () => {
             </div>
           )}
 
-          {!isUserLoggedIn && (
+          {!isAuth && (
             <div className="nav-user-menu hidden bg-gray-200 dark:bg-[#4f4f4f5d]"
             onMouseLeave={()=>handleDropDownIcon("leave")}
             >
