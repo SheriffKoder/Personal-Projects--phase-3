@@ -5,7 +5,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
-
+import { useRef } from "react";
 import PropertyCard from "@components/Home/HomeMain/PropertyCard";
 
 interface propertyInterface {
@@ -34,7 +34,7 @@ interface propertyInterface {
   }
 
 
-
+import { PropertyDocument } from "@models/propertyModel";
 
 
 
@@ -175,9 +175,12 @@ const page = () => {
 
     const currentPage : string = "property";
 
-    let thisProperty = properties[0];
+    // let thisProperty = properties[0];
   
-    let property_title = thisProperty.property_type+" for "+thisProperty.property_listing_type+" in <"+thisProperty.property_country+" "+thisProperty.property_city+" "+thisProperty.property_district+"> "+thisProperty.property_area+"sqm "+thisProperty.property_beds+" bedrooms / "+thisProperty.property_baths+" bathrooms";    
+    // const [property_title, setProperty_title] = useState("");
+
+
+
 
     function fadeOutAnimation (slider__container: any) {
 
@@ -199,13 +202,17 @@ const page = () => {
     
     if (direction === prevFade1-1) {
         // console.log("left");
-        (imageReference > 0) ? setImageReference(imageReference-1) : setImageReference(thisProperty.property_images.length-1);
+        if (pageProperty !== null)
+        (imageReference > 0) ? setImageReference(imageReference-1) : setImageReference(pageProperty.thisProperty.property_images.length-1);
         // setPrevFade1(fade1);
         // setImageReference(imageReference-1);
+        console.log("setting to "+ imageReference);
 
     } else if (direction === prevFade1+1) {
         // console.log("right");
-        (imageReference < thisProperty.property_images.length-1) ? setImageReference(imageReference+1) : setImageReference(0);
+        if (pageProperty !== null)
+        (imageReference < pageProperty.thisProperty.property_images.length-1) ? setImageReference(imageReference+1) : setImageReference(0);
+        console.log("setting to "+ imageReference);
 
     } else {
         setImageReference(direction)
@@ -265,16 +272,55 @@ const page = () => {
     const [imageReference, setImageReference] = useState(0);
     // const [propertiesCounter, setPropertiesCounter] = useState([]);
 
+    type pagePropertyType = {
+        thisProperty: PropertyDocument,
+        recProperties: PropertyDocument[]
+    }
+    
+
+    const [pageProperty, setPageProperty] = useState<pagePropertyType | null >(null);
+
+    // console.log(thisProperty);
+    let property_title = useRef("");
+
+
 
     useEffect(()=> {
-        let slider__container = document.getElementById(thisProperty.property_id.toString());        
 
-        animationCombination1(slider__container);
+        if (pageProperty == null) {
+            let current_url = window.location.href.toString().split("/properties/")[1];
+            // console.log(current_url);
+    
+            const fetchProperty = async () => {
+            const response = await fetch(`/api/properties/${current_url}`);
+            const jsonResponse = await response.json();
+            console.log(jsonResponse);
+    
+                property_title.current = `${jsonResponse.thisProperty.property_type} for ${jsonResponse.thisProperty.property_listing_type} in <${jsonResponse.thisProperty.property_country} ${jsonResponse.thisProperty.property_city} ${jsonResponse.thisProperty.property_district} ${jsonResponse.thisProperty.property_area}sqm ${jsonResponse.thisProperty.property_beds} bedrooms / ${jsonResponse.thisProperty.property_baths} bathrooms`;
+    
+        
+            setPageProperty(jsonResponse);
+            }
+            fetchProperty();
+
+    
+        }
+
+        if (pageProperty !== null) {
+            console.log(fade1);
+            let slider__container = document.getElementById(pageProperty.thisProperty._id.toString());            
+            animationCombination1(slider__container);
+        }
 
     },[fade1]);
 
 
+
+
   return (
+    <>
+    {pageProperty !== null ? (
+
     <div className="flex flex-col pb-6 pt-28 px-3">
 
 
@@ -288,7 +334,7 @@ const page = () => {
           >
           <span className="text-theme-text-brighter capitalize">
             <span>
-                {property_title}
+                {property_title.current}
             </span>
         </span>
         </div>
@@ -315,13 +361,13 @@ const page = () => {
                     <span className="text-start dark:text-[#ffffffde] text_shadow-3 
                     slide_right__text__animation">
                         <span className="inline-block shrink-0 h-3 w-3 bg-red-500 opacity-80 rounded-full mr-4"></span>
-                        <span>{property_title}</span>
+                        <span>{property_title.current}</span>
                     </span>
                 </h4>
             </div>        
 
         {/* post */}
-        {thisProperty ? (
+        {pageProperty.thisProperty ? (
             <>
 
             <div className="flex flex-col gap-6 w-[100%] md2:flex-1">
@@ -335,8 +381,8 @@ const page = () => {
                 ">
 
                     {/* <div className="">
-                        <Image src={thisProperty.property_images[0]} height={600} width={600} alt={property_title}
-                        id={thisProperty.property_id.toString()}
+                        <Image src={pageProperty.thisProperty.property_images[0]} height={600} width={600} alt={property_title.current}
+                        id={pageProperty.thisProperty.property_id.toString()}
                         className="border-0 w-full
                         rounded-[10px]
                         
@@ -360,8 +406,8 @@ const page = () => {
                         </button>
 
 
-                            <Image src={thisProperty.property_images[imageReference]} height={600} width={600} alt={property_title}
-                            id={thisProperty.property_id.toString()}
+                            <Image src={pageProperty.thisProperty.property_images[imageReference]} height={600} width={600} alt={property_title.current}
+                            id={pageProperty.thisProperty._id.toString()}
                             className="border-0
                             rounded-[10px] w-full h-[calc(45vw-0.25rem)] max-h-[100%]"
                             style={{objectFit:'cover'}}
@@ -391,16 +437,16 @@ const page = () => {
                 text_shadow-2 max-w-[100%]  mt-[-1rem] mb-[0rem] md2:mt-[-0.5rem] md2:mb-[1rem]
                 ">
                     <div className="flex flex-row gap-4 w-full items-center">
-                        {thisProperty.property_images.map((image:string) => (
+                        {pageProperty.thisProperty.property_images.map((image:string) => (
                             
                             
                             <button 
                             className="border-0
                             rounded-[7px] max-w-[50px] w-[10%]
                             h-[99%]"
-                            onClick={()=>{setPrevFade1(fade1); setFade1(thisProperty.property_images.findIndex(i => i === image));}}>
+                            onClick={()=>{setPrevFade1(fade1); setFade1(pageProperty.thisProperty.property_images.findIndex(i => i === image)); }}>
 
-                                <Image src={image} height={300} width={300} alt={property_title}
+                                <Image src={image} height={300} width={300} alt={property_title.current}
                                 className="
                                 border-0
                                 rounded-[7px] max-w-[50px] w-full
@@ -431,19 +477,19 @@ const page = () => {
                                             opacity-80 rounded-full mr-2"></span>
                                             Property Details
                                         </div>
-                                        <div>Country: {thisProperty.property_country}</div>
-                                        <div>City: {thisProperty.property_city}</div>
-                                        <div>District: {thisProperty.property_district}</div>
+                                        <div>Country: {pageProperty.thisProperty.property_country}</div>
+                                        <div>City: {pageProperty.thisProperty.property_city}</div>
+                                        <div>District: {pageProperty.thisProperty.property_district}</div>
                                     </div>
 
                                     <div>  
-                                        <div>Type of listing: <span className="capitalize">{thisProperty.property_listing_type}</span></div>
+                                        <div>Type of listing: <span className="capitalize">{pageProperty.thisProperty.property_listing_type}</span></div>
                                         
                                         <div>
                                             <span className="mr-1">
                                                 Property is:
                                             </span>
-                                            {thisProperty.property_availability ? 
+                                            {pageProperty.thisProperty.property_availability ? 
                                                 (
                                                 <span className="text-[#279b72] dark:text-[#32b084]">
                                                     Available                                
@@ -458,16 +504,16 @@ const page = () => {
                                     </div>
 
                                     <div>
-                                        <div>Area: {thisProperty.property_area}</div>
-                                        <div>Bedrooms: {thisProperty.property_beds}</div>
-                                        <div>Bathrooms: {thisProperty.property_baths}</div>
+                                        <div>Area: {pageProperty.thisProperty.property_area}</div>
+                                        <div>Bedrooms: {pageProperty.thisProperty.property_beds}</div>
+                                        <div>Bathrooms: {pageProperty.thisProperty.property_baths}</div>
 
-                                        <div>Asking price: {thisProperty.property_price}</div>
+                                        <div>Asking price: {pageProperty.thisProperty.property_price}</div>
                                     </div>
 
                                     <div>
                                         <div>More Description:</div> 
-                                        <div>{thisProperty.property_description}</div>
+                                        <div>{pageProperty.thisProperty.property_description}</div>
                                     </div>
 
                                     <div className="my-2 mx-auto ">
@@ -476,7 +522,7 @@ const page = () => {
                                         px-2 py-1 border-0 rounded-[7px] opacity-70 dark:hover:opacity-90 hover:opacity-100
                                         bg-[#279b72] dark:bg-[#32b084] text-white">
                                         
-                                        {thisProperty.property_availability ? 
+                                        {pageProperty.thisProperty.property_availability ? 
                                         (
 
                                             "Book a visit"                 
@@ -511,24 +557,34 @@ const page = () => {
                     <span className="inline-block shrink-0 h-3 w-3 bg-[rgba(0,89,255,0.7)] rounded-full mr-4"></span>
                     <span className="w-full text-start font-light text-sm
                     lowercase flex flex-row items-center">
-                        <span className="opacity-60 mr-2 hidden">{thisProperty.property_date} by {thisProperty.property_author} </span>
+                        <span className="opacity-60 mr-2 hidden">{pageProperty.thisProperty.property_date} by {pageProperty.thisProperty.property_userId.name} </span>
 
                         <div className="flex flex-col gap-4 mt-2 capitalize text-center w-full items-center">
 
 
                             <div className="flex flex-col md:flex-row  md2:flex-col items-center justify-center md2:gap-4 gap-4 md:gap-8">
-                                <div className="h-[6rem] w-[6rem] bg-white rounded-full flex items-center justify-center dark:text-black">Hi</div>
+                                <div className="h-[6rem] w-[6rem] bg-white rounded-full flex items-center justify-center dark:text-black">
+                                <Image src={pageProperty.thisProperty.property_userId.avatar} height={100} width={100} alt="agent's photo"
+                                className="
+                                border-0
+                                rounded-[7px] w-full
+                                h-[100%]
+                                "
+                                style={{objectFit:'cover'}}
+                                >
+                                </Image>
+                                </div>
 
 
                                 <div className="">
                                     <div>Handled By</div>
-                                    <div>{thisProperty.property_author}                                    </div>
+                                    <div>{pageProperty.thisProperty.property_userId.name}</div>
 
                                 </div>
 
                                 <div>
                                     <div>Listed On</div>
-                                    <div>{thisProperty.property_date}</div>
+                                    <div>{pageProperty.thisProperty.property_date}</div>
                                 </div>
 
                             </div>
@@ -539,10 +595,10 @@ const page = () => {
 
                             <div className="w-full mx-auto lg:w-auto lg:mx-0">
                                 <div className="flex flex-row flex-wrap gap-2 md2:flex-col">
-                                    {properties.map((property) => (
+                                    {pageProperty.recProperties.map((property) => (
                                         
                                         <div className="w-[calc(100%*(1/2)-6px)] md:w-[calc(100%*(1/3)-6px)] md2:w-full">
-                                            <PropertyCard {...property as propertyInterface} currentPage = "property" />
+                                            <PropertyCard {...property as PropertyDocument} currentPage = "property" />
                                         </div>
                                     ))}
                                 </div>
@@ -565,6 +621,8 @@ const page = () => {
         </div>
 
     </div>
+    ) : ("")}
+    </>
 
   )
 }

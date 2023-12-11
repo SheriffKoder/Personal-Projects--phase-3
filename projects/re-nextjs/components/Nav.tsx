@@ -167,17 +167,17 @@ const Nav = () => {
 
                   <li className=" py-2 border-b-[1px] dark:border-[#151515a1] border-[#dbdbdb]
                   w-full text-center dark:hover:bg-[#ffffff16] rounded-t-[17px]  hover:bg-[#dbdee5]">
-                    <Link href="agent/profile" className="w-full flex justify-center">
+                    <Link href={"/agents/"+session?.user.id} className="w-full flex justify-center">
                       Go to Profile
                     </Link>
                   </li>
 
                   
-                  <li className=" py-2 border-b-[1px] dark:border-[#151515a1] border-[#dbdbdb] w-full text-center dark:hover:bg-[#ffffff16]  hover:bg-[#dbdee5]">
+                  {/* <li className=" py-2 border-b-[1px] dark:border-[#151515a1] border-[#dbdbdb] w-full text-center dark:hover:bg-[#ffffff16]  hover:bg-[#dbdee5]">
                     <Link href="agent/add-property" className="w-full flex justify-center">
                       Add Property
                     </Link>
-                  </li>
+                  </li> */}
                   
                   {/* 02X.4 */}
                   {/* //02X.07 */}

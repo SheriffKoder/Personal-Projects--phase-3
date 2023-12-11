@@ -19,32 +19,32 @@ interface postsInterface {
 
 
 
-interface propertyInterface {
+// interface propertyInterface {
 
-  property_images : string[],        
-  property_id : number,
+//   property_images : string[],        
+//   property_id : number,
 
-  property_country: string,
-  property_city: string,
-  property_district: string,
+//   property_country: string,
+//   property_city: string,
+//   property_district: string,
 
-  property_type: string,
-  property_area: number,
-  property_beds: number,
-  property_baths: number,
+//   property_type: string,
+//   property_area: number,
+//   property_beds: number,
+//   property_baths: number,
   
-  property_listing_type: string,
-  property_availability: boolean,
-  property_recommended: boolean,
-  property_price: number,
+//   property_listing_type: string,
+//   property_availability: boolean,
+//   property_recommended: boolean,
+//   property_price: number,
 
-}
+// }
 
 
 
 import PropertyCard from "./HomeMain/PropertyCard";
 
-
+import { PropertyDocument } from "@models/propertyModel";
 
 
 
@@ -81,108 +81,109 @@ const Home_Main = () => {
     }
   ]
   
-  let properties: propertyInterface[] = [
-    {
-        property_images : ["/images/furniture.avif", "/images/logo.svg"],        
-        property_id : 1,
+  //04.01
+  // let properties: propertyInterface[] = [
+  //   {
+  //       property_images : ["/images/furniture.avif", "/images/logo.svg"],        
+  //       property_id : 1,
 
-        property_country: "Egypt",
-        property_city: "Giza",
-        property_district: "Zayed",
+  //       property_country: "Egypt",
+  //       property_city: "Giza",
+  //       property_district: "Zayed",
 
-        property_type: "Apartment",
-        property_area: 110,
-        property_beds: 2,
-        property_baths: 1,
+  //       property_type: "Apartment",
+  //       property_area: 110,
+  //       property_beds: 2,
+  //       property_baths: 1,
         
-        property_listing_type: "rent",
-        property_availability: true,
-        property_recommended: true,
-        property_price: 6000,
+  //       property_listing_type: "rent",
+  //       property_availability: true,
+  //       property_recommended: true,
+  //       property_price: 6000,
 
-    },
+  //   },
  
-    {
-        property_images : ["/images/furniture.avif", "/images/logo.svg"],        
-        property_id : 1,
+  //   {
+  //       property_images : ["/images/furniture.avif", "/images/logo.svg"],        
+  //       property_id : 1,
 
-        property_country: "Egypt",
-        property_city: "Giza",
-        property_district: "Zayed",
+  //       property_country: "Egypt",
+  //       property_city: "Giza",
+  //       property_district: "Zayed",
 
-        property_type: "Apartment",
-        property_area: 110,
-        property_beds: 2,
-        property_baths: 1,
+  //       property_type: "Apartment",
+  //       property_area: 110,
+  //       property_beds: 2,
+  //       property_baths: 1,
         
-        property_listing_type: "rent",
-        property_availability: true,
-        property_recommended: true,
-        property_price: 6000,
+  //       property_listing_type: "rent",
+  //       property_availability: true,
+  //       property_recommended: true,
+  //       property_price: 6000,
 
-    },
+  //   },
 
-    {
-        property_images : ["/images/furniture.avif", "/images/logo.svg"],        
-        property_id : 1,
+  //   {
+  //       property_images : ["/images/furniture.avif", "/images/logo.svg"],        
+  //       property_id : 1,
 
-        property_country: "Egypt",
-        property_city: "Giza",
-        property_district: "Zayed",
+  //       property_country: "Egypt",
+  //       property_city: "Giza",
+  //       property_district: "Zayed",
 
-        property_type: "Apartment",
-        property_area: 110,
-        property_beds: 2,
-        property_baths: 1,
+  //       property_type: "Apartment",
+  //       property_area: 110,
+  //       property_beds: 2,
+  //       property_baths: 1,
         
-        property_listing_type: "rent",
-        property_availability: true,
-        property_recommended: true,
-        property_price: 6000,
+  //       property_listing_type: "rent",
+  //       property_availability: true,
+  //       property_recommended: true,
+  //       property_price: 6000,
 
-    },
+  //   },
 
-    {
-        property_images : ["/images/furniture.avif", "/images/logo.svg"],        
-        property_id : 1,
+  //   {
+  //       property_images : ["/images/furniture.avif", "/images/logo.svg"],        
+  //       property_id : 1,
 
-        property_country: "Egypt",
-        property_city: "Giza",
-        property_district: "Zayed",
+  //       property_country: "Egypt",
+  //       property_city: "Giza",
+  //       property_district: "Zayed",
 
-        property_type: "Apartment",
-        property_area: 110,
-        property_beds: 2,
-        property_baths: 1,
+  //       property_type: "Apartment",
+  //       property_area: 110,
+  //       property_beds: 2,
+  //       property_baths: 1,
         
-        property_listing_type: "rent",
-        property_availability: true,
-        property_recommended: true,
-        property_price: 6000,
+  //       property_listing_type: "rent",
+  //       property_availability: true,
+  //       property_recommended: true,
+  //       property_price: 6000,
 
-    },
+  //   },
 
-    {
-        property_images : ["/images/furniture.avif", "/images/logo.svg"],        
-        property_id : 1,
+  //   {
+  //       property_images : ["/images/furniture.avif", "/images/logo.svg"],        
+  //       property_id : 1,
 
-        property_country: "Egypt",
-        property_city: "Giza",
-        property_district: "Zayed",
+  //       property_country: "Egypt",
+  //       property_city: "Giza",
+  //       property_district: "Zayed",
 
-        property_type: "Apartment",
-        property_area: 110,
-        property_beds: 2,
-        property_baths: 1,
+  //       property_type: "Apartment",
+  //       property_area: 110,
+  //       property_beds: 2,
+  //       property_baths: 1,
         
-        property_listing_type: "rent",
-        property_availability: true,
-        property_recommended: true,
-        property_price: 6000,
+  //       property_listing_type: "rent",
+  //       property_availability: true,
+  //       property_recommended: true,
+  //       property_price: 6000,
 
-    },
+  //   },
 
-  ];
+  // ];
     
   
   
@@ -281,6 +282,23 @@ const Home_Main = () => {
   // },[fade1]);
 
 
+  //04.01
+  const [properties, setProperties] = useState<PropertyDocument[]>([]);
+
+  useEffect(()=> {
+
+    const fetchProperties = async () => {
+      const response = await fetch("/api/properties/homePage");
+      const jsonResponse = await response.json();
+      console.log(jsonResponse);
+
+      setProperties(jsonResponse);
+    }
+
+    fetchProperties();
+  }, []);
+
+
   return (
 
     <div className="w-[95%] lg:flex lg:flex-row justify-center mx-auto ">
@@ -368,7 +386,7 @@ const Home_Main = () => {
           {/* property */}
           {properties.length > 0 ? (
             <>
-              {properties.map((property) => (
+              {properties.map((property: PropertyDocument) => (
                 <div className="
                 
                 h-auto xl:w-[48%] md:w-[46%] lg:w-[47%] w-[100%] max-w-[390px] xl:max-w-[900px]">

@@ -3,6 +3,9 @@ import mongoose, {Model, models, model} from "mongoose";
 import { Schema, Document, Types } from "mongoose";
 import { UserDocument } from "./userModel";
 
+import { PopulatedDoc } from "mongoose";
+
+
 export interface PropertyDocument extends Document {
 
     property_images : string[],        
@@ -24,7 +27,7 @@ export interface PropertyDocument extends Document {
 
     property_date: string,
     property_update: string,
-    property_userId: Types.ObjectId,
+    property_userId: PopulatedDoc<Document<Types.ObjectId> & UserDocument>,
     property_description: string,
   
   }
@@ -120,7 +123,7 @@ const propertySchema = new Schema<PropertyDocument, {}, Methods>({
   property_userId: {
     type: Schema.Types.ObjectId,
     ref: "User",
-    required: true,
+    required: false,
   },
 
 });

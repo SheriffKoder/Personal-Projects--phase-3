@@ -6,11 +6,19 @@ import Image from "next/image";
 
 import PropertyCard from "@components/Home/HomeMain/PropertyCard";
 import { bodyNoScroll, showEdit } from "@utils/bodyNoScroll";
+import { useEffect, useState } from "react";
 
 
+//05.01
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/router";
 import { UserDocument } from "@models/userModel";
 
+import PropertyModel, { PropertyDocument } from "@models/propertyModel";
+import UserModel from "@models/userModel";
+
+
+///
 interface propertyInterface {
 
     property_images : string[],        
@@ -38,6 +46,7 @@ interface propertyInterface {
   }
 
 
+///
 interface agentInterface {
     id: number
     fullName: string,
@@ -58,189 +67,146 @@ interface agentInterface {
 
 const page = () => {
 
+    //05.01
     const { data: session, status } = useSession();      //get the session.user
+    // const router = useRouter();
 
-//    let agent: UserDocument = {
-//         id: 1,
-//         fullName: "sherif koder",
-//         phone: 10423131353,
-//         email: "sheriff@gmail.com",
-//         avatar: "/images/furniture.avif",
-//         password: "eekrsmwr24sa",
-//         position: "senior advisor",
-//         role: "admin",
-//         properties: [
-//             {
-//                 property_images : ["/images/furniture.avif", "/images/logo.svg"],        
-//                 property_id : 1,
-    
-//                 property_country: "Egypt",
-//                 property_city: "Giza",
-//                 property_district: "Zayed",
-    
-//                 property_type: "Apartment",
-//                 property_area: 110,
-//                 property_beds: 2,
-//                 property_baths: 1,
-                
-//                 property_listing_type: "rent",
-//                 property_availability: true,
-//                 property_recommended: true,
-//                 property_price: 6000,
-    
-//                 property_date: "25 Dec 2023",
-//                 property_update: "26 Dec 2023",
-//                 property_author: "John",
-//                 property_description: "World Class property in a friendly neighborhood contains all facilities"
-    
-//             },
-//         ],
-//         update: "26 Dec 2023"
+    const [agent, setAgent] = useState<UserDocument[]>([]);
 
-//     }
+///
+    
+    // let properties: propertyInterface[] = [
+    //     {
+    //         property_images : ["/images/furniture.avif", "/images/logo.svg"],        
+    //         property_id : 1,
 
-    // if (session?.user) {
-    //     agent = session?.user as UserDocument;
-    // }
+    //         property_country: "Egypt",
+    //         property_city: "Giza",
+    //         property_district: "Zayed",
+
+    //         property_type: "Apartment",
+    //         property_area: 110,
+    //         property_beds: 2,
+    //         property_baths: 1,
+            
+    //         property_listing_type: "rent",
+    //         property_availability: true,
+    //         property_recommended: true,
+    //         property_price: 6000,
+
+    //         property_date: "25 Dec 2023",
+    //         property_update: "26 Dec 2023",
+    //         property_author: "John",
+    //         property_description: "World Class property in a friendly neighborhood contains all facilities"
+
+    //     },
         
+    //     {
+    //         property_images : ["/images/furniture.avif", "/images/logo.svg"],        
+    //         property_id : 1,
 
-    // let properties: propertyInterface[] = [];
-    
-    
-    let properties: propertyInterface[] = [
-        {
-            property_images : ["/images/furniture.avif", "/images/logo.svg"],        
-            property_id : 1,
+    //         property_country: "Egypt",
+    //         property_city: "Giza",
+    //         property_district: "Zayed",
 
-            property_country: "Egypt",
-            property_city: "Giza",
-            property_district: "Zayed",
-
-            property_type: "Apartment",
-            property_area: 110,
-            property_beds: 2,
-            property_baths: 1,
+    //         property_type: "Apartment",
+    //         property_area: 110,
+    //         property_beds: 2,
+    //         property_baths: 1,
             
-            property_listing_type: "rent",
-            property_availability: true,
-            property_recommended: true,
-            property_price: 6000,
+    //         property_listing_type: "rent",
+    //         property_availability: true,
+    //         property_recommended: true,
+    //         property_price: 7000,
 
-            property_date: "25 Dec 2023",
-            property_update: "26 Dec 2023",
-            property_author: "John",
-            property_description: "World Class property in a friendly neighborhood contains all facilities"
+    //         property_date: "25 Dec 2023",
+    //         property_update: "26 Dec 2023",
+    //         property_author: "John",
+    //         property_description: "World Class property in a friendly neighborhood contains all facilities"
 
-        },
-        
-        {
-            property_images : ["/images/furniture.avif", "/images/logo.svg"],        
-            property_id : 1,
 
-            property_country: "Egypt",
-            property_city: "Giza",
-            property_district: "Zayed",
+    //     },
 
-            property_type: "Apartment",
-            property_area: 110,
-            property_beds: 2,
-            property_baths: 1,
+    //     {
+    //         property_images : ["/images/furniture.avif", "/images/logo.svg"],        
+    //         property_id : 1,
+
+    //         property_country: "Egypt",
+    //         property_city: "Giza",
+    //         property_district: "Zayed",
+
+    //         property_type: "Apartment",
+    //         property_area: 110,
+    //         property_beds: 2,
+    //         property_baths: 1,
             
-            property_listing_type: "rent",
-            property_availability: true,
-            property_recommended: true,
-            property_price: 7000,
+    //         property_listing_type: "rent",
+    //         property_availability: true,
+    //         property_recommended: true,
+    //         property_price: 8000,
 
-            property_date: "25 Dec 2023",
-            property_update: "26 Dec 2023",
-            property_author: "John",
-            property_description: "World Class property in a friendly neighborhood contains all facilities"
+    //         property_date: "25 Dec 2023",
+    //         property_update: "26 Dec 2023",
+    //         property_author: "John",
+    //         property_description: "World Class property in a friendly neighborhood contains all facilities"
 
 
-        },
+    //     },
 
-        {
-            property_images : ["/images/furniture.avif", "/images/logo.svg"],        
-            property_id : 1,
+    //     {
+    //         property_images : ["/images/furniture.avif", "/images/logo.svg"],        
+    //         property_id : 1,
 
-            property_country: "Egypt",
-            property_city: "Giza",
-            property_district: "Zayed",
+    //         property_country: "Egypt",
+    //         property_city: "Giza",
+    //         property_district: "Zayed",
 
-            property_type: "Apartment",
-            property_area: 110,
-            property_beds: 2,
-            property_baths: 1,
+    //         property_type: "Apartment",
+    //         property_area: 110,
+    //         property_beds: 2,
+    //         property_baths: 1,
             
-            property_listing_type: "rent",
-            property_availability: true,
-            property_recommended: true,
-            property_price: 8000,
+    //         property_listing_type: "rent",
+    //         property_availability: true,
+    //         property_recommended: true,
+    //         property_price: 9000,
 
-            property_date: "25 Dec 2023",
-            property_update: "26 Dec 2023",
-            property_author: "John",
-            property_description: "World Class property in a friendly neighborhood contains all facilities"
+    //         property_date: "25 Dec 2023",
+    //         property_update: "26 Dec 2023",
+    //         property_author: "John",
+    //         property_description: "World Class property in a friendly neighborhood contains all facilities"
 
 
-        },
+    //     },
 
-        {
-            property_images : ["/images/furniture.avif", "/images/logo.svg"],        
-            property_id : 1,
+    //     {
+    //         property_images : ["/images/furniture.avif", "/images/logo.svg"],        
+    //         property_id : 1,
 
-            property_country: "Egypt",
-            property_city: "Giza",
-            property_district: "Zayed",
+    //         property_country: "Egypt",
+    //         property_city: "Giza",
+    //         property_district: "Zayed",
 
-            property_type: "Apartment",
-            property_area: 110,
-            property_beds: 2,
-            property_baths: 1,
+    //         property_type: "Apartment",
+    //         property_area: 110,
+    //         property_beds: 2,
+    //         property_baths: 1,
             
-            property_listing_type: "rent",
-            property_availability: true,
-            property_recommended: true,
-            property_price: 9000,
+    //         property_listing_type: "rent",
+    //         property_availability: true,
+    //         property_recommended: true,
+    //         property_price: 10000,
 
-            property_date: "25 Dec 2023",
-            property_update: "26 Dec 2023",
-            property_author: "John",
-            property_description: "World Class property in a friendly neighborhood contains all facilities"
-
-
-        },
-
-        {
-            property_images : ["/images/furniture.avif", "/images/logo.svg"],        
-            property_id : 1,
-
-            property_country: "Egypt",
-            property_city: "Giza",
-            property_district: "Zayed",
-
-            property_type: "Apartment",
-            property_area: 110,
-            property_beds: 2,
-            property_baths: 1,
-            
-            property_listing_type: "rent",
-            property_availability: true,
-            property_recommended: true,
-            property_price: 10000,
-
-            property_date: "25 Dec 2023",
-            property_update: "26 Dec 2023",
-            property_author: "John",
-            property_description: "World Class property in a friendly neighborhood contains all facilities"
+    //         property_date: "25 Dec 2023",
+    //         property_update: "26 Dec 2023",
+    //         property_author: "John",
+    //         property_description: "World Class property in a friendly neighborhood contains all facilities"
 
 
-        },
+    //     },
 
-    ];
+    // ];
 
-
- 
 
     let agents : agentInterface[] = [
         {
@@ -513,6 +479,8 @@ const page = () => {
     ]
 
 
+///
+
     const currentPage : string = "agent";
 
 
@@ -544,6 +512,35 @@ const page = () => {
         })
         document.getElementById("infoApply_button")!.style.display = "none";
         document.getElementById("infoCancel_button")!.style.display = "none";
+
+    }
+
+
+
+
+  
+
+  //05.01
+    // useEffect(()=> {
+
+    //     const fetchAgent = async () => {
+    //       const response = await fetch(`/api/users/${session?.user.id}`);
+    //       const jsonResponse = await response.json();
+    //       console.log(jsonResponse);
+    
+    //       setAgent(jsonResponse);
+    //     }
+    
+    //     // if (session?.user.id) 
+    //     fetchAgent();
+    // }, []);
+
+
+    const handleEdit = (element) => {
+
+    }
+
+    const handleDelete = (element) => {
 
     }
 

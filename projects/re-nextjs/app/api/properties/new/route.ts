@@ -1,10 +1,12 @@
 
+//for handling new property submits 
+
 import PropertyModel from "@models/propertyModel";
 import { connectToDB } from "@utils/database"
 
 //
 
-interface NewPostRequest {
+interface NewPropertyRequest {
     country: string;
     city: string;
     district: string;
@@ -23,7 +25,7 @@ interface NewPostRequest {
 }
 
 export const POST = async (req: Request, res: Response) => {
-    const body = (await req.json()) as NewPostRequest;
+    const body = (await req.json()) as NewPropertyRequest;
 
         try {
             //[connect] to the db, every time because this is a lambda function

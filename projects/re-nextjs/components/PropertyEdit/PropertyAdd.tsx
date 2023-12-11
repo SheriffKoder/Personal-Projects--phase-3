@@ -22,7 +22,7 @@ const PropertyAdd_Component = () => {
 
     const [action, setAction] = useState ("add");
     const [submitting, setSubmitting] = useState(false);
-    const [post, setPost] = useState({
+    const [propertyInfo, setPropertyInfo] = useState({
         country: "",
         city: "",
         district: "",
@@ -39,11 +39,11 @@ const PropertyAdd_Component = () => {
     });
 
     const { country, city, district, type, area, bedrooms, bathrooms, listing_type,
-    price, description } = post;
+    price, description } = propertyInfo;
 
     const handleChange: ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement> = ({ target }) => {
         const { name, value } = target;
-        setPost({ ...post, [name]:value});
+        setPropertyInfo({ ...propertyInfo, [name]:value});
     }
 
     const handleSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
@@ -52,10 +52,10 @@ const PropertyAdd_Component = () => {
 
         //creating first property
         try {
-            const response = await fetch("/api/posts/new", {
+            const response = await fetch("/api/properties/new", {
                 method: "POST",
                 body: JSON.stringify({
-                    ...post,
+                    ...propertyInfo,
                     userId: session?.user.id,
                     date: "25 dec 2023",
                 })

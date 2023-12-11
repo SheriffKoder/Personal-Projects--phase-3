@@ -102,7 +102,8 @@ const Login_component = () => {
             let agentId = (session?.user.id);
           router.push(`/agents/${agentId}`);
         }
-      }, [session, router]);
+    //   }, [session, router]);
+    }, []);
 
 
         

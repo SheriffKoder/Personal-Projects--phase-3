@@ -8,7 +8,6 @@ import bcrypt from "bcrypt";
 
 import { PropertyDocument } from "./propertyModel";
 
-
 // interface propertiesInterface {
 //     propertyId: any;
 // }
