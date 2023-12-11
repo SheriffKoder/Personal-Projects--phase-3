@@ -5,81 +5,19 @@ import { bodyScroll, hideEdit } from "@utils/bodyNoScroll";
 import { useEffect } from "react";
 import Link from "next/link";
 
-import { ChangeEventHandler, FormEventHandler } from "react";
-
-
-//03.01
-import {useState} from "react";
-import { useSession } from "next-auth/react";
-// import { useRouter } from "next/router";
 
 //03.01
 const PropertyAdd_Component = () => {
 
-    //03.01
-    // const router = useRouter();
-    const {data: session } = useSession();
-
-    const [action, setAction] = useState ("add");
-    const [submitting, setSubmitting] = useState(false);
-    const [post, setPost] = useState({
-        country: "",
-        city: "",
-        district: "",
-
-        type: "",
-        area: "",
-        bedrooms: "",
-        bathrooms: "",
-
-        listing_type: "",
-        price: "",
-        description: "",
-
-    });
-
-    const { country, city, district, type, area, bedrooms, bathrooms, listing_type,
-    price, description } = post;
-
-    const handleChange: ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement> = ({ target }) => {
-        const { name, value } = target;
-        setPost({ ...post, [name]:value});
-    }
-
-    const handleSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
-        e.preventDefault();
-        setSubmitting(true);
-
-        //creating first property
-        try {
-            const response = await fetch("/api/posts/new", {
-                method: "POST",
-                body: JSON.stringify({
-                    ...post,
-                    userId: session?.user.id,
-                    date: "25 dec 2023",
-                })
-            })
-
-            if (response.ok) {
-                // router.push("/");
-                hideEdit("Add"); bodyScroll();
-            }
-        } catch (error) {
-            console.log(error);
-        } finally {
-            //happens either way
-            setSubmitting(true);
-        }
-    }
 
 
-    // useEffect (() => {
-    //     // let LoginComponent = document.getElementById("signIn__container");
 
-    //     // LoginComponent!.style.display = "flex";
+    useEffect (() => {
+        // let LoginComponent = document.getElementById("signIn__container");
+
+        // LoginComponent!.style.display = "flex";
             
-    // },[])
+    },[])
         
 
     return (
@@ -111,15 +49,13 @@ const PropertyAdd_Component = () => {
                         </div>
 
                         <div className="mx-auto pt-0 lg:pt-6 flex flex-col lg:flex-row gap-1 flex-wrap justify-center">
-                            <h3 className="mb-2 text_shadow-2 opacity-80">
-                                {type === "add" ? ("Add a new property") : ("Edit property")}</h3>
+                            <h3 className="mb-2 text_shadow-2 opacity-80">Add a new property</h3>
                         </div>
                         
                     </div>
 
                     <form className="flex flex-col gap-1 lg:gap-4 items-center
-                    w-[90%] md:px-[5%]"
-                    onSubmit={handleSubmit}>
+                    w-[90%] md:px-[5%]">
 
                         <label className="w-[100%] flex flex-row justify-center text-center
                         label_field
@@ -132,10 +68,7 @@ const PropertyAdd_Component = () => {
 
                             <input className="w-full input_field border-0 rounded-r-[6px] 
                                 dark:bg-[#ffffff09] dark:focus:bg-[#ffffff02]  px-2 
-                                border-[rgba(255,255,255,0.02)]" type="text" required
-                                // value={post.country}
-                                name="country" value={country} onChange={handleChange}
-                                />
+                                border-[rgba(255,255,255,0.02)]" type="text" required/>
                             
                         </label>
 
@@ -150,12 +83,7 @@ const PropertyAdd_Component = () => {
 
                             <input className="w-full input_field border-0 rounded-r-[6px] 
                                 dark:bg-[#ffffff09] dark:focus:bg-[#ffffff02]  px-2 
-                                border-[rgba(255,255,255,0.02)]" type="text" 
-                                // value={post.city}
-                                // onChange={(e) => {setPost({...post, city: e.target.value})}}
-                                name="city" value={city} onChange={handleChange}
-
-                                />
+                                border-[rgba(255,255,255,0.02)]" type="text" required/>
                             
                         </label>
 
@@ -170,12 +98,7 @@ const PropertyAdd_Component = () => {
 
                             <input className="w-full input_field border-0 rounded-r-[6px] 
                                 dark:bg-[#ffffff09] dark:focus:bg-[#ffffff02]  px-2 
-                                border-[rgba(255,255,255,0.02)]" type="text" required
-                                // value={post.district}
-                                // onChange={(e) => {setPost({...post, district: e.target.value})}}
-                                name="district" value={district} onChange={handleChange}
-
-                                />
+                                border-[rgba(255,255,255,0.02)]" type="text" required/>
                             
                         </label>
 
@@ -193,12 +116,7 @@ const PropertyAdd_Component = () => {
                             <input className="w-full input_field border-0 rounded-r-[6px] 
                                 dark:bg-[#ffffff09] dark:focus:bg-[#ffffff02]  px-2 
                                 border-[rgba(255,255,255,0.02)]" type="text" required
-                                placeholder="apartment, villa, office etc."
-                                // value={post.type}
-                                // onChange={(e) => {setPost({post, type: e.target.value})}}
-                                name="type" value={type} onChange={handleChange}
-
-                                />
+                                placeholder="apartment, villa, office etc."/>
                             
                         </label>
 
@@ -208,18 +126,13 @@ const PropertyAdd_Component = () => {
                         
                         ">
                             <span className="min-w-[7rem] px-2 py-1 text_shadow-2 opacity-80 dark:opacity-90">
-                                Area
+                                Type
                             </span>
 
                             <input className="w-full input_field border-0 rounded-r-[6px] 
                                 dark:bg-[#ffffff09] dark:focus:bg-[#ffffff02]  px-2 
-                                border-[rgba(255,255,255,0.02)]" type="number" required
-                                placeholder="in sqm" 
-                                // value={post.area}
-                                // onChange={(e) => {setPost({...post, area: e.target.value})}}
-                                name="area" value={area} onChange={handleChange}
-
-                                />
+                                border-[rgba(255,255,255,0.02)]" type="text" required
+                                placeholder="in sqm"/>
                             
                         </label>
 
@@ -236,11 +149,7 @@ const PropertyAdd_Component = () => {
                                 <input className="w-full input_field border-0 rounded-r-[6px] 
                                     dark:bg-[#ffffff09] dark:focus:bg-[#ffffff02]  px-2 
                                     border-[rgba(255,255,255,0.02)]" type="number" required
-                                    min={1} max={10} 
-                                    // value={post.bedrooms}
-                                    // onChange={(e) => {setPost({...post, bedrooms: e.target.value})}}
-                                    name="bedrooms" value={bedrooms} onChange={handleChange}
-
+                                    min={1} max={10}
                                     />
                                 
                             </label>
@@ -257,11 +166,7 @@ const PropertyAdd_Component = () => {
                             <input className="w-full input_field border-0 rounded-r-[6px] 
                                 dark:bg-[#ffffff09] dark:focus:bg-[#ffffff02]  px-2 
                                 border-[rgba(255,255,255,0.02)]" type="number" required
-                                min={1} max={10} 
-                                // value={post.bathrooms}
-                                // onChange={(e) => {setPost({...post, bathrooms: e.target.value})}}
-                                name="bathrooms" value={bathrooms} onChange={handleChange}
-
+                                min={1} max={10}
                                 />
                             
                             </label>
@@ -281,12 +186,7 @@ const PropertyAdd_Component = () => {
                             <input className="w-full input_field border-0 rounded-r-[6px] 
                                 dark:bg-[#ffffff09] dark:focus:bg-[#ffffff02]  px-2 
                                 border-[rgba(255,255,255,0.02)]" type="text" required
-                                placeholder="rent, sale, etc." 
-                                // value={post.listing_type}
-                                // onChange={(e) => {setPost({...post, listing_type: e.target.value})}}
-                                name="listing_type" value={listing_type} onChange={handleChange}
-
-                                />
+                                placeholder="rent, sale, etc."/>
                             
                         </label>
 
@@ -302,12 +202,7 @@ const PropertyAdd_Component = () => {
                             <input className="w-full input_field border-0 rounded-r-[6px] 
                                 dark:bg-[#ffffff09] dark:focus:bg-[#ffffff02]  px-2 
                                 border-[rgba(255,255,255,0.02)]" type="number" required
-                                placeholder="" 
-                                // value={post.price}
-                                // onChange={(e) => {setPost({...post, price: e.target.value})}}
-                                name="price" value={price} onChange={handleChange}
-
-                                />
+                                placeholder=""/>
                             
                         </label>
 
@@ -382,7 +277,7 @@ const PropertyAdd_Component = () => {
 
                             <input className="w-full input_field border-0 rounded-r-[6px] 
                                 dark:bg-[#ffffff09] dark:focus:bg-[#ffffff02]  px-2
-                                border-[rgba(255,255,255,0.02)]" type="file"
+                                border-[rgba(255,255,255,0.02)]" type="file" required
                                 placeholder=""/>
                             
                         </label>
@@ -395,9 +290,6 @@ const PropertyAdd_Component = () => {
                             bg-[#ffffff07] rounded-[7px] border-2 border-[#ffffff02]
                             resize-none"
                             rows={6} placeholder="describe your property"
-                            // value={post.description}
-                            // onChange={(e) => {setPost({...post, description: e.target.value})}}
-                            name="description" value={description} onChange={handleChange}
                             >
 
                             </textarea>
@@ -408,9 +300,8 @@ const PropertyAdd_Component = () => {
                                 <button type="submit" className="
                                 bg-theme-text-brighter dark:bg-theme-text-dark text-white 
                                 rounded-[9px] py-1 px-3 w-full
-                                opacity-80 hover:opacity-90 mx-auto"
-                                disabled={submitting}>
-                                    {action === "add" ? ("Add to properties" ) : ("Apply changes")}
+                                opacity-80 hover:opacity-90 mx-auto">
+                                    Add this property
                                 </button>
                         </div>
 

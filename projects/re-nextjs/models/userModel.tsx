@@ -6,8 +6,12 @@ import {Model, models, model} from "mongoose";
 import { Schema, Document } from "mongoose";
 import bcrypt from "bcrypt";
 
-import { propertyInterface } from "./property";
+import { PropertyDocument } from "./propertyModel";
 
+
+// interface propertiesInterface {
+//     propertyId: any;
+// }
 
 export interface UserDocument extends Document {
     email: string;
@@ -17,7 +21,7 @@ export interface UserDocument extends Document {
     phone: number;
     avatar: string;
     position: string;
-    properties: propertyInterface[];
+    properties: PropertyDocument[];
     update: string;
 }
 
@@ -46,16 +50,23 @@ const userSchema = new Schema<UserDocument, {}, Methods>({
         required: false,     //put in by an agent with admin role
         default: "Real Estate Advisor"
     },
-    properties: {
-        type: [], 
-        // ref: "Properties", 
-        required: false,
-        default: []
-    },
+
     update: {
         type: String,
         required: false,
-    }
+    },
+
+    properties: {
+        type: [], 
+        ref: "Property", 
+        required: false,
+        default: []
+    },
+    // properties: [
+    //     {
+    //         propertyId: {type: Object, ref: "Property"}
+    //     }
+    // ],
 
 });
 
