@@ -7,58 +7,48 @@ import Image from "next/image"
 import { useEffect, useRef, useState } from "react";
 import { func } from "prop-types";
 
-interface propertyInterface {
+// interface propertyInterface {
 
-    property_image : string,
-    property_title : string,
-    property_id : number,
+//     property_image : string,
+//     property_title : string,
+//     property_id : number,
 
-    property_beds : number,
-    property_baths : number,
-    property_area : number,
-    property_location : string,
-    property_type : string,
-    property_listing_type : string,
-    property_recommended: boolean
+//     property_beds : number,
+//     property_baths : number,
+//     property_area : number,
+//     property_location : string,
+//     property_type : string,
+//     property_listing_type : string,
+//     property_recommended: boolean
 
 
-}
+// }
 
+
+
+import { PropertyDocument } from "@models/propertyModel";
 
 const Home_Rec = () => {
 
-    let properties: propertyInterface[] = [
-        {
-            property_image : "/images/furniture.avif",
-            property_title : "furniture",
-            property_id : 1,
+    // let properties1: PropertyDocument[] = [
+    //     {
+    //         property_images : ["/images/furniture.avif"],
         
-            property_beds : 3,
-            property_baths : 2,
-            property_area : 190,
-            property_location : "NYC",
-            property_type : "apartment",
-            property_listing_type : "rent",
-            property_recommended: true,
+    //         property_beds : 3,
+    //         property_baths : 2,
+    //         property_area : 190,
+    //         property_country: "USA"
+    //         property_city : "NYC",
+    //         property_type : "apartment",
+    //         property_listing_type : "rent",
+    //         property_recommended: true,
 
-        },
-        {
-            property_image : "/images/furniture.avif",
-            property_title : "furniture",
-            property_id : 2,
+    //     },
+    // ];
 
-        
-            property_beds : 2,
-            property_baths : 1,
-            property_area : 110,
-            property_location : "NYC",
-            property_type : "apartment",
-            property_listing_type : "sale",
-            property_recommended: true,
-        }
-    ];
+    // let slider : propertyInterface;
 
-    let slider : propertyInterface;
+    // let slider : PropertyDocument;
 
 
     function fadeOutAnimation (slider__container: any) {
@@ -81,11 +71,13 @@ const Home_Rec = () => {
 
         if (direction < prevFade) {
             // console.log("left");
-            (sliderIndex > 0) ? setSliderIndex(sliderIndex-1) : setSliderIndex(properties.length-1);
+            if (propertiesRec !== null)
+            (sliderIndex > 0) ? setSliderIndex(sliderIndex-1) : setSliderIndex(propertiesRec.length-1);
             setPrevFade(fade);
         } else if (direction > prevFade) {
             // console.log("right");
-            (sliderIndex < properties.length-1) ? setSliderIndex(sliderIndex+1) : setSliderIndex(0);
+            if (propertiesRec !== null)
+            (sliderIndex < propertiesRec.length-1) ? setSliderIndex(sliderIndex+1) : setSliderIndex(0);
 
         }
 
@@ -147,20 +139,45 @@ const Home_Rec = () => {
     const [prevFade, setPrevFade] = useState(0);
     const [fade, setFade] = useState(0);
     const [sliderIndex, setSliderIndex] = useState(0);
-    slider = {...properties[sliderIndex]};
+    // slider = {...properties[sliderIndex]};
     
     const tm = useRef(0);
 
-    
+    //04.01
+    const [propertiesRec, setPropertiesRec] = useState<PropertyDocument[] | null>(null);
+
+    // const [slider, setSlider] = useState<PropertyDocument | null >(null);
+    // slider = {...properties[sliderIndex]};
+    // slider = [];
+
     useEffect(()=> {
         
-        let slider__container = document.querySelector("#slider__container");        
-        animationCombination(slider__container);
+
+        if (propertiesRec == null) {
+            const fetchProperties = async () => {
+                const responseRec = await fetch("/api/properties/homePage_rec");
+                const jsonResponseRec = await responseRec.json();
+                console.log(jsonResponseRec);
+          
+                // slider = {...jsonResponse[sliderIndex]};
+                setPropertiesRec(jsonResponseRec);
+              }
+          
+              fetchProperties();    
+        }
+      
+        if (propertiesRec !== null) {
+            // console.log(propertiesRec[sliderIndex]._id);
+            let slider__container = document.querySelector("#slider__container");        
+            animationCombination(slider__container);    
+        }
 
     },[fade]);
 
 
   return (
+    <>
+    {propertiesRec !== null ? (
     <div id="rec" className="w-full md:w-[97vw] md:mx-auto h-auto border-[#ffffff15] mt-24 px-6"
     aria-label="recommended properties">
 
@@ -183,7 +200,7 @@ const Home_Rec = () => {
             relative 
             "
             id="slider__container">
-                <Image src={slider.property_image} fill={true} alt={slider.property_title}
+                <Image src={propertiesRec[sliderIndex].property_images[0]} fill={true} alt={propertiesRec[sliderIndex].property_city}
                 onMouseEnter={stopTimer} onMouseLeave={startTimer}
                 className="rounded-[17px] border-0 opacity-90 hover:opacity-100 dark:opacity-75 dark:hover:opacity-90 
                 w-full h-[calc(50vw)] max-h-[500px] max-w-[833px]"
@@ -192,8 +209,8 @@ const Home_Rec = () => {
                 <div className=" flex flex-col justify-start absolute bottom-0 left-0 
                 w-full bg-[#0000005d] p-[min(calc(1rem+0.5vw),(2rem))] text-white box-shadow-1
                 text-[min(calc(0.5rem+0.5vw),(1.25rem))] capitalize rounded-b-[17px]">
-                    <div>{slider.property_type} in {slider.property_location} for {slider.property_listing_type} </div>
-                    <div>{slider.property_area}m<sup>2</sup>, {slider.property_beds} beds, {slider.property_baths} baths </div>
+                    <div>{propertiesRec[sliderIndex].property_type} in {propertiesRec[sliderIndex].property_city} for {propertiesRec[sliderIndex].property_listing_type} </div>
+                    <div>{propertiesRec[sliderIndex].property_area}m<sup>2</sup>, {propertiesRec[sliderIndex].property_beds} beds, {propertiesRec[sliderIndex].property_baths} baths </div>
                 </div>
 
             </div>
@@ -206,7 +223,11 @@ const Home_Rec = () => {
             </button> 
 
         </div>
+
+
     </div>
+    ) : ("")}
+    </>
   )
 }
 

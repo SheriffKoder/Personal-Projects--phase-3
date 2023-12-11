@@ -288,7 +288,7 @@ const Home_Main = () => {
   useEffect(()=> {
 
     const fetchProperties = async () => {
-      const response = await fetch("/api/properties/homePage");
+      const response = await fetch("/api/properties/homePage_main");
       const jsonResponse = await response.json();
       console.log(jsonResponse);
 
