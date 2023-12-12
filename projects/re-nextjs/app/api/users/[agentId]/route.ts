@@ -54,3 +54,84 @@ export const POST = async (req:Request, {params}:any) => {
     }
 
 }
+
+
+export const PATCH = async (request:Request, {params}:any) => {
+
+
+    const currentUserPage = params.agentId;
+    const newInfo = await request.json();
+
+    console.log(currentUserPage);
+    console.log(newInfo);
+
+    try {
+        await connectToDB();
+        const userInfo = await UserModel.findById(currentUserPage);
+
+        console.log(userInfo);
+        
+        //we have info object from json, want to overwrite its keys with userInfo
+
+        if (userInfo) {
+            userInfo.name = newInfo.name;
+            userInfo.avatar = newInfo.avatar;
+            userInfo.email = newInfo.email;
+            userInfo.password = newInfo.password;
+            userInfo.phone = newInfo.phone;
+            userInfo.position = newInfo.position;
+            
+            console.log(userInfo);
+
+            await userInfo?.save();
+        
+            return new Response(JSON.stringify(userInfo), { status: 200});
+
+        }
+
+    } catch (error) {
+        return new Response(JSON.stringify("Failed to update the user's info"), {status: 500});
+
+    }
+
+    
+    
+
+
+
+
+
+    return new Response(JSON.stringify("Done"), {status: 200});
+
+}
+
+
+
+export const DELETE = async (request, {params}) => {
+    
+    try {
+
+        await connectToDB();
+
+        const {sessionId, removableUserEmail} = await request.json();
+
+        console.log(sessionId);
+        console.log(removableUserEmail);
+
+
+        await UserModel.findOneAndDelete({email:removableUserEmail});
+
+        // let allAgents :UserDocument[] = [];
+        
+        // allAgents = await UserModel.find({_id:{$ne:sessionId}});
+
+        // return new Response(JSON.stringify({allAgents}), {status: 200});
+        return new Response(JSON.stringify("Delete User success"), {status: 200});
+
+    } catch (error) {
+        
+        return new Response(JSON.stringify("Failed to delete the user"), {status: 500});
+
+    }
+
+}
