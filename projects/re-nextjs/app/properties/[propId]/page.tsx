@@ -292,14 +292,14 @@ const page = () => {
             // console.log(current_url);
     
             const fetchProperty = async () => {
-            const response = await fetch(`/api/properties/${current_url}`);
-            const jsonResponse = await response.json();
-            console.log(jsonResponse);
+
+                const response = await fetch(`/api/properties/${current_url}`);
+                const jsonResponse = await response.json();
+                console.log(jsonResponse);
     
                 property_title.current = `${jsonResponse.thisProperty.property_type} for ${jsonResponse.thisProperty.property_listing_type} in <${jsonResponse.thisProperty.property_country} ${jsonResponse.thisProperty.property_city} ${jsonResponse.thisProperty.property_district} ${jsonResponse.thisProperty.property_area}sqm ${jsonResponse.thisProperty.property_beds} bedrooms / ${jsonResponse.thisProperty.property_baths} bathrooms`;
-    
         
-            setPageProperty(jsonResponse);
+                setPageProperty(jsonResponse);
             }
             fetchProperty();
 

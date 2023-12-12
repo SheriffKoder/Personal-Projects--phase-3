@@ -342,10 +342,11 @@ const page = () => {
   //04.01
   useEffect(()=> {
 
+    console.log("syncing");
     const fetchProperties = async () => {
-      const response = await fetch("/api/properties/homePage");
+      const response = await fetch("/api/properties/allProperties");
       const jsonResponse = await response.json();
-      // console.log(jsonResponse);
+      console.log(jsonResponse);
 
       setProperties(jsonResponse);
     }
@@ -425,7 +426,7 @@ const page = () => {
             {/* post */}
             {properties.length > 0 ? (
             <>
-                {properties.map((property) => (
+                {properties.map((property: PropertyDocument) => (
                 <div className="h-auto w-full max-w-[390px] md:w-[calc(50%-16px)] md2:w-[calc(33.3%-16px)]">
                     <PropertyCard {...property}/>
                 </div>

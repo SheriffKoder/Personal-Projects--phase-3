@@ -8,6 +8,7 @@ import PropertyCard from "@components/Home/HomeMain/PropertyCard";
 import { bodyNoScroll, showEdit } from "@utils/bodyNoScroll";
 import { useEffect, useState } from "react";
 
+import { useRef } from "react";
 
 //05.01
 import { useSession } from "next-auth/react";
@@ -71,7 +72,7 @@ const page = () => {
     const { data: session, status } = useSession();      //get the session.user
     // const router = useRouter();
 
-    const [agent, setAgent] = useState<UserDocument[]>([]);
+    // const [agent, setAgent] = useState<UserDocument[]>([]);
 
 ///
     
@@ -208,275 +209,275 @@ const page = () => {
     // ];
 
 
-    let agents : agentInterface[] = [
-        {
-            id: 1,
-            fullName: "sherif koder",
-            phone: 10423131353,
-            email: "sheriff@gmail.com",
-            avatar: "/images/furniture.avif",
-            password: "eekrsmwr24sa",
-            position: "senior advisor",
-            role: "admin",
-            properties: [
-                {
-                    property_images : ["/images/furniture.avif", "/images/logo.svg"],        
-                    property_id : 1,
+    // let agents : agentInterface[] = [
+    //     {
+    //         id: 1,
+    //         fullName: "sherif koder",
+    //         phone: 10423131353,
+    //         email: "sheriff@gmail.com",
+    //         avatar: "/images/furniture.avif",
+    //         password: "eekrsmwr24sa",
+    //         position: "senior advisor",
+    //         role: "admin",
+    //         properties: [
+    //             {
+    //                 property_images : ["/images/furniture.avif", "/images/logo.svg"],        
+    //                 property_id : 1,
         
-                    property_country: "Egypt",
-                    property_city: "Giza",
-                    property_district: "Zayed",
+    //                 property_country: "Egypt",
+    //                 property_city: "Giza",
+    //                 property_district: "Zayed",
         
-                    property_type: "Apartment",
-                    property_area: 110,
-                    property_beds: 2,
-                    property_baths: 1,
+    //                 property_type: "Apartment",
+    //                 property_area: 110,
+    //                 property_beds: 2,
+    //                 property_baths: 1,
                     
-                    property_listing_type: "rent",
-                    property_availability: true,
-                    property_recommended: true,
-                    property_price: 6000,
+    //                 property_listing_type: "rent",
+    //                 property_availability: true,
+    //                 property_recommended: true,
+    //                 property_price: 6000,
         
-                    property_date: "25 Dec 2023",
-                    property_update: "26 Dec 2023",
-                    property_author: "John",
-                    property_description: "World Class property in a friendly neighborhood contains all facilities"
+    //                 property_date: "25 Dec 2023",
+    //                 property_update: "26 Dec 2023",
+    //                 property_author: "John",
+    //                 property_description: "World Class property in a friendly neighborhood contains all facilities"
         
-                },
-            ],
-            update: "26 Dec 2023",
+    //             },
+    //         ],
+    //         update: "26 Dec 2023",
     
-        },
-        {
-            id: "65761f9288c8967755b86b4a",
-            fullName: "john smith",
-            phone: 10423131353,
-            email: "sheriff@gmail.com",
-            avatar: "/images/furniture.avif",
-            password: "eekrsmwr24sa",
-            position: "senior advisor",
-            role: "agent",
-            properties: [
-                {
-                    property_images : ["/images/furniture.avif", "/images/logo.svg"],        
-                    property_id : 1,
+    //     },
+    //     {
+    //         id: "65761f9288c8967755b86b4a",
+    //         fullName: "john smith",
+    //         phone: 10423131353,
+    //         email: "sheriff@gmail.com",
+    //         avatar: "/images/furniture.avif",
+    //         password: "eekrsmwr24sa",
+    //         position: "senior advisor",
+    //         role: "agent",
+    //         properties: [
+    //             {
+    //                 property_images : ["/images/furniture.avif", "/images/logo.svg"],        
+    //                 property_id : 1,
         
-                    property_country: "Egypt",
-                    property_city: "Giza",
-                    property_district: "Zayed",
+    //                 property_country: "Egypt",
+    //                 property_city: "Giza",
+    //                 property_district: "Zayed",
         
-                    property_type: "Apartment",
-                    property_area: 110,
-                    property_beds: 2,
-                    property_baths: 1,
+    //                 property_type: "Apartment",
+    //                 property_area: 110,
+    //                 property_beds: 2,
+    //                 property_baths: 1,
                     
-                    property_listing_type: "rent",
-                    property_availability: true,
-                    property_recommended: true,
-                    property_price: 6000,
+    //                 property_listing_type: "rent",
+    //                 property_availability: true,
+    //                 property_recommended: true,
+    //                 property_price: 6000,
         
-                    property_date: "25 Dec 2023",
-                    property_update: "26 Dec 2023",
-                    property_author: "John",
-                    property_description: "World Class property in a friendly neighborhood contains all facilities"
+    //                 property_date: "25 Dec 2023",
+    //                 property_update: "26 Dec 2023",
+    //                 property_author: "John",
+    //                 property_description: "World Class property in a friendly neighborhood contains all facilities"
         
-                },
-            ],
-            update: "26 Dec 2023",
+    //             },
+    //         ],
+    //         update: "26 Dec 2023",
     
-        },
-        {
-            id: 1,
-            fullName: "sherif koder",
-            phone: 10423131353,
-            email: "sheriff@gmail.com",
-            avatar: "/images/furniture.avif",
-            password: "eekrsmwr24sa",
-            position: "senior advisor",
-            role: "admin",
-            properties: [
-                {
-                    property_images : ["/images/furniture.avif", "/images/logo.svg"],        
-                    property_id : 1,
+    //     },
+    //     {
+    //         id: 1,
+    //         fullName: "sherif koder",
+    //         phone: 10423131353,
+    //         email: "sheriff@gmail.com",
+    //         avatar: "/images/furniture.avif",
+    //         password: "eekrsmwr24sa",
+    //         position: "senior advisor",
+    //         role: "admin",
+    //         properties: [
+    //             {
+    //                 property_images : ["/images/furniture.avif", "/images/logo.svg"],        
+    //                 property_id : 1,
         
-                    property_country: "Egypt",
-                    property_city: "Giza",
-                    property_district: "Zayed",
+    //                 property_country: "Egypt",
+    //                 property_city: "Giza",
+    //                 property_district: "Zayed",
         
-                    property_type: "Apartment",
-                    property_area: 110,
-                    property_beds: 2,
-                    property_baths: 1,
+    //                 property_type: "Apartment",
+    //                 property_area: 110,
+    //                 property_beds: 2,
+    //                 property_baths: 1,
                     
-                    property_listing_type: "rent",
-                    property_availability: true,
-                    property_recommended: true,
-                    property_price: 6000,
+    //                 property_listing_type: "rent",
+    //                 property_availability: true,
+    //                 property_recommended: true,
+    //                 property_price: 6000,
         
-                    property_date: "25 Dec 2023",
-                    property_update: "26 Dec 2023",
-                    property_author: "John",
-                    property_description: "World Class property in a friendly neighborhood contains all facilities"
+    //                 property_date: "25 Dec 2023",
+    //                 property_update: "26 Dec 2023",
+    //                 property_author: "John",
+    //                 property_description: "World Class property in a friendly neighborhood contains all facilities"
         
-                },
-            ],
-            update: "26 Dec 2023",
+    //             },
+    //         ],
+    //         update: "26 Dec 2023",
     
-        },
-        {
-            id: 2,
-            fullName: "john smith",
-            phone: 10423131353,
-            email: "sheriff@gmail.com",
-            avatar: "/images/furniture.avif",
-            password: "eekrsmwr24sa",
-            position: "senior advisor",
-            role: "admin",
-            properties: [
-                {
-                    property_images : ["/images/furniture.avif", "/images/logo.svg"],        
-                    property_id : 1,
+    //     },
+    //     {
+    //         id: 2,
+    //         fullName: "john smith",
+    //         phone: 10423131353,
+    //         email: "sheriff@gmail.com",
+    //         avatar: "/images/furniture.avif",
+    //         password: "eekrsmwr24sa",
+    //         position: "senior advisor",
+    //         role: "admin",
+    //         properties: [
+    //             {
+    //                 property_images : ["/images/furniture.avif", "/images/logo.svg"],        
+    //                 property_id : 1,
         
-                    property_country: "Egypt",
-                    property_city: "Giza",
-                    property_district: "Zayed",
+    //                 property_country: "Egypt",
+    //                 property_city: "Giza",
+    //                 property_district: "Zayed",
         
-                    property_type: "Apartment",
-                    property_area: 110,
-                    property_beds: 2,
-                    property_baths: 1,
+    //                 property_type: "Apartment",
+    //                 property_area: 110,
+    //                 property_beds: 2,
+    //                 property_baths: 1,
                     
-                    property_listing_type: "rent",
-                    property_availability: true,
-                    property_recommended: true,
-                    property_price: 6000,
+    //                 property_listing_type: "rent",
+    //                 property_availability: true,
+    //                 property_recommended: true,
+    //                 property_price: 6000,
         
-                    property_date: "25 Dec 2023",
-                    property_update: "26 Dec 2023",
-                    property_author: "John",
-                    property_description: "World Class property in a friendly neighborhood contains all facilities"
+    //                 property_date: "25 Dec 2023",
+    //                 property_update: "26 Dec 2023",
+    //                 property_author: "John",
+    //                 property_description: "World Class property in a friendly neighborhood contains all facilities"
         
-                },
-            ],
-            update: "26 Dec 2023",
+    //             },
+    //         ],
+    //         update: "26 Dec 2023",
     
-        },
-        {
-            id: 1,
-            fullName: "sherif koder",
-            phone: 10423131353,
-            email: "sheriff@gmail.com",
-            avatar: "/images/furniture.avif",
-            password: "eekrsmwr24sa",
-            position: "senior advisor",
-            role: "admin",
-            properties: [
-                {
-                    property_images : ["/images/furniture.avif", "/images/logo.svg"],        
-                    property_id : 1,
+    //     },
+    //     {
+    //         id: 1,
+    //         fullName: "sherif koder",
+    //         phone: 10423131353,
+    //         email: "sheriff@gmail.com",
+    //         avatar: "/images/furniture.avif",
+    //         password: "eekrsmwr24sa",
+    //         position: "senior advisor",
+    //         role: "admin",
+    //         properties: [
+    //             {
+    //                 property_images : ["/images/furniture.avif", "/images/logo.svg"],        
+    //                 property_id : 1,
         
-                    property_country: "Egypt",
-                    property_city: "Giza",
-                    property_district: "Zayed",
+    //                 property_country: "Egypt",
+    //                 property_city: "Giza",
+    //                 property_district: "Zayed",
         
-                    property_type: "Apartment",
-                    property_area: 110,
-                    property_beds: 2,
-                    property_baths: 1,
+    //                 property_type: "Apartment",
+    //                 property_area: 110,
+    //                 property_beds: 2,
+    //                 property_baths: 1,
                     
-                    property_listing_type: "rent",
-                    property_availability: true,
-                    property_recommended: true,
-                    property_price: 6000,
+    //                 property_listing_type: "rent",
+    //                 property_availability: true,
+    //                 property_recommended: true,
+    //                 property_price: 6000,
         
-                    property_date: "25 Dec 2023",
-                    property_update: "26 Dec 2023",
-                    property_author: "John",
-                    property_description: "World Class property in a friendly neighborhood contains all facilities"
+    //                 property_date: "25 Dec 2023",
+    //                 property_update: "26 Dec 2023",
+    //                 property_author: "John",
+    //                 property_description: "World Class property in a friendly neighborhood contains all facilities"
         
-                },
-            ],
-            update: "26 Dec 2023",
+    //             },
+    //         ],
+    //         update: "26 Dec 2023",
     
-        },
-        {
-            id: 2,
-            fullName: "john smith",
-            phone: 10423131353,
-            email: "sheriff@gmail.com",
-            avatar: "/images/furniture.avif",
-            password: "eekrsmwr24sa",
-            position: "senior advisor",
-            role: "admin",
-            properties: [
-                {
-                    property_images : ["/images/furniture.avif", "/images/logo.svg"],        
-                    property_id : 1,
+    //     },
+    //     {
+    //         id: 2,
+    //         fullName: "john smith",
+    //         phone: 10423131353,
+    //         email: "sheriff@gmail.com",
+    //         avatar: "/images/furniture.avif",
+    //         password: "eekrsmwr24sa",
+    //         position: "senior advisor",
+    //         role: "admin",
+    //         properties: [
+    //             {
+    //                 property_images : ["/images/furniture.avif", "/images/logo.svg"],        
+    //                 property_id : 1,
         
-                    property_country: "Egypt",
-                    property_city: "Giza",
-                    property_district: "Zayed",
+    //                 property_country: "Egypt",
+    //                 property_city: "Giza",
+    //                 property_district: "Zayed",
         
-                    property_type: "Apartment",
-                    property_area: 110,
-                    property_beds: 2,
-                    property_baths: 1,
+    //                 property_type: "Apartment",
+    //                 property_area: 110,
+    //                 property_beds: 2,
+    //                 property_baths: 1,
                     
-                    property_listing_type: "rent",
-                    property_availability: true,
-                    property_recommended: true,
-                    property_price: 6000,
+    //                 property_listing_type: "rent",
+    //                 property_availability: true,
+    //                 property_recommended: true,
+    //                 property_price: 6000,
         
-                    property_date: "25 Dec 2023",
-                    property_update: "26 Dec 2023",
-                    property_author: "John",
-                    property_description: "World Class property in a friendly neighborhood contains all facilities"
+    //                 property_date: "25 Dec 2023",
+    //                 property_update: "26 Dec 2023",
+    //                 property_author: "John",
+    //                 property_description: "World Class property in a friendly neighborhood contains all facilities"
         
-                },
-            ],
-            update: "26 Dec 2023",
+    //             },
+    //         ],
+    //         update: "26 Dec 2023",
     
-        },
-        {
-            id: 1,
-            fullName: "sherif koder",
-            phone: 10423131353,
-            email: "sheriff@gmail.com",
-            avatar: "/images/furniture.avif",
-            password: "eekrsmwr24sa",
-            position: "senior advisor",
-            role: "admin",
-            properties: [
-                {
-                    property_images : ["/images/furniture.avif", "/images/logo.svg"],        
-                    property_id : 1,
+    //     },
+    //     {
+    //         id: 1,
+    //         fullName: "sherif koder",
+    //         phone: 10423131353,
+    //         email: "sheriff@gmail.com",
+    //         avatar: "/images/furniture.avif",
+    //         password: "eekrsmwr24sa",
+    //         position: "senior advisor",
+    //         role: "admin",
+    //         properties: [
+    //             {
+    //                 property_images : ["/images/furniture.avif", "/images/logo.svg"],        
+    //                 property_id : 1,
         
-                    property_country: "Egypt",
-                    property_city: "Giza",
-                    property_district: "Zayed",
+    //                 property_country: "Egypt",
+    //                 property_city: "Giza",
+    //                 property_district: "Zayed",
         
-                    property_type: "Apartment",
-                    property_area: 110,
-                    property_beds: 2,
-                    property_baths: 1,
+    //                 property_type: "Apartment",
+    //                 property_area: 110,
+    //                 property_beds: 2,
+    //                 property_baths: 1,
                     
-                    property_listing_type: "rent",
-                    property_availability: true,
-                    property_recommended: true,
-                    property_price: 6000,
+    //                 property_listing_type: "rent",
+    //                 property_availability: true,
+    //                 property_recommended: true,
+    //                 property_price: 6000,
         
-                    property_date: "25 Dec 2023",
-                    property_update: "26 Dec 2023",
-                    property_author: "John",
-                    property_description: "World Class property in a friendly neighborhood contains all facilities"
+    //                 property_date: "25 Dec 2023",
+    //                 property_update: "26 Dec 2023",
+    //                 property_author: "John",
+    //                 property_description: "World Class property in a friendly neighborhood contains all facilities"
         
-                },
-            ],
-            update: "26 Dec 2023",
+    //             },
+    //         ],
+    //         update: "26 Dec 2023",
     
-        },
+    //     },
 
-    ]
+    // ]
 
 
 ///
@@ -516,24 +517,57 @@ const page = () => {
     }
 
 
+    //i want to send the current url
+    //and the session id
+
+    // const sessionId = session?.user.id;
+
+
+    type userInterface = {
+        authority: string;
+        properties: PropertyDocument[];
+        userInfo: UserDocument;
+        allAgents: UserDocument[];
+    }
+
+    const [sessionId, setSessionId] = useState<string>("");
+    const [user, setUser] = useState<userInterface | null>(null);
+    const [redirect, setRedirect] = useState(false);
+
+    useEffect(()=> {
+
+        //get current browsing user
+        if (session?.user) {
+            setSessionId(session?.user.id);
+        }
+        console.log(sessionId);
+
+        //get page url as it included the id for the user page in question
+        const current_url = window.location.href.toString().split("/agents/")[1];
+        console.log(current_url);
+
+        //connect to data base
+        const fetchUserInfo = async () => { 
+            
+            const response = await fetch(`/api/users/${current_url}`, {
+                method: "POST",
+                body: JSON.stringify(sessionId),
+            })
+
+            const jsonResponse = await response.json();
+            console.log(jsonResponse);
+
+            setUser(jsonResponse);
+            //returns {properties, authority, userInfo}
+
+        }
+
+        fetchUserInfo();
+
+    }, [session, sessionId]);
 
 
   
-
-  //05.01
-    // useEffect(()=> {
-
-    //     const fetchAgent = async () => {
-    //       const response = await fetch(`/api/users/${session?.user.id}`);
-    //       const jsonResponse = await response.json();
-    //       console.log(jsonResponse);
-    
-    //       setAgent(jsonResponse);
-    //     }
-    
-    //     // if (session?.user.id) 
-    //     fetchAgent();
-    // }, []);
 
 
     const handleEdit = (element) => {
@@ -550,26 +584,29 @@ const page = () => {
 
         <div className="mt-28 mx-auto w-full max-w-[1230px] flex flex-row items-center
         md2:items-stretch
-        flex-wrap gap-8 mb-8 px-4 md2:px-8">
-        
+        flex-wrap gap-8 mb-8 px-4 md2:px-8">    
 
 
+        {user !== null ? ( 
+        <>
             {/* nav links */}
             <div className="dark:text-white text-black text-shadow-3 w-full text-xs flex flex-row gap-1 opacity-70">        
                 <Link className=""href="/">Home</Link>
                 >
-                <span className="text-theme-text-brighter">Your Profile</span>
+                <span className="text-theme-text-brighter">
+                { user.authority === "viewer" ? (`${user.userInfo.name}'s profile`) : ("Your Profile")}
+                </span>
             </div>
 
-            {session?.user ? (
+            {user.userInfo ? (
                 <>
             {/* container 1 */}
             <h1 className="text_shadow-3 font-bold text-3xl text-[#000000c7] dark:text-[#ffffffe2] capitalize w-full
             text-center md2:text-start">
-                { session?.user.role === "admin" ? 
-                ( `Viewing ${session?.user.name} as admin`
+                { user.authority === "viewer" ? 
+                ( `Viewing ${user.userInfo.name} as admin`
                 ):(
-                `Hello, ${session?.user.name.split(" ")[0]}`
+                `Hello, ${user.userInfo.name.split(" ")[0]}`
                 )}
             </h1>
 
@@ -585,13 +622,13 @@ const page = () => {
                 w-full md2:w-auto
                 ">
 
-                    <h3 className="text-lg font-semibold">{session?.user.name}</h3>
-                    <p className="text-xs font-light">{session?.user.position}</p>
+                    <h3 className="text-lg font-semibold">{user.userInfo.name}</h3>
+                    <p className="text-xs font-light">{user.userInfo.position}</p>
                     <div className="h-[11.75rem] w-[11.75rem] bg-white overflow-hidden
                     rounded-full flex items-center justify-center dark:text-black
                     mt-4">
                     
-                        <Image src={session?.user.avatar} height={150} width={150} alt=""
+                        <Image src={user.userInfo.avatar} height={150} width={150} alt=""
                         className="flex-1 h-full"
                         style={{objectFit:'cover'}}
                         ></Image>
@@ -618,7 +655,7 @@ const page = () => {
 
                         <h2 className="text_shadow-3 font-semibold text-xl  w-full
                         text-center md2:text-start mb-2 mt-2 text-[#000000c7] dark:text-[#ffffffe2]">
-                            { session?.user.role === "admin" ? ("Information"): ("Your information")}</h2>
+                            { user.authority === "viewer" ? (`${user.userInfo.name}'s Information`): ("Your information")}</h2>
 
                             <div className="capitalize
                             flex flex-row flex-wrap w-full justify-center md2:justify-start items-baseline">
@@ -633,7 +670,7 @@ const page = () => {
                                         focus:outline focus:outline-2 outline-offset-1 rounded-[7px]
                                         mr-2 max-w-[65%] px-2 text-[#0000007d] dark:text-[#ffffff9e]
                                         " 
-                                        defaultValue={session?.user.name}/>
+                                        defaultValue={user.userInfo.name}/>
 
                                         <button type="button" onClick={(e)=>allowInput(e)} 
                                         className="bg-theme-text-brighter dark:bg-theme-text-dark text-white 
@@ -683,7 +720,7 @@ const page = () => {
                                         focus:outline focus:outline-2 outline-offset-1 rounded-[7px]
                                         mr-2 max-w-[65%] px-2 text-[#0000007d] dark:text-[#ffffff9e]
                                         " 
-                                        defaultValue={session?.user.phone}/>
+                                        defaultValue={user.userInfo.phone}/>
 
                                         <button type="button" onClick={(e)=>allowInput(e)} 
                                         className="bg-theme-text-brighter dark:bg-theme-text-dark text-white 
@@ -709,7 +746,7 @@ const page = () => {
                                         focus:outline focus:outline-2 outline-offset-1 rounded-[7px]
                                         mr-2 max-w-[65%] px-2 text-[#0000007d] dark:text-[#ffffff9e]
                                         " 
-                                        defaultValue={session?.user.email}/>
+                                        defaultValue={user.userInfo.email}/>
 
                                         <button type="button" onClick={(e)=>allowInput(e)} 
                                         className="bg-theme-text-brighter dark:bg-theme-text-dark text-white 
@@ -735,7 +772,7 @@ const page = () => {
                                         focus:outline focus:outline-2 outline-offset-1 rounded-[7px]
                                         mr-2 max-w-[65%] px-2 text-[#0000007d] dark:text-[#ffffff9e]
                                         " 
-                                        defaultValue={session?.user.password}
+                                        defaultValue={user.userInfo.password}
                                         type="password"/>
 
                                         <button type="button" onClick={(e)=>allowInput(e)} 
@@ -747,7 +784,6 @@ const page = () => {
                                     </div>
                             </div>
 
-                            { session?.user.role === "admin" ? (
 
                                 <div className="capitalize
                                 flex flex-row flex-wrap w-full justify-center md2:justify-start items-baseline">
@@ -762,18 +798,22 @@ const page = () => {
                                             focus:outline focus:outline-2 outline-offset-1 rounded-[7px]
                                             mr-2 max-w-[65%] px-2 text-[#0000007d] dark:text-[#ffffff9e]
                                             " 
-                                            defaultValue={session?.user.position}/>
+                                            defaultValue={user.userInfo.position}/>
 
-                                            <button type="button" onClick={(e)=>allowInput(e)} 
-                                            className="bg-theme-text-brighter dark:bg-theme-text-dark text-white 
-                                            rounded-full min-w-[100px]
-                                            opacity-40 hover:opacity-90 text-center ml-auto">
-                                                edit
-                                            </button>
+                                            { user.userInfo.role === "admin" ? (
+
+                                                <button type="button" onClick={(e)=>allowInput(e)} 
+                                                className="bg-theme-text-brighter dark:bg-theme-text-dark text-white 
+                                                rounded-full min-w-[100px]
+                                                opacity-40 hover:opacity-90 text-center ml-auto">
+                                                    edit
+                                                </button>
+                                                
+                                            ): ("")}
+
                                         </div>
                                 </div>
 
-                            ): ("")}
 
                             <div className="mt-8 md2:mt-0 h-[1.5rem]
                             flex flex-row flex-wrap w-full justify-center md2:justify-end items-baseline md2:mr-[4.65rem]">
@@ -819,7 +859,7 @@ const page = () => {
                     <h4 className="text_shadow-3 font-semibold text-xl md2:text-start
                     text-[#000000c7] dark:text-[#ffffffe2]
                     ">
-                        { session?.user.role === "admin" ? ("Properties") : ("Your properties")}
+                        { user.authority === "viewer" ? (`${user.userInfo.name}'s Properties`) : ("Your properties")}
                     </h4>
 
                     <button type="button" 
@@ -836,11 +876,11 @@ const page = () => {
                 <div className="flex flex-row gap-6 my-6 flex-wrap justify-center md:justify-start mx-auto last-of-type:mr-auto">
 
                     {/* property */}
-                    {session?.user.properties.length > 0 ? (
+                    {user.properties.length > 0 ? (
                     <>
-                        {session?.user.properties.map((property: propertyInterface) => (
+                        {user.properties.map((property: PropertyDocument) => (
                         <div className="h-auto w-full max-w-[390px] md:w-[calc(50%-16px)] md2:w-[calc(33.3%-16px)] ">
-                            <PropertyCard {...property as propertyInterface} currentPage = "agent" />
+                            <PropertyCard {...property as PropertyDocument} currentPage = "agent" />
                     
                             
 
@@ -849,7 +889,13 @@ const page = () => {
                         )}
                     </>
                     ) : (
-                    <><h1 className="text_shadow-3">You do not have any properties yet</h1></>
+                    <>
+                        <h1 className="text_shadow-3">
+                            
+                            { user.authority === "viewer" ? (`${user.userInfo.name} does not have any properties yet`) : ("You do not have any properties yet")}
+
+                        </h1>
+                    </>
                     )
                     }
 
@@ -859,7 +905,7 @@ const page = () => {
 
 
             {/* container 3 */}
-            { session?.user.role === "admin" ? (
+            { (user.userInfo.role === "admin" && user.authority === "owner") ? (
                 <div className="bg-white rounded-[17px]
                 glass-container-background-2 min-w-[100%]
                 border backdrop-blur-10 pt-7 pb-8 px-4 mt-8
@@ -874,9 +920,9 @@ const page = () => {
                     </h4>
 
                     <div className="flex flex-row gap-6 my-6 w-full flex-wrap justify-center last-of-type:mr-auto">
-                    {agents.length > 0 ? (
+                    {user.allAgents.length > 0 ? (
                     <>
-                        {agents.map((agent: agentInterface) => (
+                        {user.allAgents.map((agent: UserDocument) => (
                         // <div className="h-auto w-full max-w-[390px] md:w-[calc(50%-16px)] md2:w-[calc(33.3%-16px)] ">
                             
                             <div className="bg-white rounded-[17px]
@@ -890,7 +936,7 @@ const page = () => {
                             
                             ">
 
-                                <h3 className="text-base font-semibold">{agent.fullName}</h3>
+                                <h3 className="text-base font-semibold">{agent.name}</h3>
                                 <p className="text-xs font-light">{agent.position}</p>
 
                                 <div className="h-[30vw] w-[30vw] max-w-[100px] max-h-[100px]
@@ -909,7 +955,7 @@ const page = () => {
                                 <p className="text-xs font-light">Properties [{agent.properties.length}]</p>
 
                                 <div className="mt-2 flex flex-row items-center justify-center">
-                                    <Link href={"/agents/"+agent.id} type="button" 
+                                    <Link href={"/agents/"+agent._id} type="button" 
                                     className="border border-1
                                     dark:bg-[#68585806] bg-[#ffffffd3] 
                                     dark:border-[#ffffff19] dark:hover:border-[#ffffff36]
@@ -948,11 +994,36 @@ const page = () => {
 
 
                 </div>
-            ):(
-                ""
-            )}
-            </>) : ("")}
+                ):(
 
+                    <div className="bg-white rounded-[17px]
+                    glass-container-background-2
+                    border backdrop-blur-10 pt-4 pb-4 px-4
+                    dark:bg-[#68585806] dark:border-[#ffffff05]
+                    text-[#000000dd] dark:text-[#ffffffd3]  
+                    opacity-80 hover:opacity-100
+                    flex flex-col items-center justify-center text-center capitalize text-l 
+                    w-full
+                    
+                    ">
+                    <Link href={"/agents/"+session?.user.id} type="button" 
+                                    className="border border-1
+                                    dark:bg-[#68585806] bg-[#ffffffd3] 
+                                    dark:border-[#ffffff19] dark:hover:border-[#ffffff36]
+                                    text-[#000000dd] dark:text-[#ffffffd3] 
+                                    rounded-[10px] text-sm w-fit px-4 py-2
+                                    opacity-90 hover:opacity-100">
+                                        Back to your profile
+                                    </Link>
+
+                    </div>
+
+                )}
+                
+            </>) : ("")}
+            
+        </>
+            ):("")}
 
         </div>
         
