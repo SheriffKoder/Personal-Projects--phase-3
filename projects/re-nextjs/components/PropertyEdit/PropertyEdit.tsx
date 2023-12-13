@@ -2,13 +2,17 @@
 "use client";
 
 import { bodyScroll, hideEdit } from "@utils/bodyNoScroll";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
+import { PropertyDocument } from "@models/propertyModel";
 
-interface propertyInterface {
+import { ChangeEventHandler, FormEventHandler } from "react";
+import { useRouter } from "next/navigation";
+
+interface PropertyDocument_dummy {
 
     property_images : string[],        
-    property_id : number,
+    // property_id : number,
 
     property_country: string,
     property_city: string,
@@ -26,157 +30,133 @@ interface propertyInterface {
 
     property_date: string,
     property_update: string,
-    property_author: string,
     property_description: string,
   
   }
 
+let Property_dummy: PropertyDocument_dummy = {
+    property_images: [],        
+    property_country: "",
+    property_city: "",
+    property_district: "",
+
+    property_type: "",
+    property_area: 0,
+    property_beds: 0,
+    property_baths: 0,
+    
+    property_listing_type: "",
+    property_availability: false,
+    property_recommended: false,
+    property_price: 0,
+
+    property_date: "",
+    property_update: "",
+    property_description: "",
+}
+
 
 const PropertyEdit_Component = () => {
 
-    let properties: propertyInterface[] = [
-        {
-            property_images : ["/images/furniture.avif", "/images/logo.svg"],        
-            property_id : 1,
 
-            property_country: "Egypt",
-            property_city: "Giza",
-            property_district: "Zayed",
+    const clearLocalStorageForProperty = () => {
+        localStorage.removeItem("editing");
+      
+    }
 
-            property_type: "Apartment",
-            property_area: 110,
-            property_beds: 2,
-            property_baths: 1,
-            
-            property_listing_type: "rent",
-            property_availability: true,
-            property_recommended: true,
-            property_price: 6000,
 
-            property_date: "25 Dec 2023",
-            property_update: "26 Dec 2023",
-            property_author: "John",
-            property_description: "World Class property in a friendly neighborhood contains all facilities"
-
-        },
+    const [property, setProperty] = useState<PropertyDocument_dummy>({
+        property_images: [],        
+        property_country: "",
+        property_city: "",
+        property_district: "",
+    
+        property_type: "",
+        property_area: 0,
+        property_beds: 0,
+        property_baths: 0,
         
-        {
-            property_images : ["/images/furniture.avif", "/images/logo.svg"],        
-            property_id : 1,
-
-            property_country: "Egypt",
-            property_city: "Giza",
-            property_district: "Zayed",
-
-            property_type: "Apartment",
-            property_area: 110,
-            property_beds: 2,
-            property_baths: 1,
-            
-            property_listing_type: "rent",
-            property_availability: true,
-            property_recommended: true,
-            property_price: 7000,
-
-            property_date: "25 Dec 2023",
-            property_update: "26 Dec 2023",
-            property_author: "John",
-            property_description: "World Class property in a friendly neighborhood contains all facilities"
+        property_listing_type: "",
+        property_availability: false,
+        property_recommended: false,
+        property_price: 0,
+    
+        property_date: "",
+        property_update: "",
+        property_description: "",
+    }
+    );
 
 
-        },
-
-        {
-            property_images : ["/images/furniture.avif", "/images/logo.svg"],        
-            property_id : 1,
-
-            property_country: "Egypt",
-            property_city: "Giza",
-            property_district: "Zayed",
-
-            property_type: "Apartment",
-            property_area: 110,
-            property_beds: 2,
-            property_baths: 1,
-            
-            property_listing_type: "rent",
-            property_availability: true,
-            property_recommended: true,
-            property_price: 8000,
-
-            property_date: "25 Dec 2023",
-            property_update: "26 Dec 2023",
-            property_author: "John",
-            property_description: "World Class property in a friendly neighborhood contains all facilities"
+    const [showInfo, setShowInfo] = useState(false);
 
 
-        },
-
-        {
-            property_images : ["/images/furniture.avif", "/images/logo.svg"],        
-            property_id : 1,
-
-            property_country: "Egypt",
-            property_city: "Giza",
-            property_district: "Zayed",
-
-            property_type: "Apartment",
-            property_area: 110,
-            property_beds: 2,
-            property_baths: 1,
-            
-            property_listing_type: "rent",
-            property_availability: true,
-            property_recommended: true,
-            property_price: 9000,
-
-            property_date: "25 Dec 2023",
-            property_update: "26 Dec 2023",
-            property_author: "John",
-            property_description: "World Class property in a friendly neighborhood contains all facilities"
+    type inputInterface = HTMLTextAreaElement | HTMLInputElement;
+    const handleChange: ChangeEventHandler<inputInterface> = ({ target }) => {
+    
+        const { name, value } = target;
+    
+        setProperty({ ...property, [name]:value});
+    }
 
 
-        },
-
-        {
-            property_images : ["/images/furniture.avif", "/images/logo.svg"],        
-            property_id : 1,
-
-            property_country: "Egypt",
-            property_city: "Giza",
-            property_district: "Zayed",
-
-            property_type: "Apartment",
-            property_area: 110,
-            property_beds: 2,
-            property_baths: 1,
-            
-            property_listing_type: "rent",
-            property_availability: true,
-            property_recommended: true,
-            property_price: 10000,
-
-            property_date: "25 Dec 2023",
-            property_update: "26 Dec 2023",
-            property_author: "John",
-            property_description: "World Class property in a friendly neighborhood contains all facilities"
+    const router = useRouter();
+    const handleSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
+        e.preventDefault();
+        const response = await fetch(`/api/properties/edit`, {
+            method: "PATCH",
+            body: JSON.stringify(property),
+        })
+        // router.refresh();
+        bodyScroll();
+        hideEdit("Edit");
+        //BUG: the user profile properties component does not refresh after changes made to database
 
 
-        },
-
-    ];
 
 
+    }
+
+    //change useEffect trigger when the element get visibility
+    document.getElementById("propertyEdit__container")?.addEventListener("pageshow", ()=>{
+        setShowInfo(true);
+        console.log("enter");
+    });
+    
 
     useEffect (() => {
-        // let LoginComponent = document.getElementById("signIn__container");
 
-        // LoginComponent!.style.display = "flex";
+        const fetchPropertyInfo = async () => { 
+
+            const editId = localStorage.getItem("editing");
             
-    },[])
+            const response = await fetch(`/api/properties/edit`, {
+                method: "POST",
+                body: JSON.stringify(editId),
+            })
+
+            const jsonResponse = await response.json();
+            console.log(jsonResponse);
+
+            setProperty(jsonResponse);
+            //returns {property info}
+
+        }
+
+
+
+
+        if (showInfo) fetchPropertyInfo();
+
+
+            
+    },[showInfo]);
         
 
     return (
+
+        <>
+        {property !== null ? (
         
             <div className=" myMain2 hidden h-[100vh] flex-col items-center justify-start
             dark:before:bg-[#000000e3] box-shadow-1 lg:mt-0 pb-10 overflow-y-scroll
@@ -197,12 +177,22 @@ const PropertyEdit_Component = () => {
                     <div className="text-center relative w-full flex flex-row justify-center">
                         <div className="absolute right-0">
                             <button 
-                            onClick={()=> {hideEdit("Edit"); bodyScroll();}}
+                            onClick={()=> {clearLocalStorageForProperty(); setShowInfo(false); hideEdit("Edit"); bodyScroll();}}
                             className="
                             ml-auto bg-theme-text-brighter opacity-80 hover:opacity-100 dark:opacity-100 dark:bg-[#912642] dark:hover:bg-[#9f2545] h-5 w-5 rounded-[6px] text-white flex items-center justify-center">
                             <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" className="bi bi-x-lg" viewBox="0 0 16 16"> <path fill-rule="evenodd" d="M13.854 2.146a.5.5 0 0 1 0 .708l-11 11a.5.5 0 0 1-.708-.708l11-11a.5.5 0 0 1 .708 0Z"/> <path fill-rule="evenodd" d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z"/> </svg>
                             </button>
                         </div>
+
+                        <div className="absolute left-0">
+                            <button 
+                            onClick={()=> {setShowInfo(true);}}
+                            className="
+                            ml-auto bg-theme-text-brighter opacity-80 hover:opacity-100 dark:opacity-100 dark:bg-[#912642] dark:hover:bg-[#9f2545] h-5 w-5 rounded-[6px] text-white flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" className="bi bi-x-lg" viewBox="0 0 16 16"> <path fill-rule="evenodd" d="M13.854 2.146a.5.5 0 0 1 0 .708l-11 11a.5.5 0 0 1-.708-.708l11-11a.5.5 0 0 1 .708 0Z"/> <path fill-rule="evenodd" d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z"/> </svg>
+                            </button>
+                        </div>
+
 
                         <div className="mx-auto pt-0 lg:pt-6 flex flex-col lg:flex-row gap-1 flex-wrap justify-center">
                             <h3 className="mb-2 text_shadow-2 opacity-80">Edit property</h3>
@@ -211,7 +201,8 @@ const PropertyEdit_Component = () => {
                     </div>
 
                     <form className="flex flex-col gap-1 lg:gap-4 items-center
-                    w-[90%] md:px-[5%]">
+                    w-[90%] md:px-[5%]"
+                    onSubmit={handleSubmit}>
 
                         <label className="w-[100%] flex flex-row justify-center text-center
                         label_field
@@ -224,7 +215,9 @@ const PropertyEdit_Component = () => {
 
                             <input className="w-full input_field border-0 rounded-r-[6px] 
                                 dark:bg-[#ffffff09] dark:focus:bg-[#ffffff02]  px-2 
-                                border-[rgba(255,255,255,0.02)]" type="text" required/>
+                                border-[rgba(255,255,255,0.02)]" type="text" required
+                                name="property_country" value={property.property_country} onChange={handleChange}
+                                />
                             
                         </label>
 
@@ -239,7 +232,9 @@ const PropertyEdit_Component = () => {
 
                             <input className="w-full input_field border-0 rounded-r-[6px] 
                                 dark:bg-[#ffffff09] dark:focus:bg-[#ffffff02]  px-2 
-                                border-[rgba(255,255,255,0.02)]" type="text" required/>
+                                border-[rgba(255,255,255,0.02)]" type="text" required
+                                name="property_city" value={property.property_city} onChange={handleChange}
+                                />
                             
                         </label>
 
@@ -254,7 +249,9 @@ const PropertyEdit_Component = () => {
 
                             <input className="w-full input_field border-0 rounded-r-[6px] 
                                 dark:bg-[#ffffff09] dark:focus:bg-[#ffffff02]  px-2 
-                                border-[rgba(255,255,255,0.02)]" type="text" required/>
+                                border-[rgba(255,255,255,0.02)]" type="text" required
+                                name="property_district" value={property.property_district} onChange={handleChange}
+                                />
                             
                         </label>
 
@@ -272,7 +269,10 @@ const PropertyEdit_Component = () => {
                             <input className="w-full input_field border-0 rounded-r-[6px] 
                                 dark:bg-[#ffffff09] dark:focus:bg-[#ffffff02]  px-2 
                                 border-[rgba(255,255,255,0.02)]" type="text" required
-                                placeholder="apartment, villa, office etc."/>
+                                placeholder="apartment, villa, office etc."
+                                name="property_type" value={property.property_type} onChange={handleChange}
+
+                                />
                             
                         </label>
 
@@ -282,13 +282,16 @@ const PropertyEdit_Component = () => {
                         
                         ">
                             <span className="min-w-[7rem] px-2 py-1 text_shadow-2 opacity-80 dark:opacity-90">
-                                Type
+                                Area
                             </span>
 
                             <input className="w-full input_field border-0 rounded-r-[6px] 
                                 dark:bg-[#ffffff09] dark:focus:bg-[#ffffff02]  px-2 
                                 border-[rgba(255,255,255,0.02)]" type="text" required
-                                placeholder="in sqm"/>
+                                placeholder="in sqm"
+                                name="property_area" value={property.property_area} onChange={handleChange}
+
+                                />
                             
                         </label>
 
@@ -306,6 +309,7 @@ const PropertyEdit_Component = () => {
                                     dark:bg-[#ffffff09] dark:focus:bg-[#ffffff02]  px-2 
                                     border-[rgba(255,255,255,0.02)]" type="number" required
                                     min={1} max={10}
+                                    name="property_beds" value={property.property_beds} onChange={handleChange}
                                     />
                                 
                             </label>
@@ -323,6 +327,8 @@ const PropertyEdit_Component = () => {
                                 dark:bg-[#ffffff09] dark:focus:bg-[#ffffff02]  px-2 
                                 border-[rgba(255,255,255,0.02)]" type="number" required
                                 min={1} max={10}
+                                name="property_baths" value={property.property_baths} onChange={handleChange}
+
                                 />
                             
                             </label>
@@ -342,7 +348,9 @@ const PropertyEdit_Component = () => {
                             <input className="w-full input_field border-0 rounded-r-[6px] 
                                 dark:bg-[#ffffff09] dark:focus:bg-[#ffffff02]  px-2 
                                 border-[rgba(255,255,255,0.02)]" type="text" required
-                                placeholder="rent, sale, etc."/>
+                                placeholder="rent, sale, etc."
+                                name="property_listing_type" value={property.property_beds} onChange={handleChange}
+                                />
                             
                         </label>
 
@@ -358,7 +366,9 @@ const PropertyEdit_Component = () => {
                             <input className="w-full input_field border-0 rounded-r-[6px] 
                                 dark:bg-[#ffffff09] dark:focus:bg-[#ffffff02]  px-2 
                                 border-[rgba(255,255,255,0.02)]" type="number" required
-                                placeholder=""/>
+                                placeholder=""
+                                name="property_price" value={property.property_price} onChange={handleChange}
+                                />
                             
                         </label>
 
@@ -433,7 +443,7 @@ const PropertyEdit_Component = () => {
 
                             <input className="w-full input_field border-0 rounded-r-[6px] 
                                 dark:bg-[#ffffff09] dark:focus:bg-[#ffffff02]  px-2
-                                border-[rgba(255,255,255,0.02)]" type="file" required
+                                border-[rgba(255,255,255,0.02)]" type="file"
                                 placeholder=""/>
                             
                         </label>
@@ -446,6 +456,8 @@ const PropertyEdit_Component = () => {
                             bg-[#ffffff07] rounded-[7px] border-2 border-[#ffffff02]
                             resize-none"
                             rows={6} placeholder="describe your property"
+                            name="property_description" value={property.property_description} onChange={handleChange}
+
                             >
 
                             </textarea>
@@ -468,6 +480,10 @@ const PropertyEdit_Component = () => {
     
             
             </div>
+        
+        
+        ) : ("")}
+        </>
       )
 }
 

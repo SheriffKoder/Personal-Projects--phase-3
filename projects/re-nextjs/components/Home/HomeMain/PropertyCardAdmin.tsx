@@ -6,36 +6,25 @@ import { useEffect, useState } from "react";
 import { useRef } from "react";
 
 import { bodyNoScroll, showEdit } from "@utils/bodyNoScroll";
+import { PropertyDocument } from "@models/propertyModel";
+import { UserDocument } from "@models/userModel";
 
-interface propertyInterface {
-
-  property_images : string[],        
-  property_id : number,
-
-  property_country: string,
-  property_city: string,
-  property_district: string,
-
-  property_type: string,
-  property_area: number,
-  property_beds: number,
-  property_baths: number,
-  
-  property_listing_type: string,
-  property_availability: boolean,
-  property_recommended: boolean,
-  property_price: number,
-
-  property_date: string,
-  property_update: string,
-  property_author: string,
-  property_description: string,
-
+type userInterface = {
+  authority: string;
+  properties: PropertyDocument[];
+  userInfo: UserDocument;
+  allAgents: UserDocument[];
 }
 
-import { PropertyDocument } from "@models/propertyModel";
 
-const PropertyCard = ({property, currentPage}:{property:PropertyDocument, currentPage:string}) => {
+
+
+const PropertyCardAdmin = ({property, currentPage="", userIncoming, setUserIncoming}:{
+  property:PropertyDocument, 
+  currentPage:string,
+  userIncoming:userInterface | null,
+  setUserIncoming: React.Dispatch<React.SetStateAction<userInterface | null>>
+}) => {
 
     // let currentPage = props.currentPage;
     // let property: propertyInterface = props.property;
@@ -131,11 +120,9 @@ const PropertyCard = ({property, currentPage}:{property:PropertyDocument, curren
 
 
     //Part 8
+    const [user, setUser] = useState(userIncoming);
     const handlePropertyDelete = async (propertyId:string) => {
 
-      // e.preventDefault();
-      const current_url = window.location.href.toString().split("/agents/")[1];
-      console.log(current_url);
 
       const response = await fetch(`/api/properties`, {
           method: "DELETE",
@@ -147,6 +134,29 @@ const PropertyCard = ({property, currentPage}:{property:PropertyDocument, curren
       const jsonResponse = await response.json();
       console.log(jsonResponse);
   }
+
+
+  const reloadProperties = (removablePropertyId:string) => {
+
+    //once deleted, the user interface should be updated without this user
+    //this can be from the database or from the UI
+    if (user) {
+      let temp_user = user;
+      console.log(removablePropertyId);
+      console.log(user.properties);
+      const filteredProperties = user.properties.filter((property) => property._id !== removablePropertyId);
+      temp_user.properties = filteredProperties;
+  
+      setUser(temp_user);  
+      console.log("done");
+    }
+}
+
+
+const setLocalStorageForProperty = (propertyId: string) => {
+  localStorage.setItem("editing", propertyId);
+
+}
 
 
 
@@ -227,14 +237,14 @@ const PropertyCard = ({property, currentPage}:{property:PropertyDocument, curren
                           <div className="text-sm font-light w-full flex flex-row gap-2 justify-start mt-2 mb-1">
 
                             <button type="button"
-                              onClick={() => {bodyNoScroll(); showEdit("Edit")}}
+                              onClick={() => {bodyNoScroll(); setLocalStorageForProperty(property._id); showEdit("Edit")}}
                               className="bg-theme-text-brighter dark:bg-theme-text-dark text-white 
                               rounded-full w-[65px]
                               opacity-40 hover:opacity-90 text-center">
                                   Edit
                               </button>
 
-                            <button type="submit" onClick={()=>{handlePropertyDelete(property._id)}}
+                            <button type="submit" onClick={()=>{handlePropertyDelete(property._id); reloadProperties(property._id); setUserIncoming(user);}}
                               className="bg-theme-text-brighter dark:bg-theme-text-dark text-white 
                               rounded-full w-[65px]
                               opacity-40 hover:opacity-90 text-center">
@@ -256,4 +266,4 @@ const PropertyCard = ({property, currentPage}:{property:PropertyDocument, curren
   )
 }
 
-export default PropertyCard;
+export default PropertyCardAdmin;

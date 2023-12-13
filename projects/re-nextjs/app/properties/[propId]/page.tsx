@@ -598,7 +598,7 @@ const page = () => {
                                     {pageProperty.recProperties.map((property) => (
                                         
                                         <div className="w-[calc(100%*(1/2)-6px)] md:w-[calc(100%*(1/3)-6px)] md2:w-full">
-                                            <PropertyCard {...property as PropertyDocument} currentPage = "property" />
+                                            <PropertyCard property={property} currentPage="property" />
                                         </div>
                                     ))}
                                 </div>

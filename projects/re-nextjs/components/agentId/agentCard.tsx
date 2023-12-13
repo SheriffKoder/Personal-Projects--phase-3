@@ -31,7 +31,7 @@ const AgentCard = ({userIncoming, setUserIncoming, sessionId}:{
 
     const [user, setUser] = useState(userIncoming);
 
-    const handleUserDeleteSubmit = async (removableUserEmail:string) => {
+    const handleUserDelete = async (removableUserEmail:string) => {
 
         // e.preventDefault();
         const current_url = window.location.href.toString().split("/agents/")[1];
@@ -50,7 +50,7 @@ const AgentCard = ({userIncoming, setUserIncoming, sessionId}:{
 
 
 
-    
+
 
     const reloadUsers = (removableUserEmail:string) => {
 
@@ -130,7 +130,7 @@ const AgentCard = ({userIncoming, setUserIncoming, sessionId}:{
 
 
                                     {/* <form method="post" action="" className="inline"> */}
-                                    <button type="button" onClick={()=>{handleUserDeleteSubmit(agent.email); reloadUsers(agent.email); setUserIncoming(user);}}
+                                    <button type="button" onClick={()=>{handleUserDelete(agent.email); reloadUsers(agent.email); setUserIncoming(user);}}
                                     className="border border-1
                                     dark:bg-[#68585806] bg-[#ffffffd3] 
                                     dark:border-[#ffffff19] dark:hover:border-[#ffffff36]

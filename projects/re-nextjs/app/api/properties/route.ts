@@ -64,3 +64,28 @@ export const POST = async (req: Request, res: Response) => {
 
 
 }
+
+
+//Part 8
+export const DELETE = async (request) => {
+    
+    try {
+
+        await connectToDB();
+
+        const {propertyId} = await request.json();
+
+        // console.log(propertyId);
+
+
+        await PropertyModel.findByIdAndDelete(propertyId);
+
+        return new Response(JSON.stringify("Delete property success"), {status: 200});
+
+    } catch (error) {
+        
+        return new Response(JSON.stringify("Failed to delete the property"), {status: 500});
+
+    }
+
+}

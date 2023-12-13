@@ -4,7 +4,7 @@
 import Link from "next/link";
 import Image from "next/image";
 
-import PropertyCard from "@components/Home/HomeMain/PropertyCard";
+import PropertyCardAdmin from "@components/Home/HomeMain/PropertyCardAdmin";
 import AgentCard from "@components/agentId/agentCard";
 import { bodyNoScroll, showEdit } from "@utils/bodyNoScroll";
 import { useEffect, useState } from "react";
@@ -195,7 +195,7 @@ const page = () => {
                     <>
                         {user.properties.map((property: PropertyDocument) => (
                         <div className="h-auto w-full max-w-[390px] md:w-[calc(50%-16px)] md2:w-[calc(33.3%-16px)] ">
-                            <PropertyCard {...property as PropertyDocument} currentPage = "agent" />
+                            <PropertyCardAdmin property={property} currentPage="agent" userIncoming={user} setUserIncoming={setUser}/>
                     
                             
 
