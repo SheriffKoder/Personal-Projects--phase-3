@@ -20,9 +20,60 @@ import { PropertyDocument } from "@models/propertyModel";
 import AgentInfo from "@components/agentId/agentInfo";
 
 
+//Part 9
+type postsType = postsInterface[];
+
+interface postsInterface {
+    id: number,
+    title: string,
+    content: string,
+    author: string,
+    date: string,
+    image: string,
+    date_add: string,
+    date_update: string,
+}
+
+
+
 
 
 const page = () => {
+
+    //Part 9
+    let posts: postsType = [
+        {
+          id : 1,
+          title: "A new release on houses",
+          content: "This company has released many new houses, with a good price too, it sounds to good to be true but they are here telling all the new stuff and with gardens, cant be better This company has released many new houses, with a good price too, it sounds to good to be true but they are here telling all the new stuff and with gardens, cant be better, This company has released many new houses, with a good price too, it sounds to good to be true but they are here telling all the new stuff and with gardens, cant be better This company has released many new houses, with a good price too, it sounds to good to be true but they are here telling all the new stuff and with gardens, cant be better, This company has released many new houses, with a good price too, it sounds to good to be true but they are here telling all the new stuff and with gardens, cant be better This company has released many new houses, with a good price too, it sounds to good to be true but they are here telling all the new stuff and with gardens, cant be better",
+          author: "John",
+          date: "Thu, 19 Sept 23",
+          image : "/images/furniture.avif",
+          date_add: "25 dec 2023",
+          date_update: "26 dec 2023",      
+        },
+        {
+          id : 2,
+          title: "A new release on houses",
+          content: "This company has released many new houses, with a good price too, it sounds to good to be true but they are here telling all the new stuff and with gardens, cant be better This company has released many new houses, with a good price too, it sounds to good to be true but they are here telling all the new stuff and with gardens, cant be better",
+          author: "John",
+          date: "Thu, 19 Sept 23",
+          image : "/images/furniture.avif",
+          date_add: "25 dec 2023",
+          date_update: "26 dec 2023",      
+        },
+        {
+          id : 3,
+          title: "A new release on houses",
+          content: "This company has released many new houses, with a good price too, it sounds to good to be true but they are here telling all the new stuff and with gardens, cant be better This company has released many new houses, with a good price too, it sounds to good to be true but they are here telling all the new stuff and with gardens, cant be better",
+          author: "John",
+          date: "Thu, 19 Sept 23",
+          image : "/images/furniture.avif",   
+          date_add: "25 dec 2023",
+          date_update: "26 dec 2023",         
+          
+        }
+      ]
 
     //05.01
     const { data: session, status } = useSession();      //get the session.user
@@ -161,7 +212,7 @@ const page = () => {
 
 
 
-            {/* container 2 */}
+            {/* container 2 - properties */}
             <div className="bg-white rounded-[17px]
             glass-container-background-2 min-w-[100%]
             border backdrop-blur-10 pt-7 pb-8 px-4 mt-8
@@ -219,7 +270,143 @@ const page = () => {
             </div>
 
 
-            {/* container 3 */}
+
+            {/* container 3 - posts */}
+            <div className="bg-white rounded-[17px]
+            glass-container-background-2 min-w-[100%]
+            border backdrop-blur-10 pt-7 pb-8 px-4 mt-8
+            dark:bg-[#68585806] dark:border-[#ffffff05]
+            text-[#000000b3] dark:text-[#ffffffb0] text-center text-l flex flex-col gap-1
+            ">
+
+                {/* here are the posts */}
+                <div className="w-full flex flex-row justify-center h-[2rem]">
+                    <h4 className="text_shadow-3 font-semibold text-xl md2:text-start
+                    text-[#000000c7] dark:text-[#ffffffe2]
+                    ">
+                        { user.authority === "viewer" ? (`${user.userInfo.name}'s posts`) : ("Your posts")}
+                    </h4>
+
+                    <button type="button" 
+                    // onClick={() => {bodyNoScroll(); showEdit("Add")}}
+                    className="
+                    bg-theme-text-brighter dark:bg-theme-text-dark text-white 
+                    rounded-[17px] text-sm py-1 px-3
+                    opacity-60 hover:opacity-90 ml-auto">
+                        Add a Post
+                    </button>
+                </div>
+
+                {/* posts container */}
+                <div className="flex flex-row gap-6 my-6 flex-wrap justify-center md:justify-start mx-auto last-of-type:mr-auto">
+
+                    {/* post */}
+                    {posts.length > 0 ? (
+                    <>
+                        {posts.map((post) => (
+
+
+                            <div className="h-auto max-w-full 
+                            bg-[#fffffff0] focus:bg-[#ffffff] hover:bg-[#ffffff] 
+                            dark:bg-[#ffffff07] dark:hover:bg-[#ffffff0a] dark:focus:bg-[#ffffff0a]
+                            flex flex-col rounded-[17px] box-shadow-1 p-1 border border-[rgba(255,255,255,0.02)]
+                            text_shadow-2
+                            md2:flex-row md:w-[calc(50%-16px)] md2:w-full
+                            ">
+
+                                <div className="md2:order-2 md2:w-[30%]">
+                                
+                                    <Link href={"/news/"+post.id} key={post.id} className="lg:order-2 ">
+                                        <Image src={post.image} height={300} width={300} alt={post.title}
+                                        id={post.id.toString()}
+                                        className="border-0 rounded-t-[10px] w-full
+                                        md2:rounded-r-[10px] md2:rounded-l-none mb-4 md2:mb-0
+                                        md2:h-full md2:w-auto
+                                        ">
+                                        </Image>
+                                    </Link>
+                                </div>
+
+                                <div className="md2:order-1 px-2 md2:py-2 md2:px-3 md2:flex-1 md2:h-full md2:flex md2:flex-col">
+
+                                    <p className="flex flex-row items-baseline font-bold uppercase">
+                                        <span className="inline-block shrink-0 h-3 w-3 bg-red-500 opacity-80 rounded-full mr-4"></span>
+                                        <span className="text-start dark:text-[#ffffffde]">
+                                        {post.title}
+                                        </span>
+                                    </p>
+                                    
+                                    <span className="flex flex-row items-baseline mt-2">
+                                        <span className="inline-block  shrink-0 h-3 w-3 bg-green-500 opacity-80 rounded-full mr-4"></span>
+                                        <span className="text-start max-h-[4rem] max-w-[900px] text-sm dot-text line-clamp-3">
+                                            {post.content}
+                                        </span>
+                                    </span>
+
+                                    <span className="flex flex-row items-baseline mt-2 md2:flex-1 md2:h-full">
+                                            <span className="inline-block shrink-0 h-3 w-3 bg-[rgba(0,89,255,0.7)] rounded-full mr-4"></span>
+                                                <div className="flex flex-col w-full items-start 
+                                                md2:flex-row md2:justify-start md2:gap-2">
+                                                    <div className="font-light text-sm w-full flex flex-row text-start
+                                                    md2:w-auto md2:gap-1">
+                                                        <span className="w-[4rem] md2:w-auto inline-block">Added:</span>
+                                                        <span>{post.date_add}</span>
+                                                    </div>
+                                                    <div className="font-light text-sm w-full flex flex-row text-start 
+                                                    md2:w-auto md2:gap-1">
+                                                        <span className="w-[4rem] md2:w-auto inline-block">Updated:</span>
+                                                        <span>{post.date_update}</span>
+                                                    </div>
+                                                </div>
+                                    </span>
+
+                                    <div className="text-sm font-light w-full flex flex-row gap-2
+                                    mt-2 mb-1 justify-center
+                                    md2:mt-auto md2:justify-end md2:mb-0">
+
+                                        <button type="button"
+                                        onClick={() => {}}
+                                        className="bg-theme-text-brighter dark:bg-theme-text-dark text-white 
+                                        rounded-full w-[65px]
+                                        opacity-40 hover:opacity-90 text-center">
+                                            Edit
+                                        </button>
+
+                                        <button type="submit" 
+                                        onClick={() => {}}                              
+                                        className="bg-theme-text-brighter dark:bg-theme-text-dark text-white 
+                                        rounded-full w-[65px]
+                                        opacity-40 hover:opacity-90 text-center">
+                                            Delete
+                                        </button>
+
+                                    </div>
+                                
+                                </div>
+
+                            </div>
+
+                        )
+                        )}
+                    </>
+                    ) : (
+                    <>
+                        <h1 className="text_shadow-3">
+                            
+                            { user.authority === "viewer" ? (`${user.userInfo.name} does not have any posts yet`) : ("You do not have any posts yet")}
+
+                        </h1>
+                    </>
+                    )
+                    }
+
+                </div>
+                
+            </div>
+
+
+
+            {/* container 4 */}
             { (user.userInfo.role === "admin" && user.authority === "owner") ? (
                 <AgentCard userIncoming={user} setUserIncoming={setUser} sessionId={sessionId}/>
 
