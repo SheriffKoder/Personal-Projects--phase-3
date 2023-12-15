@@ -19,6 +19,9 @@ import { PropertyDocument } from "@models/propertyModel";
 
 import AgentInfo from "@components/agentId/agentInfo";
 
+//Part9
+import PostAdd_Component from "@components/PropertyEdit/PostAdd";
+import { PostDocument } from "@models/postModel";
 
 //Part 9
 type postsType = postsInterface[];
@@ -28,7 +31,6 @@ interface postsInterface {
     title: string,
     content: string,
     author: string,
-    date: string,
     image: string,
     date_add: string,
     date_update: string,
@@ -41,39 +43,51 @@ interface postsInterface {
 const page = () => {
 
     //Part 9
-    let posts: postsType = [
-        {
-          id : 1,
-          title: "A new release on houses",
-          content: "This company has released many new houses, with a good price too, it sounds to good to be true but they are here telling all the new stuff and with gardens, cant be better This company has released many new houses, with a good price too, it sounds to good to be true but they are here telling all the new stuff and with gardens, cant be better, This company has released many new houses, with a good price too, it sounds to good to be true but they are here telling all the new stuff and with gardens, cant be better This company has released many new houses, with a good price too, it sounds to good to be true but they are here telling all the new stuff and with gardens, cant be better, This company has released many new houses, with a good price too, it sounds to good to be true but they are here telling all the new stuff and with gardens, cant be better This company has released many new houses, with a good price too, it sounds to good to be true but they are here telling all the new stuff and with gardens, cant be better",
-          author: "John",
-          date: "Thu, 19 Sept 23",
-          image : "/images/furniture.avif",
-          date_add: "25 dec 2023",
-          date_update: "26 dec 2023",      
-        },
-        {
-          id : 2,
-          title: "A new release on houses",
-          content: "This company has released many new houses, with a good price too, it sounds to good to be true but they are here telling all the new stuff and with gardens, cant be better This company has released many new houses, with a good price too, it sounds to good to be true but they are here telling all the new stuff and with gardens, cant be better",
-          author: "John",
-          date: "Thu, 19 Sept 23",
-          image : "/images/furniture.avif",
-          date_add: "25 dec 2023",
-          date_update: "26 dec 2023",      
-        },
-        {
-          id : 3,
-          title: "A new release on houses",
-          content: "This company has released many new houses, with a good price too, it sounds to good to be true but they are here telling all the new stuff and with gardens, cant be better This company has released many new houses, with a good price too, it sounds to good to be true but they are here telling all the new stuff and with gardens, cant be better",
-          author: "John",
-          date: "Thu, 19 Sept 23",
-          image : "/images/furniture.avif",   
-          date_add: "25 dec 2023",
-          date_update: "26 dec 2023",         
+    // let posts: postsType = [
+    //     {
+    //       id : 1,
+    //       title: "A new release on houses",
+    //       content: "This company has released many new houses, with a good price too, it sounds to good to be true but they are here telling all the new stuff and with gardens, cant be better This company has released many new houses, with a good price too, it sounds to good to be true but they are here telling all the new stuff and with gardens, cant be better, This company has released many new houses, with a good price too, it sounds to good to be true but they are here telling all the new stuff and with gardens, cant be better This company has released many new houses, with a good price too, it sounds to good to be true but they are here telling all the new stuff and with gardens, cant be better, This company has released many new houses, with a good price too, it sounds to good to be true but they are here telling all the new stuff and with gardens, cant be better This company has released many new houses, with a good price too, it sounds to good to be true but they are here telling all the new stuff and with gardens, cant be better",
+    //       author: "John",
+    //       date: "Thu, 19 Sept 23",
+    //       image : "/images/furniture.avif",
+    //       date_add: "25 dec 2023",
+    //       date_update: "26 dec 2023",      
+    //     },
+    //     {
+    //       id : 2,
+    //       title: "A new release on houses",
+    //       content: "This company has released many new houses, with a good price too, it sounds to good to be true but they are here telling all the new stuff and with gardens, cant be better This company has released many new houses, with a good price too, it sounds to good to be true but they are here telling all the new stuff and with gardens, cant be better",
+    //       author: "John",
+    //       date: "Thu, 19 Sept 23",
+    //       image : "/images/furniture.avif",
+    //       date_add: "25 dec 2023",
+    //       date_update: "26 dec 2023",      
+    //     },
+    //     {
+    //       id : 3,
+    //       title: "A new release on houses",
+    //       content: "This company has released many new houses, with a good price too, it sounds to good to be true but they are here telling all the new stuff and with gardens, cant be better This company has released many new houses, with a good price too, it sounds to good to be true but they are here telling all the new stuff and with gardens, cant be better",
+    //       author: "John",
+    //       date: "Thu, 19 Sept 23",
+    //       image : "/images/furniture.avif",   
+    //       date_add: "25 dec 2023",
+    //       date_update: "26 dec 2023",         
           
-        }
-      ]
+    //     }
+    //   ]
+
+
+      function showPostAdd () {
+        let postAddContainer = document.getElementById("postAddContainer");
+        if (postAddContainer) postAddContainer.style.display = "inline";
+        
+        let children_container2 = document.getElementById("children_container2");
+        if (children_container2) children_container2.style.opacity = "0";
+
+    }
+    
+    
 
     //05.01
     const { data: session, status } = useSession();      //get the session.user
@@ -84,6 +98,7 @@ const page = () => {
         properties: PropertyDocument[];
         userInfo: UserDocument;
         allAgents: UserDocument[];
+        posts: PostDocument[];
     }
 
     const [sessionId, setSessionId] = useState<string>("");
@@ -137,11 +152,17 @@ const page = () => {
 
         <div className="mt-28 mx-auto w-full max-w-[1230px] flex flex-row items-center
         md2:items-stretch
-        flex-wrap gap-8 mb-8 px-4 md2:px-8">    
+        flex-wrap gap-8 mb-8 px-4 md2:px-8 relative">    
 
-
+            <div className="absolute z-[99] w-full h-[100vh]
+            left-0 top-0 hidden"
+            id="postAddContainer">
+                <PostAdd_Component />
+            </div>
+        
         {user !== null ? ( 
         <>
+        <span id="children_container2" className="max-w-[100%]">
             {/* nav links */}
             <div className="dark:text-white text-black text-shadow-3 w-full text-xs flex flex-row gap-1 opacity-70">        
                 <Link className=""href="/">Home</Link>
@@ -154,7 +175,7 @@ const page = () => {
             {user.userInfo ? (
                 <>
             {/* container 1 */}
-            <h1 className="text_shadow-3 font-bold text-3xl text-[#000000c7] dark:text-[#ffffffe2] capitalize w-full
+            <h1 className="mb-6 mt-8 text_shadow-3 font-bold text-3xl text-[#000000c7] dark:text-[#ffffffe2] capitalize w-full
             text-center md2:text-start">
                 { user.authority === "viewer" ? 
                 ( `Viewing ${user.userInfo.name} as admin`
@@ -172,7 +193,7 @@ const page = () => {
                 dark:bg-[#68585806] dark:border-[#ffffff05]
                 text-[#000000b3] dark:text-[#ffffffb0] text-center text-l 
                 flex flex-col items-center justify-center flex-wrap capitalize h-full
-                w-full md2:w-auto
+                w-full md2:w-auto md2:min-h-[353px]
                 ">
 
                     <h3 className="text-lg font-semibold">{user.userInfo.name}</h3>
@@ -233,7 +254,7 @@ const page = () => {
                     className="
                     bg-theme-text-brighter dark:bg-theme-text-dark text-white 
                     rounded-[17px] text-sm py-1 px-3
-                    opacity-60 hover:opacity-90 ml-auto">
+                    opacity-60 hover:opacity-90 ml-auto w-[120px]">
                         Add a Property 
                     </button>
                 </div>
@@ -288,22 +309,22 @@ const page = () => {
                     </h4>
 
                     <button type="button" 
-                    // onClick={() => {bodyNoScroll(); showEdit("Add")}}
+                    onClick={() => {bodyNoScroll(); showPostAdd()}}
                     className="
                     bg-theme-text-brighter dark:bg-theme-text-dark text-white 
-                    rounded-[17px] text-sm py-1 px-3
-                    opacity-60 hover:opacity-90 ml-auto">
+                    rounded-[17px] text-sm py-0 px-3
+                    opacity-60 hover:opacity-90 ml-auto w-[120px]">
                         Add a Post
                     </button>
                 </div>
 
                 {/* posts container */}
-                <div className="flex flex-row gap-6 my-6 flex-wrap justify-center md:justify-start mx-auto last-of-type:mr-auto">
+                <div className="flex flex-row gap-6 my-6 flex-wrap justify-center md:justify-start mx-auto last-of-type:mr-auto w-full">
 
                     {/* post */}
-                    {posts.length > 0 ? (
+                    {user.posts.length > 0 ? (
                     <>
-                        {posts.map((post) => (
+                        {user.posts.map((post) => (
 
 
                             <div className="h-auto max-w-full 
@@ -311,14 +332,14 @@ const page = () => {
                             dark:bg-[#ffffff07] dark:hover:bg-[#ffffff0a] dark:focus:bg-[#ffffff0a]
                             flex flex-col rounded-[17px] box-shadow-1 p-1 border border-[rgba(255,255,255,0.02)]
                             text_shadow-2
-                            md2:flex-row md:w-[calc(50%-16px)] md2:w-full
+                            md2:flex-row md:w-[calc(50%-16px)] md2:min-w-[100%]
                             ">
 
-                                <div className="md2:order-2 md2:w-[30%]">
+                                <div className="md2:order-2 md2:w-[20%] md2:ml-8">
                                 
-                                    <Link href={"/news/"+post.id} key={post.id} className="lg:order-2 ">
+                                    <Link href={"/news/"+post._id} key={post._id} className="lg:order-2 ">
                                         <Image src={post.image} height={300} width={300} alt={post.title}
-                                        id={post.id.toString()}
+                                        id={post._id}
                                         className="border-0 rounded-t-[10px] w-full
                                         md2:rounded-r-[10px] md2:rounded-l-none mb-4 md2:mb-0
                                         md2:h-full md2:w-auto
@@ -406,6 +427,8 @@ const page = () => {
 
 
 
+
+
             {/* container 4 */}
             { (user.userInfo.role === "admin" && user.authority === "owner") ? (
                 <AgentCard userIncoming={user} setUserIncoming={setUser} sessionId={sessionId}/>
@@ -438,6 +461,8 @@ const page = () => {
                 
             </>) : ("")}
             
+        {/* </div> */}
+        </span>
         </>
             ):("")}
 

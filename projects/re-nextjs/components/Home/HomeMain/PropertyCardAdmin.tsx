@@ -8,12 +8,14 @@ import { useRef } from "react";
 import { bodyNoScroll, showEdit } from "@utils/bodyNoScroll";
 import { PropertyDocument } from "@models/propertyModel";
 import { UserDocument } from "@models/userModel";
+import { PostDocument } from "@models/postModel";
 
 type userInterface = {
   authority: string;
   properties: PropertyDocument[];
   userInfo: UserDocument;
   allAgents: UserDocument[];
+  posts: PostDocument[];
 }
 
 

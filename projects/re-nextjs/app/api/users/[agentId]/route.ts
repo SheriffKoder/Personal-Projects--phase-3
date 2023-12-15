@@ -1,6 +1,7 @@
 //04.03
 import { connectToDB } from "@utils/database";
 import PropertyModel from "@models/propertyModel";
+import PostModel from "@models/postModel";
 import UserModel, { UserDocument } from "@models/userModel";
 
 export const POST = async (req:Request, {params}:any) => {
@@ -41,16 +42,17 @@ export const POST = async (req:Request, {params}:any) => {
         //get the data of the page
         const userInfo = await UserModel.findOne({_id: pageUrl});
         const properties = await PropertyModel.find({property_userId: pageUrl});
+        const posts = await PostModel.find({userId: pageUrl});
 
         let allAgents :UserDocument[] = [];
         if (userInfo?.role === "admin" ) {
             allAgents = await UserModel.find({_id:{$ne:userInfo?._id}});
         }
 
-        return new Response(JSON.stringify({userInfo, authority, properties, allAgents}), {status: 200});
+        return new Response(JSON.stringify({userInfo, authority, properties, allAgents, posts}), {status: 200});
 
     } catch {
-        return new Response(JSON.stringify("Failed to fetch all properties"), {status: 500});
+        return new Response(JSON.stringify("Failed to fetch agent's info"), {status: 500});
     }
 
 }

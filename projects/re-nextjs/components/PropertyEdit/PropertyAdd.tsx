@@ -74,12 +74,6 @@ const PropertyAdd_Component = () => {
     }
 
 
-    // useEffect (() => {
-    //     // let LoginComponent = document.getElementById("signIn__container");
-
-    //     // LoginComponent!.style.display = "flex";
-            
-    // },[])
         
 
     return (

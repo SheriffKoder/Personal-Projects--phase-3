@@ -71,7 +71,7 @@ const RootLayout = ({ children }: { children: React.ReactNode}) => {
 
 
                 {/* this will hold the Home component in app>page.jsx */}
-                <div className="z-[5]">
+                <div className="z-[5]" id="children_container">
                   {children}
                   {/* <Footer /> */}
                 </div>

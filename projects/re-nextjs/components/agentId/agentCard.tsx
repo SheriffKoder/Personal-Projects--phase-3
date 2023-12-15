@@ -7,6 +7,7 @@ import Image from 'next/image'
 import { PropertyDocument } from '@models/propertyModel'
 import { UserDocument } from '@models/userModel'
 import { ChangeEventHandler, FormEventHandler } from 'react';
+import { PostDocument } from '@models/postModel';
 
 
 type userInterface = {
@@ -14,6 +15,7 @@ type userInterface = {
     properties: PropertyDocument[];
     userInfo: UserDocument;
     allAgents: UserDocument[];
+    posts: PostDocument[];
 }
 
 
