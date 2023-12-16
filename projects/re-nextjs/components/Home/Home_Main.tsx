@@ -45,41 +45,49 @@ interface postsInterface {
 import PropertyCard from "./HomeMain/PropertyCard";
 
 import { PropertyDocument } from "@models/propertyModel";
+import { PostDocument } from "@models/postModel";
 
 
+type Posts_WithUserFilled = {
+
+}
 
 
+type properties_andPosts = {
+  properties: PropertyDocument[],
+  posts: PostDocument[],
+}
 
 
 
 const Home_Main = () => {
 
-  let posts: postsType = [
-    {
-      id : 1,
-      title: "A new release on houses",
-      content: "This company has released many new houses, with a good price too, it sounds to good to be true but they are here telling all the new stuff and with gardens, cant be better This company has released many new houses, with a good price too, it sounds to good to be true but they are here telling all the new stuff and with gardens, cant be better",
-      author: "John",
-      date: "Thu, 19 Sept 23",
+  // let posts: postsType = [
+  //   {
+  //     id : 1,
+  //     title: "A new release on houses",
+  //     content: "This company has released many new houses, with a good price too, it sounds to good to be true but they are here telling all the new stuff and with gardens, cant be better This company has released many new houses, with a good price too, it sounds to good to be true but they are here telling all the new stuff and with gardens, cant be better",
+  //     author: "John",
+  //     date: "Thu, 19 Sept 23",
       
-    },
-    {
-      id : 2,
-      title: "A new release on houses",
-      content: "This company has released many new houses, with a good price too, it sounds to good to be true but they are here telling all the new stuff and with gardens, cant be better This company has released many new houses, with a good price too, it sounds to good to be true but they are here telling all the new stuff and with gardens, cant be better",
-      author: "John",
-      date: "Thu, 19 Sept 23",
+  //   },
+  //   {
+  //     id : 2,
+  //     title: "A new release on houses",
+  //     content: "This company has released many new houses, with a good price too, it sounds to good to be true but they are here telling all the new stuff and with gardens, cant be better This company has released many new houses, with a good price too, it sounds to good to be true but they are here telling all the new stuff and with gardens, cant be better",
+  //     author: "John",
+  //     date: "Thu, 19 Sept 23",
       
-    },
-    {
-      id : 3,
-      title: "A new release on houses",
-      content: "This company has released many new houses, with a good price too, it sounds to good to be true but they are here telling all the new stuff and with gardens, cant be better This company has released many new houses, with a good price too, it sounds to good to be true but they are here telling all the new stuff and with gardens, cant be better",
-      author: "John",
-      date: "Thu, 19 Sept 23",
+  //   },
+  //   {
+  //     id : 3,
+  //     title: "A new release on houses",
+  //     content: "This company has released many new houses, with a good price too, it sounds to good to be true but they are here telling all the new stuff and with gardens, cant be better This company has released many new houses, with a good price too, it sounds to good to be true but they are here telling all the new stuff and with gardens, cant be better",
+  //     author: "John",
+  //     date: "Thu, 19 Sept 23",
       
-    }
-  ]
+  //   }
+  // ]
   
   //04.01
   // let properties: propertyInterface[] = [
@@ -283,19 +291,19 @@ const Home_Main = () => {
 
 
   //04.01
-  const [properties, setProperties] = useState<PropertyDocument[]>([]);
+  const [properties_andPosts, setProperties_andPosts] = useState<properties_andPosts | null>(null);
 
   useEffect(()=> {
 
-    const fetchProperties = async () => {
+    const fetchProperties_andPosts = async () => {
       const response = await fetch("/api/properties/homePage_main");
       const jsonResponse = await response.json();
       console.log(jsonResponse);
 
-      setProperties(jsonResponse);
+      setProperties_andPosts(jsonResponse);
     }
 
-    fetchProperties();
+    fetchProperties_andPosts();
   }, []);
 
 
@@ -318,11 +326,11 @@ const Home_Main = () => {
             <div className="flex flex-col gap-6 my-6">
 
               {/* post */}
-              {posts ? (
+              {properties_andPosts !== null ? (
                 <>
-                  {posts.map((post) => (
+                  {properties_andPosts.posts.map((post) => (
 
-                    <Link href={"/posts/"+post.id} key={post.id} className="h-auto max-w-full 
+                    <Link href={"/posts/"+post._id} key={post._id} className="h-auto max-w-full 
                     bg-[#fffffff0] focus:bg-[#ffffff] hover:bg-[#ffffff] 
                     dark:bg-[#ffffff07] dark:hover:bg-[#ffffff0a] dark:focus:bg-[#ffffff0a]
                     flex flex-col rounded-[17px] box-shadow-1 p-4 border border-[rgba(255,255,255,0.02)]
@@ -346,7 +354,7 @@ const Home_Main = () => {
                           <span className="inline-block shrink-0 h-3 w-3 bg-[rgba(0,89,255,0.7)] rounded-full mr-4"></span>
                           <span className="w-full text-start font-light text-sm
                           lowercase flex flex-row items-center">
-                            <span className="opacity-60 ">{post.date} by {post.author} </span>
+                            <span className="opacity-60 ">{post.date_update} by {post.userId.name} </span>
                             <p className="ml-auto mr-2 bg-theme-text-bright h-5 w-5 right_caret rounded-[5px] border-0"> </p>
                           </span>
                         </span>            
@@ -384,9 +392,9 @@ const Home_Main = () => {
           <div className="flex flex-row gap-6 my-6 flex-wrap justify-center lg:justify-start mx-auto">
 
           {/* property */}
-          {properties.length > 0 ? (
+          {properties_andPosts !== null ? (
             <>
-              {properties.map((property: PropertyDocument) => (
+              {properties_andPosts.properties.map((property: PropertyDocument) => (
                 <div className="
                 
                 h-auto xl:w-[48%] md:w-[46%] lg:w-[47%] w-[100%] max-w-[390px] xl:max-w-[900px]">

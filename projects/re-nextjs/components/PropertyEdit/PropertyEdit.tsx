@@ -118,10 +118,10 @@ const PropertyEdit_Component = () => {
     }
 
     //change useEffect trigger when the element get visibility
-    document.getElementById("propertyEdit__container")?.addEventListener("pageshow", ()=>{
-        setShowInfo(true);
-        console.log("enter");
-    });
+    // document.getElementById("propertyEdit__container")?.addEventListener("pageshow", ()=>{
+    //     setShowInfo(true);
+    //     console.log("enter");
+    // });
     
 
     useEffect (() => {

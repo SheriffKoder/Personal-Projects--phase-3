@@ -1,18 +1,22 @@
 // import React from 'react'
+"use client"
 
 import Link from "next/link";
 import Image from "next/image";
+import { PostDocument } from "@models/postModel";
+import { useState, useEffect } from "react";
 
-type postsType = postsInterface[];
 
-interface postsInterface {
-    id: number,
-    title: string,
-    content: string,
-    author: string,
-    date: string,
-    image: string,
-}
+// type postsType = postsInterface[];
+
+// interface postsInterface {
+//     id: number,
+//     title: string,
+//     content: string,
+//     author: string,
+//     date: string,
+//     image: string,
+// }
 
 
 
@@ -28,36 +32,61 @@ interface postsInterface {
 const page = () => {
 
 
-  let posts: postsType = [
-    {
-      id : 1,
-      title: "A new release on houses",
-      content: "This company has released many new houses, with a good price too, it sounds to good to be true but they are here telling all the new stuff and with gardens, cant be better This company has released many new houses, with a good price too, it sounds to good to be true but they are here telling all the new stuff and with gardens, cant be better, This company has released many new houses, with a good price too, it sounds to good to be true but they are here telling all the new stuff and with gardens, cant be better This company has released many new houses, with a good price too, it sounds to good to be true but they are here telling all the new stuff and with gardens, cant be better, This company has released many new houses, with a good price too, it sounds to good to be true but they are here telling all the new stuff and with gardens, cant be better This company has released many new houses, with a good price too, it sounds to good to be true but they are here telling all the new stuff and with gardens, cant be better",
-      author: "John",
-      date: "Thu, 19 Sept 23",
-      image : "/images/furniture.avif",      
-    },
-    {
-      id : 2,
-      title: "A new release on houses",
-      content: "This company has released many new houses, with a good price too, it sounds to good to be true but they are here telling all the new stuff and with gardens, cant be better This company has released many new houses, with a good price too, it sounds to good to be true but they are here telling all the new stuff and with gardens, cant be better",
-      author: "John",
-      date: "Thu, 19 Sept 23",
-      image : "/images/furniture.avif",      
+  // let posts: postsType = [
+  //   {
+  //     id : 1,
+  //     title: "A new release on houses",
+  //     content: "This company has released many new houses, with a good price too, it sounds to good to be true but they are here telling all the new stuff and with gardens, cant be better This company has released many new houses, with a good price too, it sounds to good to be true but they are here telling all the new stuff and with gardens, cant be better, This company has released many new houses, with a good price too, it sounds to good to be true but they are here telling all the new stuff and with gardens, cant be better This company has released many new houses, with a good price too, it sounds to good to be true but they are here telling all the new stuff and with gardens, cant be better, This company has released many new houses, with a good price too, it sounds to good to be true but they are here telling all the new stuff and with gardens, cant be better This company has released many new houses, with a good price too, it sounds to good to be true but they are here telling all the new stuff and with gardens, cant be better",
+  //     author: "John",
+  //     date: "Thu, 19 Sept 23",
+  //     image : "/images/furniture.avif",      
+  //   },
+  //   {
+  //     id : 2,
+  //     title: "A new release on houses",
+  //     content: "This company has released many new houses, with a good price too, it sounds to good to be true but they are here telling all the new stuff and with gardens, cant be better This company has released many new houses, with a good price too, it sounds to good to be true but they are here telling all the new stuff and with gardens, cant be better",
+  //     author: "John",
+  //     date: "Thu, 19 Sept 23",
+  //     image : "/images/furniture.avif",      
 
       
-    },
-    {
-      id : 3,
-      title: "A new release on houses",
-      content: "This company has released many new houses, with a good price too, it sounds to good to be true but they are here telling all the new stuff and with gardens, cant be better This company has released many new houses, with a good price too, it sounds to good to be true but they are here telling all the new stuff and with gardens, cant be better",
-      author: "John",
-      date: "Thu, 19 Sept 23",
-      image : "/images/furniture.avif",      
+  //   },
+  //   {
+  //     id : 3,
+  //     title: "A new release on houses",
+  //     content: "This company has released many new houses, with a good price too, it sounds to good to be true but they are here telling all the new stuff and with gardens, cant be better This company has released many new houses, with a good price too, it sounds to good to be true but they are here telling all the new stuff and with gardens, cant be better",
+  //     author: "John",
+  //     date: "Thu, 19 Sept 23",
+  //     image : "/images/furniture.avif",      
       
-    }
-  ]
+  //   }
+  // ]
   
+  const [posts, setPosts] = useState<PostDocument[] | [] >([]);
+
+  useEffect(()=> {
+
+    //connect to data base
+    const fetchPosts = async () => { 
+        
+        let current_url = window.location.href.toString().split("/posts/")[1];
+
+        const response = await fetch(`/api/posts/allPosts`, {
+            method: "GET",
+        })
+
+        const jsonResponse = await response.json();
+        console.log(jsonResponse);
+
+        setPosts(jsonResponse);
+
+    }
+
+    fetchPosts();
+
+  },[]);
+
+
   return (
     <div className="flex flex-col pb-6 pt-28 px-8">
 
@@ -84,7 +113,7 @@ const page = () => {
             <div className="flex flex-col gap-6 my-6">
 
               {/* post */}
-              {posts ? (
+              {posts.length > 0 ? (
                 <>
                   {posts.map((post) => (
 
@@ -95,9 +124,9 @@ const page = () => {
                     text_shadow-2 lg:flex lg:flex-row max-w-[541px] lg:max-w-full
                     ">
 
-                      <Link href={"/news/"+post.id} key={post.id} className="lg:order-2 ">
+                      <Link href={"/posts/"+post._id} key={post._id} className="lg:order-2 ">
                           <Image src={post.image} height={300} width={300} alt={post.title}
-                          id={post.id.toString()}
+                          id={post._id}
                           className="border-0 rounded-t-[10px] w-full
                           lg:rounded-r-[10px] lg:rounded-l-none mb-4 lg:mb-0
                           lg:h-full lg:w-auto
@@ -108,7 +137,7 @@ const page = () => {
                         <div className="px-2 pb-1 lg:flex-1 lg:pt-4 lg:pr-6 flex flex-col">
                           <p className="flex flex-row items-baseline font-bold uppercase">
                             <span className="inline-block shrink-0 h-3 w-3 bg-red-500 opacity-80 rounded-full mr-4"></span>
-                            <Link href={"/news/"+post.id} key={post.id} className="text-start dark:text-[#ffffffde]">
+                            <Link href={"/posts/"+post._id} key={post._id} className="text-start dark:text-[#ffffffde]">
                               {post.title}
                             </Link>
                           </p>
@@ -124,8 +153,8 @@ const page = () => {
                             <span className="inline-block shrink-0 h-3 w-3 bg-[rgba(0,89,255,0.7)] rounded-full mr-4"></span>
                             <span className="w-full text-start font-light text-sm
                             lowercase flex flex-row items-center">
-                              <span className="opacity-60 mr-2">{post.date} by {post.author} </span>
-                              <Link href={"/news/"+post.id} key={post.id} 
+                              <span className="opacity-60 mr-2">{post.date_update} by {post.userId.name} </span>
+                              <Link href={"/posts/"+post._id} key={post._id} 
                               className="ml-auto mr-[-0.25rem]
                               bg-theme-text-brighter dark:bg-theme-text-dark text-white 
                               opacity-70 hover:opacity-80
