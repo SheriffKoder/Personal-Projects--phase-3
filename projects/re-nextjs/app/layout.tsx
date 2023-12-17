@@ -60,8 +60,8 @@ const RootLayout = ({ children }: { children: React.ReactNode}) => {
                 <div className="w-full absolute top-0 z-[8]">
                   <Login_component />
                   <SignUp_component />
-                  <PropertyAdd_Component />
-                  <PropertyEdit_Component />
+                  {/* <PropertyAdd_Component />
+                  <PropertyEdit_Component /> */}
 
                   
                 </div>

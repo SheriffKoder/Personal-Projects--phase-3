@@ -24,18 +24,29 @@ function hidePostAdd () {
 }
 
 
+interface postInputs_interface {
+    title: string;
+    content: string;
+    _id: string;
+    action: string;
+}
 
 //03.01
-const PostAdd_Component = () => {
+const PostAdd_Component = ({postInfo, setPostInfo, setReload}:{
+    postInfo: postInputs_interface, 
+    setPostInfo: React.Dispatch<React.SetStateAction<postInputs_interface>>,
+    setReload: React.Dispatch<React.SetStateAction<boolean>>,
+
+    }) => {
 
     const {data: session } = useSession();
 
-    const [action, setAction] = useState ("add");
+    // const [action, setAction] = useState ("add");
     const [submitting, setSubmitting] = useState(false);
-    const [postInfo, setPostInfo] = useState({
-        title: "",
-        content: "",
-    });
+    // const [postInfo, setPostInfo] = useState({
+    //     title: "",
+    //     content: "",
+    // });
 
     const { title, content } = postInfo;
 
@@ -54,20 +65,44 @@ const PostAdd_Component = () => {
             const current_url = window.location.href.toString().split("/agents/")[1];
 
             //put this page's i.e the userId in the params
-            const response = await fetch(`/api/posts/new/${current_url}`, {
-                method: "POST",
-                body: JSON.stringify({
-                    ...postInfo,
-                    // userId: current_url,
-                    date_add: "25 dec 2023",
-                    date_update: "26 dec 2023",
+            if (postInfo.action === "add") {
+                const response = await fetch(`/api/posts/new/${current_url}`, {
+                    method: "POST",
+                    body: JSON.stringify({
+                        ...postInfo,
+                        // userId: current_url,
+                        date_add: "25 dec 2023",
+                        date_update: "26 dec 2023",
+                    })
                 })
-            })
+    
+                if (response.ok) {
+                    // router.push("/");
+                    hidePostAdd(); bodyScroll();
+                }                    
+            
+            } else if (postInfo.action === "edit") {
+                const response = await fetch(`/api/posts/new/${current_url}`, {
+                    method: "PATCH",
+                    body: JSON.stringify({
+                        ...postInfo,
+                        // userId: current_url,
+                        date_update: "26 dec 2023",
+                    })
+                })
+    
+                if (response.ok) {
+                    // router.push("/");
+                    hidePostAdd(); bodyScroll();
+                }                   
 
-            if (response.ok) {
-                // router.push("/");
-                hidePostAdd(); bodyScroll();
+
             }
+
+            setReload(true);
+
+
+
         } catch (error) {
             console.log(error);
         } finally {
@@ -101,7 +136,7 @@ const PostAdd_Component = () => {
 
                         <div className="mx-auto pt-0 lg:pt-6 flex flex-col lg:flex-row gap-1 flex-wrap justify-center">
                             <h3 className="mb-2 text_shadow-2 opacity-80">
-                                {action === "add" ? ("Add a new property") : ("Edit property")}
+                                {postInfo.action === "add" ? ("Add a new property") : ("Edit property")}
                             </h3>
                         </div>
                         
@@ -118,7 +153,7 @@ const PostAdd_Component = () => {
                         
                         ">
                             <span className="min-w-[7rem] px-2 py-1 text_shadow-2 opacity-80 dark:opacity-90">
-                                Country
+                                Post's Title
                             </span>
 
                             <input className="w-full input_field border-0 rounded-r-[6px] 
@@ -149,7 +184,7 @@ const PostAdd_Component = () => {
                         <label className="w-[100%] flex flex-col gap-2
                         
                         ">
-                            <span>Property Description</span>
+                            <span>More details</span>
                             <textarea className="w-[100%] label_field px-4 py-2
                             bg-[#ffffff07] rounded-[7px] border-2 border-[#ffffff02]
                             resize-none"
@@ -170,8 +205,7 @@ const PostAdd_Component = () => {
                                 opacity-80 hover:opacity-90 mx-auto"
                                 // disabled={submitting}
                                 >
-                                    {action === "add" ? ("Add Post" ) : ("Apply changes")}
-                                Add
+                                    {postInfo.action === "add" ? ("Add Post" ) : ("Apply changes")}
                                 </button>
                         </div>
 

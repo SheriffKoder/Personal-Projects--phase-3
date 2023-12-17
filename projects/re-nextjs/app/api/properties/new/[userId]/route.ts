@@ -6,26 +6,31 @@ import { connectToDB } from "@utils/database"
 
 //
 
-interface NewPropertyRequest {
-    country: string;
-    city: string;
-    district: string;
+// interface NewPropertyRequest {
+//     country: string;
+//     city: string;
+//     district: string;
 
-    type: string;
-    area: number;
-    bedrooms: number;
-    bathrooms: number;
+//     type: string;
+//     area: number;
+//     bedrooms: number;
+//     bathrooms: number;
 
-    listing_type: string;
-    price: number;
-    description: string;
+//     listing_type: string;
+//     price: number;
+//     description: string;
 
-    userId: string;
-    date: string;
-}
+//     userId: string;
+//     date: string;
+// }
 
-export const POST = async (req: Request, res: Response) => {
-    const body = (await req.json()) as NewPropertyRequest;
+
+//add a new property
+export const POST = async (req: Request, {params}) => {
+
+        const body = (await req.json());
+        console.log(body);
+        console.log(params.userId);
 
         try {
             //[connect] to the db, every time because this is a lambda function
@@ -47,8 +52,9 @@ export const POST = async (req: Request, res: Response) => {
                 property_price: body.price,
                 property_description: body.description,
 
-                property_userId: body.userId,
-                property_date: body.date,
+                property_userId: params.userId,
+                property_date: body.date_add,
+                property_update: body.date_add,
             });
 
             await NewPost.save();
@@ -56,6 +62,7 @@ export const POST = async (req: Request, res: Response) => {
             //[return a new response] where we can stringify the prompt
             //and specify the status
             return new Response(JSON.stringify(NewPost), {status: 201});
+           
         
         } catch (error) {
             return new Response("Failed to create a new property", {status: 500});
@@ -66,26 +73,3 @@ export const POST = async (req: Request, res: Response) => {
 }
 
 
-//Part 8
-export const DELETE = async (request) => {
-    
-    try {
-
-        await connectToDB();
-
-        const {propertyId} = await request.json();
-
-        // console.log(propertyId);
-
-
-        await PropertyModel.findByIdAndDelete(propertyId);
-
-        return new Response(JSON.stringify("Delete property success"), {status: 200});
-
-    } catch (error) {
-        
-        return new Response(JSON.stringify("Failed to delete the property"), {status: 500});
-
-    }
-
-}

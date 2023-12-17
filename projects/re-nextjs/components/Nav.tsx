@@ -128,7 +128,7 @@ const Nav = () => {
           </li>
 
           <li className="h-full">
-            <Link href="/news" aria-label="news about the real estate market" className="hover:opacity-80 flex items-center h-full">
+            <Link href="/posts" aria-label="news about the real estate market" className="hover:opacity-80 flex items-center h-full">
               News
             </Link>
           </li>

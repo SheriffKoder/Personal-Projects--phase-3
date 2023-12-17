@@ -21,11 +21,12 @@ type userInterface = {
 
 
 
-const PropertyCardAdmin = ({property, currentPage="", userIncoming, setUserIncoming}:{
+const PropertyCardAdmin = ({setPropertyEditId, property, currentPage="", setReload}:{
+  setPropertyEditId: React.Dispatch<React.SetStateAction<string>>
   property:PropertyDocument, 
   currentPage:string,
-  userIncoming:userInterface | null,
-  setUserIncoming: React.Dispatch<React.SetStateAction<userInterface | null>>
+  // userIncoming:userInterface | null,
+  setReload: React.Dispatch<React.SetStateAction<boolean>>,
 }) => {
 
     // let currentPage = props.currentPage;
@@ -122,44 +123,51 @@ const PropertyCardAdmin = ({property, currentPage="", userIncoming, setUserIncom
 
 
     //Part 8
-    const [user, setUser] = useState(userIncoming);
-    const handlePropertyDelete = async (propertyId:string) => {
+    // const [user, setUser] = useState(userIncoming);
+    
+    const handlePropertyDelete = async (propId:string) => {
 
 
-      const response = await fetch(`/api/properties`, {
+      const response = await fetch(`/api/properties/edit/${propId}`, {
           method: "DELETE",
-          body: JSON.stringify({propertyId}),
-
       })
 
 
       const jsonResponse = await response.json();
       console.log(jsonResponse);
+      setReload(true);
   }
 
 
-  const reloadProperties = (removablePropertyId:string) => {
+    // const reloadProperties = (removablePropertyId:string) => {
 
-    //once deleted, the user interface should be updated without this user
-    //this can be from the database or from the UI
-    if (user) {
-      let temp_user = user;
-      console.log(removablePropertyId);
-      console.log(user.properties);
-      const filteredProperties = user.properties.filter((property) => property._id !== removablePropertyId);
-      temp_user.properties = filteredProperties;
+    // //once deleted, the user interface should be updated without this user
+    // //this can be from the database or from the UI
+    // if (user) {
+    //   let temp_user = user;
+    //   console.log(removablePropertyId);
+    //   console.log(user.properties);
+    //   const filteredProperties = user.properties.filter((property) => property._id !== removablePropertyId);
+    //   temp_user.properties = filteredProperties;
   
-      setUser(temp_user);  
-      console.log("done");
+    //   setUser(temp_user);  
+    //   console.log("done");
+    // }
+    // }
+
+
+    const setLocalStorageForProperty = (propertyId: string) => {
+      localStorage.setItem("editing", propertyId);
     }
-}
 
 
-const setLocalStorageForProperty = (propertyId: string) => {
-  localStorage.setItem("editing", propertyId);
-
-}
-
+    function showPropertyAdd () {
+      let postAddContainer = document.getElementById("propertyAddContainer");
+      if (postAddContainer) postAddContainer.style.display = "inline";
+      
+      let children_container2 = document.getElementById("children_container2");
+      if (children_container2) children_container2.style.opacity = "0";
+    }
 
 
     useEffect(()=> {
@@ -239,14 +247,14 @@ const setLocalStorageForProperty = (propertyId: string) => {
                           <div className="text-sm font-light w-full flex flex-row gap-2 justify-start mt-2 mb-1">
 
                             <button type="button"
-                              onClick={() => {bodyNoScroll(); setLocalStorageForProperty(property._id); showEdit("Edit")}}
+                              onClick={() => {bodyNoScroll(); setPropertyEditId(property._id); showPropertyAdd();}}
                               className="bg-theme-text-brighter dark:bg-theme-text-dark text-white 
                               rounded-full w-[65px]
                               opacity-40 hover:opacity-90 text-center">
                                   Edit
                               </button>
 
-                            <button type="submit" onClick={()=>{handlePropertyDelete(property._id); reloadProperties(property._id); setUserIncoming(user);}}
+                            <button type="button" onClick={()=>{handlePropertyDelete(property._id);}}
                               className="bg-theme-text-brighter dark:bg-theme-text-dark text-white 
                               rounded-full w-[65px]
                               opacity-40 hover:opacity-90 text-center">

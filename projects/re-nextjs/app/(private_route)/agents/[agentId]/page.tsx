@@ -22,6 +22,7 @@ import AgentInfo from "@components/agentId/agentInfo";
 //Part9
 import PostAdd_Component from "@components/PropertyEdit/PostAdd";
 import { PostDocument } from "@models/postModel";
+import PropertyAdd_Component from "@components/PropertyEdit/PropertyAdd";
 
 //Part 9
 type postsType = postsInterface[];
@@ -42,7 +43,8 @@ interface postsInterface {
 
 const page = () => {
 
-    //Part 9
+    ////////////////////////////////////////////////////////////////////////////////////
+    //Part 9 - Posts
     // let posts: postsType = [
     //     {
     //       id : 1,
@@ -77,18 +79,85 @@ const page = () => {
     //     }
     //   ]
 
+    const [reload, setReload] = useState(false);
 
-      function showPostAdd () {
+    const [postInfo, setPostInfo] = useState<postInputs_interface>({
+        title: "",
+        content: "",
+        _id: "",
+        action: "add",
+    });
+
+    interface postInputs_interface {
+        title: string;
+        content: string;
+        _id: string;
+        action: string;
+    }
+
+
+    function showPostAdd (inputs:postInputs_interface) {
         let postAddContainer = document.getElementById("postAddContainer");
         if (postAddContainer) postAddContainer.style.display = "inline";
         
         let children_container2 = document.getElementById("children_container2");
         if (children_container2) children_container2.style.opacity = "0";
 
+        setPostInfo({title:inputs.title, content: inputs.content, _id:inputs._id, action: inputs.action});
+        
     }
-    
-    
 
+    //Part 9.1
+    const handlePostDelete = async (postId:string) => {
+
+        const response = await fetch(`/api/posts/delete`, {
+            method: "DELETE",
+            body: JSON.stringify({postId}),
+        })
+
+        const jsonResponse = await response.json();
+        console.log(jsonResponse);
+        setReload(true);
+    }
+
+
+    ////////////////////////////////////////////////////////////////////////////////////
+    //Part 10 - FIXES - Inline Properties add/edit/delete
+
+    const [propertyEditId, setPropertyEditId] = useState("");
+
+    interface propertyInputs_interface {
+        country: string;
+        city: string;
+        district: string;
+
+        type: string;
+        area: number;
+        bedrooms: number;
+        bathrooms: number;
+
+        listing_type: string;
+        price: number;
+        description: string;
+        _id: string;
+        action: string;
+    }
+
+
+    function showPropertyAdd () {
+        let postAddContainer = document.getElementById("propertyAddContainer");
+        if (postAddContainer) postAddContainer.style.display = "inline";
+        
+        let children_container2 = document.getElementById("children_container2");
+        if (children_container2) children_container2.style.opacity = "0";
+        
+    }
+
+
+
+    
+    ////////////////////////////////////////////////////////////////////////////////////
+    //Part 5 - Properties get
     //05.01
     const { data: session, status } = useSession();      //get the session.user
 
@@ -104,6 +173,8 @@ const page = () => {
     const [sessionId, setSessionId] = useState<string>("");
     const [user, setUser] = useState<userInterface | null>(null);
 
+
+  
 
     useEffect(()=> {
 
@@ -133,18 +204,16 @@ const page = () => {
 
         }
 
+        //reload is set to true after adding/deleting/editing, which will trigger a user re-fetch
+        //set to false to be used again
+        setReload(false);
         fetchUserInfo();
 
-    }, [session, sessionId]);
+    }, [session, sessionId, reload]);
 
 
     
-    const handleDelete = (element:HTMLButtonElement) => {
-        // return (event: React.MouseEvent) => {
-            console.log("delete");
-            // event.preventDefault();
-        //   }
-    }
+
 
 
 
@@ -157,9 +226,15 @@ const page = () => {
             <div className="absolute z-[99] w-full h-[100vh]
             left-0 top-0 hidden"
             id="postAddContainer">
-                <PostAdd_Component />
+                <PostAdd_Component postInfo={postInfo} setPostInfo={setPostInfo} setReload={setReload}/>
             </div>
         
+            <div className="absolute z-[99] w-full h-[100vh]
+            left-0 top-0 hidden"
+            id="propertyAddContainer">
+                <PropertyAdd_Component propertyEditId={propertyEditId} setPropertyEditId={setPropertyEditId} setReload={setReload}/>
+            </div>
+
         {user !== null ? ( 
         <>
         <span id="children_container2" className="max-w-[100%]">
@@ -197,7 +272,11 @@ const page = () => {
                 ">
 
                     <h3 className="text-lg font-semibold">{user.userInfo.name}</h3>
-                    <p className="text-xs font-light">{user.userInfo.position}</p>
+                    <p className="text-xs font-light">{user.userInfo.position}
+                        { user.userInfo.role === "admin" ? (
+                            " [admin]"
+                        ): ("")}
+                    </p>
                     <div className="h-[11.75rem] w-[11.75rem] bg-white overflow-hidden
                     rounded-full flex items-center justify-center dark:text-black
                     mt-4">
@@ -223,7 +302,7 @@ const page = () => {
                 >
         
                     {/* info container */}
-                        <AgentInfo user={user}/>
+                        <AgentInfo user={user} setReload={setReload}/>
 
 
                 </div>
@@ -250,7 +329,7 @@ const page = () => {
                     </h4>
 
                     <button type="button" 
-                    onClick={() => {bodyNoScroll(); showEdit("Add")}}
+                    onClick={() => {bodyNoScroll(); setPropertyEditId(""); showPropertyAdd();}}
                     className="
                     bg-theme-text-brighter dark:bg-theme-text-dark text-white 
                     rounded-[17px] text-sm py-1 px-3
@@ -267,7 +346,7 @@ const page = () => {
                     <>
                         {user.properties.map((property: PropertyDocument) => (
                         <div className="h-auto w-full max-w-[390px] md:w-[calc(50%-16px)] md2:w-[calc(33.3%-16px)] ">
-                            <PropertyCardAdmin property={property} currentPage="agent" userIncoming={user} setUserIncoming={setUser}/>
+                            <PropertyCardAdmin setPropertyEditId={setPropertyEditId} property={property} currentPage="agent" setReload={setReload}/>
                     
                             
 
@@ -309,7 +388,7 @@ const page = () => {
                     </h4>
 
                     <button type="button" 
-                    onClick={() => {bodyNoScroll(); showPostAdd()}}
+                    onClick={() => {bodyNoScroll(); showPostAdd({title: "", content:"", _id:"", action: "add"})}}
                     className="
                     bg-theme-text-brighter dark:bg-theme-text-dark text-white 
                     rounded-[17px] text-sm py-0 px-3
@@ -386,15 +465,15 @@ const page = () => {
                                     md2:mt-auto md2:justify-end md2:mb-0">
 
                                         <button type="button"
-                                        onClick={() => {}}
+                                        onClick={() => {bodyNoScroll(); showPostAdd({title: post.title, content:post.content, _id: post._id.toString(), action: "edit"})}}
                                         className="bg-theme-text-brighter dark:bg-theme-text-dark text-white 
                                         rounded-full w-[65px]
                                         opacity-40 hover:opacity-90 text-center">
                                             Edit
                                         </button>
 
-                                        <button type="submit" 
-                                        onClick={() => {}}                              
+                                        <button type="button" 
+                                        onClick={()=>{handlePostDelete(post._id);}}                           
                                         className="bg-theme-text-brighter dark:bg-theme-text-dark text-white 
                                         rounded-full w-[65px]
                                         opacity-40 hover:opacity-90 text-center">

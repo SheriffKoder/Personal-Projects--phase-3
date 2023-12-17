@@ -59,7 +59,10 @@ type userInterface = {
 
 
 
-const AgentInfo = ({user}:{user:userInterface}) => {
+const AgentInfo = ({user, setReload}:{
+    user:userInterface,   
+    setReload: React.Dispatch<React.SetStateAction<boolean>>,
+}) => {
 
 
 
@@ -97,6 +100,7 @@ const AgentInfo = ({user}:{user:userInterface}) => {
         document.getElementById("infoApply_button")!.style.display = "none";
         document.getElementById("infoCancel_button")!.style.display = "none";
         setUpdatedUserInfo(newUserInfo);
+        setReload(true);
 
 
 
@@ -272,6 +276,7 @@ const AgentInfo = ({user}:{user:userInterface}) => {
 
                         </div>
                 </div>
+
 
 
             <div className="mt-8 md2:mt-0 h-[1.5rem]
