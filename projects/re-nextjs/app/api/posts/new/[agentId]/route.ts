@@ -3,6 +3,7 @@
 import { connectToDB } from "@utils/database";
 import PostModel, { PostDocument } from "@models/postModel";
 import UserModel, { UserDocument } from "@models/userModel";
+import { getToday_date } from "@utils/dateGenerate";
 
 
 export const POST = async (request:Request, {params}:any) => {
@@ -25,8 +26,8 @@ export const POST = async (request:Request, {params}:any) => {
         const NewPost = await PostModel.create({
             title: newInfo.title,
             content: newInfo.content,
-            date_add: newInfo.date_add,
-            date_update: newInfo.date_update,
+            date_add: getToday_date(),
+            date_update: getToday_date(),
             userId: currentUserPage,
 
         });
@@ -68,7 +69,8 @@ export const PATCH = async (request:Request, {params}:any) => {
             
             if (currentPost) {
                 currentPost.title = newInfo.title;
-                currentPost.content = newInfo.content; 
+                currentPost.content = newInfo.content;
+                currentPost.date_update = getToday_date();
                 await currentPost.save();   
             }
             return new Response("Successfully updated the post", {status: 200});

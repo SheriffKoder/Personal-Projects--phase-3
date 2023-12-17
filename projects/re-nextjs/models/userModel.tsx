@@ -7,6 +7,7 @@ import { Schema, Document } from "mongoose";
 import bcrypt from "bcrypt";
 
 import { PropertyDocument } from "./propertyModel";
+import { PostDocument } from "./postModel";
 
 // interface propertiesInterface {
 //     propertyId: any;
@@ -21,6 +22,7 @@ export interface UserDocument extends Document {
     avatar: string;
     position: string;
     properties: PropertyDocument[];
+    posts: PostDocument[];
     update: string;
 }
 
@@ -58,6 +60,12 @@ const userSchema = new Schema<UserDocument, {}, Methods>({
     properties: {
         type: [], 
         ref: "Property", 
+        required: false,
+        default: []
+    },
+    posts: {
+        type: [], 
+        ref: "Post", 
         required: false,
         default: []
     },

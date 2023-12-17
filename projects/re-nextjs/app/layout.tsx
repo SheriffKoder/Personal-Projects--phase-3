@@ -9,8 +9,8 @@ import Footer from "@components/Footer";
 import Loading from "@components/Home/Loading";
 import Login_component from "@components/Auth/Login";
 import SignUp_component from "@components/Auth/SignUp";
-import PropertyAdd_Component from "@components/PropertyEdit/PropertyAdd";
-import PropertyEdit_Component from "@components/PropertyEdit/PropertyEdit";
+// import PropertyAdd_Component from "@components/PropertyEdit/PropertyAdd";
+// import PropertyEdit_Component from "@components/PropertyEdit/PropertyEdit";
 
 //02X.03
 import { SessionProvider } from "next-auth/react";

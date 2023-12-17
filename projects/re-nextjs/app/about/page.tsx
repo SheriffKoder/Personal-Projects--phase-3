@@ -4,7 +4,7 @@
 
 import Link from "next/link"
 import Image from "next/image"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 //npm install @vis.gl/react-google-maps
 
@@ -15,6 +15,7 @@ import {
   Pin,
   InfoWindow
 } from "@vis.gl/react-google-maps";
+import { PropertyDocument } from "@models/propertyModel";
 
 
 const page = () => {
@@ -26,7 +27,22 @@ const page = () => {
   
   const [open, setOpen] = useState(false);
 
-  
+  const [propertyInquiryState, setPropertyInquiryState] = useState<PropertyDocument|null>(null);
+
+  useEffect(()=> {
+
+    const propertyInquiry = sessionStorage.getItem("propertyInquiry");
+    if (propertyInquiry) {
+      let myState = JSON.parse(propertyInquiry);
+      setPropertyInquiryState(myState);
+      // console.log(myState);
+    }
+
+
+  },[]);
+
+
+
   return (
 
 
@@ -150,6 +166,12 @@ const page = () => {
                 
                 "
                 id="inquiry"
+                value={propertyInquiryState !== null ? (`Hello, i would like to inquire about property #${propertyInquiryState._id}, 
+which is located in ${propertyInquiryState.property_country}, ${propertyInquiryState.property_city}, ${propertyInquiryState.property_district}, 
+of area ${propertyInquiryState.property_area}sqm, ${propertyInquiryState.property_beds} bedrooms / ${propertyInquiryState.property_baths} bathrooms, 
+which is offered for ${propertyInquiryState.property_listing_type} for ${propertyInquiryState.property_price}. 
+Thanks,
+              `):("")}
                 >
 
                 </textarea>

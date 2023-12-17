@@ -10,6 +10,11 @@ import { PropertyDocument } from "@models/propertyModel";
 import { UserDocument } from "@models/userModel";
 import { PostDocument } from "@models/postModel";
 
+//Part 10
+import { useSession } from "next-auth/react";
+import { updateUser_lastUpdate } from "@utils/dateGenerate";
+
+
 type userInterface = {
   authority: string;
   properties: PropertyDocument[];
@@ -120,6 +125,8 @@ const PropertyCardAdmin = ({setPropertyEditId, property, currentPage="", setRelo
     const [imageReference, setImageReference] = useState(0);
     // const [propertiesCounter, setPropertiesCounter] = useState([]);
 
+    const {data:session} = useSession();
+
 
 
     //Part 8
@@ -135,6 +142,14 @@ const PropertyCardAdmin = ({setPropertyEditId, property, currentPage="", setRelo
 
       const jsonResponse = await response.json();
       console.log(jsonResponse);
+
+      //Part 10
+      //update the user last update-date, calls a patch api on this user id
+      //which user id want to update, session user
+      let userId_session = session?.user.id;
+      if (userId_session) updateUser_lastUpdate(userId_session);
+      //
+      
       setReload(true);
   }
 

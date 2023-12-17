@@ -24,6 +24,10 @@ import PostAdd_Component from "@components/PropertyEdit/PostAdd";
 import { PostDocument } from "@models/postModel";
 import PropertyAdd_Component from "@components/PropertyEdit/PropertyAdd";
 
+//Part 10
+import { updateUser_lastUpdate } from "@utils/dateGenerate";
+
+
 //Part 9
 type postsType = postsInterface[];
 
@@ -117,6 +121,13 @@ const page = () => {
 
         const jsonResponse = await response.json();
         console.log(jsonResponse);
+
+        //Part 10
+        //update the user last update-date, calls a patch api on this user id
+        //which user id want to update, session user
+        let userId_session = session?.user.id;
+        if (userId_session) updateUser_lastUpdate(userId_session);
+        //
         setReload(true);
     }
 
@@ -237,7 +248,7 @@ const page = () => {
 
         {user !== null ? ( 
         <>
-        <span id="children_container2" className="max-w-[100%]">
+        <span id="children_container2" className="w-[100%]">
             {/* nav links */}
             <div className="dark:text-white text-black text-shadow-3 w-full text-xs flex flex-row gap-1 opacity-70">        
                 <Link className=""href="/">Home</Link>
@@ -521,7 +532,7 @@ const page = () => {
                     text-[#000000dd] dark:text-[#ffffffd3]  
                     opacity-80 hover:opacity-100
                     flex flex-col items-center justify-center text-center capitalize text-l 
-                    w-full
+                    w-full mt-8
                     
                     ">
                     <Link href={"/agents/"+session?.user.id} type="button" 

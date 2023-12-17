@@ -428,7 +428,7 @@ const page = () => {
             <>
                 {properties.map((property: PropertyDocument) => (
                 <div className="h-auto w-full max-w-[390px] md:w-[calc(50%-16px)] md2:w-[calc(33.3%-16px)]">
-                    <PropertyCard {...property}/>
+                    <PropertyCard property={property} currentPage="AllProperties" />
                 </div>
                 )
                 )}

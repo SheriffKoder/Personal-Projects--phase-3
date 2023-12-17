@@ -3,6 +3,7 @@
 
 import PropertyModel from "@models/propertyModel";
 import { connectToDB } from "@utils/database"
+import { getToday_date } from "@utils/dateGenerate";
 
 //
 
@@ -53,8 +54,8 @@ export const POST = async (req: Request, {params}) => {
                 property_description: body.description,
 
                 property_userId: params.userId,
-                property_date: body.date_add,
-                property_update: body.date_add,
+                property_date: getToday_date(),
+                property_update: getToday_date(),
             });
 
             await NewPost.save();

@@ -39,6 +39,10 @@ declare module 'next-auth' {
 
 
 const Login_component = () => {
+// ({isLogin, setIsLogin}:{
+//     isLogin:boolean, 
+//     setIsLogin: React.Dispatch<React.SetStateAction<boolean>>,
+//   }) => {
 
     const { data: session, status } = useSession();      //get the status
    
@@ -77,12 +81,15 @@ const Login_component = () => {
             password,
             redirect: false, //avoid default redirect
         });
+
         //if there is an error, update the error state and return the process
         if (res?.error) { 
             setError(res.error)
         } else {
             // console.log(res);
             // console.log("signed in");
+            let agentId = (session?.user.id);
+          router.push(`/agents/${agentId}`);
             hideLogin();
             hideDropDownMenu();
         }
@@ -102,7 +109,7 @@ const Login_component = () => {
             let agentId = (session?.user.id);
           router.push(`/agents/${agentId}`);
         }
-    //   }, [session, router]);
+    //   }, [session]);
     }, []);
 
 

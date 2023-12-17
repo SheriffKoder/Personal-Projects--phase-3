@@ -3,6 +3,7 @@
 //04.03
 import { connectToDB } from "@utils/database";
 import PropertyModel from "@models/propertyModel";
+import { getToday_date } from "@utils/dateGenerate";
 
 
 //to fill the edit property inputs
@@ -24,7 +25,7 @@ export const GET = async (request, {params}) => {
 }
 
 
-
+//edit property apply
 export const PATCH = async (request, {params}) => {
 
     const propertyInfo = (await request.json());
@@ -57,7 +58,7 @@ export const PATCH = async (request, {params}) => {
                 currentProperty.property_description = propertyInfo.description,
 
                 // currentProperty.property_userId = propertyInfo.property_userId,
-                currentProperty.property_update = propertyInfo.date_update,
+                currentProperty.property_update = getToday_date(),
 
                 await currentProperty.save();
             }

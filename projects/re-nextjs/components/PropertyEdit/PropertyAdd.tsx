@@ -11,6 +11,7 @@ import { ChangeEventHandler, FormEventHandler } from "react";
 //03.01
 import {useState} from "react";
 import { useSession } from "next-auth/react";
+import { updateUser_lastUpdate } from "@utils/dateGenerate";
 // import { useRouter } from "next/router";
 
 
@@ -118,8 +119,8 @@ const PropertyAdd_Component = ({propertyEditId, setPropertyEditId, setReload}:{
                     body: JSON.stringify({
                         ...propertyInfo,
                         // userId: current_url,
-                        date_add: "25 dec 2023",
-                        date_update: "26 dec 2023",
+                        // date_add: "25 dec 2023",
+                        // date_update: "26 dec 2023",
                     })
                 })
     
@@ -135,7 +136,7 @@ const PropertyAdd_Component = ({propertyEditId, setPropertyEditId, setReload}:{
                     body: JSON.stringify({
                         ...propertyInfo,
                         // userId: current_url,
-                        date_update: "26 dec 2023",
+                        // date_update: "26 dec 2023",
                     })
                 })
     
@@ -147,9 +148,16 @@ const PropertyAdd_Component = ({propertyEditId, setPropertyEditId, setReload}:{
 
             }
 
+            //Part 10
+            //update the user last update-date, calls a patch api on this user id
+            //which user id want to update, session user
+            let userId_session = session?.user.id;
+            if (userId_session) updateUser_lastUpdate(userId_session);
+            //
+            
             setReload(true);
 
-
+            
 
         } catch (error) {
             console.log(error);

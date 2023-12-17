@@ -116,8 +116,9 @@ const AgentCard = ({userIncoming, setUserIncoming, sessionId}:{
 
                                 </div>
 
-                                <p className="text-xs font-light">Last Update {agent.update}</p>
+                                <p className="text-xs font-light">Last Update: {agent.update}</p>
                                 <p className="text-xs font-light">Properties [{agent.properties.length}]</p>
+                                <p className="text-xs font-light">Posts [{agent.posts.length}]</p>
 
                                 <div className="mt-2 flex flex-row items-center justify-center">
                                     <Link href={"/agents/"+agent._id} type="button" 

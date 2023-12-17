@@ -4,7 +4,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useState, useEffect } from "react";
+import { useState, useEffect, MouseEventHandler } from "react";
 import { useRef } from "react";
 import PropertyCard from "@components/Home/HomeMain/PropertyCard";
 
@@ -36,13 +36,14 @@ interface propertyInterface {
 
 import { PropertyDocument } from "@models/propertyModel";
 
-
-
+import { useRouter } from "next/navigation";
+import { ChangeEventHandler } from "react";
 
 
 
 const page = () => {
 
+    const router = useRouter();
 
 
     let properties: propertyInterface[] = [
@@ -283,6 +284,15 @@ const page = () => {
     // console.log(thisProperty);
     let property_title = useRef("");
 
+    const handleInquiry = (property: PropertyDocument) => {
+
+        sessionStorage.setItem("propertyInquiry", JSON.stringify(property))
+        router.push("/about/#contact");
+
+
+
+    }
+
 
 
     useEffect(()=> {
@@ -517,10 +527,12 @@ const page = () => {
                                     </div>
 
                                     <div className="my-2 mx-auto ">
+                                        {pageProperty ? (
                                         <button className="outline-2 outline-offset-4 dark:hover:outline-[#fffd] outline dark:outline-[#ffffff2b]
                                         outline-[#0000000f] hover:outline-[#0000002a]
                                         px-2 py-1 border-0 rounded-[7px] opacity-70 dark:hover:opacity-90 hover:opacity-100
-                                        bg-[#279b72] dark:bg-[#32b084] text-white">
+                                        bg-[#279b72] dark:bg-[#32b084] text-white"
+                                        type="button" onClick={()=>handleInquiry(pageProperty.thisProperty)}>
                                         
                                         {pageProperty.thisProperty.property_availability ? 
                                         (
@@ -532,6 +544,7 @@ const page = () => {
                                         )}                                        
                                         
                                         </button>
+                                        ):("")}
                                         {/* <button className="outline-2 outline-offset-4 hover:outline-[#fffd] outline outline-[#ffffff2b]
                                             px-2 py-1 border-0 rounded-[7px] opacity-80 hover:opacity-90
                                         bg-theme-text-brighter dark:bg-theme-text-dark text-white">

@@ -13,6 +13,9 @@ import {useState} from "react";
 import { useSession } from "next-auth/react";
 // import { useRouter } from "next/router";
 
+//Part 10
+import { updateUser_lastUpdate } from "@utils/dateGenerate";
+
 
 function hidePostAdd () {
     let postAddContainer = document.getElementById("postAddContainer");
@@ -71,8 +74,8 @@ const PostAdd_Component = ({postInfo, setPostInfo, setReload}:{
                     body: JSON.stringify({
                         ...postInfo,
                         // userId: current_url,
-                        date_add: "25 dec 2023",
-                        date_update: "26 dec 2023",
+                        // date_add: "25 dec 2023",
+                        // date_update: "26 dec 2023",
                     })
                 })
     
@@ -87,7 +90,7 @@ const PostAdd_Component = ({postInfo, setPostInfo, setReload}:{
                     body: JSON.stringify({
                         ...postInfo,
                         // userId: current_url,
-                        date_update: "26 dec 2023",
+                        // date_update: "26 dec 2023",
                     })
                 })
     
@@ -99,6 +102,13 @@ const PostAdd_Component = ({postInfo, setPostInfo, setReload}:{
 
             }
 
+            //Part 10
+            //update the user last update-date, calls a patch api on this user id
+            //which user id want to update, session user
+            let userId_session = session?.user.id;
+            if (userId_session) updateUser_lastUpdate(userId_session);
+            //
+            
             setReload(true);
 
 
