@@ -5,6 +5,10 @@ import { NextResponse } from "next/server";
 
 //02X.01
 
+import { mkdir } from "fs";
+import { join } from "path";
+
+
 // data requested from user on initial render / data from the front-end
 //the data will pass to create the user
 interface NewUserRequest {
@@ -60,6 +64,11 @@ export const POST = async (req: Request): Promise<NewResponse> => {
         email: body.email,
         phone: body.phone,
         role: role,
+    });
+
+    //create a dedicated folder for the user to store their data in
+    await mkdir(join(process.cwd() + "/public" + "/images/" + user._id), (error)=> {
+        console.log(error);
     });
 
     return NextResponse.json({

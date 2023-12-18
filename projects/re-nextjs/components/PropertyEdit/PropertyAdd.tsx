@@ -15,6 +15,8 @@ import { updateUser_lastUpdate } from "@utils/dateGenerate";
 // import { useRouter } from "next/router";
 
 
+//Part11
+import { getFormData_multiple } from "@utils/ImgformDataGenerate";
 
 
 interface propertyInputs_interface {
@@ -97,6 +99,14 @@ const PropertyAdd_Component = ({propertyEditId, setPropertyEditId, setReload}:{
     const { country, city, district, type, area, bedrooms, bathrooms, listing_type,
     price, description } = propertyInfo;
 
+
+    //Part 11.01 - formData image upload
+    const [file1, setFile1] = useState<File | string |null>(null);
+    const [file2, setFile2] = useState<File | string |null>(null);
+    const [file3, setFile3] = useState<File | string |null>(null);
+
+    
+
     const handleChange: ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement> = ({ target }) => {
         const { name, value } = target;
         setPropertyInfo({ ...propertyInfo, [name]:value});
@@ -106,67 +116,88 @@ const PropertyAdd_Component = ({propertyEditId, setPropertyEditId, setReload}:{
 
         e.preventDefault();
 
+        //Part 11.01 - formData image upload
+        let formData = new FormData();
+        if (propertyInfo) formData = getFormData_multiple(formData, null, null, propertyInfo);
+        if (typeof file1 !== "string" || file1 !== null) formData = getFormData_multiple(formData, file1, "1", null);
+        if (typeof file2 !== "string" || file2 !== null) formData = getFormData_multiple(formData, file2, "2", null);
+        if (typeof file3 !== "string" || file3 !== null) formData = getFormData_multiple(formData, file3, "3", null);
+
+        // } else if (!file1) {
+        //     formData = getFormData_multiple(propertyInfo, null);
+        // }
+    
+        if (formData) {
+
         //creating first property
-        try {
+            try {
 
-            //put this page's i.e the userId in the params
-            if (action === "add") {
+                //put this page's i.e the userId in the params
+                if (action === "add") {
 
-                const current_url = window.location.href.toString().split("/agents/")[1];
+                    const current_url = window.location.href.toString().split("/agents/")[1];
 
-                const response = await fetch(`/api/properties/new/${current_url}`, {
-                    method: "POST",
-                    body: JSON.stringify({
-                        ...propertyInfo,
-                        // userId: current_url,
-                        // date_add: "25 dec 2023",
-                        // date_update: "26 dec 2023",
+                    const response = await fetch(`/api/properties/new/${current_url}`, {
+                        method: "POST",
+                        // body: JSON.stringify({
+                            // ...propertyInfo,
+                            // // userId: current_url,
+                            // // date_add: "25 dec 2023",
+                            // // date_update: "26 dec 2023",
+
+                            //Part 11.01 - formData image upload
+                            body: formData,
+                        // })
                     })
-                })
-    
-                if (response.ok) {
-                    // router.push("/");
-                    hidePropertyAdd(); bodyScroll();
-                }                    
-            
-            } else if (action === "edit") {
-                //the action is set to edit if there is a propertyEditId already from the useEffect
-                const response = await fetch(`/api/properties/edit/${propertyEditId}`, {
-                    method: "PATCH",
-                    body: JSON.stringify({
-                        ...propertyInfo,
-                        // userId: current_url,
-                        // date_update: "26 dec 2023",
-                    })
-                })
-    
-                if (response.ok) {
-                    // router.push("/");
-                    hidePropertyAdd(); bodyScroll();
-                }                   
+        
+                    if (response.ok) {
+                        // router.push("/");
+                        hidePropertyAdd(); bodyScroll();
+                    }                    
+                
+                } else if (action === "edit") {
+                    //the action is set to edit if there is a propertyEditId already from the useEffect
+                    const response = await fetch(`/api/properties/edit/${propertyEditId}`, {
+                        method: "PATCH",
+                        // body: JSON.stringify({
+                            // ...propertyInfo,
+                            // // userId: current_url,
+                            // // date_update: "26 dec 2023",
 
+                            //Part 11.01 - formData image upload
+                            body: formData,
+                        // })
+                    })
+        
+                    if (response.ok) {
+                        // router.push("/");
+                        hidePropertyAdd(); bodyScroll();
+                    }                   
+
+
+                }
+
+                //Part 10
+                //update the user last update-date, calls a patch api on this user id
+                //which user id want to update, session user
+                let userId_session = session?.user.id;
+                if (userId_session) updateUser_lastUpdate(userId_session);
+                //
+                
+                setReload(true);
+
+                
+
+            } catch (error) {
+                console.log(error);
+            } finally {
+                //happens either way
+                setSubmitting(true);
+                hidePropertyAdd(); bodyScroll();
 
             }
 
-            //Part 10
-            //update the user last update-date, calls a patch api on this user id
-            //which user id want to update, session user
-            let userId_session = session?.user.id;
-            if (userId_session) updateUser_lastUpdate(userId_session);
-            //
-            
-            setReload(true);
-
-            
-
-        } catch (error) {
-            console.log(error);
-        } finally {
-            //happens either way
-            setSubmitting(true);
-            hidePropertyAdd(); bodyScroll();
-
-        }
+        }     
     }
 
 
@@ -205,9 +236,14 @@ const PropertyAdd_Component = ({propertyEditId, setPropertyEditId, setReload}:{
                 listing_type: jsonResponse.property_listing_type,
                 price: jsonResponse.property_price,
                 description: jsonResponse.property_description,
+                images: jsonResponse.property_images,
         
             };
 
+            console.log(temp_property.images);
+            if (temp_property.images[0]) setFile1(temp_property.images[0])
+            if (temp_property.images[1]) setFile2(temp_property.images[1])
+            if (temp_property.images[2]) setFile3(temp_property.images[2])
             setPropertyInfo(temp_property);
 
         }
@@ -506,21 +542,59 @@ const PropertyAdd_Component = ({propertyEditId, setPropertyEditId, setReload}:{
 
                             <br></br>
 
+                            <span className="mr-auto mb-1">Add Images (Image 1 required)</span>
+
                             <label className="w-[100%] flex flex-row justify-center text-center
-                            label_field
+                            label_field mb-1
                             bg-[#ffffff07] rounded-[7px] border-2 border-[#ffffff02]
                             
                             ">
                                 <span className="min-w-[7rem] px-2 py-1 text_shadow-2 opacity-80 dark:opacity-90">
-                                    Add Images
+                                    Image 1
                                 </span>
 
                                 <input className="w-full input_field border-0 rounded-r-[6px] 
                                     dark:bg-[#ffffff09] dark:focus:bg-[#ffffff02]  px-2
-                                    border-[rgba(255,255,255,0.02)]" type="file"
-                                    placeholder=""/>
+                                    border-[rgba(255,255,255,0.02)]"
+                                    type="file" name="file" onChange={(e)=> setFile1(e.target.files?.[0]!)}
+                                />
                                 
                             </label>
+
+                            <label className="w-[100%] flex flex-row justify-center text-center
+                            label_field mb-1
+                            bg-[#ffffff07] rounded-[7px] border-2 border-[#ffffff02]
+                            
+                            ">
+                                <span className="min-w-[7rem] px-2 py-1 text_shadow-2 opacity-80 dark:opacity-90">
+                                    Image 2
+                                </span>
+
+                                <input className="w-full input_field border-0 rounded-r-[6px] 
+                                    dark:bg-[#ffffff09] dark:focus:bg-[#ffffff02]  px-2
+                                    border-[rgba(255,255,255,0.02)]"
+                                    type="file" name="file" onChange={(e)=> setFile2(e.target.files?.[0]!)}
+                                />
+                                
+                            </label>
+
+                            <label className="w-[100%] flex flex-row justify-center text-center
+                            label_field mb-1
+                            bg-[#ffffff07] rounded-[7px] border-2 border-[#ffffff02]
+                            
+                            ">
+                                <span className="min-w-[7rem] px-2 py-1 text_shadow-2 opacity-80 dark:opacity-90">
+                                    Image 3
+                                </span>
+
+                                <input className="w-full input_field border-0 rounded-r-[6px] 
+                                    dark:bg-[#ffffff09] dark:focus:bg-[#ffffff02]  px-2
+                                    border-[rgba(255,255,255,0.02)]"
+                                    type="file" name="file" onChange={(e)=> setFile3(e.target.files?.[0]!)}
+                                />
+                                
+                            </label>
+
 
                             <label className="w-[100%] flex flex-col gap-2
                             

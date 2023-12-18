@@ -78,6 +78,7 @@ const AgentInfo = ({user, setReload}:{
     const { name, avatar, email, password, phone, position } = updatedUserInfo;
 
     //Part 11.01
+    //a file or undefined
     const [file, setFile] = useState<File>();
 
 
