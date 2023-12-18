@@ -4,6 +4,13 @@ import PropertyModel from "@models/propertyModel";
 import PostModel from "@models/postModel";
 import UserModel, { UserDocument } from "@models/userModel";
 
+//Part 11.01
+import { getToday_date } from "@utils/dateGenerate";
+import { join } from "path";
+import { writeFile } from "fs";
+
+
+
 export const POST = async (req:Request, {params}:any) => {
 
     try {
@@ -61,11 +68,33 @@ export const POST = async (req:Request, {params}:any) => {
 export const PATCH = async (request:Request, {params}:any) => {
 
 
-    const currentUserPage = params.agentId;
-    const newInfo = await request.json();
 
-    console.log(currentUserPage);
+    const currentUserPage = params.agentId;
+    // const newInfo = await request.json();
+    
+    //Part 11.01 - formData image upload
+    //1. will use the formData as we are passing a file in the body
+    const newInfo = await request.formData();
+
+    // console.log(currentUserPage);
     console.log(newInfo);
+
+    //Part 11.01 - formData image upload
+    //3. store a file if there is and get a path
+    const file: File | null = newInfo.get("file") as unknown as File;
+    let userAvatar = "";
+    if (file) {
+        const bytes = await file.arrayBuffer();
+        const buffer = Buffer.from(bytes);
+        const path = join(process.cwd(), "/public", "/images", file.name);
+        await writeFile(path, buffer, (err)=>console.log(err));
+        console.log(`image ${file.name} is saved in ${path}`);
+        userAvatar = path.split("/public")[1];
+    } else if (!file) {
+        userAvatar = newInfo.get("avatar") as string;
+    }
+
+
 
     try {
         await connectToDB();
@@ -73,17 +102,25 @@ export const PATCH = async (request:Request, {params}:any) => {
 
         console.log(userInfo);
         
-        //we have info object from json, want to overwrite its keys with userInfo
 
-        if (userInfo) {
-            userInfo.name = newInfo.name;
-            userInfo.avatar = newInfo.avatar;
-            userInfo.email = newInfo.email;
-            userInfo.password = newInfo.password;
-            userInfo.phone = newInfo.phone;
-            userInfo.position = newInfo.position;
-            
-            console.log(userInfo);
+        if (userInfo && newInfo !== null) {
+            // // we have info object from json, want to overwrite its keys with userInfo
+            // userInfo.name = newInfo.name;
+            // userInfo.avatar = newInfo.avatar;
+            // userInfo.email = newInfo.email;
+            // userInfo.password = newInfo.password;
+            // userInfo.phone = newInfo.phone;
+            // userInfo.position = newInfo.position;
+
+            //Part 11.01 - formData image upload
+            //2. the fromData items are fetched differently
+            userInfo.name = newInfo.get("name") as string;
+            userInfo.avatar = userAvatar;
+            userInfo.email = newInfo.get("email") as string;
+            userInfo.password = newInfo.get("password") as string;
+            // userInfo.phone = newInfo.get("phone") as number;
+            userInfo.position = newInfo.get("position") as string;
+            // console.log(userInfo);
 
             await userInfo?.save();
         

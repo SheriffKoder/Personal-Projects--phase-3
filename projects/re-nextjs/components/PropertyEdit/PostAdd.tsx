@@ -16,6 +16,9 @@ import { useSession } from "next-auth/react";
 //Part 10
 import { updateUser_lastUpdate } from "@utils/dateGenerate";
 
+//Part11
+import { getFormData } from "@utils/ImgformDataGenerate";
+
 
 function hidePostAdd () {
     let postAddContainer = document.getElementById("postAddContainer");
@@ -53,6 +56,11 @@ const PostAdd_Component = ({postInfo, setPostInfo, setReload}:{
 
     const { title, content } = postInfo;
 
+    //Part 11.01 - formData image upload
+    const [file, setFile] = useState<File>();
+
+
+
     const handleChange: ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement> = ({ target }) => {
         const { name, value } = target;
         setPostInfo({ ...postInfo, [name]:value});
@@ -62,63 +70,82 @@ const PostAdd_Component = ({postInfo, setPostInfo, setReload}:{
         e.preventDefault();
         setSubmitting(true);
 
-        //creating first property
-        try {
+        //Part 11.01 - formData image upload
+        let data;
+        //  console.log(postInfo);
+         if (file) {
+             data = getFormData(postInfo, file);
+         } else if (!file) {
+             data = getFormData(postInfo, null);
+         }
+ 
+         if (data) {
 
-            const current_url = window.location.href.toString().split("/agents/")[1];
+            //creating first post
+            try {
 
-            //put this page's i.e the userId in the params
-            if (postInfo.action === "add") {
-                const response = await fetch(`/api/posts/new/${current_url}`, {
-                    method: "POST",
-                    body: JSON.stringify({
-                        ...postInfo,
-                        // userId: current_url,
-                        // date_add: "25 dec 2023",
-                        // date_update: "26 dec 2023",
+                const current_url = window.location.href.toString().split("/agents/")[1];
+
+                //put this page's i.e the userId in the params
+                if (postInfo.action === "add") {
+                    const response = await fetch(`/api/posts/new/${current_url}`, {
+                        method: "POST",
+                        // body: JSON.stringify({
+                        //     ...postInfo,
+                        //     // userId: current_url,
+                        //     // date_add: "25 dec 2023",
+                        //     // date_update: "26 dec 2023",
+                        // })
+                        //Part 11.01 - formData image upload
+                        body: data,
                     })
-                })
-    
-                if (response.ok) {
-                    // router.push("/");
-                    hidePostAdd(); bodyScroll();
-                }                    
-            
-            } else if (postInfo.action === "edit") {
-                const response = await fetch(`/api/posts/new/${current_url}`, {
-                    method: "PATCH",
-                    body: JSON.stringify({
-                        ...postInfo,
-                        // userId: current_url,
-                        // date_update: "26 dec 2023",
+        
+                    if (response.ok) {
+                        // router.push("/");
+                        hidePostAdd(); bodyScroll();
+                    }                    
+                
+                } else if (postInfo.action === "edit") {
+                    const response = await fetch(`/api/posts/new/${current_url}`, {
+                        method: "PATCH",
+                        // body: JSON.stringify({
+                        //     ...postInfo,
+                        //     // userId: current_url,
+                        //     // date_update: "26 dec 2023",
+                        // })
+                        //Part 11.01 - formData image upload
+                        body: data,
+
                     })
-                })
-    
-                if (response.ok) {
-                    // router.push("/");
-                    hidePostAdd(); bodyScroll();
-                }                   
+        
+                    if (response.ok) {
+                        // router.push("/");
+                        hidePostAdd(); bodyScroll();
+                    }                   
 
 
+                }
+
+                //Part 10
+                //update the user last update-date, calls a patch api on this user id
+                //which user id want to update, session user
+                let userId_session = session?.user.id;
+                if (userId_session) updateUser_lastUpdate(userId_session);
+                //
+                
+                setReload(true);
+
+
+
+            } catch (error) {
+                console.log(error);
+            } finally {
+                //happens either way
+                setSubmitting(true);
             }
-
-            //Part 10
-            //update the user last update-date, calls a patch api on this user id
-            //which user id want to update, session user
-            let userId_session = session?.user.id;
-            if (userId_session) updateUser_lastUpdate(userId_session);
-            //
-            
-            setReload(true);
+         }
 
 
-
-        } catch (error) {
-            console.log(error);
-        } finally {
-            //happens either way
-            setSubmitting(true);
-        }
     }
     
 
@@ -186,8 +213,10 @@ const PostAdd_Component = ({postInfo, setPostInfo, setReload}:{
 
                             <input className="w-full input_field border-0 rounded-r-[6px] 
                                 dark:bg-[#ffffff09] dark:focus:bg-[#ffffff02]  px-2
-                                border-[rgba(255,255,255,0.02)]" type="file"
-                                placeholder=""/>
+                                border-[rgba(255,255,255,0.02)]"
+                                // Part 11.01 - formData image upload
+                                type="file" name="file" onChange={(e)=> setFile(e.target.files?.[0])}/>
+                                
                             
                         </label>
 
