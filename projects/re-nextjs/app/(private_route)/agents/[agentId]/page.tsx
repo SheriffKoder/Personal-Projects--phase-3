@@ -356,8 +356,9 @@ const page = () => {
                     {user.properties.length > 0 ? (
                     <>
                         {user.properties.map((property: PropertyDocument) => (
+                            
                         <div className="h-auto w-full max-w-[390px] md:w-[calc(50%-16px)] md2:w-[calc(33.3%-16px)] ">
-                            <PropertyCardAdmin setPropertyEditId={setPropertyEditId} property={property} currentPage="agent" setReload={setReload}/>
+                            <PropertyCardAdmin setPropertyEditId={setPropertyEditId} property1={property} currentPage="agent" setReload={setReload}/>
                     
                             
 

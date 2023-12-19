@@ -67,7 +67,17 @@ export const POST = async (req: Request): Promise<NewResponse> => {
     });
 
     //create a dedicated folder for the user to store their data in
-    await mkdir(join(process.cwd() + "/public" + "/images/" + user._id), (error)=> {
+    await mkdir(join(process.cwd() + "/public" + "/images/agent-" + user._id), (error)=> {
+        console.log(error);
+    });
+
+    await mkdir(join(process.cwd() + "/public" + "/images/agent-" + user._id + "/properties"), (error)=> {
+        console.log(error);
+    });
+    await mkdir(join(process.cwd() + "/public" + "/images/agent-" + user._id + "/posts"), (error)=> {
+        console.log(error);
+    });
+    await mkdir(join(process.cwd() + "/public" + "/images/agent-" + user._id + "/profile"), (error)=> {
         console.log(error);
     });
 

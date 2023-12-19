@@ -31,7 +31,7 @@ export const POST = async (request:Request, {params}:any) => {
     if (file) {
         const bytes = await file.arrayBuffer();
         const buffer = Buffer.from(bytes);
-        const path = join(process.cwd(), "/public", "/images", file.name);
+        const path = join(process.cwd(), `/public/images/agent-${currentUserPage}/posts`, file.name);
         await writeFile(path, buffer, (err)=>console.log(err));
         console.log(`image ${file.name} is saved in ${path}`);
         postImage = path.split("/public")[1];
@@ -86,6 +86,7 @@ export const POST = async (request:Request, {params}:any) => {
 
 export const PATCH = async (request:Request, {params}:any) => {
 
+    const currentUserPage = params.agentId;
 
     //Part 11.01 - formData image upload
     //1. will use the formData as we are passing a file in the body
@@ -102,7 +103,7 @@ export const PATCH = async (request:Request, {params}:any) => {
     if (file) {
         const bytes = await file.arrayBuffer();
         const buffer = Buffer.from(bytes);
-        const path = join(process.cwd(), "/public", "/images", file.name);
+        const path = join(process.cwd(), `/public/images/agent-${currentUserPage}/posts`, file.name);
         await writeFile(path, buffer, (err)=>console.log(err));
         console.log(`image ${file.name} is saved in ${path}`);
         postImage = path.split("/public")[1];

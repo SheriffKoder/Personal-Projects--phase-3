@@ -70,7 +70,7 @@ export const PATCH = async (request, {params}) => {
             files.forEach(async (file) => {
                 if (typeof file !== "string" && file !== null) {
 
-                    const path = join(process.cwd(), "/public", "/images", currentProperty?.property_userId.toString(), file.name);
+                    const path = join(process.cwd(), `/public/images/agent-${currentProperty?.property_userId.toString()}/properties`, file.name);
                     
                     let file1_url = ""; 
                     file1_url = path.split("/public")[1];

@@ -398,7 +398,7 @@ const Home_Main = () => {
                 <div className="
                 
                 h-auto xl:w-[48%] md:w-[46%] lg:w-[47%] w-[100%] max-w-[390px] xl:max-w-[900px]">
-                  <PropertyCard property={property} currentPage="home"/>
+                  <PropertyCard property1={property} currentPage="home"/>
                 </div>
               )
               )}

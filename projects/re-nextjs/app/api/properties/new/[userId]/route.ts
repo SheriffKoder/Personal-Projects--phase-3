@@ -57,12 +57,12 @@ export const POST = async (request: Request, {params}) => {
         files.forEach(async (file) => {
             if (file) {
 
-                const path = join(process.cwd(), "/public", "/images", params.userId, file.name);
-                
+                const path = join(process.cwd(), `/public/images/agent-${params.userId}/properties`, file.name);
+
                 let file1_url = ""; 
                 file1_url = path.split("/public")[1];
                 files_url.push(file1_url);
-                
+
                 const bytes = await file.arrayBuffer();
                 const buffer = Buffer.from(bytes);
                 await writeFile(path, buffer, (err)=>console.log(err));

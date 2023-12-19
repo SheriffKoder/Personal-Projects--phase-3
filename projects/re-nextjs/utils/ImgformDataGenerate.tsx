@@ -9,7 +9,7 @@
     }
 
 
-    const getFormData_multiple = (formData:FormData, file:File|null|string, key:string|null ,object: any) => {
+    const getFormData_multiple = (formData:FormData, file:File|string|null, key:string|null ,object: any) => {
         if (file !== null) {
             formData.append(`file${key}`, file);
         }

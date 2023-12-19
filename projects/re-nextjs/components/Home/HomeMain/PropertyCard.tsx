@@ -35,7 +35,7 @@ interface propertyInterface {
 
 import { PropertyDocument } from "@models/propertyModel";
 
-const PropertyCard = ({property, currentPage}:{property:PropertyDocument, currentPage:string}) => {
+const PropertyCard = ({property1, currentPage}:{property1:PropertyDocument, currentPage:string}) => {
 
     // let currentPage = props.currentPage;
     // let property: propertyInterface = props.property;
@@ -60,19 +60,20 @@ const PropertyCard = ({property, currentPage}:{property:PropertyDocument, curren
     }
     
     function handleSliderIndex (direction: number) {
-    
-    if (direction < prevFade1) {
-        // console.log("left");
-        (imageReference > 0) ? setImageReference(imageReference-1) : setImageReference(property.property_images.length-1);
-        // setPrevFade1(fade1);
-        // setImageReference(imageReference-1);
+      
+      if (property !== null) {
+        if (direction < prevFade1) {
+            // console.log("left");
+            (imageReference > 0) ? setImageReference(imageReference-1) : setImageReference(property.property_images.length-1);
+            // setPrevFade1(fade1);
+            // setImageReference(imageReference-1);
 
-    } else if (direction > prevFade1) {
-        // console.log("right");
-        (imageReference < property.property_images.length-1) ? setImageReference(imageReference+1) : setImageReference(0);
+        } else if (direction > prevFade1) {
+            // console.log("right");
+            (imageReference < property.property_images.length-1) ? setImageReference(imageReference+1) : setImageReference(0);
 
-    }
-    
+        }
+      }
     }
     
     function fadeInAnimation (slider__container: any) {
@@ -149,11 +150,31 @@ const PropertyCard = ({property, currentPage}:{property:PropertyDocument, curren
   }
 
 
+    //Part11
+    const [property, setProperty] = useState<PropertyDocument | null>(null);
 
     useEffect(()=> {
+
+      //Part 11
+      if (property === null && property1 !== null) {
+        const filteredImages = property1.property_images.filter((image: string) => {
+          if (image !== "") {
+            return image;
+          }
+        });
+
+        console.log("filteredImages");
+        console.log(filteredImages);
+  
+        const tempProperty:PropertyDocument = property1;
+        tempProperty.property_images = filteredImages as string[];
+        setProperty(tempProperty);  
+      } else if (property !== null) {
         let slider__container = document.getElementById(property._id);        
 
-        animationCombination1(slider__container);
+        animationCombination1(slider__container);  
+      }
+
 
   },[fade1]);
 
@@ -165,7 +186,9 @@ const PropertyCard = ({property, currentPage}:{property:PropertyDocument, curren
   // let page = "property";
 
   return (
-    <div className={`latest_property bg-[#fffffff3] dark:bg-[rgba(255,255,255,0.03)]
+    <>
+    {property !== null ? (
+      <div className={`latest_property bg-[#fffffff3] dark:bg-[rgba(255,255,255,0.03)]
           flex flex-col 
            
           h-auto w-full
@@ -251,8 +274,9 @@ const PropertyCard = ({property, currentPage}:{property:PropertyDocument, curren
 
 
 
-              </div>
-
+      </div>
+    ):("")}
+    </>
   )
 }
 

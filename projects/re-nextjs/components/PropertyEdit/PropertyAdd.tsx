@@ -17,7 +17,7 @@ import { updateUser_lastUpdate } from "@utils/dateGenerate";
 
 //Part11
 import { getFormData_multiple } from "@utils/ImgformDataGenerate";
-
+import Image from "next/image";
 
 interface propertyInputs_interface {
     country: string;
@@ -101,9 +101,9 @@ const PropertyAdd_Component = ({propertyEditId, setPropertyEditId, setReload}:{
 
 
     //Part 11.01 - formData image upload
-    const [file1, setFile1] = useState<File | string |null>(null);
-    const [file2, setFile2] = useState<File | string |null>(null);
-    const [file3, setFile3] = useState<File | string |null>(null);
+    const [file1, setFile1] = useState<File | string>("");
+    const [file2, setFile2] = useState<File | string>("");
+    const [file3, setFile3] = useState<File | string>("");
 
     
 
@@ -119,9 +119,9 @@ const PropertyAdd_Component = ({propertyEditId, setPropertyEditId, setReload}:{
         //Part 11.01 - formData image upload
         let formData = new FormData();
         if (propertyInfo) formData = getFormData_multiple(formData, null, null, propertyInfo);
-        if (typeof file1 !== "string" || file1 !== null) formData = getFormData_multiple(formData, file1, "1", null);
-        if (typeof file2 !== "string" || file2 !== null) formData = getFormData_multiple(formData, file2, "2", null);
-        if (typeof file3 !== "string" || file3 !== null) formData = getFormData_multiple(formData, file3, "3", null);
+        if (file1 !== "" || file1 !== null) formData = getFormData_multiple(formData, file1, "1", null);
+        if (file2 !== "" || file2 !== null) formData = getFormData_multiple(formData, file2, "2", null);
+        if (file3 !== "" || file3 !== null) formData = getFormData_multiple(formData, file3, "3", null);
 
         // } else if (!file1) {
         //     formData = getFormData_multiple(propertyInfo, null);
@@ -544,8 +544,8 @@ const PropertyAdd_Component = ({propertyEditId, setPropertyEditId, setReload}:{
 
                             <span className="mr-auto mb-1">Add Images (Image 1 required)</span>
 
-                            <label className="w-[100%] flex flex-row justify-center text-center
-                            label_field mb-1
+                            <div className="w-[100%] flex flex-row justify-center text-center items-center
+                            label_field mb-1 max-h-[36px]
                             bg-[#ffffff07] rounded-[7px] border-2 border-[#ffffff02]
                             
                             ">
@@ -553,16 +553,39 @@ const PropertyAdd_Component = ({propertyEditId, setPropertyEditId, setReload}:{
                                     Image 1
                                 </span>
 
-                                <input className="w-full input_field border-0 rounded-r-[6px] 
-                                    dark:bg-[#ffffff09] dark:focus:bg-[#ffffff02]  px-2
-                                    border-[rgba(255,255,255,0.02)]"
-                                    type="file" name="file" onChange={(e)=> setFile1(e.target.files?.[0]!)}
-                                />
-                                
-                            </label>
+                                <div className="my-2">
+                                    <Image width={100} height={50} src={typeof file1 === "string" && file1 !== "" ? (file1) : (file1 == "" ? "/icons/fileNot.svg": "/icons/fileUpload.svg")} alt="pic"
+                                    className="max-w-[2rem] my-2">
+                                    </Image>
+                                </div>
+                                <div className="w-[2rem] my-auto mr-1">
+                                    <button 
+                                    onClick={(e)=> {e.preventDefault(); setFile1("")}}
+                                    type="button"
+                                    className="
+                                    ml-auto bg-theme-text-brighter opacity-80 hover:opacity-100 dark:opacity-100 dark:bg-[#912642] dark:hover:bg-[#9f2545] h-5 w-5 rounded-[6px] text-white flex items-center justify-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" className="bi bi-x-lg" viewBox="0 0 16 16"> <path fill-rule="evenodd" d="M13.854 2.146a.5.5 0 0 1 0 .708l-11 11a.5.5 0 0 1-.708-.708l11-11a.5.5 0 0 1 .708 0Z"/> <path fill-rule="evenodd" d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z"/> </svg>
+                                    </button>
+                                </div>
 
-                            <label className="w-[100%] flex flex-row justify-center text-center
-                            label_field mb-1
+                                <label className="flex-1 flex">
+                                    <input className="w-full input_field border-0 rounded-r-[6px] 
+                                        dark:bg-[#ffffff09] dark:focus:bg-[#ffffff02]  px-2
+                                        border-[rgba(255,255,255,0.02)] my-auto hidden"
+                                        type="file" name="file1" onChange={(e)=> setFile1(e.target.files?.[0]!)}
+                                    />
+                                    <span className="ml-auto px-2 my-2 mr-1 text-sm
+                                     bg-theme-text-brighter opacity-80 hover:opacity-100 dark:opacity-100 dark:bg-[#912642] dark:hover:bg-[#9f2545]
+                                     rounded-[5px]">
+                                        {typeof file1 === "string" && file1 !== "" ? "choose another image" : (file1 == "" ? "upload an image": "image uploaded")}
+                                    </span>
+                                </label>
+
+                                
+                            </div>
+
+                            <div className="w-[100%] flex flex-row justify-center text-center items-center
+                            label_field mb-1 max-h-[36px]
                             bg-[#ffffff07] rounded-[7px] border-2 border-[#ffffff02]
                             
                             ">
@@ -570,16 +593,39 @@ const PropertyAdd_Component = ({propertyEditId, setPropertyEditId, setReload}:{
                                     Image 2
                                 </span>
 
-                                <input className="w-full input_field border-0 rounded-r-[6px] 
-                                    dark:bg-[#ffffff09] dark:focus:bg-[#ffffff02]  px-2
-                                    border-[rgba(255,255,255,0.02)]"
-                                    type="file" name="file" onChange={(e)=> setFile2(e.target.files?.[0]!)}
-                                />
-                                
-                            </label>
+                                <div className="my-2">
+                                    <Image width={100} height={50} src={typeof file2 === "string" && file2 !== "" ? (file2) : (file2 == "" ? "/icons/fileNot.svg": "/icons/fileUpload.svg")} alt="pic"
+                                    className="max-w-[2rem] my-2">
+                                    </Image>
+                                </div>
+                                <div className="w-[2rem] my-auto mr-1">
+                                    <button 
+                                    onClick={(e)=> {e.preventDefault(); setFile2("")}}
+                                    type="button"
+                                    className="
+                                    ml-auto bg-theme-text-brighter opacity-80 hover:opacity-100 dark:opacity-100 dark:bg-[#912642] dark:hover:bg-[#9f2545] h-5 w-5 rounded-[6px] text-white flex items-center justify-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" className="bi bi-x-lg" viewBox="0 0 16 16"> <path fill-rule="evenodd" d="M13.854 2.146a.5.5 0 0 1 0 .708l-11 11a.5.5 0 0 1-.708-.708l11-11a.5.5 0 0 1 .708 0Z"/> <path fill-rule="evenodd" d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z"/> </svg>
+                                    </button>
+                                </div>
 
-                            <label className="w-[100%] flex flex-row justify-center text-center
-                            label_field mb-1
+                                <label className="flex-1 flex">
+                                    <input className="w-full input_field border-0 rounded-r-[6px] 
+                                        dark:bg-[#ffffff09] dark:focus:bg-[#ffffff02]  px-2
+                                        border-[rgba(255,255,255,0.02)] my-auto hidden"
+                                        type="file" name="file2" onChange={(e)=> {console.log(e.target); setFile2(e.target.files?.[0]!)}}
+                                    />
+                                    <span className="ml-auto px-2 my-2 mr-1 text-sm
+                                     bg-theme-text-brighter opacity-80 hover:opacity-100 dark:opacity-100 dark:bg-[#912642] dark:hover:bg-[#9f2545]
+                                     rounded-[5px]">
+                                        {typeof file2 === "string" && file2 !== "" ? "choose another image" : (file2 == "" ? "upload an image": "image uploaded")}
+                                    </span>
+                                </label>
+
+                                
+                            </div>
+
+                            <div className="w-[100%] flex flex-row justify-center text-center items-center
+                            label_field mb-1 max-h-[36px]
                             bg-[#ffffff07] rounded-[7px] border-2 border-[#ffffff02]
                             
                             ">
@@ -587,13 +633,36 @@ const PropertyAdd_Component = ({propertyEditId, setPropertyEditId, setReload}:{
                                     Image 3
                                 </span>
 
-                                <input className="w-full input_field border-0 rounded-r-[6px] 
-                                    dark:bg-[#ffffff09] dark:focus:bg-[#ffffff02]  px-2
-                                    border-[rgba(255,255,255,0.02)]"
-                                    type="file" name="file" onChange={(e)=> setFile3(e.target.files?.[0]!)}
-                                />
+                                <div className="my-2">
+                                    <Image width={100} height={50} src={typeof file3 === "string" && file3 !== "" ? (file3) : (file3 == "" ? "/icons/fileNot.svg": "/icons/fileUpload.svg")} alt="pic"
+                                    className="max-w-[2rem] my-2">
+                                    </Image>
+                                </div>
+                                <div className="w-[2rem] my-auto mr-1">
+                                    <button 
+                                    onClick={(e)=> {e.preventDefault(); setFile3("")}}
+                                    type="button"
+                                    className="
+                                    ml-auto bg-theme-text-brighter opacity-80 hover:opacity-100 dark:opacity-100 dark:bg-[#912642] dark:hover:bg-[#9f2545] h-5 w-5 rounded-[6px] text-white flex items-center justify-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" className="bi bi-x-lg" viewBox="0 0 16 16"> <path fill-rule="evenodd" d="M13.854 2.146a.5.5 0 0 1 0 .708l-11 11a.5.5 0 0 1-.708-.708l11-11a.5.5 0 0 1 .708 0Z"/> <path fill-rule="evenodd" d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z"/> </svg>
+                                    </button>
+                                </div>
+
+                                <label className="flex-1 flex">
+                                    <input className="w-full input_field border-0 rounded-r-[6px] 
+                                        dark:bg-[#ffffff09] dark:focus:bg-[#ffffff02]  px-2
+                                        border-[rgba(255,255,255,0.02)] my-auto hidden"
+                                        type="file" name="file3" onChange={(e)=> setFile3(e.target.files?.[0]!)}
+                                    />
+                                    <span className="ml-auto px-2 my-2 mr-1 text-sm
+                                     bg-theme-text-brighter opacity-80 hover:opacity-100 dark:opacity-100 dark:bg-[#912642] dark:hover:bg-[#9f2545]
+                                     rounded-[5px]">
+                                        {typeof file3 === "string" && file3 !== "" ? "choose another image" : (file3 == "" ? "upload an image": "image uploaded")}
+                                    </span>
+                                </label>
+
                                 
-                            </label>
+                            </div>
 
 
                             <label className="w-[100%] flex flex-col gap-2

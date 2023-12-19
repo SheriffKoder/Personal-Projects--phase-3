@@ -26,9 +26,9 @@ type userInterface = {
 
 
 
-const PropertyCardAdmin = ({setPropertyEditId, property, currentPage="", setReload}:{
+const PropertyCardAdmin = ({setPropertyEditId, property1, currentPage="", setReload}:{
   setPropertyEditId: React.Dispatch<React.SetStateAction<string>>
-  property:PropertyDocument, 
+  property1:PropertyDocument, 
   currentPage:string,
   // userIncoming:userInterface | null,
   setReload: React.Dispatch<React.SetStateAction<boolean>>,
@@ -58,17 +58,18 @@ const PropertyCardAdmin = ({setPropertyEditId, property, currentPage="", setRelo
     
     function handleSliderIndex (direction: number) {
     
-    if (direction < prevFade1) {
-        // console.log("left");
-        (imageReference > 0) ? setImageReference(imageReference-1) : setImageReference(property.property_images.length-1);
-        // setPrevFade1(fade1);
-        // setImageReference(imageReference-1);
-
-    } else if (direction > prevFade1) {
-        // console.log("right");
-        (imageReference < property.property_images.length-1) ? setImageReference(imageReference+1) : setImageReference(0);
-
-    }
+      if (property !== null) {
+        if (direction < prevFade1) {
+          // console.log("left");
+          (imageReference > 0) ? setImageReference(imageReference-1) : setImageReference(property.property_images.length-1);
+          // setPrevFade1(fade1);
+          // setImageReference(imageReference-1);
+        } else if (direction > prevFade1) {
+          // console.log("right");
+          (imageReference < property.property_images.length-1) ? setImageReference(imageReference+1) : setImageReference(0);
+  
+        }  
+      }
     
     }
     
@@ -129,6 +130,7 @@ const PropertyCardAdmin = ({setPropertyEditId, property, currentPage="", setRelo
 
 
 
+
     //Part 8
     // const [user, setUser] = useState(userIncoming);
     
@@ -185,10 +187,33 @@ const PropertyCardAdmin = ({setPropertyEditId, property, currentPage="", setRelo
     }
 
 
-    useEffect(()=> {
-        let slider__container = document.getElementById(property._id);        
+    //Part11
+    const [property, setProperty] = useState<PropertyDocument | null>(null);
 
-        animationCombination1(slider__container);
+    useEffect(()=> {
+
+        //Part11
+        // console.log(property1.property_images);
+
+        if (property === null && property1 !== null) {
+          const filteredImages = property1.property_images.filter((image: string) => {
+            if (image !== "") {
+              return image;
+            }
+          });
+
+          console.log("filteredImages");
+          console.log(filteredImages);
+    
+          const tempProperty:PropertyDocument = property1;
+          tempProperty.property_images = filteredImages as string[];
+          setProperty(tempProperty);  
+        } else if (property !== null) {
+          let slider__container = document.getElementById(property._id);        
+
+          animationCombination1(slider__container);  
+        }
+
 
   },[fade1]);
 
@@ -200,6 +225,9 @@ const PropertyCardAdmin = ({setPropertyEditId, property, currentPage="", setRelo
   // let page = "property";
 
   return (
+
+    <>
+    {property !== null ? (
     <div className={`latest_property bg-[#fffffff3] dark:bg-[rgba(255,255,255,0.03)]
           flex flex-col 
            
@@ -287,7 +315,8 @@ const PropertyCardAdmin = ({setPropertyEditId, property, currentPage="", setRelo
 
 
               </div>
-
+  ):("")}
+  </>
   )
 }
 
