@@ -285,7 +285,7 @@ const page = () => {
                     <h3 className="text-lg font-semibold">{user.userInfo.name}</h3>
                     <p className="text-xs font-light">{user.userInfo.position}
                         { user.userInfo.role === "admin" ? (
-                            " [admin]"
+                            <span className="ml-1 text-[#279b72] dark:text-[#32b084]">[admin]</span>
                         ): ("")}
                     </p>
                     <div className="h-[11.75rem] w-[11.75rem] bg-white overflow-hidden
@@ -350,14 +350,14 @@ const page = () => {
                 </div>
 
                 {/* properties container */}
-                <div className="flex flex-row gap-6 my-6 flex-wrap justify-center md:justify-start mx-auto last-of-type:mr-auto">
+                <div className="flex flex-row gap-6 my-6 flex-wrap justify-center md:justify-start mx-auto last-of-type:mr-auto w-full">
 
                     {/* property */}
                     {user.properties.length > 0 ? (
                     <>
                         {user.properties.map((property: PropertyDocument) => (
                             
-                        <div className="h-auto w-full max-w-[390px] md:w-[calc(50%-16px)] md2:w-[calc(33.3%-16px)] ">
+                        <div className="h-auto w-full max-w-[390px] md:w-[calc(50%-16px)] md2:w-[calc(33.3%-16px)] xl:w-[calc(33.3%-16px)] ">
                             <PropertyCardAdmin setPropertyEditId={setPropertyEditId} property1={property} currentPage="agent" setReload={setReload}/>
                     
                             
@@ -423,7 +423,7 @@ const page = () => {
                             dark:bg-[#ffffff07] dark:hover:bg-[#ffffff0a] dark:focus:bg-[#ffffff0a]
                             flex flex-col rounded-[17px] box-shadow-1 p-1 border border-[rgba(255,255,255,0.02)]
                             text_shadow-2
-                            md2:flex-row md:w-[calc(50%-16px)] md2:min-w-[100%]
+                            md2:flex-row md:w-[calc(50%-16px)] md2:min-w-[100%] md2:h-[166px]
                             ">
 
                                 <div className="md2:order-2 md2:w-[20%] md2:ml-8">
@@ -439,7 +439,7 @@ const page = () => {
                                     </Link>
                                 </div>
 
-                                <div className="md2:order-1 px-2 md2:py-2 md2:px-3 md2:flex-1 md2:h-full md2:flex md2:flex-col">
+                                <div className="md2:order-1 px-2 md2:py-2 md2:px-3 md:flex-1 md2:h-full md:flex md:flex-col">
 
                                     <p className="flex flex-row items-baseline font-bold uppercase">
                                         <span className="inline-block shrink-0 h-3 w-3 bg-red-500 opacity-80 rounded-full mr-4"></span>
@@ -455,7 +455,8 @@ const page = () => {
                                         </span>
                                     </span>
 
-                                    <span className="flex flex-row items-baseline mt-2 md2:flex-1 md2:h-full">
+                                    <div className="flex-1 flex flex-col justify-end">
+                                    <span className="flex flex-row items-baseline mt-2 md2:flex-1 md2:h-full md2:items-end">
                                             <span className="inline-block shrink-0 h-3 w-3 bg-[rgba(0,89,255,0.7)] rounded-full mr-4"></span>
                                                 <div className="flex flex-col w-full items-start 
                                                 md2:flex-row md2:justify-start md2:gap-2">
@@ -492,6 +493,7 @@ const page = () => {
                                             Delete
                                         </button>
 
+                                    </div>
                                     </div>
                                 
                                 </div>

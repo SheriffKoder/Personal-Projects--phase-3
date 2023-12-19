@@ -55,19 +55,23 @@ export const POST = async (request: Request, {params}) => {
  
 
         files.forEach(async (file) => {
-            if (file) {
+            try {
+                if (file) {
 
-                const path = join(process.cwd(), `/public/images/agent-${params.userId}/properties`, file.name);
-
-                let file1_url = ""; 
-                file1_url = path.split("/public")[1];
-                files_url.push(file1_url);
-
-                const bytes = await file.arrayBuffer();
-                const buffer = Buffer.from(bytes);
-                await writeFile(path, buffer, (err)=>console.log(err));
-                console.log(`image ${file.name} is saved in ${path}`);
-                
+                    const path = join(process.cwd(), `/public/images/agent-${params.userId}/properties`, file.name);
+    
+                    let file1_url = ""; 
+                    file1_url = path.split("/public")[1];
+                    files_url.push(file1_url);
+    
+                    const bytes = await file.arrayBuffer();
+                    const buffer = Buffer.from(bytes);
+                    await writeFile(path, buffer, (err)=>console.log(err));
+                    console.log(`image ${file.name} is saved in ${path}`);
+                    
+                }    
+            } catch (error) {
+                console.log(error);
             }
         })
 
@@ -100,6 +104,8 @@ export const POST = async (request: Request, {params}) => {
                 property_userId: params.userId,
                 property_date: getToday_date(),
                 property_update: getToday_date(),
+                property_availability: newInfo.get("availability") as string,
+                property_recommended: newInfo.get("recommended") as string,
             });
 
             await NewPost.save();

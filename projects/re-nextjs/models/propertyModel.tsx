@@ -21,8 +21,8 @@ export interface PropertyDocument extends Document {
     property_baths: number,
     
     property_listing_type: string,
-    property_availability: boolean,
-    property_recommended: boolean,
+    property_availability: string,
+    property_recommended: string,
     property_price: number,
 
     property_date: string,
@@ -88,14 +88,12 @@ const propertySchema = new Schema<PropertyDocument, {}, Methods>({
     default: "sale",
   },
   property_availability: {
-    type: Boolean,
+    type: String,
     // required: true,
-    default: true,
   },
   property_recommended: {
-    type: Boolean,
+    type: String,
     // required: true,
-    default: true,
   },
   property_price: {
     type: Number,

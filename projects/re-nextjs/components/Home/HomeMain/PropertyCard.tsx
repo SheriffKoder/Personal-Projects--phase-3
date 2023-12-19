@@ -163,8 +163,8 @@ const PropertyCard = ({property1, currentPage}:{property1:PropertyDocument, curr
           }
         });
 
-        console.log("filteredImages");
-        console.log(filteredImages);
+        // console.log("filteredImages");
+        // console.log(filteredImages);
   
         const tempProperty:PropertyDocument = property1;
         tempProperty.property_images = filteredImages as string[];
@@ -198,10 +198,17 @@ const PropertyCard = ({property1, currentPage}:{property1:PropertyDocument, curr
           border border-[rgba(255,255,255,0.02)]
           dark:opacity-75 dark:hover:opacity-90 opacity-90 hover:opacity-100
           focus:opacity-100 dark:focus:opacity-90
+          ${currentPage === 'AllProperties' ? 'md2:h-[254px] xl:flex-col' : ''}
+
           `}>
 
                 <div className={`relative flex flex-row items-center justify-start text-start
-                ${currentPage === 'property' ? '' : 'xl:max-w-[50%]'} `}>
+                ${currentPage === 'property' ? '' : 'xl:max-w-[50%]'} 
+                max-h-[23vh] rounded-t-[10px] overflow-hidden md:max-h-[22vw] lg:max-h-[18vw]
+                xl:max-h-[136px]
+                ${currentPage === 'AllProperties' ? 'xl:min-w-full' : ''}
+
+                `}>
                   <button 
                     onClick={()=>{setPrevFade1(fade1); setFade1(fade1-1);}}
                     className="absolute bg-[#0a0a0a7d] left-1 rounded-[3px]
@@ -212,7 +219,7 @@ const PropertyCard = ({property1, currentPage}:{property1:PropertyDocument, curr
                   className="h-[100%]">
                     <Image src={property.property_images[imageReference]} height={400} width={400} alt={property.property_type+" "+property.property_country+" "+property.property_city+" "+property.property_district+" "+property.property_area+" "+property.property_beds+" bedrooms "+property.property_baths+" bathrooms "+property.property_listing_type}
                     id={property._id}
-                    className={`border-0 rounded-t-[10px] w-full max-h-8.5rem min-h-[100%]
+                    className={`border-0 rounded-t-[10px] min-w-full max-h-8.5rem
                     ${currentPage === 'property' ? '' : 'xl:rounded-l-[10px] xl:rounded-tr-none'}
                     `}
                     style={{objectFit:'fill'}}>

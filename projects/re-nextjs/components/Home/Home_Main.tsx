@@ -334,7 +334,7 @@ const Home_Main = () => {
                     bg-[#fffffff0] focus:bg-[#ffffff] hover:bg-[#ffffff] 
                     dark:bg-[#ffffff07] dark:hover:bg-[#ffffff0a] dark:focus:bg-[#ffffff0a]
                     flex flex-col rounded-[17px] box-shadow-1 p-4 border border-[rgba(255,255,255,0.02)]
-                    text_shadow-2
+                    text_shadow-2 h-[174px] md:h-[146px] lg:h-[184px] lg:p-4
                     ">
                         <p className="flex flex-row items-baseline font-bold uppercase">
                           <span className="inline-block shrink-0 h-3 w-3 bg-red-500 opacity-80 rounded-full mr-4"></span>
@@ -350,14 +350,16 @@ const Home_Main = () => {
                           </span>
                         </span>
 
-                        <span className="flex flex-row items-baseline mt-2">
+                        <span className="flex-1 flex flex-col justify-end pt-2">
+                        <span className="flex flex-row items-baseline mt-auto">
                           <span className="inline-block shrink-0 h-3 w-3 bg-[rgba(0,89,255,0.7)] rounded-full mr-4"></span>
                           <span className="w-full text-start font-light text-sm
                           lowercase flex flex-row items-center">
                             <span className="opacity-60 ">{post.date_update} by {post.userId.name} </span>
-                            <p className="ml-auto mr-2 bg-theme-text-bright h-5 w-5 right_caret rounded-[5px] border-0"> </p>
+                            <p className="ml-auto mr-2 lg:mr-[-0.1rem] lg:mt-4 bg-theme-text-bright h-5 w-5 right_caret rounded-[5px] border-0"> </p>
                           </span>
-                        </span>            
+                        </span>
+                        </span>
                     </Link>
 
                   ))}

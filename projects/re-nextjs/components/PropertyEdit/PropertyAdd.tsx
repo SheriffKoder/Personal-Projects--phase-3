@@ -68,6 +68,8 @@ const PropertyAdd_Component = ({propertyEditId, setPropertyEditId, setReload}:{
             listing_type: "",
             price: "",
             description: "",
+            availability: "",
+            recommended: "",
         });
     
     }
@@ -93,11 +95,13 @@ const PropertyAdd_Component = ({propertyEditId, setPropertyEditId, setReload}:{
         listing_type: "",
         price: "",
         description: "",
+        availability: "",
+        recommended: "",
 
     });
 
     const { country, city, district, type, area, bedrooms, bathrooms, listing_type,
-    price, description } = propertyInfo;
+    price, description, availability, recommended } = propertyInfo;
 
 
     //Part 11.01 - formData image upload
@@ -223,6 +227,8 @@ const PropertyAdd_Component = ({propertyEditId, setPropertyEditId, setReload}:{
             const jsonResponse = await response.json();
             console.log(jsonResponse);
 
+
+            //Part11
             const temp_property = {
                 country: jsonResponse.property_country,
                 city: jsonResponse.property_city,
@@ -237,6 +243,8 @@ const PropertyAdd_Component = ({propertyEditId, setPropertyEditId, setReload}:{
                 price: jsonResponse.property_price,
                 description: jsonResponse.property_description,
                 images: jsonResponse.property_images,
+                availability: jsonResponse.property_availability,
+                recommended: jsonResponse.property_recommended,
         
             };
 
@@ -244,6 +252,7 @@ const PropertyAdd_Component = ({propertyEditId, setPropertyEditId, setReload}:{
             if (temp_property.images[0]) setFile1(temp_property.images[0])
             if (temp_property.images[1]) setFile2(temp_property.images[1])
             if (temp_property.images[2]) setFile3(temp_property.images[2])
+
             setPropertyInfo(temp_property);
 
         }
@@ -420,9 +429,7 @@ const PropertyAdd_Component = ({propertyEditId, setPropertyEditId, setReload}:{
 
                                 <label className="w-[50%] flex flex-row justify-center text-center
                                 label_field
-                                bg-[#ffffff07] rounded-[7px] border-2 border-[#ffffff02]
-                            
-                            ">
+                                bg-[#ffffff07] rounded-[7px] border-2 border-[#ffffff02]">
                                 <span className="min-w-[7rem] px-2 py-1 text_shadow-2 opacity-80 dark:opacity-90">
                                     Bathrooms
                                 </span>
@@ -496,7 +503,8 @@ const PropertyAdd_Component = ({propertyEditId, setPropertyEditId, setReload}:{
                                 <input className="
                                     dark:bg-[#ffffff09] dark:focus:bg-[#ffffff02]
                                     border-[rgba(255,255,255,0.02)]" type="radio" required
-                                    />
+                                    name="availability" value={"Yes"} onChange={handleChange} 
+                                    checked={Boolean(availability === "Yes")}/>
                                 
                                 </label>
 
@@ -506,7 +514,8 @@ const PropertyAdd_Component = ({propertyEditId, setPropertyEditId, setReload}:{
                                 <input className="
                                     dark:bg-[#ffffff09] dark:focus:bg-[#ffffff02]
                                     border-[rgba(255,255,255,0.02)]" type="radio" required
-                                    />
+                                    name="availability" value={"No"} onChange={handleChange}
+                                    checked={Boolean(availability === "No")}/>
                                 
                                 </label>
                             </div>
@@ -525,7 +534,8 @@ const PropertyAdd_Component = ({propertyEditId, setPropertyEditId, setReload}:{
                                 <input className="
                                     dark:bg-[#ffffff09] dark:focus:bg-[#ffffff02]
                                     border-[rgba(255,255,255,0.02)]" type="radio" required
-                                    />
+                                    name="recommended" value={"Yes"} onChange={handleChange} 
+                                    checked={Boolean(recommended === "Yes")}/>
                                 
                                 </label>
 
@@ -535,7 +545,8 @@ const PropertyAdd_Component = ({propertyEditId, setPropertyEditId, setReload}:{
                                 <input className="
                                     dark:bg-[#ffffff09] dark:focus:bg-[#ffffff02]
                                     border-[rgba(255,255,255,0.02)]" type="radio" required
-                                    />
+                                    name="recommended" value={"No"} onChange={handleChange} 
+                                    checked={Boolean(recommended === "No")}/>
                                 
                                 </label>
                             </div>

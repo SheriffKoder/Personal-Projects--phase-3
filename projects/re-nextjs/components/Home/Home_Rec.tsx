@@ -166,10 +166,13 @@ const Home_Rec = () => {
               fetchProperties();    
         }
       
-        if (propertiesRec !== null) {
-            // console.log(propertiesRec[sliderIndex]._id);
-            let slider__container = document.querySelector("#slider__container");        
-            animationCombination(slider__container);    
+        if (propertiesRec !== null ) {
+            //if we have only one recommended property there is no need to animate
+            if (propertiesRec.length > 1) {
+                // console.log(propertiesRec[sliderIndex]._id);
+                let slider__container = document.querySelector("#slider__container");        
+                animationCombination(slider__container);    
+            } 
         }
 
     },[fade]);

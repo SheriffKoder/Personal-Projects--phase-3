@@ -120,6 +120,8 @@ export const PATCH = async (request, {params}) => {
                 currentProperty.property_images = files_url;
 
                 currentProperty.property_update = getToday_date();
+                currentProperty.property_availability = newInfo.get("availability") as string,
+                currentProperty.property_recommended = newInfo.get("recommended") as string,
 
 
                 await currentProperty.save();

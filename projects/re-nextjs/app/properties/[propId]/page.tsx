@@ -309,6 +309,15 @@ const page = () => {
     
                 property_title.current = `${jsonResponse.thisProperty.property_type} for ${jsonResponse.thisProperty.property_listing_type} in <${jsonResponse.thisProperty.property_country} ${jsonResponse.thisProperty.property_city} ${jsonResponse.thisProperty.property_district} ${jsonResponse.thisProperty.property_area}sqm ${jsonResponse.thisProperty.property_beds} bedrooms / ${jsonResponse.thisProperty.property_baths} bathrooms`;
         
+                //Part 11 - filter out empty string images (i.e not used slots)
+                jsonResponse.thisProperty.property_images = jsonResponse.thisProperty.property_images.filter((image: string) => {
+                    if (image !== "") {
+                      return image;
+                    }
+                  });
+
+
+
                 setPageProperty(jsonResponse);
             }
             fetchProperty();
@@ -470,22 +479,47 @@ const page = () => {
                     </div>
                 </div>
 
-                <div className="h-auto w-full 
+                <div className=" w-full 
                 bg-[#fffffff0] focus:bg-[#ffffff] hover:bg-[#ffffff] 
                 glass-container-background-2 backdrop-blur-10
                 dark:bg-[#ffffff07] dark:hover:bg-[#ffffff0a] dark:focus:bg-[#ffffff0a]
                 flex flex-col rounded-[17px] box-shadow-1 p-4 border border-[rgba(255,255,255,0.02)]
-                text_shadow-3 max-w-[100%]
+                text_shadow-3 max-w-[100%] h-full
                 ">
 
-                                <div className="w-full
-                                flex flex-col justify-center items-start gap-2 text-sm">
+                                <div className="w-full h-full
+                                flex flex-col items-start gap-2 text-sm">
 
-                                    <div>
-                                        <div className="font-semibold mb-2 text-base">                             
-                                            <span className="inline-block shrink-0 h-3 w-3 bg-green-500 
-                                            opacity-80 rounded-full mr-2"></span>
-                                            Property Details
+                                    <div className="w-full">
+                                        <div className="font-semibold mb-2 text-base flex flex-col w-full items-baseline md:flex-row">                             
+                                            <div>
+                                                <span className="inline-block shrink-0 h-3 w-3 bg-green-500 
+                                                opacity-80 rounded-full mr-2
+                                                "></span>
+                                                <span>Property Details</span>
+                                            </div>
+                                            
+                                            {pageProperty ? (
+                                            <button className="hidden md:inline
+                                            md:ml-auto mx-auto md:mx-0 my-4 md:my-0 md:mt-1
+                                            outline-2 outline-offset-4 dark:hover:outline-[#fffd] outline dark:outline-[#ffffff2b]
+                                            outline-[#0000000f] hover:outline-[#0000002a]
+                                            px-2 py-1 border-0 rounded-[7px] opacity-70 dark:hover:opacity-90 hover:opacity-100
+                                            bg-[#279b72] dark:bg-[#32b084] text-white"
+                                            type="button" onClick={()=>handleInquiry(pageProperty.thisProperty)}>
+                                            
+                                            {pageProperty.thisProperty.property_availability === "Yes" ? 
+                                            (
+
+                                                "Book a visit"                 
+                                            ) : (
+
+                                                "Contact us for alternatives"
+                                            )}                                        
+                                            
+                                            </button>
+                                            ):("")}
+
                                         </div>
                                         <div>Country: {pageProperty.thisProperty.property_country}</div>
                                         <div>City: {pageProperty.thisProperty.property_city}</div>
@@ -499,7 +533,7 @@ const page = () => {
                                             <span className="mr-1">
                                                 Property is:
                                             </span>
-                                            {pageProperty.thisProperty.property_availability ? 
+                                            {pageProperty.thisProperty.property_availability === "Yes" ? 
                                                 (
                                                 <span className="text-[#279b72] dark:text-[#32b084]">
                                                     Available                                
@@ -526,25 +560,27 @@ const page = () => {
                                         <div>{pageProperty.thisProperty.property_description}</div>
                                     </div>
 
-                                    <div className="my-2 mx-auto ">
-                                        {pageProperty ? (
-                                        <button className="outline-2 outline-offset-4 dark:hover:outline-[#fffd] outline dark:outline-[#ffffff2b]
-                                        outline-[#0000000f] hover:outline-[#0000002a]
-                                        px-2 py-1 border-0 rounded-[7px] opacity-70 dark:hover:opacity-90 hover:opacity-100
-                                        bg-[#279b72] dark:bg-[#32b084] text-white"
-                                        type="button" onClick={()=>handleInquiry(pageProperty.thisProperty)}>
-                                        
-                                        {pageProperty.thisProperty.property_availability ? 
-                                        (
+                                    <div className="mt-auto mx-auto mb-2 md:hidden">
+                                    {pageProperty ? (
+                                            <button className="
+                                            md:ml-auto mx-auto md:mx-0 mt-auto md:my-0 md:mt-1
+                                            outline-2 outline-offset-4 dark:hover:outline-[#fffd] outline dark:outline-[#ffffff2b]
+                                            outline-[#0000000f] hover:outline-[#0000002a]
+                                            px-2 py-1 border-0 rounded-[7px] opacity-70 dark:hover:opacity-90 hover:opacity-100
+                                            bg-[#279b72] dark:bg-[#32b084] text-white"
+                                            type="button" onClick={()=>handleInquiry(pageProperty.thisProperty)}>
+                                            
+                                            {pageProperty.thisProperty.property_availability === "Yes" ? 
+                                            (
 
-                                            "Book a visit"                 
-                                        ) : (
+                                                "Book a visit"                 
+                                            ) : (
 
-                                            "Contact us for alternatives"
-                                        )}                                        
-                                        
-                                        </button>
-                                        ):("")}
+                                                "Contact us for alternatives"
+                                            )}                                        
+                                            
+                                            </button>
+                                            ):("")}
                                         {/* <button className="outline-2 outline-offset-4 hover:outline-[#fffd] outline outline-[#ffffff2b]
                                             px-2 py-1 border-0 rounded-[7px] opacity-80 hover:opacity-90
                                         bg-theme-text-brighter dark:bg-theme-text-dark text-white">
@@ -566,17 +602,17 @@ const page = () => {
             flex flex-col rounded-[7px] box-shadow-1 p-2 border border-[rgba(255,255,255,0.02)]
             text_shadow-2 md2:rounded-[17px]
             ">
-                <span className="flex flex-col items-baseline p-2 md2:p-2 md2:flex-col">
+                <span className="flex flex-col items-baseline p-2 md2:p-2 md2:flex-col h-full">
                     <span className="inline-block shrink-0 h-3 w-3 bg-[rgba(0,89,255,0.7)] rounded-full mr-4"></span>
-                    <span className="w-full text-start font-light text-sm
+                    <span className="h-full w-full text-start font-light text-sm
                     lowercase flex flex-row items-center">
                         <span className="opacity-60 mr-2 hidden">{pageProperty.thisProperty.property_date} by {pageProperty.thisProperty.property_userId.name} </span>
 
-                        <div className="flex flex-col gap-4 mt-2 capitalize text-center w-full items-center">
+                        <div className="h-full flex flex-col gap-4 mt-2 capitalize text-center w-full items-center">
 
 
                             <div className="flex flex-col md:flex-row  md2:flex-col items-center justify-center md2:gap-4 gap-4 md:gap-8">
-                                <div className="h-[6rem] w-[6rem] bg-white rounded-full flex items-center justify-center dark:text-black">
+                                <div className="overflow-hidden h-[6rem] w-[6rem] bg-white rounded-full flex items-center justify-center dark:text-black">
                                 <Image src={pageProperty.thisProperty.property_userId.avatar} height={100} width={100} alt="agent's photo"
                                 className="
                                 border-0
@@ -606,11 +642,11 @@ const page = () => {
                                 You may also be interested to look at
                             </h4>
 
-                            <div className="w-full mx-auto lg:w-auto lg:mx-0">
-                                <div className="flex flex-row flex-wrap gap-2 md2:flex-col">
+                            <div className="w-full mx-auto lg:w-auto lg:mx-0 mt-auto md2:mt-0 mb-2">
+                                <div className="flex flex-row flex-wrap gap-4 md2:gap-8 md2:flex-col mt-auto">
                                     {pageProperty.recProperties.map((property) => (
                                         
-                                        <div className="w-[calc(100%*(1/2)-6px)] md:w-[calc(100%*(1/3)-6px)] md2:w-full">
+                                        <div className="w-[calc(100%*(1/2)-8px)] md:w-[calc(100%*(1/3)-11px)] md2:w-full">
                                             <PropertyCard property1={property} currentPage="property" />
                                         </div>
                                     ))}

@@ -177,7 +177,7 @@ useEffect(()=> {
                 glass-container-background-2 backdrop-blur-10
                 dark:bg-[#ffffff07] dark:hover:bg-[#ffffff0a] dark:focus:bg-[#ffffff0a]
                 flex flex-col rounded-[17px] box-shadow-1 p-2 border border-[rgba(255,255,255,0.02)]
-                text_shadow-2 max-w-[100%]
+                text_shadow-2 max-w-[100%] md2:min-h-[300px]
                 ">
                     <div className="p-2">
                     
@@ -247,7 +247,7 @@ useEffect(()=> {
                                 bg-[#fffffff0] focus:bg-[#ffffff] hover:bg-[#ffffff] 
                                 dark:bg-[#ffffff07] dark:hover:bg-[#ffffff0a] dark:focus:bg-[#ffffff0a]
                                 flex flex-col rounded-[17px] box-shadow-1 p-3 border border-[rgba(255,255,255,0.02)]
-                                text_shadow-2 text-xs
+                                text_shadow-2 text-xs w-full min-h-[158px]
                                 ">
                                     <p className="flex flex-row items-baseline font-bold uppercase">
                                     <span className="inline-block shrink-0 h-2 w-2 bg-red-500 opacity-50 rounded-full mr-2"></span>
@@ -263,16 +263,18 @@ useEffect(()=> {
                                     </span>
                                     </span>
 
-                                    <span className="flex flex-row items-baseline mt-2">
-                                    <span className="inline-block shrink-0 h-2 w-2 bg-[rgba(0,89,255,0.5)] rounded-full mr-2"></span>
-                                    <span className="w-full text-start font-light text-sm
-                                    lowercase flex flex-row items-center">
-                                        <span className="opacity-60 ">{post.date_update} 
-                                        <div>by {post.userId.name} </div>
+                                    <span className="flex-1 flex flex-col justify-end">
+                                        <span className="flex flex-row items-baseline mt-auto h-full">
+                                        <span className="inline-block shrink-0 h-2 w-2 bg-[rgba(0,89,255,0.5)] rounded-full mr-2"></span>
+                                        <span className="w-full text-start font-light text-sm
+                                        lowercase flex flex-row items-end">
+                                            <span className="opacity-60 ">{post.date_update} 
+                                            <span className="md2:block">by {post.userId.name}</span>
+                                            </span>
+                                            <p className="ml-auto mr-[-0.2rem] md2:mr-0 md2:px-1 bg-theme-text-bright h-5 w-5 right_caret rounded-[5px] border-0"> </p>
                                         </span>
-                                        <p className="ml-auto mr-2 bg-theme-text-bright h-5 w-5 right_caret rounded-[5px] border-0"> </p>
+                                        </span>            
                                     </span>
-                                    </span>            
                                 </Link>
 
                             ))}

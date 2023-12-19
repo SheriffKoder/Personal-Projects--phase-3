@@ -415,6 +415,8 @@ const page = () => {
     border backdrop-blur-10 pt-7 pb-8 px-4 mt-8
     dark:bg-[#68585806] dark:border-[#ffffff05]
     text-[#000000b3] dark:text-[#ffffffb0] text-center text-l flex flex-col gap-1
+    sm:px-12
+    
     ">
 
         {/* here are the posts */}

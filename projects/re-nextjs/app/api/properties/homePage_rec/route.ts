@@ -9,7 +9,7 @@ export const GET = async () => {
     try {
         await connectToDB();
 
-        const properties = await PropertyModel.find().limit(4);
+        const properties = await PropertyModel.find({property_recommended: "Yes"}).limit(4);
 
         return new Response(JSON.stringify(properties), {status: 200});
 

@@ -202,8 +202,8 @@ const PropertyCardAdmin = ({setPropertyEditId, property1, currentPage="", setRel
             }
           });
 
-          console.log("filteredImages");
-          console.log(filteredImages);
+          // console.log("filteredImages");
+          // console.log(filteredImages);
     
           const tempProperty:PropertyDocument = property1;
           tempProperty.property_images = filteredImages as string[];
@@ -238,10 +238,15 @@ const PropertyCardAdmin = ({setPropertyEditId, property1, currentPage="", setRel
           border border-[rgba(255,255,255,0.02)]
           dark:opacity-75 dark:hover:opacity-90 opacity-90 hover:opacity-100
           focus:opacity-100 dark:focus:opacity-90
+          xl:h-[190px]
           `}>
 
-                <div className={`relative flex flex-row items-center justify-start text-start
-                ${currentPage === 'property' ? '' : 'xl:max-w-[50%]'} `}>
+                <div className={`relative flex flex-row items-center justify-center text-start
+                ${currentPage === 'property' ? '' : 'xl:max-w-[50%]'} 
+                md:max-h-[25vw] overflow-hidden rounded-t-[10px] xl:rounded-tr-none
+                md2:h-[14vw] xl:max-h-full
+                `}>
+
                   <button 
                     onClick={()=>{setPrevFade1(fade1); setFade1(fade1-1);}}
                     className="absolute bg-[#0a0a0a7d] left-1 rounded-[3px]
@@ -255,7 +260,7 @@ const PropertyCardAdmin = ({setPropertyEditId, property1, currentPage="", setRel
                     className={`border-0 rounded-t-[10px] w-full max-h-8.5rem min-h-[100%]
                     ${currentPage === 'property' ? '' : 'xl:rounded-l-[10px] xl:rounded-tr-none'}
                     `}
-                    style={{objectFit:'fill'}}>
+                    style={{objectFit:'cover'}}>
                     </Image>
                   </Link>
 
