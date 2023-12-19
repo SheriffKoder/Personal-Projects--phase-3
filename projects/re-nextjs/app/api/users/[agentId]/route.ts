@@ -86,7 +86,7 @@ export const PATCH = async (request:Request, {params}:any) => {
     if (file) {
         const bytes = await file.arrayBuffer();
         const buffer = Buffer.from(bytes);
-        const path = join(process.cwd(), `/public/images/agent-{currentUserPage}/profile`, file.name);
+        const path = join(process.cwd(), `/public/images/agent-${currentUserPage}/profile`, file.name);
         await writeFile(path, buffer, (err)=>console.log(err));
         console.log(`image ${file.name} is saved in ${path}`);
         userAvatar = path.split("/public")[1];
@@ -94,7 +94,7 @@ export const PATCH = async (request:Request, {params}:any) => {
         userAvatar = newInfo.get("avatar") as string;
     }
 
-
+    
 
     try {
         await connectToDB();
