@@ -9,6 +9,8 @@ import { ChangeEventHandler, FormEventHandler } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
+
+
 const SignUp_component = () => {
 
      //02X
@@ -61,6 +63,8 @@ const SignUp_component = () => {
         hideSignUp();
         hideDropDownMenu();
     }
+
+
 
 
         

@@ -8,6 +8,7 @@ import { getToday_date } from "@utils/dateGenerate";
 //Part 11.01
 import { join } from "path";
 import { writeFile } from "fs";
+import { increaseUserScore } from "@utils/userScore";
 
 
 export const POST = async (request:Request, {params}:any) => {
@@ -65,7 +66,11 @@ export const POST = async (request:Request, {params}:any) => {
 
         });
 
-        await NewPost.save();
+        await Promise.all([
+            await NewPost.save(),
+            await increaseUserScore("post", currentUserPage)    
+        ]);
+
 
         //[return a new response] where we can stringify the prompt
         //and specify the status

@@ -33,7 +33,7 @@ const AgentCard = ({userIncoming, setUserIncoming, sessionId}:{
 
     const [user, setUser] = useState(userIncoming);
 
-    const handleUserDelete = async (removableUserEmail:string) => {
+    const handleUserDelete = async (removableUserId:string) => {
 
         // e.preventDefault();
         const current_url = window.location.href.toString().split("/agents/")[1];
@@ -41,7 +41,7 @@ const AgentCard = ({userIncoming, setUserIncoming, sessionId}:{
 
         const response = await fetch(`/api/users/${current_url}`, {
             method: "DELETE",
-            body: JSON.stringify({sessionId,removableUserEmail}),
+            body: JSON.stringify({sessionId,removableUserId}),
 
         })
 
@@ -54,12 +54,12 @@ const AgentCard = ({userIncoming, setUserIncoming, sessionId}:{
 
 
 
-    const reloadUsers = (removableUserEmail:string) => {
+    const reloadUsers = (removableUserId:string) => {
 
         //once deleted, the user interface should be updated without this user
         //this can be from the database or from the UI
         let temp_user = user;
-        const filteredAgents = user.allAgents.filter((agent) => agent.email !== removableUserEmail);
+        const filteredAgents = user.allAgents.filter((agent) => agent._id.toString() !== removableUserId);
         temp_user.allAgents = filteredAgents;
 
         setUser(temp_user);
@@ -117,8 +117,8 @@ const AgentCard = ({userIncoming, setUserIncoming, sessionId}:{
                                 </div>
 
                                 <p className="text-xs font-light">Last Update: {agent.update}</p>
-                                <p className="text-xs font-light">Properties [{agent.properties.length}]</p>
-                                <p className="text-xs font-light">Posts [{agent.posts.length}]</p>
+                                <p className="text-xs font-light">Properties [{agent.properties_count}]</p>
+                                <p className="text-xs font-light">Posts [{agent.posts_count}]</p>
 
                                 <div className="mt-2 flex flex-row items-center justify-center">
                                     <Link href={"/agents/"+agent._id} type="button" 
@@ -133,7 +133,7 @@ const AgentCard = ({userIncoming, setUserIncoming, sessionId}:{
 
 
                                     {/* <form method="post" action="" className="inline"> */}
-                                    <button type="button" onClick={()=>{handleUserDelete(agent.email); reloadUsers(agent.email); setUserIncoming(user);}}
+                                    <button type="button" onClick={()=>{handleUserDelete(agent._id.toString()); reloadUsers(agent._id.toString()); setUserIncoming(user);}}
                                     className="border border-1
                                     dark:bg-[#68585806] bg-[#ffffffd3] 
                                     dark:border-[#ffffff19] dark:hover:border-[#ffffff36]

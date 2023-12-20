@@ -5,6 +5,11 @@ const nextConfig = {
       GG_Maps_AP: process.env.GG_Maps_AP,
       GG_Maps_MapId: process.env.GG_Maps_MapId,
       MONGODB_URI : process.env.MONGODB_URI,
+      EmailHost: process.env.EmailHost,
+      EmailPort : process.env.EmailPort,
+      EmailUser : process.env.EmailUser,
+      EmailPass : process.env.EmailPass,
+      myEmail : process.env.myEmail,
     },
     images: {
         remotePatterns: [

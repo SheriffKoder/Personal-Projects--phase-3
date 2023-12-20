@@ -7,7 +7,9 @@ import UserModel, { UserDocument } from "@models/userModel";
 //Part 11.01
 import { getToday_date } from "@utils/dateGenerate";
 import { join } from "path";
-import { writeFile } from "fs";
+import { writeFile , unlink, readdir, rmdir} from "fs";
+
+//Part 10.2
 
 
 
@@ -152,23 +154,51 @@ export const DELETE = async (request, {params}) => {
 
         await connectToDB();
 
-        const {sessionId, removableUserEmail} = await request.json();
+        const {sessionId, removableUserId} = await request.json();
 
         console.log(sessionId);
-        console.log(removableUserEmail);
+        console.log(removableUserId);
+
+        Promise.all([
+            await UserModel.findOneAndDelete({_id:removableUserId}),
+            await PostModel.deleteMany({userId: removableUserId}),
+            await PropertyModel.deleteMany({property_userId: removableUserId})
+        ]);
+
+        const myFolders = [
+            "/properties",
+            "/posts",
+            "/profile",
+            ""  //at last remove the parent
+        ]
+
+        myFolders.forEach((folder) => {
+            const path_posts = join(process.cwd()+ `/public/images/agent-${removableUserId}` + `${folder}`);;
+            // const directory = `/home/desktop/git/phase-3/projects/re-nextjs/public/images/agent-${removableUserId}`
+            //remove files in folder
+            readdir(path_posts, (err, files) => {
+                if (err) throw err;
+
+                for (const file of files) {
+                    unlink(join(path_posts, file), (err) => {
+                        if (err) throw err;
+                    });
+                }
+            });
+            //then remove the folder
+            rmdir(join(process.cwd()+ `/public/images/agent-${removableUserId}` + `${folder}`), (error)=> {
+                console.log(error);
+            });
+        });
 
 
-        await UserModel.findOneAndDelete({email:removableUserEmail});
 
-        // let allAgents :UserDocument[] = [];
-        
-        // allAgents = await UserModel.find({_id:{$ne:sessionId}});
 
-        // return new Response(JSON.stringify({allAgents}), {status: 200});
+
         return new Response(JSON.stringify("Delete User success"), {status: 200});
 
     } catch (error) {
-        
+        console.log(error);        
         return new Response(JSON.stringify("Failed to delete the user"), {status: 500});
 
     }

@@ -21,8 +21,8 @@ export interface UserDocument extends Document {
     phone: number;
     avatar: string;
     position: string;
-    properties: PropertyDocument[];
-    posts: PostDocument[];
+    properties_count: number;
+    posts_count: number;
     update: string;
 }
 
@@ -57,17 +57,15 @@ const userSchema = new Schema<UserDocument, {}, Methods>({
         required: false,
     },
 
-    properties: {
-        type: [], 
-        ref: "Property", 
+    properties_count: {
+        type: Number, 
         required: false,
-        default: []
+        default: 0
     },
-    posts: {
-        type: [], 
-        ref: "Post", 
+    posts_count: {
+        type: Number, 
         required: false,
-        default: []
+        default: 0
     },
     // properties: [
     //     {

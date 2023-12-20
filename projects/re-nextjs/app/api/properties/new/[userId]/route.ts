@@ -9,6 +9,8 @@ import { getToday_date } from "@utils/dateGenerate";
 import { join } from "path";
 import { writeFile } from "fs";
 
+//Part 10
+import { increaseUserScore } from "@utils/userScore";
 
 //
 
@@ -108,7 +110,11 @@ export const POST = async (request: Request, {params}) => {
                 property_recommended: newInfo.get("recommended") as string,
             });
 
-            await NewPost.save();
+            await Promise.all([
+                await NewPost.save(),
+                await increaseUserScore("property", params.userId)
+            ]);
+
 
             //[return a new response] where we can stringify the prompt
             //and specify the status

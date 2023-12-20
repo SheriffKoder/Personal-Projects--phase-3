@@ -9,6 +9,7 @@ import { getToday_date } from "@utils/dateGenerate";
 import { join } from "path";
 import { writeFile } from "fs";
 
+import { decreaseUserScore } from "@utils/userScore";
 
 
 //to fill the edit property inputs
@@ -155,9 +156,14 @@ export const DELETE = async (request, {params}) => {
         // console.log(propertyId);
         console.log(params.propId);
 
+        await Promise.all([
+            await decreaseUserScore("property", params.propId),
+            await PropertyModel.findByIdAndDelete(params.propId)
+        ]);
 
 
-        await PropertyModel.findByIdAndDelete(params.propId);
+
+
 
         return new Response(JSON.stringify("Delete property success"), {status: 200});
 

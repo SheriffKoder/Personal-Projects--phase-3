@@ -70,7 +70,7 @@ const AgentInfo = ({user, setReload}:{
         name: user?.userInfo.name,
         avatar: user?.userInfo.avatar,
         email: user?.userInfo.email,
-        password: user?.userInfo.password,
+        password: "",
         phone: user?.userInfo.phone,
         position: user?.userInfo.position,
     });

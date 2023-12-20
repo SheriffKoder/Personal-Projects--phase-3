@@ -4,7 +4,7 @@
 
 import Link from "next/link"
 import Image from "next/image"
-import { useEffect, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 
 //npm install @vis.gl/react-google-maps
 
@@ -18,6 +18,13 @@ import {
 import { PropertyDocument } from "@models/propertyModel";
 
 
+//Part 11.2
+import { MouseEventHandler, ChangeEventHandler, FormEventHandler } from "react";
+
+
+
+
+
 const page = () => {
 
   //put in process.env, define in next.config.js
@@ -28,15 +35,64 @@ const page = () => {
   const [open, setOpen] = useState(false);
 
   const [propertyInquiryState, setPropertyInquiryState] = useState<PropertyDocument|null>(null);
+  const [propertyInquiryText, setPropertyInquiryText] = useState("");
+
+  
+  ///////////////////////////////////////////////////
+  //Part 11.2
+
+  const [emailBody, setEmailBody] = useState({
+    name: "",
+    number: "",
+    email: "",
+    content: propertyInquiryText,
+  });
+
+  const { name, number, email, content } = emailBody;
+
+  const handleChange: ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement > = ({ target }) => {
+
+    const { name, value } = target;
+    setEmailBody({ ...emailBody, [name]:value});
+
+  }
+
+
+    const handleSubmit: FormEventHandler<HTMLFormElement>  = async (e) => {
+      e.preventDefault();
+      console.log(emailBody);
+        const res = await fetch("/api/mail/propertyMail", {
+            method: "POST",
+            body: JSON.stringify(emailBody),
+
+        }).then((res) => res.json());
+        console.log(res);
+    }
+
+  ///////////////////////////////////////////////////
+  
 
   useEffect(()=> {
 
     const propertyInquiry = sessionStorage.getItem("propertyInquiry");
     if (propertyInquiry) {
-      let myState = JSON.parse(propertyInquiry);
-      setPropertyInquiryState(myState);
-      // console.log(myState);
-    }
+      let propertyInquiryParsed = JSON.parse(propertyInquiry);
+      // setPropertyInquiryState(propertyInquiryParsed);
+      setEmailBody({
+        name: "",
+        number: "",
+        email: "",
+        content:`Hello, i would like to inquire about property #${propertyInquiryParsed._id},\n 
+which is located in ${propertyInquiryParsed.property_country}, ${propertyInquiryParsed.property_city}, ${propertyInquiryParsed.property_district},
+of area ${propertyInquiryParsed.property_area}sqm, ${propertyInquiryParsed.property_beds} bedrooms / ${propertyInquiryParsed.property_baths} bathrooms,
+which is offered for ${propertyInquiryParsed.property_listing_type} for ${propertyInquiryParsed.property_price}.
+Thanks, \n`
+      });
+    
+  }
+
+  //just take the info, set the text then clear the localStorage right away
+  return (sessionStorage.removeItem("propertyInquiry"));
 
 
   },[]);
@@ -96,10 +152,10 @@ const page = () => {
 
         <div className="flex flex-col gap-6 flex-1 my-auto">
             <h1 className="font-semibold text-base">Contact us about your inquiry</h1>
-            <form className="flex flex-col md2:gap-4 gap-6">
+            <form className="flex flex-col md2:gap-4 gap-6" onSubmit={handleSubmit}>
 
               <div className="flex flex-col gap-2 md2:gap-0 md2:flex-row h-14 md2:h-7 items-center">
-                <label className="w-[10rem] block text-center md2:text-start" htmlFor="name">
+                <label className="w-[10rem] block text-center md2:text-start">
                   Your Name
                 </label>
                 <input 
@@ -112,7 +168,13 @@ const page = () => {
                   id="name"
                   maxLength={35}
 
-                  type="text" />                
+                  name="name"
+                  value={name}
+                  onChange={handleChange}
+                  required
+                  
+                  type="text" 
+                  />                
               </div>
               
               <div className="flex flex-col gap-2 md2:gap-0 md2:flex-row h-14 md2:h-7 items-center">
@@ -129,7 +191,12 @@ const page = () => {
                   id="contact-number"
                   maxLength={35}
 
-                  type="tel" />                
+                  name="number"
+                  value={number}
+                  onChange={handleChange}
+                  required
+
+                  type="text" />                
               </div>
 
               <div className="flex flex-col gap-2 md2:gap-0 md2:flex-row h-14 md2:h-7 items-center">
@@ -146,6 +213,12 @@ const page = () => {
                   w-full max-w-[500px]"
                   id="email"
                   maxLength={35}
+
+                  name="email"
+                  value={email}
+                  onChange={handleChange}
+                  required
+
                   type="email" />                
               </div>
 
@@ -165,13 +238,20 @@ const page = () => {
                 py-2 resize-none w-full max-w-[500px]
                 
                 "
+
+                name="content"
+                value={content}
+                onChange={handleChange}
+                required
+
                 id="inquiry"
-                value={propertyInquiryState !== null ? (`Hello, i would like to inquire about property #${propertyInquiryState._id}, 
-which is located in ${propertyInquiryState.property_country}, ${propertyInquiryState.property_city}, ${propertyInquiryState.property_district}, 
-of area ${propertyInquiryState.property_area}sqm, ${propertyInquiryState.property_beds} bedrooms / ${propertyInquiryState.property_baths} bathrooms, 
-which is offered for ${propertyInquiryState.property_listing_type} for ${propertyInquiryState.property_price}. 
-Thanks,
-              `):("")}
+//                 value={propertyInquiryState !== null ? (`Hello, i would like to inquire about property #${propertyInquiryState._id}, 
+// which is located in ${propertyInquiryState.property_country}, ${propertyInquiryState.property_city}, ${propertyInquiryState.property_district}, 
+// of area ${propertyInquiryState.property_area}sqm, ${propertyInquiryState.property_beds} bedrooms / ${propertyInquiryState.property_baths} bathrooms, 
+// which is offered for ${propertyInquiryState.property_listing_type} for ${propertyInquiryState.property_price}. 
+// Thanks,
+//               `):("")}
+// value={propertyInquiryText !== "" ? (propertyInquiryText):("")}
                 >
 
                 </textarea>
@@ -184,7 +264,7 @@ Thanks,
                 </span>
 
                 <div className="md2:flex-1 flex w-full justify-center max-w-[500px]">
-                  <button type="submit" 
+                  <button type="submit"
                 className="bg-theme-text-brighter dark:bg-theme-text-dark text-white 
                   rounded-full py-1.5 px-3 w-[80%] max-w-[200px]
                   opacity-80 hover:opacity-90 text-center md2:ml-auto">

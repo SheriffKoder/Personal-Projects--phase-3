@@ -1,5 +1,6 @@
 import { connectToDB } from "@utils/database";
 import PostModel from "@models/postModel";
+import { decreaseUserScore } from "@utils/userScore";
 
 
 //Part 9.1
@@ -13,8 +14,11 @@ export const DELETE = async (request) => {
 
         // console.log(propertyId);
 
+        await Promise.all([
+            await decreaseUserScore("post", postId),
+            await PostModel.findByIdAndDelete(postId)
 
-        await PostModel.findByIdAndDelete(postId);
+        ]);
 
         return new Response(JSON.stringify("Delete post success"), {status: 200});
 
