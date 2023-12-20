@@ -526,31 +526,34 @@ const page = () => {
             { (user.userInfo.role === "admin" && user.authority === "owner") ? (
                 <AgentCard userIncoming={user} setUserIncoming={setUser} sessionId={sessionId}/>
 
-                ):(
+            ) : ("")}
 
-                    <div className="bg-white rounded-[17px]
-                    glass-container-background-2
-                    border backdrop-blur-10 pt-4 pb-4 px-4
-                    dark:bg-[#68585806] dark:border-[#ffffff05]
-                    text-[#000000dd] dark:text-[#ffffffd3]  
-                    opacity-80 hover:opacity-100
-                    flex flex-col items-center justify-center text-center capitalize text-l 
-                    w-full mt-8
-                    
-                    ">
-                    <Link href={"/agents/"+session?.user.id} type="button" 
-                                    className="border border-1
-                                    dark:bg-[#68585806] bg-[#ffffffd3] 
-                                    dark:border-[#ffffff19] dark:hover:border-[#ffffff36]
-                                    text-[#000000dd] dark:text-[#ffffffd3] 
-                                    rounded-[10px] text-sm w-fit px-4 py-2
-                                    opacity-90 hover:opacity-100">
-                                        Back to your profile
-                                    </Link>
+            {(user.userInfo.role === "admin" && user.authority === "viewer") ? (
 
-                    </div>
+                <div className="bg-white rounded-[17px]
+                glass-container-background-2
+                border backdrop-blur-10 pt-4 pb-4 px-4
+                dark:bg-[#68585806] dark:border-[#ffffff05]
+                text-[#000000dd] dark:text-[#ffffffd3]  
+                opacity-80 hover:opacity-100
+                flex flex-col items-center justify-center text-center capitalize text-l 
+                w-full mt-8
+                
+                ">
+                <Link href={"/agents/"+session?.user.id} type="button" 
+                                className="border border-1
+                                dark:bg-[#68585806] bg-[#ffffffd3] 
+                                dark:border-[#ffffff19] dark:hover:border-[#ffffff36]
+                                text-[#000000dd] dark:text-[#ffffffd3] 
+                                rounded-[10px] text-sm w-fit px-4 py-2
+                                opacity-90 hover:opacity-100">
+                                    Back to your profile
+                                </Link>
 
-                )}
+                </div>
+                ) : ("")}
+
+                
                 
             </>) : ("")}
             

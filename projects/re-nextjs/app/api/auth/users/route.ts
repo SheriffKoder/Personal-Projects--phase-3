@@ -54,7 +54,7 @@ export const POST = async (req: Request): Promise<NewResponse> => {
     );
 
     let role: string;
-    (body.adminId !== "1234" && body.adminId === "1111") ? role = "admin" : role = "agent";
+    (body.adminId !== "1234" && body.adminId === "1111") ? role = "admin" : role = "user";
 
 
     //the body has the name, email etc.. like the NewAgentRequest
@@ -81,10 +81,11 @@ export const POST = async (req: Request): Promise<NewResponse> => {
     //     console.log(error);
     // });
 
+    const mainFolder = await mkdir(join(process.cwd() + "/public" + "/images/agent-" + user._id), (error)=> {
+        console.log(error);
+    });
+
     await Promise.all([
-        mkdir(join(process.cwd() + "/public" + "/images/agent-" + user._id), (error)=> {
-            console.log(error);
-        }),
         mkdir(join(process.cwd() + "/public" + "/images/agent-" + user._id + "/properties"), (error)=> {
             console.log(error);
         }),

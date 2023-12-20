@@ -6,8 +6,9 @@ import UserModel, { UserDocument } from "@models/userModel";
 
 //Part 11.01
 import { getToday_date } from "@utils/dateGenerate";
-import { join } from "path";
+import { join, resolve } from "path";
 import { writeFile , unlink, readdir, rmdir} from "fs";
+import { removeFolder } from "@utils/deleteFolder";
 
 //Part 10.2
 
@@ -152,47 +153,29 @@ export const DELETE = async (request, {params}) => {
     
     try {
 
-        await connectToDB();
 
+
+
+        await connectToDB();
         const {sessionId, removableUserId} = await request.json();
 
         console.log(sessionId);
         console.log(removableUserId);
 
-        Promise.all([
-            await UserModel.findOneAndDelete({_id:removableUserId}),
-            await PostModel.deleteMany({userId: removableUserId}),
-            await PropertyModel.deleteMany({property_userId: removableUserId})
-        ]);
 
-        const myFolders = [
+
+
+        await UserModel.findOneAndDelete({_id:removableUserId}),
+        await PostModel.deleteMany({userId: removableUserId});
+        await PropertyModel.deleteMany({property_userId: removableUserId});
+
+        const myPathFolders = [
             "/properties",
             "/posts",
             "/profile",
-            ""  //at last remove the parent
-        ]
-
-        myFolders.forEach((folder) => {
-            const path_posts = join(process.cwd()+ `/public/images/agent-${removableUserId}` + `${folder}`);;
-            // const directory = `/home/desktop/git/phase-3/projects/re-nextjs/public/images/agent-${removableUserId}`
-            //remove files in folder
-            readdir(path_posts, (err, files) => {
-                if (err) throw err;
-
-                for (const file of files) {
-                    unlink(join(path_posts, file), (err) => {
-                        if (err) throw err;
-                    });
-                }
-            });
-            //then remove the folder
-            rmdir(join(process.cwd()+ `/public/images/agent-${removableUserId}` + `${folder}`), (error)=> {
-                console.log(error);
-            });
-        });
-
-
-
+        ];
+        const userPath = `/public/images/agent-${removableUserId}`;
+        removeFolder(userPath, myPathFolders);
 
 
         return new Response(JSON.stringify("Delete User success"), {status: 200});
