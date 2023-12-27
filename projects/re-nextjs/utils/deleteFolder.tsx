@@ -3,6 +3,9 @@ import { join, resolve } from "path";
 import { writeFile , unlink, readdir, rmdir} from "fs";
 
 
+//need to wait for all subfolders to be deleted in order to delete the main folder (path)
+//waiting for each subfolder for the next subfolder to be deleted is not necessary though
+
 
 
 //Promise

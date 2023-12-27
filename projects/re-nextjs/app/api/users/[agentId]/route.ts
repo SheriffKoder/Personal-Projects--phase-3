@@ -153,9 +153,6 @@ export const DELETE = async (request, {params}) => {
     
     try {
 
-
-
-
         await connectToDB();
         const {sessionId, removableUserId} = await request.json();
 
@@ -164,11 +161,13 @@ export const DELETE = async (request, {params}) => {
 
 
 
-
+        //Delete and clear user items from the database
         await UserModel.findOneAndDelete({_id:removableUserId}),
         await PostModel.deleteMany({userId: removableUserId});
         await PropertyModel.deleteMany({property_userId: removableUserId});
 
+
+        //Clear and delete user local folder
         const myPathFolders = [
             "/properties",
             "/posts",
@@ -176,6 +175,8 @@ export const DELETE = async (request, {params}) => {
         ];
         const userPath = `/public/images/agent-${removableUserId}`;
         removeFolder(userPath, myPathFolders);
+
+
 
 
         return new Response(JSON.stringify("Delete User success"), {status: 200});

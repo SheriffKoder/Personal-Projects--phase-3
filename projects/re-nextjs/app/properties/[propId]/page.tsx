@@ -44,143 +44,7 @@ import { ChangeEventHandler } from "react";
 const page = () => {
 
     const router = useRouter();
-
-
-    let properties: propertyInterface[] = [
-        {
-            property_images : ["/images/furniture.avif", "/images/logo.svg"],        
-            property_id : 1,
-
-            property_country: "Egypt",
-            property_city: "Giza",
-            property_district: "Zayed",
-
-            property_type: "Apartment",
-            property_area: 110,
-            property_beds: 2,
-            property_baths: 1,
-            
-            property_listing_type: "rent",
-            property_availability: true,
-            property_recommended: true,
-            property_price: 6000,
-
-            property_date: "25 Dec 2023",
-            property_author: "John",
-            property_description: "World Class property in a friendly neighborhood contains all facilities"
-
-        },
-        
-        {
-            property_images : ["/images/furniture.avif", "/images/logo.svg"],        
-            property_id : 1,
-
-            property_country: "Egypt",
-            property_city: "Giza",
-            property_district: "Zayed",
-
-            property_type: "Apartment",
-            property_area: 110,
-            property_beds: 2,
-            property_baths: 1,
-            
-            property_listing_type: "rent",
-            property_availability: true,
-            property_recommended: true,
-            property_price: 7000,
-
-            property_date: "25 Dec 2023",
-            property_author: "John",
-            property_description: "World Class property in a friendly neighborhood contains all facilities"
-
-
-        },
-
-        {
-            property_images : ["/images/furniture.avif", "/images/logo.svg"],        
-            property_id : 1,
-
-            property_country: "Egypt",
-            property_city: "Giza",
-            property_district: "Zayed",
-
-            property_type: "Apartment",
-            property_area: 110,
-            property_beds: 2,
-            property_baths: 1,
-            
-            property_listing_type: "rent",
-            property_availability: true,
-            property_recommended: true,
-            property_price: 8000,
-
-            property_date: "25 Dec 2023",
-            property_author: "John",
-            property_description: "World Class property in a friendly neighborhood contains all facilities"
-
-
-        },
-
-        {
-            property_images : ["/images/furniture.avif", "/images/logo.svg"],        
-            property_id : 1,
-
-            property_country: "Egypt",
-            property_city: "Giza",
-            property_district: "Zayed",
-
-            property_type: "Apartment",
-            property_area: 110,
-            property_beds: 2,
-            property_baths: 1,
-            
-            property_listing_type: "rent",
-            property_availability: true,
-            property_recommended: true,
-            property_price: 9000,
-
-            property_date: "25 Dec 2023",
-            property_author: "John",
-            property_description: "World Class property in a friendly neighborhood contains all facilities"
-
-
-        },
-
-        {
-            property_images : ["/images/furniture.avif", "/images/logo.svg"],        
-            property_id : 1,
-
-            property_country: "Egypt",
-            property_city: "Giza",
-            property_district: "Zayed",
-
-            property_type: "Apartment",
-            property_area: 110,
-            property_beds: 2,
-            property_baths: 1,
-            
-            property_listing_type: "rent",
-            property_availability: true,
-            property_recommended: true,
-            property_price: 10000,
-
-            property_date: "25 Dec 2023",
-            property_author: "John",
-            property_description: "World Class property in a friendly neighborhood contains all facilities"
-
-
-        },
-
-    ];
-
-
     const currentPage : string = "property";
-
-    // let thisProperty = properties[0];
-  
-    // const [property_title, setProperty_title] = useState("");
-
-
 
 
     function fadeOutAnimation (slider__container: any) {
@@ -191,35 +55,36 @@ const page = () => {
         
     }
     
-    function delayAnimation (slider__container: any){
-    //give [delay], after fadeOut(600ms) finishes
-    setTimeout(()=> {
-        handleSliderIndex(fade1);
+    // function delayAnimation (slider__container: any){
+    //     //give [delay], after fadeOut(600ms) finishes
+    //     setTimeout(()=> {
+    //         handleSliderIndex(fade1);
+        
+    //     },600);
+    // }
     
-    },600);
-    }
+    // function handleSliderIndex (direction: number) {
     
-    function handleSliderIndex (direction: number) {
-    
-    if (direction === prevFade1-1) {
-        // console.log("left");
-        if (pageProperty !== null)
-        (imageReference > 0) ? setImageReference(imageReference-1) : setImageReference(pageProperty.thisProperty.property_images.length-1);
-        // setPrevFade1(fade1);
-        // setImageReference(imageReference-1);
-        console.log("setting to "+ imageReference);
+    // if (direction === prevFade1.current-1) {
+    //     // console.log("left");
+    //     if (pageProperty !== null)
+    //     (imageReference > 0) ? setImageReference(imageReference-1) : setImageReference(pageProperty.thisProperty.property_images.length-1);
+    //     // setPrevFade1(fade1);
+    //     // setImageReference(imageReference-1);
+    //     console.log("setting to "+ imageReference);
 
-    } else if (direction === prevFade1+1) {
-        // console.log("right");
-        if (pageProperty !== null)
-        (imageReference < pageProperty.thisProperty.property_images.length-1) ? setImageReference(imageReference+1) : setImageReference(0);
-        console.log("setting to "+ imageReference);
+    // } else if (direction === prevFade1.current+1) {
+    //     // console.log("right");
+    //     if (pageProperty !== null)
+    //     (imageReference < pageProperty.thisProperty.property_images.length-1) ? setImageReference(imageReference+1) : setImageReference(0);
+    //     console.log("setting to "+ imageReference);
 
-    } else {
-        setImageReference(direction)
-    }
+    // } else {
+    //     setImageReference(direction);
+    // }
+
     
-    }
+    // }
     
     function fadeInAnimation (slider__container: any) {
     
@@ -239,39 +104,58 @@ const page = () => {
     
     }
     
-    function animationCombination1 (slider__container: any) {
+    // function animationCombination1 (slider__container: any) {
     
-    //prevent the animation from playing on the initial render, plays only on caret icon click
-    if (initialRender !== 0 ) {
-        // //stop current timers to not overlap
-        // clearInterval(tm.current);
+    // //prevent the animation from playing on the initial render, plays only on caret icon click
+    // if (initialRender !== 0 ) {
+    //     // //stop current timers to not overlap
+    //     // clearInterval(tm.current);
 
-        fadeOutAnimation(slider__container);
-        delayAnimation(slider__container); //with handle fade change
+    //     fadeOutAnimation(slider__container);
+    //     delayAnimation(slider__container); //with handle fade change
         
-        fadeInAnimation(slider__container);        
-    }
-    else {
-        setInitialRender(initialRender+1);
-    }
+    //     fadeInAnimation(slider__container);        
+    // }
+    // else {
+    //     setInitialRender(initialRender+1);
+    // }
     
-    //start the auto animation timer after first render or again after caret click
-    // tm.current = window.setInterval(() => {
-    //     // console.log("timer");
-    //     setPrevFade(fade); setFade(fade-1);
-    // }, 6000);
+    // //start the auto animation timer after first render or again after caret click
+    // // tm.current = window.setInterval(() => {
+    // //     // console.log("timer");
+    // //     setPrevFade(fade); setFade(fade-1);
+    // // }, 6000);
     
+    // }
+
+
+    function animationCombination2 (slider__container: any, imageIndex: number, imageArrayLength: number) {
+
+
+        
+        fadeOutAnimation(slider__container); 
+
+        setTimeout(()=> {
+            //if we got less than 0, view last image
+            if (imageIndex < 0) setImageReference(imageArrayLength-1);
+
+            //if we got more than images.length -1
+            if (imageIndex > imageArrayLength-1) setImageReference(0);
+
+            if (imageIndex >= 0 && imageIndex < imageArrayLength) setImageReference(imageIndex);        
+        },600);
+
+        // sliderWait(imageIndex);
+        fadeInAnimation(slider__container);
     }
+
+
     
 
-    const [prevFade1, setPrevFade1] = useState(0);
-    const [fade1, setFade1] = useState(0);
-    const [initialRender, setInitialRender] = useState(0);
-    // slider1 = {...properties[sliderIndex1]};
-
-    // const propertiesRefCount = useRef(0);
+    // const prevFade1 = useRef(0);
+    // const [fade1, setFade1] = useState(0);
+    // const [initialRender, setInitialRender] = useState(0);
     const [imageReference, setImageReference] = useState(0);
-    // const [propertiesCounter, setPropertiesCounter] = useState([]);
 
     type pagePropertyType = {
         thisProperty: PropertyDocument,
@@ -281,9 +165,9 @@ const page = () => {
 
     const [pageProperty, setPageProperty] = useState<pagePropertyType | null >(null);
 
-    // console.log(thisProperty);
     let property_title = useRef("");
 
+    
     const handleInquiry = (property: PropertyDocument) => {
 
         sessionStorage.setItem("propertyInquiry", JSON.stringify(property))
@@ -295,7 +179,10 @@ const page = () => {
 
 
 
+
+
     useEffect(()=> {
+
 
         if (pageProperty == null) {
             let current_url = window.location.href.toString().split("/properties/")[1];
@@ -325,14 +212,18 @@ const page = () => {
     
         }
 
-        if (pageProperty !== null) {
-            console.log(fade1);
-            let slider__container = document.getElementById(pageProperty.thisProperty._id.toString());            
-            animationCombination1(slider__container);
-        }
+        
+        // on right/left button image change
+        // if (pageProperty !== null) {
 
-    },[fade1]);
+        //     let slider__container = document.getElementById(pageProperty.thisProperty._id.toString());            
+        //     animationCombination1(slider__container);
 
+        // }
+
+
+    // },[fade1]);
+    },[]);
 
 
 
@@ -413,7 +304,7 @@ const page = () => {
                     h-[45vw] w-full max-h-[600px]
                     ">
                         <button 
-                            onClick={()=>{setPrevFade1(fade1); setFade1(fade1-1);}}
+                            onClick={()=>{animationCombination2(document.getElementById(pageProperty.thisProperty._id.toString()), imageReference-1, pageProperty.thisProperty.property_images.length)}}                            // onClick={()=>{prevFade=fade; fade=fade+1; animationCombination(slider__container);}}
                             // onClick={()=>{prevFade=fade; fade=fade-1; animationCombination(slider__container);}}
                             className="
                             absolute left-[1rem]
@@ -434,7 +325,7 @@ const page = () => {
                             </Image>
 
                         <button 
-                            onClick={()=>{setPrevFade1(fade1); setFade1(fade1+1);}}                            // onClick={()=>{prevFade=fade; fade=fade+1; animationCombination(slider__container);}}
+                            onClick={()=>{animationCombination2(document.getElementById(pageProperty.thisProperty._id.toString()), imageReference+1, pageProperty.thisProperty.property_images.length)}}                            // onClick={()=>{prevFade=fade; fade=fade+1; animationCombination(slider__container);}}
                             className="
                             absolute right-[1rem]
                             bg-[#0a0a0a7d] rounded-[3px]
@@ -463,7 +354,7 @@ const page = () => {
                             className="border-0
                             rounded-[7px] max-w-[50px] w-[10%]
                             h-[99%]"
-                            onClick={()=>{setPrevFade1(fade1); setFade1(pageProperty.thisProperty.property_images.findIndex(i => i === image)); }}>
+                            onClick={()=>{animationCombination2(document.getElementById(pageProperty.thisProperty._id.toString()), pageProperty.thisProperty.property_images.findIndex(i => i === image), pageProperty.thisProperty.property_images.length); }}>
 
                                 <Image src={image} height={300} width={300} alt={property_title.current}
                                 className="
