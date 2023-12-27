@@ -190,7 +190,7 @@ const page = () => {
     
             const fetchProperty = async () => {
 
-                const response = await fetch(`/api/properties/${current_url}`);
+                const response = await fetch(`/api/properties/single/${current_url}`);
                 const jsonResponse = await response.json();
                 console.log(jsonResponse);
     

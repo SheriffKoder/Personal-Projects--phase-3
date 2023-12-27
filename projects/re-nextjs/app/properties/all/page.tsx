@@ -6,7 +6,7 @@ import Image from "next/image";
 
 import PropertyCard from "@components/Home/HomeMain/PropertyCard";
 import { PropertyDocument } from "@models/propertyModel";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 // interface propertyInterface {
 
@@ -337,22 +337,51 @@ const page = () => {
 
 
   
-  const [properties, setProperties] = useState<PropertyDocument[]>([]);
+    const [properties, setProperties] = useState<PropertyDocument[]>([]);
+
+    const [pageId, setPageId] = useState(1);
+    const endPage = useRef(1);
 
   //04.01
   useEffect(()=> {
 
     console.log("syncing");
     const fetchProperties = async () => {
-      const response = await fetch("/api/properties/allProperties");
-      const jsonResponse = await response.json();
-      console.log(jsonResponse);
 
-      setProperties(jsonResponse);
+        let current_page = window.location.href.toString().split("/all/")[1];
+        // setPageId(Number(current_page));
+
+        //state needs to have a different value to take the same value again which is jsonResponse.properties
+        if (properties.length > 0) {
+            let loadingProperties:PropertyDocument[] = [];
+            
+            console.log("loadingProperties");
+            console.log(loadingProperties);
+            setProperties(loadingProperties);
+        }
+        const response = await fetch(`/api/properties/all/${pageId}`);
+        const jsonResponse = await response.json();
+        console.log(jsonResponse);
+
+        endPage.current = jsonResponse.pagesEnd;
+        console.log("end page: "+endPage.current);
+        console.log("current page: "+ pageId);
+
+        console.log("properties were");
+        console.log(properties);
+    
+        console.log(jsonResponse.properties);
+
+        setProperties(jsonResponse.properties);
+        
+        console.log("properties now are");
+        console.log(properties);
+    
     }
 
     fetchProperties();
-  }, []);
+
+  },[pageId]);
 
 
 
@@ -423,7 +452,7 @@ const page = () => {
         <h4 className="text_shadow-3">All properties</h4>
 
         {/* posts container */}
-        <div className="flex flex-row gap-6 my-6 flex-wrap justify-center md:justify-start mx-auto last-of-type:mr-auto">
+        <div className="flex flex-row gap-6 my-6 flex-wrap justify-center md:justify-start mx-auto last-of-type:mr-auto w-full">
 
             {/* post */}
             {properties.length > 0 ? (
@@ -436,9 +465,135 @@ const page = () => {
                 )}
             </>
             ) : (
-            <><h1 className="text_shadow-3">No Properties</h1></>
+            <>
+            <div className="min-h-[254px] flex mx-auto">
+                <h1 className="text_shadow-3  my-auto">Loading...</h1>
+            </div></>
             )
             }
+
+        </div>
+
+        {/* pagination buttons */}
+        <div className="w-full flex flex-row justify-center items-center gap-2">
+
+
+
+            <div className="relative">
+
+                {/* previous buttons */}
+                <div className="absolute right-7 top-0 flex flex-row gap-2">
+
+                    {/* first page button */}
+                    {pageId-1 > 1 ? (
+                    <button 
+                    onClick={()=> {setPageId(1)}}
+                    className="
+                    bg-theme-text-brighter opacity-80 hover:opacity-100 dark:opacity-100 
+                    dark:bg-[#912642] dark:hover:bg-[#9f2545] 
+                    h-5 w-12 rounded-[6px] text-white flex items-center justify-center
+                    text-xs">
+                        first
+                    </button>
+                    ):(
+                        <div 
+                        className="
+                        bg-theme-text-brighter opacity-50 dark:opacity-50 
+                        dark:bg-[#912642] dark:hover:bg-[#9f2545] 
+                        h-5 w-12 rounded-[6px] text-black flex items-center justify-center
+                        text-xs">    
+                        </div>
+                    
+                    )}
+
+
+                    {/* previous page button */}
+                    {pageId > 1 ? (
+                    <button 
+                    onClick={()=> {setPageId(pageId-1)}}
+                    className="
+                    bg-theme-text-brighter opacity-80 hover:opacity-100 dark:opacity-100 
+                    dark:bg-[#912642] dark:hover:bg-[#9f2545] 
+                    h-5 w-5 rounded-[6px] text-white flex items-center justify-center
+                    text-xs">
+                        {pageId-1}
+                    </button>
+                    ):(
+                        <div 
+                        className="
+                        bg-theme-text-brighter opacity-50 dark:opacity-50 
+                        dark:bg-[#912642] dark:hover:bg-[#9f2545] 
+                        h-5 w-5 rounded-[6px] text-black flex items-center justify-center
+                        text-xs">    
+                        </div>
+                    
+                    )}
+
+                </div>
+
+                {/* middle/current button */}
+                <button 
+                onClick={()=> {}}
+                className="
+                bg-theme-text-brighter opacity-80 hover:opacity-100 dark:opacity-100 
+                dark:bg-[#912642] dark:hover:bg-[#9f2545] 
+                h-5 w-5 rounded-[6px] text-black flex items-center justify-center
+                text-xs outline outline-1 outline-offset-3 dark:outline-slate-300 outline-slate-700">
+                    {pageId}
+                </button>
+
+                {/* next buttons */}
+                <div className="absolute left-7 top-0 flex flex-row gap-2">
+                    {/* next page button */}
+                    {pageId < Number(endPage.current) ? (
+                    <button 
+                    onClick={()=> {setPageId(pageId+1)}}
+                    className="
+                    bg-theme-text-brighter opacity-80 hover:opacity-100 dark:opacity-100 
+                    dark:bg-[#912642] dark:hover:bg-[#9f2545] 
+                    h-5 w-5 rounded-[6px] text-white flex items-center justify-center
+                    text-xs">
+                        {pageId+1}
+                    </button>
+                    ):(
+                        <div 
+                        className="
+                        bg-theme-text-brighter opacity-50 dark:opacity-50 
+                        dark:bg-[#912642] dark:hover:bg-[#9f2545] 
+                        h-5 w-5 rounded-[6px] text-black flex items-center justify-center
+                        text-xs">    
+                        </div>
+                    )}
+
+                    {/* last page button */}
+                    {pageId+1 < Number(endPage.current) ? (
+                    <button 
+                    onClick={()=> {setPageId(Math.round(endPage.current))}}
+                    className="
+                    bg-theme-text-brighter opacity-80 hover:opacity-100 dark:opacity-100 
+                    dark:bg-[#912642] dark:hover:bg-[#9f2545] 
+                    h-5 w-12 rounded-[6px] text-white flex items-center justify-center
+                    text-xs">
+                        last
+                    </button>
+                    ):(
+                        <div 
+                        className="
+                        bg-theme-text-brighter opacity-50 dark:opacity-50 
+                        dark:bg-[#912642] dark:hover:bg-[#9f2545] 
+                        h-5 w-12 rounded-[6px] text-black flex items-center justify-center
+                        text-xs">    
+                        </div>
+                    )}
+
+                </div>
+
+
+            </div>
+
+
+
+            
 
         </div>
         

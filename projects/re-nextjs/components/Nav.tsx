@@ -122,7 +122,7 @@ const Nav = () => {
           </li>
 
           <li className="h-full">
-            <Link href="/properties" aria-label="check our properties" className="hover:opacity-80 flex items-center h-full">
+            <Link href="/properties/all" aria-label="check our properties" className="hover:opacity-80 flex items-center h-full">
               Properties
             </Link>
           </li>

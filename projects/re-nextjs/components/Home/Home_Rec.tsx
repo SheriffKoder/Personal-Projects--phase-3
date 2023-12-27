@@ -130,7 +130,7 @@ const Home_Rec = () => {
     function startTimer () {
         tm.current = window.setInterval(() => {
             // console.log("timer");
-            setPrevFade(fade); setFade(fade-1);
+            setPrevFade(fade); setFade(fade+1);
         }, 6000);
     }
 
