@@ -185,7 +185,7 @@ const page = () => {
 
 
         if (pageProperty == null) {
-            let current_url = window.location.href.toString().split("/properties/")[1];
+            let current_url = window.location.href.toString().split("/single/")[1];
             // console.log(current_url);
     
             const fetchProperty = async () => {

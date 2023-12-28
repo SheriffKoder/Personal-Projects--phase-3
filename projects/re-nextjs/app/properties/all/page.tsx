@@ -339,6 +339,7 @@ const page = () => {
   
     const [properties, setProperties] = useState<PropertyDocument[]>([]);
 
+    //Part 11.03
     const [pageId, setPageId] = useState(1);
     const endPage = useRef(1);
 
@@ -348,7 +349,7 @@ const page = () => {
     console.log("syncing");
     const fetchProperties = async () => {
 
-        let current_page = window.location.href.toString().split("/all/")[1];
+        // let current_page = window.location.href.toString().split("/all/")[1];
         // setPageId(Number(current_page));
 
         //state needs to have a different value to take the same value again which is jsonResponse.properties
@@ -537,8 +538,8 @@ const page = () => {
                 className="
                 bg-theme-text-brighter opacity-80 hover:opacity-100 dark:opacity-100 
                 dark:bg-[#912642] dark:hover:bg-[#9f2545] 
-                h-5 w-5 rounded-[6px] text-black flex items-center justify-center
-                text-xs outline outline-1 outline-offset-3 dark:outline-slate-300 outline-slate-700">
+                h-5 w-5 rounded-[6px] text-white flex items-center justify-center
+                text-xs outline outline-1 outline-offset-2 dark:outline-[#ffffff4f] outline-[#0000005a]">
                     {pageId}
                 </button>
 
@@ -568,7 +569,7 @@ const page = () => {
                     {/* last page button */}
                     {pageId+1 < Number(endPage.current) ? (
                     <button 
-                    onClick={()=> {setPageId(Math.round(endPage.current))}}
+                    onClick={()=> {setPageId(Math.ceil(endPage.current))}}
                     className="
                     bg-theme-text-brighter opacity-80 hover:opacity-100 dark:opacity-100 
                     dark:bg-[#912642] dark:hover:bg-[#9f2545] 
