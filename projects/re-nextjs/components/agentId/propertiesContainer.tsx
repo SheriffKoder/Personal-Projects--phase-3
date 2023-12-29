@@ -12,16 +12,17 @@ interface propertiesState {
     pageId: number,
 }
 
-const PropertiesContainer = ({setPropertyEditId, userAuthority, userName}:{
+const PropertiesContainer = ({setPropertyEditId, userAuthority, setReload, reload, userName}:{
     setPropertyEditId: React.Dispatch<React.SetStateAction<string>>
-    // setReload: React.Dispatch<React.SetStateAction<boolean>>,
+    setReload: React.Dispatch<React.SetStateAction<boolean>>,
+    reload: any,
     userAuthority: string,
     userName: string,
   
 }) => {
 
     const [userProperties, setUserProperties] = useState<PropertyDocument[]|[]>([]);
-    const [reload, setReload] = useState(false);
+    // const [reload, setReload] = useState(false);
 
     //Part 11.03
     const [pageId, setPageId] = useState(1);
@@ -44,7 +45,7 @@ const PropertiesContainer = ({setPropertyEditId, userAuthority, userName}:{
                 // console.log(loadingProperties);
                 // setUserProperties(loadingProperties);
 
-                setUserProperties([]);
+                // setUserProperties([]);
     
             }
             
@@ -61,18 +62,18 @@ const PropertiesContainer = ({setPropertyEditId, userAuthority, userName}:{
         
             // console.log(jsonResponse.properties);
     
-            // setUserProperties([]);
             setUserProperties(jsonResponse.properties);
+            setReload(false);
 
-            
             // console.log("properties now are");
             // console.log(userProperties);
     
         }
     
         fetchProperties();
+
     
-      },[pageId, reload]);
+      },[pageId,reload]);
     
 
   return (
@@ -114,7 +115,7 @@ const PropertiesContainer = ({setPropertyEditId, userAuthority, userName}:{
                 {/* first page button */}
                 {pageId-1 > 1 ? (
                 <button 
-                onClick={()=> {setPageId(1)}}
+                onClick={()=> {setPageId(1); setReload(true);}}
                 className="
                 bg-theme-text-brighter opacity-80 hover:opacity-100 dark:opacity-100 
                 dark:bg-[#912642] dark:hover:bg-[#9f2545] 
@@ -137,7 +138,7 @@ const PropertiesContainer = ({setPropertyEditId, userAuthority, userName}:{
                 {/* previous page button */}
                 {pageId > 1 ? (
                 <button 
-                onClick={()=> {setPageId(pageId-1)}}
+                onClick={()=> {setPageId(pageId-1); setReload(true);}}
                 className="
                 bg-theme-text-brighter opacity-80 hover:opacity-100 dark:opacity-100 
                 dark:bg-[#912642] dark:hover:bg-[#9f2545] 
@@ -174,7 +175,7 @@ const PropertiesContainer = ({setPropertyEditId, userAuthority, userName}:{
                 {/* next page button */}
                 {pageId < Math.ceil(endPage.current) ? (
                 <button 
-                onClick={()=> {setPageId(pageId+1)}}
+                onClick={()=> {setPageId(pageId+1); setReload(true);}}
                 className="
                 bg-theme-text-brighter opacity-80 hover:opacity-100 dark:opacity-100 
                 dark:bg-[#912642] dark:hover:bg-[#9f2545] 
@@ -195,7 +196,7 @@ const PropertiesContainer = ({setPropertyEditId, userAuthority, userName}:{
                 {/* last page button */}
                 {pageId+1 < Math.ceil(endPage.current) ? (
                 <button 
-                onClick={()=> {setPageId(Math.ceil(endPage.current))}}
+                onClick={()=> {setPageId(Math.ceil(endPage.current)); setReload(true);}}
                 className="
                 bg-theme-text-brighter opacity-80 hover:opacity-100 dark:opacity-100 
                 dark:bg-[#912642] dark:hover:bg-[#9f2545] 

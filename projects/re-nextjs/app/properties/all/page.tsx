@@ -8,6 +8,9 @@ import PropertyCard from "@components/Home/HomeMain/PropertyCard";
 import { PropertyDocument } from "@models/propertyModel";
 import { useState, useEffect, useRef } from "react";
 
+import { FormEventHandler, ChangeEventHandler } from "react";
+
+
 // interface propertyInterface {
 
 //     property_images : string[],        
@@ -342,6 +345,45 @@ const page = () => {
     //Part 11.03
     const [pageId, setPageId] = useState(1);
     const endPage = useRef(1);
+    const [reload, setReload] = useState(false);
+
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //Part 11.04 - search
+    const [searchInput, setSearchInput] = useState({
+        searchText: "",
+        bedroomsFrom: "",
+        bedroomsTo: "",
+        priceFrom: "",
+        priceTo: "",
+        areaFrom: "",
+        areaTo: "",
+        country: "",
+    });
+
+    let {searchText, bedroomsTo, bedroomsFrom, priceFrom, priceTo, areaFrom, areaTo,
+    country} = searchInput;
+
+    const handleChange: ChangeEventHandler<HTMLInputElement | HTMLSelectElement> = ({ target }) => {
+        const { name, value } = target;
+        setSearchInput({ ...searchInput, [name]:value});
+    }
+
+    const handleSearchSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
+        e.preventDefault();
+
+        const apiResponse = await fetch(`/api/properties/all/${pageId}`, {
+            method: "POST",
+            body: JSON.stringify(searchInput),
+        });
+
+        const jsonResponse = await apiResponse.json();
+        console.log(jsonResponse);
+    
+    
+    } 
+    ///////////////////////////////////////////////////////////////////////////////////////
+
+
 
   //04.01
   useEffect(()=> {
@@ -356,9 +398,9 @@ const page = () => {
         if (properties.length > 0) {
             let loadingProperties:PropertyDocument[] = [];
             
-            console.log("loadingProperties");
-            console.log(loadingProperties);
-            setProperties(loadingProperties);
+            // console.log("loadingProperties");
+            // console.log(loadingProperties);
+            // setProperties(loadingProperties);
         }
         const response = await fetch(`/api/properties/all/${pageId}`);
         const jsonResponse = await response.json();
@@ -377,12 +419,13 @@ const page = () => {
         
         console.log("properties now are");
         console.log(properties);
+        setReload(false);
     
     }
 
     fetchProperties();
 
-  },[pageId]);
+  },[pageId,reload]);
 
 
 
@@ -401,31 +444,91 @@ const page = () => {
         <span className="text-theme-text-brighter">Properties</span>
     </div>
 
-    <div className="bg-white rounded-[17px]
+    <form className="bg-white rounded-[17px]
     glass-container-background-2 min-w-[100%]
     border backdrop-blur-10 pt-4 pb-4 px-4 mt-8
     dark:bg-[#68585806] dark:border-[#ffffff05]
     text-[#000000b3] dark:text-[#ffffffb0] text-center text-l flex flex-row gap-2
-    items-center text-sm
-    ">
+    items-center text-sm flex-wrap
+    " onSubmit={handleSearchSubmit}>
 
-        <label className="w-[100%] flex flex-row justify-center text-center
-        label_field
-        bg-[#ffffff07] rounded-[7px] border-2 border-[#ffffff02]
-        
-        ">
-            <span className="min-w-[7rem] px-2 py-1 text_shadow-2 opacity-80 dark:opacity-90">
+        <div className="w-full flex flex-row">
+            <label className="flex-1 flex flex-row justify-center text-center
+            label_field
+            bg-[#ffffff07] rounded-[7px] border-2 border-[#ffffff02]
+            
+            ">
+                <span className="min-w-[9rem] px-2 py-1 text_shadow-2 opacity-80 dark:opacity-90">
+                    search description
+                </span>
+                
+                <input className="w-full border-0 rounded-r-[6px] 
+                    dark:bg-[#ffffff09] dark:focus:bg-[#ffffff02]  px-2 
+                    border-[rgba(255,255,255,0.02)]" type="text"
+                    name="searchText" value={searchText} onChange={handleChange}
+                />
+                
+            </label>
+            
+            <button type="submit"
+            className="ml-2 px-2 py-1 dark:bg-text-accent-dark bg-theme-text-brighter opacity-75 text-white rounded-[3px] flex items-center justify-center">
                 search
+            </button>
+            
+            <span className="ml-2 px-2 py-1 dark:bg-text-accent-dark bg-theme-text-brighter opacity-75 text-white rounded-[3px] flex items-center justify-center
+            "
+            >
+                filter
             </span>
-            
-            <input className="w-full border-0 rounded-r-[6px] 
-                dark:bg-[#ffffff09] dark:focus:bg-[#ffffff02]  px-2 
-                border-[rgba(255,255,255,0.02)]" type="password"
-            />
-            
-        </label>
-        <span className="ml-2 px-2 py-1 dark:bg-text-accent-dark bg-theme-text-brighter opacity-75 text-white rounded-[3px] flex items-center justify-center">
-            Filter
+        </div>
+
+        <span className="flex flex-row items-center px-2
+        min-w-full border rounded-[7px] h-8 dark:border-text-accent-dark border-theme-text-brighter">
+            {/* bedrooms, bathrooms, country, city, district, price, type, area, listing-type */}
+            <span className="flex flex-row gap-2">
+                <span>Rooms</span>
+                <span>from
+                    <input className="ml-1 w-[1.5rem] rounded-[3px] text-black" type="text"
+                    defaultValue={bedroomsFrom} name="bedroomsFrom" onChange={handleChange}/>
+                </span>
+                <span>to
+                    <input className="ml-1 w-[1.5rem] rounded-[3px] text-black" type="text"
+                    defaultValue={bedroomsTo} name="bedroomsTo" onChange={handleChange}/>
+                </span>
+            </span>
+
+            <span className="flex flex-row gap-2">
+                <span>Price</span>
+                <span>from
+                    <input className="ml-1 w-[1.5rem] rounded-[3px] text-black" type="text"
+                    defaultValue={priceFrom} name="priceFrom" onChange={handleChange}/>
+                </span>
+                <span>to
+                    <input className="ml-1 w-[1.5rem] rounded-[3px] text-black" type="text"
+                    defaultValue={priceTo} name="priceTo" onChange={handleChange}/>
+                </span>
+            </span>
+
+            <span className="flex flex-row gap-2">
+                <span>Area</span>
+                <span>from
+                    <input className="ml-1 w-[1.5rem] rounded-[3px] text-black" type="text"
+                    defaultValue={areaFrom} name="areaFrom" onChange={handleChange}/>
+                </span>
+                <span>to
+                    <input className="ml-1 w-[1.5rem] rounded-[3px] text-black" type="text"
+                    defaultValue={areaTo} name="areaTo" onChange={handleChange}/>
+                </span>
+            </span>
+
+            {properties.length > 0 ? (
+            <select name="country" value={country} onChange={handleChange}>
+                {properties.map((property) => (
+                    <option>{property.property_country}</option>
+                ))}
+            </select>
+            ):("")}
+
         </span>
 
         {/* <div className="flex flex-row gap-1 uppercase text-sm">
@@ -438,7 +541,7 @@ const page = () => {
             <span className="px-2 bg-text-accent-dark rounded-[3px] flex items-center justify-center">Price</span>
 
         </div> */}
-    </div>
+    </form>
 
     <div className="bg-white rounded-[17px]
     glass-container-background-2 min-w-[100%]
@@ -478,8 +581,6 @@ const page = () => {
         {/* pagination buttons */}
         <div className="w-full flex flex-row justify-center items-center gap-2">
 
-
-
             <div className="relative">
 
                 {/* previous buttons */}
@@ -488,7 +589,7 @@ const page = () => {
                     {/* first page button */}
                     {pageId-1 > 1 ? (
                     <button 
-                    onClick={()=> {setPageId(1)}}
+                    onClick={()=> {setPageId(1); setReload(true);}}
                     className="
                     bg-theme-text-brighter opacity-80 hover:opacity-100 dark:opacity-100 
                     dark:bg-[#912642] dark:hover:bg-[#9f2545] 
@@ -511,7 +612,7 @@ const page = () => {
                     {/* previous page button */}
                     {pageId > 1 ? (
                     <button 
-                    onClick={()=> {setPageId(pageId-1)}}
+                    onClick={()=> {setPageId(pageId-1); setReload(true);}}
                     className="
                     bg-theme-text-brighter opacity-80 hover:opacity-100 dark:opacity-100 
                     dark:bg-[#912642] dark:hover:bg-[#9f2545] 
@@ -546,9 +647,9 @@ const page = () => {
                 {/* next buttons */}
                 <div className="absolute left-7 top-0 flex flex-row gap-2">
                     {/* next page button */}
-                    {pageId < Number(endPage.current) ? (
+                    {pageId < Math.ceil(endPage.current) ? (
                     <button 
-                    onClick={()=> {setPageId(pageId+1)}}
+                    onClick={()=> {setPageId(pageId+1); setReload(true);}}
                     className="
                     bg-theme-text-brighter opacity-80 hover:opacity-100 dark:opacity-100 
                     dark:bg-[#912642] dark:hover:bg-[#9f2545] 
@@ -567,9 +668,9 @@ const page = () => {
                     )}
 
                     {/* last page button */}
-                    {pageId+1 < Number(endPage.current) ? (
+                    {pageId+1 < Math.ceil(endPage.current) ? (
                     <button 
-                    onClick={()=> {setPageId(Math.ceil(endPage.current))}}
+                    onClick={()=> {setPageId(Math.ceil(endPage.current)); setReload(true);}}
                     className="
                     bg-theme-text-brighter opacity-80 hover:opacity-100 dark:opacity-100 
                     dark:bg-[#912642] dark:hover:bg-[#9f2545] 
@@ -591,10 +692,6 @@ const page = () => {
 
 
             </div>
-
-
-
-            
 
         </div>
         

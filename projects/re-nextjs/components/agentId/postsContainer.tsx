@@ -21,15 +21,17 @@ interface postInputs_interface {
     action: string;
 }
 
-const PostsContainer = ({userAuthority, userName, setPostInfo}:{
+const PostsContainer = ({userAuthority, userName, setReload, reload, setPostInfo}:{
     userAuthority: string,
     userName: string,
+    setReload: React.Dispatch<React.SetStateAction<boolean>>,
+    reload:any,
     setPostInfo: React.Dispatch<React.SetStateAction<postInputs_interface>>
 
 }) => {
 
     const { data: session, status } = useSession();      //get the session.user
-    const [reload, setReload] = useState(false);
+    // const [reload, setReload] = useState(false);
 
 
     function showPostAdd (inputs:postInputs_interface) {
@@ -87,7 +89,7 @@ const PostsContainer = ({userAuthority, userName, setPostInfo}:{
                 // console.log(loadingProperties);
                 // setUserProperties(loadingProperties);
 
-                setUserPosts([]);
+                // setUserPosts([]); //Here
     
             }
             
@@ -105,8 +107,8 @@ const PostsContainer = ({userAuthority, userName, setPostInfo}:{
             // console.log(jsonResponse.properties);
     
             // setUserProperties([]);
-            setUserPosts(jsonResponse.posts);
-
+            setUserPosts(jsonResponse.posts); //Here
+            setReload(false);
             
             // console.log("properties now are");
             // console.log(userProperties);
@@ -115,7 +117,7 @@ const PostsContainer = ({userAuthority, userName, setPostInfo}:{
     
         fetchPosts();
     
-      },[pageId, reload]);
+      },[pageId,reload]);
     
 
   return (
@@ -256,7 +258,7 @@ const PostsContainer = ({userAuthority, userName, setPostInfo}:{
                 {/* first page button */}
                 {pageId-1 > 1 ? (
                 <button 
-                onClick={()=> {setPageId(1)}}
+                onClick={()=> {setPageId(1); setReload(true);}}
                 className="
                 bg-theme-text-brighter opacity-80 hover:opacity-100 dark:opacity-100 
                 dark:bg-[#912642] dark:hover:bg-[#9f2545] 
@@ -279,7 +281,7 @@ const PostsContainer = ({userAuthority, userName, setPostInfo}:{
                 {/* previous page button */}
                 {pageId > 1 ? (
                 <button 
-                onClick={()=> {setPageId(pageId-1)}}
+                onClick={()=> {setPageId(pageId-1); setReload(true);}}
                 className="
                 bg-theme-text-brighter opacity-80 hover:opacity-100 dark:opacity-100 
                 dark:bg-[#912642] dark:hover:bg-[#9f2545] 
@@ -316,7 +318,7 @@ const PostsContainer = ({userAuthority, userName, setPostInfo}:{
                 {/* next page button */}
                 {pageId < Math.ceil(endPage.current) ? (
                 <button 
-                onClick={()=> {setPageId(pageId+1)}}
+                onClick={()=> {setPageId(pageId+1); setReload(true);}}
                 className="
                 bg-theme-text-brighter opacity-80 hover:opacity-100 dark:opacity-100 
                 dark:bg-[#912642] dark:hover:bg-[#9f2545] 
@@ -337,7 +339,7 @@ const PostsContainer = ({userAuthority, userName, setPostInfo}:{
                 {/* last page button */}
                 {pageId+1 < Math.ceil(endPage.current) ? (
                 <button 
-                onClick={()=> {setPageId(Math.ceil(endPage.current))}}
+                onClick={()=> {setPageId(Math.ceil(endPage.current)); setReload(true);}}
                 className="
                 bg-theme-text-brighter opacity-80 hover:opacity-100 dark:opacity-100 
                 dark:bg-[#912642] dark:hover:bg-[#9f2545] 

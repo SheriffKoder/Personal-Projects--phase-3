@@ -356,7 +356,8 @@ const page = () => {
 
                     <PropertiesContainer 
                     setPropertyEditId={setPropertyEditId} 
-                    // setReload={setReload} 
+                    setReload={setReload} 
+                    reload={reload}
                     userAuthority={user.authority} 
                     userName={user.userInfo.name}
                     />
@@ -417,6 +418,8 @@ const page = () => {
 
                 <PostsContainer 
                 userAuthority={user.authority} 
+                setReload={setReload}
+                reload={reload}
                 userName={user.userInfo.name}
                 setPostInfo={setPostInfo}
                 />
