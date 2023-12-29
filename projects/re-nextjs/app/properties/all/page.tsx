@@ -346,8 +346,40 @@ const page = () => {
     const [pageId, setPageId] = useState(1);
     const endPage = useRef(1);
     const [reload, setReload] = useState(false);
+    // const [clearFilter, setClearFilter] = useState(false);
+    const [reload2, setReload2] = useState(false);
+
+    const [filterActive, setFilterActive] = useState(false);
 
     ///////////////////////////////////////////////////////////////////////////////////////
+
+    const hideFilter = () => {
+        const filterContainer = document.getElementById("filterContainer");
+        if (filterContainer) filterContainer.style.display = "none";
+
+    }
+
+    const showFilter = () => {
+        const filterContainer = document.getElementById("filterContainer");
+        if (filterContainer) filterContainer.style.display = "flex";
+
+    }
+
+    const clearFilter = () => {
+        setSearchInput({
+            searchText: "",
+            bedroomsFrom: "",
+            bedroomsTo: "",
+            priceFrom: "",
+            priceTo: "",
+            areaFrom: "",
+            areaTo: "",
+            country: "",
+            type: "",
+            listing_type: "",    
+        })
+    }
+
     //Part 11.04 - search
     const [searchInput, setSearchInput] = useState({
         searchText: "",
@@ -358,10 +390,12 @@ const page = () => {
         areaFrom: "",
         areaTo: "",
         country: "",
+        type: "",
+        listing_type: "",
     });
 
     let {searchText, bedroomsTo, bedroomsFrom, priceFrom, priceTo, areaFrom, areaTo,
-    country} = searchInput;
+    country, type, listing_type} = searchInput;
 
     const handleChange: ChangeEventHandler<HTMLInputElement | HTMLSelectElement> = ({ target }) => {
         const { name, value } = target;
@@ -370,6 +404,9 @@ const page = () => {
 
     const handleSearchSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
         e.preventDefault();
+        setProperties([]);
+        setReload2(true);
+
 
         const apiResponse = await fetch(`/api/properties/all/${pageId}`, {
             method: "POST",
@@ -378,6 +415,9 @@ const page = () => {
 
         const jsonResponse = await apiResponse.json();
         console.log(jsonResponse);
+        endPage.current = jsonResponse.pagesEnd;
+        setProperties(jsonResponse.filteredProperties);
+        setReload2(false);
     
     
     } 
@@ -419,13 +459,15 @@ const page = () => {
         
         console.log("properties now are");
         console.log(properties);
-        setReload(false);
+        // setClearFilter(false);
     
     }
 
     fetchProperties();
+    setReload(false);
 
-  },[pageId,reload]);
+
+  },[pageId]);
 
 
 
@@ -462,72 +504,138 @@ const page = () => {
                     search description
                 </span>
                 
-                <input className="w-full border-0 rounded-r-[6px] 
+                <input className="w-full border-0 rounded-r-[6px] outline outline-none
                     dark:bg-[#ffffff09] dark:focus:bg-[#ffffff02]  px-2 
-                    border-[rgba(255,255,255,0.02)]" type="text"
+                    border-[rgba(255,255,255,0.02)]  
+                    " type="text"
                     name="searchText" value={searchText} onChange={handleChange}
                 />
                 
             </label>
             
             <button type="submit"
-            className="ml-2 px-2 py-1 dark:bg-text-accent-dark bg-theme-text-brighter opacity-75 text-white rounded-[3px] flex items-center justify-center">
-                search
+            className="ml-2 px-2 py-1 dark:bg-text-accent-dark bg-theme-text-brighter opacity-75 text-white rounded-[7px] flex items-center justify-center">
+                {filterActive ? ("apply"):("search")}
             </button>
             
-            <span className="ml-2 px-2 py-1 dark:bg-text-accent-dark bg-theme-text-brighter opacity-75 text-white rounded-[3px] flex items-center justify-center
+            <span className="ml-2 px-2 py-1 dark:bg-text-accent-dark bg-theme-text-brighter opacity-75 text-white rounded-[7px] flex items-center justify-center cursor-pointer
             "
+            onClick={()=> {
+                if(filterActive) { 
+                    hideFilter(); 
+                    setFilterActive(false); 
+                }else {  
+                    showFilter(); 
+                    setFilterActive(true);
+                }
+            }}
             >
-                filter
+                {filterActive? ("close"):("filter")}
             </span>
         </div>
 
-        <span className="flex flex-row items-center px-2
-        min-w-full border rounded-[7px] h-8 dark:border-text-accent-dark border-theme-text-brighter">
+        <span className="hidden flex-row items-center px-2 gap-2 justify-center
+        min-w-full flex-wrap text-xs"
+        id="filterContainer">
             {/* bedrooms, bathrooms, country, city, district, price, type, area, listing-type */}
-            <span className="flex flex-row gap-2">
-                <span>Rooms</span>
+            <span className="flex flex-row gap-2 px-3 py-1
+            rounded-[12px] dark:bg-[#ffffff11] bg-[#ffffff9b]">
+                <span className="font-semibold">Rooms</span>
                 <span>from
-                    <input className="ml-1 w-[1.5rem] rounded-[3px] text-black" type="text"
+                    <input className="ml-1 w-[1.5rem] rounded-[3px] text-center
+                     text-black dark:bg-[#ffffff32] bg-[#00000017]
+                     focus:outline focus:outline-1 outline-[#0000002b] dark:outline-[#ffffff61]" type="text"
                     defaultValue={bedroomsFrom} name="bedroomsFrom" onChange={handleChange}/>
                 </span>
                 <span>to
-                    <input className="ml-1 w-[1.5rem] rounded-[3px] text-black" type="text"
-                    defaultValue={bedroomsTo} name="bedroomsTo" onChange={handleChange}/>
+                    <input className="ml-1 w-[1.5rem] rounded-[3px] text-center
+                        text-black dark:bg-[#ffffff32] bg-[#00000017]
+                        focus:outline focus:outline-1 outline-[#0000002b] dark:outline-[#ffffff61]" type="text"
+                        defaultValue={bedroomsTo} name="bedroomsTo" onChange={handleChange}/>
                 </span>
             </span>
 
-            <span className="flex flex-row gap-2">
-                <span>Price</span>
+            <span className="flex flex-row gap-2 px-3 py-1
+            rounded-[12px] dark:bg-[#ffffff11] bg-[#ffffff9b]">
+                <span className="font-semibold">Price</span>
                 <span>from
-                    <input className="ml-1 w-[1.5rem] rounded-[3px] text-black" type="text"
-                    defaultValue={priceFrom} name="priceFrom" onChange={handleChange}/>
+                    <input className="ml-1 w-[1.5rem] rounded-[3px] text-center
+                        text-black dark:bg-[#ffffff32] bg-[#00000017]
+                        focus:outline focus:outline-1 outline-[#0000002b] dark:outline-[#ffffff61]" type="text"
+                        defaultValue={priceFrom} name="priceFrom" onChange={handleChange}/>
                 </span>
                 <span>to
-                    <input className="ml-1 w-[1.5rem] rounded-[3px] text-black" type="text"
-                    defaultValue={priceTo} name="priceTo" onChange={handleChange}/>
+                    <input className="ml-1 w-[1.5rem] rounded-[3px] text-center
+                        text-black dark:bg-[#ffffff32] bg-[#00000017]
+                        focus:outline focus:outline-1 outline-[#0000002b] dark:outline-[#ffffff61]" type="text"
+                        defaultValue={priceTo} name="priceTo" onChange={handleChange}/>
                 </span>
             </span>
 
-            <span className="flex flex-row gap-2">
-                <span>Area</span>
+            <span className="flex flex-row gap-2 px-3 py-1
+            rounded-[12px] dark:bg-[#ffffff11] bg-[#ffffff9b]">
+                <span className="font-semibold">Area</span>
                 <span>from
-                    <input className="ml-1 w-[1.5rem] rounded-[3px] text-black" type="text"
+                    <input className="ml-1 w-[1.5rem] rounded-[3px] text-center
+                     text-black dark:bg-[#ffffff32] bg-[#00000017]
+                     focus:outline focus:outline-1 outline-[#0000002b] dark:outline-[#ffffff61]" type="text"
                     defaultValue={areaFrom} name="areaFrom" onChange={handleChange}/>
                 </span>
                 <span>to
-                    <input className="ml-1 w-[1.5rem] rounded-[3px] text-black" type="text"
+                    <input className="ml-1 w-[1.5rem] rounded-[3px] text-center
+                     text-black dark:bg-[#ffffff32] bg-[#00000017]
+                     focus:outline focus:outline-1 outline-[#0000002b] dark:outline-[#ffffff61]" type="text"
                     defaultValue={areaTo} name="areaTo" onChange={handleChange}/>
                 </span>
             </span>
 
+
+
             {properties.length > 0 ? (
-            <select name="country" value={country} onChange={handleChange}>
+            <select className="pl-3 pr-5 py-1 appearance-none down_caret
+            rounded-[12px] dark:bg-[#ffffff11] bg-[#ffffff9b]
+            focus:outline focus:outline-1 outline-[#0000002b] dark:outline-[#ffffff61]"
+            name="country" value={country} onChange={handleChange}>
+                <option>select country</option>
                 {properties.map((property) => (
-                    <option>{property.property_country}</option>
+                    <option>country: {property.property_country}</option>
                 ))}
             </select>
             ):("")}
+
+            {properties.length > 0 ? (
+            <select className="pl-3 pr-5 py-1 appearance-none down_caret
+            rounded-[12px] dark:bg-[#ffffff11] bg-[#ffffff9b]
+            focus:outline focus:outline-1 outline-[#0000002b] dark:outline-[#ffffff61]"
+            name="type" value={type} onChange={handleChange}>
+                <option>select type</option>
+                {properties.map((property) => (
+                    <option>type: {property.property_type}</option>
+                ))}
+            </select>
+            ):("")}
+
+            {properties.length > 0 ? (
+            <select className="pl-3 pr-5 py-1 appearance-none down_caret
+            rounded-[12px] dark:bg-[#ffffff11] bg-[#ffffff9b]
+            focus:outline focus:outline-1 outline-[#0000002b] dark:outline-[#ffffff61]"
+            name="listing_type" value={listing_type} onChange={handleChange}>
+                <option>select listing type</option>
+                {properties.map((property) => (
+                    <option>listing type: {property.property_listing_type}</option>
+                ))}
+            </select>
+            ):("")}
+
+
+            <button 
+            className="
+            dark:bg-text-accent-dark bg-theme-text-brighter opacity-75 text-white
+            px-3 py-1 rounded-[12px]
+            focus:outline focus:outline-1 outline-[#0000002b] dark:outline-[#ffffff61]"
+            onClick={()=>{clearFilter();}}>
+                    Clear
+            </button>
 
         </span>
 

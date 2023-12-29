@@ -428,6 +428,13 @@ img {
   background-size: 50%;
 }
 
+.down_caret {
+  background-image: url("/icons/arrow-down-grey.svg");
+  background-position: 94%, center;
+  background-repeat: no-repeat;
+  background-size: 0.6rem;
+}
+
 
 /* .latest_property {
   width: 60vmin;

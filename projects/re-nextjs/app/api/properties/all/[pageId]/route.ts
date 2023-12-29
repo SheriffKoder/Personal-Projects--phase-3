@@ -34,8 +34,15 @@ export const GET = async (request: NextRequest, {params}:any) => {
 //receive keywords
 export const POST = async (request: NextRequest, {params}:any) => {
 
+    console.log(params.pageId);
+    const page = params.pageId - 1; //so page 1 will be 0, page 2 will be 1, page 3 will be 2
+    const end = 3;
+    const start = page * end;
+
+
+
     const body = await request.json();
-    console.log(body);
+    // console.log(body);
 
     const search_text = body.searchText;
 
@@ -48,15 +55,15 @@ export const POST = async (request: NextRequest, {params}:any) => {
         }
     })
 
-    // body.country = "";
 
+    //// overwrite not entered values 
     //get the keys
-    //if the key contains From
-    //check for the value
+    //if the key contains From or To
+    //check for the value if empty ""
     //make it 0 in the body
-    //same for to, make it 999999999
+    //same for To, make it 999999999
     for (let key in body) {
-        console.log(key);
+        // console.log(key);
         if (key.search("From") > -1 ) {
             if (body[key] === "") {
                 body[key] = 0;
@@ -74,19 +81,35 @@ export const POST = async (request: NextRequest, {params}:any) => {
         // }
     }
 
-    console.log("new body");
-    console.log(body);
+    // console.log("new body");
+    // console.log(body);
 
     //regex to match the string
     // const filteredProperties = await PropertyModel.find({property_description: {$regex: '^' + search_text, $options: 'i'}});
     const filteredProperties = await PropertyModel.find({
         $or: myFilter, 
-        property_beds: {$gt: Number(body.bedroomsFrom)-1, $lt: Number(body.bedroomsTo)+1},
-        property_price: {$gt: Number(body.priceFrom)-1, $lt: Number(body.priceTo)+1},
-        property_area: {$gt: Number(body.areaFrom)-1, $lt: Number(body.areaTo)+1},
+        //greater/less than equal $gte/$lte or not equal $gt/$lt
+        property_beds: {$gte: Number(body.bedroomsFrom), $lte: Number(body.bedroomsTo)},
+        property_price: {$gte: Number(body.priceFrom), $lte: Number(body.priceTo)},
+        property_area: {$gte: Number(body.areaFrom), $lte: Number(body.areaTo)},
         //if country is "" it will still give results for all, but if specified, will choose only this country
         property_country: {$regex: body.country},
-    });
+        property_type: {$regex: body.type},
+        property_listing_type: {$regex: body.listing_type}
+
+    }).skip(start).limit(end);
+
+    const pagesEnd = await PropertyModel.find({
+        $or: myFilter, 
+        //greater/less than equal $gte/$lte or not equal $gt/$lt
+        property_beds: {$gte: Number(body.bedroomsFrom), $lte: Number(body.bedroomsTo)},
+        property_price: {$gte: Number(body.priceFrom), $lte: Number(body.priceTo)},
+        property_area: {$gte: Number(body.areaFrom), $lte: Number(body.areaTo)},
+        //if country is "" it will still give results for all, but if specified, will choose only this country
+        property_country: {$regex: body.country},
+        property_type: {$regex: body.type},
+        property_listing_type: {$regex: body.listing_type}
+    }).countDocuments() / end;
 
     //for each input, if input not empty search 
     //we can remove all empty fields
@@ -98,7 +121,7 @@ export const POST = async (request: NextRequest, {params}:any) => {
 
 
     try {
-        return new Response(JSON.stringify("received inputs"), {status: 200});
+        return new Response(JSON.stringify({filteredProperties, pagesEnd}), {status: 200});
 
     } catch {
         return new Response(JSON.stringify("Failed to fetch all properties"), {status: 500});
