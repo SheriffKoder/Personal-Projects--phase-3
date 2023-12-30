@@ -2,7 +2,7 @@
 "use client";
 
 import { hideDropDownMenu, hideLogin } from "@utils/bodyNoScroll";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 
 //02X.01
@@ -64,6 +64,87 @@ const Login_component = () => {
     //02X.02
     const { email, password } = userInfo;
 
+
+    //////////////////////////////////
+    //part 10 - addon input validation
+    const errorMessage = useRef({
+        email: "",
+        password: ""
+    })
+    const inputCheckHandler = ({target}) => {
+        // console.log(e.target.value);
+        // console.log(target);
+        const {name, value} = target;
+
+        // console.log({name, value});
+
+        //get the input
+        //check the input's value from the patterns available
+        //
+
+        const patterns: {} = {
+            // telephone: /^\d{12}$/ ,         // only, country code+10 digits - login
+            // telephoneShort: /^\d{10}$/ ,         // only, 10 digits - signup
+            // password: /^[\w@-]{8,20}$/,     //the pattern is repeated, looking for (a-z A-Z also 0-9 and _)or @ or -
+            email: /^([a-zA-Z\d\.-\_]+)@([a-zA-Z\d-]+)\.([a-z]{2,8})\.?([a-z]{2,8})?$/,               //also dots \.
+            //        // domain with . - .. @ .. domain .. dot .. com ..  .uk(optional)
+            // name: /^([a-zA-Z]{3,15})\s([a-zA-Z]{3,15})\s?([a-zA-Z]{3,15})?$/,
+            
+            //8 or more any characters
+            // title: /^.{8,}$/,
+            password: /^.{4,}$/,
+        };
+    
+        //the error message for each regex
+        const errorMessages = {
+            email: "be in a valid format",
+            // password: "be from 8 to 20 characters"
+            password: "be more than 4 characters - test"
+        }
+
+        //test the incoming input value with its corresponding regex
+        const regex: RegExp = patterns[name as keyof typeof patterns];
+        const validInput = regex.test(value);
+
+        // console.log(validInput);
+
+
+        //// render to the ui the error messages
+        const errorText = document.getElementById("errorMsg_login");
+        
+        //if not valid, store the message in the errorMessage Ref
+        if(!validInput) {
+            //give the ref the text 
+            //give the jsx element the ref as a string
+            errorMessage.current[name as keyof typeof errorMessage.current] = `<b>${name}:</b> should be ${errorMessages[name as keyof typeof errorMessages]} </br>`;
+        //if valid, clear the message of this key-name in the errorMessage Ref
+        } else if (validInput) {
+            errorMessage.current[name as keyof typeof errorMessage.current] = "";
+        }      
+
+        //now clear the message in the ui and store all error messages again
+        if (errorText) {
+            errorText.innerHTML = "";
+            for (const errorName in errorMessage.current) {
+                errorText.innerHTML = errorText.innerHTML + errorMessage.current[errorName as keyof typeof errorMessage.current];
+                // console.log(errorName);
+            }
+
+            //if the errorText jsx element has some error content
+            if(errorText.innerHTML !== "") {
+                //show the input jsx container
+                document.getElementById("errorMsgContainer_login")!.style.display="flex";
+            }
+        }
+
+
+    }
+    //////////////////////////////////
+
+
+
+
+
     //02X.02
     const handleChange: ChangeEventHandler<HTMLInputElement> = ({ target }) => {
         const { name, value } = target;
@@ -109,6 +190,8 @@ const Login_component = () => {
             let agentId = (session?.user.id);
           router.push(`/agents/${agentId}`);
         }
+        document.getElementById("errorMsgContainer_login")!.style.display="none";
+
     //   }, [session]);
     }, []);
 
@@ -129,6 +212,29 @@ const Login_component = () => {
             dark:text-[#ffffffde] shadow-2xl dark:shadow-inner 
             pb-4 lg:pb-7
             ">
+
+                <span id="errorMsgContainer_login"
+                className="border-[rgba(255,255,255,0.02)] shadow-lg dark:shadow-inner 
+                absolute z-[2] top-[50%] left-[50%] centered_centered text-theme-text-dark text-xs
+                p-2 dark:bg-[#151515f8] bg-[#fdfdfd] rounded-[7px] flex flex-col">
+                    
+                    <span className="dark:text-white  text-black flex flex-row">
+                        <span className="mt-auto ml-1 opacity-70">
+                            Please check the following inputs
+                        </span>
+                        <button 
+                            onClick={()=> {document.getElementById("errorMsgContainer_login")!.style.display="none"}}
+                            className="
+                            ml-auto bg-theme-text-brighter opacity-80 hover:opacity-100 dark:opacity-100 dark:bg-[#912642] dark:hover:bg-[#9f2545] h-5 w-5 rounded-[6px] text-white flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" className="bi bi-x-lg" viewBox="0 0 16 16"> <path fill-rule="evenodd" d="M13.854 2.146a.5.5 0 0 1 0 .708l-11 11a.5.5 0 0 1-.708-.708l11-11a.5.5 0 0 1 .708 0Z"/> <path fill-rule="evenodd" d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z"/> </svg>
+                        </button>
+                    </span>
+
+                    <span id="errorMsg_login" className="w-[95%] mx-auto mt-2">
+
+                    </span>
+                </span>
+                
                 <div className="text-center relative w-full flex flex-col">
                     <div className="absolute right-0">
                         <button 
@@ -162,7 +268,7 @@ const Login_component = () => {
                         <input className="w-full input_field border-0 rounded-r-[6px] 
                             dark:bg-[#ffffff09] dark:focus:bg-[#ffffff02]  px-2 
                             border-[rgba(255,255,255,0.02)]" type="email"
-                        name="email" value={email} onChange={handleChange}
+                        name="email" value={email} onChange={handleChange} onBlur={inputCheckHandler}
                         />
                         
                     </label>
@@ -176,7 +282,7 @@ const Login_component = () => {
                         <input className="w-full input_field border-0 rounded-r-[6px] 
                             dark:bg-[#ffffff09] dark:focus:bg-[#ffffff02]  px-2 
                             border-[rgba(255,255,255,0.02)]" type="password"
-                            name="password" value={password} onChange={handleChange}
+                            name="password" value={password} onChange={handleChange} onBlur={inputCheckHandler}
                         />
                         
                     </label>

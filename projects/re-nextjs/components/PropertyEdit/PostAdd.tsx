@@ -2,7 +2,7 @@
 "use client";
 
 import { bodyScroll, hideEdit } from "@utils/bodyNoScroll";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import Link from "next/link";
 
 import { ChangeEventHandler, FormEventHandler } from "react";
@@ -58,6 +58,82 @@ const PostAdd_Component = ({postInfo, setPostInfo, setReload}:{
 
     //Part 11.01 - formData image upload
     const [file, setFile] = useState<File>();
+
+
+    //////////////////////////////////
+    //part 10 - addon input validation
+    const errorMessage = useRef({
+        title: "",
+        content: ""
+    })
+    const inputCheckHandler = ({target}) => {
+        // console.log(e.target.value);
+        // console.log(target);
+        const {name, value} = target;
+
+        // console.log({name, value});
+
+        //get the input
+        //check the input's value from the patterns available
+        //
+
+        const patterns: {} = {
+            // telephone: /^\d{12}$/ ,         // only, country code+10 digits - login
+            // telephoneShort: /^\d{10}$/ ,         // only, 10 digits - signup
+            // password: /^[\w@-]{8,20}$/,     //the pattern is repeated, looking for (a-z A-Z also 0-9 and _)or @ or -
+            // email: /^([a-zA-Z\d\.-\_]+)@([a-zA-Z\d-]+)\.([a-z]{2,8})\.?([a-z]{2,8})?$/,               //also dots \.
+            //        // domain with . - .. @ .. domain .. dot .. com ..  .uk(optional)
+            // name: /^([a-zA-Z]{3,15})\s([a-zA-Z]{3,15})\s?([a-zA-Z]{3,15})?$/,
+            
+            //8 or more any characters
+            title: /^.{8,}$/,
+            content: /^.{30,}$/,
+        };
+    
+        //the error message for each regex
+        const errorMessages = {
+            title: "at least 8 characters",
+            content: "at least 30 characters"
+        }
+
+        //test the incoming input value with its corresponding regex
+        const regex: RegExp = patterns[name as keyof typeof patterns];
+        const validInput = regex.test(value);
+
+        // console.log(validInput);
+
+
+        //// render to the ui the error messages
+        const errorText = document.getElementById("errorMsg_postSubmit");
+        
+        //if not valid, store the message in the errorMessage Ref
+        if(!validInput) {
+            //give the ref the text 
+            //give the jsx element the ref as a string
+            errorMessage.current[name as keyof typeof errorMessage.current] = `<b>${name}:</b> should be ${errorMessages[name as keyof typeof errorMessages]} </br>`;
+        //if valid, clear the message of this key-name in the errorMessage Ref
+        } else if (validInput) {
+            errorMessage.current[name as keyof typeof errorMessage.current] = "";
+        }      
+
+        //now clear the message in the ui and store all error messages again
+        if (errorText) {
+            errorText.innerHTML = "";
+            for (const errorName in errorMessage.current) {
+                errorText.innerHTML = errorText.innerHTML + errorMessage.current[errorName as keyof typeof errorMessage.current];
+                // console.log(errorName);
+            }
+
+            //if the errorText jsx element has some error content
+            if(errorText.innerHTML !== "") {
+                //show the input jsx container
+                document.getElementById("errorMsgContainer_postSubmit")!.style.display="flex";
+            }
+        }
+
+
+    }
+    //////////////////////////////////
 
 
 
@@ -148,6 +224,10 @@ const PostAdd_Component = ({postInfo, setPostInfo, setReload}:{
 
     }
     
+    useEffect(()=> {
+        document.getElementById("errorMsgContainer_postSubmit")!.style.display="none";
+
+    },[]);
 
 
     return (
@@ -158,10 +238,40 @@ const PostAdd_Component = ({postInfo, setPostInfo, setReload}:{
                 rounded-[17px] bg-[#ffffffbd]  dark:bg-[#ffffff10]
                 border-[rgba(255,255,255,0.02)]
                 dark:text-[#ffffffde] shadow-2xl dark:shadow-inner 
-                pb-4 lg:pb-7
+                pb-4 lg:pb-7 relative
                 ">
+
+                <span id="errorMsgContainer_postSubmit"
+                className="border-[rgba(255,255,255,0.02)] shadow-lg dark:shadow-inner 
+                absolute top-[50%] left-[50%] centered_centered text-theme-text-dark text-xs
+                p-2 dark:bg-[#151515f8] bg-[#fdfdfd] rounded-[7px] flex flex-col">
+                    
+                    <span className="dark:text-white  text-black flex flex-row">
+                        <span className="mt-auto ml-1 opacity-70">
+                            Please check the following inputs
+                        </span>
+                            <button 
+                                onClick={()=> {document.getElementById("errorMsgContainer_postSubmit")!.style.display="none"}}
+                                className="
+                                ml-auto bg-theme-text-brighter opacity-80 hover:opacity-100 dark:opacity-100 dark:bg-[#912642] dark:hover:bg-[#9f2545] h-5 w-5 rounded-[6px] text-white flex items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" className="bi bi-x-lg" viewBox="0 0 16 16"> <path fill-rule="evenodd" d="M13.854 2.146a.5.5 0 0 1 0 .708l-11 11a.5.5 0 0 1-.708-.708l11-11a.5.5 0 0 1 .708 0Z"/> <path fill-rule="evenodd" d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z"/> </svg>
+                            </button>
+                        </span>
+
+                        <span id="errorMsg_postSubmit" className="w-[95%] mx-auto mt-2">
+
+                        </span>
+                    </span>
+
             
                     <div className="text-center relative w-full flex flex-row justify-center">
+                        
+                        <div className="mx-auto pt-0 lg:pt-6 flex flex-col lg:flex-row gap-1 flex-wrap justify-center">
+                            <h3 className="mb-2 text_shadow-2 opacity-80">
+                                {postInfo.action === "add" ? ("Add a new post") : ("Edit post")}
+                            </h3>
+                        </div>
+
                         <div className="">
                             <button 
                             onClick={()=> {hidePostAdd(); bodyScroll();}}
@@ -171,11 +281,6 @@ const PostAdd_Component = ({postInfo, setPostInfo, setReload}:{
                             </button>
                         </div>
 
-                        <div className="mx-auto pt-0 lg:pt-6 flex flex-col lg:flex-row gap-1 flex-wrap justify-center">
-                            <h3 className="mb-2 text_shadow-2 opacity-80">
-                                {postInfo.action === "add" ? ("Add a new property") : ("Edit property")}
-                            </h3>
-                        </div>
                         
                     </div>
 
@@ -197,9 +302,8 @@ const PostAdd_Component = ({postInfo, setPostInfo, setReload}:{
                                 dark:bg-[#ffffff09] dark:focus:bg-[#ffffff02]  px-2 
                                 border-[rgba(255,255,255,0.02)]" type="text" required
                                 // value={post.country}
-                                name="title" value={title} onChange={handleChange}
-                                />
-                            
+                                name="title" value={title} onChange={handleChange} onBlur={inputCheckHandler}
+                                />                            
                         </label>
 
                         <label className="w-[100%] flex flex-row justify-center text-center
@@ -230,14 +334,14 @@ const PostAdd_Component = ({postInfo, setPostInfo, setReload}:{
                             rows={6} placeholder="describe your property"
                             // value={post.description}
                             // onChange={(e) => {setPost({...post, description: e.target.value})}}
-                            name="content" value={content} onChange={handleChange}
+                            name="content" value={content} onChange={handleChange} onBlur={inputCheckHandler}
                             >
 
                             </textarea>
                         </label>
 
 
-                        <div className="mt-4 w-[80%] flex">
+                        <div className="mt-4 w-[80%] flex relative">
                                 <button type="submit" className="
                                 bg-theme-text-brighter dark:bg-theme-text-dark text-white 
                                 rounded-[9px] py-1 px-3 w-full
