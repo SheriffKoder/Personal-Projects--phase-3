@@ -40,18 +40,64 @@ export const POST = async (req: Request): Promise<NewResponse> => {
 
     await connectToDB();
 
+    //////////////////////////////////////////////////////////////////////////////////
+    ////Input check
+
+    let errorArray: string[] = [];
+
+    //AdminId
     console.log(body.adminId);
     if ((body.adminId !== "1234") && (body.adminId !== "1111")) {
-            return NextResponse.json({error: "not authorized"}, {status: 422});
+            errorArray.push("not authorized")
     }
 
+    //phone
+    if (isNaN(body.phone)) {
+        errorArray.push("the phone should be in digits only");
+
+    } else if (body.phone.toString().length < 4) {
+        errorArray.push("the phone should be more than 4 digits");
+    }
+
+    const phoneExists = await UserModel.findOne({ phone: body.phone});
+    if (phoneExists) {
+        errorArray.push("this phone number is already in use!");
+    }
+    
+    //password
+    if (body.password.length < 4) {
+        errorArray.push("the password should be more than 4 characters");
+    }
+
+    //name
+    if (body.name.length < 6) {
+        errorArray.push("the name should be more than 4 characters");
+    }
+
+    if (!body.name.match(/^([a-zA-Z]{3,15}\s[a-zA-Z]{3,15})(\s[a-zA-Z]{3,15})?$/)) {
+        errorArray.push("the name should be a full name consisting of first and last names and an optional middle name");
+    }
+
+    //email
+    if (!body.email.match(/^([a-zA-Z\d\.-\_]+)@([a-zA-Z\d-]+)\.([a-z]{2,8})\.?([a-z]{2,8})?$/)) {
+        errorArray.push("the email is not in a valid format");
+    }
 
     const oldUser = await UserModel.findOne({ email: body.email});
-    if (oldUser)
-    return NextResponse.json(
-        { error: "email is already in use!"},
-        { status: 422 }
-    );
+    if (oldUser) {
+        errorArray.push("this email already exists");
+    }
+
+    if (errorArray.length > 0) {
+        // return NextResponse.json(errorArray,{ status: 422 });
+        return new NextResponse(JSON.stringify({errorArray}), {status: 422});
+
+            
+    }
+
+    //////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////
+
 
     let role: string;
     (body.adminId !== "1234" && body.adminId === "1111") ? role = "admin" : role = "user";
@@ -97,7 +143,7 @@ export const POST = async (req: Request): Promise<NewResponse> => {
         })
     ])
 
-    return NextResponse.json({
+    return new NextResponse(JSON.stringify({
         user: {
             id: user._id.toString(),
             email: user.email,
@@ -106,7 +152,7 @@ export const POST = async (req: Request): Promise<NewResponse> => {
 
         },
         signUp: true,
-    });
+    }), {status: 200});
     
 };
 

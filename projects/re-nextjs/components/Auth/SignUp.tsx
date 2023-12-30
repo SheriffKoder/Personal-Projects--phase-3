@@ -86,7 +86,8 @@ const SignUp_component = () => {
 
         //// render to the ui the error messages
         const errorText = document.getElementById("errorMsg_signUp");
-        
+        const errorTitle = document.getElementById("errorMsg_signUp_title");
+
         //if not valid, store the message in the errorMessage Ref
         if(!validInput) {
             //give the ref the text 
@@ -98,8 +99,9 @@ const SignUp_component = () => {
         }      
 
         //now clear the message in the ui and store all error messages again
-        if (errorText) {
+        if (errorText && errorTitle) {
             errorText.innerHTML = "";
+            errorTitle.innerText = "Please check the following input fields:";
             for (const errorName in errorMessage.current) {
                 errorText.innerHTML = errorText.innerHTML + errorMessage.current[errorName as keyof typeof errorMessage.current];
                 // console.log(errorName);
@@ -129,17 +131,45 @@ const SignUp_component = () => {
         setBusy(true);
 
         e.preventDefault();
-        const res = await fetch("/api/auth/users", {
+        const apiResponse = await fetch("/api/auth/users", {
             method: "POST",
             body: JSON.stringify(userInfo),
 
-        }).then((res) => res.json());
+        })
+        // .then((res) => res.json());
+
+        const res = await apiResponse.json();
         console.log(res);
         setBusy(false);
 
+        if (res.errorArray) {
+            console.log("server error "+res.errorArray);
+
+            const errorText = document.getElementById("errorMsg_signUp");
+            const errorTitle = document.getElementById("errorMsg_signUp_title");
+
+            //now clear the message in the ui and store all error messages again
+            if (errorText && errorTitle) {
+                errorText.innerHTML = "";
+                errorTitle.innerText = "SignUp failed because of the following:";
+                res.errorArray.forEach((error:string)=>{
+                    errorText.innerHTML = errorText.innerHTML + error + "</br>";
+                })
+    
+                //if the errorText jsx element has some error content
+                if(errorText.innerHTML !== "") {
+                    //show the input jsx container
+                    document.getElementById("errorMsgContainer_signUp")!.style.display="flex";
+                }
+    
+            }
+
+            return;
+        }
+
         //02X.07
         //login automatically after a successful sign-up
-        if (res) {
+        if (res.signUp) {
             console.log("we can sign in");
             //send the request to the backend api
             const res = await signIn("credentials", {
@@ -148,10 +178,10 @@ const SignUp_component = () => {
             redirect: false, //avoid default redirect
             });
             console.log("signed in");
+            hideSignUp();
+            hideDropDownMenu();    
         }
-        hideSignUp();
-        hideDropDownMenu();
-    }
+   }
 
 
     useEffect(() => {
@@ -186,7 +216,7 @@ const SignUp_component = () => {
                 p-2 dark:bg-[#151515f8] bg-[#fdfdfd] rounded-[7px] hidden flex-col">
                     
                     <span className="dark:text-white  text-black flex flex-row">
-                        <span className="mt-auto ml-1 opacity-70">
+                        <span className="mt-auto ml-1 mr-2 opacity-70" id="errorMsg_signUp_title">
                             Please check the following inputs
                         </span>
                         <button 

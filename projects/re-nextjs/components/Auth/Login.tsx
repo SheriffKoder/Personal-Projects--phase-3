@@ -111,6 +111,7 @@ const Login_component = () => {
 
         //// render to the ui the error messages
         const errorText = document.getElementById("errorMsg_login");
+        const errorTitle = document.getElementById("errorMsg_login_title");
         
         //if not valid, store the message in the errorMessage Ref
         if(!validInput) {
@@ -123,8 +124,9 @@ const Login_component = () => {
         }      
 
         //now clear the message in the ui and store all error messages again
-        if (errorText) {
+        if (errorText && errorTitle) {
             errorText.innerHTML = "";
+            errorTitle.innerText = "Please check the following input fields";
             for (const errorName in errorMessage.current) {
                 errorText.innerHTML = errorText.innerHTML + errorMessage.current[errorName as keyof typeof errorMessage.current];
                 // console.log(errorName);
@@ -157,24 +159,46 @@ const Login_component = () => {
         setBusy(true);
         e.preventDefault();
         //send the request to the backend api
-        const res = await signIn("credentials", {
+        const apiResponse = await signIn("credentials", {
             email,
             password,
             redirect: false, //avoid default redirect
         });
+        
+        console.log(apiResponse);
+        if (apiResponse) {
+            setBusy(false);    
+        
+            //if there is an error, update the error state and return the process
+            if (apiResponse.error !== null) { 
+                // setError(res.error);
+                const errorText = document.getElementById("errorMsg_login");
+                const errorTitle = document.getElementById("errorMsg_login_title");
 
-        //if there is an error, update the error state and return the process
-        if (res?.error) { 
-            setError(res.error)
-        } else {
-            // console.log(res);
-            // console.log("signed in");
-            let agentId = (session?.user.id);
-          router.push(`/agents/${agentId}`);
-            hideLogin();
-            hideDropDownMenu();
+                //now clear the message in the ui and store all error messages again
+                if (errorText && errorTitle) {
+                    errorText.innerHTML = "";
+                    errorTitle.innerText = "Login failed because of the following:";
+                    errorText.innerHTML = apiResponse.error;
+        
+                    //if the errorText jsx element has some error content
+                    if(errorText.innerHTML !== "") {
+                        //show the input jsx container
+                        document.getElementById("errorMsgContainer_login")!.style.display="flex";
+                    }
+        
+                }
+                return;
+
+            } else {
+                // console.log(res);
+                // console.log("signed in");
+                let agentId = (session?.user.id);
+            router.push(`/agents/${agentId}`);
+                hideLogin();
+                hideDropDownMenu();
+            }
         }
-        setBusy(false);
 
     };
     //////////////////////////////////////////////////////////////////////////
@@ -219,7 +243,7 @@ const Login_component = () => {
                 p-2 dark:bg-[#151515f8] bg-[#fdfdfd] rounded-[7px] flex flex-col">
                     
                     <span className="dark:text-white  text-black flex flex-row">
-                        <span className="mt-auto ml-1 opacity-70">
+                        <span className="mt-auto ml-1 opacity-70 mr-2" id="errorMsg_login_title">
                             Please check the following inputs
                         </span>
                         <button 
