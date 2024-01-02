@@ -21,12 +21,12 @@ interface postInputs_interface {
     action: string;
 }
 
-const PostsContainer = ({userAuthority, userName, setReload, reload, setPostInfo}:{
+const PostsContainer = ({setPostEditId, userAuthority, setReload, reload, userName}:{
+    setPostEditId: React.Dispatch<React.SetStateAction<string>>
+    setReload: React.Dispatch<React.SetStateAction<boolean>>,
+    reload: any,
     userAuthority: string,
     userName: string,
-    setReload: React.Dispatch<React.SetStateAction<boolean>>,
-    reload:any,
-    setPostInfo: React.Dispatch<React.SetStateAction<postInputs_interface>>
 
 }) => {
 
@@ -34,14 +34,16 @@ const PostsContainer = ({userAuthority, userName, setReload, reload, setPostInfo
     // const [reload, setReload] = useState(false);
 
 
-    function showPostAdd (inputs:postInputs_interface) {
+    // function showPostAdd (inputs:postInputs_interface) {
+    function showPostAdd () {
+
         let postAddContainer = document.getElementById("postAddContainer");
         if (postAddContainer) postAddContainer.style.display = "inline";
         
         let children_container2 = document.getElementById("children_container2");
         if (children_container2) children_container2.style.opacity = "0";
 
-        setPostInfo({title:inputs.title, content: inputs.content, _id:inputs._id, action: inputs.action});
+        // setPostInfo({title:inputs.title, content: inputs.content, _id:inputs._id, action: inputs.action});
         
     }
 
@@ -130,8 +132,9 @@ const PostsContainer = ({userAuthority, userName, setReload, reload, setPostInfo
                 { userAuthority === "viewer" ? (`${userName}'s posts`) : ("Your posts")}
             </h4>
 
+            {/* {title: "", content:"", _id:"", action: "add"} */}
             <button type="button" 
-            onClick={() => {bodyNoScroll(); showPostAdd({title: "", content:"", _id:"", action: "add"})}}
+            onClick={() => {bodyNoScroll(); showPostAdd()}}
             className="
             bg-theme-text-brighter dark:bg-theme-text-dark text-white 
             rounded-[17px] text-sm py-0 px-3
@@ -209,7 +212,7 @@ const PostsContainer = ({userAuthority, userName, setReload, reload, setPostInfo
                         md2:mt-auto md2:justify-end md2:mb-0">
 
                             <button type="button"
-                            onClick={() => {bodyNoScroll(); showPostAdd({title: post.title, content:post.content, _id: post._id.toString(), action: "edit"})}}
+                            onClick={() => {bodyNoScroll(); setPostEditId(post._id); showPostAdd();}}
                             className="bg-theme-text-brighter dark:bg-theme-text-dark text-white 
                             rounded-full w-[65px]
                             opacity-40 hover:opacity-90 text-center">

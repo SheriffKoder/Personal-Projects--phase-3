@@ -173,9 +173,9 @@ const PropertyCardAdmin = ({setPropertyEditId, property1, currentPage="", setRel
     // }
 
 
-    const setLocalStorageForProperty = (propertyId: string) => {
-      localStorage.setItem("editing", propertyId);
-    }
+    // const setLocalStorageForProperty = (propertyId: string) => {
+    //   localStorage.setItem("editing", propertyId);
+    // }
 
 
     function showPropertyAdd () {
@@ -192,7 +192,7 @@ const PropertyCardAdmin = ({setPropertyEditId, property1, currentPage="", setRel
 
     useEffect(()=> {
 
-        //Part11
+        //Part11 - filter un existing image slots
         // console.log(property1.property_images);
 
         if (property === null && property1 !== null) {

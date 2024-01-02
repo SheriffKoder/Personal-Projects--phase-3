@@ -18,6 +18,8 @@ import { updateUser_lastUpdate } from "@utils/dateGenerate";
 
 //Part11
 import { getFormData } from "@utils/ImgformDataGenerate";
+import Image from "next/image";
+import { getFormData_multiple } from "@utils/ImgformDataGenerate";
 
 
 function hidePostAdd () {
@@ -38,26 +40,49 @@ interface postInputs_interface {
 }
 
 //03.01
-const PostAdd_Component = ({postInfo, setPostInfo, setReload}:{
-    postInfo: postInputs_interface, 
-    setPostInfo: React.Dispatch<React.SetStateAction<postInputs_interface>>,
+const PostAdd_Component = ({postEditId, setPostEditId, setReload}:{
+    postEditId: string, 
+    setPostEditId: React.Dispatch<React.SetStateAction<string>>,
     setReload: React.Dispatch<React.SetStateAction<boolean>>,
 
     }) => {
 
+        function hidePostAdd () {
+            let postAddContainer = document.getElementById("postAddContainer");
+            if (postAddContainer) postAddContainer.style.display = "none";
+        
+            let children_container2 = document.getElementById("children_container2");
+            if (children_container2) children_container2.style.opacity = "1";
+            setPostEditId("");
+            setAction("add");
+            setPostInfo({
+                title: "",
+                content: "",
+                image: "",
+            });
+        
+        }
+
     const {data: session } = useSession();
 
-    // const [action, setAction] = useState ("add");
+    const [action, setAction] = useState ("add");
     const [submitting, setSubmitting] = useState(false);
     // const [postInfo, setPostInfo] = useState({
     //     title: "",
     //     content: "",
     // });
 
-    const { title, content } = postInfo;
+    const [postInfo, setPostInfo] = useState({
+        title: "",
+        content: "",
+        image: "",
+
+    });
+
+    const {title, content} = postInfo;
 
     //Part 11.01 - formData image upload
-    const [file, setFile] = useState<File>();
+    const [file, setFile] = useState<File | string>("");
 
 
     //////////////////////////////////
@@ -66,7 +91,7 @@ const PostAdd_Component = ({postInfo, setPostInfo, setReload}:{
         title: "",
         content: ""
     })
-    const inputCheckHandler = ({target}) => {
+    const inputCheckHandler = ({target}:any) => {
         // console.log(e.target.value);
         // console.log(target);
         const {name, value} = target;
@@ -147,15 +172,13 @@ const PostAdd_Component = ({postInfo, setPostInfo, setReload}:{
         setSubmitting(true);
 
         //Part 11.01 - formData image upload
-        let data;
-        //  console.log(postInfo);
-         if (file) {
-             data = getFormData(postInfo, file);
-         } else if (!file) {
-             data = getFormData(postInfo, null);
-         }
- 
-         if (data) {
+        let formData = new FormData();
+        //add the form information to formData 
+        if (postInfo) formData = getFormData_multiple(formData, null, null, postInfo);
+        //add the image with out a key (as we have a single image) to the formData that also now has information
+        if (file !== "" || file !== null) formData = getFormData_multiple(formData, file, "", null);
+
+         if (formData) {
 
             //creating first post
             try {
@@ -163,7 +186,7 @@ const PostAdd_Component = ({postInfo, setPostInfo, setReload}:{
                 const current_url = window.location.href.toString().split("/agents/")[1];
 
                 //put this page's i.e the userId in the params
-                if (postInfo.action === "add") {
+                if (action === "add") {
                     const response = await fetch(`/api/posts/new/${current_url}`, {
                         method: "POST",
                         // body: JSON.stringify({
@@ -173,7 +196,7 @@ const PostAdd_Component = ({postInfo, setPostInfo, setReload}:{
                         //     // date_update: "26 dec 2023",
                         // })
                         //Part 11.01 - formData image upload
-                        body: data,
+                        body: formData,
                     })
         
                     if (response.ok) {
@@ -181,7 +204,7 @@ const PostAdd_Component = ({postInfo, setPostInfo, setReload}:{
                         hidePostAdd(); bodyScroll();
                     }                    
                 
-                } else if (postInfo.action === "edit") {
+                } else if (action === "edit") {
                     const response = await fetch(`/api/posts/new/${current_url}`, {
                         method: "PATCH",
                         // body: JSON.stringify({
@@ -190,7 +213,7 @@ const PostAdd_Component = ({postInfo, setPostInfo, setReload}:{
                         //     // date_update: "26 dec 2023",
                         // })
                         //Part 11.01 - formData image upload
-                        body: data,
+                        body: formData,
 
                     })
         
@@ -218,6 +241,7 @@ const PostAdd_Component = ({postInfo, setPostInfo, setReload}:{
             } finally {
                 //happens either way
                 setSubmitting(true);
+                hidePostAdd(); bodyScroll();
             }
          }
 
@@ -225,9 +249,50 @@ const PostAdd_Component = ({postInfo, setPostInfo, setReload}:{
     }
     
     useEffect(()=> {
+
+        console.log(postEditId);
+        //the edit passes and id and the add passes "", 
+        //so if there is an id, set action to edit, 
+
+        if (postEditId !== "") {
+            setAction("edit");
+        
+
+        //by default we have an empty property state for an add button
+        //if there is an id i.e edit button clicked, we would like to fetch this property,
+        //and extract the needed parts into our property state
+        const fetchPostInfo = async () => {
+            const response = await fetch(`/api/posts/new/${postEditId}`, {
+                method: "GET",
+            });
+
+            const jsonResponse = await response.json();
+            console.log(jsonResponse);
+
+
+            //Part11
+            const temp_post = {
+                title: jsonResponse.title,
+                content: jsonResponse.content,
+                image: jsonResponse.image,        
+            };
+
+            console.log(temp_post.image);
+            if (temp_post.image) setFile(temp_post.image);
+
+            setPostInfo(temp_post);
+
+        }
+        
+
+        fetchPostInfo();
+
+        }
+
+
         document.getElementById("errorMsgContainer_postSubmit")!.style.display="none";
 
-    },[]);
+    },[postEditId, setFile]);
 
 
     return (
@@ -268,7 +333,7 @@ const PostAdd_Component = ({postInfo, setPostInfo, setReload}:{
                         
                         <div className="mx-auto pt-0 lg:pt-6 flex flex-col lg:flex-row gap-1 flex-wrap justify-center">
                             <h3 className="mb-2 text_shadow-2 opacity-80">
-                                {postInfo.action === "add" ? ("Add a new post") : ("Edit post")}
+                                {action === "add" ? ("Add a new post") : ("Edit post")}
                             </h3>
                         </div>
 
@@ -306,23 +371,55 @@ const PostAdd_Component = ({postInfo, setPostInfo, setReload}:{
                                 />                            
                         </label>
 
-                        <label className="w-[100%] flex flex-row justify-center text-center
+                        <div className="w-[100%] flex flex-row justify-center text-center
                         label_field
                         bg-[#ffffff07] rounded-[7px] border-2 border-[#ffffff02]
-                        
+                        max-h-[36px]
                         ">
                             <span className="min-w-[7rem] px-2 py-1 text_shadow-2 opacity-80 dark:opacity-90">
                                 Add Images
                             </span>
 
-                            <input className="w-full input_field border-0 rounded-r-[6px] 
+                            {/* <input className="w-full input_field border-0 rounded-r-[6px] 
                                 dark:bg-[#ffffff09] dark:focus:bg-[#ffffff02]  px-2
                                 border-[rgba(255,255,255,0.02)]"
                                 // Part 11.01 - formData image upload
-                                type="file" name="file" onChange={(e)=> setFile(e.target.files?.[0])}/>
+                                type="file" name="file" onChange={(e)=> setFile(e.target.files?.[0])}/> */}
+                                
+                                <div className="">
+                                    <Image width={100} height={50} src={typeof file === "string" && file !== "" ? (file) : (file == "" ? "/icons/fileNot.svg": "/icons/fileUpload.svg")} alt="pic"
+                                    className="max-w-[2rem]">
+                                    </Image>
+                                </div>
+
+                                {file!== ""? (
+                                    <div className="w-[2rem] my-auto mr-1">
+                                        <button 
+                                        onClick={(e)=> {e.preventDefault(); setFile("")}}
+                                        type="button"
+                                        className="
+                                        ml-auto bg-theme-text-brighter opacity-80 hover:opacity-100 dark:opacity-100 dark:bg-[#912642] dark:hover:bg-[#9f2545] h-5 w-5 rounded-[6px] text-white flex items-center justify-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" className="bi bi-x-lg" viewBox="0 0 16 16"> <path fill-rule="evenodd" d="M13.854 2.146a.5.5 0 0 1 0 .708l-11 11a.5.5 0 0 1-.708-.708l11-11a.5.5 0 0 1 .708 0Z"/> <path fill-rule="evenodd" d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z"/> </svg>
+                                        </button>
+                                    </div>
+                                ):("")}
+                                
+                                <label className="flex-1 flex items-center">
+                                    <input className="w-full input_field border-0 rounded-r-[6px] 
+                                        dark:bg-[#ffffff09] dark:focus:bg-[#ffffff02]  px-2
+                                        border-[rgba(255,255,255,0.02)] my-auto hidden"
+                                        type="file" name="file1" onChange={(e)=> setFile(e.target.files?.[0]!)}
+                                    />
+                                    <span className="ml-auto px-2 mr-1 my-1 text-sm
+                                     bg-theme-text-brighter opacity-80 hover:opacity-100 dark:opacity-100 dark:bg-[#912642] dark:hover:bg-[#9f2545]
+                                     rounded-[5px]">
+                                        {typeof file === "string" && file !== "" ? "choose another image" : (file == "" ? "upload an image": "image uploaded")}
+                                    </span>
+                                </label>
+
                                 
                             
-                        </label>
+                        </div>
 
                         <label className="w-[100%] flex flex-col gap-2
                         
@@ -348,7 +445,7 @@ const PostAdd_Component = ({postInfo, setPostInfo, setReload}:{
                                 opacity-80 hover:opacity-90 mx-auto"
                                 // disabled={submitting}
                                 >
-                                    {postInfo.action === "add" ? ("Add Post" ) : ("Apply changes")}
+                                    {action === "add" ? ("Add Post" ) : ("Apply changes")}
                                 </button>
                         </div>
 

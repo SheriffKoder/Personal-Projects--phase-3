@@ -5,6 +5,8 @@
 import Link from "next/link"
 import Image from "next/image"
 import { FormEvent, useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+
 
 //npm install @vis.gl/react-google-maps
 
@@ -37,7 +39,8 @@ const page = () => {
   const [propertyInquiryState, setPropertyInquiryState] = useState<PropertyDocument|null>(null);
   const [propertyInquiryText, setPropertyInquiryText] = useState("");
 
-  
+  const router = useRouter();
+
   ///////////////////////////////////////////////////
   //Part 11.2
 
@@ -58,6 +61,50 @@ const page = () => {
   }
 
 
+ 
+    const showEmailConfirm = () => {
+
+      let container = document.getElementById("messageContainer_inquiry");
+
+
+      /////////////////////////////
+      if (container) {
+
+        // slider__container.style.opacity = "0";
+        container.style.display = "flex";
+
+
+        //fade-in
+        // slider__container?.classList.remove("fadeOut_animation");
+        container.classList.add("fadeIn_animation");
+
+        //wait - to show
+        setTimeout(()=> {
+          if (container) {
+            //fade-out after waiting and showed
+            container.classList.remove("fadeIn_animation");
+            container.classList.add("fadeOut_animation");
+
+            //wait for fade out to finish then hide the container - duration of the css animation 0.6s
+            setTimeout(()=> {
+              if (container) container.style.display = "none";
+            }, 600);
+          
+          }
+        }, 7000);
+
+      }
+      /////////////////////////////
+
+
+      //redirect to home page
+      // router.push("/");
+
+        
+    }
+
+
+
     const handleSubmit: FormEventHandler<HTMLFormElement>  = async (e) => {
       e.preventDefault();
       console.log(emailBody);
@@ -67,6 +114,8 @@ const page = () => {
 
         }).then((res) => res.json());
         console.log(res);
+
+        showEmailConfirm();
     }
 
   ///////////////////////////////////////////////////
@@ -91,6 +140,8 @@ Thanks, \n`
     
   }
 
+  showEmailConfirm();
+
   //just take the info, set the text then clear the localStorage right away
   return (sessionStorage.removeItem("propertyInquiry"));
 
@@ -102,8 +153,33 @@ Thanks, \n`
   return (
 
 
-    <div className="flex flex-col pb-6 pt-28 px-4 md2:px-8 items-center">
+    <div className="flex flex-col pb-6 pt-28 px-4 md2:px-8 items-center relative">
 
+
+                <span id="messageContainer_inquiry"
+                  className="border-[rgba(255,255,255,0.02)] shadow-lg dark:shadow-inner 
+                  absolute z-[2] top-[50%] left-[50%] centered_centered text-xs py-2 px-8
+                  bg-[#c21f50] dark:bg-[#951f42] text-white 
+                  rounded-[7px] hidden flex-col items-center justify-center whitespace-nowrap
+                  ">
+                    
+                    <span className=" flex flex-row">
+                        <span className="opacity-70 text-center font-semibold" id="message_inquiry_title">
+                            Thank you, for contacting us
+                        </span>
+                        {/* <button 
+                            onClick={()=> {document.getElementById("messageContainer_inquiry")!.style.display="none"}}
+                            className="
+                            ml-auto bg-theme-text-brighter opacity-80 hover:opacity-100 dark:opacity-100 dark:bg-[#912642] dark:hover:bg-[#9f2545] h-5 w-5 rounded-[6px] text-white flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" className="bi bi-x-lg" viewBox="0 0 16 16"> <path fill-rule="evenodd" d="M13.854 2.146a.5.5 0 0 1 0 .708l-11 11a.5.5 0 0 1-.708-.708l11-11a.5.5 0 0 1 .708 0Z"/> <path fill-rule="evenodd" d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z"/> </svg>
+                        </button> */}
+                    </span>
+
+                    <span id="message_inquiry" className="w-full mx-auto mt-2 opacity-60 text-center">
+                        <div>your inquiry has been received,</div>
+                        <div>expect feedback call soon.</div>
+                    </span>
+                </span>
 
       <div className="max-w-[1230px] w-full">
 
@@ -279,6 +355,8 @@ Thanks, \n`
 
             </form>
           </div>
+
+          
 
           <div className=" min-h-[100%] md2:ml-auto flex flex-col w-full md2:max-w-[300px] max-w-[500px] mx-auto">
 

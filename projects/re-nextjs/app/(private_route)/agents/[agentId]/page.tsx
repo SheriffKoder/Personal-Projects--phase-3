@@ -87,12 +87,12 @@ const page = () => {
 
     const [reload, setReload] = useState(false);
 
-    const [postInfo, setPostInfo] = useState<postInputs_interface>({
-        title: "",
-        content: "",
-        _id: "",
-        action: "add",
-    });
+    // const [postInfo, setPostInfo] = useState<postInputs_interface>({
+    //     title: "",
+    //     content: "",
+    //     _id: "",
+    //     action: "add",
+    // });
 
     interface postInputs_interface {
         title: string;
@@ -138,6 +138,8 @@ const page = () => {
     //Part 10 - FIXES - Inline Properties add/edit/delete
 
     const [propertyEditId, setPropertyEditId] = useState("");
+    const [postEditId, setPostEditId] = useState("");
+
 
     interface propertyInputs_interface {
         country: string;
@@ -239,7 +241,7 @@ const page = () => {
             <div className="absolute z-[99] w-full h-[100vh]
             left-0 top-0 hidden"
             id="postAddContainer">
-                <PostAdd_Component postInfo={postInfo} setPostInfo={setPostInfo} setReload={setReload}/>
+                <PostAdd_Component postEditId={postEditId} setPostEditId={setPostEditId} setReload={setReload}/>
             </div>
         
             <div className="absolute z-[99] w-full h-[100vh]
@@ -417,11 +419,12 @@ const page = () => {
                 </div> */}
 
                 <PostsContainer 
-                userAuthority={user.authority} 
+                setPostEditId={setPostEditId}
                 setReload={setReload}
                 reload={reload}
+                userAuthority={user.authority} 
                 userName={user.userInfo.name}
-                setPostInfo={setPostInfo}
+
                 />
                 
             </div>

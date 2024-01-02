@@ -11,6 +11,25 @@ import { writeFile } from "fs";
 import { increaseUserScore } from "@utils/userScore";
 
 
+//to fill the edit post inputs
+export const GET = async (request, {params}) => {
+
+    try {
+        await connectToDB();
+        console.log(params);
+
+        //agentId here will actually be a postId to fetch from
+        const thisPost = await PostModel.findById(params.agentId);
+    
+        
+        return new Response(JSON.stringify(thisPost), {status: 200});
+
+    } catch {
+        return new Response(JSON.stringify("Failed to fetch this post"), {status: 500});
+    }
+
+}
+
 export const POST = async (request:Request, {params}:any) => {
 
 
@@ -28,14 +47,18 @@ export const POST = async (request:Request, {params}:any) => {
     //Part 11.01
     //3. store a file if there is and get a path
     const file: File | null = newInfo.get("file") as unknown as File;
+
     let postImage = "";
+
     if (file) {
+        const path = join(process.cwd(), `/public/images/agent-${currentUserPage}/posts`, file.name);
+        
+        postImage = path.split("/public")[1];
+
         const bytes = await file.arrayBuffer();
         const buffer = Buffer.from(bytes);
-        const path = join(process.cwd(), `/public/images/agent-${currentUserPage}/posts`, file.name);
         await writeFile(path, buffer, (err)=>console.log(err));
         console.log(`image ${file.name} is saved in ${path}`);
-        postImage = path.split("/public")[1];
     } else if (!file) {
         // postImage = newInfo.get("image") as string;
         postImage = "/images/logo.svg";

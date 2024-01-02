@@ -64,6 +64,7 @@ const PropertyAdd_Component = ({propertyEditId, setPropertyEditId, setReload}:{
             area: "",
             bedrooms: "",
             bathrooms: "",
+            images: ["","", ""],
     
             listing_type: "",
             price: "",
@@ -91,6 +92,7 @@ const PropertyAdd_Component = ({propertyEditId, setPropertyEditId, setReload}:{
         area: "",
         bedrooms: "",
         bathrooms: "",
+        images: ["","",""],
 
         listing_type: "",
         price: "",
@@ -120,9 +122,11 @@ const PropertyAdd_Component = ({propertyEditId, setPropertyEditId, setReload}:{
 
         e.preventDefault();
 
-        //Part 11.01 - formData image upload
+        ////Part 11.01 - formData image upload
         let formData = new FormData();
+        //add the form information to formData 
         if (propertyInfo) formData = getFormData_multiple(formData, null, null, propertyInfo);
+        //add the images to the formData that also now has information
         if (file1 !== "" || file1 !== null) formData = getFormData_multiple(formData, file1, "1", null);
         if (file2 !== "" || file2 !== null) formData = getFormData_multiple(formData, file2, "2", null);
         if (file3 !== "" || file3 !== null) formData = getFormData_multiple(formData, file3, "3", null);
@@ -569,15 +573,18 @@ const PropertyAdd_Component = ({propertyEditId, setPropertyEditId, setReload}:{
                                     className="max-w-[2rem] my-2">
                                     </Image>
                                 </div>
-                                <div className="w-[2rem] my-auto mr-1">
-                                    <button 
-                                    onClick={(e)=> {e.preventDefault(); setFile1("")}}
-                                    type="button"
-                                    className="
-                                    ml-auto bg-theme-text-brighter opacity-80 hover:opacity-100 dark:opacity-100 dark:bg-[#912642] dark:hover:bg-[#9f2545] h-5 w-5 rounded-[6px] text-white flex items-center justify-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" className="bi bi-x-lg" viewBox="0 0 16 16"> <path fill-rule="evenodd" d="M13.854 2.146a.5.5 0 0 1 0 .708l-11 11a.5.5 0 0 1-.708-.708l11-11a.5.5 0 0 1 .708 0Z"/> <path fill-rule="evenodd" d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z"/> </svg>
-                                    </button>
-                                </div>
+
+                                {file1!== ""? (
+                                    <div className="w-[2rem] my-auto mr-1">
+                                        <button 
+                                        onClick={(e)=> {e.preventDefault(); setFile1("")}}
+                                        type="button"
+                                        className="
+                                        ml-auto bg-theme-text-brighter opacity-80 hover:opacity-100 dark:opacity-100 dark:bg-[#912642] dark:hover:bg-[#9f2545] h-5 w-5 rounded-[6px] text-white flex items-center justify-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" className="bi bi-x-lg" viewBox="0 0 16 16"> <path fill-rule="evenodd" d="M13.854 2.146a.5.5 0 0 1 0 .708l-11 11a.5.5 0 0 1-.708-.708l11-11a.5.5 0 0 1 .708 0Z"/> <path fill-rule="evenodd" d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z"/> </svg>
+                                        </button>
+                                    </div>
+                                ):("")}
 
                                 <label className="flex-1 flex">
                                     <input className="w-full input_field border-0 rounded-r-[6px] 
@@ -609,15 +616,18 @@ const PropertyAdd_Component = ({propertyEditId, setPropertyEditId, setReload}:{
                                     className="max-w-[2rem] my-2">
                                     </Image>
                                 </div>
-                                <div className="w-[2rem] my-auto mr-1">
-                                    <button 
-                                    onClick={(e)=> {e.preventDefault(); setFile2("")}}
-                                    type="button"
-                                    className="
-                                    ml-auto bg-theme-text-brighter opacity-80 hover:opacity-100 dark:opacity-100 dark:bg-[#912642] dark:hover:bg-[#9f2545] h-5 w-5 rounded-[6px] text-white flex items-center justify-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" className="bi bi-x-lg" viewBox="0 0 16 16"> <path fill-rule="evenodd" d="M13.854 2.146a.5.5 0 0 1 0 .708l-11 11a.5.5 0 0 1-.708-.708l11-11a.5.5 0 0 1 .708 0Z"/> <path fill-rule="evenodd" d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z"/> </svg>
-                                    </button>
-                                </div>
+
+                                {file2!== ""? (
+                                    <div className="w-[2rem] my-auto mr-1">
+                                        <button 
+                                        onClick={(e)=> {e.preventDefault(); setFile2("")}}
+                                        type="button"
+                                        className="
+                                        ml-auto bg-theme-text-brighter opacity-80 hover:opacity-100 dark:opacity-100 dark:bg-[#912642] dark:hover:bg-[#9f2545] h-5 w-5 rounded-[6px] text-white flex items-center justify-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" className="bi bi-x-lg" viewBox="0 0 16 16"> <path fill-rule="evenodd" d="M13.854 2.146a.5.5 0 0 1 0 .708l-11 11a.5.5 0 0 1-.708-.708l11-11a.5.5 0 0 1 .708 0Z"/> <path fill-rule="evenodd" d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z"/> </svg>
+                                        </button>
+                                    </div>
+                                ):("")}
 
                                 <label className="flex-1 flex">
                                     <input className="w-full input_field border-0 rounded-r-[6px] 
@@ -649,6 +659,8 @@ const PropertyAdd_Component = ({propertyEditId, setPropertyEditId, setReload}:{
                                     className="max-w-[2rem] my-2">
                                     </Image>
                                 </div>
+
+                                {file3!== ""? (
                                 <div className="w-[2rem] my-auto mr-1">
                                     <button 
                                     onClick={(e)=> {e.preventDefault(); setFile3("")}}
@@ -658,6 +670,7 @@ const PropertyAdd_Component = ({propertyEditId, setPropertyEditId, setReload}:{
                                     <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" className="bi bi-x-lg" viewBox="0 0 16 16"> <path fill-rule="evenodd" d="M13.854 2.146a.5.5 0 0 1 0 .708l-11 11a.5.5 0 0 1-.708-.708l11-11a.5.5 0 0 1 .708 0Z"/> <path fill-rule="evenodd" d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z"/> </svg>
                                     </button>
                                 </div>
+                                ):("")}
 
                                 <label className="flex-1 flex">
                                     <input className="w-full input_field border-0 rounded-r-[6px] 

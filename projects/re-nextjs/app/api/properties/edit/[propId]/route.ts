@@ -25,7 +25,7 @@ export const GET = async (request, {params}) => {
         return new Response(JSON.stringify(thisProperty), {status: 200});
 
     } catch {
-        return new Response(JSON.stringify("Failed to fetch all properties"), {status: 500});
+        return new Response(JSON.stringify("Failed to fetch this property"), {status: 500});
     }
 
 }
