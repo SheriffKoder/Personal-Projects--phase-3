@@ -5,6 +5,8 @@ import HomeText from "@components/Home/HomeText";
 import Home_Rec from "@components/Home/Home_Rec";
 import Home_Main from "@components/Home/Home_Main";
 import Feed from "@/components/Feed";
+import { Suspense } from "react";
+import Loading from "./loading";
 
 //01.01
 const Home = () => {

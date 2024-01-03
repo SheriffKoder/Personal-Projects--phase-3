@@ -97,7 +97,7 @@ const PropertyCard = ({property1, currentPage}:{property1:PropertyDocument, curr
     function animationCombination1 (slider__container: any) {
     
     //prevent the animation from playing on the initial render, plays only on caret icon click
-    if (initialRender !== 0 ) {
+    // if (initialRender !== 0 ) {
         // //stop current timers to not overlap
         // clearInterval(tm.current);
 
@@ -105,10 +105,10 @@ const PropertyCard = ({property1, currentPage}:{property1:PropertyDocument, curr
         delayAnimation(slider__container); //with handle fade change
         
         fadeInAnimation(slider__container);        
-    }
-    else {
-        setInitialRender(initialRender+1);
-    }
+    // }
+    // else {
+        // setInitialRender(initialRender+1);
+    // }
     
     //start the auto animation timer after first render or again after caret click
     // tm.current = window.setInterval(() => {
@@ -120,7 +120,7 @@ const PropertyCard = ({property1, currentPage}:{property1:PropertyDocument, curr
 
 
 
-    const [prevFade1, setPrevFade1] = useState(0);
+    const [prevFade1, setPrevFade1] = useState(1);
     const [fade1, setFade1] = useState(0);
     const [initialRender, setInitialRender] = useState(0);
     // slider1 = {...properties[sliderIndex1]};
@@ -153,30 +153,34 @@ const PropertyCard = ({property1, currentPage}:{property1:PropertyDocument, curr
     //Part11
     const [property, setProperty] = useState<PropertyDocument | null>(null);
 
+    let slider__container = document.getElementById(property?._id);        
+
+    
     useEffect(()=> {
 
-      //Part 11
-      if (property === null && property1 !== null) {
+      // console.log(property1);
+      //Part 11 - get out from passed property info's images array only used image slots in a const
+      // if (property === null && property1 !== null) {
         const filteredImages = property1.property_images.filter((image: string) => {
-          if (image !== "") {
+          // if (image !== "") {
             return image;
-          }
+          // }
         });
 
-        // console.log("filteredImages");
+        console.log("filteredImages");
         // console.log(filteredImages);
   
         const tempProperty:PropertyDocument = property1;
         tempProperty.property_images = filteredImages as string[];
-        setProperty(tempProperty);  
-      } else if (property !== null) {
-        let slider__container = document.getElementById(property._id);        
+        setProperty(tempProperty);
 
-        animationCombination1(slider__container);  
-      }
+      // } else if (property !== null) {
+
+         
+      // }
 
 
-  },[fade1]);
+  });
 
   // hover:outline hover:outline-[#d6003580] hover:outline-2  hover:outline-offset-1
   // focus:outline focus:outline-[#d6003580] focus:outline-2  focus:outline-offset-1
@@ -210,7 +214,7 @@ const PropertyCard = ({property1, currentPage}:{property1:PropertyDocument, curr
 
                 `}>
                   <button 
-                    onClick={()=>{setPrevFade1(fade1); setFade1(fade1-1);}}
+                    onClick={()=>{setPrevFade1(fade1); setFade1(fade1-1); animationCombination1(slider__container); }}
                     className="absolute bg-[#0a0a0a7d] left-1 rounded-[3px]
                     bg-[url('/icons/arrow-left.svg')] h-4 w-4 bg-no-repeat bg-contain">
                   </button>
@@ -227,7 +231,7 @@ const PropertyCard = ({property1, currentPage}:{property1:PropertyDocument, curr
                   </Link>
 
                   <button
-                    onClick={()=>{setPrevFade1(fade1); setFade1(fade1+1);}}
+                    onClick={()=>{setPrevFade1(fade1); console.log(prevFade1); setFade1(fade1+1); console.log(fade1); animationCombination1(slider__container); }}
                     className="absolute bg-[#0a0a0a7d] right-1 rounded-[3px]
                     bg-[url('/icons/arrow-right.svg')] h-4 w-4 bg-no-repeat bg-contain">
                   </button>

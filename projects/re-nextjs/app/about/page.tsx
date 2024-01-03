@@ -98,7 +98,7 @@ const page = () => {
 
 
       //redirect to home page
-      // router.push("/");
+      router.push("/");
 
         
     }
@@ -140,7 +140,7 @@ Thanks, \n`
     
   }
 
-  showEmailConfirm();
+  // showEmailConfirm();
 
   //just take the info, set the text then clear the localStorage right away
   return (sessionStorage.removeItem("propertyInquiry"));

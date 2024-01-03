@@ -53,13 +53,17 @@ const PostAdd_Component = ({postEditId, setPostEditId, setReload}:{
         
             let children_container2 = document.getElementById("children_container2");
             if (children_container2) children_container2.style.opacity = "1";
+            document.querySelector("footer")!.style.opacity = "1";
+
             setPostEditId("");
             setAction("add");
             setPostInfo({
                 title: "",
                 content: "",
                 image: "",
+                _id: "",
             });
+            setFile("");
         
         }
 
@@ -76,6 +80,7 @@ const PostAdd_Component = ({postEditId, setPostEditId, setReload}:{
         title: "",
         content: "",
         image: "",
+        _id: "",
 
     });
 
@@ -274,7 +279,8 @@ const PostAdd_Component = ({postEditId, setPostEditId, setReload}:{
             const temp_post = {
                 title: jsonResponse.title,
                 content: jsonResponse.content,
-                image: jsonResponse.image,        
+                image: jsonResponse.image,
+                _id: jsonResponse._id        
             };
 
             console.log(temp_post.image);
@@ -376,8 +382,8 @@ const PostAdd_Component = ({postEditId, setPostEditId, setReload}:{
                         bg-[#ffffff07] rounded-[7px] border-2 border-[#ffffff02]
                         max-h-[36px]
                         ">
-                            <span className="min-w-[7rem] px-2 py-1 text_shadow-2 opacity-80 dark:opacity-90">
-                                Add Images
+                            <span className="md:min-w-[7rem] min-w-[6rem] md:pl-0 md:px-2 pl-4 py-1 text_shadow-2 opacity-80 dark:opacity-90">
+                                Add Image
                             </span>
 
                             {/* <input className="w-full input_field border-0 rounded-r-[6px] 
@@ -393,7 +399,7 @@ const PostAdd_Component = ({postEditId, setPostEditId, setReload}:{
                                 </div>
 
                                 {file!== ""? (
-                                    <div className="w-[2rem] my-auto mr-1">
+                                    <div className="w-[1.5rem] my-auto mr-1">
                                         <button 
                                         onClick={(e)=> {e.preventDefault(); setFile("")}}
                                         type="button"
@@ -410,10 +416,10 @@ const PostAdd_Component = ({postEditId, setPostEditId, setReload}:{
                                         border-[rgba(255,255,255,0.02)] my-auto hidden"
                                         type="file" name="file1" onChange={(e)=> setFile(e.target.files?.[0]!)}
                                     />
-                                    <span className="ml-auto px-2 mr-1 my-1 text-sm
+                                    <span className="ml-auto px-2 mr-1 my-1 text-sm w-[8rem]
                                      bg-theme-text-brighter opacity-80 hover:opacity-100 dark:opacity-100 dark:bg-[#912642] dark:hover:bg-[#9f2545]
                                      rounded-[5px]">
-                                        {typeof file === "string" && file !== "" ? "choose another image" : (file == "" ? "upload an image": "image uploaded")}
+                                        {typeof file === "string" && file !== "" ? "change" : (file == "" ? "upload": "image uploaded")}
                                     </span>
                                 </label>
 

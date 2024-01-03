@@ -365,23 +365,7 @@ const page = () => {
 
     }
 
-    const clearFilter = () => {
-        setSearchInput({
-            searchText: "",
-            bedroomsFrom: "",
-            bedroomsTo: "",
-            priceFrom: "",
-            priceTo: "",
-            areaFrom: "",
-            areaTo: "",
-            country: "",
-            type: "",
-            listing_type: "",    
-        })
-    }
-
-    //Part 11.04 - search
-    const [searchInput, setSearchInput] = useState({
+    const emptyProperty = {
         searchText: "",
         bedroomsFrom: "",
         bedroomsTo: "",
@@ -391,8 +375,13 @@ const page = () => {
         areaTo: "",
         country: "",
         type: "",
-        listing_type: "",
-    });
+        listing_type: "",    
+    };
+
+    const clearFilter = () => { setSearchInput(emptyProperty);}
+
+    //Part 11.04 - search
+    const [searchInput, setSearchInput] = useState(emptyProperty);
 
     let {searchText, bedroomsTo, bedroomsFrom, priceFrom, priceTo, areaFrom, areaTo,
     country, type, listing_type} = searchInput;
@@ -447,24 +436,24 @@ const page = () => {
         console.log(jsonResponse);
 
         endPage.current = jsonResponse.pagesEnd;
-        console.log("end page: "+endPage.current);
-        console.log("current page: "+ pageId);
+        // console.log("end page: "+endPage.current);
+        // console.log("current page: "+ pageId);
 
-        console.log("properties were");
-        console.log(properties);
+        // console.log("properties were");
+        // console.log(properties);
     
         console.log(jsonResponse.properties);
 
         setProperties(jsonResponse.properties);
         
-        console.log("properties now are");
-        console.log(properties);
+        // console.log("properties now are");
+        // console.log(properties);
         // setClearFilter(false);
     
     }
 
     fetchProperties();
-    setReload(false);
+    // setReload(false);
 
 
   },[pageId]);
@@ -675,6 +664,122 @@ const page = () => {
                 </div>
                 )
                 )}
+
+                {/* pagination buttons */}
+                <div className="w-full flex flex-row justify-center items-center gap-2">
+                    <div className="relative">
+
+                        {/* previous buttons */}
+                        <div className="absolute right-7 top-0 flex flex-row gap-2">
+
+                            {/* first page button */}
+                            {pageId-1 > 1 ? (
+                            <button 
+                            onClick={()=> {setPageId(1);}}
+                            className="
+                            bg-theme-text-brighter opacity-80 hover:opacity-100 dark:opacity-100 
+                            dark:bg-[#912642] dark:hover:bg-[#9f2545] 
+                            h-5 w-12 rounded-[6px] text-white flex items-center justify-center
+                            text-xs">
+                                first
+                            </button>
+                            ):(
+                                <div 
+                                className="
+                                bg-theme-text-brighter opacity-50 dark:opacity-50 
+                                dark:bg-[#912642] dark:hover:bg-[#9f2545] 
+                                h-5 w-12 rounded-[6px] text-black flex items-center justify-center
+                                text-xs">    
+                                </div>
+                            
+                            )}
+
+
+                            {/* previous page button */}
+                            {pageId > 1 ? (
+                            <button 
+                            onClick={()=> {setPageId(pageId-1);}}
+                            className="
+                            bg-theme-text-brighter opacity-80 hover:opacity-100 dark:opacity-100 
+                            dark:bg-[#912642] dark:hover:bg-[#9f2545] 
+                            h-5 w-5 rounded-[6px] text-white flex items-center justify-center
+                            text-xs">
+                                {pageId-1}
+                            </button>
+                            ):(
+                                <div 
+                                className="
+                                bg-theme-text-brighter opacity-50 dark:opacity-50 
+                                dark:bg-[#912642] dark:hover:bg-[#9f2545] 
+                                h-5 w-5 rounded-[6px] text-black flex items-center justify-center
+                                text-xs">    
+                                </div>
+                            
+                            )}
+
+                        </div>
+
+                        {/* middle/current button */}
+                        <button 
+                        onClick={()=> {}}
+                        className="
+                        bg-theme-text-brighter opacity-80 hover:opacity-100 dark:opacity-100 
+                        dark:bg-[#912642] dark:hover:bg-[#9f2545] 
+                        h-5 w-5 rounded-[6px] text-white flex items-center justify-center
+                        text-xs outline outline-1 outline-offset-2 dark:outline-[#ffffff4f] outline-[#0000005a]">
+                            {pageId}
+                        </button>
+
+                        {/* next buttons */}
+                        <div className="absolute left-7 top-0 flex flex-row gap-2">
+                            {/* next page button */}
+                            {pageId < Math.ceil(endPage.current) ? (
+                            <button 
+                            onClick={()=> {setPageId(pageId+1);}}
+                            className="
+                            bg-theme-text-brighter opacity-80 hover:opacity-100 dark:opacity-100 
+                            dark:bg-[#912642] dark:hover:bg-[#9f2545] 
+                            h-5 w-5 rounded-[6px] text-white flex items-center justify-center
+                            text-xs">
+                                {pageId+1}
+                            </button>
+                            ):(
+                                <div 
+                                className="
+                                bg-theme-text-brighter opacity-50 dark:opacity-50 
+                                dark:bg-[#912642] dark:hover:bg-[#9f2545] 
+                                h-5 w-5 rounded-[6px] text-black flex items-center justify-center
+                                text-xs">    
+                                </div>
+                            )}
+
+                            {/* last page button */}
+                            {pageId+1 < Math.ceil(endPage.current) ? (
+                            <button 
+                            onClick={()=> {setPageId(Math.ceil(endPage.current));}}
+                            className="
+                            bg-theme-text-brighter opacity-80 hover:opacity-100 dark:opacity-100 
+                            dark:bg-[#912642] dark:hover:bg-[#9f2545] 
+                            h-5 w-12 rounded-[6px] text-white flex items-center justify-center
+                            text-xs">
+                                last
+                            </button>
+                            ):(
+                                <div 
+                                className="
+                                bg-theme-text-brighter opacity-50 dark:opacity-50 
+                                dark:bg-[#912642] dark:hover:bg-[#9f2545] 
+                                h-5 w-12 rounded-[6px] text-black flex items-center justify-center
+                                text-xs">    
+                                </div>
+                            )}
+
+                        </div>
+
+
+                    </div>
+                </div>
+
             </>
             ) : (
             <>
@@ -686,122 +791,7 @@ const page = () => {
 
         </div>
 
-        {/* pagination buttons */}
-        <div className="w-full flex flex-row justify-center items-center gap-2">
 
-            <div className="relative">
-
-                {/* previous buttons */}
-                <div className="absolute right-7 top-0 flex flex-row gap-2">
-
-                    {/* first page button */}
-                    {pageId-1 > 1 ? (
-                    <button 
-                    onClick={()=> {setPageId(1); setReload(true);}}
-                    className="
-                    bg-theme-text-brighter opacity-80 hover:opacity-100 dark:opacity-100 
-                    dark:bg-[#912642] dark:hover:bg-[#9f2545] 
-                    h-5 w-12 rounded-[6px] text-white flex items-center justify-center
-                    text-xs">
-                        first
-                    </button>
-                    ):(
-                        <div 
-                        className="
-                        bg-theme-text-brighter opacity-50 dark:opacity-50 
-                        dark:bg-[#912642] dark:hover:bg-[#9f2545] 
-                        h-5 w-12 rounded-[6px] text-black flex items-center justify-center
-                        text-xs">    
-                        </div>
-                    
-                    )}
-
-
-                    {/* previous page button */}
-                    {pageId > 1 ? (
-                    <button 
-                    onClick={()=> {setPageId(pageId-1); setReload(true);}}
-                    className="
-                    bg-theme-text-brighter opacity-80 hover:opacity-100 dark:opacity-100 
-                    dark:bg-[#912642] dark:hover:bg-[#9f2545] 
-                    h-5 w-5 rounded-[6px] text-white flex items-center justify-center
-                    text-xs">
-                        {pageId-1}
-                    </button>
-                    ):(
-                        <div 
-                        className="
-                        bg-theme-text-brighter opacity-50 dark:opacity-50 
-                        dark:bg-[#912642] dark:hover:bg-[#9f2545] 
-                        h-5 w-5 rounded-[6px] text-black flex items-center justify-center
-                        text-xs">    
-                        </div>
-                    
-                    )}
-
-                </div>
-
-                {/* middle/current button */}
-                <button 
-                onClick={()=> {}}
-                className="
-                bg-theme-text-brighter opacity-80 hover:opacity-100 dark:opacity-100 
-                dark:bg-[#912642] dark:hover:bg-[#9f2545] 
-                h-5 w-5 rounded-[6px] text-white flex items-center justify-center
-                text-xs outline outline-1 outline-offset-2 dark:outline-[#ffffff4f] outline-[#0000005a]">
-                    {pageId}
-                </button>
-
-                {/* next buttons */}
-                <div className="absolute left-7 top-0 flex flex-row gap-2">
-                    {/* next page button */}
-                    {pageId < Math.ceil(endPage.current) ? (
-                    <button 
-                    onClick={()=> {setPageId(pageId+1); setReload(true);}}
-                    className="
-                    bg-theme-text-brighter opacity-80 hover:opacity-100 dark:opacity-100 
-                    dark:bg-[#912642] dark:hover:bg-[#9f2545] 
-                    h-5 w-5 rounded-[6px] text-white flex items-center justify-center
-                    text-xs">
-                        {pageId+1}
-                    </button>
-                    ):(
-                        <div 
-                        className="
-                        bg-theme-text-brighter opacity-50 dark:opacity-50 
-                        dark:bg-[#912642] dark:hover:bg-[#9f2545] 
-                        h-5 w-5 rounded-[6px] text-black flex items-center justify-center
-                        text-xs">    
-                        </div>
-                    )}
-
-                    {/* last page button */}
-                    {pageId+1 < Math.ceil(endPage.current) ? (
-                    <button 
-                    onClick={()=> {setPageId(Math.ceil(endPage.current)); setReload(true);}}
-                    className="
-                    bg-theme-text-brighter opacity-80 hover:opacity-100 dark:opacity-100 
-                    dark:bg-[#912642] dark:hover:bg-[#9f2545] 
-                    h-5 w-12 rounded-[6px] text-white flex items-center justify-center
-                    text-xs">
-                        last
-                    </button>
-                    ):(
-                        <div 
-                        className="
-                        bg-theme-text-brighter opacity-50 dark:opacity-50 
-                        dark:bg-[#912642] dark:hover:bg-[#9f2545] 
-                        h-5 w-12 rounded-[6px] text-black flex items-center justify-center
-                        text-xs">    
-                        </div>
-                    )}
-
-                </div>
-
-
-            </div>
-
-        </div>
         
     </div>
 

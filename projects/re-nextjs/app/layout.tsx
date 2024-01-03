@@ -6,7 +6,7 @@ import "@styles/globals.css"; //import the css to the entire application
 //import layout components
 import Nav from "@components/Nav";
 import Footer from "@components/Footer";
-import Loading from "@components/Home/Loading";
+import MyLoading from "@components/Home/myLoading";
 import Login_component from "@components/Auth/Login";
 import SignUp_component from "@components/Auth/SignUp";
 // import PropertyAdd_Component from "@components/PropertyEdit/PropertyAdd";
@@ -15,6 +15,9 @@ import SignUp_component from "@components/Auth/SignUp";
 //02X.03
 import { SessionProvider } from "next-auth/react";
 import AuthProvider from "@components/AuthProvider";
+
+// import { Suspense } from "react";
+// import Loading from "./loading";
 // import AuthProvider from "@components/AuthProvider";
 
 export const metadata = {
@@ -51,7 +54,7 @@ const RootLayout = ({ children }: { children: React.ReactNode}) => {
 
 
               <div className="w-full sticky top-0 z-[99]">
-                <Loading />
+                <MyLoading />
               </div>
               
 
@@ -72,7 +75,10 @@ const RootLayout = ({ children }: { children: React.ReactNode}) => {
 
                 {/* this will hold the Home component in app>page.jsx */}
                 <div className="z-[5]" id="children_container">
-                  {children}
+                  {/* <Suspense fallback={<Loading />}> */}
+                    {children}
+                  {/* </Suspense> */}
+
                   {/* <Footer /> */}
                 </div>
 

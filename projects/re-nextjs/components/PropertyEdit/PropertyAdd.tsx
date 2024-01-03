@@ -72,6 +72,9 @@ const PropertyAdd_Component = ({propertyEditId, setPropertyEditId, setReload}:{
             availability: "",
             recommended: "",
         });
+        setFile1("");
+        setFile2("");
+        setFile3("");
     
     }
 
@@ -277,7 +280,7 @@ const PropertyAdd_Component = ({propertyEditId, setPropertyEditId, setReload}:{
     return (
 
             <div className="flex items-center justify-center w-full h-[90vh]
-            centered_centered overflow-y-scroll pt-[20rem]">
+            centered_centered overflow-y-scroll pt-[30rem]">
 
 
             <div className="
@@ -564,7 +567,7 @@ const PropertyAdd_Component = ({propertyEditId, setPropertyEditId, setReload}:{
                             bg-[#ffffff07] rounded-[7px] border-2 border-[#ffffff02]
                             
                             ">
-                                <span className="min-w-[7rem] px-2 py-1 text_shadow-2 opacity-80 dark:opacity-90">
+                                <span className="min-w-[5rem] px-2 py-1 text_shadow-2 opacity-80 dark:opacity-90">
                                     Image 1
                                 </span>
 
@@ -575,7 +578,7 @@ const PropertyAdd_Component = ({propertyEditId, setPropertyEditId, setReload}:{
                                 </div>
 
                                 {file1!== ""? (
-                                    <div className="w-[2rem] my-auto mr-1">
+                                    <div className="w-[1.5rem] my-auto mr-1">
                                         <button 
                                         onClick={(e)=> {e.preventDefault(); setFile1("")}}
                                         type="button"
@@ -592,10 +595,10 @@ const PropertyAdd_Component = ({propertyEditId, setPropertyEditId, setReload}:{
                                         border-[rgba(255,255,255,0.02)] my-auto hidden"
                                         type="file" name="file1" onChange={(e)=> setFile1(e.target.files?.[0]!)}
                                     />
-                                    <span className="ml-auto px-2 my-2 mr-1 text-sm
+                                    <span className="ml-auto px-2 my-2 mr-1 text-sm w-[8rem]
                                      bg-theme-text-brighter opacity-80 hover:opacity-100 dark:opacity-100 dark:bg-[#912642] dark:hover:bg-[#9f2545]
                                      rounded-[5px]">
-                                        {typeof file1 === "string" && file1 !== "" ? "choose another image" : (file1 == "" ? "upload an image": "image uploaded")}
+                                        {typeof file1 === "string" && file1 !== "" ? "change" : (file1 == "" ? "upload": "image uploaded")}
                                     </span>
                                 </label>
 
@@ -607,7 +610,7 @@ const PropertyAdd_Component = ({propertyEditId, setPropertyEditId, setReload}:{
                             bg-[#ffffff07] rounded-[7px] border-2 border-[#ffffff02]
                             
                             ">
-                                <span className="min-w-[7rem] px-2 py-1 text_shadow-2 opacity-80 dark:opacity-90">
+                                <span className="min-w-[5rem] px-2 py-1 text_shadow-2 opacity-80 dark:opacity-90">
                                     Image 2
                                 </span>
 
@@ -618,7 +621,7 @@ const PropertyAdd_Component = ({propertyEditId, setPropertyEditId, setReload}:{
                                 </div>
 
                                 {file2!== ""? (
-                                    <div className="w-[2rem] my-auto mr-1">
+                                    <div className="w-[1.5rem] my-auto mr-1">
                                         <button 
                                         onClick={(e)=> {e.preventDefault(); setFile2("")}}
                                         type="button"
@@ -635,10 +638,10 @@ const PropertyAdd_Component = ({propertyEditId, setPropertyEditId, setReload}:{
                                         border-[rgba(255,255,255,0.02)] my-auto hidden"
                                         type="file" name="file2" onChange={(e)=> {console.log(e.target); setFile2(e.target.files?.[0]!)}}
                                     />
-                                    <span className="ml-auto px-2 my-2 mr-1 text-sm
+                                    <span className="ml-auto px-2 my-2 mr-1 text-sm w-[8rem]
                                      bg-theme-text-brighter opacity-80 hover:opacity-100 dark:opacity-100 dark:bg-[#912642] dark:hover:bg-[#9f2545]
                                      rounded-[5px]">
-                                        {typeof file2 === "string" && file2 !== "" ? "choose another image" : (file2 == "" ? "upload an image": "image uploaded")}
+                                        {typeof file2 === "string" && file2 !== "" ? "change" : (file2 == "" ? "upload": "image uploaded")}
                                     </span>
                                 </label>
 
@@ -650,7 +653,7 @@ const PropertyAdd_Component = ({propertyEditId, setPropertyEditId, setReload}:{
                             bg-[#ffffff07] rounded-[7px] border-2 border-[#ffffff02]
                             
                             ">
-                                <span className="min-w-[7rem] px-2 py-1 text_shadow-2 opacity-80 dark:opacity-90">
+                                <span className="min-w-[5rem] px-2 py-1 text_shadow-2 opacity-80 dark:opacity-90">
                                     Image 3
                                 </span>
 
@@ -661,7 +664,7 @@ const PropertyAdd_Component = ({propertyEditId, setPropertyEditId, setReload}:{
                                 </div>
 
                                 {file3!== ""? (
-                                <div className="w-[2rem] my-auto mr-1">
+                                <div className="w-[1.5rem] my-auto mr-1">
                                     <button 
                                     onClick={(e)=> {e.preventDefault(); setFile3("")}}
                                     type="button"
@@ -678,10 +681,10 @@ const PropertyAdd_Component = ({propertyEditId, setPropertyEditId, setReload}:{
                                         border-[rgba(255,255,255,0.02)] my-auto hidden"
                                         type="file" name="file3" onChange={(e)=> setFile3(e.target.files?.[0]!)}
                                     />
-                                    <span className="ml-auto px-2 my-2 mr-1 text-sm
+                                    <span className="ml-auto px-2 my-2 mr-1 text-sm w-[8rem]
                                      bg-theme-text-brighter opacity-80 hover:opacity-100 dark:opacity-100 dark:bg-[#912642] dark:hover:bg-[#9f2545]
                                      rounded-[5px]">
-                                        {typeof file3 === "string" && file3 !== "" ? "choose another image" : (file3 == "" ? "upload an image": "image uploaded")}
+                                        {typeof file3 === "string" && file3 !== "" ? "change" : (file3 == "" ? "upload": "image uploaded")}
                                     </span>
                                 </label>
 

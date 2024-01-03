@@ -15,7 +15,7 @@ import { bodyNoScroll, bodyScroll } from "@utils/bodyNoScroll";
 
 
 
-function Loading() {
+function MyLoading() {
 
 
     useEffect(() => {
@@ -95,4 +95,4 @@ function Loading() {
   )
 }
 
-export default Loading;
+export default MyLoading;

@@ -77,31 +77,31 @@ const page = () => {
         // let current_url = window.location.href.toString().split("/posts/")[1];
 
         //state needs to have a different value to take the same value again which is jsonResponse.properties
-        if (posts.length > 0) {
-            let loadingPosts:PostDocument[] = [];
+        // if (posts.length > 0) {
+        //     let loadingPosts:PostDocument[] = [];
             
-            console.log("loadingPosts");
-            console.log(loadingPosts);
-            setPosts(loadingPosts);
-        }
+        //     console.log("loadingPosts");
+        //     console.log(loadingPosts);
+        //     setPosts(loadingPosts);
+        // }
         
         const response = await fetch(`/api/posts/all/${pageId}`);
         const jsonResponse = await response.json();
-        console.log(jsonResponse);
+        // console.log(jsonResponse);
 
         endPage.current = jsonResponse.pagesEnd;
-        console.log("end page: "+endPage.current);
-        console.log("current page: "+ pageId);
+        // console.log("end page: "+endPage.current);
+        // console.log("current page: "+ pageId);
 
-        console.log("posts were");
-        console.log(posts);
+        // console.log("posts were");
+        // console.log(posts);
     
-        console.log(jsonResponse.posts);
+        // console.log(jsonResponse.posts);
 
         setPosts(jsonResponse.posts);
         
-        console.log("posts now are");
-        console.log(posts);
+        // console.log("posts now are");
+        // console.log(posts);
 
     }
 

@@ -9,7 +9,7 @@ import DarkModeToggle from "./DarkModeToggle"
 //01.03
 import Link, { LinkProps } from "next/link";
 import Image from "next/image";
-import {useState, useEffect} from "react";
+import {useState, useEffect, useRef} from "react";
 
 import { bodyNoScroll } from "@utils/bodyNoScroll";
 
@@ -82,7 +82,7 @@ const Nav = () => {
 
 
   
-  const [toggleDropDown, setToggleDropDown] = useState(true);
+  const toggleDropDown = useRef("false");
   // let isUserLoggedIn = false;
 
 
@@ -128,7 +128,7 @@ const Nav = () => {
           </li>
 
           <li className="h-full">
-            <Link href="/posts" aria-label="news about the real estate market" className="hover:opacity-80 flex items-center h-full">
+            <Link href="/posts/all" aria-label="news about the real estate market" className="hover:opacity-80 flex items-center h-full">
               News
             </Link>
           </li>
@@ -142,7 +142,11 @@ const Nav = () => {
 
         <span className="bg-red ml-auto flex flex-row gap-3 items-center relative">
 
-          <span onMouseEnter={()=>handleDropDownIcon("enter")}>
+          <span 
+          onClick={()=>{ if (toggleDropDown.current === "false") { handleDropDownIcon("enter"); toggleDropDown.current = "true"; } else { handleDropDownIcon("leave"); toggleDropDown.current = "false";}}}
+          onMouseLeave={()=>{handleDropDownIcon("enter");}}
+          >
+
             <Link href="/" className=" nav-user-icon flex gap-2 flex-center rounded-full border-0 hover:bg-gray-200 dark:hover:bg-[#4f4f4f2e] h-7 w-7"
             >
 

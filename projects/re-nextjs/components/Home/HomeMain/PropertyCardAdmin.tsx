@@ -94,7 +94,7 @@ const PropertyCardAdmin = ({setPropertyEditId, property1, currentPage="", setRel
     function animationCombination1 (slider__container: any) {
     
     //prevent the animation from playing on the initial render, plays only on caret icon click
-    if (initialRender !== 0 ) {
+    // if (initialRender !== 0 ) {
         // //stop current timers to not overlap
         // clearInterval(tm.current);
 
@@ -102,10 +102,10 @@ const PropertyCardAdmin = ({setPropertyEditId, property1, currentPage="", setRel
         delayAnimation(slider__container); //with handle fade change
         
         fadeInAnimation(slider__container);        
-    }
-    else {
-        setInitialRender(initialRender+1);
-    }
+    // }
+    // else {
+        // setInitialRender(initialRender+1);
+    // }
     
     //start the auto animation timer after first render or again after caret click
     // tm.current = window.setInterval(() => {
@@ -117,7 +117,7 @@ const PropertyCardAdmin = ({setPropertyEditId, property1, currentPage="", setRel
 
 
 
-    const [prevFade1, setPrevFade1] = useState(0);
+    const [prevFade1, setPrevFade1] = useState(1);
     const [fade1, setFade1] = useState(0);
     const [initialRender, setInitialRender] = useState(0);
     // slider1 = {...properties[sliderIndex1]};
@@ -190,12 +190,20 @@ const PropertyCardAdmin = ({setPropertyEditId, property1, currentPage="", setRel
     //Part11
     const [property, setProperty] = useState<PropertyDocument | null>(null);
 
+    let slider__container = document.getElementById(property?._id);        
+
     useEffect(()=> {
+
+        //reset the imageReference if there is a new property in this DOM component
+        if (property1._id !== property?._id) {
+          setImageReference(0);
+        }
 
         //Part11 - filter un existing image slots
         // console.log(property1.property_images);
+        console.log(imageReference);
 
-        if (property === null && property1 !== null) {
+        // if (property === null && property1 !== null) {
           const filteredImages = property1.property_images.filter((image: string) => {
             if (image !== "") {
               return image;
@@ -208,14 +216,13 @@ const PropertyCardAdmin = ({setPropertyEditId, property1, currentPage="", setRel
           const tempProperty:PropertyDocument = property1;
           tempProperty.property_images = filteredImages as string[];
           setProperty(tempProperty);  
-        } else if (property !== null) {
-          let slider__container = document.getElementById(property._id);        
+        // } else if (property !== null) {
 
-          animationCombination1(slider__container);  
-        }
+           
+        // }
 
 
-  },[fade1]);
+  });
 
   // hover:outline hover:outline-[#d6003580] hover:outline-2  hover:outline-offset-1
   // focus:outline focus:outline-[#d6003580] focus:outline-2  focus:outline-offset-1
@@ -248,7 +255,7 @@ const PropertyCardAdmin = ({setPropertyEditId, property1, currentPage="", setRel
                 `}>
 
                   <button 
-                    onClick={()=>{setPrevFade1(fade1); setFade1(fade1-1);}}
+                    onClick={()=>{setPrevFade1(fade1); setFade1(fade1-1); animationCombination1(slider__container); }}
                     className="absolute bg-[#0a0a0a7d] left-1 rounded-[3px]
                     bg-[url('/icons/arrow-left.svg')] h-4 w-4 bg-no-repeat bg-contain">
                   </button>
@@ -265,7 +272,7 @@ const PropertyCardAdmin = ({setPropertyEditId, property1, currentPage="", setRel
                   </Link>
 
                   <button
-                    onClick={()=>{setPrevFade1(fade1); setFade1(fade1+1);}}
+                    onClick={()=>{setPrevFade1(fade1); setFade1(fade1+1); animationCombination1(slider__container); }}
                     className="absolute bg-[#0a0a0a7d] right-1 rounded-[3px]
                     bg-[url('/icons/arrow-right.svg')] h-4 w-4 bg-no-repeat bg-contain">
                   </button>

@@ -128,15 +128,15 @@ export const PATCH = async (request:Request, {params}:any) => {
     //3. store a file if there is and get a path
     const file: File | null = newInfo.get("file") as unknown as File;
     let postImage = "";
-    if (file) {
+    if (typeof file !== "string" && file !== null) {
         const bytes = await file.arrayBuffer();
         const buffer = Buffer.from(bytes);
         const path = join(process.cwd(), `/public/images/agent-${currentUserPage}/posts`, file.name);
         await writeFile(path, buffer, (err)=>console.log(err));
         console.log(`image ${file.name} is saved in ${path}`);
         postImage = path.split("/public")[1];
-    } else if (!file) {
-        postImage = newInfo.get("image") as string;
+    } else if (typeof file == "string") {
+        postImage = newInfo.get("file") as string;
     }
 
 
