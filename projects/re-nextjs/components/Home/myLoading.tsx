@@ -1,5 +1,7 @@
 // import React from 'react'
 
+
+//This component's use is to wait till the UI renders the right theme as dark takes time to load
 "use client";
 
 import { useEffect } from "react";
@@ -46,7 +48,7 @@ function MyLoading() {
             // body!.style.overflow = "auto";
             bodyScroll();
 
-        },500);
+        },1500);
 
         setTimeout(()=> {
             if (loading_icon?.classList.contains("pulse_loading")) {

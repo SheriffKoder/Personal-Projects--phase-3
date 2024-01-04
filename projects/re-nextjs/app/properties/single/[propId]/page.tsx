@@ -41,7 +41,7 @@ import { ChangeEventHandler } from "react";
 
 
 
-const page = () => {
+const page = async () => {
 
     const router = useRouter();
     const currentPage : string = "property";
@@ -163,7 +163,7 @@ const page = () => {
     }
     
 
-    const [pageProperty, setPageProperty] = useState<pagePropertyType | null >(null);
+    // const [pageProperty, setPageProperty] = useState<pagePropertyType | null >(null);
 
     let property_title = useRef("");
 
@@ -178,52 +178,72 @@ const page = () => {
     }
 
 
-
-
-
-    useEffect(()=> {
-
-
-        if (pageProperty == null) {
-            let current_url = window.location.href.toString().split("/single/")[1];
-            // console.log(current_url);
+    let pageProperty = null;
+    if(typeof window !== 'undefined') {
     
-            const fetchProperty = async () => {
+    let current_url = window.location.href.toString().split("/single/")[1];
+        // console.log(current_url);
 
-                const response = await fetch(`/api/properties/single/${current_url}`);
-                const jsonResponse = await response.json();
-                console.log(jsonResponse);
+
+            const response = await fetch(`/api/properties/single/${current_url}`);
+             pageProperty = await response.json();
+            // console.log(jsonResponse);
+
+            property_title.current = `${pageProperty.thisProperty.property_type} for ${pageProperty.thisProperty.property_listing_type} in <${pageProperty.thisProperty.property_country} ${pageProperty.thisProperty.property_city} ${pageProperty.thisProperty.property_district} ${pageProperty.thisProperty.property_area}sqm ${pageProperty.thisProperty.property_beds} bedrooms / ${pageProperty.thisProperty.property_baths} bathrooms`;
     
-                property_title.current = `${jsonResponse.thisProperty.property_type} for ${jsonResponse.thisProperty.property_listing_type} in <${jsonResponse.thisProperty.property_country} ${jsonResponse.thisProperty.property_city} ${jsonResponse.thisProperty.property_district} ${jsonResponse.thisProperty.property_area}sqm ${jsonResponse.thisProperty.property_beds} bedrooms / ${jsonResponse.thisProperty.property_baths} bathrooms`;
-        
-                //Part 11 - filter out empty string images (i.e not used slots)
-                jsonResponse.thisProperty.property_images = jsonResponse.thisProperty.property_images.filter((image: string) => {
-                    if (image !== "") {
-                      return image;
-                    }
-                  });
-
-
-
-                setPageProperty(jsonResponse);
-            }
-            fetchProperty();
-
-    
+            //Part 11 - filter out empty string images (i.e not used slots)
+            pageProperty.thisProperty.property_images = pageProperty.thisProperty.property_images.filter((image: string) => {
+                if (image !== "") {
+                  return image;
+                }
+              });
         }
 
+
+
+    // useEffect(()=> {
+
+
+    //     if (pageProperty == null) {
+    //         let current_url = window.location.href.toString().split("/single/")[1];
+    //         // console.log(current_url);
+    
+    //         const fetchProperty = async () => {
+
+    //             const response = await fetch(`/api/properties/single/${current_url}`);
+    //             const jsonResponse = await response.json();
+    //             console.log(jsonResponse);
+    
+    //             property_title.current = `${jsonResponse.thisProperty.property_type} for ${jsonResponse.thisProperty.property_listing_type} in <${jsonResponse.thisProperty.property_country} ${jsonResponse.thisProperty.property_city} ${jsonResponse.thisProperty.property_district} ${jsonResponse.thisProperty.property_area}sqm ${jsonResponse.thisProperty.property_beds} bedrooms / ${jsonResponse.thisProperty.property_baths} bathrooms`;
         
-        // on right/left button image change
-        // if (pageProperty !== null) {
+    //             //Part 11 - filter out empty string images (i.e not used slots)
+    //             jsonResponse.thisProperty.property_images = jsonResponse.thisProperty.property_images.filter((image: string) => {
+    //                 if (image !== "") {
+    //                   return image;
+    //                 }
+    //               });
 
-        //     let slider__container = document.getElementById(pageProperty.thisProperty._id.toString());            
-        //     animationCombination1(slider__container);
-
-        // }
 
 
-    // },[fade1]);
-    },[]);
+    //             setPageProperty(jsonResponse);
+    //         }
+    //         fetchProperty();
+
+    
+    //     }
+
+        
+    //     // on right/left button image change
+    //     // if (pageProperty !== null) {
+
+    //     //     let slider__container = document.getElementById(pageProperty.thisProperty._id.toString());            
+    //     //     animationCombination1(slider__container);
+
+    //     // }
+
+
+    // // },[fade1]);
+    // },[]);
 
 
 
@@ -552,7 +572,7 @@ const page = () => {
                     
                     </>
                 ) : (
-                    <><h1 className="text_shadow-3">This post does not exist</h1></>
+                    <><h1 className="text_shadow-3">This property does not exist</h1></>
                 )
                 }
 

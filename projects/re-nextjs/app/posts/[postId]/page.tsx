@@ -27,7 +27,7 @@ import { useState, useEffect } from "react";
 
 
 
-const page = () => {
+const page = async () => {
 
 
 //   let posts: postsType = [
@@ -67,34 +67,50 @@ type post_andRecPosts = {
     posts: PostDocument[];
 }
 
-const [post_andRecPosts, setPost_andRecPosts] = useState<post_andRecPosts | null>(null);
+// const [post_andRecPosts, setPost_andRecPosts] = useState<post_andRecPosts | null>(null);
 
 
-useEffect(()=> {
 
-    //get page url as it included the id for the user page in question
-    const current_url = window.location.href.toString().split("/posts/")[1];
-    console.log(current_url);
+//connect to data base
+    
+    let current_url = window.location.href.toString().split("/posts/")[1];
 
-    //connect to data base
-    const fetchPost = async () => { 
+    const response = await fetch(`/api/posts/${current_url}`, {
+        method: "GET",
+    })
+
+    const jsonResponse = await response.json();
+    // console.log(jsonResponse);
+
+    const post_andRecPosts = jsonResponse;
+
+
+
+// useEffect(()=> {
+
+//     //get page url as it included the id for the user page in question
+//     const current_url = window.location.href.toString().split("/posts/")[1];
+//     console.log(current_url);
+
+//     //connect to data base
+//     const fetchPost = async () => { 
         
-        let current_url = window.location.href.toString().split("/posts/")[1];
+//         let current_url = window.location.href.toString().split("/posts/")[1];
 
-        const response = await fetch(`/api/posts/${current_url}`, {
-            method: "GET",
-        })
+//         const response = await fetch(`/api/posts/${current_url}`, {
+//             method: "GET",
+//         })
 
-        const jsonResponse = await response.json();
-        // console.log(jsonResponse);
+//         const jsonResponse = await response.json();
+//         // console.log(jsonResponse);
 
-        setPost_andRecPosts(jsonResponse);
+//         setPost_andRecPosts(jsonResponse);
 
-    }
+//     }
 
-    fetchPost();
+//     fetchPost();
 
-},[]);
+// },[]);
 
 
 
@@ -241,7 +257,7 @@ useEffect(()=> {
                                 You may also be interested to read
                             </h4>
 
-                            {post_andRecPosts.posts.map((post) => (
+                            {post_andRecPosts.posts.map((post:PostDocument) => (
 
                                 <Link href={"/posts/"+post._id} key={post._id} 
                                 className="h-auto max-w-full 

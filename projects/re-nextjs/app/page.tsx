@@ -6,7 +6,6 @@ import Home_Rec from "@components/Home/Home_Rec";
 import Home_Main from "@components/Home/Home_Main";
 import Feed from "@/components/Feed";
 import { Suspense } from "react";
-import Loading from "./loading";
 
 //01.01
 const Home = () => {
@@ -25,12 +24,11 @@ const Home = () => {
           Promptopia is an open-source AI prompting tool for modern world to 
           discover, create and share creative prompts
       </p> */}
-
+      
       <Hero />
       <HomeText />
       <Home_Rec/>
       <Home_Main />
-
 
       {/* <Feed /> */}
 

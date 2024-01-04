@@ -17,14 +17,26 @@ import { bodyNoScroll, bodyScroll } from "@utils/bodyNoScroll";
 
 function Loading() {
 
+  useEffect(() => {
+
+    let loading_icon2 = document.getElementById("loading_icon2");
+   
+    let body = document.querySelector("body");
+    body!.style.overflow = "hidden";
+    loading_icon2!.classList.add("pulse_loading2");
+
+    return (()=> {body!.style.overflow = "visible"})
+
+},[])
+
 
   return (
-    <div className="w-full sticky top-0 z-[99]">
+    <div className="w-[100vw] h-[100vh] top-0 z-[99]">
 
-    <div className="absolute top-0 left-0 w-[100%] h-[100vh] bg-[#000000]
+    <div className="w-[100%] h-[100vh] bg-[#000000]
     flex items-center justify-center"
-    id="loading_icon__container">
-        <div id="loading_icon" className="">
+    id="loading_icon__container2">
+        <div id="loading_icon2" className="">
         <svg className="bi bi-house" xmlns="http://www.w3.org/2000/svg" 
               width="50" height="50" fill="currentColor" viewBox="0 0 16 16">
                 

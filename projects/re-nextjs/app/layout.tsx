@@ -86,7 +86,7 @@ const RootLayout = ({ children }: { children: React.ReactNode}) => {
                   {/* <Footer /> */}
                 </div>
 
-                <div className="z-[5]">
+                <div className="z-[5]" id="footer">
                   <Footer />
                 </div>
 
