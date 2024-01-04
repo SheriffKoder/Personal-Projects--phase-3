@@ -105,12 +105,12 @@ useEffect(()=> {
 
 
   return (
-    <div className="flex flex-col pb-6 pt-28 px-3">
+    <div className="flex flex-col pb-6 pt-32 px-3">
 
     {post_andRecPosts !== null ? (
       <div className="mx-auto max-w-[1230px]">
 
-        <div className="dark:text-white text-black text-shadow-3 w-full text-xs flex flex-row gap-1 opacity-70">
+        <div className="dark:text-white text-black text-shadow-3 w-full text-xs flex flex-row gap-1 opacity-70 ml-2">
           
           <Link className=""href="/#home-news">Home</Link>
           >
@@ -160,13 +160,14 @@ useEffect(()=> {
                 text_shadow-2 max-w-[100%]
                 ">
 
-                    <div className="">
+                    <div className="max-h-[855px] overflow-hidden">
                         <Image src={post_andRecPosts.post.image} height={600} width={600} alt={post_andRecPosts.post.title}
                         id={post_andRecPosts.post._id}
                         className="border-0 w-full
-                        rounded-[10px]
+                        rounded-[10px]"
                         
-                        ">
+                        style={{objectFit:'cover'}}>
+
                         </Image>
                     </div>
                     
@@ -177,7 +178,7 @@ useEffect(()=> {
                 glass-container-background-2 backdrop-blur-10
                 dark:bg-[#ffffff07] dark:hover:bg-[#ffffff0a] dark:focus:bg-[#ffffff0a]
                 flex flex-col rounded-[17px] box-shadow-1 p-2 border border-[rgba(255,255,255,0.02)]
-                text_shadow-2 max-w-[100%] md2:min-h-[300px]
+                text_shadow-2 max-w-[100%] md2:min-h-max min-h-[500px] mb-20 md2:mb-0 flex-1
                 ">
                     <div className="p-2">
                     
@@ -197,7 +198,7 @@ useEffect(()=> {
             glass-container-background-2 backdrop-blur-10
             dark:bg-[#ffffff07] dark:hover:bg-[#ffffff0a] dark:focus:bg-[#ffffff0a]
             flex flex-col rounded-[7px] box-shadow-1 p-2 border border-[rgba(255,255,255,0.02)]
-            text_shadow-2 md2:rounded-[17px]
+            text_shadow-2 md2:rounded-[17px] md2:h-[872px]
             ">
                 <span className="flex flex-col items-baseline p-2 md2:p-2 md2:flex-col">
                     <span className="inline-block shrink-0 h-3 w-3 bg-[rgba(0,89,255,0.7)] rounded-full mr-4"></span>
@@ -209,7 +210,7 @@ useEffect(()=> {
 
 
                             <div className="flex flex-col md:flex-row  md2:flex-col items-center justify-center md2:gap-4 gap-4 md:gap-8">
-                            <div className="h-[6rem] w-[6rem] bg-white rounded-full flex items-center justify-center dark:text-black">
+                            <div className="h-[6rem] w-[6rem] bg-white rounded-full flex items-center justify-center dark:text-black overflow-hidden">
                                 <Image src={post_andRecPosts.post.userId.avatar} height={100} width={100} alt="agent's photo"
                                 className="
                                 border-0
@@ -251,7 +252,7 @@ useEffect(()=> {
                                 ">
                                     <p className="flex flex-row items-baseline font-bold uppercase">
                                     <span className="inline-block shrink-0 h-2 w-2 bg-red-500 opacity-50 rounded-full mr-2"></span>
-                                    <span className="text-start dark:text-[#ffffffde]">
+                                    <span className="text-start dark:text-[#ffffffde] dot-text line-clamp-1">
                                         {post.title}
                                     </span>
                                     </p>

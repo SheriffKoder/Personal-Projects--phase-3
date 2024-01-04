@@ -119,7 +119,7 @@ const page = () => {
 
 
   return (
-    <div className="flex flex-col pb-6 pt-28 px-8">
+    <div className="flex flex-col pb-6 pt-28 px-4">
 
 
       <div className="mx-auto max-w-[1230px] w-full">
@@ -148,27 +148,31 @@ const page = () => {
                 <>
                   {posts.map((post) => (
 
-                    <div className="h-auto w-full 
+                    <div className="w-full 
                     bg-[#fffffff0] focus:bg-[#ffffff] hover:bg-[#ffffff] 
                     dark:bg-[#ffffff07] dark:hover:bg-[#ffffff0a] dark:focus:bg-[#ffffff0a]
                     flex flex-col rounded-[17px] box-shadow-1 p-2 border border-[rgba(255,255,255,0.02)]
-                    text_shadow-2 lg:flex lg:flex-row max-w-[541px] lg:max-w-full
+                    text_shadow-2 lg:flex lg:flex-row lg:max-w-full h-[115vw] max-h-[750px] lg:h-[25vh]
                     ">
 
-                      <Link href={"/posts/"+post._id} key={post._id} className="lg:order-2 ">
+                      <Link href={"/posts/"+post._id} key={post._id} className="lg:order-2 h-[60%] overflow-hidden
+                      lg:h-full lg:w-[30%]">
                           <Image src={post.image} height={300} width={300} alt={post.title}
                           id={post._id}
-                          className="border-0 rounded-t-[10px] w-full
+                          className="border-0 rounded-t-[10px] w-full h-full
                           lg:rounded-r-[10px] lg:rounded-l-none mb-4 lg:mb-0
-                          lg:h-full lg:w-auto
-                          ">
+                          
+                          "
+                          style={{objectFit:'cover'}}
+                          >
                           </Image>
                       </Link>
                       
-                        <div className="px-2 pb-1 lg:flex-1 lg:pt-4 lg:pr-6 flex flex-col">
-                          <p className="flex flex-row items-baseline font-bold uppercase">
+                        <div className="px-2 pb-1 lg:flex-1 lg:pt-4 lg:pr-6 flex flex-col flex-1 mt-4 lg:mt-0">
+                          <p className="flex flex-row items-baseline font-bold uppercase min-h-[3rem]">
                             <span className="inline-block shrink-0 h-3 w-3 bg-red-500 opacity-80 rounded-full mr-4"></span>
-                            <Link href={"/posts/"+post._id} key={post._id} className="text-start dark:text-[#ffffffde]">
+                            <Link href={"/posts/"+post._id} key={post._id} 
+                            className="text-start dark:text-[#ffffffde] dot-text line-clamp-3">
                               {post.title}
                             </Link>
                           </p>
@@ -180,7 +184,7 @@ const page = () => {
                             </span>
                           </span>
 
-                          <span className="flex flex-row items-baseline mt-4 lg:mt-auto">
+                          <span className="flex flex-row items-baseline mt-auto pt-2">
                             <span className="inline-block shrink-0 h-3 w-3 bg-[rgba(0,89,255,0.7)] rounded-full mr-4"></span>
                             <span className="w-full text-start font-light text-sm
                             lowercase flex flex-row items-center">

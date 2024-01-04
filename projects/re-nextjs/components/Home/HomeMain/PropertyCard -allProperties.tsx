@@ -219,7 +219,7 @@ const PropertyCard = ({property1, currentPage}:{property1:PropertyDocument, curr
                     bg-[url('/icons/arrow-left.svg')] h-4 w-4 bg-no-repeat bg-contain">
                   </button>
 
-                  <Link href={"/properties/"+property._id} key={property._id}
+                  <Link href={"/properties/single/"+property._id} key={property._id}
                   className="min-h-[18vw]">
                     <Image src={property.property_images[imageReference]} height={400} width={400} alt={property.property_type+" "+property.property_country+" "+property.property_city+" "+property.property_district+" "+property.property_area+" "+property.property_beds+" bedrooms "+property.property_baths+" bathrooms "+property.property_listing_type}
                     id={property._id}
@@ -240,7 +240,7 @@ const PropertyCard = ({property1, currentPage}:{property1:PropertyDocument, curr
                 <div className="w-full text_shadow-2">
 
 
-                  <Link href={"/properties/"+property._id} key={property._id}
+                  <Link href={"/properties/single/"+property._id} key={property._id}
                   className="w-full">
                     <div className="flex flex-col items-start px-2 pt-1 text-sm text-start">
                       <div className="dark:text-[#ffffffde] capitalize">{property.property_type} for {property.property_listing_type}</div>

@@ -6,7 +6,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect, MouseEventHandler } from "react";
 import { useRef } from "react";
-import PropertyCard from "@components/Home/HomeMain/PropertyCard";
+import PropertyCard from "@components/Home/HomeMain/PropertyCard-singleProperty";
 
 interface propertyInterface {
 
@@ -236,7 +236,7 @@ const page = () => {
 
       <div className="mx-auto max-w-[1230px]">
 
-        <div className="dark:text-white text-black text-shadow-3 w-full text-xs flex flex-row gap-1 opacity-70">
+        <div className="dark:text-white text-black text-shadow-3 w-full text-xs flex flex-row gap-1 opacity-70 ml-2">
           
           <Link className=""href="/">Home</Link>
           >

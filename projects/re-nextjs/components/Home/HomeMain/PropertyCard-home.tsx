@@ -208,9 +208,10 @@ const PropertyCard = ({property1, currentPage}:{property1:PropertyDocument, curr
 
                 <div className={`relative flex flex-row items-center justify-start text-start
                 ${currentPage === 'property' ? '' : 'xl:max-w-[50%]'} 
-                max-h-[23vh] rounded-t-[10px] overflow-hidden md:max-h-[22vw] lg:max-h-[18vw]
-                xl:max-h-[136px]
+                max-h-[23vh] rounded-t-[10px] overflow-hidden md:h-[22vw] lg:max-h-[16vw]
+                xl:max-h-[130px]
                 ${currentPage === 'AllProperties' ? 'xl:min-w-full xl:max-h-[100%]' : ''}
+                xl:rounded-tr-none xl:rounded-l-[10px]
 
                 `}>
                   <button 
@@ -223,8 +224,8 @@ const PropertyCard = ({property1, currentPage}:{property1:PropertyDocument, curr
                   className="min-h-[18vw]">
                     <Image src={property.property_images[imageReference]} height={400} width={400} alt={property.property_type+" "+property.property_country+" "+property.property_city+" "+property.property_district+" "+property.property_area+" "+property.property_beds+" bedrooms "+property.property_baths+" bathrooms "+property.property_listing_type}
                     id={property._id}
-                    className={`border-0 rounded-t-[10px] min-w-full min-h-[18vw]
-                    ${currentPage === 'property' ? '' : 'xl:rounded-l-[10px] xl:rounded-tr-none'}
+                    className={`border-0 min-w-full min-h-[18vw]
+                    
                     `}
                     style={{objectFit:'contain'}}>
                     </Image>

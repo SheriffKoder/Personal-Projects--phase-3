@@ -147,7 +147,7 @@ const Nav = () => {
           onMouseLeave={()=>{handleDropDownIcon("enter");}}
           >
 
-            <Link href="/" className=" nav-user-icon flex gap-2 flex-center rounded-full border-0 hover:bg-gray-200 dark:hover:bg-[#4f4f4f2e] h-7 w-7"
+            <div className=" nav-user-icon flex gap-2 flex-center rounded-full border-0 hover:bg-gray-200 dark:hover:bg-[#4f4f4f2e] h-7 w-7"
             >
 
                   <svg xmlns="http://www.w3.org/2000/svg" 
@@ -157,7 +157,7 @@ const Nav = () => {
                   </svg>
 
                   {/* <p>RE Company</p> */}
-            </Link>
+            </div>
           </span >
 
 

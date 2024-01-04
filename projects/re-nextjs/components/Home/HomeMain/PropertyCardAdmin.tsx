@@ -251,7 +251,7 @@ const PropertyCardAdmin = ({setPropertyEditId, property1, currentPage="", setRel
                 <div className={`relative flex flex-row items-center justify-center text-start
                 ${currentPage === 'property' ? '' : 'xl:max-w-[50%]'} 
                 md:max-h-[25vw] overflow-hidden rounded-t-[10px] xl:rounded-tr-none
-                md2:h-[14vw] xl:max-h-full
+                md2:h-[18vw] xl:max-h-full h-full bg-[#0000001a]
                 `}>
 
                   <button 
@@ -261,13 +261,13 @@ const PropertyCardAdmin = ({setPropertyEditId, property1, currentPage="", setRel
                   </button>
 
                   <Link href={"/properties/single/"+property._id} key={property._id}
-                  className="h-[100%]">
+                  className="h-[50vw] md:h-[100vw]">
                     <Image src={property.property_images[imageReference]} height={400} width={400} alt={property.property_type+" "+property.property_country+" "+property.property_city+" "+property.property_district+" "+property.property_area+" "+property.property_beds+" bedrooms "+property.property_baths+" bathrooms "+property.property_listing_type}
                     id={property._id}
-                    className={`border-0 rounded-t-[10px] w-full max-h-8.5rem min-h-[100%]
+                    className={`border-0 rounded-t-[10px] w-full min-h-[100%]
                     ${currentPage === 'property' ? '' : 'xl:rounded-l-[10px] xl:rounded-tr-none'}
                     `}
-                    style={{objectFit:'cover'}}>
+                    style={{objectFit:'contain'}}>
                     </Image>
                   </Link>
 

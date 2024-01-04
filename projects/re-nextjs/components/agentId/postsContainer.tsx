@@ -165,32 +165,38 @@ const PostsContainer = ({setPostEditId, userAuthority, setReload, reload, userNa
             {userPosts.map((post) => (
 
 
-                <div className="h-auto max-w-full 
+                <div className="max-w-full 
                 bg-[#fffffff0] focus:bg-[#ffffff] hover:bg-[#ffffff] 
                 dark:bg-[#ffffff07] dark:hover:bg-[#ffffff0a] dark:focus:bg-[#ffffff0a]
                 flex flex-col rounded-[17px] box-shadow-1 p-1 border border-[rgba(255,255,255,0.02)]
                 text_shadow-2
-                md2:flex-row md:w-[calc(50%-16px)] md2:min-w-[100%] md2:h-[166px]
+                md2:flex-row md:w-[calc(50%-16px)] md2:min-w-[100%] md2:h-[220px] h-[135vw] md:h-[calc(15vh+50vw)]
                 ">
 
-                    <div className="md2:order-2 md2:w-[20%] md2:ml-8">
+                    <div className="
+                    md2:order-2 md2:w-[30%] md2:ml-8 overflow-hidden rounded-t-[10px] md2:rounded-tl-none md2:rounded-br-[10px] 
+                    h-[40%] mb-4 md2:mb-0 md2:min-h-full flex
+                    ">
                     
-                        <Link href={"/posts/"+post._id} key={post._id} className="lg:order-2 ">
+                        <Link href={"/posts/"+post._id} key={post._id} 
+                        className="overflow-hidden lg:order-2 min-h-full w-full">
                             <Image src={post.image} height={300} width={300} alt={post.title}
                             id={post._id}
-                            className="border-0 rounded-t-[10px] w-full
-                            md2:rounded-r-[10px] md2:rounded-l-none mb-4 md2:mb-0
-                            md2:h-full md2:w-auto
-                            ">
+                            className="border-0 h-full w-full flex
+                            mb-4 md2:mb-0
+                            
+                            "
+                            style={{objectFit:'cover'}}>
                             </Image>
                         </Link>
                     </div>
 
-                    <div className="md2:order-1 px-2 md2:py-2 md2:px-3 md:flex-1 md2:h-full md:flex md:flex-col">
+                    <div className="md2:order-1 px-2 md2:py-2 md2:px-3 md:flex-1 md2:h-full flex flex-col
+                    flex-1">
 
-                        <p className="flex flex-row items-baseline font-bold uppercase">
+                        <p className="flex flex-row items-baseline font-bold uppercase min-h-[3rem]">
                             <span className="inline-block shrink-0 h-3 w-3 bg-red-500 opacity-80 rounded-full mr-4"></span>
-                            <span className="text-start dark:text-[#ffffffde]">
+                            <span className="text-start dark:text-[#ffffffde] dot-text line-clamp-2">
                             {post.title}
                             </span>
                         </p>
@@ -202,17 +208,17 @@ const PostsContainer = ({setPostEditId, userAuthority, setReload, reload, userNa
                             </span>
                         </span>
 
-                        <div className="flex-1 flex flex-col justify-end">
+                        <div className="flex-1 flex flex-col justify-end mt-auto">
                         <span className="flex flex-row items-baseline mt-2 md2:flex-1 md2:h-full md2:items-end">
                                 <span className="inline-block shrink-0 h-3 w-3 bg-[rgba(0,89,255,0.7)] rounded-full mr-4"></span>
                                     <div className="flex flex-col w-full items-start 
-                                    md2:flex-row md2:justify-start md2:gap-2">
-                                        <div className="font-light text-sm w-full flex flex-row text-start
+                                    md2:flex-row md2:justify-start md2:h-full md2:mb-[-0.25rem] md2:items-end md2:gap-2">
+                                        <div className="font-light text-xs w-full flex flex-row text-start
                                         md2:w-auto md2:gap-1">
                                             <span className="w-[4rem] md2:w-auto inline-block">Added:</span>
                                             <span>{post.date_add}</span>
                                         </div>
-                                        <div className="font-light text-sm w-full flex flex-row text-start 
+                                        <div className="font-light text-xs w-full flex flex-row text-start 
                                         md2:w-auto md2:gap-1">
                                             <span className="w-[4rem] md2:w-auto inline-block">Updated:</span>
                                             <span>{post.date_update}</span>

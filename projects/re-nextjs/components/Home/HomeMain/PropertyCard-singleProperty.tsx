@@ -196,21 +196,19 @@ const PropertyCard = ({property1, currentPage}:{property1:PropertyDocument, curr
           flex flex-col 
            
           h-auto w-full
-          ${currentPage === 'property' ? 'xl:flex-col' : 'xl:flex-row'} 
+          xl:flex-col
           gap-1
           rounded-[17px] box-shadow-1 p-1 relative
           border border-[rgba(255,255,255,0.02)]
           dark:opacity-75 dark:hover:opacity-90 opacity-90 hover:opacity-100
           focus:opacity-100 dark:focus:opacity-90
-          ${currentPage === 'AllProperties' ? 'md2:h-[350px] xl:flex-col' : ''}
 
           `}>
 
                 <div className={`relative flex flex-row items-center justify-start text-start
                 ${currentPage === 'property' ? '' : 'xl:max-w-[50%]'} 
-                max-h-[23vh] rounded-t-[10px] overflow-hidden md:max-h-[22vw] lg:max-h-[18vw]
-                xl:max-h-[136px]
-                ${currentPage === 'AllProperties' ? 'xl:min-w-full xl:max-h-[100%]' : ''}
+                h-[7vh] rounded-t-[10px] overflow-hidden sm:h-[22vw] md:h-[15vw] md2:h-[10vw] lg:h-[10vw]
+                xl:max-h-[120px]
 
                 `}>
                   <button 
@@ -220,13 +218,12 @@ const PropertyCard = ({property1, currentPage}:{property1:PropertyDocument, curr
                   </button>
 
                   <Link href={"/properties/"+property._id} key={property._id}
-                  className="min-h-[18vw]">
+                  className="">
                     <Image src={property.property_images[imageReference]} height={400} width={400} alt={property.property_type+" "+property.property_country+" "+property.property_city+" "+property.property_district+" "+property.property_area+" "+property.property_beds+" bedrooms "+property.property_baths+" bathrooms "+property.property_listing_type}
                     id={property._id}
-                    className={`border-0 rounded-t-[10px] min-w-full min-h-[18vw]
-                    ${currentPage === 'property' ? '' : 'xl:rounded-l-[10px] xl:rounded-tr-none'}
+                    className={`
                     `}
-                    style={{objectFit:'contain'}}>
+                    style={{objectFit:'fill'}}>
                     </Image>
                   </Link>
 
@@ -243,7 +240,8 @@ const PropertyCard = ({property1, currentPage}:{property1:PropertyDocument, curr
                   <Link href={"/properties/"+property._id} key={property._id}
                   className="w-full">
                     <div className="flex flex-col items-start px-2 pt-1 text-sm text-start">
-                      <div className="dark:text-[#ffffffde] capitalize">{property.property_type} for {property.property_listing_type}</div>
+                      <div className="dark:text-[#ffffffde] capitalize">{property.property_type}</div>
+                      <div className="dark:text-[#ffffffde] capitalize">for {property.property_listing_type}</div>
                       {/* <div className="dark:text-[#ffffffde] capitalize">In {property.property_country}, {property.property_city}</div> */}
                       <div className="dark:text-[#ffffffde] capitalize">in {property.property_city}, {property.property_district}</div>
                       <div className="">{property.property_beds} beds / {property.property_baths} bath</div>
@@ -253,33 +251,7 @@ const PropertyCard = ({property1, currentPage}:{property1:PropertyDocument, curr
 
                     </div>
                   </Link>
-                  {currentPage === 'agent' ? (
-                        <div className="flex flex-col items-start px-2 pb-1 text-sm text-start">               
-                          <div className="font-light text-sm">Added: {property.property_date}</div>
-                          <div className="font-light text-sm">Updated: {property.property_update}</div>
 
-                          <div className="text-sm font-light w-full flex flex-row gap-2 justify-start mt-2 mb-1">
-
-                            <button type="button"
-                              onClick={() => {bodyNoScroll(); showEdit("Edit")}}
-                              className="bg-theme-text-brighter dark:bg-theme-text-dark text-white 
-                              rounded-full w-[65px]
-                              opacity-40 hover:opacity-90 text-center">
-                                  Edit
-                              </button>
-
-                            <button type="submit" onClick={()=>{handlePropertyDelete(property._id)}}
-                              className="bg-theme-text-brighter dark:bg-theme-text-dark text-white 
-                              rounded-full w-[65px]
-                              opacity-40 hover:opacity-90 text-center">
-                                  Delete
-                              </button>
-
-                          </div>
-                        </div>
-                      ):(
-                        ""
-                      )}
                 </div>
 
 

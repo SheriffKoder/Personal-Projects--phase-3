@@ -4,7 +4,8 @@
 import Link from "next/link";
 import Image from "next/image";
 
-import PropertyCard from "@components/Home/HomeMain/PropertyCard";
+// import PropertyCard from "@components/Home/HomeMain/PropertyCard";
+import PropertyCard from "@components/Home/HomeMain/PropertyCard -allProperties";
 import { PropertyDocument } from "@models/propertyModel";
 import { useState, useEffect, useRef } from "react";
 
@@ -661,7 +662,7 @@ const page = () => {
             rounded-[12px] dark:bg-[#ffffff11] bg-[#ffffff9b]
             focus:outline focus:outline-1 outline-[#0000002b] dark:outline-[#ffffff61]"
             name="country" value={country} onChange={handleChange}>
-                <option>select country</option>
+                <option value="" disabled selected>select country</option>
                 
                  {propertiesCountries.current.map((country) => (
                     <option>{country}</option>
@@ -680,7 +681,7 @@ const page = () => {
             rounded-[12px] dark:bg-[#ffffff11] bg-[#ffffff9b]
             focus:outline focus:outline-1 outline-[#0000002b] dark:outline-[#ffffff61]"
             name="type" value={type} onChange={handleChange}>
-                <option>select type</option>
+                <option value="" disabled selected>select type</option>
 
                  {propertiesTypes.current.map((type) => (
                     <option>{type}</option>
@@ -696,7 +697,7 @@ const page = () => {
             rounded-[12px] dark:bg-[#ffffff11] bg-[#ffffff9b]
             focus:outline focus:outline-1 outline-[#0000002b] dark:outline-[#ffffff61]"
             name="listing_type" value={listing_type} onChange={handleChange}>
-                <option>select listing type</option>
+                <option value="" disabled selected>select listing type</option>
 
                  {listingTypes.current.map((listing) => (
                     <option>{listing}</option>
@@ -747,7 +748,7 @@ const page = () => {
             {properties.length > 0 ? (
             <>
                 {properties.map((property: PropertyDocument) => (
-                <div className="h-auto w-full max-w-[390px] md:w-[calc(50%-16px)] md2:w-[calc(33.3%-16px)]">
+                <div className="h-auto w-full max-w-[390px] md:w-[calc(50%-16px)] lg:w-[calc(33.3%-16px)]">
                     <PropertyCard property1={property} currentPage="AllProperties" />
                 </div>
                 )
