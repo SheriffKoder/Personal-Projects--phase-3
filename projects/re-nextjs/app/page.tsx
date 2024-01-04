@@ -11,7 +11,7 @@ import Loading from "./loading";
 //01.01
 const Home = () => {
   return (
-    <section className="w-full flex flex-col">
+    <section className="w-full flex flex-col ">
 
       {/* <h1 className="head_text text-center">
         Discover & Share

@@ -21,8 +21,10 @@ export const GET = async (request: NextRequest, {params}:any) => {
         // const properties = await PropertyModel.find().skip(3).limit(3);             //page 1
         // const properties = await PropertyModel.find().skip(6).limit(3);             //page 2
 
+        const allProperties = await PropertyModel.find();          //page X
 
-        return new Response(JSON.stringify({properties, pagesEnd}), {status: 200});
+
+        return new Response(JSON.stringify({allProperties, properties, pagesEnd}), {status: 200});
 
     } catch {
         return new Response(JSON.stringify("Failed to fetch all properties"), {status: 500});

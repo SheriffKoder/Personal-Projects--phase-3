@@ -28,8 +28,12 @@ const PropertiesContainer = ({setPropertyEditId, userAuthority, setReload, reloa
     const [pageId, setPageId] = useState(1);
     const endPage = useRef(1);
 
+    const [dataCondition,setDataCondition] = useState("Loading properties...");
+
 
     useEffect(()=> {
+
+        setDataCondition("Loading properties...");
 
         //connect to data base
         const fetchProperties = async () => { 
@@ -38,16 +42,16 @@ const PropertiesContainer = ({setPropertyEditId, userAuthority, setReload, reloa
     
             console.log(userProperties);
             //state needs to have a different value to take the same value again which is jsonResponse.properties
-            if (userProperties.length > 0) {
-                let loadingProperties:PropertyDocument[] = [];
+            // if (userProperties.length > 0) {
+            //     let loadingProperties:PropertyDocument[] = [];
                 
-                // console.log("loadingProperties");
-                // console.log(loadingProperties);
-                // setUserProperties(loadingProperties);
+            //     // console.log("loadingProperties");
+            //     // console.log(loadingProperties);
+            //     // setUserProperties(loadingProperties);
 
-                // setUserProperties([]);
+            //     // setUserProperties([]);
     
-            }
+            // }
             
             const response = await fetch(`/api/properties/${userId}/${pageId}`);
             const jsonResponse = await response.json();
@@ -62,7 +66,16 @@ const PropertiesContainer = ({setPropertyEditId, userAuthority, setReload, reloa
         
             // console.log(jsonResponse.properties);
     
-            setUserProperties(jsonResponse.properties);
+            if (jsonResponse.properties.length > 0) {
+            
+                setUserProperties(jsonResponse.properties); //Here
+            } else {
+                if (userAuthority === "viewer") {
+                setDataCondition(`${userName} does not have any posts yet`)
+                } else {
+                setDataCondition("You do not have any posts yet");
+                }
+            }
             setReload(false);
 
             // console.log("properties now are");
@@ -210,9 +223,10 @@ const PropertiesContainer = ({setPropertyEditId, userAuthority, setReload, reloa
         </>
         ) : (
         <>
-            <h1 className="text_shadow-3">
+            <h1 className="text_shadow-3 w-full text-center">
                 
-                { userAuthority === "viewer" ? (`${userName} does not have any properties yet`) : ("You do not have any properties yet")}
+                {/* { userAuthority === "viewer" ? (`${userName} does not have any properties yet`) : ("You do not have any properties yet")} */}
+                {dataCondition}
 
             </h1>
         </>

@@ -75,8 +75,11 @@ const PostsContainer = ({setPostEditId, userAuthority, setReload, reload, userNa
     const [pageId, setPageId] = useState(1);
     const endPage = useRef(1);
 
+    const [dataCondition,setDataCondition] = useState("Loading posts...");
 
     useEffect(()=> {
+
+        setDataCondition("Loading posts...");
 
         //connect to data base
         const fetchPosts = async () => { 
@@ -85,16 +88,16 @@ const PostsContainer = ({setPostEditId, userAuthority, setReload, reload, userNa
     
             console.log(userPosts);
             //state needs to have a different value to take the same value again which is jsonResponse.properties
-            if (userPosts.length > 0) {
-                let loadingProperties:PropertyDocument[] = [];
+            // if (userPosts.length > 0) {
+            //     let loadingProperties:PropertyDocument[] = [];
                 
-                // console.log("loadingProperties");
-                // console.log(loadingProperties);
-                // setUserProperties(loadingProperties);
+            //     // console.log("loadingProperties");
+            //     // console.log(loadingProperties);
+            //     // setUserProperties(loadingProperties);
 
-                // setUserPosts([]); //Here
+            //     // setUserPosts([]); //Here
     
-            }
+            // }
             
             const response = await fetch(`/api/posts/user/${userId}/${pageId}`);
             const jsonResponse = await response.json();
@@ -110,7 +113,16 @@ const PostsContainer = ({setPostEditId, userAuthority, setReload, reload, userNa
             // console.log(jsonResponse.properties);
     
             // setUserProperties([]);
-            setUserPosts(jsonResponse.posts); //Here
+            if (jsonResponse.posts.length > 0) {
+            
+                setUserPosts(jsonResponse.posts); //Here
+            } else {
+                if (userAuthority === "viewer") {
+                setDataCondition(`${userName} does not have any posts yet`)
+                } else {
+                setDataCondition("You do not have any posts yet");
+                }
+            }
             setReload(false);
             
             // console.log("properties now are");
@@ -357,9 +369,10 @@ const PostsContainer = ({setPostEditId, userAuthority, setReload, reload, userNa
         </>
         ) : (
         <>
-            <h1 className="text_shadow-3">
+            <h1 className="text_shadow-3 w-full text-center">
                 
-                { userAuthority === "viewer" ? (`${userName} does not have any posts yet`) : ("You do not have any posts yet")}
+                {/* { userAuthority === "viewer" ? (`${userName} does not have any properties yet`) : ("You do not have any properties yet")} */}
+                {dataCondition}
 
             </h1>
         </>

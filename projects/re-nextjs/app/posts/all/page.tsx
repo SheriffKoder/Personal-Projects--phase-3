@@ -67,9 +67,12 @@ const page = () => {
   //Part 11.03
   const [pageId, setPageId] = useState(1);
   const endPage = useRef(1);
+  const [dataCondition,setDataCondition] = useState("Loading...");
 
 
   useEffect(()=> {
+
+    setDataCondition("Loading...");
 
     //connect to data base
     const fetchPosts = async () => { 
@@ -98,7 +101,12 @@ const page = () => {
     
         // console.log(jsonResponse.posts);
 
-        setPosts(jsonResponse.posts);
+        if (jsonResponse.posts.length > 0) {
+            
+          setPosts(jsonResponse.posts);
+        } else {
+            setDataCondition("no posts found...");
+        }
         
         // console.log("posts now are");
         // console.log(posts);
@@ -195,7 +203,7 @@ const page = () => {
               ) : (
                 <>
                   <div className="min-h-[254px] flex mx-auto">
-                    <h1 className="text_shadow-3  my-auto">Loading...</h1>
+                    <h1 className="text_shadow-3  my-auto">{dataCondition}</h1>
                   </div>
                 </>
               )

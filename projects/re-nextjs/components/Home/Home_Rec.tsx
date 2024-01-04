@@ -144,7 +144,7 @@ const Home_Rec = () => {
     const tm = useRef(0);
 
     //04.01
-    const [propertiesRec, setPropertiesRec] = useState<PropertyDocument[] | null>(null);
+    const [propertiesRec, setPropertiesRec] = useState<PropertyDocument[] | []>([]);
 
     // const [slider, setSlider] = useState<PropertyDocument | null >(null);
     // slider = {...properties[sliderIndex]};
@@ -153,34 +153,46 @@ const Home_Rec = () => {
     useEffect(()=> {
         
 
-        if (propertiesRec == null) {
+        // if (propertiesRec == null) {
             const fetchProperties = async () => {
                 const responseRec = await fetch("/api/properties/homePage_rec");
                 const jsonResponseRec = await responseRec.json();
                 console.log(jsonResponseRec);
           
                 // slider = {...jsonResponse[sliderIndex]};
+
+
+                //filter out un-used images slots in every property in the json response
+                jsonResponseRec.forEach((property: PropertyDocument) => {
+                    property.property_images = property.property_images.filter((image: string) => {
+                        if (image !== "") {
+                          return image;
+                        }
+                      });
+                })
+
+
                 setPropertiesRec(jsonResponseRec);
               }
           
               fetchProperties();    
-        }
+        // }
       
-        if (propertiesRec !== null ) {
+        // if (propertiesRec !== null ) {
             //if we have only one recommended property there is no need to animate
             if (propertiesRec.length > 1) {
                 // console.log(propertiesRec[sliderIndex]._id);
                 let slider__container = document.querySelector("#slider__container");        
                 animationCombination(slider__container);    
             } 
-        }
+        // }
 
     },[fade]);
 
 
   return (
     <>
-    {propertiesRec !== null ? (
+    {propertiesRec?.length > 0 ? (
     <div id="rec" className="w-full md:w-[97vw] md:mx-auto h-auto border-[#ffffff15] mt-24 px-6"
     aria-label="recommended properties">
 

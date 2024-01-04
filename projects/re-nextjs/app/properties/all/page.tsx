@@ -388,6 +388,7 @@ const page = () => {
 
     const handleChange: ChangeEventHandler<HTMLInputElement | HTMLSelectElement> = ({ target }) => {
         const { name, value } = target;
+        console.log(value);
         setSearchInput({ ...searchInput, [name]:value});
     }
 
@@ -405,32 +406,74 @@ const page = () => {
         const jsonResponse = await apiResponse.json();
         console.log(jsonResponse);
         endPage.current = jsonResponse.pagesEnd;
-        setProperties(jsonResponse.filteredProperties);
+        if (jsonResponse.filteredProperties.length > 0) {
+            
+            setProperties(jsonResponse.filteredProperties);
+        } else {
+            setDataCondition("no properties found in this search");
+
+        }
         setReload2(false);
     
     
     } 
+
+
+    const cleanArray = (inputArray: string[]) => {
+
+      let filterArray:string[] = [];
+            
+      filterArray.push(inputArray[0]);
+      for (let i=1; i<inputArray.length; i++) {
+          temp2: for (let j=0; j<filterArray.length; j++) {
+              if (inputArray[i] === filterArray[j]) {
+                  break temp2;
+              }
+              if (j === filterArray.length-1) {
+                filterArray.push(inputArray[i]);
+              }
+          }
+
+      }
+
+      return filterArray;
+
+
+
+    }
+
+
     ///////////////////////////////////////////////////////////////////////////////////////
 
+    const [dataCondition,setDataCondition] = useState("Loading...");
+    const [clearSearch, setClearSearch] = useState(false);
+
+    const propertiesCountries = useRef([""]);
+    const propertiesTypes = useRef([""]);
+    const listingTypes = useRef([""]);
 
 
   //04.01
   useEffect(()=> {
 
+    setDataCondition("Loading...");
+    setClearSearch(false);
+
     console.log("syncing");
     const fetchProperties = async () => {
 
+        
         // let current_page = window.location.href.toString().split("/all/")[1];
         // setPageId(Number(current_page));
 
         //state needs to have a different value to take the same value again which is jsonResponse.properties
-        if (properties.length > 0) {
-            let loadingProperties:PropertyDocument[] = [];
+        // if (properties.length > 0) {
+        //     let loadingProperties:PropertyDocument[] = [];
             
-            // console.log("loadingProperties");
-            // console.log(loadingProperties);
-            // setProperties(loadingProperties);
-        }
+        //     // console.log("loadingProperties");
+        //     // console.log(loadingProperties);
+        //     // setProperties(loadingProperties);
+        // }
         const response = await fetch(`/api/properties/all/${pageId}`);
         const jsonResponse = await response.json();
         console.log(jsonResponse);
@@ -444,7 +487,35 @@ const page = () => {
     
         console.log(jsonResponse.properties);
 
-        setProperties(jsonResponse.properties);
+        //get all the countries, types, listing types from the properties in the database
+        //clean duplicate strings, to use in the filter selects
+        if (jsonResponse.properties.length > 0 && jsonResponse.allProperties.length > 0) {
+            
+            setProperties(jsonResponse.properties);
+
+            //you have jsonResponse.allProperties
+            //get all the countries in an array
+            const tempCountries = jsonResponse.allProperties.map((property:PropertyDocument) => property.property_country);
+            
+            //now for each country check if it existed before in an array, if not add it
+            propertiesCountries.current = cleanArray(tempCountries);
+            // console.log(propertiesCountries.current);
+
+
+            const tempPropTypes = jsonResponse.allProperties.map((property:PropertyDocument) => property.property_type);
+            propertiesTypes.current = cleanArray(tempPropTypes);
+            // console.log(propertiesTypes.current);
+
+
+            const tempPropListingTypes = jsonResponse.allProperties.map((property:PropertyDocument) => property.property_listing_type);
+            listingTypes.current = cleanArray(tempPropListingTypes);
+            // console.log(listingTypes.current);
+
+
+        } else {
+            setDataCondition("no properties found...");
+
+        }
         
         // console.log("properties now are");
         // console.log(properties);
@@ -456,7 +527,7 @@ const page = () => {
     // setReload(false);
 
 
-  },[pageId]);
+  },[pageId, clearSearch]);
 
 
 
@@ -579,39 +650,56 @@ const page = () => {
             </span>
 
 
-
+                {/* you have an array object 
+                for each item in the array, if the keyword did not exist before, return it
+                 */}
+                 {/* {properties.map((property) => (
+                    <option>country: {property.property_country}</option>
+                ))} */}
             {properties.length > 0 ? (
             <select className="pl-3 pr-5 py-1 appearance-none down_caret
             rounded-[12px] dark:bg-[#ffffff11] bg-[#ffffff9b]
             focus:outline focus:outline-1 outline-[#0000002b] dark:outline-[#ffffff61]"
             name="country" value={country} onChange={handleChange}>
                 <option>select country</option>
-                {properties.map((property) => (
-                    <option>country: {property.property_country}</option>
+                
+                 {propertiesCountries.current.map((country) => (
+                    <option>{country}</option>
                 ))}
+
+
             </select>
             ):("")}
 
+
+            {/* {properties.map((property) => (
+              <option>type: {property.property_type}</option>
+            ))} */}
             {properties.length > 0 ? (
             <select className="pl-3 pr-5 py-1 appearance-none down_caret
             rounded-[12px] dark:bg-[#ffffff11] bg-[#ffffff9b]
             focus:outline focus:outline-1 outline-[#0000002b] dark:outline-[#ffffff61]"
             name="type" value={type} onChange={handleChange}>
                 <option>select type</option>
-                {properties.map((property) => (
-                    <option>type: {property.property_type}</option>
+
+                 {propertiesTypes.current.map((type) => (
+                    <option>{type}</option>
                 ))}
             </select>
             ):("")}
 
+            {/* {properties.map((property) => (
+              <option>listing type: {property.property_listing_type}</option>
+            ))} */}
             {properties.length > 0 ? (
             <select className="pl-3 pr-5 py-1 appearance-none down_caret
             rounded-[12px] dark:bg-[#ffffff11] bg-[#ffffff9b]
             focus:outline focus:outline-1 outline-[#0000002b] dark:outline-[#ffffff61]"
             name="listing_type" value={listing_type} onChange={handleChange}>
                 <option>select listing type</option>
-                {properties.map((property) => (
-                    <option>listing type: {property.property_listing_type}</option>
+
+                 {listingTypes.current.map((listing) => (
+                    <option>{listing}</option>
                 ))}
             </select>
             ):("")}
@@ -783,8 +871,19 @@ const page = () => {
             </>
             ) : (
             <>
-            <div className="min-h-[254px] flex mx-auto">
-                <h1 className="text_shadow-3  my-auto">Loading...</h1>
+            <div className="min-h-[254px] flex flex-col mx-auto justify-center">
+                <h1 className="text_shadow-3">{dataCondition}</h1>
+
+                {dataCondition === "no properties found in this search" ? (
+                    <button 
+                    className="
+                    dark:bg-text-accent-dark bg-theme-text-brighter opacity-75 text-white
+                    px-2 py-0 rounded-[12px] mt-2 w-[4rem] mx-auto text-sm
+                    focus:outline focus:outline-1 outline-[#0000002b] dark:outline-[#ffffff61]"
+                    onClick={()=>{setClearSearch(true);}}>
+                            Back
+                    </button>
+                ): ("")}
             </div></>
             )
             }

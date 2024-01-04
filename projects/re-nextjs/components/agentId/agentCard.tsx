@@ -66,6 +66,19 @@ const AgentCard = ({userIncoming, setUserIncoming, sessionId}:{
     }
 
 
+    const [dataCondition,setDataCondition] = useState("Loading agents...");
+
+    useEffect(()=> {
+
+        if (user.allAgents.length <= 0) {
+            
+            setDataCondition("No agents exist yet");
+        } else {
+            setDataCondition("Loading agents...");
+        }
+
+    },[])
+
 
 
   return (
@@ -153,7 +166,11 @@ const AgentCard = ({userIncoming, setUserIncoming, sessionId}:{
                         )}
                     </>
                     ) : (
-                    <><h1 className="text_shadow-3">No agents exist yet</h1></>
+                    <>
+                        <h1 className="text_shadow-3 w-full text-center">            
+                            {dataCondition}
+                        </h1>
+                    </>
                     )
                     }
 

@@ -291,17 +291,39 @@ const Home_Main = () => {
 
 
   //04.01
-  const [properties_andPosts, setProperties_andPosts] = useState<properties_andPosts | null>(null);
+  const [properties_andPosts, setProperties_andPosts] = useState<properties_andPosts>({
+    properties: [],
+    posts: [],
+  });
+
+  const [dataPropertiesCondition,setDataPropertiesCondition] = useState("Loading properties...");
+  const [dataPostsCondition,setDataPostsCondition] = useState("Loading posts...");
+
+
 
   useEffect(()=> {
+
+    setDataPropertiesCondition("Loading properties...");
+    setDataPostsCondition("Loading posts...");
+
 
     const fetchProperties_andPosts = async () => {
       const response = await fetch("/api/properties/homePage_main");
       const jsonResponse = await response.json();
       console.log(jsonResponse);
 
+      if (jsonResponse.properties.length <= 0) {
+        setDataPropertiesCondition("no properties found...");
+      }
+
+      if (jsonResponse.posts.length <= 0) {
+        setDataPostsCondition("no posts found...");
+      }
+
       setProperties_andPosts(jsonResponse);
+
     }
+
 
     fetchProperties_andPosts();
   }, []);
@@ -326,7 +348,7 @@ const Home_Main = () => {
             <div className="flex flex-col gap-6 my-6">
 
               {/* post */}
-              {properties_andPosts !== null ? (
+              {properties_andPosts?.posts.length > 0 ? (
                 <>
                   {properties_andPosts.posts.map((post) => (
 
@@ -363,18 +385,25 @@ const Home_Main = () => {
                     </Link>
 
                   ))}
-                </>
-              ) : (
-                <><h1 className="text_shadow-3">No Posts</h1></>
-              )
-              }
 
-            </div>
-            <Link href="/news" className="bg-theme-text-brighter dark:bg-theme-text-dark text-white 
+                <Link href="/news" className="bg-theme-text-brighter dark:bg-theme-text-dark text-white 
                 rounded-full py-1.5 px-3 w-[80%] max-w-[200px] text_shadow-3
                 opacity-80 hover:opacity-90 mx-auto mt-auto">
                         Check all news 
-          </Link>
+                </Link>
+
+                </>
+              ) : (
+                <>
+                  <h1 className="text_shadow-3 w-full text-center">            
+                    {dataPostsCondition}
+                  </h1>
+                </>
+                )
+              }
+
+            </div>
+
 
             
       </div>
@@ -394,7 +423,7 @@ const Home_Main = () => {
           <div className="flex flex-row gap-6 my-6 flex-wrap justify-center lg:justify-start mx-auto">
 
           {/* property */}
-          {properties_andPosts !== null ? (
+          {properties_andPosts?.properties.length > 0 ? (
             <>
               {properties_andPosts.properties.map((property: PropertyDocument) => (
                 <div className="
@@ -404,20 +433,25 @@ const Home_Main = () => {
                 </div>
               )
               )}
+
+              <Link href="/properties" className="bg-theme-text-brighter dark:bg-theme-text-dark text-white 
+                    rounded-full py-1.5 px-3 w-[80%] max-w-[200px]
+                    opacity-80 hover:opacity-90 mx-auto mt-auto">
+                            view all properties 
+              </Link>
             </>
             ) : (
-              <><h1 className="text_shadow-3">No Properties</h1></>
-            )
+              <>
+              <h1 className="text_shadow-3 w-full text-center">            
+                {dataPropertiesCondition}
+              </h1>
+            </>            )
           }
 
 
 
           </div>
-          <Link href="/properties" className="bg-theme-text-brighter dark:bg-theme-text-dark text-white 
-                rounded-full py-1.5 px-3 w-[80%] max-w-[200px]
-                opacity-80 hover:opacity-90 mx-auto mt-auto">
-                        view all properties 
-          </Link>
+         
 
       </div>
 

@@ -34,7 +34,7 @@ const RootLayout = ({ children }: { children: React.ReactNode}) => {
 
     <html className="" lang="en">
       {/* <body className="antialiased text-slate-500 dark:text-slate-400 bg-white dark:bg-slate-900"> */}
-      <body className="w-full h-auto flex justify-center relative">
+      <body className="w-full flex justify-center relative h-auto">
 
 
           {/* <div className="myMain dark:brightness-10 relative"> */}
@@ -45,13 +45,17 @@ const RootLayout = ({ children }: { children: React.ReactNode}) => {
 
 
 
-          <div className="absolute top-0 z-[3] w-full h-full max-w-full"
+          <div className="absolute top-0 z-[3] w-full max-w-full"
           id="main__main-container">
 
 
-            <main className="myMain2 dark:before:bg-[#000000e3] w-full min-h-full flex flex-col justify-start 
-              absolute top-0 box-shadow-1 h-auto ">
+            <main className="myMain2 dark:before:bg-[#000000e3] w-full  flex flex-col justify-start 
+              absolute top-0 box-shadow-1">
 
+
+            {/* allow having a 100vh container that includes all our components that is scollable in this 100vh */}
+            {/* <div className="max-h-[100vh] overflow-y-scroll z-[3]"> */}
+            {/* <div className="h-[100vh] z-[2]"> */}
 
               <div className="w-full sticky top-0 z-[99]">
                 <MyLoading />
@@ -74,7 +78,7 @@ const RootLayout = ({ children }: { children: React.ReactNode}) => {
 
 
                 {/* this will hold the Home component in app>page.jsx */}
-                <div className="z-[5]" id="children_container">
+                <div className="z-[5] min-h-[100vh]" id="children_container">
                   {/* <Suspense fallback={<Loading />}> */}
                     {children}
                   {/* </Suspense> */}
@@ -85,6 +89,9 @@ const RootLayout = ({ children }: { children: React.ReactNode}) => {
                 <div className="z-[5]">
                   <Footer />
                 </div>
+
+
+                {/* </div> */}
 
             </main>
           </div>
