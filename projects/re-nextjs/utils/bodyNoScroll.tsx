@@ -66,7 +66,6 @@ const hideLogin = function () {
 
 const scrollScroll = () => {
 
-  console.log("hi");
   const body = document.querySelector("html");
 
   if (sessionStorage.theme === "light") {

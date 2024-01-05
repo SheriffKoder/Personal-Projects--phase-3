@@ -452,7 +452,7 @@ const page = () => {
     const propertiesCountries = useRef([""]);
     const propertiesTypes = useRef([""]);
     const listingTypes = useRef([""]);
-
+    const rendered = useRef("false");
 
 
     
@@ -478,8 +478,13 @@ const page = () => {
         //     // setProperties(loadingProperties);
         // }
         const response = await fetch(`/api/properties/all/${pageId}`);
+        const responseFilter = await fetch(`/api/properties/all/filter/${rendered.current}`);
+
         const jsonResponse = await response.json();
+        const jsonResponseFilter = await responseFilter.json();
+
         console.log(jsonResponse);
+        console.log(jsonResponseFilter);
 
         endPage.current = jsonResponse.pagesEnd;
         // console.log("end page: "+endPage.current);
@@ -492,27 +497,35 @@ const page = () => {
 
         //get all the countries, types, listing types from the properties in the database
         //clean duplicate strings, to use in the filter selects
-        if (jsonResponse.properties.length > 0 && jsonResponse.allProperties.length > 0) {
+        if (jsonResponse.properties.length > 0) {
             
             setProperties(jsonResponse.properties);
 
-            //you have jsonResponse.allProperties
-            //get all the countries in an array
-            const tempCountries = jsonResponse.allProperties.map((property:PropertyDocument) => property.property_country);
-            
-            //now for each country check if it existed before in an array, if not add it
-            propertiesCountries.current = cleanArray(tempCountries);
-            // console.log(propertiesCountries.current);
+            if (jsonResponseFilter.allProperties.length > 0) {
+                //you have jsonResponse.allProperties
+                //get all the countries in an array
+                const tempCountries = jsonResponseFilter.allProperties.map((property:PropertyDocument) => property.property_country);
+                
+                //now for each country check if it existed before in an array, if not add it
+                propertiesCountries.current = cleanArray(tempCountries);
+                // console.log(propertiesCountries.current);
 
 
-            const tempPropTypes = jsonResponse.allProperties.map((property:PropertyDocument) => property.property_type);
-            propertiesTypes.current = cleanArray(tempPropTypes);
-            // console.log(propertiesTypes.current);
+                const tempPropTypes = jsonResponseFilter.allProperties.map((property:PropertyDocument) => property.property_type);
+                propertiesTypes.current = cleanArray(tempPropTypes);
+                // console.log(propertiesTypes.current);
 
 
-            const tempPropListingTypes = jsonResponse.allProperties.map((property:PropertyDocument) => property.property_listing_type);
-            listingTypes.current = cleanArray(tempPropListingTypes);
-            // console.log(listingTypes.current);
+                const tempPropListingTypes = jsonResponseFilter.allProperties.map((property:PropertyDocument) => property.property_listing_type);
+                listingTypes.current = cleanArray(tempPropListingTypes);
+                // console.log(listingTypes.current);
+
+                //if we got all the properties and done setting the filter values
+                //set the rendered to true so the properties/all/filter/ api not fetch all properties again
+                //all properties are only fetched on initial render and we took all values needed on first render
+                rendered.current = "true";
+            }
+
 
 
         } else {
@@ -527,6 +540,8 @@ const page = () => {
     }
 
     fetchProperties();
+    // rendered.current === "false" ? rendered.current = "true" : "";
+
     // setReload(false);
 
 

@@ -674,7 +674,7 @@ html.dark_scroll::-webkit-scrollbar {
 }
 
 html.dark_scroll::-webkit-scrollbar-track {
-  border-radius: 10px;
+  /* border-radius: 10px; */
   background-color: #1d1d1d;
 }
 
@@ -700,12 +700,12 @@ html.hide_scroll_light::-webkit-scrollbar-thumb {
 
 html.hide_scroll_dark::-webkit-scrollbar {
   /* display: none; */
-  background-color: #111111;
+  background-color: #161616;
   width: 6px;
   height: 6px;
 }
 html.hide_scroll_dark::-webkit-scrollbar-thumb {
-  background-color: #111111;
+  background-color: #161616;
 }
 
 /* keep the components centered because of the 6px scroll */
