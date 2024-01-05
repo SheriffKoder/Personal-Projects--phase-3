@@ -1,6 +1,7 @@
 // import React from 'react'
 
 "use client";
+import { scrollScroll } from "@utils/bodyNoScroll";
 import { useState, useEffect } from "react";
 
 
@@ -62,10 +63,13 @@ const DarkModeToggle = () => {
 
     function setTheme (theme: string) {
 
-        console.log("input is "+theme);
+        // console.log("input is "+theme);
         // const toggleBG = document.querySelector("#toggleBG");
         const toggleBT = document.querySelector("#toggleBT");
         const toggleSp = document.querySelector("#mySpan");
+        const body = document.querySelector("html");
+
+        body?.addEventListener("wheel", scrollScroll);
 
         let nextTheme :string;
         let toggleBGColor: string;
@@ -76,12 +80,22 @@ const DarkModeToggle = () => {
 
         toggleBT?.classList.remove(`bg-[url('/icons/light-theme-icon.svg')]`);
         toggleBT?.classList.add(`bg-[url('/icons/dark-theme-icon.svg')]`);
+        body?.classList.remove("dark_scroll");
+        body?.classList.add("light_scroll");
+
+
+
+
         } else {
             toggleBT?.classList.remove(`bg-[url('/icons/dark-theme-icon.svg')]`);
-            toggleBT?.classList.add(`bg-[url('/icons/light-theme-icon.svg')]`);  
+            toggleBT?.classList.add(`bg-[url('/icons/light-theme-icon.svg')]`); 
+            body?.classList.remove("light_scroll");
+            body?.classList.add("dark_scroll");
+
         }
 
         sessionStorage.setItem("theme", theme);
+
         window.document.documentElement.classList.remove(nextTheme);
         window.document.documentElement.classList.add(theme);
 
@@ -95,6 +109,7 @@ const DarkModeToggle = () => {
         toggleSp?.classList.add(`toggle-animation-${theme}`);
 
         console.log(sessionStorage.theme);
+        scrollScroll();
 
     }
 

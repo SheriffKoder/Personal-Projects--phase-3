@@ -6,6 +6,7 @@ import Link from "next/link"
 import Image from "next/image"
 import { useEffect, useRef, useState } from "react";
 import { func } from "prop-types";
+import { scrollScroll } from "@utils/bodyNoScroll";
 
 // interface propertyInterface {
 
@@ -157,7 +158,7 @@ const Home_Rec = () => {
             const fetchProperties = async () => {
                 const responseRec = await fetch("/api/properties/homePage_rec");
                 const jsonResponseRec = await responseRec.json();
-                console.log(jsonResponseRec);
+                // console.log(jsonResponseRec);
           
                 // slider = {...jsonResponse[sliderIndex]};
 
@@ -186,6 +187,8 @@ const Home_Rec = () => {
                 animationCombination(slider__container);    
             } 
         // }
+
+
 
     },[fade]);
 

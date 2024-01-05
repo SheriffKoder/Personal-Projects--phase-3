@@ -32,9 +32,9 @@ const RootLayout = ({ children }: { children: React.ReactNode}) => {
   return (
     <AuthProvider>
 
-    <html className="" lang="en">
+    <html className="relative" lang="en">
       {/* <body className="antialiased text-slate-500 dark:text-slate-400 bg-white dark:bg-slate-900"> */}
-      <body className="w-full flex justify-center relative h-auto">
+      <body className="w-full flex justify-center relative h-auto ">
 
 
           {/* <div className="myMain dark:brightness-10 relative"> */}
