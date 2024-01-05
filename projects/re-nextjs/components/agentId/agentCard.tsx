@@ -12,10 +12,8 @@ import { PostDocument } from '@models/postModel';
 
 type userInterface = {
     authority: string;
-    properties: PropertyDocument[];
     userInfo: UserDocument;
     allAgents: UserDocument[];
-    posts: PostDocument[];
 }
 
 

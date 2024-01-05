@@ -1,15 +1,17 @@
 // import React from 'react'
 
+//This is the profile page for signed in users
+//a guard is set by the session-guard in this folder's layout.tsx
+
+
 "use client";
 import Link from "next/link";
 import Image from "next/image";
 
-import PropertyCardAdmin from "@components/Home/HomeMain/PropertyCardAdmin";
 import AgentCard from "@components/agentId/agentCard";
-import { bodyNoScroll, showEdit } from "@utils/bodyNoScroll";
+import { bodyNoScroll } from "@utils/bodyNoScroll";
 import { useEffect, useState } from "react";
 
-import { useRef } from "react";
 
 //05.01
 import { useSession } from "next-auth/react";
@@ -25,23 +27,8 @@ import { PostDocument } from "@models/postModel";
 import PropertyAdd_Component from "@components/PropertyEdit/PropertyAdd";
 
 //Part 10
-import { updateUser_lastUpdate } from "@utils/dateGenerate";
 import PropertiesContainer from "@components/agentId/propertiesContainer";
 import PostsContainer from "@components/agentId/postsContainer";
-
-
-//Part 9
-type postsType = postsInterface[];
-
-interface postsInterface {
-    id: number,
-    title: string,
-    content: string,
-    author: string,
-    image: string,
-    date_add: string,
-    date_update: string,
-}
 
 
 
@@ -49,89 +36,8 @@ interface postsInterface {
 
 const page = () => {
 
-    ////////////////////////////////////////////////////////////////////////////////////
-    //Part 9 - Posts
-    // let posts: postsType = [
-    //     {
-    //       id : 1,
-    //       title: "A new release on houses",
-    //       content: "This company has released many new houses, with a good price too, it sounds to good to be true but they are here telling all the new stuff and with gardens, cant be better This company has released many new houses, with a good price too, it sounds to good to be true but they are here telling all the new stuff and with gardens, cant be better, This company has released many new houses, with a good price too, it sounds to good to be true but they are here telling all the new stuff and with gardens, cant be better This company has released many new houses, with a good price too, it sounds to good to be true but they are here telling all the new stuff and with gardens, cant be better, This company has released many new houses, with a good price too, it sounds to good to be true but they are here telling all the new stuff and with gardens, cant be better This company has released many new houses, with a good price too, it sounds to good to be true but they are here telling all the new stuff and with gardens, cant be better",
-    //       author: "John",
-    //       date: "Thu, 19 Sept 23",
-    //       image : "/images/furniture.avif",
-    //       date_add: "25 dec 2023",
-    //       date_update: "26 dec 2023",      
-    //     },
-    //     {
-    //       id : 2,
-    //       title: "A new release on houses",
-    //       content: "This company has released many new houses, with a good price too, it sounds to good to be true but they are here telling all the new stuff and with gardens, cant be better This company has released many new houses, with a good price too, it sounds to good to be true but they are here telling all the new stuff and with gardens, cant be better",
-    //       author: "John",
-    //       date: "Thu, 19 Sept 23",
-    //       image : "/images/furniture.avif",
-    //       date_add: "25 dec 2023",
-    //       date_update: "26 dec 2023",      
-    //     },
-    //     {
-    //       id : 3,
-    //       title: "A new release on houses",
-    //       content: "This company has released many new houses, with a good price too, it sounds to good to be true but they are here telling all the new stuff and with gardens, cant be better This company has released many new houses, with a good price too, it sounds to good to be true but they are here telling all the new stuff and with gardens, cant be better",
-    //       author: "John",
-    //       date: "Thu, 19 Sept 23",
-    //       image : "/images/furniture.avif",   
-    //       date_add: "25 dec 2023",
-    //       date_update: "26 dec 2023",         
-          
-    //     }
-    //   ]
-
+    //used to make a UI refresh
     const [reload, setReload] = useState(false);
-
-    // const [postInfo, setPostInfo] = useState<postInputs_interface>({
-    //     title: "",
-    //     content: "",
-    //     _id: "",
-    //     action: "add",
-    // });
-
-    interface postInputs_interface {
-        title: string;
-        content: string;
-        _id: string;
-        action: string;
-    }
-
-
-    // function showPostAdd (inputs:postInputs_interface) {
-    //     let postAddContainer = document.getElementById("postAddContainer");
-    //     if (postAddContainer) postAddContainer.style.display = "inline";
-        
-    //     let children_container2 = document.getElementById("children_container2");
-    //     if (children_container2) children_container2.style.opacity = "0";
-
-    //     setPostInfo({title:inputs.title, content: inputs.content, _id:inputs._id, action: inputs.action});
-        
-    // }
-
-    // //Part 9.1
-    // const handlePostDelete = async (postId:string) => {
-
-    //     const response = await fetch(`/api/posts/delete`, {
-    //         method: "DELETE",
-    //         body: JSON.stringify({postId}),
-    //     })
-
-    //     const jsonResponse = await response.json();
-    //     console.log(jsonResponse);
-
-    //     //Part 10
-    //     //update the user last update-date, calls a patch api on this user id
-    //     //which user id want to update, session user
-    //     let userId_session = session?.user.id;
-    //     if (userId_session) updateUser_lastUpdate(userId_session);
-    //     //
-    //     setReload(true);
-    // }
 
 
     ////////////////////////////////////////////////////////////////////////////////////
@@ -140,25 +46,7 @@ const page = () => {
     const [propertyEditId, setPropertyEditId] = useState("");
     const [postEditId, setPostEditId] = useState("");
 
-
-    interface propertyInputs_interface {
-        country: string;
-        city: string;
-        district: string;
-
-        type: string;
-        area: number;
-        bedrooms: number;
-        bathrooms: number;
-
-        listing_type: string;
-        price: number;
-        description: string;
-        _id: string;
-        action: string;
-    }
-
-
+    //show the property add form component
     function showPropertyAdd () {
         let postAddContainer = document.getElementById("propertyAddContainer");
         if (postAddContainer) postAddContainer.style.display = "inline";
@@ -176,13 +64,11 @@ const page = () => {
     //05.01
     const { data: session, status } = useSession();      //get the session.user
 
-
+    //get this page's user related data of : userInfo, authority, and all agents in case of an admin agent
     type userInterface = {
         authority: string;
-        properties: PropertyDocument[];
         userInfo: UserDocument;
         allAgents: UserDocument[];
-        posts: PostDocument[];
     }
 
     const [sessionId, setSessionId] = useState<string>("");
@@ -194,16 +80,12 @@ const page = () => {
     useEffect(()=> {
 
         //get current browsing user
-        if (session?.user) {
-            setSessionId(session?.user.id);
-        }
-        console.log(sessionId);
+        if (session?.user) setSessionId(session?.user.id);
 
-        //get page url as it included the id for the user page in question
+        //get page url as it includes the id for the user page in question
         const current_url = window.location.href.toString().split("/agents/")[1];
-        console.log(current_url);
 
-        //connect to data base
+        //fetch the user info from the database
         const fetchUserInfo = async () => { 
             
             const response = await fetch(`/api/users/${current_url}`, {
@@ -212,16 +94,19 @@ const page = () => {
             })
 
             const jsonResponse = await response.json();
-            console.log(jsonResponse);
 
+            //store the user info on the webpage
             setUser(jsonResponse);
-            //returns {properties, authority, userInfo}
+            //returns {allUsers, authority, userInfo}
+            //however could have separated into separate api routes and not be combined
 
         }
 
         //reload is set to true after adding/deleting/editing, which will trigger a user re-fetch
         //set to false to be used again
         setReload(false);
+
+        //call the fetch function above
         fetchUserInfo();
 
     }, [session, sessionId, reload]);
@@ -238,12 +123,16 @@ const page = () => {
         md2:items-stretch
         flex-wrap gap-8 mb-8 px-4 md2:px-8 relative">    
 
+            {/* the post add form component */}
+            {/* it has to be on top of all components on this page */}
             <div className="absolute z-[99] w-full h-[100vh]
             left-0 top-0 hidden"
             id="postAddContainer">
                 <PostAdd_Component postEditId={postEditId} setPostEditId={setPostEditId} setReload={setReload}/>
             </div>
         
+            {/* the property add form component */}
+            {/* it has to be on top of all components on this page */}
             <div className="absolute z-[99] w-full h-[100vh]
             left-0 top-0 hidden"
             id="propertyAddContainer">
@@ -264,7 +153,7 @@ const page = () => {
 
             {user.userInfo ? (
                 <>
-            {/* container 1 */}
+            {/* container 1 - this page's user related info */}
             <h1 className="mb-6 mt-8 text_shadow-3 font-bold text-3xl text-[#000000c7] dark:text-[#ffffffe2] capitalize w-full
             text-center md2:text-start">
                 { user.authority === "viewer" ? 
@@ -276,7 +165,7 @@ const page = () => {
 
             <div className="flex flex-row flex-wrap gap-4 w-full">
 
-                {/* avatar */}
+                {/* user's avatar/photo along with name, position, admin or not*/}
                 <div className="bg-white rounded-[17px]
                 glass-container-background-2
                 border backdrop-blur-10 pt-4 md2:pb-6 pb-12 px-8
@@ -305,7 +194,7 @@ const page = () => {
                         
                 </div>
 
-                {/* info edit */}
+                {/* user's info and edits */}
                 <div className="bg-white rounded-[17px]
                 glass-container-background-2
                 border backdrop-blur-10 pt-4 pb-4 px-4
@@ -316,7 +205,7 @@ const page = () => {
                 "
                 >
         
-                    {/* info container */}
+                    {/* user's info container, name, email etc... with edit functionalities */}
                         <AgentInfo user={user} setReload={setReload}/>
 
 
@@ -327,7 +216,7 @@ const page = () => {
 
 
 
-            {/* container 2 - properties */}
+            {/* container 2 - user's properties */}
             <div className="bg-white rounded-[17px]
             glass-container-background-2 min-w-[100%]
             border backdrop-blur-10 pt-7 pb-8 px-4 mt-8
@@ -335,7 +224,7 @@ const page = () => {
             text-[#000000b3] dark:text-[#ffffffb0] text-center text-l flex flex-col gap-1
             ">
 
-                {/* here are the properties */}
+                {/* properties container's header and add property button */}
                 <div className="w-full flex flex-row justify-center h-[2rem]">
                     <h4 className="text_shadow-3 font-semibold text-xl md2:text-start
                     text-[#000000c7] dark:text-[#ffffffe2]
@@ -353,46 +242,21 @@ const page = () => {
                     </button>
                 </div>
 
-                {/* properties container */}
-                {/* <div className="flex flex-row gap-6 my-6 flex-wrap justify-center md:justify-start mx-auto last-of-type:mr-auto w-full"> */}
-
-                    <PropertiesContainer 
-                    setPropertyEditId={setPropertyEditId} 
-                    setReload={setReload} 
-                    reload={reload}
-                    userAuthority={user.authority} 
-                    userName={user.userInfo.name}
-                    />
+                {/* properties container - which will generate propertyCardAdmin 
+                and fetch this page's user properties*/}
+                <PropertiesContainer 
+                setPropertyEditId={setPropertyEditId} 
+                setReload={setReload} 
+                reload={reload}
+                userAuthority={user.authority} 
+                userName={user.userInfo.name}
+                />
                     
-                    {/* property */}
-                    {/* {user.properties.length > 0 ? (
-                    <>
-                        {user.properties.map((property: PropertyDocument) => (
-                            
-                            <div className="h-auto w-full max-w-[390px] md:w-[calc(50%-16px)] md2:w-[calc(33.3%-16px)] xl:w-[calc(33.3%-16px)] ">
-                                <PropertyCardAdmin setPropertyEditId={setPropertyEditId} property1={property} currentPage="agent" setReload={setReload}/>
-                            </div>
-                            )
-                        )}
-                    </>
-                    ) : (
-                    <>
-                        <h1 className="text_shadow-3">
-                            
-                            { user.authority === "viewer" ? (`${user.userInfo.name} does not have any properties yet`) : ("You do not have any properties yet")}
-
-                        </h1>
-                    </>
-                    )
-                    } */}
-
-                {/* </div> */}
-                
             </div>
 
 
 
-            {/* container 3 - posts */}
+            {/* container 3 - user's posts */}
             <div className="bg-white rounded-[17px]
             glass-container-background-2 min-w-[100%]
             border backdrop-blur-10 pt-7 pb-8 px-4 mt-8
@@ -401,30 +265,16 @@ const page = () => {
             ">
 
                 {/* here are the posts */}
-                {/* <div className="w-full flex flex-row justify-center h-[2rem]">
-                    <h4 className="text_shadow-3 font-semibold text-xl md2:text-start
-                    text-[#000000c7] dark:text-[#ffffffe2]
-                    ">
-                        { user.authority === "viewer" ? (`${user.userInfo.name}'s posts`) : ("Your posts")}
-                    </h4>
+                    {/* the container header and add a new post button exist on the PostsContainer below */}
 
-                    <button type="button" 
-                    onClick={() => {bodyNoScroll(); showPostAdd({title: "", content:"", _id:"", action: "add"})}}
-                    className="
-                    bg-theme-text-brighter dark:bg-theme-text-dark text-white 
-                    rounded-[17px] text-sm py-0 px-3
-                    opacity-60 hover:opacity-90 ml-auto w-[120px]">
-                        Add a Post
-                    </button>
-                </div> */}
 
+                {/* Posts container */}
                 <PostsContainer 
                 setPostEditId={setPostEditId}
                 setReload={setReload}
                 reload={reload}
                 userAuthority={user.authority} 
                 userName={user.userInfo.name}
-
                 />
                 
             </div>
@@ -433,12 +283,16 @@ const page = () => {
 
 
 
-            {/* container 4 */}
+            {/* container 4 - other users on the database
+            in case this user is an admin and owner of the currently open page
+            as we do not need to show all users on a page viewed as a viewer (other agent's page)*/}
             { (user.userInfo.role === "admin" && user.authority === "owner") ? (
                 <AgentCard userIncoming={user} setUserIncoming={setUser} sessionId={sessionId}/>
 
             ) : ("")}
 
+            {/* in case the profile page is not the admin's page and we will not show other agents
+            we can display a return back to profile button instead */}
             {(user.userInfo.role === "admin" && user.authority === "viewer") ? (
 
                 <div className="bg-white rounded-[17px]
@@ -451,15 +305,15 @@ const page = () => {
                 w-full mt-8
                 
                 ">
-                <Link href={"/agents/"+session?.user.id} type="button" 
-                                className="border border-1
-                                dark:bg-[#68585806] bg-[#ffffffd3] 
-                                dark:border-[#ffffff19] dark:hover:border-[#ffffff36]
-                                text-[#000000dd] dark:text-[#ffffffd3] 
-                                rounded-[10px] text-sm w-fit px-4 py-2
-                                opacity-90 hover:opacity-100">
-                                    Back to your profile
-                                </Link>
+                    <Link href={"/agents/"+session?.user.id} type="button" 
+                    className="border border-1
+                    dark:bg-[#68585806] bg-[#ffffffd3] 
+                    dark:border-[#ffffff19] dark:hover:border-[#ffffff36]
+                    text-[#000000dd] dark:text-[#ffffffd3] 
+                    rounded-[10px] text-sm w-fit px-4 py-2
+                    opacity-90 hover:opacity-100">
+                        Back to your profile
+                    </Link>
 
                 </div>
                 ) : ("")}
@@ -468,7 +322,6 @@ const page = () => {
                 
             </>) : ("")}
             
-        {/* </div> */}
         </span>
         </>
             ):("")}
@@ -478,4 +331,4 @@ const page = () => {
     )
 }
 
-export default page
+export default page;

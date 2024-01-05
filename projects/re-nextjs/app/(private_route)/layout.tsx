@@ -7,6 +7,8 @@ interface Props {
     children: ReactNode;
 }
 
+
+//redirect to "/" in case a user is not on session i.e not a logged in user
 export default async function PrivateLayout({ children }: Props ) {
     //await for the getServerSession
     const session = await getServerSession(authOptions);

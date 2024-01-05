@@ -1,4 +1,5 @@
-//for handling fetching properties
+
+//used to fetch properties marked with "recommended = yes" by agents on the home page image slider
 
 //04.03
 import { connectToDB } from "@utils/database";
@@ -14,7 +15,7 @@ export const GET = async () => {
         return new Response(JSON.stringify(properties), {status: 200});
 
     } catch {
-        return new Response(JSON.stringify("Failed to fetch all properties"), {status: 500});
+        return new Response(JSON.stringify("Failed to fetch recommended properties"), {status: 500});
     }
 
 }

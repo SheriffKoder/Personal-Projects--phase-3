@@ -12,26 +12,6 @@ import { writeFile } from "fs";
 //Part 10
 import { increaseUserScore } from "@utils/userScore";
 
-//
-
-// interface NewPropertyRequest {
-//     country: string;
-//     city: string;
-//     district: string;
-
-//     type: string;
-//     area: number;
-//     bedrooms: number;
-//     bathrooms: number;
-
-//     listing_type: string;
-//     price: number;
-//     description: string;
-
-//     userId: string;
-//     date: string;
-// }
-
 
 //add a new property
 export const POST = async (request: Request, {params}) => {
@@ -42,24 +22,23 @@ export const POST = async (request: Request, {params}) => {
         //1. will use the formData as we are passing a file in the body
         const newInfo = await request.formData();
 
-        console.log(newInfo);
-        console.log(params.userId);
-
         //Part 11.01 - formData image upload
-       //3. store a file if there is and get a path
+        //1. get the files, can be a file, nothing (deleted image), string (image not changed)
         const file1: File | null = newInfo.get("file1") as unknown as File;
         const file2: File | null = newInfo.get("file2") as unknown as File;
         const file3: File | null = newInfo.get("file3") as unknown as File;
 
         const files = [file1, file2, file3];
-        let files_url:string[] = [];
+        let files_url:string[] = [];    //will store the files paths in this array once stored locally
 
  
-
+        //2. store a file if there is and get a path
+        //there are either a file or no file (null), no pre existing files of course
+        //push the string as a url already, and add/push the new string for new files
         files.forEach(async (file) => {
             try {
-                if (file) {
 
+                if (file) {
                     const path = join(process.cwd(), `/public/images/agent-${params.userId}/properties`, file.name);
     
                     let file1_url = ""; 
@@ -69,19 +48,16 @@ export const POST = async (request: Request, {params}) => {
                     const bytes = await file.arrayBuffer();
                     const buffer = Buffer.from(bytes);
                     await writeFile(path, buffer, (err)=>console.log(err));
-                    console.log(`image ${file.name} is saved in ${path}`);
-                    
+                    // console.log(`image ${file.name} is saved in ${path}`);
                 }    
+
             } catch (error) {
                 console.log(error);
             }
         })
 
 
-    
-        console.log(files_url);
-
-
+        //// create a new property and save
         try {
             //[connect] to the db, every time because this is a lambda function
             //i.e will end once it does its job
@@ -101,6 +77,8 @@ export const POST = async (request: Request, {params}) => {
                 property_listing_type: newInfo.get("listing_type") as string,
                 property_price: newInfo.get("price") as string,
                 property_description: newInfo.get("description") as string,
+
+                //store the property path's array on to the database
                 property_images: files_url,
 
                 property_userId: params.userId,
@@ -110,14 +88,14 @@ export const POST = async (request: Request, {params}) => {
                 property_recommended: newInfo.get("recommended") as string,
             });
 
+            //once property added, update the user's properties score (used in the admin's profile page when viewing all users)
             await Promise.all([
                 await NewPost.save(),
                 await increaseUserScore("property", params.userId)
             ]);
 
 
-            //[return a new response] where we can stringify the prompt
-            //and specify the status
+            // 200: operation succeeded
             return new Response(JSON.stringify(NewPost), {status: 201});
            
         

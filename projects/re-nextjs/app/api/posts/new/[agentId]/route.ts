@@ -11,14 +11,14 @@ import { writeFile } from "fs";
 import { increaseUserScore } from "@utils/userScore";
 
 
-//to fill the edit post inputs
+//to fill the "edit post inputs" on edit (yes used the GET to fetch info to be returned to the form element)
 export const GET = async (request, {params}) => {
 
     try {
         await connectToDB();
         console.log(params);
 
-        //agentId here will actually be a postId to fetch from
+        //agentId here will actually act like a postId to fetch from
         const thisPost = await PostModel.findById(params.agentId);
     
         
@@ -30,6 +30,8 @@ export const GET = async (request, {params}) => {
 
 }
 
+
+//create a new post
 export const POST = async (request:Request, {params}:any) => {
 
 
@@ -40,12 +42,8 @@ export const POST = async (request:Request, {params}:any) => {
     //1. will use the formData as we are passing a file in the body
     const newInfo = await request.formData();
 
-
-    console.log(currentUserPage);
-    console.log(newInfo);
-
     //Part 11.01
-    //3. store a file if there is and get a path
+    //3. store a file if there is, and get a path for the image url in the database
     const file: File | null = newInfo.get("file") as unknown as File;
 
     let postImage = "";
@@ -61,7 +59,7 @@ export const POST = async (request:Request, {params}:any) => {
         console.log(`image ${file.name} is saved in ${path}`);
     } else if (!file) {
         // postImage = newInfo.get("image") as string;
-        postImage = "/images/logo.svg";
+        postImage = "/images/defaultPost.jpg";
 
     }
 
@@ -73,7 +71,10 @@ export const POST = async (request:Request, {params}:any) => {
         await connectToDB();
         //once we are connected, we want to create a new property post
 
+        //create post with dates
+        //userId will be of the current page, if an admin adding for another agent, this agent will have the post with their id
         const NewPost = await PostModel.create({
+
             // title: newInfo.title,
             // content: newInfo.content,
             // date_add: getToday_date(),
@@ -89,6 +90,7 @@ export const POST = async (request:Request, {params}:any) => {
 
         });
 
+        //after saving, increase the agent's post score, local function
         await Promise.all([
             await NewPost.save(),
             await increaseUserScore("post", currentUserPage)    
@@ -110,8 +112,7 @@ export const POST = async (request:Request, {params}:any) => {
 };
 
 
-
-
+//update an existing post
 export const PATCH = async (request:Request, {params}:any) => {
 
     const currentUserPage = params.agentId;
@@ -128,13 +129,17 @@ export const PATCH = async (request:Request, {params}:any) => {
     //3. store a file if there is and get a path
     const file: File | null = newInfo.get("file") as unknown as File;
     let postImage = "";
+
+    //type string means the image has not been changed, it is the old url not a new file
     if (typeof file !== "string" && file !== null) {
+
         const bytes = await file.arrayBuffer();
         const buffer = Buffer.from(bytes);
         const path = join(process.cwd(), `/public/images/agent-${currentUserPage}/posts`, file.name);
         await writeFile(path, buffer, (err)=>console.log(err));
         console.log(`image ${file.name} is saved in ${path}`);
         postImage = path.split("/public")[1];
+
     } else if (typeof file == "string") {
         postImage = newInfo.get("file") as string;
     }
@@ -153,25 +158,25 @@ export const PATCH = async (request:Request, {params}:any) => {
         const currentPost: PostDocument | null = await PostModel.findById(newInfo.get("_id"));
 
         
-            if (currentPost) {
-                // currentPost.title = newInfo.title;
-                // currentPost.content = newInfo.content;
-                // currentPost.date_update = getToday_date();
+        if (currentPost) {
+            // currentPost.title = newInfo.title;
+            // currentPost.content = newInfo.content;
+            // currentPost.date_update = getToday_date();
 
-                //Part 11.01 - formData image upload
-                currentPost.title = newInfo.get("title") as string;
-                currentPost.content = newInfo.get("content") as string;
-                currentPost.date_update = getToday_date();
-                currentPost.image = postImage;
+            //Part 11.01 - formData image upload
+            currentPost.title = newInfo.get("title") as string;
+            currentPost.content = newInfo.get("content") as string;
+            currentPost.date_update = getToday_date();
+            currentPost.image = postImage;
 
-                await currentPost.save();
-
-            }
-            return new Response("Successfully updated the post", {status: 200});
+            await currentPost.save();
+        }
+        
+        return new Response("Successfully updated this post", {status: 201});
 
             
     } catch (error) {
-        return new Response("Failed to create a new post", {status: 500});
+        return new Response("Failed to update this post", {status: 500});
 
     }
 

@@ -12,9 +12,9 @@ export const DELETE = async (request) => {
 
         const {postId} = await request.json();
 
-        // console.log(propertyId);
-
         await Promise.all([
+            //the user has a posts or properties counter, this local function decreased the score
+            //score is used to display for each user how many of each they have on the admin's profile page
             await decreaseUserScore("post", postId),
             await PostModel.findByIdAndDelete(postId)
 

@@ -6,19 +6,7 @@ import Image from "next/image";
 import { PostDocument } from "@models/postModel";
 import { useState, useEffect, useRef } from "react";
 
-
-// type postsType = postsInterface[];
-
-// interface postsInterface {
-//     id: number,
-//     title: string,
-//     content: string,
-//     author: string,
-//     date: string,
-//     image: string,
-// }
-
-
+//all posts page
 
 
 
@@ -32,36 +20,6 @@ import { useState, useEffect, useRef } from "react";
 const page = () => {
 
 
-  // let posts: postsType = [
-  //   {
-  //     id : 1,
-  //     title: "A new release on houses",
-  //     content: "This company has released many new houses, with a good price too, it sounds to good to be true but they are here telling all the new stuff and with gardens, cant be better This company has released many new houses, with a good price too, it sounds to good to be true but they are here telling all the new stuff and with gardens, cant be better, This company has released many new houses, with a good price too, it sounds to good to be true but they are here telling all the new stuff and with gardens, cant be better This company has released many new houses, with a good price too, it sounds to good to be true but they are here telling all the new stuff and with gardens, cant be better, This company has released many new houses, with a good price too, it sounds to good to be true but they are here telling all the new stuff and with gardens, cant be better This company has released many new houses, with a good price too, it sounds to good to be true but they are here telling all the new stuff and with gardens, cant be better",
-  //     author: "John",
-  //     date: "Thu, 19 Sept 23",
-  //     image : "/images/furniture.avif",      
-  //   },
-  //   {
-  //     id : 2,
-  //     title: "A new release on houses",
-  //     content: "This company has released many new houses, with a good price too, it sounds to good to be true but they are here telling all the new stuff and with gardens, cant be better This company has released many new houses, with a good price too, it sounds to good to be true but they are here telling all the new stuff and with gardens, cant be better",
-  //     author: "John",
-  //     date: "Thu, 19 Sept 23",
-  //     image : "/images/furniture.avif",      
-
-      
-  //   },
-  //   {
-  //     id : 3,
-  //     title: "A new release on houses",
-  //     content: "This company has released many new houses, with a good price too, it sounds to good to be true but they are here telling all the new stuff and with gardens, cant be better This company has released many new houses, with a good price too, it sounds to good to be true but they are here telling all the new stuff and with gardens, cant be better",
-  //     author: "John",
-  //     date: "Thu, 19 Sept 23",
-  //     image : "/images/furniture.avif",      
-      
-  //   }
-  // ]
-  
   const [posts, setPosts] = useState<PostDocument[] | [] >([]);
 
   //Part 11.03
@@ -77,44 +35,26 @@ const page = () => {
     //connect to data base
     const fetchPosts = async () => { 
         
-        // let current_url = window.location.href.toString().split("/posts/")[1];
-
-        //state needs to have a different value to take the same value again which is jsonResponse.properties
-        // if (posts.length > 0) {
-        //     let loadingPosts:PostDocument[] = [];
-            
-        //     console.log("loadingPosts");
-        //     console.log(loadingPosts);
-        //     setPosts(loadingPosts);
-        // }
-        
         const response = await fetch(`/api/posts/all/${pageId}`);
         const jsonResponse = await response.json();
-        // console.log(jsonResponse);
 
+        //the end page is used to fill the "last page" button with a page value to go to
         endPage.current = jsonResponse.pagesEnd;
-        // console.log("end page: "+endPage.current);
-        // console.log("current page: "+ pageId);
 
-        // console.log("posts were");
-        // console.log(posts);
-    
-        // console.log(jsonResponse.posts);
 
         if (jsonResponse.posts.length > 0) {
-            
           setPosts(jsonResponse.posts);
         } else {
             setDataCondition("no posts found...");
         }
-        
-        // console.log("posts now are");
-        // console.log(posts);
 
     }
 
+    //call the above function
     fetchPosts();
 
+  //re-fetch the posts when the pageId is changed from the pagination buttons
+  //to return new skip/limit posts from the api
   },[pageId]);
 
 
@@ -124,6 +64,7 @@ const page = () => {
 
       <div className="mx-auto max-w-[1230px] w-full">
 
+        {/* navigation current location links */}
         <div className="dark:text-white text-black text-shadow-3 w-full text-xs flex flex-row gap-1 opacity-70">
           
           <Link className=""href="/">Home</Link>
@@ -207,6 +148,8 @@ const page = () => {
               ) : (
                 <>
                   <div className="min-h-[254px] flex mx-auto">
+                    {/* this will fill the all posts container in case there are no posts fetched */}
+                    {/* data condition will be loading or no posts found */}
                     <h1 className="text_shadow-3  my-auto">{dataCondition}</h1>
                   </div>
                 </>
@@ -346,4 +289,4 @@ const page = () => {
   )
 }
 
-export default page
+export default page;

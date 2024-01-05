@@ -1,4 +1,7 @@
-//for handling fetching properties
+
+
+//for handling fetching properties, the pageId is used for pagination
+//for handling search and filter on the properties
 
 //04.03
 import { connectToDB } from "@utils/database";
@@ -16,20 +19,12 @@ export const GET = async (request: NextRequest, {params}:any) => {
     try {
         await connectToDB();
 
-        const pagesEnd = await PropertyModel.find().countDocuments() / end;          //page X
+        const pagesEnd = await PropertyModel.find().countDocuments() / end;            //page X
         const properties = await PropertyModel.find().skip(start).limit(end);          //page X
         // const properties = await PropertyModel.find().skip(0).limit(3);             //page 0
         // const properties = await PropertyModel.find().skip(3).limit(3);             //page 1
         // const properties = await PropertyModel.find().skip(6).limit(3);             //page 2
 
-        // let allProperties: PropertyDocument[] | [];
-        // if (params.pageId !== "1") {
-        //     allProperties = [];
-
-        // } else {
-        //     allProperties = await PropertyModel.find();          //page X
-
-        // }
 
         return new Response(JSON.stringify({properties, pagesEnd}), {status: 200});
 
@@ -40,7 +35,7 @@ export const GET = async (request: NextRequest, {params}:any) => {
 }
 
 
-//receive keywords
+//for a search/filter submit - receive search keywords, filter values
 export const POST = async (request: NextRequest, {params}:any) => {
 
     console.log(params.pageId);
@@ -49,27 +44,27 @@ export const POST = async (request: NextRequest, {params}:any) => {
     const start = page * end;
 
 
-
     const body = await request.json();
-    // console.log(body);
-
     const search_text = body.searchText;
 
-    const myFilter = search_text.split(" ").map((s:string)=> {
+    ////Get filter values
+    //return the filter values in an object iterate on when finding on the database
+    const myFilter = search_text.split(" ").map((filterValue:string)=> {
         return {
             property_description: {
-                $regex: s,
+                $regex: filterValue,
                 $options: "i"
             }
         }
     })
 
 
-    //// overwrite not entered values 
+    //// overwrite not entered values in the To/From filter inputs, as user can enter to and leave from
+    //Steps:
     //get the keys
     //if the key contains From or To
     //check for the value if empty ""
-    //make it 0 in the body
+    //make it 0 in the body (if From)
     //same for To, make it 999999999
     for (let key in body) {
         // console.log(key);
@@ -83,18 +78,14 @@ export const POST = async (request: NextRequest, {params}:any) => {
                 body[key] = 999999999;
             }
         }
-        // else {
-        //     if (body[key] === "") {
-        //         body[key] = 999999999;
-        //     }
-        // }
     }
 
-    // console.log("new body");
-    // console.log(body);
-
-    //regex to match the string
+    ////Find in the database
+    //regex to match the string - a way of doing things
     // const filteredProperties = await PropertyModel.find({property_description: {$regex: '^' + search_text, $options: 'i'}});
+    
+    //greater/less than equal $gte/$lte or not equal $gt/$lt
+    //with previous logic we will always have Number values
     const filteredProperties = await PropertyModel.find({
         $or: myFilter, 
         //greater/less than equal $gte/$lte or not equal $gt/$lt
@@ -107,10 +98,11 @@ export const POST = async (request: NextRequest, {params}:any) => {
         property_listing_type: {$regex: body.listing_type}
 
     }).skip(start).limit(end);
+    //now we have the posts we need but will limit our results count
 
+    ////after we find, we also want the count for all matching posts for pagination
     const pagesEnd = await PropertyModel.find({
         $or: myFilter, 
-        //greater/less than equal $gte/$lte or not equal $gt/$lt
         property_beds: {$gte: Number(body.bedroomsFrom), $lte: Number(body.bedroomsTo)},
         property_price: {$gte: Number(body.priceFrom), $lte: Number(body.priceTo)},
         property_area: {$gte: Number(body.areaFrom), $lte: Number(body.areaTo)},
@@ -119,14 +111,6 @@ export const POST = async (request: NextRequest, {params}:any) => {
         property_type: {$regex: body.type},
         property_listing_type: {$regex: body.listing_type}
     }).countDocuments() / end;
-
-    //for each input, if input not empty search 
-    //we can remove all empty fields
-
-
-
-    console.log(filteredProperties);
-    console.log(filteredProperties.length);
 
 
     try {

@@ -50,7 +50,6 @@ function disableInput (e:any) {
 
 type userInterface = {
         authority: string;
-        properties: PropertyDocument[];
         userInfo: UserDocument;
         allAgents: UserDocument[];
 }

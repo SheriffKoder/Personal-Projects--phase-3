@@ -1,10 +1,11 @@
 
+//sign-up
+
 import UserModel from "@models/userModel";
 import { connectToDB } from "@utils/database";
 import { NextResponse } from "next/server";
 
-//02X.01
-
+//02X.01 - creating files for the user on signup
 import { mkdir } from "fs";
 import { join } from "path";
 
@@ -40,18 +41,21 @@ export const POST = async (req: Request): Promise<NewResponse> => {
 
     await connectToDB();
 
-    //////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////
     ////Input check
 
+    //will store all the errors will get from the checks in an array
     let errorArray: string[] = [];
 
-    //AdminId
+    //check - AdminId
     console.log(body.adminId);
     if ((body.adminId !== "1234") && (body.adminId !== "1111")) {
-            errorArray.push("not authorized")
+        errorArray.push("not authorized")
     }
 
-    //phone
+
+    //check - phone
     if (isNaN(body.phone)) {
         errorArray.push("the phone should be in digits only");
 
@@ -64,13 +68,16 @@ export const POST = async (req: Request): Promise<NewResponse> => {
         errorArray.push("this phone number is already in use!");
     }
     
-    //password
+
+    //check - password
     if (body.password.length < 4) {
         errorArray.push("the password should be more than 4 characters");
     }
 
-    //name
-    if (body.name.length < 6) {
+    
+    //check - name
+    //should have length, should also have more than one name
+    if (body.name.length < 4) {
         errorArray.push("the name should be more than 4 characters");
     }
 
@@ -78,7 +85,8 @@ export const POST = async (req: Request): Promise<NewResponse> => {
         errorArray.push("the name should be a full name consisting of first and last names and an optional middle name");
     }
 
-    //email
+
+    //check - email
     if (!body.email.match(/^([a-zA-Z\d\.-\_]+)@([a-zA-Z\d-]+)\.([a-z]{2,8})\.?([a-z]{2,8})?$/)) {
         errorArray.push("the email is not in a valid format");
     }
@@ -88,21 +96,21 @@ export const POST = async (req: Request): Promise<NewResponse> => {
         errorArray.push("this email already exists");
     }
 
+    //422: invalid input
     if (errorArray.length > 0) {
-        // return NextResponse.json(errorArray,{ status: 422 });
         return new NextResponse(JSON.stringify({errorArray}), {status: 422});
-
-            
     }
 
     //////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////
 
 
+    //check for the adminId to determine the user role on the website
     let role: string;
     (body.adminId !== "1234" && body.adminId === "1111") ? role = "admin" : role = "user";
 
 
+    //create the user on the database
     //the body has the name, email etc.. like the NewAgentRequest
     const user = await UserModel.create({
         name: body.name,
@@ -112,25 +120,15 @@ export const POST = async (req: Request): Promise<NewResponse> => {
         role: role,
     });
 
+
+    ////////////////////////////////////////////////////////////////////////////////////
     //create a dedicated folder for the user to store their data in
-    // await mkdir(join(process.cwd() + "/public" + "/images/agent-" + user._id), (error)=> {
-    //     console.log(error);
-    // });
-
-    // await mkdir(join(process.cwd() + "/public" + "/images/agent-" + user._id + "/properties"), (error)=> {
-    //     console.log(error);
-    // });
-    // await mkdir(join(process.cwd() + "/public" + "/images/agent-" + user._id + "/posts"), (error)=> {
-    //     console.log(error);
-    // });
-    // await mkdir(join(process.cwd() + "/public" + "/images/agent-" + user._id + "/profile"), (error)=> {
-    //     console.log(error);
-    // });
-
+    //create the main folder first with the user's id
     const mainFolder = await mkdir(join(process.cwd() + "/public" + "/images/agent-" + user._id), (error)=> {
         console.log(error);
     });
 
+    //can await/create all these folders in the same time as they are not dependent on each other's existence
     await Promise.all([
         mkdir(join(process.cwd() + "/public" + "/images/agent-" + user._id + "/properties"), (error)=> {
             console.log(error);
@@ -141,8 +139,12 @@ export const POST = async (req: Request): Promise<NewResponse> => {
         mkdir(join(process.cwd() + "/public" + "/images/agent-" + user._id + "/profile"), (error)=> {
             console.log(error);
         })
-    ])
+    ]);
+    ////////////////////////////////////////////////////////////////////////////////////
 
+    //once done with creating the user and the local folders, return the user's data to be console.log
+    //will need the signup true to take some action after signup, like login automatically
+    // 201: success and created a resource
     return new NextResponse(JSON.stringify({
         user: {
             id: user._id.toString(),
@@ -152,7 +154,7 @@ export const POST = async (req: Request): Promise<NewResponse> => {
 
         },
         signUp: true,
-    }), {status: 200});
+    }), {status: 201});
     
 };
 

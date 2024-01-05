@@ -1,3 +1,6 @@
+
+//the api for fetching information for the "profile-page"
+
 //04.03
 import { connectToDB } from "@utils/database";
 import PropertyModel from "@models/propertyModel";
@@ -10,10 +13,8 @@ import { join, resolve } from "path";
 import { writeFile , unlink, readdir, rmdir} from "fs";
 import { removeFolder } from "@utils/deleteFolder";
 
-//Part 10.2
 
-
-
+// get the data for the user, we needed to pass some body(sessionId) so used post
 export const POST = async (req:Request, {params}:any) => {
 
     try {
@@ -23,43 +24,41 @@ export const POST = async (req:Request, {params}:any) => {
         const pageUrl = params.agentId;
         const sessionId = await req.json();
 
-        // const user = await UserModel.findById(pageUrl);
-        // console.log(user);
 
         let authority : string = "notAuth";
 
-        //if url is also session
+        //if the page's url matches the sessionId, then the user viewing the page is its owner
         if (pageUrl === sessionId) {
             authority = "owner";
-
         }
 
-        //if url is not a session, check if session is admin
+        //if the page's url does not match the sessionId, then the user viewing the page is not its owner but a viewer admin
         if (pageUrl !== sessionId) {
             const userCheck = await UserModel.findById(sessionId);
-
             if (userCheck?.role === "admin") {
                 authority = "viewer";
             } else {
                 authority = "notAuth";
-                return new Response(JSON.stringify("not authorized"), {status: 500});
-
+                return new Response(JSON.stringify("not authorized"), {status: 402});
             }
-
         }
 
 
         //get the data of the page
+        //the page's agent information like name, email etc...
         const userInfo = await UserModel.findOne({_id: pageUrl});
-        const properties = await PropertyModel.find({property_userId: pageUrl});
-        const posts = await PostModel.find({userId: pageUrl});
 
+        //we used to fetch these from here, but now we are using a separate component to fetch the page's user's properties and posts
+        // const properties = await PropertyModel.find({property_userId: pageUrl});
+        // const posts = await PostModel.find({userId: pageUrl});
+
+        //the admin users do need to have all the agents to view in agentCards
         let allAgents :UserDocument[] = [];
         if (userInfo?.role === "admin" ) {
             allAgents = await UserModel.find({_id:{$ne:userInfo?._id}});
         }
 
-        return new Response(JSON.stringify({userInfo, authority, properties, allAgents, posts}), {status: 200});
+        return new Response(JSON.stringify({userInfo, authority, allAgents}), {status: 200});
 
     } catch {
         return new Response(JSON.stringify("Failed to fetch agent's info"), {status: 500});
@@ -68,9 +67,8 @@ export const POST = async (req:Request, {params}:any) => {
 }
 
 
+// edit the user's info
 export const PATCH = async (request:Request, {params}:any) => {
-
-
 
     const currentUserPage = params.agentId;
     // const newInfo = await request.json();
@@ -136,28 +134,17 @@ export const PATCH = async (request:Request, {params}:any) => {
 
     }
 
-    
-    
-
-
-
-
-
-    return new Response(JSON.stringify("Done"), {status: 200});
-
+    // return new Response(JSON.stringify("Done"), {status: 200});
 }
 
 
-
+// if an admin deleted a user
 export const DELETE = async (request, {params}) => {
     
     try {
 
         await connectToDB();
         const {sessionId, removableUserId} = await request.json();
-
-        console.log(sessionId);
-        console.log(removableUserId);
 
 
 
@@ -167,14 +154,21 @@ export const DELETE = async (request, {params}) => {
         await PropertyModel.deleteMany({property_userId: removableUserId});
 
 
-        //Clear and delete user local folder
+        ////////////////////////////////////////////////////////////////////////////////////
+        //// Clear and delete user local folder
+        //define the paths in the folder as we created them when adding a new user
         const myPathFolders = [
             "/properties",
             "/posts",
             "/profile",
         ];
         const userPath = `/public/images/agent-${removableUserId}`;
+
+        //local function, that iterates over folders to clear their contents
+        //then deletes these sub folders
+        //then delete the userPath/main agent folder
         removeFolder(userPath, myPathFolders);
+        ////////////////////////////////////////////////////////////////////////////////////
 
 
 

@@ -1,5 +1,6 @@
-//Part 11.2
-// const nodemailer = require("nodemailer");
+
+//Part 11.2 - send email with data passed to this api
+
 import nodemailer from "nodemailer";
 
 export const POST = async (req:Request) => {
@@ -10,6 +11,7 @@ export const POST = async (req:Request) => {
         const emailBody = await req.json();
         console.log(emailBody);
 
+        //1
         const transporter = nodemailer.createTransport({
             host: process.env.EmailHost,
             port: process.env.EmailPort as unknown as number, //to solve the "no overload" ts error
@@ -20,6 +22,7 @@ export const POST = async (req:Request) => {
             }
         });
 
+        //2
         const mailOptions = {
             from: "kodersheriff@gmail.com",
             to: "kodersheriff@gmail.com",
@@ -37,11 +40,11 @@ export const POST = async (req:Request) => {
                 `
         };
         
-        //Send the email
+        //3 - Send the email
         await transporter.sendMail(mailOptions);
 
 
-    
+        // 200: operation succeeded
         return new Response(JSON.stringify("Email Sent"), {status: 200});
 
     } catch {

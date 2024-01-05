@@ -15,7 +15,7 @@ export const authOptions: NextAuthOptions = {
         //will choose the credentials provider as we are using email/
         CredentialsProvider({
             type: "credentials",
-            credentials: {},    //empty because we do not want to use their UI
+            credentials: {},    //empty because we do not want to use the default UI
             async authorize(credentials, req){
                 //the credentials will be empty as we use {} but will cast its type anyway
                 const {email, password} = credentials as {
@@ -99,6 +99,7 @@ export const authOptions: NextAuthOptions = {
 // create auth handler
 const authHandler = NextAuth(authOptions);
 
+//// another way of exporting GET and POST
 // export const GET = authHandler;
 // export const POST = authHandler;
 

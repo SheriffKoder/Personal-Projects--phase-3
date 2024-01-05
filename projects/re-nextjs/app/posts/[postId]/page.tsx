@@ -1,77 +1,27 @@
 // import React from 'react'
-"use client"
+// "use client"
 
 import Link from "next/link";
 import Image from "next/image";
 import { PostDocument } from "@models/postModel";
-import { useState, useEffect } from "react";
-// type postsType = postsInterface[];
-
-// interface postsInterface {
-//     id: number,
-//     title: string,
-//     content: string,
-//     author: string,
-//     date: string,
-//     image: string,
-// }
 
 
-
-
-
-
-
-
-
-
-
+//single post page: we render the post info, and side posts
 
 const page = async () => {
 
 
-//   let posts: postsType = [
-//     {
-//       id : 1,
-//       title: "A new release on houses, limited time, for the best clients ever, with no delay",
-//       content: "This company has released many new houses, with a good price too, it sounds to good to be true but they are here telling all the new stuff and with gardens, cant be better This company has released many new houses, with a good price too, it sounds to good to be true but they are here telling all the new stuff and with gardens, cant be better, This company has released many new houses, with a good price too, it sounds to good to be true but they are here telling all the new stuff and with gardens, cant be better This company has released many new houses, with a good price too, it sounds to good to be true but they are here telling all the new stuff and with gardens, cant be better, This company has released many new houses, with a good price too, it sounds to good to be true but they are here telling all the new stuff and with gardens, cant be better This company has released many new houses, with a good price too, it sounds to good to be true but they are here telling all the new stuff and with gardens, cant be better",
-//       author: "John",
-//       date: "Thu, 19 Sept 23",
-//       image : "/images/furniture.avif",      
-//     },
-//     {
-//       id : 2,
-//       title: "A new release on houses",
-//       content: "This company has released many new houses, with a good price too, it sounds to good to be true but they are here telling all the new stuff and with gardens, cant be better This company has released many new houses, with a good price too, it sounds to good to be true but they are here telling all the new stuff and with gardens, cant be better",
-//       author: "John",
-//       date: "Thu, 19 Sept 23",
-//       image : "/images/furniture.avif",      
+    type post_andRecPosts = {
+        post: PostDocument;
+        posts: PostDocument[];
+    }
 
-      
-//     },
-//     {
-//       id : 3,
-//       title: "A new release on houses",
-//       content: "This company has released many new houses, with a good price too, it sounds to good to be true but they are here telling all the new stuff and with gardens, cant be better This company has released many new houses, with a good price too, it sounds to good to be true but they are here telling all the new stuff and with gardens, cant be better",
-//       author: "John",
-//       date: "Thu, 19 Sept 23",
-//       image : "/images/furniture.avif",      
-      
-//     }
-//   ]
-
-//   let post = posts[0];
-
-type post_andRecPosts = {
-    post: PostDocument;
-    posts: PostDocument[];
-}
-
-// const [post_andRecPosts, setPost_andRecPosts] = useState<post_andRecPosts | null>(null);
+    //not used since we used the loading.tsx, now we store in a const as this page does not change
+    // const [post_andRecPosts, setPost_andRecPosts] = useState<post_andRecPosts | null>(null);
 
 
 
-//connect to data base
+    //connect to the data base, fetch this post
     
     let current_url = window.location.href.toString().split("/posts/")[1];
 
@@ -80,13 +30,11 @@ type post_andRecPosts = {
     })
 
     const jsonResponse = await response.json();
-    // console.log(jsonResponse);
-
     const post_andRecPosts = jsonResponse;
 
 
-
-// useEffect(()=> {
+    //not used since we used the loading.tsx, to make the loading work we need to fetch outside of a useEffect
+    // useEffect(()=> {
 
 //     //get page url as it included the id for the user page in question
 //     const current_url = window.location.href.toString().split("/posts/")[1];
@@ -113,19 +61,13 @@ type post_andRecPosts = {
 // },[]);
 
 
-
-
-
-
-
-
-
   return (
     <div className="flex flex-col pb-6 pt-32 px-3">
 
     {post_andRecPosts !== null ? (
       <div className="mx-auto max-w-[1230px]">
 
+        {/* navigation current location links */}
         <div className="dark:text-white text-black text-shadow-3 w-full text-xs flex flex-row gap-1 opacity-70 ml-2">
           
           <Link className=""href="/#home-news">Home</Link>
@@ -135,6 +77,7 @@ type post_andRecPosts = {
           <span className="text-theme-text-brighter capitalize"><span>{post_andRecPosts.post.title}</span></span>
         </div>
 
+        {/* the post whole container */}
         <div className="bg-white rounded-[17px]
         glass-container-background-2 
         border backdrop-blur-10 pt-7 pb-7 px-7 mt-8
@@ -143,6 +86,7 @@ type post_andRecPosts = {
       
         ">
 
+            {/* the post's title */}
             <div className="w-full 
             bg-[#fffffff0] focus:bg-[#ffffff] hover:bg-[#ffffff] 
              backdrop-blur-10
@@ -152,7 +96,6 @@ type post_andRecPosts = {
             
             ">
 
-                {/* here are the posts */}
                 <h4 className="flex flex-row items-baseline font-bold uppercase px-2">
                     <span className="text-start dark:text-[#ffffffde] text_shadow-3 
                     slide_right__text__animation">
@@ -162,12 +105,13 @@ type post_andRecPosts = {
                 </h4>
             </div>        
 
-        {/* post */}
-        {post_andRecPosts.post ? (
+            {/* the post's image  and contents*/}
+            {post_andRecPosts.post ? (
             <>
 
             <div className="flex flex-col gap-6 w-[100%] md2:flex-1">
 
+                {/* the post's image */}
                 <div className="h-auto w-full 
                 bg-[#fffffff0] focus:bg-[#ffffff] hover:bg-[#ffffff] 
                 glass-container-background-2 backdrop-blur-10
@@ -189,6 +133,7 @@ type post_andRecPosts = {
                     
                 </div>
 
+                {/* the posts contents */}
                 <div className="h-auto w-full 
                 bg-[#fffffff0] focus:bg-[#ffffff] hover:bg-[#ffffff] 
                 glass-container-background-2 backdrop-blur-10
@@ -209,6 +154,8 @@ type post_andRecPosts = {
 
             </div>
 
+
+            {/* the side container - author and side posts container */}
             <div className=" w-[100%] md2:w-[20%] min-w-[215px] h-auto
             bg-[#fffffff0] focus:bg-[#ffffff] hover:bg-[#ffffff] 
             glass-container-background-2 backdrop-blur-10
@@ -224,7 +171,7 @@ type post_andRecPosts = {
 
                         <div className="flex flex-col gap-4 mt-2 capitalize text-center w-full items-center">
 
-
+                            {/* section - author and date */}
                             <div className="flex flex-col md:flex-row  md2:flex-col items-center justify-center md2:gap-4 gap-4 md:gap-8">
                             <div className="h-[6rem] w-[6rem] bg-white rounded-full flex items-center justify-center dark:text-black overflow-hidden">
                                 <Image src={post_andRecPosts.post.userId.avatar} height={100} width={100} alt="agent's photo"
@@ -253,6 +200,8 @@ type post_andRecPosts = {
 
                             </div>
                             
+
+                            {/* section - side posts */}
                             <h4 className="text_shadow-2 opacity-90 md2:mt-8 mt-4 text-black dark:text-white">
                                 You may also be interested to read
                             </h4>
@@ -303,21 +252,23 @@ type post_andRecPosts = {
             </div>
 
                     
-                    </>
-                ) : (
-                    <><h1 className="text_shadow-3">This post does not exist</h1></>
-                )
-                }
+            </>
+            ) : (
+            <>
+                <h1 className="text_shadow-3">This post does not exist</h1>
+            </>
+            )
+            }
 
-                </div>
+            </div>
                 
-    </div>
+        </div>
 
     ):("")}
 
-        </div>
+    </div>
 
   )
 }
 
-export default page
+export default page;

@@ -1,3 +1,4 @@
+
 //for handling fetching for single property page, the page's property and the side properties
 
 //04.03
@@ -19,7 +20,7 @@ export const GET = async (request, {params}) => {
         return new Response(JSON.stringify({thisProperty,recProperties}), {status: 200});
 
     } catch {
-        return new Response(JSON.stringify("Failed to fetch all properties"), {status: 500});
+        return new Response(JSON.stringify("Failed to fetch this property and side properties"), {status: 500});
     }
 
 }

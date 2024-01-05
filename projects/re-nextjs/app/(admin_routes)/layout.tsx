@@ -7,6 +7,9 @@ interface Props {
     children: ReactNode;
 }
 
+
+//to render specific page.jsx in case the session user is admin only
+//we did not put a page.jsx here as we did not want to use this functionality
 export default async function PrivateLayout({ children }: Props ) {
     //await for the getServerSession
     const session = await getServerSession(authOptions);

@@ -1,4 +1,5 @@
 
+//this is used for the propertiesContainer component on the profile page to display the user's properties in propertyCardAdmin components
 
 import { connectToDB } from "@utils/database";
 import { NextRequest } from "next/server";
@@ -20,10 +21,10 @@ export const GET = async (request:NextRequest, {params}:any) => {
         const properties = await PropertyModel.find({property_userId: params.userId})
         .skip(start).limit(end);
 
-        // const posts = await PropertyModel.find().skip(start).limit(end).populate("userId");          //page X
-        // const properties = await PropertyModel.find().skip(0).limit(3);             //page 0
-        // const properties = await PropertyModel.find().skip(3).limit(3);             //page 1
-        // const properties = await PropertyModel.find().skip(6).limit(3);             //page 2
+        // const posts = await PropertyModel.find().skip(start).limit(end).populate("userId");  //page X
+        // const properties = await PropertyModel.find().skip(0).limit(3);                      //page 0
+        // const properties = await PropertyModel.find().skip(3).limit(3);                      //page 1
+        // const properties = await PropertyModel.find().skip(6).limit(3);                      //page 2
 
 
         // const posts = await PostModel.find().populate("userId");
@@ -32,7 +33,7 @@ export const GET = async (request:NextRequest, {params}:any) => {
         return new Response(JSON.stringify({properties, pagesEnd}), {status: 200});
 
     } catch {
-        return new Response(JSON.stringify("Failed to fetch the post"), {status: 500});
+        return new Response(JSON.stringify("Failed to fetch the properties"), {status: 500});
     }
 
 }
