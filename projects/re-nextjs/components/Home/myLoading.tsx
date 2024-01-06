@@ -2,19 +2,11 @@
 
 
 //This component's use is to wait till the UI renders the right theme as dark takes time to load
+
 "use client";
 
 import { useEffect } from "react";
 import { bodyNoScroll, bodyScroll } from "@utils/bodyNoScroll";
-
-
-
-
-
-
-
-
-
 
 
 function MyLoading() {

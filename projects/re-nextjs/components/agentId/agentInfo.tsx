@@ -1,18 +1,13 @@
 
-
+// display the user information and photo on their profile page
 
 //Part 7
 import React from 'react'
 import { ChangeEventHandler, FormEventHandler } from 'react';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 import { UserDocument } from "@models/userModel";
-import { PropertyDocument } from "@models/propertyModel";
 
-
-
-
-const currentPage : string = "agent";
 
 
 function allowInput (e:any) {
@@ -46,8 +41,6 @@ function disableInput (e:any) {
 
 }
 
-
-
 type userInterface = {
         authority: string;
         userInfo: UserDocument;
@@ -64,7 +57,7 @@ const AgentInfo = ({user, setReload}:{
 }) => {
 
 
-
+    //fill the state by default with user.userInfo
     const [updatedUserInfo, setUpdatedUserInfo] = useState({
         name: user?.userInfo.name,
         avatar: user?.userInfo.avatar,
@@ -74,18 +67,18 @@ const AgentInfo = ({user, setReload}:{
         position: user?.userInfo.position,
     });
 
+    //get the values from the state to fill the input values
     const { name, avatar, email, password, phone, position } = updatedUserInfo;
-
-    //Part 11.01
-    //a file or undefined
-    const [file, setFile] = useState<File>();
-
 
     const handleInputChange: ChangeEventHandler<HTMLInputElement> = ({ target }) => {
         const { name, value } = target;
         setUpdatedUserInfo({ ...updatedUserInfo, [name]:value});
     }
 
+    ////////////////////////////////////////////////////////////////////////////////////
+    //Part 11.01
+    //a file or undefined - file is the user's photo
+    const [file, setFile] = useState<File>();
 
     //Part 11.01
     function getFormData(object:any, file:File|null) {
@@ -96,7 +89,6 @@ const AgentInfo = ({user, setReload}:{
         }
         return formData;
     }
-
 
     const handleUserEditSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
 
@@ -137,8 +129,7 @@ const AgentInfo = ({user, setReload}:{
         }
 
     }
-
-
+    ////////////////////////////////////////////////////////////////////////////////////
 
 
   return (
@@ -148,10 +139,12 @@ const AgentInfo = ({user, setReload}:{
         items-center max-w-[500px]"
         onSubmit={handleUserEditSubmit}>
 
-        <h2 className="text_shadow-3 font-semibold text-xl  w-full
-        text-center md2:text-start mb-2 mt-2 text-[#000000c7] dark:text-[#ffffffe2]">
-            { user.authority === "viewer" ? (`${user.userInfo.name}'s Information`): ("Your information")}</h2>
+            <h2 className="text_shadow-3 font-semibold text-xl  w-full
+            text-center md2:text-start mb-2 mt-2 text-[#000000c7] dark:text-[#ffffffe2]">
+                { user.authority === "viewer" ? (`${user.userInfo.name}'s Information`): ("Your information")}
+            </h2>
 
+            {/* full name */}
             <div className="capitalize
             flex flex-row flex-wrap w-full justify-center md2:justify-start items-baseline">
 
@@ -176,6 +169,7 @@ const AgentInfo = ({user, setReload}:{
                     </div>
             </div>
 
+            {/* user's photo, which is displayed also on their items on the website */}
             <div className="
             flex flex-row flex-wrap w-full justify-center md2:justify-start items-baseline">
 
@@ -202,6 +196,7 @@ const AgentInfo = ({user, setReload}:{
 
             </div>
 
+            {/* phone */}
             <div className="
             flex flex-row flex-wrap w-full justify-center md2:justify-start items-baseline">
 
@@ -227,7 +222,7 @@ const AgentInfo = ({user, setReload}:{
             </div>
 
             
-
+            {/* email */}
             <div className="
             flex flex-row flex-wrap w-full justify-center md2:justify-start items-baseline">
 
@@ -254,6 +249,7 @@ const AgentInfo = ({user, setReload}:{
 
             </div>
 
+            {/* password */}
             <div className="
             flex flex-row flex-wrap w-full justify-center md2:justify-start items-baseline">
 
@@ -279,7 +275,7 @@ const AgentInfo = ({user, setReload}:{
                     </div>
             </div>
 
-
+            {/* position, changed by admins only */}
             <div className="capitalize
             flex flex-row flex-wrap w-full justify-center md2:justify-start items-baseline">
 
@@ -309,7 +305,7 @@ const AgentInfo = ({user, setReload}:{
                     </div>
             </div>
 
-
+            {/* cancel and apply edits buttons */}
             <div className="mt-8 md2:mt-0 h-[1.5rem]
             flex flex-row flex-wrap w-full justify-center md2:justify-end items-baseline md2:mr-[4.65rem]">
 
@@ -340,4 +336,4 @@ const AgentInfo = ({user, setReload}:{
 )
 }
 
-export default AgentInfo
+export default AgentInfo;

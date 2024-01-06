@@ -95,10 +95,10 @@ export const PATCH = async (request:Request, {params}:any) => {
         userAvatar = newInfo.get("avatar") as string;
     }
 
-    
+    await connectToDB();
+
 
     try {
-        await connectToDB();
         const userInfo = await UserModel.findById(currentUserPage);
 
         console.log(userInfo);
@@ -125,9 +125,11 @@ export const PATCH = async (request:Request, {params}:any) => {
 
             await userInfo?.save();
         
-            return new Response(JSON.stringify(userInfo), { status: 200});
+            return new Response(JSON.stringify({userInfo}), {status: 200});
 
         }
+
+
 
     } catch (error) {
         return new Response(JSON.stringify("Failed to update the user's info"), {status: 500});

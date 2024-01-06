@@ -27,7 +27,7 @@ const Nav = () => {
   const isAuth = status === "authenticated";  //use the status
   const router = useRouter();
 
-
+  //user icon drop down, to show login/signup or go to profile, signout etc...
   function handleDropDownIcon (input : string) {
       document.querySelector(".nav-user-icon")?.classList.toggle("agentNavIcon_background");
       
@@ -81,22 +81,12 @@ const Nav = () => {
   // const [providers, setProviders] = useState(null);
 
 
-  
   const toggleDropDown = useRef("false");
   // let isUserLoggedIn = false;
 
 
-
-
   return (
     <nav className="w-full px-2 md:px-12  max-w-7xl absolute z-[9] my-8">
-      {/* <ul className="bg-[#ffffffd3] text-[#d6003580] flex flex-row gap-3 border-0 border-[] 
-      rounded-2xl py-2 px-4 w-full backdrop-blur-sm shadow-l 
-      ">
-        <li>Text1</li>
-        <li>Text2</li>
-
-      </ul> */}
 
       <span className=" dark:bg-[#31313175] bg-[#ffffffd3]
        text-theme-text-bright dark:text-theme-text-dark 
@@ -104,20 +94,23 @@ const Nav = () => {
       rounded-full px-2 backdrop-blur-sm shadow-l  text-sm mx-auto
       glass-container-background-3
       ">
+
         <ul className="flex flex-row items-center gap-3 ml-2 h-12">
-        <li className="h-full">
-            <Link href="/" className=" flex items-center h-full nav-icon gap-2 flex-center" aria-label="back to the home page">
-              <svg className="hover:opacity-80 bi bi-house" xmlns="http://www.w3.org/2000/svg" 
-              width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
-                
-                <path className="dark:fill-[#cc2750d3] fill-[#d6003580]" fillRule="evenodd" d="M2 13.5V7h1v6.5a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5V7h1v6.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5zm11-11V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z">
-                </path> 
-                
-                <path className="dark:fill-[#cc2750d3] fill-[#d6003580]" fillRule="evenodd" d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z">
-                </path> 
-              </svg>
-              {/* <p>RE Company</p> */}
-            </Link>
+        
+          {/* company logo icon */}
+          <li className="h-full">
+              <Link href="/" className=" flex items-center h-full nav-icon gap-2 flex-center" aria-label="back to the home page">
+                <svg className="hover:opacity-80 bi bi-house" xmlns="http://www.w3.org/2000/svg" 
+                width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
+                  
+                  <path className="dark:fill-[#cc2750d3] fill-[#d6003580]" fillRule="evenodd" d="M2 13.5V7h1v6.5a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5V7h1v6.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5zm11-11V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z">
+                  </path> 
+                  
+                  <path className="dark:fill-[#cc2750d3] fill-[#d6003580]" fillRule="evenodd" d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z">
+                  </path> 
+                </svg>
+                {/* <p>RE Company</p> */}
+              </Link>
 
           </li>
 
@@ -140,13 +133,17 @@ const Nav = () => {
           </li>
         </ul>
 
+
+        {/* user icon, user menu (hidden and displayed by click or mouse-enter), theme toggle icon */}
         <span className="bg-red ml-auto flex flex-row gap-3 items-center relative">
 
+          {/* user icon, drop down handles */}
           <span 
           onClick={()=>{ if (toggleDropDown.current === "false") { handleDropDownIcon("enter"); toggleDropDown.current = "true"; } else { handleDropDownIcon("leave"); toggleDropDown.current = "false";}}}
           onMouseLeave={()=>{handleDropDownIcon("enter");}}
           >
 
+            {/* user icon */}
             <div className=" nav-user-icon flex gap-2 flex-center rounded-full border-0 hover:bg-gray-200 dark:hover:bg-[#4f4f4f2e] h-7 w-7"
             >
 
@@ -161,6 +158,7 @@ const Nav = () => {
           </span >
 
 
+          {/* user menu - logged in - positioned absolute*/}
           {/* {isAuth && ( */}
           {session?.user && (
             <div className="nav-user-menu  hidden bg-gray-200 dark:bg-[#4f4f4f5d]"
@@ -199,6 +197,7 @@ const Nav = () => {
             </div>
           )}
 
+          {/* user menu - not logged in - positioned absolute */}
           {/* {!isAuth && ( */}
           {!session?.user && (
             <div className="nav-user-menu hidden bg-gray-200 dark:bg-[#4f4f4f5d]"
@@ -220,9 +219,11 @@ const Nav = () => {
 
                 </ul>
             </div>
-            )}
+          )}
 
+          {/* the theme toggle icon */}
           <DarkModeToggle/>
+
         </span>
 
       </span>
@@ -233,4 +234,4 @@ const Nav = () => {
   )
 }
 
-export default Nav
+export default Nav;

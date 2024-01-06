@@ -1,62 +1,24 @@
 // import React from 'react'
 
+// this is the recommended properties slider on the home page
+
 "use client";
 
-import Link from "next/link"
 import Image from "next/image"
 import { useEffect, useRef, useState } from "react";
-import { func } from "prop-types";
-import { scrollScroll } from "@utils/bodyNoScroll";
-
-// interface propertyInterface {
-
-//     property_image : string,
-//     property_title : string,
-//     property_id : number,
-
-//     property_beds : number,
-//     property_baths : number,
-//     property_area : number,
-//     property_location : string,
-//     property_type : string,
-//     property_listing_type : string,
-//     property_recommended: boolean
-
-
-// }
-
 
 
 import { PropertyDocument } from "@models/propertyModel";
 
 const Home_Rec = () => {
 
-    // let properties1: PropertyDocument[] = [
-    //     {
-    //         property_images : ["/images/furniture.avif"],
-        
-    //         property_beds : 3,
-    //         property_baths : 2,
-    //         property_area : 190,
-    //         property_country: "USA"
-    //         property_city : "NYC",
-    //         property_type : "apartment",
-    //         property_listing_type : "rent",
-    //         property_recommended: true,
 
-    //     },
-    // ];
-
-    // let slider : propertyInterface;
-
-    // let slider : PropertyDocument;
-
+    ////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////
 
     function fadeOutAnimation (slider__container: any) {
-
-
         //[fadeOut]
-        slider__container?.classList.add("fadeOut_animation");
+       slider__container?.classList.add("fadeOut_animation");
         
     }
 
@@ -84,9 +46,6 @@ const Home_Rec = () => {
 
     }
 
-
-
-
     function fadeInAnimation (slider__container: any) {
 
         //[fadeIn] after fadeout(600ms) and delay(200ms) finish
@@ -104,8 +63,6 @@ const Home_Rec = () => {
 
 
     }
-
-
 
     function animationCombination (slider__container: any) {
 
@@ -135,60 +92,47 @@ const Home_Rec = () => {
         }, 6000);
     }
 
+    ////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////
 
 
     const [prevFade, setPrevFade] = useState(0);
     const [fade, setFade] = useState(0);
     const [sliderIndex, setSliderIndex] = useState(0);
-    // slider = {...properties[sliderIndex]};
     
     const tm = useRef(0);
 
     //04.01
     const [propertiesRec, setPropertiesRec] = useState<PropertyDocument[] | []>([]);
 
-    // const [slider, setSlider] = useState<PropertyDocument | null >(null);
-    // slider = {...properties[sliderIndex]};
-    // slider = [];
 
     useEffect(()=> {
         
 
-        // if (propertiesRec == null) {
-            const fetchProperties = async () => {
-                const responseRec = await fetch("/api/properties/homePage_rec");
-                const jsonResponseRec = await responseRec.json();
-                // console.log(jsonResponseRec);
-          
-                // slider = {...jsonResponse[sliderIndex]};
+        const fetchProperties = async () => {
+        const responseRec = await fetch("/api/properties/homePage_rec");
+        const jsonResponseRec = await responseRec.json();
 
 
-                //filter out un-used images slots in every property in the json response
-                jsonResponseRec.forEach((property: PropertyDocument) => {
-                    property.property_images = property.property_images.filter((image: string) => {
-                        if (image !== "") {
-                          return image;
-                        }
-                      });
-                })
+        //filter out un-used images slots in every property in the json response
+        jsonResponseRec.forEach((property: PropertyDocument) => {
+            property.property_images = property.property_images.filter((image: string) => {
+                if (image !== "") {
+                return image;
+                }
+            });
+        })
 
 
-                setPropertiesRec(jsonResponseRec);
-              }
-          
-              fetchProperties();    
-        // }
-      
-        // if (propertiesRec !== null ) {
-            //if we have only one recommended property there is no need to animate
-            if (propertiesRec.length > 1) {
-                // console.log(propertiesRec[sliderIndex]._id);
-                let slider__container = document.querySelector("#slider__container");        
-                animationCombination(slider__container);    
-            } 
-        // }
+        setPropertiesRec(jsonResponseRec);
+        }
 
+        fetchProperties();    
 
+        if (propertiesRec.length > 1) {
+            let slider__container = document.querySelector("#slider__container");        
+            animationCombination(slider__container);    
+        } 
 
     },[fade]);
 

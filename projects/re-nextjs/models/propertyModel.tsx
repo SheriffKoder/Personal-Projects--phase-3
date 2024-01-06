@@ -41,7 +41,7 @@ const propertySchema = new Schema<PropertyDocument, {}, Methods>({
   property_images : {
     type: [],
     required: false,
-    default: ["/images/furniture.avif"]
+    default: ["/images/defaultProperty.jpg"]
   },        
   // property_id : number,
 

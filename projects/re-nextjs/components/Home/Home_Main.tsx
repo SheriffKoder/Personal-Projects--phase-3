@@ -1,57 +1,17 @@
 // import React from 'react'
 
+//this is the main area of the home page
+//contains two components,
+// the latest properties and the latest posts
+
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { useEffect, useState } from "react";
-import { useRef } from "react";
-
-type postsType = postsInterface[];
-
-interface postsInterface {
-    id: number,
-    title: string,
-    content: string,
-    author: string,
-    date: string,
-}
-
-
-
-// interface propertyInterface {
-
-//   property_images : string[],        
-//   property_id : number,
-
-//   property_country: string,
-//   property_city: string,
-//   property_district: string,
-
-//   property_type: string,
-//   property_area: number,
-//   property_beds: number,
-//   property_baths: number,
-  
-//   property_listing_type: string,
-//   property_availability: boolean,
-//   property_recommended: boolean,
-//   property_price: number,
-
-// }
-
-
 
 import PropertyCard from "./HomeMain/PropertyCard-home";
-
 import { PropertyDocument } from "@models/propertyModel";
 import { PostDocument } from "@models/postModel";
-
-
-type Posts_WithUserFilled = {
-
-}
-
 
 type properties_andPosts = {
   properties: PropertyDocument[],
@@ -296,11 +256,12 @@ const Home_Main = () => {
     posts: [],
   });
 
+  //text that will be in place of properties or posts when loading or no items returned from the DB
   const [dataPropertiesCondition,setDataPropertiesCondition] = useState("Loading properties...");
   const [dataPostsCondition,setDataPostsCondition] = useState("Loading posts...");
 
 
-
+  //fetch latest posts and properties
   useEffect(()=> {
 
     setDataPropertiesCondition("Loading properties...");
@@ -333,6 +294,8 @@ const Home_Main = () => {
 
     <div className="w-[95%] lg:flex lg:flex-row justify-center mx-auto ">
 
+
+      {/* latest posts */}
       <div className=" bg-white rounded-[17px]
       glass-container-background-2 
       border backdrop-blur-10 py-7 px-7 w-[95%] mx-auto lg:ml-6 my-20
@@ -386,6 +349,7 @@ const Home_Main = () => {
 
                   ))}
 
+                {/* go to the all-posts page button */}
                 <Link href="/news" className="bg-theme-text-brighter dark:bg-theme-text-dark text-white 
                 rounded-full py-1.5 px-3 w-[80%] max-w-[200px] text_shadow-3
                 opacity-80 hover:opacity-90 mx-auto mt-auto">
@@ -409,6 +373,7 @@ const Home_Main = () => {
       </div>
 
 
+      {/* latest properties */}
       <div className=" bg-white rounded-[17px] h-auto
           glass-container-background-2 
           border backdrop-blur-10 py-7 px-7 my-20
@@ -419,11 +384,11 @@ const Home_Main = () => {
             {/* here are the properties */}
             <h4 className="text_shadow-3">Check out our latest properties</h4>
 
-          {/* latest properties container */}
-          <div className="flex flex-row gap-6 my-6 flex-wrap justify-center lg:justify-start mx-auto">
+            {/* latest properties container */}
+            <div className="flex flex-row gap-6 my-6 flex-wrap justify-center lg:justify-start mx-auto">
 
           {/* property */}
-          {properties_andPosts?.properties.length > 0 ? (
+            {properties_andPosts?.properties.length > 0 ? (
             <>
               {properties_andPosts.properties.map((property: PropertyDocument) => (
                 <div className="
@@ -434,6 +399,7 @@ const Home_Main = () => {
               )
               )}
 
+                {/* go to the all-properties page button */}
               <Link href="/properties" className="bg-theme-text-brighter dark:bg-theme-text-dark text-white 
                     rounded-full py-1.5 px-3 w-[80%] max-w-[200px]
                     opacity-80 hover:opacity-90 mx-auto mt-auto">
@@ -442,11 +408,11 @@ const Home_Main = () => {
             </>
             ) : (
               <>
-              <h1 className="text_shadow-3 w-full text-center">            
-                {dataPropertiesCondition}
-              </h1>
-            </>            )
-          }
+                <h1 className="text_shadow-3 w-full text-center">            
+                  {dataPropertiesCondition}
+                </h1>
+              </>            )
+            }
 
 
 

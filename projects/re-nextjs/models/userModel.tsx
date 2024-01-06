@@ -44,7 +44,7 @@ const userSchema = new Schema<UserDocument, {}, Methods>({
     avatar: {
         type: String,
         required: false,
-        default: "/images/logo.svg"
+        default: "/images/defaultUser.jpg"
     },
     position: {
         type: String,

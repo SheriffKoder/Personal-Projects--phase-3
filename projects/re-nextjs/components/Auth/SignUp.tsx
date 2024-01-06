@@ -13,7 +13,8 @@ import { useRouter } from "next/navigation";
 
 const SignUp_component = () => {
 
-     //02X
+
+    //02X
     //this is set to true when handling the submit 
     //so it changes the button style if the app is currently busy accessing the database
     const [busy, setBusy] = useState(false);
@@ -31,7 +32,8 @@ const SignUp_component = () => {
 
 
 
-    //////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////
     //part 10 - addon input validation
     const errorMessage = useRef({
         name: "",
@@ -116,8 +118,8 @@ const SignUp_component = () => {
 
 
     }
-    //////////////////////////////////
-
+    ////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////
 
 
     const handleChange: ChangeEventHandler<HTMLInputElement> = ({ target }) => {
@@ -127,6 +129,7 @@ const SignUp_component = () => {
 
     const router = useRouter();
 
+    //02X.02 submit to the api and check for authentication errors received from the api
     const handleSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
         setBusy(true);
 
@@ -142,6 +145,9 @@ const SignUp_component = () => {
         console.log(res);
         setBusy(false);
 
+        ////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////
+        //part 10 - addon input authentication
         if (res.errorArray) {
             console.log("server error "+res.errorArray);
 
@@ -166,6 +172,9 @@ const SignUp_component = () => {
 
             return;
         }
+        ////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////
+
 
         //02X.07
         //login automatically after a successful sign-up
@@ -184,12 +193,10 @@ const SignUp_component = () => {
    }
 
 
-    useEffect(() => {
+useEffect(()=> {
+    document.getElementById("errorMsgContainer_signUp")!.style.display="none";
 
-        document.getElementById("errorMsgContainer_signUp")!.style.display="none";
-
-    },[]);
-
+})
 
 
         
@@ -210,6 +217,7 @@ const SignUp_component = () => {
             
             ">
 
+                {/* the message notification */}
                 <span id="errorMsgContainer_signUp"
                 className="border-[rgba(255,255,255,0.02)] shadow-lg dark:shadow-inner 
                 absolute z-[2] top-[50%] left-[50%] centered_centered text-theme-text-dark text-xs
@@ -232,6 +240,7 @@ const SignUp_component = () => {
                     </span>
                 </span>
 
+                {/* close button */}
                 <div className="text-center relative w-full flex flex-row
                 lg:flex-col">
                     <div className="absolute right-0">
@@ -256,6 +265,7 @@ const SignUp_component = () => {
                 onSubmit={handleSubmit}>
                 {/* //02X */}
 
+                    {/* name */}
                     <label className="w-[100%] flex flex-row justify-center text-center
                     label_field
                     bg-[#ffffff07] rounded-[7px] border-2 border-[#ffffff02]
@@ -270,6 +280,7 @@ const SignUp_component = () => {
                         
                     </label>
 
+                    {/* phone */}
                     <label className="w-[100%] flex flex-row justify-center text-center
                     label_field
                     bg-[#ffffff07] rounded-[7px] border-2 border-[#ffffff02]
@@ -284,6 +295,7 @@ const SignUp_component = () => {
                         
                     </label>
 
+                    {/* email */}
                     <label className="w-[100%] flex flex-row justify-center text-center
                     label_field
                     bg-[#ffffff07] rounded-[7px] border-2 border-[#ffffff02]
@@ -298,6 +310,7 @@ const SignUp_component = () => {
                         
                     </label>
 
+                    {/* password */}
                     <label className="w-[100%] flex flex-row justify-center text-center
                     label_field
                     bg-[#ffffff07] rounded-[7px] border-2 border-[#ffffff02]
@@ -312,6 +325,7 @@ const SignUp_component = () => {
                         
                     </label>
 
+                    {/* adminId */}
                     <label className="w-[100%] flex flex-row justify-center text-center
                     label_field
                      rounded-[7px] border-2 border-[#ffffff02]
@@ -328,6 +342,7 @@ const SignUp_component = () => {
                         
                     </label>
 
+                    {/* the submit button */}
                     <div className="mt-1 lg:mt-4 w-[80%] flex">
                             <button type="submit" 
                             className="
@@ -351,4 +366,4 @@ const SignUp_component = () => {
       )
 }
 
-export default SignUp_component
+export default SignUp_component;

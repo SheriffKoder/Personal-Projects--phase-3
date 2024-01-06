@@ -1,5 +1,7 @@
 // import React from 'react'
 
+// this is a simple text component displayed on the home page below the hero image
+
 const HomeText = () => {
   return (
     <div className="glass-container-background-1 

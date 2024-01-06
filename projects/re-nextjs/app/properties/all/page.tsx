@@ -1,6 +1,8 @@
 "use client";
 // import React from 'react'
 
+//all properties page
+
 import Link from "next/link";
 import Image from "next/image";
 
@@ -21,26 +23,27 @@ const page = () => {
     //Part 11.03
     const [pageId, setPageId] = useState(1);
     const endPage = useRef(1);
-    const [reload, setReload] = useState(false);
-    // const [clearFilter, setClearFilter] = useState(false);
-    const [reload2, setReload2] = useState(false);
+    const [reload2, setReload2] = useState(false);  //used in the search submit to re-render the ui with new properties or no properties (if not found)
 
     const [filterActive, setFilterActive] = useState(false);
 
     ///////////////////////////////////////////////////////////////////////////////////////
 
+    // hide filter inputs
     const hideFilter = () => {
         const filterContainer = document.getElementById("filterContainer");
         if (filterContainer) filterContainer.style.display = "none";
 
     }
 
+    // show filter inputs
     const showFilter = () => {
         const filterContainer = document.getElementById("filterContainer");
         if (filterContainer) filterContainer.style.display = "flex";
 
     }
 
+    //resetting the filter or search, we want to pass to the fetch api empty values to fetch all
     const emptyProperty = {
         searchText: "",
         bedroomsFrom: "",
@@ -59,12 +62,14 @@ const page = () => {
     //Part 11.04 - search
     const [searchInput, setSearchInput] = useState(emptyProperty);
 
+    //values used for the input element values
     let {searchText, bedroomsTo, bedroomsFrom, priceFrom, priceTo, areaFrom, areaTo,
     country, type, listing_type} = searchInput;
 
+    //on change store the input values in the searchInput state
     const handleChange: ChangeEventHandler<HTMLInputElement | HTMLSelectElement> = ({ target }) => {
         const { name, value } = target;
-        console.log(value);
+        // console.log(value);
         setSearchInput({ ...searchInput, [name]:value});
     }
 
@@ -94,7 +99,8 @@ const page = () => {
     
     } 
 
-
+    //remove duplicates from an array, like the all-properties countries, types, listing types
+    //to display only one of each as an option to be used in the filter search submit
     const cleanArray = (inputArray: string[]) => {
 
       let filterArray:string[] = [];
@@ -121,12 +127,14 @@ const page = () => {
 
     ///////////////////////////////////////////////////////////////////////////////////////
 
-    const [dataCondition,setDataCondition] = useState("Loading...");
-    const [clearSearch, setClearSearch] = useState(false);
+    const [dataCondition,setDataCondition] = useState("Loading...");    //text replaces properties in case there are not properties yet
+    const [clearSearch, setClearSearch] = useState(false);  //set to true in order to trigger the useEffect and fetch all properties again as if there is not search, used when there are no properties found in the search so we can reset the search
 
+    //these refs are used to display filter option/select values
     const propertiesCountries = useRef([""]);
     const propertiesTypes = useRef([""]);
     const listingTypes = useRef([""]);
+    //this is passed to the api in order to determine if we already rendered this page once before, then not fetch all-properties again which are needed for filter values
     const rendered = useRef("false");
 
 
@@ -135,7 +143,7 @@ const page = () => {
   useEffect(()=> {
 
     setDataCondition("Loading...");
-    setClearSearch(false);
+    if (clearSearch) setClearSearch(false);  //if we set as true to trigger this useEffect in a no props found search, set to false again
 
     console.log("syncing");
     const fetchProperties = async () => {
@@ -153,73 +161,59 @@ const page = () => {
         //     // setProperties(loadingProperties);
         // }
         const response = await fetch(`/api/properties/all/${pageId}`);
-        const responseFilter = await fetch(`/api/properties/all/filter/${rendered.current}`);
+        const responseFilter = await fetch(`/api/properties/all/filter/${rendered.current}`);   //get back all properties in the DB, as the previous fetch gets back limited number of properties for pagination
 
         const jsonResponse = await response.json();
         const jsonResponseFilter = await responseFilter.json();
 
-        console.log(jsonResponse);
-        console.log(jsonResponseFilter);
-
+        //last page button value, to jump to the last page of results
         endPage.current = jsonResponse.pagesEnd;
-        // console.log("end page: "+endPage.current);
-        // console.log("current page: "+ pageId);
-
-        // console.log("properties were");
-        // console.log(properties);
     
-        console.log(jsonResponse.properties);
 
-        //get all the countries, types, listing types from the properties in the database
-        //clean duplicate strings, to use in the filter selects
         if (jsonResponse.properties.length > 0) {
-            
+
+            //store the skip/limit properties
             setProperties(jsonResponse.properties);
 
+            //get all the (countries, types, listing types) from the properties in the database
+            //clean duplicate strings, to use in the filter selects
             if (jsonResponseFilter.allProperties.length > 0) {
+                // 1 - all countries
                 //you have jsonResponse.allProperties
                 //get all the countries in an array
                 const tempCountries = jsonResponseFilter.allProperties.map((property:PropertyDocument) => property.property_country);
                 
-                //now for each country check if it existed before in an array, if not add it
+                //clear duplicates and store in this ref
                 propertiesCountries.current = cleanArray(tempCountries);
-                // console.log(propertiesCountries.current);
-
-
+            
+                // 2 - all property types
                 const tempPropTypes = jsonResponseFilter.allProperties.map((property:PropertyDocument) => property.property_type);
                 propertiesTypes.current = cleanArray(tempPropTypes);
-                // console.log(propertiesTypes.current);
 
-
+                // 3 - all property listing types
                 const tempPropListingTypes = jsonResponseFilter.allProperties.map((property:PropertyDocument) => property.property_listing_type);
                 listingTypes.current = cleanArray(tempPropListingTypes);
-                // console.log(listingTypes.current);
-
-                //if we got all the properties and done setting the filter values
-                //set the rendered to true so the properties/all/filter/ api not fetch all properties again
-                //all properties are only fetched on initial render and we took all values needed on first render
+                
+                //rendered was "false" so we were able because of this value to fetch all properties
+                //set to "true" so on any useEffect trigger there would be no all-properties returned from the api
                 rendered.current = "true";
             }
 
 
 
         } else {
+            //if no properties at all or search result (skip/limit) display this, 
             setDataCondition("no properties found...");
 
         }
         
-        // console.log("properties now are");
-        // console.log(properties);
-        // setClearFilter(false);
     
     }
 
+    //call the fetch code
     fetchProperties();
-    // rendered.current === "false" ? rendered.current = "true" : "";
-
-    // setReload(false);
-
-
+ 
+    //fetch is triggered on pageId change, or reset search results (on no results)
   },[pageId, clearSearch]);
 
 
@@ -232,6 +226,7 @@ const page = () => {
 
     <div className="max-w-[1230px] w-full">
 
+    {/* navigation current location links */}
     <div className="dark:text-white text-black text-shadow-3 w-full text-xs flex flex-row gap-1 opacity-70">
         
         <Link className=""href="/">Home</Link>
@@ -266,11 +261,13 @@ const page = () => {
                 
             </label>
             
+            {/* search submit button */}
             <button type="submit"
             className="ml-2 px-2 py-1 dark:bg-text-accent-dark bg-theme-text-brighter opacity-75 text-white rounded-[7px] flex items-center justify-center">
                 {filterActive ? ("apply"):("search")}
             </button>
             
+            {/* filter inputs container - toggle button */}
             <span className="ml-2 px-2 py-1 dark:bg-text-accent-dark bg-theme-text-brighter opacity-75 text-white rounded-[7px] flex items-center justify-center cursor-pointer
             "
             onClick={()=> {
@@ -287,6 +284,7 @@ const page = () => {
             </span>
         </div>
 
+        {/* filter inputs container */}
         <span className="hidden flex-row items-center px-2 gap-2 justify-center
         min-w-full flex-wrap text-xs"
         id="filterContainer">
@@ -409,18 +407,9 @@ const page = () => {
 
         </span>
 
-        {/* <div className="flex flex-row gap-1 uppercase text-sm">
-            <span className="px-2 bg-text-accent-dark rounded-[3px] flex items-center justify-center">Type</span>
-            <span className="px-2 bg-text-accent-dark rounded-[3px] flex items-center justify-center">Bedrooms</span>
-            <span className="px-2 bg-text-accent-dark rounded-[3px] flex items-center justify-center">Area</span>
-            <span className="px-2 bg-text-accent-dark rounded-[3px] flex items-center justify-center">Country</span>
-            <span className="px-2 bg-text-accent-dark rounded-[3px] flex items-center justify-center">City</span>
-            <span className="px-2 bg-text-accent-dark rounded-[3px] flex items-center justify-center">District</span>
-            <span className="px-2 bg-text-accent-dark rounded-[3px] flex items-center justify-center">Price</span>
-
-        </div> */}
     </form>
 
+    {/* all properties cards container */}
     <div className="bg-white rounded-[17px]
     glass-container-background-2 min-w-[100%]
     border backdrop-blur-10 pt-7 pb-8 px-4 mt-8
@@ -430,13 +419,13 @@ const page = () => {
     
     ">
 
-        {/* here are the posts */}
+        {/* here are the properties */}
         <h4 className="text_shadow-3">All properties</h4>
 
-        {/* posts container */}
+        {/* properties container */}
         <div className="flex flex-row gap-6 my-6 flex-wrap justify-center md:justify-start mx-auto last-of-type:mr-auto w-full">
 
-            {/* post */}
+            {/* property cards and pagination buttons*/}
             {properties.length > 0 ? (
             <>
                 {properties.map((property: PropertyDocument) => (
@@ -564,9 +553,11 @@ const page = () => {
             </>
             ) : (
             <>
+            {/* no properties found text and clear search button */}
             <div className="min-h-[254px] flex flex-col mx-auto justify-center">
                 <h1 className="text_shadow-3">{dataCondition}</h1>
 
+                {/* only if the dataCondition is set to this value, if we searched and got not properties, show back */}
                 {dataCondition === "no properties found in this search" ? (
                     <button 
                     className="
@@ -594,4 +585,4 @@ const page = () => {
 )
 }
 
-export default page
+export default page;

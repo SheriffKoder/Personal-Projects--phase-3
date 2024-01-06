@@ -1,16 +1,12 @@
 import React from 'react'
 
+// the properties container in the profile page (title, add button, propertyCardAdmin component)
+
+
 import { PropertyDocument } from '@models/propertyModel';
 import PropertyCardAdmin from '@components/Home/HomeMain/PropertyCardAdmin';
 import { useState, useEffect, useRef } from 'react';
 
-//i need properties fetched
-//i need setPropertyId, setReload
-
-interface propertiesState {
-    properties: PropertyDocument[],
-    pageId: number,
-}
 
 const PropertiesContainer = ({setPropertyEditId, userAuthority, setReload, reload, userName}:{
     setPropertyEditId: React.Dispatch<React.SetStateAction<string>>
@@ -22,7 +18,6 @@ const PropertiesContainer = ({setPropertyEditId, userAuthority, setReload, reloa
 }) => {
 
     const [userProperties, setUserProperties] = useState<PropertyDocument[]|[]>([]);
-    // const [reload, setReload] = useState(false);
 
     //Part 11.03
     const [pageId, setPageId] = useState(1);
@@ -35,40 +30,19 @@ const PropertiesContainer = ({setPropertyEditId, userAuthority, setReload, reloa
 
         setDataCondition("Loading properties...");
 
-        //connect to data base
+        //connect to data base, fetch user's properties with the pagination reference pageId
         const fetchProperties = async () => { 
             
             let userId = window.location.href.toString().split("/agents/")[1];
-    
-            console.log(userProperties);
-            //state needs to have a different value to take the same value again which is jsonResponse.properties
-            // if (userProperties.length > 0) {
-            //     let loadingProperties:PropertyDocument[] = [];
-                
-            //     // console.log("loadingProperties");
-            //     // console.log(loadingProperties);
-            //     // setUserProperties(loadingProperties);
-
-            //     // setUserProperties([]);
-    
-            // }
             
             const response = await fetch(`/api/properties/${userId}/${pageId}`);
             const jsonResponse = await response.json();
-            console.log(jsonResponse);
     
+            //last page button value, to jump to the last page of results
             endPage.current = jsonResponse.pagesEnd;
-            console.log("end page: "+endPage.current);
-            console.log("current page: "+ pageId);
-    
-            // console.log("properties were");
-            // console.log(userProperties);
-        
-            // console.log(jsonResponse.properties);
-    
+
             if (jsonResponse.properties.length > 0) {
-            
-                setUserProperties(jsonResponse.properties); //Here
+                setUserProperties(jsonResponse.properties);
             } else {
                 if (userAuthority === "viewer") {
                 setDataCondition(`${userName} does not have any posts yet`)
@@ -77,15 +51,13 @@ const PropertiesContainer = ({setPropertyEditId, userAuthority, setReload, reloa
                 }
             }
             setReload(false);
-
-            // console.log("properties now are");
-            // console.log(userProperties);
     
         }
     
+        // call the fetching function above
         fetchProperties();
 
-    
+        //we fetch posts when reload (set to true when editing deleting) are changed 
       },[reload]);
     
 
@@ -93,7 +65,7 @@ const PropertiesContainer = ({setPropertyEditId, userAuthority, setReload, reloa
     <>
     <div className="flex flex-row gap-6 my-6 flex-wrap justify-center md:justify-start mx-auto last-of-type:mr-auto w-full">
 
-    {/* property */}
+    {/* property map iteration to PropertyCardAdmin components*/}
     {userProperties.length > 0 ? (
         <>
             {userProperties.map((property: PropertyDocument) => (
@@ -103,7 +75,6 @@ const PropertiesContainer = ({setPropertyEditId, userAuthority, setReload, reloa
                 </div>
                 )
             )}
-
 
             {/* pagination buttons */}
             <div className="w-full flex flex-row justify-center items-center gap-2">
@@ -224,10 +195,7 @@ const PropertiesContainer = ({setPropertyEditId, userAuthority, setReload, reloa
         ) : (
         <>
             <h1 className="text_shadow-3 w-full text-center">
-                
-                {/* { userAuthority === "viewer" ? (`${userName} does not have any properties yet`) : ("You do not have any properties yet")} */}
                 {dataCondition}
-
             </h1>
         </>
         )

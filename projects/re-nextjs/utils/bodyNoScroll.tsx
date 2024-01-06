@@ -64,6 +64,7 @@ const hideLogin = function () {
 
 }
 
+//custom scroll behavior used in the nav component
 const scrollScroll = () => {
 
   const body = document.querySelector("html");

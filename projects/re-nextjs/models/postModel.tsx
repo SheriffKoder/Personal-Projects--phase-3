@@ -33,7 +33,7 @@ const postSchema = new Schema<PostDocument, {}, Methods>({
   },
  image: {
     type: String,
-    default: "/images/furniture.avif",
+    default: "/images/defaultPost.jpg",
   },
   date_add: {
     type: String,

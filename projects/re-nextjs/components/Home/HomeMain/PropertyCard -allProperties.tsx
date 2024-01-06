@@ -1,51 +1,21 @@
 "use client";
 
+// used different card components with mostly the same code
+// as i wanted each to be responsive in a different way depending on the page
+// and using just one component to get the end result without complexity while coding
+
 import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { useRef } from "react";
 
 import { bodyNoScroll, showEdit } from "@utils/bodyNoScroll";
-
-interface propertyInterface {
-
-  property_images : string[],        
-  property_id : number,
-
-  property_country: string,
-  property_city: string,
-  property_district: string,
-
-  property_type: string,
-  property_area: number,
-  property_beds: number,
-  property_baths: number,
-  
-  property_listing_type: string,
-  property_availability: boolean,
-  property_recommended: boolean,
-  property_price: number,
-
-  property_date: string,
-  property_update: string,
-  property_author: string,
-  property_description: string,
-
-}
 
 import { PropertyDocument } from "@models/propertyModel";
 
 const PropertyCard = ({property1, currentPage}:{property1:PropertyDocument, currentPage:string}) => {
 
-    // let currentPage = props.currentPage;
-    // let property: propertyInterface = props.property;
-    // let currentPage = "property";
-
-    // let property = properties[0];
-
+  
     function fadeOutAnimation (slider__container: any) {
-
-
         //[fadeOut]
         slider__container?.classList.add("fadeOut_animation");
         
@@ -77,21 +47,17 @@ const PropertyCard = ({property1, currentPage}:{property1:PropertyDocument, curr
     }
     
     function fadeInAnimation (slider__container: any) {
-    
-    //[fadeIn] after fadeout(600ms) and delay(200ms) finish
-    setTimeout(()=> {
-        slider__container?.classList.add("fadeIn_animation");
-    },800);
-    
-    //after fadeOut,delay,fadeIn finish, remove to be re-applied
-    setTimeout(()=> {
-        slider__container?.classList.remove("fadeOut_animation");
-        slider__container?.classList.remove("fadeIn_animation");
-    },1400);
-    
-    
-    
-    
+ 
+      //[fadeIn] after fadeout(600ms) and delay(200ms) finish
+      setTimeout(()=> {
+          slider__container?.classList.add("fadeIn_animation");
+      },800);
+      
+      //after fadeOut,delay,fadeIn finish, remove to be re-applied
+      setTimeout(()=> {
+          slider__container?.classList.remove("fadeOut_animation");
+          slider__container?.classList.remove("fadeIn_animation");
+      },1400);
     }
     
     function animationCombination1 (slider__container: any) {
@@ -122,32 +88,8 @@ const PropertyCard = ({property1, currentPage}:{property1:PropertyDocument, curr
 
     const [prevFade1, setPrevFade1] = useState(1);
     const [fade1, setFade1] = useState(0);
-    const [initialRender, setInitialRender] = useState(0);
-    // slider1 = {...properties[sliderIndex1]};
 
-    // const propertiesRefCount = useRef(0);
     const [imageReference, setImageReference] = useState(0);
-    // const [propertiesCounter, setPropertiesCounter] = useState([]);
-
-
-
-    //Part 8
-    const handlePropertyDelete = async (propertyId:string) => {
-
-      // e.preventDefault();
-      const current_url = window.location.href.toString().split("/agents/")[1];
-      console.log(current_url);
-
-      const response = await fetch(`/api/properties`, {
-          method: "DELETE",
-          body: JSON.stringify({propertyId}),
-
-      })
-
-
-      const jsonResponse = await response.json();
-      console.log(jsonResponse);
-  }
 
 
     //Part11
@@ -158,7 +100,6 @@ const PropertyCard = ({property1, currentPage}:{property1:PropertyDocument, curr
     
     useEffect(()=> {
 
-      // console.log(property1);
       //Part 11 - get out from passed property info's images array only used image slots in a const
       // if (property === null && property1 !== null) {
         const filteredImages = property1.property_images.filter((image: string) => {
@@ -174,20 +115,8 @@ const PropertyCard = ({property1, currentPage}:{property1:PropertyDocument, curr
         tempProperty.property_images = filteredImages as string[];
         setProperty(tempProperty);
 
-      // } else if (property !== null) {
-
-         
-      // }
-
-
   });
 
-  // hover:outline hover:outline-[#d6003580] hover:outline-2  hover:outline-offset-1
-  // focus:outline focus:outline-[#d6003580] focus:outline-2  focus:outline-offset-1
-  // dark:hover:outline-[#d600352c] dark:hover:outline-offset-[0px]
-  // dark:focus:outline-[#d600352c] dark:focus:outline-offset-[0px] 
-
-  // let page = "property";
 
   return (
     <>
@@ -206,6 +135,7 @@ const PropertyCard = ({property1, currentPage}:{property1:PropertyDocument, curr
 
           `}>
 
+                {/* the property's image and slider buttons */}
                 <div className={`relative flex flex-row items-center justify-start text-start
                 ${currentPage === 'property' ? '' : 'xl:max-w-[50%]'} 
                 max-h-[23vh] rounded-t-[10px] overflow-hidden md:max-h-[22vw] lg:max-h-[18vw]
@@ -239,7 +169,6 @@ const PropertyCard = ({property1, currentPage}:{property1:PropertyDocument, curr
                 
                 <div className="w-full text_shadow-2">
 
-
                   <Link href={"/properties/single/"+property._id} key={property._id}
                   className="w-full">
                     <div className="flex flex-col items-start px-2 pt-1 text-sm text-start">
@@ -253,33 +182,7 @@ const PropertyCard = ({property1, currentPage}:{property1:PropertyDocument, curr
 
                     </div>
                   </Link>
-                  {currentPage === 'agent' ? (
-                        <div className="flex flex-col items-start px-2 pb-1 text-sm text-start">               
-                          <div className="font-light text-sm">Added: {property.property_date}</div>
-                          <div className="font-light text-sm">Updated: {property.property_update}</div>
 
-                          <div className="text-sm font-light w-full flex flex-row gap-2 justify-start mt-2 mb-1">
-
-                            <button type="button"
-                              onClick={() => {bodyNoScroll(); showEdit("Edit")}}
-                              className="bg-theme-text-brighter dark:bg-theme-text-dark text-white 
-                              rounded-full w-[65px]
-                              opacity-40 hover:opacity-90 text-center">
-                                  Edit
-                              </button>
-
-                            <button type="submit" onClick={()=>{handlePropertyDelete(property._id)}}
-                              className="bg-theme-text-brighter dark:bg-theme-text-dark text-white 
-                              rounded-full w-[65px]
-                              opacity-40 hover:opacity-90 text-center">
-                                  Delete
-                              </button>
-
-                          </div>
-                        </div>
-                      ):(
-                        ""
-                      )}
                 </div>
 
 

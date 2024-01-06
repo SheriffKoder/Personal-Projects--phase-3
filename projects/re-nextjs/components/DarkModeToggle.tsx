@@ -4,11 +4,12 @@
 import { scrollScroll } from "@utils/bodyNoScroll";
 import { useState, useEffect } from "react";
 
-
+//the dark toggle icons, sessionStorage set on click/initial render/, icon management
 
 
 const DarkModeToggle = () => {
 
+    //called when pressing the button on the UI
     function handleToggle () {
 
         const toggleBG = document.querySelector("#toggleBG");
@@ -19,57 +20,25 @@ const DarkModeToggle = () => {
         if (sessionStorage.theme === "light") {
 
             setTheme("dark");
-            // sessionStorage.setItem("theme", "dark");
-            // window.document.documentElement.classList.remove("light");
-            // window.document.documentElement.classList.add("dark");
-            // toggleBG?.classList.add("bg-[#8080802e]");
-            // toggleBT?.classList.remove("bg-[url('/icons/moon-custom.svg')]");
-
-            // toggleBT?.classList.add("bg-[url('/icons/sun-custom.svg')]");
-            // // toggleBT?.classList.remove("toggle-animation-right");
-
-            // // toggleBT?.classList.add("toggle-animation-left");
-            // toggleSp?.classList.remove("toggle-animation2");
-
-            // toggleSp?.classList.add("toggle-animation");
-
-            // console.log(sessionStorage.theme);
-
 
         } else if (sessionStorage.theme === "dark") {
 
             setTheme("light");
-            // sessionStorage.setItem("theme", "light");
-            // window.document.documentElement.classList.remove("dark");
-            // window.document.documentElement.classList.add("light");
-            // toggleBG?.classList.add("g-gray-200");
-            // toggleBT?.classList.remove("bg-[url('/icons/sun-custom.svg')]");
-
-            // toggleBT?.classList.add("bg-[url('/icons/moon-custom.svg')]");
-            // // toggleBT?.classList.remove("toggle-animation-left");
-            
-   
-            // // toggleBT?.classList.add("toggle-animation-right");
-            // toggleSp?.classList.remove("toggle-animation");
-
-            // toggleSp?.classList.add("toggle-animation2");
-      
-
-            
-            // console.log(sessionStorage.theme);
-
         }
     }
 
+
+    //view the proper theme icon
     function setTheme (theme: string) {
 
-        // console.log("input is "+theme);
-        // const toggleBG = document.querySelector("#toggleBG");
         const toggleBT = document.querySelector("#toggleBT");
         const toggleSp = document.querySelector("#mySpan");
-        const body = document.querySelector("html");
-
+        
+        //part 11 - custom scroll
+        const body = document.querySelector("html");  
+        //add the animation to the scroll to fade out and display a scroll with background color and no thumb  
         body?.addEventListener("wheel", scrollScroll);
+
 
         let nextTheme :string;
         let toggleBGColor: string;
@@ -78,17 +47,19 @@ const DarkModeToggle = () => {
 
         if (theme === "light") {
 
-        toggleBT?.classList.remove(`bg-[url('/icons/light-theme-icon.svg')]`);
-        toggleBT?.classList.add(`bg-[url('/icons/dark-theme-icon.svg')]`);
-        body?.classList.remove("dark_scroll");
-        body?.classList.add("light_scroll");
+            toggleBT?.classList.remove(`bg-[url('/icons/light-theme-icon.svg')]`);
+            toggleBT?.classList.add(`bg-[url('/icons/dark-theme-icon.svg')]`);
 
-
-
+            //part 11 - custom scroll
+            body?.classList.remove("dark_scroll");
+            body?.classList.add("light_scroll");
 
         } else {
+
             toggleBT?.classList.remove(`bg-[url('/icons/dark-theme-icon.svg')]`);
             toggleBT?.classList.add(`bg-[url('/icons/light-theme-icon.svg')]`); 
+
+            //part 11 - custom scroll
             body?.classList.remove("light_scroll");
             body?.classList.add("dark_scroll");
 
@@ -96,25 +67,22 @@ const DarkModeToggle = () => {
 
         sessionStorage.setItem("theme", theme);
 
+        //move the icon left or right depending on the themes from/to
         window.document.documentElement.classList.remove(nextTheme);
         window.document.documentElement.classList.add(theme);
 
-        // toggleBT?.classList.remove(`bg-[url('/icons/${theme}-theme-icon.svg')]`);
-        // toggleBT?.classList.add(`bg-[url('/icons/${nextTheme}-theme-icon.svg')]`);
-        // toggleBT?.classList.remove("toggle-animation-right");
-
-        // toggleBT?.classList.add("toggle-animation-left");
+      
         toggleSp?.classList.remove(`toggle-animation-${nextTheme}`);
-
         toggleSp?.classList.add(`toggle-animation-${theme}`);
 
-        console.log(sessionStorage.theme);
-        scrollScroll();
 
+        //part 11 - custom scroll
+        //add the animation to the scroll to fade out and display a scroll with background color and no thumb
+        scrollScroll(); 
     }
 
   
-
+    //set the session storage to a theme string value (1)
     useEffect(() => {
 
         //not need to cause a re-render

@@ -45,6 +45,7 @@ const decreaseUserScore = async (target:string, itemId:string) => {
                 User.properties_count >= 0 ? (User.properties_count = User.properties_count - 1) : (User.properties_count = 0);
                 console.log(User.properties_count);
                 await User.save();    
+                console.log("score decreased successfully");
             }
         }
 
@@ -56,9 +57,10 @@ const decreaseUserScore = async (target:string, itemId:string) => {
                 User.posts_count > 0 ? (User.posts_count = User.posts_count - 1) : (User.posts_count = 0);
                 console.log(User.posts_count);
                 await User.save();    
-
+                console.log("score decreased successfully");
             }
         }
+
 
 
 

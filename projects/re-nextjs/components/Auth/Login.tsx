@@ -13,7 +13,8 @@ import { useRouter } from "next/navigation";
 
 //02X.07
 import type { DefaultSession } from 'next-auth';
-import { propertyInterface } from "@models/property";
+import { PropertyDocument } from "@models/propertyModel";
+
 //02X.07
 //to use the user.id in the useEffect
 //and also it is public anywhere, do apply on agent page's ts
@@ -29,7 +30,7 @@ declare module 'next-auth' {
     phone: number;
     avatar: string;
     position: string;
-    properties: propertyInterface[];
+    properties: PropertyDocument[];
     update: string;
     //   };
     };
@@ -39,10 +40,6 @@ declare module 'next-auth' {
 
 
 const Login_component = () => {
-// ({isLogin, setIsLogin}:{
-//     isLogin:boolean, 
-//     setIsLogin: React.Dispatch<React.SetStateAction<boolean>>,
-//   }) => {
 
     const { data: session, status } = useSession();      //get the status
    
@@ -65,7 +62,8 @@ const Login_component = () => {
     const { email, password } = userInfo;
 
 
-    //////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////
     //part 10 - addon input validation
     const errorMessage = useRef({
         email: "",
@@ -75,8 +73,6 @@ const Login_component = () => {
         // console.log(e.target.value);
         // console.log(target);
         const {name, value} = target;
-
-        // console.log({name, value});
 
         //get the input
         //check the input's value from the patterns available
@@ -141,9 +137,8 @@ const Login_component = () => {
 
 
     }
-    //////////////////////////////////
-
-
+    ////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////
 
 
 
@@ -154,7 +149,7 @@ const Login_component = () => {
         setUserInfo({ ...userInfo, [name]:value});
     }
 
-    //02X.02
+    //02X.02 submit to the api and check for authentication errors received from the api
     const handleSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
         setBusy(true);
         e.preventDefault();
@@ -166,6 +161,10 @@ const Login_component = () => {
         });
         
         console.log(apiResponse);
+
+        ////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////
+        //part 10 - addon input authentication
         if (apiResponse) {
             setBusy(false);    
         
@@ -199,10 +198,13 @@ const Login_component = () => {
                 hideDropDownMenu();
             }
         }
+        ////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////
+
 
     };
-    //////////////////////////////////////////////////////////////////////////
-    //////////////////////////////////////////////////////////////////////////
+
+
 
     //02X.07
     //when the user is logged into session, the useEffect redirects to their page
@@ -223,125 +225,129 @@ const Login_component = () => {
         
 
     return (
+
         <div className=" myMain2 h-[100vh] hidden items-center justify-center
         dark:before:bg-[#000000e3]  box-shadow-1 mt-9 lg:mt-0
         "
         id="login__container">
 
-        <div className="
-            z-[3] w-[90%] h-auto
-            flex flex-col items-center gap-1 lg:gap-4  p-3 max-w-[500px]
-            rounded-[17px] bg-[#ffffffbd]  dark:bg-[#ffffff10]
-            border-[rgba(255,255,255,0.02)]
-            dark:text-[#ffffffde] shadow-2xl dark:shadow-inner 
-            pb-4 lg:pb-7
-            ">
+            <div className="
+                z-[3] w-[90%] h-auto
+                flex flex-col items-center gap-1 lg:gap-4  p-3 max-w-[500px]
+                rounded-[17px] bg-[#ffffffbd]  dark:bg-[#ffffff10]
+                border-[rgba(255,255,255,0.02)]
+                dark:text-[#ffffffde] shadow-2xl dark:shadow-inner 
+                pb-4 lg:pb-7
+                ">
 
-                <span id="errorMsgContainer_login"
-                className="border-[rgba(255,255,255,0.02)] shadow-lg dark:shadow-inner 
-                absolute z-[2] top-[50%] left-[50%] centered_centered text-theme-text-dark text-xs
-                p-2 dark:bg-[#151515f8] bg-[#fdfdfd] rounded-[7px] flex flex-col">
-                    
-                    <span className="dark:text-white  text-black flex flex-row">
-                        <span className="mt-auto ml-1 opacity-70 mr-2" id="errorMsg_login_title">
-                            Please check the following inputs
+                    {/* the message notification */}
+                    <span id="errorMsgContainer_login"
+                    className="border-[rgba(255,255,255,0.02)] shadow-lg dark:shadow-inner 
+                    absolute z-[2] top-[50%] left-[50%] centered_centered text-theme-text-dark text-xs
+                    p-2 dark:bg-[#151515f8] bg-[#fdfdfd] rounded-[7px] flex flex-col">
+                        
+                        <span className="dark:text-white  text-black flex flex-row">
+                            <span className="mt-auto ml-1 opacity-70 mr-2" id="errorMsg_login_title">
+                                Please check the following inputs
+                            </span>
+                            <button 
+                                onClick={()=> {document.getElementById("errorMsgContainer_login")!.style.display="none"}}
+                                className="
+                                ml-auto bg-theme-text-brighter opacity-80 hover:opacity-100 dark:opacity-100 dark:bg-[#912642] dark:hover:bg-[#9f2545] h-5 w-5 rounded-[6px] text-white flex items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" className="bi bi-x-lg" viewBox="0 0 16 16"> <path fill-rule="evenodd" d="M13.854 2.146a.5.5 0 0 1 0 .708l-11 11a.5.5 0 0 1-.708-.708l11-11a.5.5 0 0 1 .708 0Z"/> <path fill-rule="evenodd" d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z"/> </svg>
+                            </button>
                         </span>
-                        <button 
-                            onClick={()=> {document.getElementById("errorMsgContainer_login")!.style.display="none"}}
+
+                        <span id="errorMsg_login" className="w-[95%] mx-auto mt-2">
+
+                        </span>
+                    </span>
+                    
+                    {/* close button */}
+                    <div className="text-center relative w-full flex flex-col">
+                        <div className="absolute right-0">
+                            <button 
+                            onClick={()=> {hideLogin();}}
                             className="
                             ml-auto bg-theme-text-brighter opacity-80 hover:opacity-100 dark:opacity-100 dark:bg-[#912642] dark:hover:bg-[#9f2545] h-5 w-5 rounded-[6px] text-white flex items-center justify-center">
                             <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" className="bi bi-x-lg" viewBox="0 0 16 16"> <path fill-rule="evenodd" d="M13.854 2.146a.5.5 0 0 1 0 .708l-11 11a.5.5 0 0 1-.708-.708l11-11a.5.5 0 0 1 .708 0Z"/> <path fill-rule="evenodd" d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z"/> </svg>
-                        </button>
-                    </span>
-
-                    <span id="errorMsg_login" className="w-[95%] mx-auto mt-2">
-
-                    </span>
-                </span>
-                
-                <div className="text-center relative w-full flex flex-col">
-                    <div className="absolute right-0">
-                        <button 
-                        onClick={()=> {hideLogin();}}
-                        className="
-                        ml-auto bg-theme-text-brighter opacity-80 hover:opacity-100 dark:opacity-100 dark:bg-[#912642] dark:hover:bg-[#9f2545] h-5 w-5 rounded-[6px] text-white flex items-center justify-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" className="bi bi-x-lg" viewBox="0 0 16 16"> <path fill-rule="evenodd" d="M13.854 2.146a.5.5 0 0 1 0 .708l-11 11a.5.5 0 0 1-.708-.708l11-11a.5.5 0 0 1 .708 0Z"/> <path fill-rule="evenodd" d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z"/> </svg>
-                        </button>
-                    </div>
-
-                    <div className="mx-auto pt-0 lg:pt-6 flex flex-col lg:flex-row gap-1 flex-wrap justify-center">
-                        <span className="opacity-60">Welcome Again. </span>
-                        <h3 className="mb-2 text_shadow-2 opacity-80">Sign-in to your account</h3>
-                    </div>
-                    
-                </div>
-
-                <form className="flex flex-col gap-1 lg:gap-4 items-center
-                w-[90%] md:px-[5%]
-                
-                "
-                onSubmit={handleSubmit}
-                >
-
-                    <label className="w-[100%] flex flex-row justify-center text-center
-                    label_field
-                    bg-[#ffffff07] rounded-[7px] border-2 border-[#ffffff02]
-                    
-                    ">
-                        <span className="min-w-[7rem] px-2 py-1 text_shadow-2 opacity-80 dark:opacity-90">E-Mail</span>
-                        <input className="w-full input_field border-0 rounded-r-[6px] 
-                            dark:bg-[#ffffff09] dark:focus:bg-[#ffffff02]  px-2 
-                            border-[rgba(255,255,255,0.02)]" type="email"
-                        name="email" value={email} onChange={handleChange} onBlur={inputCheckHandler}
-                        />
-                        
-                    </label>
-
-                    <label className="w-[100%] flex flex-row justify-center text-center
-                    label_field
-                    bg-[#ffffff07] rounded-[7px] border-2 border-[#ffffff02]
-                    
-                    ">
-                        <span className="min-w-[7rem] px-2 py-1 text_shadow-2 opacity-80 dark:opacity-90">password</span>
-                        <input className="w-full input_field border-0 rounded-r-[6px] 
-                            dark:bg-[#ffffff09] dark:focus:bg-[#ffffff02]  px-2 
-                            border-[rgba(255,255,255,0.02)]" type="password"
-                            name="password" value={password} onChange={handleChange} onBlur={inputCheckHandler}
-                        />
-                        
-                    </label>
-
-                    <div className="w-full pr-2 flex flex-row">
-                            <Link href="/" 
-                            className="ml-auto text-sm hover:text-[#d33660]">
-                                forgot password ?
-                            </Link>
-                            
-                            {error ? (
-                                <span>{error}</span>
-                            ): (null)}
-                    </div>
-
-
-                    <div className="mt-1 lg:mt-4 w-[80%] flex">
-                            <button type="submit" className="
-                            bg-theme-text-brighter dark:bg-theme-text-dark text-white 
-                            rounded-[9px] py-1 px-3 w-full
-                            opacity-80 hover:opacity-90 mx-auto"
-                            disabled={busy}
-                            style={{opacity: busy? 0.5 : 1}}>
-                                Sign in 
                             </button>
+                        </div>
+
+                        <div className="mx-auto pt-0 lg:pt-6 flex flex-col lg:flex-row gap-1 flex-wrap justify-center">
+                            <span className="opacity-60">Welcome Again. </span>
+                            <h3 className="mb-2 text_shadow-2 opacity-80">Sign-in to your account</h3>
+                        </div>
+                        
                     </div>
 
-                </form>
+                    <form className="flex flex-col gap-1 lg:gap-4 items-center
+                    w-[90%] md:px-[5%]
+                    "
+                    onSubmit={handleSubmit}
+                    >
+
+                        {/* email */}
+                        <label className="w-[100%] flex flex-row justify-center text-center
+                        label_field
+                        bg-[#ffffff07] rounded-[7px] border-2 border-[#ffffff02]
+                        ">
+                            <span className="min-w-[7rem] px-2 py-1 text_shadow-2 opacity-80 dark:opacity-90">E-Mail</span>
+                            <input className="w-full input_field border-0 rounded-r-[6px] 
+                                dark:bg-[#ffffff09] dark:focus:bg-[#ffffff02]  px-2 
+                                border-[rgba(255,255,255,0.02)]" type="email"
+                            name="email" value={email} onChange={handleChange} onBlur={inputCheckHandler}
+                            />
+                            
+                        </label>
+
+                        {/* password */}
+                        <label className="w-[100%] flex flex-row justify-center text-center
+                        label_field
+                        bg-[#ffffff07] rounded-[7px] border-2 border-[#ffffff02]
+                        
+                        ">
+                            <span className="min-w-[7rem] px-2 py-1 text_shadow-2 opacity-80 dark:opacity-90">password</span>
+                            <input className="w-full input_field border-0 rounded-r-[6px] 
+                                dark:bg-[#ffffff09] dark:focus:bg-[#ffffff02]  px-2 
+                                border-[rgba(255,255,255,0.02)]" type="password"
+                                name="password" value={password} onChange={handleChange} onBlur={inputCheckHandler}
+                            />
+                            
+                        </label>
+
+                        {/* forgot password */}
+                        <div className="w-full pr-2 flex flex-row">
+                                <Link href="/" 
+                                className="ml-auto text-sm hover:text-[#d33660]">
+                                    forgot password ?
+                                </Link>
+                                
+                                {error ? (
+                                    <span>{error}</span>
+                                ): (null)}
+                        </div>
+
+                        {/* the submit button */}
+                        <div className="mt-1 lg:mt-4 w-[80%] flex">
+                                <button type="submit" className="
+                                bg-theme-text-brighter dark:bg-theme-text-dark text-white 
+                                rounded-[9px] py-1 px-3 w-full
+                                opacity-80 hover:opacity-90 mx-auto"
+                                disabled={busy}
+                                style={{opacity: busy? 0.5 : 1}}>
+                                    Sign in 
+                                </button>
+                        </div>
+
+                    </form>
 
 
             </div>
- 
+    
         
         </div>
       )
 }
 
-export default Login_component
+export default Login_component;

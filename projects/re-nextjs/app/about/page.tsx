@@ -92,17 +92,18 @@ const page = () => {
           //wait for fade out to finish then hide the container - duration of the css animation is 0.6s
           setTimeout(()=> {
             if (container) container.style.display = "none";
+              //redirect to home page when email is submitted
+              router.push("/");
           }, 600);
         
         }
-      }, 7000);
+      }, 5000);
 
     }
     /////////////////////////////
 
 
-    //redirect to home page when email is submitted
-    router.push("/");
+
 
       
   }
@@ -119,7 +120,7 @@ const page = () => {
       }).then((res) => res.json());
       console.log(res);
 
-      if (res.ok) showEmailConfirm();
+      if (res === "Email Sent") showEmailConfirm();
 
   }
 

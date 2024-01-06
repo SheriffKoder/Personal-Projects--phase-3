@@ -8,7 +8,7 @@ import PostModel from "@models/postModel";
 
 export const GET = async (request:NextRequest, {params}:any) => {
 
-    // console.log(params);
+    console.log(params);
     const page = params.pageId - 1; //so page 1 will be 0, page 2 will be 1, page 3 will be 2
     const end = 2;  //how many items per each view
     const start = page * end;
@@ -18,8 +18,8 @@ export const GET = async (request:NextRequest, {params}:any) => {
         // await connectToDB();
         // console.log(params);
 
-        const pagesEnd = await PostModel.find({property_userId: params.userId2}).countDocuments() / end;          //page X
-        const posts = await PostModel.find({property_userId: params.userId2})
+        const pagesEnd = await PostModel.find({property_userId: params.userId}).countDocuments() / end;          //page X
+        const posts = await PostModel.find({property_userId: params.userId})
         .skip(start).limit(end);
 
         // const posts = await PropertyModel.find().skip(start).limit(end).populate("userId");  //page X

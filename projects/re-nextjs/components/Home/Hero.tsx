@@ -1,5 +1,7 @@
 // import React from 'react'
 
+// this is the hero image component with the "speak to an agent button"
+
 import Link from "next/link";
 import Image from "next/image";
 
