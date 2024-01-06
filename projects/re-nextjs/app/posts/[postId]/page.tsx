@@ -1,9 +1,10 @@
 // import React from 'react'
-// "use client"
+"use client"
 
 import Link from "next/link";
 import Image from "next/image";
 import { PostDocument } from "@models/postModel";
+import { useEffect, useState } from "react";
 
 
 //single post page: we render the post info, and side posts
@@ -17,48 +18,48 @@ const page = async () => {
     }
 
     //not used since we used the loading.tsx, now we store in a const as this page does not change
-    // const [post_andRecPosts, setPost_andRecPosts] = useState<post_andRecPosts | null>(null);
+    const [post_andRecPosts, setPost_andRecPosts] = useState<post_andRecPosts | null>(null);
 
 
 
     //connect to the data base, fetch this post
     
-    let current_url = window.location.href.toString().split("/posts/")[1];
+    // let current_url = window.location.href.toString().split("/posts/")[1];
 
-    const response = await fetch(`/api/posts/${current_url}`, {
-        method: "GET",
-    })
+    // const response = await fetch(`/api/posts/${current_url}`, {
+    //     method: "GET",
+    // })
 
-    const jsonResponse = await response.json();
-    const post_andRecPosts = jsonResponse;
+    // const jsonResponse = await response.json();
+    // const post_andRecPosts = jsonResponse;
 
 
     //not used since we used the loading.tsx, to make the loading work we need to fetch outside of a useEffect
-    // useEffect(()=> {
+    useEffect(()=> {
 
-//     //get page url as it included the id for the user page in question
-//     const current_url = window.location.href.toString().split("/posts/")[1];
-//     console.log(current_url);
+    //get page url as it included the id for the user page in question
+    const current_url = window.location.href.toString().split("/posts/")[1];
+    console.log(current_url);
 
-//     //connect to data base
-//     const fetchPost = async () => { 
+    //connect to data base
+    const fetchPost = async () => { 
         
-//         let current_url = window.location.href.toString().split("/posts/")[1];
+        let current_url = window.location.href.toString().split("/posts/")[1];
 
-//         const response = await fetch(`/api/posts/${current_url}`, {
-//             method: "GET",
-//         })
+        const response = await fetch(`/api/posts/${current_url}`, {
+            method: "GET",
+        })
 
-//         const jsonResponse = await response.json();
-//         // console.log(jsonResponse);
+        const jsonResponse = await response.json();
+        // console.log(jsonResponse);
 
-//         setPost_andRecPosts(jsonResponse);
+        setPost_andRecPosts(jsonResponse);
 
-//     }
+    }
 
-//     fetchPost();
+    fetchPost();
 
-// },[]);
+},[]);
 
 
   return (

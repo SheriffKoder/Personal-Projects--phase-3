@@ -221,13 +221,13 @@ const PropertyCard = ({property1, currentPage}:{property1:PropertyDocument, curr
                   </button>
 
                   <Link href={"/properties/"+property._id} key={property._id}
-                  className="min-h-[18vw]">
+                  className="min-h-[10vw]">
                     <Image src={property.property_images[imageReference]} height={400} width={400} alt={property.property_type+" "+property.property_country+" "+property.property_city+" "+property.property_district+" "+property.property_area+" "+property.property_beds+" bedrooms "+property.property_baths+" bathrooms "+property.property_listing_type}
                     id={property._id}
-                    className={`border-0 min-w-full min-h-[18vw]
+                    className={`border-0 min-w-full min-h-[10vw]
                     
                     `}
-                    style={{objectFit:'contain'}}>
+                    style={{objectFit:'cover'}}>
                     </Image>
                   </Link>
 

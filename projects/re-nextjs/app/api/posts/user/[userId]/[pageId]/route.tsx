@@ -15,11 +15,11 @@ export const GET = async (request:NextRequest, {params}:any) => {
 
     
     try {
-        // await connectToDB();
+        await connectToDB();
         // console.log(params);
 
-        const pagesEnd = await PostModel.find({property_userId: params.userId}).countDocuments() / end;          //page X
-        const posts = await PostModel.find({property_userId: params.userId})
+        const pagesEnd = await PostModel.find({useId: params.userId}).countDocuments() / end;          //page X
+        const posts = await PostModel.find({userId: params.userId})
         .skip(start).limit(end);
 
         // const posts = await PropertyModel.find().skip(start).limit(end).populate("userId");  //page X
@@ -29,6 +29,7 @@ export const GET = async (request:NextRequest, {params}:any) => {
 
 
         // const posts = await PostModel.find().populate("userId");
+        console.log(posts);
 
  
         return new Response(JSON.stringify({posts, pagesEnd}), {status: 200});

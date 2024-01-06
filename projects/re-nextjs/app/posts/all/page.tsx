@@ -96,8 +96,8 @@ const page = () => {
                     text_shadow-2 lg:flex lg:flex-row lg:max-w-full h-[115vw] max-h-[750px] lg:h-[25vh]
                     ">
 
-                      <Link href={"/posts/"+post._id} key={post._id} className="lg:order-2 h-[60%] overflow-hidden
-                      lg:h-full lg:w-[30%]">
+                      <Link href={"/posts/"+post._id} key={post._id} className="lg:order-2  overflow-hidden
+                      lg:h-full lg:w-[30%] h-[50vw] md2:h-[50vw]">
                           <Image src={post.image} height={300} width={300} alt={post.title}
                           id={post._id}
                           className="border-0 rounded-t-[10px] w-full h-full

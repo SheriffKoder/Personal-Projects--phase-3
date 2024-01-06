@@ -108,6 +108,7 @@ const Home_Rec = () => {
 
     useEffect(()=> {
         
+        let slider__container = document.querySelector("#slider__container"); 
 
         const fetchProperties = async () => {
         const responseRec = await fetch("/api/properties/homePage_rec");
@@ -125,14 +126,17 @@ const Home_Rec = () => {
 
 
         setPropertiesRec(jsonResponseRec);
+        
+
         }
 
-        fetchProperties();    
+        if (propertiesRec.length < 1) fetchProperties();  animationCombination(slider__container);   
 
         if (propertiesRec.length > 1) {
-            let slider__container = document.querySelector("#slider__container");        
             animationCombination(slider__container);    
         } 
+
+
 
     },[fade]);
 

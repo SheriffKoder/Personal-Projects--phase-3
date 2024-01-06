@@ -385,11 +385,13 @@ const Home_Main = () => {
             <h4 className="text_shadow-3">Check out our latest properties</h4>
 
             {/* latest properties container */}
-            <div className="flex flex-row gap-6 my-6 flex-wrap justify-center lg:justify-start mx-auto">
+            <div className="flex flex-col h-full">
 
           {/* property */}
             {properties_andPosts?.properties.length > 0 ? (
             <>
+              <div className="flex flex-row gap-6 my-6 flex-wrap justify-center lg:justify-start mx-auto">
+
               {properties_andPosts.properties.map((property: PropertyDocument) => (
                 <div className="
                 
@@ -398,6 +400,7 @@ const Home_Main = () => {
                 </div>
               )
               )}
+              </div>
 
                 {/* go to the all-properties page button */}
               <Link href="/properties" className="bg-theme-text-brighter dark:bg-theme-text-dark text-white 

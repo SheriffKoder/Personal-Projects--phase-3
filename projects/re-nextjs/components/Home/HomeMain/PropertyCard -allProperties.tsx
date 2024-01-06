@@ -156,7 +156,7 @@ const PropertyCard = ({property1, currentPage}:{property1:PropertyDocument, curr
                     className={`border-0 rounded-t-[10px] min-w-full min-h-[18vw]
                     ${currentPage === 'property' ? '' : 'xl:rounded-l-[10px] xl:rounded-tr-none'}
                     `}
-                    style={{objectFit:'contain'}}>
+                    style={{objectFit:'cover'}}>
                     </Image>
                   </Link>
 

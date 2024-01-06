@@ -82,6 +82,7 @@ const PostsContainer = ({setPostEditId, userAuthority, setReload, reload, userNa
             const response = await fetch(`/api/posts/user/${userId}/${pageId}`);
             const jsonResponse = await response.json();
 
+            console.log(jsonResponse);
             //last page button value, to jump to the last page of results
             endPage.current = jsonResponse.pagesEnd;
 

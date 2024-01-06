@@ -192,10 +192,11 @@ const Login_component = () => {
             } else {
                 // console.log(res);
                 // console.log("signed in");
-                let agentId = (session?.user.id);
-            router.push(`/agents/${agentId}`);
-                hideLogin();
-                hideDropDownMenu();
+            //     console.log(session);
+            //         let agentId = (session?.user.id);
+            //     router.push(`/agents/${agentId}`);
+            //         hideLogin();
+            //         hideDropDownMenu();
             }
         }
         ////////////////////////////////////////////////////////////////////////////////////
@@ -205,16 +206,20 @@ const Login_component = () => {
     };
 
 
+    let loggedIn = false;
 
     //02X.07
     //when the user is logged into session, the useEffect redirects to their page
     //wether after login or the sign-up's login
     useEffect(() => {
-        // console.log(session?.user);
+        console.log(session?.user);
         // console.log(session?.user.id);
-        if (session?.user.id) {
+        if (session?.user.id && loggedIn === false) {
+            loggedIn = true;
             let agentId = (session?.user.id);
-          router.push(`/agents/${agentId}`);
+            router.push(`/agents/${agentId}`);
+            hideLogin();
+            hideDropDownMenu();
         }
         document.getElementById("errorMsgContainer_login")!.style.display="none";
 

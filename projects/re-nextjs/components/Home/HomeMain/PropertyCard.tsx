@@ -219,14 +219,14 @@ const PropertyCard = ({property1, currentPage}:{property1:PropertyDocument, curr
                     bg-[url('/icons/arrow-left.svg')] h-4 w-4 bg-no-repeat bg-contain">
                   </button>
 
-                  <Link href={"/properties/"+property._id} key={property._id}
-                  className="min-h-[18vw]">
+                  <Link href={"/properties/single/"+property._id} key={property._id}
+                  className="min-h-[10vw]">
                     <Image src={property.property_images[imageReference]} height={400} width={400} alt={property.property_type+" "+property.property_country+" "+property.property_city+" "+property.property_district+" "+property.property_area+" "+property.property_beds+" bedrooms "+property.property_baths+" bathrooms "+property.property_listing_type}
                     id={property._id}
-                    className={`border-0 rounded-t-[10px] min-w-full min-h-[18vw]
+                    className={`border-0 rounded-t-[10px] min-w-full min-h-[10vw]
                     ${currentPage === 'property' ? '' : 'xl:rounded-l-[10px] xl:rounded-tr-none'}
                     `}
-                    style={{objectFit:'contain'}}>
+                    style={{objectFit:'cover'}}>
                     </Image>
                   </Link>
 
