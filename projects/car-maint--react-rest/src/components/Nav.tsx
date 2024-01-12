@@ -1,11 +1,14 @@
 import React from "react"
+import { useNavigate } from "react-router-dom";
+
 
 const Nav = () => {
+    const navigate = useNavigate();
   return (
     <nav className="text-white bg-[#0000001c] px-3 py-2 mb-6">
         <ul className="flex flex-row items-center gap-2">
             <li>
-                <a href="/">
+                <a onClick={()=>navigate("/")}>
                 <svg 
                 xmlns="http://www.w3.org/2000/svg" 
                 width="16" 

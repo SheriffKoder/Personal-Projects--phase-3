@@ -6,7 +6,8 @@ type checksType = {
     nextCheck: string,
     remaining: string,
     notes: string,
-    _id: number
+    _id: number,
+    color: string,
 };
 
 
@@ -22,6 +23,7 @@ const CheckCard = () => {
             remaining: "30",
             notes: "Make sure to check on the replacement part next time!",
             _id: 1,
+            color: "#058885",
         },
         {
             name: "Oil",
@@ -30,6 +32,7 @@ const CheckCard = () => {
             remaining: "30",
             notes: "Make sure to bring a filter next time",
             _id: 2,
+            color: "#c5b807",
 
         },
     
@@ -52,7 +55,8 @@ const CheckCard = () => {
             <div className="w-full flex flex-row px-2">
     
                 {/* title */}
-                <div className="rounded-[7px] bg-[#058885] 
+                <div style={{background: info.color}}
+                className="rounded-[7px]
                 px-2 py-0 w-[8rem] text-center
                 ">
                     {info.name}

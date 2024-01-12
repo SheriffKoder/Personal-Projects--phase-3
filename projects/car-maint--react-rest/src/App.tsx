@@ -1,9 +1,15 @@
 import React from 'react'
 import './App.css';
 
+//Part 2
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
+
 //Components
 import Nav from './components/Nav';
-import Home from './components/Home/Home';
+import Home from './components/Home/layout';
+import NotFound from './components/NotFound';
+import History from './components/History/layout';
 
 
 const App = () => {
@@ -19,13 +25,28 @@ const App = () => {
     <div className="
       bg-gradient-to-bl from-[#05a570] via-[#2779b3] to-[#226798]
       min-h-[100vh] max-w-[100vw] text-white pb-8
+      flex flex-col
       
     ">
 
+
+
+    
+
+    <Router>
     <Nav/>
-    <Home/>
+
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/:checkId" element={<History/>} />
+        <Route path="/*" element={<NotFound />} />
+      </Routes>  
+    </Router>
+
+
 
     </div>
+
 
 
 

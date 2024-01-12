@@ -450,6 +450,8 @@ put the nav
 then put the home component which will be "/" 
 which will include the CarInfo, checkCard etc
 
+in these components create the UI and fill with dummy data
 
-`
+
+
 */
