@@ -1,56 +1,70 @@
-import React from "react"
+import React, { Suspense, lazy, useEffect } from "react"
+import { useState } from "react";
+
+// import CarInfo from './HomeComponents/CarInfo'
+// import CheckCard from './HomeComponents/checkCard'
+import Loading from "./HomeComponents/loading";
+
+const CheckCard = lazy(() => import('./HomeComponents/checkCard'));
+const CarInfo = lazy(() => import('./HomeComponents/CarInfo'));
 
 
-import CarInfo from './HomeComponents/CarInfo'
-import CheckCard from './HomeComponents/checkCard'
+
 
 
 
 
 const Home = () => {
 
-    const checks = [
-        {
-            name: "Maintenance",
-            lastCheck: "01/01/01",
-            nextCheck: "01/01/01",
-            remaining: "30",
-            notes: "Make sure to check on the replacement part next time!",
-        },
-        {
-            name: "Oil",
-            lastCheck: "01/01/01",
-            nextCheck: "01/01/01",
-            remaining: "30",
-            notes: "Make sure to bring a filter next time",
-        },
-    
-    ];
 
-    const carInfo = {
-        brand: "Mazda",
-        model: "mazda 6",
-        lastCheck: "",
-        nextCheck: "",
-        image: "/images/car1.png",
-    }
+
 
   return (
+    <>
     <div className="px-3">
 
-        <h1 className="w-full font-semibold text-center mb-[-1rem]">Your Car's Info</h1>
-        <CarInfo carInfo={carInfo}/>
+        {/* Car info title, edit button */}
+        <div className="w-full flex flex-row mb-[-1rem] justify-center items-center gap-2">
 
-        <h1 className="w-full font-semibold text-center mb-[-1rem]">Your Check-ups</h1>
+            <h1 className="font-semibold text-center mx-auto relative">
+                Your Car's Info
+                <button className="rounded-full border border-[#ffffff2a] 
+                px-3 text-xs h-[1rem] absolute right-[-50%] top-[15%]
+                hover:bg-[#ffffff2a] focus:bg-[#ffffff2a]">
+                    edit
+                </button>
+            </h1>
+            
 
-        <>
-        {checks.map((check) => (
-            <CheckCard info={check}/>
-        ))}
-        </>
+
+        </div>
+        <Suspense fallback={<Loading/>}>
+            <CarInfo/>
+        </Suspense>
+
+
+        {/* Car check-ups title, add check-up button */}
+        <div className="w-full flex flex-row justify-center items-center 
+        gap-2 relative mb-[-0.5rem]">
+
+            <h1 className="font-semibold text-center mx-auto">Your Check-ups</h1>
+            
+            <button className="rounded-full border-2 border-[#ffffff2a] px-4 py-[0.125rem]
+                text-xs absolute right-0 font-semibold
+                hover:bg-[#ffffff2a] focus:bg-[#ffffff2a]">
+                    add new
+            </button> 
+
+        </div>
+        <Suspense fallback={<Loading/>}>
+            <CheckCard/>
+        </Suspense>
+
 
     </div>
+    </>
+    
   )
 }
 
-export default Home
+export default Home;
