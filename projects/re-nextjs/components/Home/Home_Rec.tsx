@@ -130,6 +130,9 @@ const Home_Rec = () => {
 
         }
 
+        //as the useEffect triggers on first load AND fade state (set by timer or buttons)
+        //we do not want to fetch properties again if there are
+        //if there are properties, just set the timer to animate and change the property index
         if (propertiesRec.length < 1) fetchProperties();  animationCombination(slider__container);   
 
         if (propertiesRec.length > 1) {
@@ -147,12 +150,16 @@ const Home_Rec = () => {
     <div id="rec" className="w-full md:w-[97vw] md:mx-auto h-auto border-[#ffffff15] mt-24 px-6"
     aria-label="recommended properties">
 
+        {/* title */}
         <h2 className="text-white text-[min(calc(1rem+2vw),(2.5rem))] font-semibold  mb-12
         text-center text_shadow-2">
             Our Recommendations
         </h2>
 
+        {/* arrows and image with info */}
         <div className="flex flex-row items-center justify-center gap-2 md:gap-8 h-[50vw] max-h-[500px] ">
+            
+            {/* prevFade to determine direction in the animation function */}
             <button 
                 onClick={()=>{setPrevFade(fade); setFade(fade-1);}}
                 // onClick={()=>{prevFade=fade; fade=fade-1; animationCombination(slider__container);}}
@@ -161,17 +168,21 @@ const Home_Rec = () => {
             </button>
 
             {/* maintain 16:9 aspect ratio */}
+            {/* the image and the property summarized info */}
             <div className="rounded-[17px] border-0
             w-full h-[calc(50vw)] max-h-[500px] max-w-[833px]
             relative 
             "
             id="slider__container">
+
+                {/* image */}
                 <Image src={propertiesRec[sliderIndex].property_images[0]} fill={true} alt={propertiesRec[sliderIndex].property_city}
                 onMouseEnter={stopTimer} onMouseLeave={startTimer}
                 className="rounded-[17px] border-0 opacity-90 hover:opacity-100 dark:opacity-75 dark:hover:opacity-90 
                 w-full h-[calc(50vw)] max-h-[500px] max-w-[833px]"
                 style={{objectFit:'cover'}}></Image>
 
+                {/* property summarized info */}
                 <div className=" flex flex-col justify-start absolute bottom-0 left-0 
                 w-full bg-[#0000005d] p-[min(calc(1rem+0.5vw),(2rem))] text-white box-shadow-1
                 text-[min(calc(0.5rem+0.5vw),(1.25rem))] capitalize rounded-b-[17px]">
@@ -197,4 +208,4 @@ const Home_Rec = () => {
   )
 }
 
-export default Home_Rec
+export default Home_Rec;

@@ -160,6 +160,38 @@ a simple container contains some text with a glass-like-css background
 }
 
 
+////////////////////////////////////////////////////////////////////////////////////////////////////
+////////// Property slider (Our recommendations) //////////
+Components>Home>Home_Rec.tsx
+
+this component fetches properties marked by agents as recommended
+and displays for each property some of its information and its first image
+so a user can click on the property to view its page for more details
+
+the main idea of the component is that on the page's load
+there is a timer that changes the displayed property after X seconds automatically
+with an animation to fade out the current property and fade in with the new property 
+the property can be changed also with the right/left arrow buttons
+
+*when the user hovers over the property, the timer stops to allow the user to check the information
+when the user hovers out, the timer then starts again to change between properties automatically
+when changing the properties with left/right arrow buttons the timer is reset for the new property
+
+
+* the component also filter-out un-used image slots to use the 2nd slot if the first slot is empty
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
