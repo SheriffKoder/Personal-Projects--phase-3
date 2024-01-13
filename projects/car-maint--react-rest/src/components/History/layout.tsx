@@ -2,7 +2,7 @@ import React, {Suspense} from "react"
 import Loading from "../Home/HomeComponents/loading";
 
 
-import HistoryCards from "./Cards";
+import HistoryCards from "./HistoryCards";
 
 
 

@@ -1,4 +1,5 @@
 import React from "react"
+import BackToHome from "../BackToHome";
 
 
 
@@ -15,7 +16,8 @@ type checksType = {
 type checkModel = {
     name: string,
     color: string,
-    checks: checksType[];
+    history: checksType[],
+    _id: string
     
 };
 
@@ -23,66 +25,103 @@ type checkModel = {
 
 const HistoryCards = () => {
   
-    const check: checkModel = {
-        name: "Maintenance",
-        color: "#058885",
-        checks: [
+    const check: checkModel = 
+    // {
+    //     name: "Maintenance",
+    //     color: "#058885",
+    //     _id: "1234",
+    //     history: [
+    //         {
+    //             addDate: "addDate 0",
+    //             initialCheck: "initialCheck 0",
+    //             // lastCheck: "03/03/23",
+    //             nextCheck: "nextCheck 0",
+    //             checkedOn: "checkedOn 0",
+    //             notes: "Make sure to check on the replacement part next time!",
+    //             _id: 1,
+    //         },
+    //         {
+    //             addDate: "addDate 1",
+    //             initialCheck: "initialCheck 1",
+    //             // lastCheck: "03/02/23",
+    //             nextCheck: "nextCheck 1",
+    //             checkedOn: "checkedOn 1",
+    //             notes: "get something for the filter!",
+    //             _id: 2,
+    //         },
+    //         {
+    //             addDate: "addDate 2",
+    //             initialCheck: "initialCheck 2",
+    //             // lastCheck: "none",
+    //             nextCheck: "nextCheck 2",
+    //             checkedOn: "checkedOn 2",
+    //             notes: "Make sure to bring a filter next time",
+    //             _id: 3,
+    //         },
+    //         {
+    //             addDate: "addDate 3",
+    //             initialCheck: "initialCheck 3",
+    //             // lastCheck: "none",
+    //             nextCheck: "nextCheck 3",
+    //             checkedOn: "checkedOn 3",
+    //             notes: "Make sure to bring a filter next time",
+    //             _id: 3,
+
+    //         },
+    //     ]
+    // };
+
+    {
+        name: "Oil Change",
+        color: "#b7ab09",
+        _id: "4567",
+
+        history: [
             {
-                addDate: "addDate 0",
+                addDate: "addDate Oil 0",
                 initialCheck: "initialCheck 0",
-                // lastCheck: "03/03/23",
-                nextCheck: "nextCheck 0",
-                checkedOn: "checkedOn 0",
-                notes: "Make sure to check on the replacement part next time!",
+                nextCheck: "nextCheck Oil 0",
+                checkedOn: "",
+                notes: "Make sure to bring a filter next time",
                 _id: 1,
             },
             {
-                addDate: "addDate 1",
+                addDate: "addDate Oil 1",
                 initialCheck: "initialCheck 1",
-                // lastCheck: "03/02/23",
-                nextCheck: "nextCheck 1",
-                checkedOn: "checkedOn 1",
-                notes: "get something for the filter!",
+                nextCheck: "nextCheck Oil 1",
+                checkedOn: "checkedOn Oil 1",
+                notes: "all done",
                 _id: 2,
             },
-            {
-                addDate: "addDate 2",
-                initialCheck: "initialCheck 2",
-                // lastCheck: "none",
-                nextCheck: "nextCheck 2",
-                checkedOn: "checkedOn 2",
-                notes: "Make sure to bring a filter next time",
-                _id: 3,
-            },
-            {
-                addDate: "addDate 3",
-                initialCheck: "initialCheck 3",
-                // lastCheck: "none",
-                nextCheck: "nextCheck 3",
-                checkedOn: "checkedOn 3",
-                notes: "Make sure to bring a filter next time",
-                _id: 3,
 
-            },
         ]
-        
-    
+
+
     };
 
-    const slimChecks = check.checks;
+    const slimChecks = check.history;
     const allChecks: checksType[] = [...slimChecks];
   
     //take first check and delete  
     const currentCheck = slimChecks[0];
     slimChecks.shift();
 
-    //take last check and delete
-    const firstCheck = slimChecks[slimChecks.length-1];
-    slimChecks.pop();
+    let firstCheck = currentCheck;
+
+    if (slimChecks.length > 0) {
+        //take last check and delete
+        firstCheck = slimChecks[slimChecks.length-1];
+        slimChecks.pop();
+    }
+
+    console.log(currentCheck);
+    console.log(firstCheck);
+    console.log(slimChecks);
   
     let i = 1;
 
     return (
+    <div className="flex flex-col items-center">
         <div className="flex flex-col px-4">
 
             {/* the check title */}
@@ -141,7 +180,7 @@ const HistoryCards = () => {
 
                         <li className="w-full flex flex-row ml-2">
                             <div className="min-w-[7rem]">
-                            Last Check: {allChecks[1].checkedOn}
+                            Last Check: {slimChecks.length > 0 ? allChecks[1].checkedOn : currentCheck.initialCheck}
                             </div>
                         </li>
 
@@ -231,7 +270,7 @@ const HistoryCards = () => {
 
                                 <li className="w-full flex flex-row ml-2">
                                     <div className="min-w-[7rem]">duration:</div>
-                                    <div>calc nextDate-addDate</div>
+                                    <div>calc nextDate-today</div>
                                 </li>
                 
                                 <li className="w-full flex flex-row ml-2">
@@ -251,10 +290,12 @@ const HistoryCards = () => {
                     </div>
     
                 )
+
           
             })}
           
             {/* first check */}
+            {firstCheck._id !== currentCheck._id ? (
             <div className="
             w-full border border-[#ffffff00]
             glass-container-background-2 rounded-[7px] py-2 mt-6
@@ -311,7 +352,7 @@ const HistoryCards = () => {
 
                     <li className="w-full flex flex-row ml-2">
                         <div className="min-w-[7rem]">duration:</div>
-                        <div>calc (nextDate-addDate)</div>
+                        <div>calc (nextDate-today)</div>
                     </li>
     
                     <li className="w-full flex flex-row ml-2">
@@ -332,11 +373,16 @@ const HistoryCards = () => {
 
             
             </div>
+            ):("") }
 
 
         </div>
 
 
+            <div className="w-auto mt-4 mb-2 ml-[-0.5rem]">
+            <BackToHome/>
+            </div>
+    </div>
   )
 }
 

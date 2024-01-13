@@ -451,6 +451,9 @@ then put the home component which will be "/"
 which will include the CarInfo, checkCard etc
 
 in these components create the UI and fill with dummy data
+working on the dummy data to determine the needed functionality
+
+use useNavigate to live redirect
 
 
 
