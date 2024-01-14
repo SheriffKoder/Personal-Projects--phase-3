@@ -1,5 +1,5 @@
 import React from "react"
-import BackToHome from "./BackToHome";
+import BackToHome from "./misc/BackToHome";
 
 const NotFound = () => {
 

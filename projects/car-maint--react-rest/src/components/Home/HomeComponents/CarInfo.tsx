@@ -31,7 +31,12 @@ type carInfoType = {
 
 
 
-const CarInfo =  () => {
+const CarInfo =  ({brand, model, lastCheck, nextCheck}: {
+  brand: string,
+  model: string,
+  lastCheck: string,
+  nextCheck: string,
+}) => {
 
 
   const carInfo:carInfoType = {
@@ -68,19 +73,19 @@ const CarInfo =  () => {
         {/* <h2 className="pl-2 text-base">Car Details</h2> */}
         <ul className="text-sm font-light pl-3 flex flex-col gap-1">
           <li>
-            Brand: {carInfo.brand}
+            Brand: {brand}
           </li>
 
           <li>
-            Model: {carInfo.model}
+            Model: {model}
           </li>
 
           <li>
-            Last Check: {carInfo.lastCheck}
+            Last Check: {lastCheck}
           </li>
 
           <li>
-            Next Check: {carInfo.nextCheck}
+            Next Check: {nextCheck}
           </li>
         </ul>
       </div>

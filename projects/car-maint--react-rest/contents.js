@@ -439,6 +439,7 @@ working on the App.tsx with tailwind
 //// Part 2
 
 add components
+the main layout (App.tsx) nav/footer, home component(s), history page + components
 
 the App.tsx is just a component
 that returns a div
@@ -454,6 +455,67 @@ in these components create the UI and fill with dummy data
 working on the dummy data to determine the needed functionality
 
 use useNavigate to live redirect
+
+add the router wrapper in the main components App.tsx
+to allow switching between pages still keep the nav/footer without reload
+with the help of the useNavigate method
+
+
+/////////////////////////////////////////////
+//// Part 3
+
+add a login/signup, add/edit check
+
+//the login,signup component page
+//the add maintenance
+
+what should it have
+name
+color
+id (backend)
+
+addDate (backend)
+initialCheck
+nextCheck
+checkedOn = later a route
+notes
+_id (backend, id+index)
+
+
+so will have
+title, color, 
+initial check (should be moved to the head of the object)
+next check
+notes
+
+when editing the initial check (previous default on 0) will check if there is one
+if it exists (first check) then can edit
+if not exist, (1st+ check, previous check will be based on the check before  
+duration should be determined by today-next check
+
+so the edit component is exactly the same
+all what i did is changed text and put a condition to view the initial check input
+
+
+
+*/
+
+
+
+
+
+
+
+
+
+
+/*
+
+this project was designed mainly to work on phones and tablets in terms of UI
+did not work much on the front-end functionalities
+as the main idea is to practice making a REST App
+and try working with plain react for learning purposes
+
 
 
 

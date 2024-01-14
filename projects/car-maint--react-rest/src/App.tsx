@@ -5,13 +5,22 @@ import './App.css';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 
-//Components
+///// Components
 import Nav from './components/Nav';
-import Home from './components/Home/layout';
+
+// Main-pages
 import NotFound from './components/NotFound';
+import Home from './components/Home/layout';
 import History from './components/History/layout';
+
 import Footer from './components/Footer';
 
+// Forms
+import SignUp from './components/Forms/signUp';
+import Login from './components/Forms/login';
+import CheckupNew from './components/Forms/CheckupNew';
+import CheckupEdit from './components/Forms/CheckupEdit'
+import CarInfoNew from './components/Forms/CarInfoNew';
 
 const App = () => {
 
@@ -29,18 +38,26 @@ const App = () => {
       flex flex-col
       
     ">
-
+      
 
 
     
-
     <Router>
       <Nav/>
 
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/:checkId" element={<History/>} />
+        <Route path="/checkup/:checkId" element={<History/>} />
         <Route path="/*" element={<NotFound />} />
+        <Route path="/*" element={<NotFound />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/login" element={<Login />} />
+
+        <Route path="/checkup/new/" element={<CheckupNew />} />
+        <Route path="/checkup/edit/:checkId" element={<CheckupEdit />} />
+        <Route path="/CarInfo/new/" element={<CarInfoNew />} />
+
+
       </Routes>  
 
       <div className="mt-auto">

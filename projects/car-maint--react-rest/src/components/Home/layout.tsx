@@ -39,7 +39,7 @@ const Home = () => {
 
         </div>
         <Suspense fallback={<Loading/>}>
-            <CarInfo/>
+            <CarInfo brand="Mazda" model="mazda 6" lastCheck="01/01/2024" nextCheck="01/02/2024"/>
         </Suspense>
 
 

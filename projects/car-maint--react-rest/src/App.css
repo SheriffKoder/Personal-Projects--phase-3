@@ -57,3 +57,10 @@
   border: 1px solid rgba(255, 255, 255, 0.07);
 
 }
+
+.centered_centered {
+  position: fixed;
+  top: 30%;
+  left: 30%;
+  transform: translate(-50%, -50%);
+}
