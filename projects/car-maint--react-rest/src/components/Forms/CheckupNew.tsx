@@ -3,12 +3,14 @@ import React from "react"
 import GradientButtonBorderRounded from "../misc/GradientButtonBorderRounded";
 import { ChangeEventHandler } from "react";
 import BackToHome from "../misc/BackToHome";
+import { useNavigate } from "react-router-dom";
 
 const CheckupNew = () => {
 
+    const navigate = useNavigate();
 
     const [checkupInfo, setCheckupInfo] = useState({
-        title: "hh",
+        title: "",
         color: "#058885",
         initialCheck: "",
         nextCheck: "",
@@ -29,12 +31,19 @@ const CheckupNew = () => {
 
 
     return (
-    <div className="flex flex-col flex-1 items-center">
+    <div className="flex flex-col flex-1 items-center px-4 text_shadow">
+
+        <div className="flex flex-row w-full max-w-[900px] mb-8 text-xs text_shadow">
+            <span onClick={()=>{navigate("/")}} className="cursor-pointer">Home</span>
+            <span className="right_caret h-full w-[1rem] text-transparent">.</span>
+            <span style={{color:"#00465f"}}>New Check-up</span>
+        </div>
+
         <form className="bg-[#ffffff13] mx-6 rounded-[12px]
         flex flex-col justify-center pt-2 pb-3 px-4 my-auto
-        text-sm">
+        text-sm w-full max-w-[600px]">
 
-                <h2 className="w-full text-center font-semibold mb-3">
+                <h2 className="w-full text-center font-semibold mb-3 ">
                     Create a new checkup
                 </h2>
 
@@ -148,7 +157,7 @@ const CheckupNew = () => {
                             bg-[#e3f4ffd9]
                             focus-within:outline outline-offset-[3px] outline-2
                             outline-[#0bb97f]" 
-                            rows={4}
+                            rows={3}
                             defaultValue={notes}
                             name="notes"
                             onChange={handleChange}/>
@@ -179,7 +188,7 @@ const CheckupNew = () => {
 
         </form>
 
-        <div className="mt-auto ml-[-0.5rem]">
+        <div className="mt-auto ml-[-0.5rem] md:mt-8 md:mb-4">
             <BackToHome/>
         </div>
 

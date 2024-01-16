@@ -8,7 +8,6 @@ type checksType = {
     nextCheck: string,  //c     //1     //2
     checkedOn: string,  //c     //1     //2
     notes: string,      //c     //1     //2
-    _id: number,
 }
 
 type checkModel = {
@@ -40,7 +39,6 @@ const CheckCard = () => {
                     nextCheck: "nextCheck 0",
                     checkedOn: "checkedOn 0",
                     notes: "Make sure to check on the replacement part next time!",
-                    _id: 1,
                 },
                 {
                     addDate: "addDate 1",
@@ -49,7 +47,6 @@ const CheckCard = () => {
                     nextCheck: "nextCheck 1",
                     checkedOn: "checkedOn 1",
                     notes: "get something for the filter!",
-                    _id: 2,
                 },
                 {
                     addDate: "addDate 2",
@@ -58,7 +55,6 @@ const CheckCard = () => {
                     nextCheck: "nextCheck 2",
                     checkedOn: "checkedOn 2",
                     notes: "Make sure to bring a filter next time",
-                    _id: 3,
                 },
                 {
                     addDate: "addDate 3",
@@ -67,8 +63,6 @@ const CheckCard = () => {
                     nextCheck: "nextCheck 3",
                     checkedOn: "checkedOn 3",
                     notes: "Make sure to bring a filter next time",
-                    _id: 3,
-
                 },
             ]
 
@@ -87,23 +81,24 @@ const CheckCard = () => {
                     nextCheck: "nextCheck Oil 0",
                     checkedOn: "",
                     notes: "Make sure to bring a filter next time",
-                    _id: 1,
                 },
 
             ]
 
 
         },
-
-
         
     ];
+
     
+    const handleDeleteCheckTree = (checkTreeId: string) => {
+        console.log(checkTreeId);
+    };
 
   
     return (
 
-    <>
+    <div className="flex flex-col flex-wrap lg:flex-row lg:gap-4 lg:justify-center">
 
         {checks.length > 0 && checks.map((check:checkModel) => { 
          
@@ -122,6 +117,7 @@ const CheckCard = () => {
                 w-full border border-[#ffffff00]
                 glass-container-background-2 rounded-[7px] py-2 mt-6
                 opacity-90 hover:opacity-100 focus:opacity-100
+                max-w-[800px] mx-auto lg:w-[400px] lg:mx-0
                 " key={info._id}>
                 
                     {/* check-up title, buttons */}
@@ -137,11 +133,15 @@ const CheckCard = () => {
             
                         {/* buttons */}
                         <div className="ml-auto flex flex-row gap-2 h-[1rem]">
-                            <button className="ml-auto rounded-full bg-[#ffffff2a] px-1 py-0
+                            <button 
+                            onClick={()=>navigate(`/checkup/edit/${check._id}=0`)}
+                            className="ml-auto rounded-full bg-[#ffffff2a] px-1 py-0
                             w-[4.5rem] text-xs hover:scale-105 focus:scale-105">
                                 edit
                             </button>
-                            <button className="ml-auto rounded-full bg-[#ffffff2a] px-1 py-0
+                            <button 
+                            onClick={()=>handleDeleteCheckTree(check._id)}
+                            className="ml-auto rounded-full bg-[#ffffff2a] px-1 py-0
                             w-[4.5rem] text-xs hover:scale-105 focus:scale-105">
                             remove
                             </button>
@@ -180,7 +180,7 @@ const CheckCard = () => {
                     {/* button - view history */}
                     <div className="w-full flex mt-3 mb-1">
                         <button 
-                        onClick={()=>navigate(`/check=${info._id}`)}
+                        onClick={()=>navigate(`/checkup/${info._id}`)}
                         className="rounded-full border border-[#ffffff2a] px-3 py-1
                         text-xs mx-auto
                         hover:bg-[#ffffff2a] focus:bg-[#ffffff2a]">
@@ -208,7 +208,7 @@ const CheckCard = () => {
         )}
         
 
-    </>
+    </div>
   )
 }
 

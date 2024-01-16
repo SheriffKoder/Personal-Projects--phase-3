@@ -44,8 +44,9 @@
   drop-shadow(3px 0px 0px rgb(255, 255, 255))
   drop-shadow(0px -3px 0px rgb(255, 255, 255))
   drop-shadow(0px 3px 0px rgb(255, 255, 255));
-
 }
+
+
 
 
 .glass-container-background-2 {
@@ -63,4 +64,15 @@
   top: 30%;
   left: 30%;
   transform: translate(-50%, -50%);
+}
+
+.right_caret {
+  background-image: url("/public/images/arrow-right.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 50%;
+}
+
+.text_shadow {
+  text-shadow: 1px 1px 10px rgba(0, 0, 0, 0.06);
 }

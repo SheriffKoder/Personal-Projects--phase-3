@@ -3,13 +3,16 @@ import React from "react"
 import GradientButtonBorderRounded from "../misc/GradientButtonBorderRounded";
 import { ChangeEventHandler } from "react";
 import BackToHome from "../misc/BackToHome";
+import { useNavigate } from "react-router-dom";
 
 
 const CheckupEdit = () => {
 
+    const navigate = useNavigate();
+
 
     const [checkupInfo, setCheckupInfo] = useState({
-        title: "",
+        title: "Maint",
         color: "#058885",
         initialCheck: "",
         nextCheck: "",
@@ -30,11 +33,17 @@ const CheckupEdit = () => {
 
 
     return (
-        <div className="px-6 flex flex-col flex-1 items-center">
+        <div className="px-4 flex flex-col flex-1 items-center">
+
+            <div className="flex flex-row w-full max-w-[900px] mb-8 text-xs text_shadow">
+                <span onClick={()=>{navigate("/")}} className="cursor-pointer">Home</span>
+                <span className="right_caret h-full w-[1rem] text-transparent">.</span>
+                <span style={{color:"#00465f"}}>Edit Check-up ( {checkupInfo.title} )</span>
+            </div>
 
             <form className="bg-[#ffffff13] mx-6 rounded-[12px]
             flex flex-col justify-center pt-2 pb-3 px-4 my-auto
-            text-sm w-full">
+            text-sm w-full max-w-[600px]">
         
                     <h2 className="w-full text-center font-semibold mb-3">
                         Edit your checkup details
@@ -152,7 +161,7 @@ const CheckupEdit = () => {
                                 bg-[#e3f4ffd9]
                                 focus-within:outline outline-offset-[3px] outline-2
                                 outline-[#0bb97f]" 
-                                rows={4}
+                                rows={3}
                                 defaultValue={notes}
                                 name="notes"
                                 onChange={handleChange}/>
@@ -183,7 +192,7 @@ const CheckupEdit = () => {
         
             </form>
 
-            <div className="mt-auto ml-[-0.5rem]">
+            <div className="mt-auto ml-[-0.5rem] md:mt-8 md:mb-4">
             <BackToHome/>
             </div>
 

@@ -4,47 +4,68 @@ import GradientButtonBorderRounded from "../misc/GradientButtonBorderRounded";
 import { ChangeEventHandler } from "react";
 import CarInfo from "../Home/HomeComponents/CarInfo";
 import BackToHome from "../misc/BackToHome";
-
+import { useNavigate } from "react-router-dom";
 const CarInfoNew = () => {
 
+    const navigate = useNavigate();
 
-    const [checkupInfo, setCheckupInfo] = useState({
-        brand: "Mazda",
-        model: "mazda 6",
+    // const [carInfo, setCarInfo] = useState({
+    //     brand: "Mazda",
+    //     model: "mazda 6",
+    //     lastCheck: "01/01/2024",
+    //     nextCheck: "30/01/2024",
+    //     image: "/images/car1.png",
+    //     _id: "000",
+
+    // });
+
+    const [carInfo, setCarInfo] = useState({
+        brand: "",
+        model: "",
+        lastCheck: "",
+        nextCheck: "",
         image: "",
+        _id: "",
 
     });
 
 
-    const {brand, model, image} = checkupInfo;
+
+    const {brand, model, image} = carInfo;
 
 
     const handleChange: ChangeEventHandler<HTMLInputElement|HTMLTextAreaElement> = ({ target }) => {
         const { name, value } = target;
 
         console.log(value);
-        setCheckupInfo({ ...checkupInfo, [name]:value});
+        setCarInfo({ ...carInfo, [name]:value});
     }
 
 
     return (
-        <div className="px-3 flex flex-col flex-1 items-center">
+        <div className="px-3 flex flex-col flex-1 items-center text_shadow">
 
-            <div className="w-full flex flex-row mb-[-1rem] justify-center items-center gap-2">
+            <div className="flex flex-row w-full max-w-[900px] text-xs text_shadow">
+                <span onClick={()=>{navigate("/")}} className="cursor-pointer">Home</span>
+                <span className="right_caret h-full w-[1rem] text-transparent">.</span>
+                <span style={{color:"#00465f"}}>Add Car</span>
+            </div>
+
+            <div className="w-full flex flex-row justify-center items-center gap-2">
                 <h1 className="font-semibold text-center mx-auto relative">
                     Your Car's Info
                 </h1>
             </div>
-            <CarInfo brand={brand} model={model} lastCheck="01" nextCheck="01" />
+            <CarInfo info={carInfo} />
 
 
-
-            <form className="bg-[#ffffff13] mx-6 rounded-[12px]
+            <div className="flex-1 w-full px-6 flex flex-col items-center">
+            <form className="bg-[#ffffff13] rounded-[12px]
             flex flex-col justify-center pt-2 pb-3 px-4
-            text-sm">
+            text-sm w-full max-w-[500px]">
         
                     <h2 className="w-full text-center font-semibold mb-3">
-                        Add a new car
+                        {carInfo.brand == "" ? ("Add a new car"):("Edit your Car")}
                     </h2>
         
                     <ul className="flex flex-col gap-4">
@@ -96,29 +117,49 @@ const CarInfoNew = () => {
                             </label>
                         </li>
         
-                        <li className="w-[70%] mx-auto gradient_button z-[0] relative">
-                            <button 
-                            onClick={()=>{}}
-                            type="submit"
-                            className="w-full rounded-full px-3 py-1
-                            text-xs
-                            bg-gradient-to-l from-[#05b5b2]  to-[#226798]
-                            ">
-                                Add Car
-                            </button>
+                        <li className="flex flex-row justify-center items-center">
+                            <div className="w-[40%] mx-auto gradient_button z-[0] relative">
+                                <button 
+                                onClick={()=>{}}
+                                type="submit"
+                                className="w-full rounded-full px-3 py-1
+                                text-xs
+                                bg-gradient-to-l from-[#05b5b2]  to-[#226798]
+                                ">
+                                    {carInfo.brand == "" ? ("Add Car"):("Apply Changes")}
+                                </button>
 
-                            {/* rounded gradient button border */}
-                            <GradientButtonBorderRounded/>
+                                {/* rounded gradient button border */}
+                                <GradientButtonBorderRounded/>
+                            </div>
+
+                            {carInfo.brand !== "" ? (                            
+                            <div className="w-[40%] mx-auto gradient_button z-[0] relative">
+                                <button 
+                                onClick={()=>{}}
+                                type="submit"
+                                className="w-full rounded-full px-3 py-1
+                                text-xs
+                                bg-gradient-to-l from-[#81043a]  to-[#226798]
+                                ">
+                                    Delete Car
+                                </button>
+
+                                {/* rounded gradient button border */}
+                                <GradientButtonBorderRounded/>
+                            </div>
+                            ):("")}
                         </li>
-        
+
                     </ul>
         
             
         
         
             </form>
+            </div>
 
-            <div className="mt-auto ml-[-0.5rem]">
+            <div className="mt-auto ml-[-0.5rem] md:mt-8 md:mb-4">
                 <BackToHome/>
             </div>
         </div>

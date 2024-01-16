@@ -1,5 +1,6 @@
 import React from "react"
 import BackToHome from "../misc/BackToHome";
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -10,7 +11,6 @@ type checksType = {
     nextCheck: string,  //c     //1     //2
     checkedOn: string,  //c     //1     //2
     notes: string,      //c     //1     //2
-    _id: number,
 }
 
 type checkModel = {
@@ -25,6 +25,16 @@ type checkModel = {
 
 const HistoryCards = () => {
   
+    const navigate = useNavigate();
+
+    const handleDeleteCheck = (checkTreeId:string, checkIndex:number) => {
+
+        console.log(checkTreeId);
+        console.log(checkIndex);
+
+
+    };
+
     const check: checkModel = 
     // {
     //     name: "Maintenance",
@@ -81,9 +91,8 @@ const HistoryCards = () => {
                 addDate: "addDate Oil 0",
                 initialCheck: "initialCheck 0",
                 nextCheck: "nextCheck Oil 0",
-                checkedOn: "",
+                checkedOn: "checkedOn Oil 0",
                 notes: "Make sure to bring a filter next time",
-                _id: 1,
             },
             {
                 addDate: "addDate Oil 1",
@@ -91,7 +100,20 @@ const HistoryCards = () => {
                 nextCheck: "nextCheck Oil 1",
                 checkedOn: "checkedOn Oil 1",
                 notes: "all done",
-                _id: 2,
+            },
+            {
+                addDate: "addDate Oil 2",
+                initialCheck: "initialCheck 2",
+                nextCheck: "nextCheck Oil 2",
+                checkedOn: "checkedOn Oil 2",
+                notes: "all done",
+            },
+            {
+                addDate: "addDate Oil 3",
+                initialCheck: "initialCheck 3",
+                nextCheck: "nextCheck Oil 3",
+                checkedOn: "checkedOn Oil 3",
+                notes: "all done",
             },
 
         ]
@@ -99,7 +121,7 @@ const HistoryCards = () => {
 
     };
 
-    const slimChecks = check.history;
+    const slimChecks = [...check.history];
     const allChecks: checksType[] = [...slimChecks];
   
     //take first check and delete  
@@ -114,15 +136,22 @@ const HistoryCards = () => {
         slimChecks.pop();
     }
 
-    console.log(currentCheck);
-    console.log(firstCheck);
-    console.log(slimChecks);
+    // console.log(currentCheck);
+    // console.log(firstCheck);
+    // console.log(slimChecks);
   
-    let i = 1;
+    // let i = 1;
 
     return (
-    <div className="flex flex-col items-center">
-        <div className="flex flex-col px-4">
+    <div className="flex flex-col px-4 items-center w-full text_shadow">
+
+        <div className="flex flex-row w-full max-w-[900px] mb-8 text-xs text_shadow">
+            <span onClick={()=>{navigate("/")}} className="cursor-pointer">Home</span>
+            <span className="right_caret h-full w-[1rem] text-transparent">.</span>
+            <span style={{color:"#00465f"}}>History ( {check.name} )</span>
+        </div>
+        
+        <div className="flex flex-col w-full max-w-[600px]">
 
             {/* the check title */}
             <h1
@@ -140,7 +169,7 @@ const HistoryCards = () => {
             w-full border border-[#ffffff00]
             glass-container-background-2 rounded-[7px] py-2 mt-6
             opacity-90 hover:opacity-100 focus:opacity-100
-            " key={currentCheck._id}>
+            " key={0}>
             
                 {/* check-up title, buttons */}
                 <div className="w-full flex flex-row px-2">
@@ -156,11 +185,15 @@ const HistoryCards = () => {
 
                     {/* buttons */}
                     <div className="ml-auto flex flex-row gap-2 h-[1rem]">
-                        <button className="ml-auto rounded-full bg-[#ffffff2a] px-1 py-0
+                        <button 
+                        onClick={()=>navigate(`/checkup/edit/${check._id}=0`)}
+                        className="ml-auto rounded-full bg-[#ffffff2a] px-1 py-0
                         w-[4.5rem] text-xs hover:scale-105 focus:scale-105">
                             edit
                         </button>
-                        <button className="ml-auto rounded-full bg-[#ffffff2a] px-1 py-0
+                        <button 
+                        onClick={()=>handleDeleteCheck(check._id, 0)}
+                        className="ml-auto rounded-full bg-[#ffffff2a] px-1 py-0
                         w-[4.5rem] text-xs hover:scale-105 focus:scale-105">
                         remove
                         </button>
@@ -214,13 +247,17 @@ const HistoryCards = () => {
             
             {/* the middle checks, with all to use their values as well */}
             {slimChecks.length > 0 && slimChecks.map((info) => {
-                i = i + 1;
+                // i = i + 1;
+                const checkIndex = check.history.indexOf(info);
+                // console.log(checkIndex);
                 return (
                     <div className="
                     w-full border border-[#ffffff00]
                     glass-container-background-2 rounded-[7px] py-2 mt-6
                     opacity-90 hover:opacity-100 focus:opacity-100
-                    " key={info._id}>
+                    " 
+                    key={checkIndex}
+                    >
                     
                         {/* check-up title, buttons */}
                         <div className="w-full flex flex-row px-2">
@@ -235,11 +272,15 @@ const HistoryCards = () => {
                 
                             {/* buttons */}
                             <div className="ml-auto flex flex-row gap-2 h-[1rem]">
-                                <button className="ml-auto rounded-full bg-[#ffffff2a] px-1 py-0
+                                <button 
+                                onClick={()=>navigate(`/checkup/edit/${check._id}=${checkIndex}`)}
+                                className="ml-auto rounded-full bg-[#ffffff2a] px-1 py-0
                                 w-[4.5rem] text-xs hover:scale-105 focus:scale-105">
                                     edit
                                 </button>
-                                <button className="ml-auto rounded-full bg-[#ffffff2a] px-1 py-0
+                                <button 
+                                onClick={()=>handleDeleteCheck(check._id, checkIndex)}
+                                className="ml-auto rounded-full bg-[#ffffff2a] px-1 py-0
                                 w-[4.5rem] text-xs hover:scale-105 focus:scale-105">
                                 remove
                                 </button>
@@ -253,7 +294,7 @@ const HistoryCards = () => {
                 
                                 <li className="w-full flex flex-row ml-2">
                                     <div className="min-w-[7rem]">Previous check was:</div>
-                                    <div>{allChecks[i].checkedOn}</div>
+                                    <div>{check.history[checkIndex-1].checkedOn}</div>
                                 </li>
                             
                                 <li className="w-full flex flex-row ml-2">
@@ -295,12 +336,12 @@ const HistoryCards = () => {
             })}
           
             {/* first check */}
-            {firstCheck._id !== currentCheck._id ? (
+            {firstCheck !== currentCheck ? (
             <div className="
             w-full border border-[#ffffff00]
             glass-container-background-2 rounded-[7px] py-2 mt-6
             opacity-90 hover:opacity-100 focus:opacity-100
-            " key={firstCheck._id}>
+            " key={check.history.length-1}>
             
                 {/* check-up title, buttons */}
                 <div className="w-full flex flex-row px-2">
@@ -317,11 +358,15 @@ const HistoryCards = () => {
 
                     {/* buttons */}
                     <div className="ml-auto flex flex-row gap-2 h-[1rem]">
-                        <button className="ml-auto rounded-full bg-[#ffffff2a] px-1 py-0
+                        <button 
+                        onClick={()=>navigate(`/checkup/edit/${check._id}=${check.history.length-1}`)}
+                        className="ml-auto rounded-full bg-[#ffffff2a] px-1 py-0
                         w-[4.5rem] text-xs hover:scale-105 focus:scale-105">
                             edit
                         </button>
-                        <button className="ml-auto rounded-full bg-[#ffffff2a] px-1 py-0
+                        <button 
+                        onClick={()=>handleDeleteCheck(check._id, check.history.length-1)}
+                        className="ml-auto rounded-full bg-[#ffffff2a] px-1 py-0
                         w-[4.5rem] text-xs hover:scale-105 focus:scale-105">
                         remove
                         </button>
@@ -379,7 +424,7 @@ const HistoryCards = () => {
         </div>
 
 
-            <div className="w-auto mt-4 mb-2 ml-[-0.5rem]">
+            <div className="w-auto mt-4 mb-2 ml-[-0.5rem]  md:mt-8 md:mb-4">
             <BackToHome/>
             </div>
     </div>

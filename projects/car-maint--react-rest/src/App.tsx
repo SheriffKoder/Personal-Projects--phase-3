@@ -35,7 +35,7 @@ const App = () => {
     <div className="
       bg-gradient-to-bl from-[#05a570] via-[#2779b3] to-[#226798]
       min-h-[100vh] max-w-[100vw] text-white
-      flex flex-col
+      flex flex-col min-w-[350px]
       
     ">
       
@@ -56,6 +56,7 @@ const App = () => {
         <Route path="/checkup/new/" element={<CheckupNew />} />
         <Route path="/checkup/edit/:checkId" element={<CheckupEdit />} />
         <Route path="/CarInfo/new/" element={<CarInfoNew />} />
+        <Route path="/CarInfo/edit/:carId" element={<CarInfoNew />} />
 
 
       </Routes>  

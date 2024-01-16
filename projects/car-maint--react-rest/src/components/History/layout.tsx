@@ -16,7 +16,7 @@ const History = () => {
 
 return (
     <div>
-        <div className="w-full flex flex-row mb-[-1rem] justify-center items-center gap-2">
+        <div className="w-full flex flex-col mb-[-1rem] justify-center items-center gap-2">
 
             <Suspense fallback={<Loading/>}>
                 <HistoryCards/>

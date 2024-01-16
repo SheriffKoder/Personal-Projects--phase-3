@@ -493,8 +493,50 @@ if it exists (first check) then can edit
 if not exist, (1st+ check, previous check will be based on the check before  
 duration should be determined by today-next check
 
-so the edit component is exactly the same
+so the edit check component is exactly the same
 all what i did is changed text and put a condition to view the initial check input
+
+most probably the car edit will be like the new car component
+
+/////////////////////////////////////////////
+//// Part 3.1
+
+add proper edit/delete buttons 
+for add new check, edit/delete checks from home page and history page by passing references
+edit a check from the home page (edit the currentCheck by its index in history which will be 0)
+delete a check from the home page (delete the check tree)
+edit a check from the history (edit the selected check by its index in history)
+delete a check from the home page (delete the selected check by its index in history)
+
+edit/add new car
+
+add new car button and sign-out button on nav, when user is logged in
+
+edit and add new car displays ? or mark depending on the image
+add delete button if there is a car we are editing
+
+/////////////////////////////////////////////
+//// Part 3.2
+
+responsively
+
+home page
+
+Work on the website buttons with proper redirections
+- add-new-check
+- edit/delete checks from history, should pass to their relevant functions the checkId, and the history item in question's index
+- delete check from home page passes the id of the whole check tree to be deleted
+- add/edit car from the nav/home page
+
+Further Addons:
+- Add icons that overlay the car's image when editing/adding a car
+to represent the image status (no image/image uploaded)
+- Add to all the components navigation links
+- is a user is loggedIn, the login button is replaced with sign-out, add car buttons
+
+Make the website responsive for all view-widths
+
+
 
 
 

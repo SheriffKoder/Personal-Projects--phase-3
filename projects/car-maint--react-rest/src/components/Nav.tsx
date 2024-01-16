@@ -1,9 +1,13 @@
 import React from "react"
 import { useNavigate } from "react-router-dom";
-
+import { useState } from "react";
 
 const Nav = () => {
     const navigate = useNavigate();
+
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+
   return (
     <nav className="text-white bg-[#0000001c] px-3 py-2 mb-6">
         <ul className="flex flex-row items-center gap-2">
@@ -28,9 +32,49 @@ const Nav = () => {
                 Car Maintenance
             </li>
 
-            <button className='ml-auto rounded-full bg-[#226798] px-2 py-0'>
+            {isLoggedIn ? (
+                
+                <div className="ml-auto">
+
+                    <button 
+                        onClick={()=>navigate(`/carInfo/new/`)}
+                        className="rounded-full border border-[#ffffff2a] 
+                        px-2 pt-[2px] text-xs w-[4.5rem]
+                        hover:bg-[#ffffff2a] focus:bg-[#ffffff2a]">
+                            add car
+                    </button>
+
+                    <button 
+                        // onClick={()=>navigate(`/signOut/`)}
+                        onClick={()=>{setIsLoggedIn(false)}}
+                        className="rounded-full border border-[#226798] 
+                        px-2 py-[1px] text-xs ml-1 w-[4.5rem]
+                        bg-[#226798]
+                        hover:bg-[#ffffff2a] focus:bg-[#ffffff2a]
+                        hover:border-[#ffffff2a] focus:border-[#ffffff2a]">
+                            sign out
+                    </button>
+                </div>
+            ):(
+                <div className="ml-auto">
+                    <button 
+                        // onClick={()=>navigate(`/login/`)}
+                        onClick={()=>{setIsLoggedIn(true)}}
+                        className="rounded-full border border-[#226798] 
+                        px-2 py-[1px] text-xs ml-1 w-[4.5rem]
+                        bg-[#226798]
+                        hover:bg-[#ffffff2a] focus:bg-[#ffffff2a]
+                        hover:border-[#ffffff2a] focus:border-[#ffffff2a]">
+                            Login
+                    </button>
+                </div>
+            )}
+
+
+            {/* <button className='ml-auto rounded-full bg-[#226798] px-2 py-0'>
                 Login
-            </button>
+            </button> */}
+
         </ul>
     </nav>
   )
