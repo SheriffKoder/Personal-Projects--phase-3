@@ -1,14 +1,19 @@
 import React, { Suspense, lazy, useEffect } from "react"
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-// import CarInfo from './HomeComponents/CarInfo'
+import CarInfo from './HomeComponents/CarInfo'
 // import CheckCard from './HomeComponents/checkCard'
 import Loading from "./HomeComponents/loading";
+import { useCarInfoFetch } from "../misc/useCarInfoFetch";
 
 const CheckCard = lazy(() => import('./HomeComponents/checkCard'));
-const CarInfo = lazy(() => import('./HomeComponents/CarInfo'));
-
-
+// const CarInfo = lazy(() => import('./HomeComponents/CarInfo'));
+// const CarInfo = lazy(() => {
+//     return new Promise(resolve => {
+//         setTimeout(()=> {
+//             resolve (import('./HomeComponents/CarInfo'))
+//         }, 2000);
+//     })});
 
 
 type carInfoType = {
@@ -20,7 +25,7 @@ type carInfoType = {
     _id: string
   }
 
-  
+
 
 
 const Home = () => {
@@ -28,14 +33,19 @@ const Home = () => {
 
     const navigate = useNavigate();
 
-    const carInfo:carInfoType = {
-    brand: "Mazda",
-    model: "mazda 6",
-    lastCheck: "01/01/2024",
-    nextCheck: "30/01/2024",
-    image: "/images/car1.png",
-    _id: "000",
-  }
+    // const carInfo:carInfoType = {
+    // brand: "Mazda",
+    // model: "mazda 6",
+    // lastCheck: "01/01/2024",
+    // nextCheck: "30/01/2024",
+    // image: "/images/car1.png",
+    // _id: "000",
+    // }
+
+
+    // const carInfo: carInfoType = fetch(useCarInfoFetch());
+    const carInfo: carInfoType = useCarInfoFetch();
+
 
   return (
     <>
@@ -59,9 +69,12 @@ const Home = () => {
 
         </div>
         <Suspense fallback={<Loading/>}>
+            {carInfo ? (
             <CarInfo info={carInfo}/>
-        </Suspense>
-
+            ): (
+                <Loading/>
+            )}
+            </Suspense>
 
         {/* Car check-ups title, add check-up button */}
         <div className="max-w-[1300px] mx-auto">

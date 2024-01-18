@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useCallback } from "react"
 
+import { useCarInfoFetch } from "../../misc/useCarInfoFetch";
 
 
 
@@ -13,27 +14,11 @@ type carInfoType = {
 }
 
 
-// const fetchCarInfo: ()=>Promise<carInfoType> = () => {
-//   return  new Promise ((resolve) => {
-      
-//       const carInfo:carInfoType = {
-//           brand: "Mazda",
-//           model: "mazda 6",
-//           lastCheck: "",
-//           nextCheck: "",
-//           image: "/images/car1.png",
-//       }
-
-//       setTimeout(()=> {
-//           resolve(carInfo);
-//       },2000);
-//   })
-// }
 
 
 
 const CarInfo =  ({info}: {
-  info: carInfoType,
+  info: carInfoType;
 }) => {
 
 
@@ -46,9 +31,14 @@ const CarInfo =  ({info}: {
   //   _id: "000",
   // }
 
-
   
+  
+    
+
+
+
   return (
+
 
     <>
     <div className="flex flex-row items-center justify-center
@@ -109,7 +99,9 @@ const CarInfo =  ({info}: {
 
     </div>
     </>
+
   )
+
   
 
 

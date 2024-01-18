@@ -522,7 +522,7 @@ responsively
 
 home page
 
-Work on the website buttons with proper redirections
+Work on the website buttons with proper redirection
 - add-new-check
 - edit/delete checks from history, should pass to their relevant functions the checkId, and the history item in question's index
 - delete check from home page passes the id of the whole check tree to be deleted
@@ -537,7 +537,193 @@ to represent the image status (no image/image uploaded)
 Make the website responsive for all view-widths
 
 
+/////////////////////////////////////////////
+//// Part 4 Video notes
 
+do not get confused, just understand topics like loading, etc.
+
+notice:
+React.CreateElement(Element, props, content)
+in class components you can use only one state
+
+the .svg files do have paths code
+then can import it as an element into the code
+and pass as a src prop to the styled component
+
+
+useMemo/useCallback, used to call a function conditionally so 
+in the case when using a function with a setState in a useEffect
+that triggers a infinite loop of re-rendering
+
+
+isLoading, just a state to show/hide spinner button
+
+//keeping the old data and adding new beside it (load more)
+setState(prev => ({
+    ...movies,
+    results: page > 1 ? [...prev.results, ...movies.results] : [...movies.results]
+}))
+
+2:53:40 , timer to set the search term to the search input every 500ms automatically
+useEffect returns clearTimeout(timer)
+that triggers on setSearchTerm, and searchInput
+
+
+//skip the initial render in a useEffect
+if (initial.current) { initial.current = false; return; }
+
+3:01:00, search input transparent bg and absolute on a rounded div with padding
+of for the div's search icon,
+
+const { state: movie, loading } = someState; //name state as movie
+
+
+react uses the key when mapping, to diff stuff to know what it will change in the DOM
+
+
+
+
+
+
+
+
+//////// take away: ////////
+
+//styled-components lib
+component folder > Header.styles.tsx
+import styled from "styled-components"
+export const wrapper = styled.div`
+  position: absolute;
+  left: ${props.direction}
+  @media () {}
+  h1 {}
+`;
+""repeat
+then import these const into the app.tsx/index.tsx etc.
+<Wrapper direction={} />
+
+
+the globalStyle.js file to set some basics for the root, body, definitions
+and import its {const} in the App.tsx
+and use this {const} as an element in the wrapping div
+
+
+** //props and state /////////////////////////////////////////////
+setLamp(prev => !prev); //you get the current state as a prop
+
+<Lamp lampOn={isLampOneOn}
+<LightSwitch switchOn={isLampOneOn} callBack={handleLamp}
+
+
+take props as const Lamp = (props) => () then props.name
+or ({name, age}), then name, age
+//a prop should never change in the component that receives the prop
+!! when the prop changes from the parent, the child component will re-render
+and have a new value !
+
+on many re-renders due to multiple setStates react diff the states 
+will only update things in the DOM that have changed
+so no performance issue
+///////////////////////////////////////////////////////////////
+
+//custom hooks
+can be used for re-using logic
+folder hooks > useHookName.tsx
+export const useHookName = () => {
+  put all the fetching logic and its state definitions
+}
+- custom hooks 3:36:30 [done] function with useEffect function and call
+
+
+css: object-fit cover;
+//for hero movie bg css
+background-size:cover, background-position:center;
+and over this an element with background 0, 0, 0, 0, 0.7
+
+
+<input
+onChange={(e) => setState(e.currentTarget.value)}
+value={state}
+/>
+
+
+** helpers calc time and convert-money
+
+
+
+hour 5.1, hour 6
+//////// look at: ////////
+
+- css grid
+
+the useEffect cannot have an async keyword, [done]
+so will use inside of it an async function
+with try/catch, in the try can await
+then call it
+
+- useDeferredValue
+
+
+** //route params /////////////////////////////////////////////
+//give params
+import {Link} from "react-router-dom";
+and in the component
+<Link to={`/${movieId}`}
+
+//get params
+import {useParams} from "react-router-dom";
+const {movieId} = useParams();
+
+movieId as defined in the route url in the layout
+///////////////////////////////////////////////////////////////
+
+
+//persist state in the session storage
+if there is something in the session storage on initial render
+retrieve this one instead
+
+
+
+ 
+** //the context /////////////////////////////////////////////
+which exports a userProvider function
+in the root of the src context.js
+context to provide down values
+provider to provide the application with these values
+the {children} to wrap any component in our application 
+then wrap the components inside userProvider tags
+
+in the login, import Context from the context.js
+then
+const [user, setUser] = useContext(Context)
+
+ok, the Context is a useContext const
+added on it .provider with value=[state,setState]
+then the app is wrapped in it
+
+in the login component, import the const Context, then destruct out the values 
+(state, setState)
+to set value for the setState/setUser on a successful login
+thus. this context (state) which holds the user, can be used in all wrapped components
+
+to use 
+const [state] = useContext(Context);
+
+wipe out the user from the state when log out
+///////////////////////////////////////////////////////////////
+
+
+
+
+-- we can use this to make a login component before the API
+tomorrow revert thinking pattern
+we apply these notes, sort them, 
+and in the 2nd itr begin the REST notes
+
+
+..
+context, params
+props read
 
 
 */
