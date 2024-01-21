@@ -1,10 +1,48 @@
-import React from "react"
+import React, { useState } from "react"
 import GradientButtonBorderRounded from "../misc/GradientButtonBorderRounded";
 import { useNavigate } from "react-router-dom";
+
+//API 0.1
+import { ChangeEventHandler } from "react";
+import { FormEventHandler } from "react";
 
 const SignUp = () => {
 
     const navigate = useNavigate();
+
+    /////////////////////////////////////////////////////////////
+    //API 0.1
+    const [userInfo, setUserInfo] = useState({
+        name: "",
+        email: "",
+        password: ""
+    });
+
+
+    const {name, email, password} = userInfo;
+
+    const handleChange: ChangeEventHandler<HTMLInputElement> = ({ target }) => {
+        const { name, value } = target;
+        setUserInfo({ ...userInfo, [name]:value});
+    }
+    
+    
+    const handleSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
+        e.preventDefault();
+        const apiResponse = await fetch("http://localhost:8080/auth/signup", {
+            method: "POST",
+            headers: {
+                "Content-type": "application/json"
+              },
+            body: JSON.stringify(userInfo),
+
+        })
+        const res = await apiResponse.json();
+        console.log(res);
+    }
+
+    /////////////////////////////////////////////////////////////
+
 
   return (
 
@@ -21,7 +59,8 @@ const SignUp = () => {
         {/* // flex-1 as this is a component inside a flex-col parent */}
         <form className="bg-[#ffffff13] mx-6 rounded-[12px]
             flex flex-col justify-center pt-2 pb-3 px-4 my-auto
-            text-sm max-w-[500px] w-full">
+            text-sm max-w-[500px] w-full"
+            onSubmit={handleSubmit}>
 
                 <h2 className="w-full text-center font-semibold mb-3">Sign-Up</h2>
 
@@ -34,7 +73,8 @@ const SignUp = () => {
                             text-center">Name</span>
                             <input className="w-[70%] text-[#000000d6]
                             px-2 py-[1px] outline-none selection:bg-[#3c8bc374]
-                            bg-[#e3f4ff]" type="text"/>
+                            bg-[#e3f4ff]" type="text"
+                            name="name" value={name} onChange={handleChange}/>
                         
                         </label>
                     </li>
@@ -47,7 +87,8 @@ const SignUp = () => {
                             text-center">Email</span>
                             <input className="w-[70%] text-[#000000d6]
                             px-2 py-[1px] outline-none selection:bg-[#3c8bc374]
-                            bg-[#e3f4ff]" type="text"/>
+                            bg-[#e3f4ff]" type="text"
+                            name="email" value={email} onChange={handleChange}/>
                         
                         </label>
                     </li>
@@ -60,14 +101,14 @@ const SignUp = () => {
                             text-center">Password</span>
                             <input className="w-[70%] text-[#000000d6]
                             px-2 py-[1px] outline-none selection:bg-[#3c8bc374]
-                            bg-[#e3f4ff]" type="text"/>
+                            bg-[#e3f4ff]" type="text"
+                            name="password" value={password} onChange={handleChange}/>
                         
                         </label>
                     </li>
 
                     <li className="w-[70%] mx-auto gradient_button z-[0] relative">
                         <button 
-                        onClick={()=>{}}
                         type="submit"
                         className="w-full rounded-full px-3 py-1
                         text-xs

@@ -750,6 +750,17 @@ add a separate component in the app.tsx for the routing (to use the context valu
 > on any component, use the useContext(userContext) to access the context value
 > on any component, use the useContext(userContext).updateUser
 
+/////////////////////////////////////////////
+//// Part 6 the backend
+
+let us check the backend... shall we
+
+
+
+
+
+
+
 
 
 
