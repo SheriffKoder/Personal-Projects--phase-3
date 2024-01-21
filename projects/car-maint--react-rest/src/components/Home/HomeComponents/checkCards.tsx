@@ -1,6 +1,8 @@
-import React from "react"
+import React, { useContext } from "react"
 import { useNavigate } from "react-router-dom";
 
+//Part 5
+import { userContext } from "../../../context";
 
 type checksType = {
     addDate: string,    //c     //1     //2
@@ -20,75 +22,78 @@ type checkModel = {
 
 
 
-const CheckCard = () => {
+const CheckCard = ({checks}: {
+    checks: checkModel[],
+}) => {
   
     const navigate = useNavigate();
 
-  
-    const checks: checkModel[] = [ 
+    // const checks = useContext(userContext)?.userCars.checks;
+
+    // const checks: checkModel[] = [ 
         
-        {
-            name: "Maintenance",
-            color: "#058885",
-            _id: "1234",
-            history: [
-                {
-                    addDate: "addDate 0",
-                    initialCheck: "initialCheck 0",
-                    // lastCheck: "03/03/23",
-                    nextCheck: "nextCheck 0",
-                    checkedOn: "checkedOn 0",
-                    notes: "Make sure to check on the replacement part next time!",
-                },
-                {
-                    addDate: "addDate 1",
-                    initialCheck: "initialCheck 1",
-                    // lastCheck: "03/02/23",
-                    nextCheck: "nextCheck 1",
-                    checkedOn: "checkedOn 1",
-                    notes: "get something for the filter!",
-                },
-                {
-                    addDate: "addDate 2",
-                    initialCheck: "initialCheck 2",
-                    // lastCheck: "none",
-                    nextCheck: "nextCheck 2",
-                    checkedOn: "checkedOn 2",
-                    notes: "Make sure to bring a filter next time",
-                },
-                {
-                    addDate: "addDate 3",
-                    initialCheck: "initialCheck 3",
-                    // lastCheck: "none",
-                    nextCheck: "nextCheck 3",
-                    checkedOn: "checkedOn 3",
-                    notes: "Make sure to bring a filter next time",
-                },
-            ]
+    //     {
+    //         name: "Maintenance",
+    //         color: "#058885",
+    //         _id: "1234",
+    //         history: [
+    //             {
+    //                 addDate: "addDate 0",
+    //                 initialCheck: "initialCheck 0",
+    //                 // lastCheck: "03/03/23",
+    //                 nextCheck: "nextCheck 0",
+    //                 checkedOn: "checkedOn 0",
+    //                 notes: "Make sure to check on the replacement part next time!",
+    //             },
+    //             {
+    //                 addDate: "addDate 1",
+    //                 initialCheck: "initialCheck 1",
+    //                 // lastCheck: "03/02/23",
+    //                 nextCheck: "nextCheck 1",
+    //                 checkedOn: "checkedOn 1",
+    //                 notes: "get something for the filter!",
+    //             },
+    //             {
+    //                 addDate: "addDate 2",
+    //                 initialCheck: "initialCheck 2",
+    //                 // lastCheck: "none",
+    //                 nextCheck: "nextCheck 2",
+    //                 checkedOn: "checkedOn 2",
+    //                 notes: "Make sure to bring a filter next time",
+    //             },
+    //             {
+    //                 addDate: "addDate 3",
+    //                 initialCheck: "initialCheck 3",
+    //                 // lastCheck: "none",
+    //                 nextCheck: "nextCheck 3",
+    //                 checkedOn: "checkedOn 3",
+    //                 notes: "Make sure to bring a filter next time",
+    //             },
+    //         ]
 
 
-        },
+    //     },
         
-        {
-            name: "Oil Change",
-            color: "#b7ab09",
-            _id: "4567",
+    //     {
+    //         name: "Oil Change",
+    //         color: "#b7ab09",
+    //         _id: "4567",
 
-            history: [
-                {
-                    addDate: "addDate Oil 0",
-                    initialCheck: "initialCheck 0",
-                    nextCheck: "nextCheck Oil 0",
-                    checkedOn: "",
-                    notes: "Make sure to bring a filter next time",
-                },
+    //         history: [
+    //             {
+    //                 addDate: "addDate Oil 0",
+    //                 initialCheck: "initialCheck 0",
+    //                 nextCheck: "nextCheck Oil 0",
+    //                 checkedOn: "",
+    //                 notes: "Make sure to bring a filter next time",
+    //             },
 
-            ]
+    //         ]
 
 
-        },
+    //     },
         
-    ];
+    // ];
 
     
     const handleDeleteCheckTree = (checkTreeId: string) => {
@@ -98,9 +103,10 @@ const CheckCard = () => {
   
     return (
 
+    
     <div className="flex flex-col flex-wrap lg:flex-row lg:gap-4 lg:justify-center">
 
-        {checks.length > 0 && checks.map((check:checkModel) => { 
+        {checks.length > 0 && checks.map((check) => { 
          
             const info = {
                 _id: check._id,
@@ -194,6 +200,7 @@ const CheckCard = () => {
             )
         
         })}
+
         
         {checks.length < 1 && (
         <div className="

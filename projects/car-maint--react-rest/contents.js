@@ -651,7 +651,6 @@ value={state}
 
 
 
-hour 5.1, hour 6
 //////// look at: ////////
 
 - css grid
@@ -730,6 +729,27 @@ props read
 
 
 
+/////////////////////////////////////////////
+//// Part 5 using context
+/*
+
+let us have a user context
+
+ok so i can use the userContext values in the home components
+carInfo and checkCards
+
+- add a welcome page
+
+
+
+create a context in context.tsx
+>export the context wrapper with value of a state and a function that sets the state
+>wrap the application in the context wrapper
+add a separate component in the app.tsx for the routing (to use the context value)
+
+> on any component, use the useContext(userContext) to access the context value
+> on any component, use the useContext(userContext).updateUser
+
 
 
 
@@ -738,6 +758,9 @@ props read
 
 
 /*
+
+
+
 
 this project was designed mainly to work on phones and tablets in terms of UI
 did not work much on the front-end functionalities

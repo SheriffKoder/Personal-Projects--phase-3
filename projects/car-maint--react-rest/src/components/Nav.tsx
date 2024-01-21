@@ -1,11 +1,112 @@
 import React from "react"
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { useContext } from "react";
+import { userContext } from "../context";
+
+
+type checksType = {
+    addDate: string,    //c     //1     //2
+    initialCheck: string,               //2
+    nextCheck: string,  //c     //1     //2
+    checkedOn: string,  //c     //1     //2
+    notes: string,      //c     //1     //2
+}
+
+type checkModel = {
+    name: string,
+    color: string,
+    history: checksType[],
+    _id: string,
+    
+};
+
+
+type carInfoType = {
+    brand: string,
+    model: string,
+    lastCheck: string,
+    nextCheck: string,
+    image: string,
+    _id: string,
+    checks: checkModel[],
+
+  }
+
+type userType = {
+    name: string,
+    email: string,
+
+}
+
+type fullUserType = {
+    user: userType,
+    userCars: carInfoType,
+}
+
+type contextType = {
+    user: fullUserType | null;
+    setUser: React.Dispatch<React.SetStateAction<fullUserType>>;
+
+}
+
+
+//a user has name, email, etc
+//a car is assigned with a userId that contains
+//its info, its checks
+//each check contain its main info and history array
+
+
+// console.log(fullUser);
+
+const userInfo : userType = {
+    name: "",
+    email: "",
+}
+
+const userCars:carInfoType = {
+    brand: "",
+    model: "",
+    lastCheck: "",
+    nextCheck: "",
+    image: "",
+    _id: "",
+    checks: [
+        {
+            name: "",
+            color: "",
+            _id: "",
+            history: [
+                {
+                    addDate: "",
+                    initialCheck: "",
+                    nextCheck: "",
+                    checkedOn: "",
+                    notes: "",
+                },
+  
+            ]
+
+
+        },
+        
+    ]
+};
+
+
+const emptyUser = {
+    userInfo, userCars
+}
+
+
 
 const Nav = () => {
     const navigate = useNavigate();
 
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    // const [isLoggedIn, setIsLoggedIn] = useState(true);
+    const setUser = useContext(userContext).updateUser;
+
+    const isLoggedIn = (useContext(userContext).userState.userInfo.name !== "");
 
 
   return (
@@ -46,7 +147,7 @@ const Nav = () => {
 
                     <button 
                         // onClick={()=>navigate(`/signOut/`)}
-                        onClick={()=>{setIsLoggedIn(false)}}
+                        onClick={()=>{setUser(emptyUser)}}
                         className="rounded-full border border-[#226798] 
                         px-2 py-[1px] text-xs ml-1 w-[4.5rem]
                         bg-[#226798]
@@ -56,18 +157,19 @@ const Nav = () => {
                     </button>
                 </div>
             ):(
-                <div className="ml-auto">
-                    <button 
-                        // onClick={()=>navigate(`/login/`)}
-                        onClick={()=>{setIsLoggedIn(true)}}
-                        className="rounded-full border border-[#226798] 
-                        px-2 py-[1px] text-xs ml-1 w-[4.5rem]
-                        bg-[#226798]
-                        hover:bg-[#ffffff2a] focus:bg-[#ffffff2a]
-                        hover:border-[#ffffff2a] focus:border-[#ffffff2a]">
-                            Login
-                    </button>
-                </div>
+                // <div className="ml-auto">
+                //     <button 
+                //         // onClick={()=>navigate(`/login/`)}
+                //         onClick={()=>{setIsLoggedIn(true)}}
+                //         className="rounded-full border border-[#226798] 
+                //         px-2 py-[1px] text-xs ml-1 w-[4.5rem]
+                //         bg-[#226798]
+                //         hover:bg-[#ffffff2a] focus:bg-[#ffffff2a]
+                //         hover:border-[#ffffff2a] focus:border-[#ffffff2a]">
+                //             Login
+                //     </button>
+                // </div>
+                ""
             )}
 
 

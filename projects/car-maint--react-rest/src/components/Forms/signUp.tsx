@@ -8,9 +8,10 @@ const SignUp = () => {
 
   return (
 
-    <>
-        <div className="ml-4 flex flex-row w-full max-w-[900px] text-xs text_shadow mx-auto">
-            <span onClick={()=>{navigate("/")}} className="cursor-pointer">Home</span>
+    <div className="px-4 flex flex-col flex-1">
+        
+        <div className="ml-4 md2:ml-auto flex flex-row w-full max-w-[900px] text-xs text_shadow mx-auto">
+            <span onClick={()=>{navigate("/")}} className="cursor-pointer">Welcome</span>
             <span className="right_caret h-full w-[1rem] text-transparent">.</span>
             <span style={{color:"#00465f"}}>Sign-up</span>
         </div>
@@ -19,8 +20,8 @@ const SignUp = () => {
 
         {/* // flex-1 as this is a component inside a flex-col parent */}
         <form className="bg-[#ffffff13] mx-6 rounded-[12px]
-        flex flex-col justify-center pt-2 pb-3 px-4 my-auto
-        text-sm w-full">
+            flex flex-col justify-center pt-2 pb-3 px-4 my-auto
+            text-sm max-w-[500px] w-full">
 
                 <h2 className="w-full text-center font-semibold mb-3">Sign-Up</h2>
 
@@ -87,7 +88,7 @@ const SignUp = () => {
 
         </form>
         </div>
-    </>
+    </div>
 
   )
 }

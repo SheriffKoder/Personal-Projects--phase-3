@@ -1,4 +1,4 @@
-import React, { Suspense, lazy, useEffect } from "react"
+import React, { Suspense, lazy, useContext, useEffect } from "react"
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import CarInfo from './HomeComponents/CarInfo'
@@ -6,7 +6,10 @@ import CarInfo from './HomeComponents/CarInfo'
 import Loading from "./HomeComponents/loading";
 import { useCarInfoFetch } from "../misc/useCarInfoFetch";
 
-const CheckCard = lazy(() => import('./HomeComponents/checkCard'));
+//Part 5
+import { userContext } from "../../context";
+
+const CheckCard = lazy(() => import('./HomeComponents/checkCards'));
 // const CarInfo = lazy(() => import('./HomeComponents/CarInfo'));
 // const CarInfo = lazy(() => {
 //     return new Promise(resolve => {
@@ -42,9 +45,13 @@ const Home = () => {
     // _id: "000",
     // }
 
+    const carInfo = useContext(userContext)?.userState.userCars;
+    const checks = useContext(userContext)?.userState.userCars.checks;
+
+    console.log(useContext(userContext));
 
     // const carInfo: carInfoType = fetch(useCarInfoFetch());
-    const carInfo: carInfoType = useCarInfoFetch();
+    // const carInfo: carInfoType = useCarInfoFetch();
 
 
   return (
@@ -52,19 +59,19 @@ const Home = () => {
     <div className="px-3 pt-4">
 
         {/* Car info title, edit button */}
+
         <div className="w-full flex flex-row justify-center items-center gap-2">
 
             <h1 className="font-semibold text-center mx-auto relative">
                 Your Car's Info
                 <button 
-                onClick={()=>navigate(`/carInfo/edit/${carInfo._id}`)}
+                onClick={()=>{ if (carInfo) navigate(`/carInfo/edit/${carInfo._id}`)}}
                 className="rounded-full border border-[#ffffff2a] 
                 px-3 text-xs h-[1rem] absolute right-[-50%] top-[15%]
                 hover:bg-[#ffffff2a] focus:bg-[#ffffff2a]">
                     edit
                 </button>
             </h1>
-            
 
 
         </div>
@@ -93,8 +100,10 @@ const Home = () => {
 
             </div>
             <Suspense fallback={<Loading/>}>
-                <CheckCard/>
-            </Suspense>
+                {checks && (
+                <CheckCard checks={checks}/>
+                )}
+                </Suspense>
         </div>
 
     </div>
