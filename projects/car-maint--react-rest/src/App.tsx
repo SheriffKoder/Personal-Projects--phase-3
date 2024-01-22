@@ -19,22 +19,22 @@ const App = () => {
   // const {fullUser} = useContext(userContext);
   console.log(useContext(userContext));
 
-  const myFetch = async () => {
+  // const myFetch = async () => {
 
-    try {
-      const res = await fetch('http://localhost:8080/feed/posts', {
-        method: 'GET',
-      });  
+  //   try {
+  //     const res = await fetch('http://localhost:8080/feed/posts', {
+  //       method: 'GET',
+  //     });  
 
-      console.log(await res.json());
+  //     console.log(await res.json());
 
-    } catch (error) {
-      console.log(error);
-    }
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
 
-  }
+  // }
 
-  myFetch();
+  // myFetch();
 
 
   return (

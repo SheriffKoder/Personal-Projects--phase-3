@@ -1,9 +1,11 @@
-import React, { useContext } from "react"
+import React, { useContext, useState } from "react"
 import GradientButtonBorderRounded from "../misc/GradientButtonBorderRounded";
 import { useNavigate } from "react-router-dom";
 import { userContext } from "../../context";
 
-
+//API 0.1
+import { ChangeEventHandler } from "react";
+import { FormEventHandler } from "react";
 
 type checksType = {
     addDate: string,    //c     //1     //2
@@ -117,7 +119,7 @@ const userCars:carInfoType = {
 }
 
 
-const emptyUser = {
+const loggedInUser = {
     userInfo, userCars
 }
 
@@ -137,6 +139,42 @@ const Login = () => {
     const navigate = useNavigate();
     const setUser = useContext(userContext)?.updateUser;
 
+    /////////////////////////////////////////////////////////////
+    //API 0.1 - login
+    const [userInfo, setUserInfo] = useState({
+        email: "",
+        password: ""
+    });
+    /////////////////////////////////////////////////////////////
+
+
+
+    const {email, password} = userInfo;
+
+    const handleChange: ChangeEventHandler<HTMLInputElement> = ({ target }) => {
+        const { name, value } = target;
+        setUserInfo({ ...userInfo, [name]:value});
+    }
+    
+    const handleSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
+        e.preventDefault();
+        const url = process.env.REACT_APP_CURRENT_URL!;
+
+        const apiResponse = await fetch(url+"/auth/login", {
+            method: "POST",
+            headers: {
+                "Content-type": "application/json"
+              },
+            body: JSON.stringify(userInfo),
+
+        })
+        const res = await apiResponse.json();
+        console.log(res);
+        console.log(apiResponse.status);
+    }
+
+    /////////////////////////////////////////////////////////////
+
     return (
 
         <div className="px-4 flex flex-col flex-1">
@@ -151,7 +189,9 @@ const Login = () => {
             {/* // flex-1 as this is a component inside a flex-col parent */}
             <form className="bg-[#ffffff13] mx-6 rounded-[12px]
             flex flex-col justify-center pt-2 pb-3 px-4 my-auto
-            text-sm max-w-[500px] w-full">
+            text-sm max-w-[500px] w-full"
+            onSubmit={handleSubmit}>
+
         
                     <h2 className="w-full text-center font-semibold mb-3">Login to your Account</h2>
         
@@ -165,7 +205,9 @@ const Login = () => {
                                 text-center">Email</span>
                                 <input className="w-[70%] text-[#000000d6]
                                 px-2 py-[1px] outline-none selection:bg-[#3c8bc374]
-                                bg-[#e3f4ff]" type="text"/>
+                                bg-[#e3f4ff]" type="email"
+                                name="email" value={email} onChange={handleChange}/>
+
                             
                             </label>
                         </li>
@@ -178,7 +220,9 @@ const Login = () => {
                                 text-center">Password</span>
                                 <input className="w-[70%] text-[#000000d6]
                                 px-2 py-[1px] outline-none selection:bg-[#3c8bc374]
-                                bg-[#e3f4ff]" type="text"/>
+                                bg-[#e3f4ff]" type="text"
+                                name="password" value={password} onChange={handleChange}/>
+
                             
                             </label>
                         </li>
@@ -207,7 +251,7 @@ const Login = () => {
         
             </form>
             <button 
-                            onClick={()=>{setUser(emptyUser); navigate("/")}}
+                            onClick={()=>{setUser(loggedInUser); navigate("/")}}
                             className="w-full rounded-full px-3 py-1
                             text-xs
                             bg-gradient-to-l from-[#05b5b2]  to-[#226798]

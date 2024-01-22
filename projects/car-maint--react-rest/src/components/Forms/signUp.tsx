@@ -17,6 +17,8 @@ const SignUp = () => {
         email: "",
         password: ""
     });
+    /////////////////////////////////////////////////////////////
+
 
 
     const {name, email, password} = userInfo;
@@ -26,10 +28,11 @@ const SignUp = () => {
         setUserInfo({ ...userInfo, [name]:value});
     }
     
-    
     const handleSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
         e.preventDefault();
-        const apiResponse = await fetch("http://localhost:8080/auth/signup", {
+        const url = process.env.REACT_APP_CURRENT_URL!;
+
+        const apiResponse = await fetch(url+"/auth/signup", {
             method: "POST",
             headers: {
                 "Content-type": "application/json"
@@ -39,6 +42,7 @@ const SignUp = () => {
         })
         const res = await apiResponse.json();
         console.log(res);
+        console.log(apiResponse.status);
     }
 
     /////////////////////////////////////////////////////////////
