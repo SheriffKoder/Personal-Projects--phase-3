@@ -49,7 +49,7 @@ const connectToDB = async () => {
 
     try {
         await mongoose.connect(process.env.MONGODB_URI);
-        app.listen(8080);    
+        app.listen(8000);    
     } catch (error) {
         console.log(error);
     }

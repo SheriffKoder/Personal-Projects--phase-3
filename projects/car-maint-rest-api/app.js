@@ -40,7 +40,7 @@ app.use("/auth", authRoutes);
 const connectToDB = () => __awaiter(void 0, void 0, void 0, function* () {
     try {
         yield mongoose.connect(process.env.MONGODB_URI);
-        app.listen(8080);
+        app.listen(8000);
     }
     catch (error) {
         console.log(error);
