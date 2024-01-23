@@ -6,11 +6,10 @@ import { useCarInfoFetch } from "../../misc/useCarInfoFetch";
 
 type carInfoType = {
   brand: string,
-  model: string,
+  carModel: string,
   lastCheck: string,
   nextCheck: string,
   image: string,
-  _id: string
 }
 
 
@@ -82,7 +81,7 @@ const CarInfo =  ({info}: {
           </li>
 
           <li>
-            Model: {info.model}
+            Model: {info.carModel}
           </li>
 
           <li className="flex flex-col">

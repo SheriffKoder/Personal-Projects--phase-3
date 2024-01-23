@@ -95,7 +95,7 @@ const userCars:carInfoType = {
 
 
 const emptyUser = {
-    userInfo, userCars
+    userInfo:null, userCars:null
 }
 
 
@@ -106,7 +106,7 @@ const Nav = () => {
     // const [isLoggedIn, setIsLoggedIn] = useState(true);
     const setUser = useContext(userContext).updateUser;
 
-    const isLoggedIn = (useContext(userContext).userState.userInfo.name !== "");
+    const isLoggedIn = (useContext(userContext).userState.userInfo);
 
 
   return (
@@ -137,13 +137,13 @@ const Nav = () => {
                 
                 <div className="ml-auto">
 
-                    <button 
+                    {/* <button 
                         onClick={()=>navigate(`/carInfo/new/`)}
                         className="rounded-full border border-[#ffffff2a] 
                         px-2 pt-[2px] text-xs w-[4.5rem]
                         hover:bg-[#ffffff2a] focus:bg-[#ffffff2a]">
                             add car
-                    </button>
+                    </button> */}
 
                     <button 
                         // onClick={()=>navigate(`/signOut/`)}

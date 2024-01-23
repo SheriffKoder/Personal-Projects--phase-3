@@ -1,5 +1,5 @@
 //Part 5
-import React, { ReactNode, createContext, useState } from 'react';
+import React, { ReactNode, createContext, useContext, useState } from 'react';
 
 
 type checksType = {
@@ -21,11 +21,12 @@ type checkModel = {
 
 type carInfoType = {
     brand: string,
-    model: string,
+    carModel: string,
     lastCheck: string,
     nextCheck: string,
     image: string,
     _id: string,
+    userId: string,
     checks: checkModel[],
 
   }
@@ -33,12 +34,13 @@ type carInfoType = {
 type userType = {
     name: string,
     email: string,
+    _id: string,
 
 }
 
 type fullUserType = {
-    userInfo: userType,
-    userCars: carInfoType,
+    userInfo: userType | null,
+    userCars: carInfoType[] | null,
 }
 
 type contextType = {
@@ -59,15 +61,17 @@ type contextType = {
 const userInfo : userType = {
     name: "",
     email: "",
+    _id: "",
 }
 
 const userCars:carInfoType = {
     brand: "",
-    model: "",
+    carModel: "",
     lastCheck: "",
     nextCheck: "",
     image: "",
     _id: "",
+    userId: "",
     checks: [
         {
             name: "",
@@ -92,8 +96,9 @@ const userCars:carInfoType = {
 
 
 const fullUser = {
-    userInfo, userCars
+    userInfo:null, userCars:[]
 }
+
 
 
 

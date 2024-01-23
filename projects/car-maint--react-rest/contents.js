@@ -751,10 +751,23 @@ add a separate component in the app.tsx for the routing (to use the context valu
 > on any component, use the useContext(userContext).updateUser
 
 /////////////////////////////////////////////
-//// Part 6 the backend
+////// Part 6 the backend
 
+////API 0.1
 let us check the backend... shall we
 
+will use a process.env to store the API url as it can be changed
+needs names to be defined as REACT_APP_VARNAME
+and use it in react with a ! for overcoming the undefined error
+
+
+> signUp.tsx
+- add form input and submit functions and jsx attributes
+- add fetch method and display the API's response and status
+
+> login.tsx
+- add form input and submit functions and jsx attributes
+- add fetch method and display the API's response and status
 
 
 

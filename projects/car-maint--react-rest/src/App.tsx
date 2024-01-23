@@ -16,17 +16,17 @@ import Layout from './layout';
 
 const App = () => {
 
-  // const {fullUser} = useContext(userContext);
-  console.log(useContext(userContext));
+  // const appContext = useContext(userContext);
+  // console.log(useContext(userContext));
 
   // const myFetch = async () => {
 
   //   try {
-  //     const res = await fetch('http://localhost:8080/feed/posts', {
-  //       method: 'GET',
-  //     });  
+  //     const url = process.env.REACT_APP_CURRENT_URL!;
 
-  //     console.log(await res.json());
+  //     const apiResponse = await fetch(url+"/auth/login");  
+
+  //     console.log(await apiResponse.json());
 
   //   } catch (error) {
   //     console.log(error);

@@ -1,13 +1,26 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import React from "react"
 import GradientButtonBorderRounded from "../misc/GradientButtonBorderRounded";
-import { ChangeEventHandler } from "react";
 import CarInfo from "../Home/HomeComponents/CarInfo";
 import BackToHome from "../misc/BackToHome";
 import { useNavigate } from "react-router-dom";
+
+//API 0.1
+import { ChangeEventHandler } from "react";
+import { FormEventHandler } from "react";
+import { useContext } from "react";
+import { userContext } from "../../context";
+
+import {useParams} from "react-router-dom";
+
 const CarInfoNew = () => {
 
     const navigate = useNavigate();
+    const setUser = useContext(userContext)?.updateUser;
+    const userInfo = useContext(userContext)?.userState.userInfo
+    const userCars = useContext(userContext)?.userState.userCars;
+    const {carId} = useParams();
+    // console.log(carId);
 
     // const [carInfo, setCarInfo] = useState({
     //     brand: "Mazda",
@@ -21,17 +34,46 @@ const CarInfoNew = () => {
 
     const [carInfo, setCarInfo] = useState({
         brand: "",
-        model: "",
+        carModel: "",
         lastCheck: "",
         nextCheck: "",
         image: "",
         _id: "",
+        userId: useContext(userContext).userState.userInfo?._id,
 
     });
 
+    const {brand, carModel, image} = carInfo;
+
+   
+    //display info for the car to be edited, and avoid many re-renders
+    useEffect(()=> {
+        if (carId) {
+            const currentCar = userCars?.filter((car) => car._id === carId )[0];
+            // setCarInfo(currentCar);
+            // console.log(currentCar);
+    
+            if (currentCar) {
+              const  { brand, carModel, image, userId, _id} = currentCar;
+            
+              setCarInfo({
+                brand: brand,
+                carModel: carModel,
+                lastCheck: "",
+                nextCheck: "",
+                image: image,
+                _id: _id,
+                userId: userId,
+        
+            })
+    
+            
+    
+            } 
+        }
+    },[]);
 
 
-    const {brand, model, image} = carInfo;
 
 
     const handleChange: ChangeEventHandler<HTMLInputElement|HTMLTextAreaElement> = ({ target }) => {
@@ -40,6 +82,75 @@ const CarInfoNew = () => {
         console.log(value);
         setCarInfo({ ...carInfo, [name]:value});
     }
+
+    const handleSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
+        e.preventDefault();
+
+        const url = process.env.REACT_APP_CURRENT_URL!;
+
+        //Add a new car route
+        if (carInfo._id === "") {
+        
+            const apiResponse = await fetch(url+"/car/new", {
+                method: "POST",
+                headers: {
+                    "Content-type": "application/json"
+                  },
+                body: JSON.stringify(carInfo),
+    
+            })
+            const res = await apiResponse.json();
+            console.log(res);
+            console.log(apiResponse.status);
+    
+            const userCars = [res];
+            setUser({userInfo,userCars});
+            navigate("/");    
+        
+        //Edit car route
+        } else {
+        
+            const apiResponse = await fetch(url+"/car/edit", {
+                method: "PATCH",
+                headers: {
+                    "Content-type": "application/json"
+                  },
+                body: JSON.stringify(carInfo),
+    
+            })
+            const res = await apiResponse.json();
+            console.log(res);
+            console.log(apiResponse.status);
+    
+            const userCars = [res];
+            setUser({userInfo,userCars});
+            navigate("/");    
+        
+        }
+    }
+
+
+    const handleDelete = async () => {
+        const url = process.env.REACT_APP_CURRENT_URL!;
+
+        const apiResponse = await fetch(url+"/car/delete", {
+            method: "DELETE",
+            headers: {
+                "Content-type": "application/json"
+              },
+            body: JSON.stringify(carInfo),
+
+        })
+        const res = await apiResponse.json();
+        console.log(res);
+        console.log(apiResponse.status);
+
+        // const userCars = [res];
+        setUser({userInfo,userCars:[]});
+        navigate("/");
+    }
+
+    /////////////////////////////////////////////////////////////
 
 
     return (
@@ -62,7 +173,8 @@ const CarInfoNew = () => {
             <div className="flex-1 w-full px-6 flex flex-col items-center">
             <form className="bg-[#ffffff13] rounded-[12px]
             flex flex-col justify-center pt-2 pb-3 px-4
-            text-sm w-full max-w-[500px]">
+            text-sm w-full max-w-[500px]"
+            onSubmit={handleSubmit}>
         
                     <h2 className="w-full text-center font-semibold mb-3">
                         {carInfo.brand == "" ? ("Add a new car"):("Edit your Car")}
@@ -80,7 +192,7 @@ const CarInfoNew = () => {
                                 px-2 py-[1px] outline-none selection:bg-[#3c8bc374]
                                 bg-[#e3f4ff]" 
                                 type="text"
-                                defaultValue={brand}
+                                value={brand}
                                 name="brand"
                                 onChange={handleChange}
                                 />
@@ -98,8 +210,8 @@ const CarInfoNew = () => {
                                 px-2 py-[1px] outline-none selection:bg-[#3c8bc374]
                                 bg-[#e3f4ff]" 
                                 type="text"
-                                defaultValue={model}
-                                name="model"
+                                defaultValue={carModel}
+                                name="carModel"
                                 onChange={handleChange}
                                 />
                             
@@ -126,18 +238,18 @@ const CarInfoNew = () => {
                                 text-xs
                                 bg-gradient-to-l from-[#05b5b2]  to-[#226798]
                                 ">
-                                    {carInfo.brand == "" ? ("Add Car"):("Apply Changes")}
+                                    {carInfo._id == "" ? ("Add Car"):("Apply Changes")}
                                 </button>
 
                                 {/* rounded gradient button border */}
                                 <GradientButtonBorderRounded/>
                             </div>
 
-                            {carInfo.brand !== "" ? (                            
+                            {carInfo._id !== "" ? (                            
                             <div className="w-[40%] mx-auto gradient_button z-[0] relative">
                                 <button 
-                                onClick={()=>{}}
-                                type="submit"
+                                onClick={handleDelete}
+                                type="button"
                                 className="w-full rounded-full px-3 py-1
                                 text-xs
                                 bg-gradient-to-l from-[#81043a]  to-[#226798]

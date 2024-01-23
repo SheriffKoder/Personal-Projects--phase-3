@@ -6,6 +6,10 @@ import CarInfo from './HomeComponents/CarInfo'
 import Loading from "./HomeComponents/loading";
 import { useCarInfoFetch } from "../misc/useCarInfoFetch";
 
+//API 1.0 - edit car
+import {Link} from "react-router-dom";
+
+
 //Part 5
 import { userContext } from "../../context";
 
@@ -19,13 +23,32 @@ const CheckCard = lazy(() => import('./HomeComponents/checkCards'));
 //     })});
 
 
+type checksType = {
+    addDate: string,    //c     //1     //2
+    initialCheck: string,               //2
+    nextCheck: string,  //c     //1     //2
+    checkedOn: string,  //c     //1     //2
+    notes: string,      //c     //1     //2
+}
+
+type checkModel = {
+    name: string,
+    color: string,
+    history: checksType[],
+    _id: string,
+    
+};
+
+
 type carInfoType = {
     brand: string,
-    model: string,
+    carModel: string,
     lastCheck: string,
     nextCheck: string,
     image: string,
-    _id: string
+    _id: string,
+    checks: checkModel[],
+
   }
 
 
@@ -45,10 +68,22 @@ const Home = () => {
     // _id: "000",
     // }
 
-    const carInfo = useContext(userContext)?.userState.userCars;
-    const checks = useContext(userContext)?.userState.userCars.checks;
+    const userCars = useContext(userContext)?.userState.userCars;
+    console.log(userCars);
 
-    console.log(useContext(userContext));
+    let checks;
+    let carInfo:carInfoType | null = null;
+
+    if (userCars !== null && userCars.length > 0) {
+        carInfo = userCars[0];
+        checks = carInfo.checks;        
+    }
+
+
+    // if (userCars) carInfo = userCars[0];
+    // if (carInfo) checks = carInfo.checks;
+    
+    // console.log(useContext(userContext));
 
     // const carInfo: carInfoType = fetch(useCarInfoFetch());
     // const carInfo: carInfoType = useCarInfoFetch();
@@ -64,13 +99,15 @@ const Home = () => {
 
             <h1 className="font-semibold text-center mx-auto relative">
                 Your Car's Info
+                <Link to={carInfo ? `/carInfo/edit/${carInfo._id}` : ""}>
                 <button 
-                onClick={()=>{ if (carInfo) navigate(`/carInfo/edit/${carInfo._id}`)}}
+                // onClick={()=>{ carInfo && (navigate(`/carInfo/edit/${carInfo._id}`))}}
                 className="rounded-full border border-[#ffffff2a] 
                 px-3 text-xs h-[1rem] absolute right-[-50%] top-[15%]
                 hover:bg-[#ffffff2a] focus:bg-[#ffffff2a]">
                     edit
                 </button>
+                </Link>
             </h1>
 
 

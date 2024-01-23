@@ -26,11 +26,12 @@ type checkModel = {
 
 type carInfoType = {
     brand: string,
-    model: string,
+    carModel: string,
     lastCheck: string,
     nextCheck: string,
     image: string,
     _id: string,
+    userId: string,
     checks: checkModel[],
 
   }
@@ -38,22 +39,54 @@ type carInfoType = {
 type userType = {
     name: string,
     email: string,
+    _id: string,
 
 }
 
+// const userCars:carInfoType = {
+//     brand: "",
+//     model: "",
+//     lastCheck: "",
+//     nextCheck: "",
+//     image: "",
+//     _id: "",
+//     checks: [
+//         {
+//             name: "",
+//             color: "",
+//             _id: "",
+//             history: [
+//                 {
+//                     addDate: "",
+//                     initialCheck: "",
+//                     nextCheck: "",
+//                     checkedOn: "",
+//                     notes: "",
+//                 },
+  
+//             ]
+
+
+//         },
+        
+//     ]
+// };
 
 const userInfo : userType = {
     name: "Sherif",
     email: "test@email.com",
+    _id: "11"
 }
 
-const userCars:carInfoType = {
+const userCars:carInfoType[] = [
+    {
     brand: "Mazda",
-    model: "mazda 6",
+    carModel: "mazda 6",
     lastCheck: "01/01/2024",
     nextCheck: "30/01/2024",
     image: "/images/car1.png",
     _id: "000",
+    userId: "111",
     checks: [
         {
             name: "Maintenance",
@@ -116,7 +149,9 @@ const userCars:carInfoType = {
 
         },
     ]
-}
+}];
+
+
 
 
 const loggedInUser = {
@@ -141,7 +176,7 @@ const Login = () => {
 
     /////////////////////////////////////////////////////////////
     //API 0.1 - login
-    const [userInfo, setUserInfo] = useState({
+    const [loginInfo, setLoginInfo] = useState({
         email: "",
         password: ""
     });
@@ -149,11 +184,11 @@ const Login = () => {
 
 
 
-    const {email, password} = userInfo;
+    const {email, password} = loginInfo;
 
     const handleChange: ChangeEventHandler<HTMLInputElement> = ({ target }) => {
         const { name, value } = target;
-        setUserInfo({ ...userInfo, [name]:value});
+        setLoginInfo({ ...loginInfo, [name]:value});
     }
     
     const handleSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
@@ -165,12 +200,15 @@ const Login = () => {
             headers: {
                 "Content-type": "application/json"
               },
-            body: JSON.stringify(userInfo),
+            body: JSON.stringify(loginInfo),
 
         })
         const res = await apiResponse.json();
         console.log(res);
         console.log(apiResponse.status);
+
+        setUser(res);
+        navigate("/");
     }
 
     /////////////////////////////////////////////////////////////
