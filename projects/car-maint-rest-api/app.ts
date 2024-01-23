@@ -10,6 +10,7 @@ require("dotenv").config();
 
 const feedRoutes = require("./routes/feed.js");
 const authRoutes = require("./routes/auth.js");
+const carRoutes = require("./routes/car.js");
 
 
 //we are writing the back-end routes here
@@ -43,6 +44,7 @@ app.use(bodyParser.json());
 //listen to any request on 8080/feed/(router-url)
 app.use("/feed", feedRoutes);
 app.use("/auth", authRoutes);
+app.use("/car", carRoutes);
 
 
 const connectToDB = async () => {

@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const { validationResult } = require("express-validator");
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const userModel_1 = __importDefault(require("../models/userModel"));
+const carModel_1 = __importDefault(require("../models/carModel"));
 // (req: Request, res:Response, next: NextFunction)
 const routeValidationErrors = (req, res) => {
     ////////////////////////////////////////////////////////////////
@@ -49,24 +50,11 @@ exports.signUp = (req, res, next) => __awaiter(void 0, void 0, void 0, function*
     // console.log(body);
     // console.log(body.name);
     ////////////////////////////////////////////////////////////////
-    //get the validation errors array
-    //an array of objects with path, msg
-    const routeValidationErrors = validationResult(req).errors;
-    // console.log(routeValidationErrors);
-    //if there is an error, return back to the FE a response
-    if (routeValidationErrors.length > 0) {
-        //i want to go over each object in the array
-        //for each object return its msg as message
-        const errors = routeValidationErrors.map((errorObject) => {
-            return {
-                message: errorObject.msg
-            };
-        });
-        console.log(errors);
+    const errors = routeValidationErrors(req, res);
+    if (errors)
         return res.status(422).json(errors);
-    }
     ////////////////////////////////////////////////////////////////
-    //create a user
+    //create a user if no errors
     try {
         const { name, email, password } = req.body;
         // console.log(name);
@@ -100,20 +88,12 @@ exports.signUp = (req, res, next) => __awaiter(void 0, void 0, void 0, function*
     // })
 });
 exports.login = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    // const user = {
-    //     name: "sheriff"
-    // }
-    // res.status(200).json(user);
-    // console.log(await req.json());
-    // const body =  req.body;
-    // console.log(body);
-    // console.log(body.name);
     ////////////////////////////////////////////////////////////////
     const errors = routeValidationErrors(req, res);
     if (errors)
         return res.status(422).json(errors);
     ////////////////////////////////////////////////////////////////
-    //create a user
+    //find the user if no errors
     try {
         const { email, password } = req.body;
         // console.log(name);
@@ -130,7 +110,10 @@ exports.login = (req, res, next) => __awaiter(void 0, void 0, void 0, function* 
                 return res.status(401).json("No user found with this email");
             }
             else {
-                return res.status(200).json("User account found");
+                //return the user's car
+                const userCars = yield carModel_1.default.find({ userId: user._id });
+                const userInfo = { name: user.name, email: user.email, _id: user._id };
+                return res.status(200).json({ userInfo, userCars });
             }
         }
     }

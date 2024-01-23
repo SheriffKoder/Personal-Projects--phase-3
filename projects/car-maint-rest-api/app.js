@@ -16,6 +16,7 @@ const mongoose = require("mongoose");
 require("dotenv").config();
 const feedRoutes = require("./routes/feed.js");
 const authRoutes = require("./routes/auth.js");
+const carRoutes = require("./routes/car.js");
 //we are writing the back-end routes here
 // app.js -> routes -> controllers
 //Access-Control configurations
@@ -37,6 +38,7 @@ app.use(bodyParser.json());
 //listen to any request on 8080/feed/(router-url)
 app.use("/feed", feedRoutes);
 app.use("/auth", authRoutes);
+app.use("/car", carRoutes);
 const connectToDB = () => __awaiter(void 0, void 0, void 0, function* () {
     try {
         yield mongoose.connect(process.env.MONGODB_URI);

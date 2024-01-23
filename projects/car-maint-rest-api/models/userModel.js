@@ -1,37 +1,6 @@
 "use strict";
+//a user model without any cars.
 Object.defineProperty(exports, "__esModule", { value: true });
-const userInfo = {
-    name: "",
-    email: "",
-};
-const userCars = {
-    brand: "",
-    model: "",
-    lastCheck: "",
-    nextCheck: "",
-    image: "",
-    _id: "",
-    checks: [
-        {
-            name: "",
-            color: "",
-            _id: "",
-            history: [
-                {
-                    addDate: "",
-                    initialCheck: "",
-                    nextCheck: "",
-                    checkedOn: "",
-                    notes: "",
-                },
-            ]
-        },
-    ]
-};
-const fullUser = {
-    userInfo, userCars
-};
-//we need a user model without any cars now.
 const mongoose_1 = require("mongoose");
 const mongoose_2 = require("mongoose");
 ;

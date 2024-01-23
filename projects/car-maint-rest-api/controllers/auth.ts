@@ -5,6 +5,7 @@ import { NextFunction, Request, Response } from "express";
 const {validationResult} = require("express-validator");
 import bcrypt from "bcrypt";
 import UserModel from "../models/userModel";
+import CarModel from "../models/carModel";
 
 // (req: Request, res:Response, next: NextFunction)
 
@@ -134,7 +135,12 @@ exports.login = async (req: Request, res:Response, next: NextFunction) => {
             if (!passwordMatch) {
                 return res.status(401).json("No user found with this email");
             } else {
-                return res.status(200).json("User account found");
+
+                //return the user's car
+                const userCars = await CarModel.find({userId: user._id});
+                const userInfo = {name: user.name, email: user.email, _id: user._id};
+
+                return res.status(200).json({userInfo, userCars});
             }
             
         }
