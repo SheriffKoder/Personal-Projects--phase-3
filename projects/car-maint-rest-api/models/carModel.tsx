@@ -11,7 +11,7 @@ type checkModel = {
     name: string,
     color: string,
     history: checksType[],
-    _id: string,
+    // _id: string,
     
 };
 
