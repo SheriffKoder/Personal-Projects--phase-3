@@ -40,6 +40,26 @@ const CarInfoNew = () => {
         image: "",
         _id: "",
         userId: useContext(userContext).userState.userInfo?._id,
+        checks: [
+            {
+                name: "",
+                color: "",
+                _id: "",
+                history: [
+                    {
+                        addDate: "",
+                        initialCheck: "",
+                        nextCheck: "",
+                        checkedOn: "",
+                        notes: "",
+                    },
+      
+                ]
+    
+    
+            },
+            
+        ]
 
     });
 
@@ -54,7 +74,7 @@ const CarInfoNew = () => {
             // console.log(currentCar);
     
             if (currentCar) {
-              const  { brand, carModel, image, userId, _id} = currentCar;
+              const  { brand, carModel, image, userId, _id, checks} = currentCar;
             
               setCarInfo({
                 brand: brand,
@@ -64,6 +84,7 @@ const CarInfoNew = () => {
                 image: image,
                 _id: _id,
                 userId: userId,
+                checks: checks
         
             })
     

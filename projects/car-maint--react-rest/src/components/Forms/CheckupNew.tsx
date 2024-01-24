@@ -1,13 +1,34 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import React from "react"
 import GradientButtonBorderRounded from "../misc/GradientButtonBorderRounded";
 import { ChangeEventHandler } from "react";
 import BackToHome from "../misc/BackToHome";
 import { useNavigate } from "react-router-dom";
+import { FormEventHandler } from "react";
+
+import { useContext } from "react";
+import { userContext } from "../../context";
+import {useParams} from "react-router-dom";
 
 const CheckupNew = () => {
 
     const navigate = useNavigate();
+    const setUser = useContext(userContext)?.updateUser;
+    const userInfo = useContext(userContext)?.userState.userInfo;
+    const {carId} = useParams();    //will send the carId to find the car, with the checkupInfo
+    
+    const {checkIndex} = useParams();
+    const {historyIndex} = useParams();
+    const userCars = useContext(userContext).userState.userCars;
+
+    //if the check history has more than one item, we will not want to view the previous check input
+    let oldCheck;
+    if (userCars && checkIndex) {
+        const currentCar = userCars?.filter((car) => car._id == carId)[0];
+        oldCheck = currentCar?.checks[+checkIndex].history.length > 1;
+    }
+
+    console.log(oldCheck);
 
     const [checkupInfo, setCheckupInfo] = useState({
         title: "",
@@ -17,6 +38,9 @@ const CheckupNew = () => {
         notes: "",
 
     });
+
+    
+
 
 
     const {title, color, initialCheck, nextCheck, notes} = checkupInfo;
@@ -29,6 +53,77 @@ const CheckupNew = () => {
         setCheckupInfo({ ...checkupInfo, [name]:value});
     }
 
+    const handleSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
+        e.preventDefault();
+
+        const url = process.env.REACT_APP_CURRENT_URL!;
+
+        //push the check info to the API to add it to the car
+        if (!checkIndex && !historyIndex) {
+
+            const apiResponse = await fetch(url+"/car/check/new", {
+                method: "PATCH",
+                headers: {
+                    "Content-type": "application/json"
+                  },
+                body: JSON.stringify({...checkupInfo,carId}),
+    
+            })
+            const res = await apiResponse.json();
+            console.log(res);
+            console.log(apiResponse.status);
+    
+            const userCars = [res];
+            setUser({userInfo,userCars});
+            navigate("/");    
+        
+        
+        //edit check if there are indexes of a current check in the url
+        } else {
+
+            const apiResponse = await fetch(url+"/car/check/edit", {
+                method: "PATCH",
+                headers: {
+                    "Content-type": "application/json"
+                  },
+                body: JSON.stringify({...checkupInfo, carId, checkIndex, historyIndex}),
+    
+            })
+            const res = await apiResponse.json();
+            console.log(res);
+            console.log(apiResponse.status);
+    
+            const userCars = [res];
+            setUser({userInfo,userCars});
+            navigate("/");    
+
+
+        }
+        
+            
+   
+    }
+
+    //set the info if we are editing, only on first render
+    useEffect(()=> {
+        //if we are on an editing url (given from the button link and the react route)
+        //take the checkup information and set to the state
+        if (userCars && checkIndex && historyIndex) {
+            const thisCar = userCars.filter((car) => car._id === carId)[0];
+            const thisCheck = thisCar.checks[+checkIndex];
+
+            setCheckupInfo({
+                title: thisCheck.name,
+                color: thisCheck.color,
+                nextCheck: thisCheck.history[+historyIndex].nextCheck,
+                initialCheck: thisCheck.history[+historyIndex].initialCheck,
+                notes: thisCheck.history[+historyIndex].notes,
+            })
+        }
+
+    },[]);
+
+
 
     return (
     <div className="flex flex-col flex-1 items-center px-4 text_shadow">
@@ -36,15 +131,20 @@ const CheckupNew = () => {
         <div className="flex flex-row w-full max-w-[900px] mb-8 text-xs text_shadow">
             <span onClick={()=>{navigate("/")}} className="cursor-pointer">Home</span>
             <span className="right_caret h-full w-[1rem] text-transparent">.</span>
-            <span style={{color:"#00465f"}}>New Check-up</span>
+            <span style={{color:"#00465f"}}>
+                {checkIndex ? "Edit Checkup" : "New Check-up" }
+            </span>
         </div>
 
         <form className="bg-[#ffffff13] mx-6 rounded-[12px]
         flex flex-col justify-center pt-2 pb-3 px-4 my-auto
-        text-sm w-full max-w-[600px]">
+        text-sm w-full max-w-[600px]"
+        onSubmit={handleSubmit}>
 
                 <h2 className="w-full text-center font-semibold mb-3 ">
-                    Create a new checkup
+                    
+                    {checkIndex ? "Edit This Checkup" : "Create a new checkup" }
+
                 </h2>
 
                 <ul className="flex flex-col gap-5">
@@ -101,7 +201,9 @@ const CheckupNew = () => {
 
                     </li>
 
+
                     {/* previous check (initialCheck) */}
+                    {!oldCheck && (
                     <li>
                         <label className="flex flex-row rounded-[5px] overflow-hidden
                         focus-within:outline outline-offset-[3px] outline-2
@@ -123,7 +225,9 @@ const CheckupNew = () => {
                         
                         </label>
                     </li>
-
+                    )}
+                    
+                    
                     {/* next check */}
                     <li>
                         <label className="flex flex-row rounded-[5px] overflow-hidden
@@ -137,7 +241,7 @@ const CheckupNew = () => {
                             px-2 py-[1px] outline-none selection:bg-[#3c8bc374]
                             bg-[#e3f4ff]" 
                             type="date"
-                            defaultValue={nextCheck}
+                            value={nextCheck}
                             name="nextCheck"
                             onChange={handleChange}/>
                         
@@ -174,7 +278,8 @@ const CheckupNew = () => {
                         text-xs
                         bg-gradient-to-l from-[#05b5b2]  to-[#226798]
                         ">
-                            Add Checkup
+                            {checkIndex ? "Apply Changes" : "Add Checkup" }
+
                         </button>
 
                         {/* rounded gradient button border */}

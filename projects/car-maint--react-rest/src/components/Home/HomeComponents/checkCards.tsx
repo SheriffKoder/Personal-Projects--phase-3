@@ -4,6 +4,11 @@ import { useNavigate } from "react-router-dom";
 //Part 5
 import { userContext } from "../../../context";
 
+//API
+import { getDayDifference } from "../../../util/daysDiff";
+import {Link} from "react-router-dom";
+
+
 type checksType = {
     addDate: string,    //c     //1     //2
     initialCheck: string,               //2
@@ -22,11 +27,14 @@ type checkModel = {
 
 
 
-const CheckCard = ({checks}: {
+const CheckCard = ({checks, carId}: {
     checks: checkModel[],
+    carId: string,
 }) => {
   
     const navigate = useNavigate();
+    const setUser = useContext(userContext)?.updateUser;
+    const userInfo = useContext(userContext)?.userState.userInfo
 
     // const checks = useContext(userContext)?.userCars.checks;
 
@@ -96,11 +104,52 @@ const CheckCard = ({checks}: {
     // ];
 
     
-    const handleDeleteCheckTree = (checkTreeId: string) => {
-        console.log(checkTreeId);
+    const handleDeleteCheckTree = async (carId:string, checkIndex:number) => {
+        console.log(carId, checkIndex);
+
+        const url = process.env.REACT_APP_CURRENT_URL!;
+
+        const apiResponse = await fetch(url+"/car/check/delete", {
+            method: "DELETE",
+            headers: {
+                "Content-type": "application/json"
+              },
+            body: JSON.stringify({carId, checkIndex}),
+
+        })
+        const res = await apiResponse.json();
+        console.log(res);
+        console.log(apiResponse.status);
+
+        const userCars = [res];
+        setUser({userInfo,userCars});
+        navigate("/");    
     };
 
-  
+
+    const handleCompleteCheck = async (carId:string, checkIndex:number) => {
+        console.log(carId);
+
+        const url = process.env.REACT_APP_CURRENT_URL!;
+
+        const apiResponse = await fetch(url+"/car/check/complete", {
+            method: "PATCH",
+            headers: {
+                "Content-type": "application/json"
+              },
+            body: JSON.stringify({carId, checkIndex}),
+
+        })
+        const res = await apiResponse.json();
+        console.log(res);
+        console.log(apiResponse.status);
+
+        const userCars = [res];
+        setUser({userInfo,userCars});
+        navigate("/");    
+    }
+
+
     return (
 
     
@@ -109,14 +158,17 @@ const CheckCard = ({checks}: {
         {checks.length > 0 && checks.map((check) => { 
          
             const info = {
-                _id: check._id,
+                _id: check.name,
                 color: check.color,
                 name: check.name,
                 lastCheck: (check.history.length > 1 ? check.history[1].checkedOn : "not yet" ),
-                nextCheck: check.history[0].nextCheck,
-                remaining: "calc today- check.history[0].nextCheck",
+                nextCheck: check.history[0].nextCheck !== "" ? check.history[0].nextCheck : "not set",
+                remaining: check.history[0].nextCheck !== "" ? getDayDifference(check.history[0].nextCheck) : "not set",
                 notes: check.history[0].notes,                
             }
+
+            const checkIndexInAllChecks = checks.indexOf(check);
+            const checkIndexInThisCheck = 0;
 
             return (
                 <div className="
@@ -139,14 +191,17 @@ const CheckCard = ({checks}: {
             
                         {/* buttons */}
                         <div className="ml-auto flex flex-row gap-2 h-[1rem]">
-                            <button 
-                            onClick={()=>navigate(`/checkup/edit/${check._id}=0`)}
-                            className="ml-auto rounded-full bg-[#ffffff2a] px-1 py-0
-                            w-[4.5rem] text-xs hover:scale-105 focus:scale-105">
-                                edit
-                            </button>
-                            <button 
-                            onClick={()=>handleDeleteCheckTree(check._id)}
+                                <Link 
+                                to={carId ? `/${carId}/checkup/${checkIndexInAllChecks}/${checkIndexInThisCheck}/edit/` : ""}
+                                // onClick={()=>navigate(`/checkup/edit/${check._id}=0`)}
+                                className="ml-auto rounded-full bg-[#ffffff2a] px-1 py-0
+                                w-[4.5rem] text-center text-xs hover:scale-105 focus:scale-105">
+                                    
+                                    {info.remaining == "not set" ? "update" : "edit"}
+                                    
+                                </Link>
+                                <button 
+                            onClick={()=>handleDeleteCheckTree(carId,checkIndexInAllChecks)}
                             className="ml-auto rounded-full bg-[#ffffff2a] px-1 py-0
                             w-[4.5rem] text-xs hover:scale-105 focus:scale-105">
                             remove
@@ -169,9 +224,38 @@ const CheckCard = ({checks}: {
                                 <div>{info.nextCheck}</div>
                             </li>
             
+                            <li className="w-full flex flex-row ml-2 items-center">
+                                <div className="min-w-[7rem]">
+                                    {+info.remaining > -1 || info.remaining == "not set"? "Remaining:" : "Overdue:"}
+                                </div>
+                                    <div className="flex flex-row items-center gap-1 flex-1">
+                                        <div 
+                                        className={`
+                                        ${info.remaining !== "not set" && "px-2 opacity-90"}
+                                        text-center rounded-full  h-[24px] pt-[0.05rem]
+                                        ${+info.remaining < 0 ? "bg-red-600" : ""}
+                                        ${+info.remaining > 1 ? "bg-green-700" : ""}
+                                        ${+info.remaining == 0 || +info.remaining == 1 ? "bg-yellow-600" : ""}
+
+                                        `}>
+                                            {info.remaining == "not set" ? info.remaining : info.remaining +" Days"}
+                                        </div>
+
+                                        {info.remaining !== "not set" && (
+
+                                        <div 
+                                        onClick={()=> {handleCompleteCheck(carId, checkIndexInAllChecks)}}
+                                        className="ml-auto rounded-full border border-[#ffffff2a] px-3 py-1
+                                        text-xs mr-1 hover:bg-[#ffffff2a] focus:bg-[#ffffff2a]">
+                                            mark as completed
+                                        </div>
+                                        )}
+                                    </div>
+                            </li>
+
                             <li className="w-full flex flex-row ml-2">
-                                <div className="min-w-[7rem]">Remaining:</div>
-                                <div>{info.remaining}</div>
+                                <div className="min-w-[7rem]">Completions:</div>
+                                <div>{check.history.length-1}</div>
                             </li>
             
                             <li className="w-full bg-[#ffffff15] rounded-[7px] 
@@ -185,13 +269,14 @@ const CheckCard = ({checks}: {
             
                     {/* button - view history */}
                     <div className="w-full flex mt-3 mb-1">
-                        <button 
+                        <Link 
+                        to={carId ? `/${carId}/checkup/${checkIndexInAllChecks}` : ""}
                         onClick={()=>navigate(`/checkup/${info._id}`)}
                         className="rounded-full border border-[#ffffff2a] px-3 py-1
                         text-xs mx-auto
                         hover:bg-[#ffffff2a] focus:bg-[#ffffff2a]">
                             check history
-                        </button>
+                        </Link>
                     </div>
             
             

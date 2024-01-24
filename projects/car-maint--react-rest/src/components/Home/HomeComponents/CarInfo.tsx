@@ -1,8 +1,24 @@
 import React, { useState, useEffect, useCallback } from "react"
 
 import { useCarInfoFetch } from "../../misc/useCarInfoFetch";
+import { getNearestDay, getNearestDay2 } from "../../../util/daysDiff";
 
 
+type checksType = {
+  addDate: string,    //c     //1     //2
+  initialCheck: string,               //2
+  nextCheck: string,  //c     //1     //2
+  checkedOn: string,  //c     //1     //2
+  notes: string,      //c     //1     //2
+}
+
+type checkModel = {
+  name: string,
+  color: string,
+  history: checksType[],
+  // _id: string,
+  
+};
 
 type carInfoType = {
   brand: string,
@@ -10,6 +26,7 @@ type carInfoType = {
   lastCheck: string,
   nextCheck: string,
   image: string,
+  checks: checkModel[] | []
 }
 
 
@@ -31,7 +48,27 @@ const CarInfo =  ({info}: {
   // }
 
   
+    //we have the car, want to find in its checks the last check
+  //we have many checks, with their last being the last check date
+  //so we can differentiate between each car.checks.map((check)=> {}).history[0].
+
+  const CarNextChecks = info.checks.map((check)=> {
+    return check.history[0].nextCheck;
+  })
+
+  const CarLastChecks = info.checks.map((check)=> {
+    return check.history[0].checkedOn;
+  })
+  // console.log(CarNextChecks);
+  // const NearestNextCheck = "";
+  const NearestNextCheck = getNearestDay(CarNextChecks)
+  // console.log(NearestNextCheck);
+
+  // const NearestLastCheck = ""
+  const NearestLastCheck = getNearestDay2(CarLastChecks)
+  // console.log(NearestLastCheck);
   
+  // console.log(info.checks);
     
 
 
@@ -86,12 +123,12 @@ const CarInfo =  ({info}: {
 
           <li className="flex flex-col">
             <span>Last Check</span> 
-            <span>{info.lastCheck}</span>
+            <span>{NearestLastCheck}</span>
           </li>
 
           <li className="flex flex-col">
             <span>Next Check</span> 
-            <span>{info.nextCheck}</span>
+            <span>{NearestNextCheck}</span>
           </li>
         </ul>
       </div>

@@ -62,11 +62,11 @@ const Layout = () => {
                 <Routes>
                 {/* if there is a user, display user info, if there is none, display the login/signup */}
                     <Route path="/" element={<Home />} />
-                    <Route path="/checkup/new/" element={<CheckupNew />} />
-                    <Route path="/checkup/edit/:checkId" element={<CheckupEdit />} />
+                    <Route path="/:carId/checkup/new/" element={<CheckupNew />} />
+                    <Route path="/:carId/checkup/:checkIndex/:historyIndex/edit/" element={<CheckupNew />} />
                     <Route path="/CarInfo/new/" element={<CarInfoNew />} />
                     <Route path="/CarInfo/edit/:carId" element={<CarInfoNew />} />
-                    <Route path="/checkup/:checkId" element={<History/>} />
+                    <Route path=":carId/checkup/:checkIndex/" element={<History/>} />
     
                     {/* if user is already logged it, then tell you are logged in */}
                     <Route path="/signup" element={<AlreadyLoggedIn />} />

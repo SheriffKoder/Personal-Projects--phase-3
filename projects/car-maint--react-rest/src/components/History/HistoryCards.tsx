@@ -1,13 +1,12 @@
 import React from "react"
 import BackToHome from "../misc/BackToHome";
 import { useNavigate } from "react-router-dom";
-
+import { getDayDifference, getDayDiffTwoDates } from "../../util/daysDiff";
 
 
 type checksType = {
     addDate: string,    //c     //1     //2
     initialCheck: string,               //2
-    // lastCheck: string,
     nextCheck: string,  //c     //1     //2
     checkedOn: string,  //c     //1     //2
     notes: string,      //c     //1     //2
@@ -17,13 +16,16 @@ type checkModel = {
     name: string,
     color: string,
     history: checksType[],
-    _id: string
+    // _id: string,
     
 };
 
 
 
-const HistoryCards = () => {
+
+const HistoryCards = ({check}:{
+    check: checkModel
+}) => {
   
     const navigate = useNavigate();
 
@@ -35,91 +37,91 @@ const HistoryCards = () => {
 
     };
 
-    const check: checkModel = 
+    // const check: checkModel = 
+    // // {
+    // //     name: "Maintenance",
+    // //     color: "#058885",
+    // //     _id: "1234",
+    // //     history: [
+    // //         {
+    // //             addDate: "addDate 0",
+    // //             initialCheck: "initialCheck 0",
+    // //             // lastCheck: "03/03/23",
+    // //             nextCheck: "nextCheck 0",
+    // //             checkedOn: "checkedOn 0",
+    // //             notes: "Make sure to check on the replacement part next time!",
+    // //             _id: 1,
+    // //         },
+    // //         {
+    // //             addDate: "addDate 1",
+    // //             initialCheck: "initialCheck 1",
+    // //             // lastCheck: "03/02/23",
+    // //             nextCheck: "nextCheck 1",
+    // //             checkedOn: "checkedOn 1",
+    // //             notes: "get something for the filter!",
+    // //             _id: 2,
+    // //         },
+    // //         {
+    // //             addDate: "addDate 2",
+    // //             initialCheck: "initialCheck 2",
+    // //             // lastCheck: "none",
+    // //             nextCheck: "nextCheck 2",
+    // //             checkedOn: "checkedOn 2",
+    // //             notes: "Make sure to bring a filter next time",
+    // //             _id: 3,
+    // //         },
+    // //         {
+    // //             addDate: "addDate 3",
+    // //             initialCheck: "initialCheck 3",
+    // //             // lastCheck: "none",
+    // //             nextCheck: "nextCheck 3",
+    // //             checkedOn: "checkedOn 3",
+    // //             notes: "Make sure to bring a filter next time",
+    // //             _id: 3,
+
+    // //         },
+    // //     ]
+    // // };
+
     // {
-    //     name: "Maintenance",
-    //     color: "#058885",
-    //     _id: "1234",
+    //     name: "Oil Change",
+    //     color: "#b7ab09",
+    //     _id: "4567",
+
     //     history: [
     //         {
-    //             addDate: "addDate 0",
+    //             addDate: "addDate Oil 0",
     //             initialCheck: "initialCheck 0",
-    //             // lastCheck: "03/03/23",
-    //             nextCheck: "nextCheck 0",
-    //             checkedOn: "checkedOn 0",
-    //             notes: "Make sure to check on the replacement part next time!",
-    //             _id: 1,
+    //             nextCheck: "nextCheck Oil 0",
+    //             checkedOn: "checkedOn Oil 0",
+    //             notes: "Make sure to bring a filter next time",
     //         },
     //         {
-    //             addDate: "addDate 1",
+    //             addDate: "addDate Oil 1",
     //             initialCheck: "initialCheck 1",
-    //             // lastCheck: "03/02/23",
-    //             nextCheck: "nextCheck 1",
-    //             checkedOn: "checkedOn 1",
-    //             notes: "get something for the filter!",
-    //             _id: 2,
+    //             nextCheck: "nextCheck Oil 1",
+    //             checkedOn: "checkedOn Oil 1",
+    //             notes: "all done",
     //         },
     //         {
-    //             addDate: "addDate 2",
+    //             addDate: "addDate Oil 2",
     //             initialCheck: "initialCheck 2",
-    //             // lastCheck: "none",
-    //             nextCheck: "nextCheck 2",
-    //             checkedOn: "checkedOn 2",
-    //             notes: "Make sure to bring a filter next time",
-    //             _id: 3,
+    //             nextCheck: "nextCheck Oil 2",
+    //             checkedOn: "checkedOn Oil 2",
+    //             notes: "all done",
     //         },
     //         {
-    //             addDate: "addDate 3",
+    //             addDate: "addDate Oil 3",
     //             initialCheck: "initialCheck 3",
-    //             // lastCheck: "none",
-    //             nextCheck: "nextCheck 3",
-    //             checkedOn: "checkedOn 3",
-    //             notes: "Make sure to bring a filter next time",
-    //             _id: 3,
-
+    //             nextCheck: "nextCheck Oil 3",
+    //             checkedOn: "checkedOn Oil 3",
+    //             notes: "all done",
     //         },
+
     //     ]
+
+
     // };
-
-    {
-        name: "Oil Change",
-        color: "#b7ab09",
-        _id: "4567",
-
-        history: [
-            {
-                addDate: "addDate Oil 0",
-                initialCheck: "initialCheck 0",
-                nextCheck: "nextCheck Oil 0",
-                checkedOn: "checkedOn Oil 0",
-                notes: "Make sure to bring a filter next time",
-            },
-            {
-                addDate: "addDate Oil 1",
-                initialCheck: "initialCheck 1",
-                nextCheck: "nextCheck Oil 1",
-                checkedOn: "checkedOn Oil 1",
-                notes: "all done",
-            },
-            {
-                addDate: "addDate Oil 2",
-                initialCheck: "initialCheck 2",
-                nextCheck: "nextCheck Oil 2",
-                checkedOn: "checkedOn Oil 2",
-                notes: "all done",
-            },
-            {
-                addDate: "addDate Oil 3",
-                initialCheck: "initialCheck 3",
-                nextCheck: "nextCheck Oil 3",
-                checkedOn: "checkedOn Oil 3",
-                notes: "all done",
-            },
-
-        ]
-
-
-    };
 
     const slimChecks = [...check.history];
     const allChecks: checksType[] = [...slimChecks];
@@ -186,13 +188,13 @@ const HistoryCards = () => {
                     {/* buttons */}
                     <div className="ml-auto flex flex-row gap-2 h-[1rem]">
                         <button 
-                        onClick={()=>navigate(`/checkup/edit/${check._id}=0`)}
+                        // onClick={()=>navigate(`/checkup/edit/${check._id}=0`)}
                         className="ml-auto rounded-full bg-[#ffffff2a] px-1 py-0
                         w-[4.5rem] text-xs hover:scale-105 focus:scale-105">
                             edit
                         </button>
                         <button 
-                        onClick={()=>handleDeleteCheck(check._id, 0)}
+                        // onClick={()=>handleDeleteCheck(check._id, 0)}
                         className="ml-auto rounded-full bg-[#ffffff2a] px-1 py-0
                         w-[4.5rem] text-xs hover:scale-105 focus:scale-105">
                         remove
@@ -213,20 +215,28 @@ const HistoryCards = () => {
 
                         <li className="w-full flex flex-row ml-2">
                             <div className="min-w-[7rem]">
-                            Last Check: {slimChecks.length > 0 ? allChecks[1].checkedOn : currentCheck.initialCheck}
+                            Last Check: {allChecks.length > 1 ? 
+                            allChecks[1].checkedOn !== "" ? allChecks[1].checkedOn : "was not defined" 
+                            : 
+                            currentCheck.initialCheck !== "" ? currentCheck.initialCheck : "not defined yet"
+                            }
                             </div>
                         </li>
 
                         <li className="w-full flex flex-row ml-2">
                             <div className="min-w-[7rem]">
-                            Next Check: {currentCheck.nextCheck}
+                            Next Check: 
+                            {currentCheck.nextCheck !== "" ? currentCheck.nextCheck : "not set" }
                             </div>
                         </li>
 
 
                         <li className="w-full flex flex-row ml-2">
                             <div className="min-w-[7rem]">
-                            Remaining: "calc nextCheck-checkDate" Days
+                            Remaining: {check.history[0].nextCheck !== "" ? getDayDifference(check.history[0].nextCheck) : "not set"}
+                            {getDayDifference(check.history[0].nextCheck) > 1 && " Days"}
+                            {getDayDifference(check.history[0].nextCheck) == 1 && " Day"}
+
                             </div>
                         </li>
                     
@@ -273,13 +283,13 @@ const HistoryCards = () => {
                             {/* buttons */}
                             <div className="ml-auto flex flex-row gap-2 h-[1rem]">
                                 <button 
-                                onClick={()=>navigate(`/checkup/edit/${check._id}=${checkIndex}`)}
+                                // onClick={()=>navigate(`/checkup/edit/${check._id}=${checkIndex}`)}
                                 className="ml-auto rounded-full bg-[#ffffff2a] px-1 py-0
                                 w-[4.5rem] text-xs hover:scale-105 focus:scale-105">
                                     edit
                                 </button>
                                 <button 
-                                onClick={()=>handleDeleteCheck(check._id, checkIndex)}
+                                // onClick={()=>handleDeleteCheck(check._id, checkIndex)}
                                 className="ml-auto rounded-full bg-[#ffffff2a] px-1 py-0
                                 w-[4.5rem] text-xs hover:scale-105 focus:scale-105">
                                 remove
@@ -311,12 +321,21 @@ const HistoryCards = () => {
 
                                 <li className="w-full flex flex-row ml-2">
                                     <div className="min-w-[7rem]">duration:</div>
-                                    <div>calc nextDate-today</div>
+                                    <div>
+                                        {getDayDifference(info.nextCheck)}
+                                        {getDayDifference(info.nextCheck) > 1 && " Days"}
+                                        {getDayDifference(info.nextCheck) == 1 && " Day"}
+                                    </div>
                                 </li>
                 
                                 <li className="w-full flex flex-row ml-2">
                                     <div className="min-w-[7rem]">due by:</div>
-                                    <div>calc (nextDate-addDate) - checked on</div>
+                                    <div>
+                                        {/* {firstCheck.checkedOn - firstCheck.nextCheck} */}
+                                        {getDayDiffTwoDates(info.checkedOn, info.nextCheck)}
+                                        {Math.abs(getDayDiffTwoDates(info.checkedOn, info.nextCheck)) > 1 && " Days"}
+                                        {Math.abs(getDayDiffTwoDates(info.checkedOn, info.nextCheck)) == 1 && " Day"}
+                                    </div>                                
                                 </li>
                                 
                                 <li className="w-full bg-[#ffffff15] rounded-[7px] 
@@ -359,13 +378,13 @@ const HistoryCards = () => {
                     {/* buttons */}
                     <div className="ml-auto flex flex-row gap-2 h-[1rem]">
                         <button 
-                        onClick={()=>navigate(`/checkup/edit/${check._id}=${check.history.length-1}`)}
+                        // onClick={()=>navigate(`/checkup/edit/${check._id}=${check.history.length-1}`)}
                         className="ml-auto rounded-full bg-[#ffffff2a] px-1 py-0
                         w-[4.5rem] text-xs hover:scale-105 focus:scale-105">
                             edit
                         </button>
                         <button 
-                        onClick={()=>handleDeleteCheck(check._id, check.history.length-1)}
+                        // onClick={()=>handleDeleteCheck(check._id, check.history.length-1)}
                         className="ml-auto rounded-full bg-[#ffffff2a] px-1 py-0
                         w-[4.5rem] text-xs hover:scale-105 focus:scale-105">
                         remove
@@ -380,7 +399,9 @@ const HistoryCards = () => {
 
                     <li className="w-full flex flex-row ml-2">
                         <div className="min-w-[7rem]">Previous check was:</div>
-                        <div>{firstCheck.initialCheck}</div>
+                        <div>
+                            {firstCheck.initialCheck === "" ? "not set" : firstCheck.initialCheck}
+                        </div>
                     </li>
                 
                     <li className="w-full flex flex-row ml-2">
@@ -397,12 +418,23 @@ const HistoryCards = () => {
 
                     <li className="w-full flex flex-row ml-2">
                         <div className="min-w-[7rem]">duration:</div>
-                        <div>calc (nextDate-today)</div>
+                        {/* <div>calc (nextDate-today)</div> */}
+                        <div>
+                            {getDayDifference(firstCheck.nextCheck)}
+                            {getDayDifference(firstCheck.nextCheck) > 1 && " Days"}
+                            {getDayDifference(firstCheck.nextCheck) == 1 && " Day"}
+
+                        </div>
                     </li>
     
                     <li className="w-full flex flex-row ml-2">
                         <div className="min-w-[7rem]">due by:</div>
-                        <div>calc (nextDate-addDate) - checked on</div>
+                        <div>
+                            {/* {firstCheck.checkedOn - firstCheck.nextCheck} */}
+                            {getDayDiffTwoDates(firstCheck.checkedOn, firstCheck.nextCheck)}
+                            {Math.abs(getDayDiffTwoDates(firstCheck.checkedOn, firstCheck.nextCheck)) > 1 && " Days"}
+                            {Math.abs(getDayDiffTwoDates(firstCheck.checkedOn, firstCheck.nextCheck)) == 1 && " Day"}
+                        </div>
                     </li>
                     
                     <li className="w-full bg-[#ffffff15] rounded-[7px] 

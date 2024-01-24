@@ -128,17 +128,20 @@ const Home = () => {
                 <h1 className="font-semibold text-center mx-auto">Your Check-ups</h1>
                 
                 {/* absolute because want the title before to be in the center and this button then follows it on the right */}
-                <button onClick={()=>navigate("/checkup/new")}
-                className="rounded-full border-2 border-[#ffffff2a] px-4 py-[0.125rem]
-                    text-xs absolute right-0 font-semibold
-                    hover:bg-[#ffffff2a] focus:bg-[#ffffff2a]">
-                        add new
-                </button> 
+                <Link to={carInfo ? `/${carInfo._id}/checkup/new/` : ""}>
+                    <button 
+                    // onClick={()=>navigate("/checkup/new")}
+                    className="rounded-full border-2 border-[#ffffff2a] px-4 py-[0.125rem]
+                        text-xs absolute right-0 font-semibold
+                        hover:bg-[#ffffff2a] focus:bg-[#ffffff2a]">
+                            add new
+                    </button> 
+                </Link>
 
             </div>
             <Suspense fallback={<Loading/>}>
-                {checks && (
-                <CheckCard checks={checks}/>
+                {checks && carInfo && (
+                <CheckCard checks={checks} carId={carInfo?._id}/>
                 )}
                 </Suspense>
         </div>
