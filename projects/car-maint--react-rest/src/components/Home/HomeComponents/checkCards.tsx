@@ -35,6 +35,7 @@ const CheckCard = ({checks, carId}: {
     const navigate = useNavigate();
     const setUser = useContext(userContext)?.updateUser;
     const userInfo = useContext(userContext)?.userState.userInfo
+    const token = useContext(userContext)?.userState.token;
 
     // const checks = useContext(userContext)?.userCars.checks;
 
@@ -112,7 +113,9 @@ const CheckCard = ({checks, carId}: {
         const apiResponse = await fetch(url+"/car/check/delete", {
             method: "DELETE",
             headers: {
-                "Content-type": "application/json"
+                "Content-type": "application/json",
+                "Authorization": token
+
               },
             body: JSON.stringify({carId, checkIndex}),
 
@@ -122,7 +125,7 @@ const CheckCard = ({checks, carId}: {
         console.log(apiResponse.status);
 
         const userCars = [res];
-        setUser({userInfo,userCars});
+        setUser({userInfo,userCars,token});
         navigate("/");    
     };
 
@@ -135,7 +138,9 @@ const CheckCard = ({checks, carId}: {
         const apiResponse = await fetch(url+"/car/check/complete", {
             method: "PATCH",
             headers: {
-                "Content-type": "application/json"
+                "Content-type": "application/json",
+                "Authorization": token
+
               },
             body: JSON.stringify({carId, checkIndex}),
 
@@ -145,7 +150,7 @@ const CheckCard = ({checks, carId}: {
         console.log(apiResponse.status);
 
         const userCars = [res];
-        setUser({userInfo,userCars});
+        setUser({userInfo,userCars,token});
         navigate("/");    
     }
 

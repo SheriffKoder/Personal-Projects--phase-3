@@ -10,6 +10,7 @@ import { useContext } from "react";
 import { userContext } from "../../context";
 import {useParams} from "react-router-dom";
 
+//this component operates on url /:carId/checkup/:checkIndex/:historyIndex/edit
 const CheckupNew = () => {
 
     const navigate = useNavigate();
@@ -21,12 +22,24 @@ const CheckupNew = () => {
     const {historyIndex} = useParams();
     const userCars = useContext(userContext).userState.userCars;
 
+    const token = useContext(userContext)?.userState.token;
+
+
     //if the check history has more than one item, we will not want to view the previous check input
+    // let oldCheck;
+    // if (userCars && checkIndex) {
+    //     const currentCar = userCars?.filter((car) => car._id === carId)[0];
+    //     oldCheck = currentCar?.checks[+checkIndex].history.length > 1;
+    // }
+    
+    //want to allow editing the initial check only if this is the last item in the history (first one added)
     let oldCheck;
-    if (userCars && checkIndex) {
-        const currentCar = userCars?.filter((car) => car._id == carId)[0];
-        oldCheck = currentCar?.checks[+checkIndex].history.length > 1;
+    if (userCars && checkIndex && historyIndex) {
+        const currentCar = userCars?.filter((car) => car._id === carId)[0];
+        const checkHistory = currentCar?.checks[+checkIndex].history; 
+        oldCheck = checkHistory[checkHistory.length-1] === checkHistory[+historyIndex];
     }
+    
 
     console.log(oldCheck);
 
@@ -36,6 +49,7 @@ const CheckupNew = () => {
         initialCheck: "",
         nextCheck: "",
         notes: "",
+        checkedOn: "",
 
     });
 
@@ -43,7 +57,7 @@ const CheckupNew = () => {
 
 
 
-    const {title, color, initialCheck, nextCheck, notes} = checkupInfo;
+    const {title, color, initialCheck, nextCheck, notes, checkedOn} = checkupInfo;
 
 
     const handleChange: ChangeEventHandler<HTMLInputElement|HTMLTextAreaElement> = ({ target }) => {
@@ -64,7 +78,8 @@ const CheckupNew = () => {
             const apiResponse = await fetch(url+"/car/check/new", {
                 method: "PATCH",
                 headers: {
-                    "Content-type": "application/json"
+                    "Content-type": "application/json",
+                    "Authorization": token
                   },
                 body: JSON.stringify({...checkupInfo,carId}),
     
@@ -74,7 +89,7 @@ const CheckupNew = () => {
             console.log(apiResponse.status);
     
             const userCars = [res];
-            setUser({userInfo,userCars});
+            setUser({userInfo,userCars, token});
             navigate("/");    
         
         
@@ -84,7 +99,8 @@ const CheckupNew = () => {
             const apiResponse = await fetch(url+"/car/check/edit", {
                 method: "PATCH",
                 headers: {
-                    "Content-type": "application/json"
+                    "Content-type": "application/json",
+                    "Authorization": token
                   },
                 body: JSON.stringify({...checkupInfo, carId, checkIndex, historyIndex}),
     
@@ -94,7 +110,7 @@ const CheckupNew = () => {
             console.log(apiResponse.status);
     
             const userCars = [res];
-            setUser({userInfo,userCars});
+            setUser({userInfo,userCars,token});
             navigate("/");    
 
 
@@ -118,11 +134,11 @@ const CheckupNew = () => {
                 nextCheck: thisCheck.history[+historyIndex].nextCheck,
                 initialCheck: thisCheck.history[+historyIndex].initialCheck,
                 notes: thisCheck.history[+historyIndex].notes,
+                checkedOn: thisCheck.history[+historyIndex].checkedOn,
             })
         }
 
     },[]);
-
 
 
     return (
@@ -131,6 +147,15 @@ const CheckupNew = () => {
         <div className="flex flex-row w-full max-w-[900px] mb-8 text-xs text_shadow">
             <span onClick={()=>{navigate("/")}} className="cursor-pointer">Home</span>
             <span className="right_caret h-full w-[1rem] text-transparent">.</span>
+            
+            {/* view a link to the previous page if came from history if this is a checkHistory other than 0 (last added), {+checkedOn !== ""} can also work */}
+            {historyIndex && parseInt(historyIndex) > 0 && (
+            <>
+                <span onClick={()=>{navigate(`/${carId}/checkup/${checkIndex}`)}} className="cursor-pointer">History</span>
+                <span className="right_caret h-full w-[1rem] text-transparent">.</span>
+            </>
+            )}
+            
             <span style={{color:"#00465f"}}>
                 {checkIndex ? "Edit Checkup" : "New Check-up" }
             </span>
@@ -203,14 +228,14 @@ const CheckupNew = () => {
 
 
                     {/* previous check (initialCheck) */}
-                    {!oldCheck && (
+                    {oldCheck && (
                     <li>
                         <label className="flex flex-row rounded-[5px] overflow-hidden
                         focus-within:outline outline-offset-[3px] outline-2
                             outline-[#0bb97f] mx-2">
                             <span className="flex-1 bg-[#00000000] pt-[1px]
                             text-start">
-                                Previous check 
+                                Initial check 
                                 <span className="ml-1 text-xs opacity-70">
                                     (optional)
                                 </span>
@@ -227,7 +252,7 @@ const CheckupNew = () => {
                     </li>
                     )}
                     
-                    
+
                     {/* next check */}
                     <li>
                         <label className="flex flex-row rounded-[5px] overflow-hidden
@@ -247,6 +272,29 @@ const CheckupNew = () => {
                         
                         </label>
                     </li>
+
+                    {/* checked on edit, will be "" unless the check is marked as complete by user */}
+                    {checkedOn !== "" && (
+                    <li>
+                        <label className="flex flex-row rounded-[5px] overflow-hidden
+                        focus-within:outline outline-offset-[3px] outline-2
+                            outline-[#0bb97f] mx-2">
+                            <span className="flex-1 bg-[#00000000] pt-[1px]
+                            text-start">
+                                Checked on
+                            </span>
+                            <input className="w-[40%] rounded-[5px] text-[#000000d6]
+                            px-2 py-[1px] outline-none selection:bg-[#3c8bc374]
+                            bg-[#e3f4ff]" 
+                            type="date"
+                            defaultValue={checkedOn}
+                            name="checkedOn"
+                            onChange={handleChange}/>
+                        
+                        </label>
+                    </li>
+                    )}
+
 
                     {/* notes */}
                     <li>

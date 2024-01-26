@@ -152,10 +152,10 @@ const userCars:carInfoType[] = [
 }];
 
 
-
+const token = "";
 
 const loggedInUser = {
-    userInfo, userCars
+    userInfo, userCars, token,
 }
 
 
@@ -289,7 +289,7 @@ const Login = () => {
         
             </form>
             <button 
-                            onClick={()=>{setUser(loggedInUser); navigate("/")}}
+                            // onClick={()=>{setUser(loggedInUser); navigate("/")}}
                             className="w-full rounded-full px-3 py-1
                             text-xs
                             bg-gradient-to-l from-[#05b5b2]  to-[#226798]

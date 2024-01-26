@@ -19,7 +19,10 @@ const CarInfoNew = () => {
     const setUser = useContext(userContext)?.updateUser;
     const userInfo = useContext(userContext)?.userState.userInfo
     const userCars = useContext(userContext)?.userState.userCars;
+
     const {carId} = useParams();
+    const token = useContext(userContext)?.userState.token;
+
     // console.log(carId);
 
     // const [carInfo, setCarInfo] = useState({
@@ -115,7 +118,8 @@ const CarInfoNew = () => {
             const apiResponse = await fetch(url+"/car/new", {
                 method: "POST",
                 headers: {
-                    "Content-type": "application/json"
+                    "Content-type": "application/json",
+                    "Authorization": token
                   },
                 body: JSON.stringify(carInfo),
     
@@ -125,7 +129,7 @@ const CarInfoNew = () => {
             console.log(apiResponse.status);
     
             const userCars = [res];
-            setUser({userInfo,userCars});
+            setUser({userInfo,userCars, token});
             navigate("/");    
         
         //Edit car route
@@ -134,7 +138,8 @@ const CarInfoNew = () => {
             const apiResponse = await fetch(url+"/car/edit", {
                 method: "PATCH",
                 headers: {
-                    "Content-type": "application/json"
+                    "Content-type": "application/json",
+                    "Authorization": token
                   },
                 body: JSON.stringify(carInfo),
     
@@ -144,7 +149,7 @@ const CarInfoNew = () => {
             console.log(apiResponse.status);
     
             const userCars = [res];
-            setUser({userInfo,userCars});
+            setUser({userInfo,userCars, token});
             navigate("/");    
         
         }
@@ -157,7 +162,8 @@ const CarInfoNew = () => {
         const apiResponse = await fetch(url+"/car/delete", {
             method: "DELETE",
             headers: {
-                "Content-type": "application/json"
+                "Content-type": "application/json",
+                "Authorization": token
               },
             body: JSON.stringify(carInfo),
 
@@ -167,7 +173,7 @@ const CarInfoNew = () => {
         console.log(apiResponse.status);
 
         // const userCars = [res];
-        setUser({userInfo,userCars:[]});
+        setUser({userInfo,userCars:[], token});
         navigate("/");
     }
 

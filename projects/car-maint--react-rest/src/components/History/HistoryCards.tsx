@@ -1,7 +1,15 @@
-import React from "react"
+import React, { useContext } from "react"
 import BackToHome from "../misc/BackToHome";
 import { useNavigate } from "react-router-dom";
 import { getDayDifference, getDayDiffTwoDates } from "../../util/daysDiff";
+
+
+
+//edit/delete the history check card
+import {Link} from "react-router-dom";
+import {useParams} from "react-router-dom";
+import { userContext } from "../../context";
+
 
 
 type checksType = {
@@ -28,12 +36,36 @@ const HistoryCards = ({check}:{
 }) => {
   
     const navigate = useNavigate();
+    const setUser = useContext(userContext)?.updateUser;
+    const userInfo = useContext(userContext)?.userState.userInfo
 
-    const handleDeleteCheck = (checkTreeId:string, checkIndex:number) => {
+    const {carId} = useParams();    //will send the carId to find the car, with the checkupInfo
+    const {checkIndex} = useParams();
 
-        console.log(checkTreeId);
-        console.log(checkIndex);
+    const token = useContext(userContext)?.userState.token;
 
+    const handleDeleteCheck = async (carId:string, checkIndex:string, historyIndex: number) => {
+
+        // console.log(checkTreeId);
+        // console.log(checkIndex);
+        const url = process.env.REACT_APP_CURRENT_URL!;
+
+        const apiResponse = await fetch(url+"/car/check/historyItem/delete", {
+            method: "PATCH",
+            headers: {
+                "Content-type": "application/json",
+                "Authorization": token
+              },
+            body: JSON.stringify({carId, checkIndex, historyIndex}),
+
+        })
+        const res = await apiResponse.json();
+        console.log(res);
+        console.log(apiResponse.status);
+
+        const userCars = [res];
+        setUser({userInfo,userCars, token});
+        navigate("/");    
 
     };
 
@@ -187,18 +219,21 @@ const HistoryCards = ({check}:{
 
                     {/* buttons */}
                     <div className="ml-auto flex flex-row gap-2 h-[1rem]">
-                        <button 
-                        // onClick={()=>navigate(`/checkup/edit/${check._id}=0`)}
-                        className="ml-auto rounded-full bg-[#ffffff2a] px-1 py-0
-                        w-[4.5rem] text-xs hover:scale-105 focus:scale-105">
-                            edit
-                        </button>
-                        <button 
-                        // onClick={()=>handleDeleteCheck(check._id, 0)}
+
+                        {/* <button 
+                        onClick={()=>carId && checkIndex && handleDeleteCheck(carId, checkIndex, 0)}
                         className="ml-auto rounded-full bg-[#ffffff2a] px-1 py-0
                         w-[4.5rem] text-xs hover:scale-105 focus:scale-105">
                         remove
-                        </button>
+                        </button> */}
+                        {/* there is no point in removing the current check, and it can cause errors/issues-to-fix if all removed then this is removed */}
+                        <Link 
+                        to={carId ? `/${carId}/checkup/${checkIndex}/0/edit/` : ""}
+                        // onClick={()=>navigate(`/checkup/edit/${check._id}=0`)}
+                        className="ml-auto rounded-full bg-[#ffffff2a] px-1 py-0
+                        w-[4.5rem] text-xs hover:scale-105 focus:scale-105 text-center">
+                            edit
+                        </Link>
                     </div>
 
                 </div>
@@ -235,7 +270,7 @@ const HistoryCards = ({check}:{
                             <div className="min-w-[7rem]">
                             Remaining: {check.history[0].nextCheck !== "" ? getDayDifference(check.history[0].nextCheck) : "not set"}
                             {getDayDifference(check.history[0].nextCheck) > 1 && " Days"}
-                            {getDayDifference(check.history[0].nextCheck) == 1 && " Day"}
+                            {getDayDifference(check.history[0].nextCheck) === 1 && " Day"}
 
                             </div>
                         </li>
@@ -258,7 +293,7 @@ const HistoryCards = ({check}:{
             {/* the middle checks, with all to use their values as well */}
             {slimChecks.length > 0 && slimChecks.map((info) => {
                 // i = i + 1;
-                const checkIndex = check.history.indexOf(info);
+                const historyIndex = check.history.indexOf(info);
                 // console.log(checkIndex);
                 return (
                     <div className="
@@ -266,7 +301,7 @@ const HistoryCards = ({check}:{
                     glass-container-background-2 rounded-[7px] py-2 mt-6
                     opacity-90 hover:opacity-100 focus:opacity-100
                     " 
-                    key={checkIndex}
+                    key={historyIndex}
                     >
                     
                         {/* check-up title, buttons */}
@@ -283,17 +318,18 @@ const HistoryCards = ({check}:{
                             {/* buttons */}
                             <div className="ml-auto flex flex-row gap-2 h-[1rem]">
                                 <button 
-                                // onClick={()=>navigate(`/checkup/edit/${check._id}=${checkIndex}`)}
-                                className="ml-auto rounded-full bg-[#ffffff2a] px-1 py-0
-                                w-[4.5rem] text-xs hover:scale-105 focus:scale-105">
-                                    edit
-                                </button>
-                                <button 
-                                // onClick={()=>handleDeleteCheck(check._id, checkIndex)}
+                                onClick={()=>carId && checkIndex && handleDeleteCheck(carId, checkIndex, +historyIndex)}
                                 className="ml-auto rounded-full bg-[#ffffff2a] px-1 py-0
                                 w-[4.5rem] text-xs hover:scale-105 focus:scale-105">
                                 remove
                                 </button>
+                                <Link 
+                                to={carId ? `/${carId}/checkup/${checkIndex}/${historyIndex}/edit/` : ""}
+                                // onClick={()=>navigate(`/checkup/edit/${check._id}=${checkIndex}`)}
+                                className="ml-auto rounded-full bg-[#ffffff2a] px-1 py-0
+                                w-[4.5rem] text-xs hover:scale-105 focus:scale-105 text-center">
+                                    edit
+                                </Link>
                             </div>
                 
                         </div>
@@ -304,7 +340,7 @@ const HistoryCards = ({check}:{
                 
                                 <li className="w-full flex flex-row ml-2">
                                     <div className="min-w-[7rem]">Previous check was:</div>
-                                    <div>{check.history[checkIndex-1].checkedOn}</div>
+                                    <div>{check.history[historyIndex-1].checkedOn}</div>
                                 </li>
                             
                                 <li className="w-full flex flex-row ml-2">
@@ -324,7 +360,7 @@ const HistoryCards = ({check}:{
                                     <div>
                                         {getDayDifference(info.nextCheck)}
                                         {getDayDifference(info.nextCheck) > 1 && " Days"}
-                                        {getDayDifference(info.nextCheck) == 1 && " Day"}
+                                        {getDayDifference(info.nextCheck) === 1 && " Day"}
                                     </div>
                                 </li>
                 
@@ -334,7 +370,7 @@ const HistoryCards = ({check}:{
                                         {/* {firstCheck.checkedOn - firstCheck.nextCheck} */}
                                         {getDayDiffTwoDates(info.checkedOn, info.nextCheck)}
                                         {Math.abs(getDayDiffTwoDates(info.checkedOn, info.nextCheck)) > 1 && " Days"}
-                                        {Math.abs(getDayDiffTwoDates(info.checkedOn, info.nextCheck)) == 1 && " Day"}
+                                        {Math.abs(getDayDiffTwoDates(info.checkedOn, info.nextCheck)) === 1 && " Day"}
                                     </div>                                
                                 </li>
                                 
@@ -378,17 +414,18 @@ const HistoryCards = ({check}:{
                     {/* buttons */}
                     <div className="ml-auto flex flex-row gap-2 h-[1rem]">
                         <button 
-                        // onClick={()=>navigate(`/checkup/edit/${check._id}=${check.history.length-1}`)}
-                        className="ml-auto rounded-full bg-[#ffffff2a] px-1 py-0
-                        w-[4.5rem] text-xs hover:scale-105 focus:scale-105">
-                            edit
-                        </button>
-                        <button 
-                        // onClick={()=>handleDeleteCheck(check._id, check.history.length-1)}
+                        onClick={()=>carId && checkIndex && handleDeleteCheck(carId, checkIndex, check.history.length-1)}
                         className="ml-auto rounded-full bg-[#ffffff2a] px-1 py-0
                         w-[4.5rem] text-xs hover:scale-105 focus:scale-105">
                         remove
                         </button>
+                        <Link
+                        to={carId ? `/${carId}/checkup/${checkIndex}/${check.history.length-1}/edit/` : ""}
+                        // onClick={()=>navigate(`/checkup/edit/${check._id}=${check.history.length-1}`)}
+                        className="ml-auto rounded-full bg-[#ffffff2a] px-1 py-0
+                        w-[4.5rem] text-xs hover:scale-105 focus:scale-105 text-center">
+                            edit
+                        </Link>
                     </div>
 
                 </div>
@@ -422,7 +459,7 @@ const HistoryCards = ({check}:{
                         <div>
                             {getDayDifference(firstCheck.nextCheck)}
                             {getDayDifference(firstCheck.nextCheck) > 1 && " Days"}
-                            {getDayDifference(firstCheck.nextCheck) == 1 && " Day"}
+                            {getDayDifference(firstCheck.nextCheck) === 1 && " Day"}
 
                         </div>
                     </li>
@@ -433,7 +470,7 @@ const HistoryCards = ({check}:{
                             {/* {firstCheck.checkedOn - firstCheck.nextCheck} */}
                             {getDayDiffTwoDates(firstCheck.checkedOn, firstCheck.nextCheck)}
                             {Math.abs(getDayDiffTwoDates(firstCheck.checkedOn, firstCheck.nextCheck)) > 1 && " Days"}
-                            {Math.abs(getDayDiffTwoDates(firstCheck.checkedOn, firstCheck.nextCheck)) == 1 && " Day"}
+                            {Math.abs(getDayDiffTwoDates(firstCheck.checkedOn, firstCheck.nextCheck)) === 1 && " Day"}
                         </div>
                     </li>
                     

@@ -35,12 +35,14 @@ type userType = {
     name: string,
     email: string,
     _id: string,
+    cars: [],
 
 }
 
 type fullUserType = {
     userInfo: userType | null,
     userCars: carInfoType[] | null,
+    token: any,
 }
 
 type contextType = {
@@ -62,6 +64,7 @@ const userInfo : userType = {
     name: "",
     email: "",
     _id: "",
+    cars: [],
 }
 
 const userCars:carInfoType = {
@@ -96,7 +99,7 @@ const userCars:carInfoType = {
 
 
 const fullUser = {
-    userInfo:null, userCars:[]
+    userInfo:null, userCars:[], token: ""
 }
 
 

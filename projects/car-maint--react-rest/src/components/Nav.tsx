@@ -95,7 +95,7 @@ const userCars:carInfoType = {
 
 
 const emptyUser = {
-    userInfo:null, userCars:null
+    userInfo:null, userCars:null, token: ""
 }
 
 
