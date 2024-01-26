@@ -96,14 +96,19 @@ const carSchema = new Schema<CarDocument, {}> ({
     userId: {
         type: Schema.Types.ObjectId,
         ref: "User",
+        required: true,
       },
     checks: {
         type: [],
         default: []
     }
     
+}, {
+    //mongoose will auto add timestamps 
+    //when a new version is added to the db
+    //createdAt, updatedAt timestamps
+    timestamps: true,
 });
-
 
 const CarModel = models.Car || model("Car", carSchema);
 

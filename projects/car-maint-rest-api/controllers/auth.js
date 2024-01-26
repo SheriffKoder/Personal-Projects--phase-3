@@ -16,6 +16,8 @@ const { validationResult } = require("express-validator");
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const userModel_1 = __importDefault(require("../models/userModel"));
 const carModel_1 = __importDefault(require("../models/carModel"));
+//API 0.2 - authentication
+const jwt = require("jsonwebtoken");
 // (req: Request, res:Response, next: NextFunction)
 const routeValidationErrors = (req, res) => {
     ////////////////////////////////////////////////////////////////
@@ -110,10 +112,17 @@ exports.login = (req, res, next) => __awaiter(void 0, void 0, void 0, function* 
                 return res.status(401).json("No user found with this email");
             }
             else {
+                //API 0.2 - authentication
+                //create a token on a successful login
+                //to return its defined contents to the user 
+                const token = jwt.sign({
+                    email: user.email,
+                    userId: user._id.toString(),
+                }, "mySecret", { expiresIn: "1h" });
                 //return the user's car
                 const userCars = yield carModel_1.default.find({ userId: user._id });
                 const userInfo = { name: user.name, email: user.email, _id: user._id };
-                return res.status(200).json({ userInfo, userCars });
+                return res.status(200).json({ userInfo, userCars, token });
             }
         }
     }

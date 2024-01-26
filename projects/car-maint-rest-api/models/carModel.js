@@ -53,11 +53,17 @@ const carSchema = new mongoose_2.Schema({
     userId: {
         type: mongoose_2.Schema.Types.ObjectId,
         ref: "User",
+        required: true,
     },
     checks: {
         type: [],
         default: []
     }
+}, {
+    //mongoose will auto add timestamps 
+    //when a new version is added to the db
+    //createdAt, updatedAt timestamps
+    timestamps: true,
 });
 const CarModel = mongoose_1.models.Car || (0, mongoose_1.model)("Car", carSchema);
 exports.default = CarModel;

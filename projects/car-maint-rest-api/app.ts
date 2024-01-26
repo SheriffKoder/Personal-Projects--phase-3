@@ -16,6 +16,61 @@ const carRoutes = require("./routes/car.js");
 //we are writing the back-end routes here
 // app.js -> routes -> controllers
 
+/////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////
+//API 0.2 - images
+import multer, { FileFilterCallback } from 'multer';
+const path = require("path");
+
+interface IFile {
+    fieldname: string;
+    originalname: string;
+    encoding: string;
+    mimetype: string;
+    buffer: Buffer;
+    size: number;
+  }
+  
+const fileStorage = multer.diskStorage({
+    destination: (req: Request, file: IFile, cb) => {
+        //null (store image in case of an error?), images(fs folder)
+        cb(null, "images");
+    },
+    filename: (req: Request, file: IFile, cb) => {
+        //null, we are fine store it please
+        cb(null, new Date().toISOString() + "-" + file.originalname);
+    }
+})
+
+const fileFilter = (req: Request, file: IFile, cb: FileFilterCallback) => {
+    //mimetype, type of file
+    if (
+        file.mimetype === "image/jpeg"  || 
+        file.mimetype=== "image/jpg"    || 
+        file.mimetype === "image/png"
+        ) {
+        //true: want to accept these files
+        //no error, return true
+        cb(null, true);
+    } else {
+        //no error, return false
+        cb(null, false);
+    }
+}
+
+//use the configs we defined, 
+//tell multer we will fetch a single file in a field named image in the incoming request
+app.use(multer({storage: fileStorage, fileFilter: fileFilter}).single("image"));
+
+//any request that goes into /images
+app.use("/images", express.static(path.join(__dirname, "images")));
+
+/////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+
 //Access-Control configurations
 app.use((req: Request, res:Response, next: NextFunction) => {
 
@@ -45,6 +100,46 @@ app.use(bodyParser.json());
 app.use("/feed", feedRoutes);
 app.use("/auth", authRoutes);
 app.use("/car", carRoutes);
+
+
+///////////////////////////////////////
+//API 0.2 - authentication
+//error handling middleware
+//this will exe whenever an error is throw/next
+interface errorType {
+    statusCode: number,
+    message: string,
+    data: string,
+}
+
+app.use((error:errorType, req:Request, res:Response, next:NextFunction) => {
+    //console any error reached
+    console.log(error);
+    //status code a custom method defined in the controller
+    //having code of 422 or 500
+    //give a default of 500 (server-error)
+    const status = error.statusCode || 500;
+    //exists by default, hold the message passed in the controller validation error handling
+    const message = error.message;
+    const data = error.data; //(25.2.5)
+
+    res.status(status).json({message: message, data: data});
+});
+
+/*
+	.catch((err) => {
+        //(25.0.8)
+        if (!err.statusCode) {
+            err.statusCode = 500;
+        }
+        next(err);  //async error handling         //(25.0.8)
+	})
+
+*/
+
+///////////////////////////////////////
+
+
 
 
 const connectToDB = async () => {
