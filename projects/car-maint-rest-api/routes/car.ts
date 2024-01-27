@@ -17,15 +17,15 @@ const isAuth = require("../middleware/isAuth");
 //Routes
 router_car.post("/new", [
     
-    body_car("brand")
-    .trim()
-    .isLength({min:2})
-    .withMessage("Name should be more than 2 characters"),
+    // body_car("brand")
+    // .trim()
+    // .isLength({min:2})
+    // .withMessage("Name should be more than 2 characters"),
 
-    body_car("carModel")
-    .trim()
-    .isLength({min:1})
-    .withMessage("Car's Model should be at least than 1 characters"),
+    // body_car("carModel")
+    // .trim()
+    // .isLength({min:1})
+    // .withMessage("Car's Model should be at least than 1 characters"),
 
 
 ], isAuth, carController.addCar);

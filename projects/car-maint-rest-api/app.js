@@ -41,7 +41,8 @@ const fileFilter = (req, file, cb) => {
     //mimetype, type of file
     if (file.mimetype === "image/jpeg" ||
         file.mimetype === "image/jpg" ||
-        file.mimetype === "image/png") {
+        file.mimetype === "image/png" ||
+        file.mimetype === "image/svg") {
         //true: want to accept these files
         //no error, return true
         cb(null, true);
@@ -52,8 +53,8 @@ const fileFilter = (req, file, cb) => {
     }
 };
 //use the configs we defined, 
-//tell multer we will fetch a single file in a field named image in the incoming request
-app.use((0, multer_1.default)({ storage: fileStorage, fileFilter: fileFilter }).single("image"));
+//tell multer we will fetch a single file in a field name=file in the incoming request
+app.use((0, multer_1.default)({ storage: fileStorage, fileFilter: fileFilter }).single("file"));
 //any request that goes into /images
 app.use("/images", express.static(path.join(__dirname, "images")));
 /////////////////////////////////////////////////////////////////////////////
