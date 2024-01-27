@@ -70,6 +70,7 @@ const CarInfo =  ({info}: {
   
   // console.log(info.checks);
     
+  const url = process.env.REACT_APP_CURRENT_URL!;
 
 
 
@@ -89,7 +90,7 @@ const CarInfo =  ({info}: {
       md2:flex-1 md:ml-auto">
         {typeof info.image == "string" && info.image !== "" ? (
 
-            <img src={info.image}
+            <img src={url+""+info.image}
             className="md:ml-auto border_image">
             </img>
 

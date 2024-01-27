@@ -12,6 +12,8 @@ import { useContext } from "react";
 import { userContext } from "../../context";
 
 import {useParams} from "react-router-dom";
+import { getFormData_multiple } from "../../util/formDataGenerate";
+
 
 const CarInfoNew = () => {
 
@@ -68,6 +70,9 @@ const CarInfoNew = () => {
 
     const {brand, carModel, image} = carInfo;
 
+    //API 0.2 - images
+    const [imageFile, setImageFile] = useState<File | string>("");
+
    
     //display info for the car to be edited, and avoid many re-renders
     useEffect(()=> {
@@ -110,6 +115,15 @@ const CarInfoNew = () => {
     const handleSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
         e.preventDefault();
 
+        //API 0.2 - images /////
+        let formData = new FormData();
+        if (carInfo) formData = getFormData_multiple(formData, null, null, carInfo);
+        //add the image with out a key (as we have a single image) to the formData that also now has information
+        if (imageFile !== "" || imageFile !== null) formData = getFormData_multiple(formData, imageFile, "", null);
+        ///////////////////////
+
+
+        console.log(formData);
         const url = process.env.REACT_APP_CURRENT_URL!;
 
         //Add a new car route
@@ -118,10 +132,10 @@ const CarInfoNew = () => {
             const apiResponse = await fetch(url+"/car/new", {
                 method: "POST",
                 headers: {
-                    "Content-type": "application/json",
+                    // "Content-type": "application/json",
                     "Authorization": token
                   },
-                body: JSON.stringify(carInfo),
+                body: formData,
     
             })
             const res = await apiResponse.json();
@@ -138,10 +152,10 @@ const CarInfoNew = () => {
             const apiResponse = await fetch(url+"/car/edit", {
                 method: "PATCH",
                 headers: {
-                    "Content-type": "application/json",
+                    // "Content-type": "application/json",
                     "Authorization": token
                   },
-                body: JSON.stringify(carInfo),
+                body: formData,
     
             })
             const res = await apiResponse.json();
@@ -245,13 +259,16 @@ const CarInfoNew = () => {
                             </label>
                         </li>
                         
+                        {/* //API 0.2 - images */}
                         <li>
                             <label className="flex flex-row rounded-[5px] overflow-hidden
                             focus-within:outline outline-offset-[3px] outline-2
                             outline-[#0bb97f]">
                                 <span className="w-full bg-[#00000053] pt-[1px]
                                 text-center">Add Image</span>
-                                <input className="hidden" type="file"/>
+                                <input className="hidden" type="file"
+                                name="file" id="file" onChange={(e)=> setImageFile(e.target.files?.[0]!)}
+                                />
                             
                             </label>
                         </li>
