@@ -124,7 +124,7 @@ const CarInfoNew = () => {
         //add the image with out a key (as we have a single image) to the formData that also now has information
         
         let imageUrl = carInfo.image;
-        if (imageFile !== "" || imageFile !== null) {
+        if (imageFile !== "" && imageFile !== null) {
             formData = getFormData_multiple(formData, imageFile, "", null);
 
             //API 0.3 - uploading images to graphQL
@@ -148,20 +148,139 @@ const CarInfoNew = () => {
 
 
         
+        let graphqlQuery;
+
+        //Add a new car query, mainly the edit value
+        if (carInfo._id === "") {         
+            graphqlQuery = {
+                query: `
+                    mutation {
+                        addEditDeleteCar(carInput: {
+                            brand: "${carInfo.brand}",
+                            carModel: "${carInfo.carModel}",
+                            image: "${imageUrl}",
+                            _id: "${carInfo._id}",
+                            edit: "false",
+                            
+                            })
+                            {
+                                _id
+                                email
+                                name
+                                token
+                                cars {
+                                    _id
+                                    brand
+                                    carModel
+                                    image
+                                    lastCheck
+                                    nextCheck
+                                    userId
+                                    checks {
+                                        name
+                                        color
+                                        history {
+                                            addDate
+                                            initialCheck
+                                            nextCheck
+                                            checkedOn
+                                            notes
+                                        }
+                                    }
+                                    createdAt
+                                    updatedAt
+                                }
+                                
+                            }
+                    }
+                `
+            }
+        } else {
+            graphqlQuery = {
+                query: `
+                    mutation {
+                        addEditDeleteCar(carInput: {
+                            brand: "${carInfo.brand}",
+                            carModel: "${carInfo.carModel}",
+                            image: "${imageUrl}",
+                            _id: "${carInfo._id}",
+                            edit: "true",
+
+                            
+                            })
+                            {
+                                _id
+                                email
+                                name
+                                token
+                                cars {
+                                    _id
+                                    brand
+                                    carModel
+                                    image
+                                    lastCheck
+                                    nextCheck
+                                    userId
+                                    checks {
+                                        name
+                                        color
+                                        history {
+                                            addDate
+                                            initialCheck
+                                            nextCheck
+                                            checkedOn
+                                            notes
+                                        }
+                                    }
+                                    createdAt
+                                    updatedAt
+                                }
+                                
+                            }
+                    }
+                `
+            }
+        }
+    
+        if (graphqlQuery) {
+            //API 0.3 - GraphQl
+            // console.log(graphqlQuery);
+            const apiResponse = await fetch(url+"/graphql/car", {
+                method: "POST",
+                headers: {
+                    "Content-type": "application/json",
+                    "Authorization": token
+                    },
+                    body: JSON.stringify(graphqlQuery),
+
+            })
+            const res = await apiResponse.json();
+            console.log(res);
+            console.log(apiResponse.status);
+
+            const userCars = [res];
+            setUser(res.data.addEditDeleteCar);
+            navigate("/");    
+        }
+
+ 
+        
+    }
 
 
-        //API 0.3 - GraphQl
+    const handleDelete = async () => {
+        const url = process.env.REACT_APP_CURRENT_URL!;
+
         const graphqlQuery = {
             query: `
                 mutation {
-                    addCar(carInput: {
+                    addEditDeleteCar(carInput: {
                         brand: "${carInfo.brand}",
                         carModel: "${carInfo.carModel}",
-                        lastCheck: "${carInfo.lastCheck}",
-                        nextCheck: "${carInfo.nextCheck}",
-                        image: "${imageUrl}",
+                        image: "${carInfo.image}",
                         _id: "${carInfo._id}",
-                        userId: "${carInfo.userId}",
+                        edit: "delete",
+
                         
                         })
                         {
@@ -196,70 +315,22 @@ const CarInfoNew = () => {
                 }
             `
         }
-        
-        //Add a new car route
-        if (carInfo._id === "") {
-        
-            const apiResponse = await fetch(url+"/graphql/car", {
-                method: "POST",
-                headers: {
-                    "Content-type": "application/json",
-                    Authorization: token
-                  },
-                  body: JSON.stringify(graphqlQuery),
-    
-            })
-            const res = await apiResponse.json();
-            console.log(res);
-            console.log(apiResponse.status);
-    
-            const userCars = [res];
-            setUser(res.data.addCar);
-            navigate("/");    
-        
-        //Edit car route
-        } else {
-        
-            const apiResponse = await fetch(url+"/car/edit", {
-                method: "PATCH",
-                headers: {
-                    // "Content-type": "application/json",
-                    "Authorization": token
-                  },
-                body: formData,
-    
-            })
-            const res = await apiResponse.json();
-            console.log(res);
-            console.log(apiResponse.status);
-    
-            const userCars = [res];
-            setUser(res.data.carEdit);
-            navigate("/");    
-        
-        }
-    }
-
-
-    const handleDelete = async () => {
-        const url = process.env.REACT_APP_CURRENT_URL!;
-
-        const apiResponse = await fetch(url+"/car/delete", {
-            method: "DELETE",
+        const apiResponse = await fetch(url+"/graphql/car", {
+            method: "POST",
             headers: {
                 "Content-type": "application/json",
                 "Authorization": token
               },
-            body: JSON.stringify(carInfo),
+                body: JSON.stringify(graphqlQuery),
 
-        })
-        const res = await apiResponse.json();
-        console.log(res);
-        console.log(apiResponse.status);
+            })
 
-        // const userCars = [res];
-        setUser(res.data.carDelete);
-        navigate("/");
+            const res = await apiResponse.json();
+            console.log(res);
+            console.log(apiResponse.status);
+
+            setUser(res.data.addEditDeleteCar);
+            navigate("/");    
     }
 
     /////////////////////////////////////////////////////////////
