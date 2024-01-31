@@ -12,9 +12,16 @@ const {graphqlHTTP} = require("express-graphql");
 const graphqlAuthResolver = require("./graphql/AuthResolvers");
 const graphqlAuthSchema = require("./graphql/AuthSchema");
 
+const graphqlCarResolver = require("./graphql/CarResolvers");
+const graphqlCarSchema = require("./graphql/CarSchema");
+
+//API 0.3 - GraphQL - Authentication
+const auth = require("./middleware/isAuth");
+import { clearImage } from "./util/clearImage";
+
 // const feedRoutes = require("./routes/feed.js");
 // const authRoutes = require("./routes/auth.js");
-// const carRoutes = require("./routes/car.js");
+const carRoutes = require("./routes/car.js");
 
 
 //we are writing the back-end routes here
@@ -118,15 +125,36 @@ app.use(bodyParser.json());
 // app.use("/car", carRoutes);
 
 
-///////////////////////////////////////
-//API 0.2 - authentication
-//error handling middleware
-//this will exe whenever an error is throw/next
-interface errorType {
-    statusCode: number,
-    message: string,
-    data: string,
+//API 0.3 - GraphQL - Authentication
+app.use(auth);
+
+
+//API 0.3 - GraphQL - images
+
+interface Request_With_isAuth extends Request {
+    isAuth: boolean;
 }
+app.put("/post-image", (req: Request_With_isAuth, res: Response, next: NextFunction) => {
+
+    if (!req.isAuth) {
+        throw new Error ("Not Authenticated");
+    }
+
+    if (!req.file) {
+        return res.status(200).json({message: "No file provided"});
+    }
+
+    if (req.body.oldPath) {
+        clearImage(req.body.oldPath);
+    }
+
+    return res.status(201).json({message: "File stored.", filePath: req.file.path});
+
+})
+
+
+
+
 
 
 //API 0.3 - GraphQL
@@ -159,6 +187,10 @@ app.use("/graphql/auth", graphqlHTTP({
 
 }));
 
+app.use("/graphql/car", graphqlHTTP({
+    schema: graphqlCarSchema,
+    rootValue: graphqlCarResolver,
+}));
 
 // app.use("/graphql/login", graphqlHTTP({
 //     schema: graphqlLoginSchema,
@@ -169,6 +201,15 @@ app.use("/graphql/auth", graphqlHTTP({
 // }));
 
 
+///////////////////////////////////////
+//API 0.2 - authentication
+//error handling middleware
+//this will exe whenever an error is throw/next
+interface errorType {
+    statusCode: number,
+    message: string,
+    data: string,
+}
 
 
 app.use((error:errorType, req:Request, res:Response, next:NextFunction) => {

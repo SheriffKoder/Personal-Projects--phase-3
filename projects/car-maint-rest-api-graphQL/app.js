@@ -21,9 +21,14 @@ require("dotenv").config();
 const { graphqlHTTP } = require("express-graphql");
 const graphqlAuthResolver = require("./graphql/AuthResolvers");
 const graphqlAuthSchema = require("./graphql/AuthSchema");
+const graphqlCarResolver = require("./graphql/CarResolvers");
+const graphqlCarSchema = require("./graphql/CarSchema");
+//API 0.3 - GraphQL - Authentication
+const auth = require("./middleware/isAuth");
+const clearImage_1 = require("./util/clearImage");
 // const feedRoutes = require("./routes/feed.js");
 // const authRoutes = require("./routes/auth.js");
-// const carRoutes = require("./routes/car.js");
+const carRoutes = require("./routes/car.js");
 //we are writing the back-end routes here
 // app.js -> routes -> controllers
 /////////////////////////////////////////////////////////////////////////////
@@ -84,6 +89,24 @@ app.use((req, res, next) => {
 //use .json to parse incoming json data
 //to be able to extract it on the body as (req.body) in controllers here
 app.use(bodyParser.json());
+//listen to any request on 8080/feed/(router-url)
+// app.use("/feed", feedRoutes);
+// app.use("/auth", authRoutes);
+// app.use("/car", carRoutes);
+//API 0.3 - GraphQL - Authentication
+app.use(auth);
+app.put("/post-image", (req, res, next) => {
+    if (!req.isAuth) {
+        throw new Error("Not Authenticated");
+    }
+    if (!req.file) {
+        return res.status(200).json({ message: "No file provided" });
+    }
+    if (req.body.oldPath) {
+        (0, clearImage_1.clearImage)(req.body.oldPath);
+    }
+    return res.status(201).json({ message: "File stored.", filePath: req.file.path });
+});
 //API 0.3 - GraphQL
 //after all middlewares, .use not post if want to use graphiql
 app.use("/graphql/auth", graphqlHTTP({
@@ -109,12 +132,10 @@ app.use("/graphql/auth", graphqlHTTP({
     // }
     // },
 }));
-// app.use("/graphql/login", graphqlHTTP({
-//     schema: graphqlLoginSchema,
-//     rootValue: graphqlAuthResolver,
-//     //in case want to use the web tester 8080/graphql, which sends a get request (optional)
-//     graphiql: true, 
-// }));
+app.use("/graphql/car", graphqlHTTP({
+    schema: graphqlCarSchema,
+    rootValue: graphqlCarResolver,
+}));
 app.use((error, req, res, next) => {
     //console any error reached
     console.log(error);

@@ -6,6 +6,8 @@ interface Error_With_Status extends Error {
 
 interface Request_With_UserId extends Request {
     userId: string;
+    isAuth: boolean;
+    token: string;
 }
 
 //the token is given the a user for 1h when the user login
@@ -21,29 +23,22 @@ module.exports = (req:Request_With_UserId, res:Response, next:NextFunction) => {
     //req.get returns a request header contents
     //== extract the authorization header from the incoming request
     const authHandler = req.get("Authorization");
-    // console.log("New Token");
-    // console.log(authHandler);
-    // console.log("xx Token");
 
 
-    //if no authorization header, throw an error
     if (!authHandler) {
-        const error = new Error("Not Authenticated") as Error_With_Status;
-        error.statusCode = 401;
-        // throw error;
-        // console.log("error 34");
+        
+        //API 0.3 - GraphQL
+        req.isAuth = false;
+        return next();
+
     } else {
 
         //== get the bearer token in the FE
-        //interested in the value that comes after the white space of bearer
         const token = authHandler;
 
-        // console.log("token is");
-        // console.log(token);
         //== verify the token
         let decodedToken;
         try {
-            // console.log("error 46");
 
             //verify will decode and verify the token
             //also have a decode method, which will only decode and not check if it is valid
@@ -52,20 +47,18 @@ module.exports = (req:Request_With_UserId, res:Response, next:NextFunction) => {
 
         } catch (err: any) {
 
-            // console.log("error 55");
-
-            err.statusCode = 500;
-            throw err;
+            //API 0.3 - GraphQL
+            req.isAuth = false;
+            return next();
 
         }
 
         //decoding worked (no catch error) but unable to verify the token
         if (!decodedToken) {
-            console.log("error 64");
 
-            const error = new Error("Not Authenticated") as Error_With_Status;
-            error.statusCode = 401;
-            throw error;
+            //API 0.3 - GraphQL
+            req.isAuth = false;
+            return next();
         }
 
 
@@ -74,6 +67,9 @@ module.exports = (req:Request_With_UserId, res:Response, next:NextFunction) => {
         // to compare with this userId any front-end userId
         req.userId = decodedToken.userId.toString();
 
+        //API 0.3 - GraphQL - authentication
+        req.isAuth = true;
+        req.token = token;
 
         // then forward the request object including the userId
         next();
