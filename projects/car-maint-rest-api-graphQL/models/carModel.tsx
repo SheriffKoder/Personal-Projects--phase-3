@@ -88,10 +88,13 @@ const carSchema = new Schema<CarDocument, {}> ({
     lastCheck: {
         type: Date,
         required: false,
+        default : "",
     },
     nextCheck: {
         type: Date,
         required: false,
+        default : "",
+
     },
     userId: {
         type: Schema.Types.ObjectId,

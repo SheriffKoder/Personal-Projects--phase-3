@@ -132,8 +132,15 @@ module.exports = CarSchema(`
         lastCheck: String!
         nextCheck: String!
         image: String!
-        _id: String!
-        userId: String!
+        _id: ID!
+        userId: ID!
+    }
+
+    input CarEditInputType {
+        brand: String!
+        carModel: String!
+        image: String!
+        _id: ID!
     }
 
 
@@ -148,7 +155,11 @@ module.exports = CarSchema(`
         password: String!
     }
 
-    type RootMutation {
+    type carEditMutation {
+        addCar(carInput: CarEditInputType ): UserResolverReturn!
+    }
+
+    type carAddMutation {
         addCar(carInput: CarAddInputType ): UserResolverReturn!
     }
 
@@ -157,7 +168,8 @@ module.exports = CarSchema(`
     }
 
     schema {
-        mutation: RootMutation
+        mutation: carAddMutation
+        mutation: carEditMutation
         query: RootQuery
     }
 

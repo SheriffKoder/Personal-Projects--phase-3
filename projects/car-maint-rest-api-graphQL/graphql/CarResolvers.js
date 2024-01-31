@@ -18,6 +18,7 @@ const userModel_1 = __importDefault(require("../models/userModel"));
 // (req: Request, res:Response, next: NextFunction)
 const today = new Date();
 const todayString = today.getFullYear() + "-" + today.getMonth() + 1 + "-" + today.getDate();
+const clearImage_1 = require("../util/clearImage");
 //API 0.2 - authentication
 //API 0.2 - images
 module.exports = {
@@ -58,6 +59,44 @@ module.exports = {
                 return Object.assign(Object.assign({}, updatedUser._doc), { _id: updatedUser._id.toString(), cars: updatedUser.cars, token: req.token });
             }
             // return {text:"hello"};
+        });
+    },
+    editCar: function (args, req) {
+        return __awaiter(this, void 0, void 0, function* () {
+            //API 0.3 - GraphQL - Authentication
+            if (!req.isAuth) {
+                const error = new Error("Not Authenticated to edit a car");
+                throw error;
+            }
+            const { brand, carModel, image, _id } = args.carInput;
+            console.log(args);
+            // console.log(name);
+            const currentCar = yield carModel_1.default.findById(_id);
+            if (currentCar) {
+                // console.log(req.userId);
+                // console.log(currentCar.userId);
+                //API 0.2 - authentication
+                //check the ownership of the currently logged in user accessing this middleware
+                //the req.userId is set when accessing isAuth checker
+                //which is taken from the token created on login
+                if (currentCar.userId.toString() !== req.userId.toString()) {
+                    const error = new Error("Not Authorized to edit car");
+                    throw error;
+                }
+                currentCar.brand = brand;
+                currentCar.carModel = carModel;
+                //API 0.2 - images
+                // if there is a file in the request given by multer
+                const oldImage = currentCar.image;
+                const updatedCar = yield currentCar.save();
+                if (image !== oldImage) {
+                    (0, clearImage_1.clearImage)(oldImage);
+                }
+                const user = yield userModel_1.default.findById(req.userId);
+                if (user) {
+                    return Object.assign(Object.assign({}, user._doc), { _id: user._id.toString(), cars: updatedCar, token: req.token });
+                }
+            }
         });
     },
     dummyQuery: function (args, req) {

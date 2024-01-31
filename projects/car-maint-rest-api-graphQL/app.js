@@ -25,7 +25,6 @@ const graphqlCarResolver = require("./graphql/CarResolvers");
 const graphqlCarSchema = require("./graphql/CarSchema");
 //API 0.3 - GraphQL - Authentication
 const auth = require("./middleware/isAuth");
-const clearImage_1 = require("./util/clearImage");
 // const feedRoutes = require("./routes/feed.js");
 // const authRoutes = require("./routes/auth.js");
 const carRoutes = require("./routes/car.js");
@@ -102,9 +101,9 @@ app.put("/post-image", (req, res, next) => {
     if (!req.file) {
         return res.status(200).json({ message: "No file provided" });
     }
-    if (req.body.oldPath) {
-        (0, clearImage_1.clearImage)(req.body.oldPath);
-    }
+    // if (req.body.oldPath) {
+    //     clearImage(req.body.oldPath);
+    // }
     return res.status(201).json({ message: "File stored.", filePath: req.file.path });
 });
 //API 0.3 - GraphQL

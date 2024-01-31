@@ -45,10 +45,12 @@ const carSchema = new mongoose_2.Schema({
     lastCheck: {
         type: Date,
         required: false,
+        default: "",
     },
     nextCheck: {
         type: Date,
         required: false,
+        default: "",
     },
     userId: {
         type: mongoose_2.Schema.Types.ObjectId,

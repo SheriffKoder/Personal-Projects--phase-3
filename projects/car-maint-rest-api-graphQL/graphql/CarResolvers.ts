@@ -74,6 +74,65 @@ module.exports = {
 
     },
 
+    editCar: async function (args:any, req:Request_With_UserId_Token) {
+
+
+        //API 0.3 - GraphQL - Authentication
+        if (!req.isAuth) {
+            const error = new Error("Not Authenticated to edit a car");
+            throw error;
+        }
+
+        const {brand, carModel, image, _id} = args.carInput;
+        console.log(args);
+        // console.log(name);
+
+        const currentCar = await CarModel.findById(_id);
+
+
+
+        if (currentCar) {
+
+            // console.log(req.userId);
+            // console.log(currentCar.userId);
+            //API 0.2 - authentication
+            //check the ownership of the currently logged in user accessing this middleware
+            //the req.userId is set when accessing isAuth checker
+            //which is taken from the token created on login
+            if (currentCar.userId.toString() !== req.userId.toString()) {
+                const error = new Error("Not Authorized to edit car");
+                throw error;
+            }
+
+
+
+
+            currentCar.brand = brand;
+            currentCar.carModel = carModel;
+
+            //API 0.2 - images
+            // if there is a file in the request given by multer
+            const oldImage = currentCar.image;
+
+
+            const updatedCar = await currentCar.save();
+
+            if (image !== oldImage) {
+                clearImage(oldImage);
+            }
+
+            const user = await UserModel.findById(req.userId);
+
+            if (user) {
+                return {...user._doc, _id: user._id.toString(), cars:updatedCar, token: req.token};
+
+            }
+
+        }
+
+    },
+
+
     dummyQuery: async function (args: any, req:Request) {
 
        return {text:"hello"};
