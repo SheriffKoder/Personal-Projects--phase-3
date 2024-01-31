@@ -115,22 +115,22 @@ const CarInfoNew = () => {
     const handleSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
         e.preventDefault();
 
-        //API 0.2 - images /////
-        let formData = new FormData();
-        if (carInfo) formData = getFormData_multiple(formData, null, null, carInfo);
-        //add the image with out a key (as we have a single image) to the formData that also now has information
-        if (imageFile !== "" || imageFile !== null) formData = getFormData_multiple(formData, imageFile, "", null);
-        ///////////////////////
-
-
-        console.log(formData);
         const url = process.env.REACT_APP_CURRENT_URL!;
 
-        //Add a new car route
-        if (carInfo._id === "") {
+
+        //API 0.2 - images /////
+        let formData = new FormData();
+        // if (carInfo) formData = getFormData_multiple(formData, null, null, carInfo);
+        //add the image with out a key (as we have a single image) to the formData that also now has information
         
-            const apiResponse = await fetch(url+"/car/new", {
-                method: "POST",
+        let imageUrl = carInfo.image;
+        if (imageFile !== "" || imageFile !== null) {
+            formData = getFormData_multiple(formData, imageFile, "", null);
+
+            //API 0.3 - uploading images to graphQL
+            console.log(formData);
+            const apiResponse_image = await fetch(url+"/post-image", {
+                method: "PUT",
                 headers: {
                     // "Content-type": "application/json",
                     "Authorization": token
@@ -138,12 +138,83 @@ const CarInfoNew = () => {
                 body: formData,
     
             })
+            const res = await apiResponse_image.json();
+            console.log(res.filePath);
+            imageUrl = "/"+res.filePath;
+
+        }
+        ///////////////////////
+
+
+
+        
+
+
+        //API 0.3 - GraphQl
+        const graphqlQuery = {
+            query: `
+                mutation {
+                    addCar(carInput: {
+                        brand: "${carInfo.brand}",
+                        carModel: "${carInfo.carModel}",
+                        lastCheck: "${carInfo.lastCheck}",
+                        nextCheck: "${carInfo.nextCheck}",
+                        image: "${imageUrl}",
+                        _id: "${carInfo._id}",
+                        userId: "${carInfo.userId}",
+                        
+                        })
+                        {
+                            _id
+                            email
+                            name
+                            token
+                            cars {
+                                _id
+                                brand
+                                carModel
+                                image
+                                lastCheck
+                                nextCheck
+                                userId
+                                checks {
+                                    name
+                                    color
+                                    history {
+                                        addDate
+                                        initialCheck
+                                        nextCheck
+                                        checkedOn
+                                        notes
+                                    }
+                                }
+                                createdAt
+                                updatedAt
+                            }
+                            
+                        }
+                }
+            `
+        }
+        
+        //Add a new car route
+        if (carInfo._id === "") {
+        
+            const apiResponse = await fetch(url+"/graphql/car", {
+                method: "POST",
+                headers: {
+                    "Content-type": "application/json",
+                    Authorization: token
+                  },
+                  body: JSON.stringify(graphqlQuery),
+    
+            })
             const res = await apiResponse.json();
             console.log(res);
             console.log(apiResponse.status);
     
             const userCars = [res];
-            setUser(res.data.carNew);
+            setUser(res.data.addCar);
             navigate("/");    
         
         //Edit car route
