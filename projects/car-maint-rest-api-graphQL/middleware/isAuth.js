@@ -9,6 +9,8 @@ module.exports = (req, res, next) => {
     //req.get returns a request header contents
     //== extract the authorization header from the incoming request
     const authHandler = req.get("Authorization");
+    console.log("xxx");
+    console.log(authHandler);
     if (!authHandler) {
         //API 0.3 - GraphQL
         req.isAuth = false;
