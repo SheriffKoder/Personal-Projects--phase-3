@@ -110,8 +110,6 @@ const fullUser = {
 }
 
 
-
-
 export const userContext = createContext<{userState: fullUserType, updateUser: (user: fullUserType) => void}>({
     userState:fullUser,
     updateUser: (user: fullUserType)=> {}

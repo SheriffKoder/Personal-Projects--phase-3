@@ -110,47 +110,151 @@ const CheckCard = ({checks, carId}: {
 
         const url = process.env.REACT_APP_CURRENT_URL!;
 
-        const apiResponse = await fetch(url+"/car/check/delete", {
-            method: "DELETE",
+        const graphqlQuery = {
+            query: `
+                mutation updateCheck (
+                    $carId: String!,
+                    $action: String!,
+                    $checkIndex: Int,
+                ) {
+                    addEditDeleteCheck(checkInput: {
+                        carId: $carId,
+                        action: $action,
+                        checkIndex: $checkIndex,
+                        })
+                        {
+                            _id
+                            email
+                            name
+                            token
+                            cars {
+                                _id
+                                brand
+                                carModel
+                                image
+                                lastCheck
+                                nextCheck
+                                userId
+                                checks {
+                                    name
+                                    color
+                                    history {
+                                        addDate
+                                        initialCheck
+                                        nextCheck
+                                        checkedOn
+                                        notes
+                                    }
+                                }
+                                createdAt
+                                updatedAt
+                            }
+                            
+                        }
+                }
+
+            `,      
+            variables: {
+                carId: carId,
+                action: "delete",
+                checkIndex: checkIndex,
+            }
+        }
+            
+
+        const apiResponse = await fetch(url+"/graphql/check", {
+            method: "POST",
             headers: {
                 "Content-type": "application/json",
                 "Authorization": token
+                },
+                body: JSON.stringify(graphqlQuery),
 
-              },
-            body: JSON.stringify({carId, checkIndex}),
+        });
 
-        })
+
         const res = await apiResponse.json();
         console.log(res);
         console.log(apiResponse.status);
 
-        const userCars = [res];
-        setUser(res.data.checkDelete);
+        setUser(res.data.addEditDeleteCheck);
         navigate("/");    
     };
 
 
     const handleCompleteCheck = async (carId:string, checkIndex:number) => {
-        console.log(carId);
+        console.log(carId, checkIndex);
 
         const url = process.env.REACT_APP_CURRENT_URL!;
 
-        const apiResponse = await fetch(url+"/car/check/complete", {
-            method: "PATCH",
+        const graphqlQuery = {
+            query: `
+                mutation updateCheck (
+                    $carId: String!,
+                    $action: String!,
+                    $checkIndex: Int,
+                ) {
+                    addEditDeleteCheck(checkInput: {
+                        carId: $carId,
+                        action: $action,
+                        checkIndex: $checkIndex,
+                        })
+                        {
+                            _id
+                            email
+                            name
+                            token
+                            cars {
+                                _id
+                                brand
+                                carModel
+                                image
+                                lastCheck
+                                nextCheck
+                                userId
+                                checks {
+                                    name
+                                    color
+                                    history {
+                                        addDate
+                                        initialCheck
+                                        nextCheck
+                                        checkedOn
+                                        notes
+                                    }
+                                }
+                                createdAt
+                                updatedAt
+                            }
+                            
+                        }
+                }
+
+            `,      
+            variables: {
+                carId: carId,
+                action: "complete",
+                checkIndex: checkIndex,
+            }
+        }
+            
+
+        const apiResponse = await fetch(url+"/graphql/check", {
+            method: "POST",
             headers: {
                 "Content-type": "application/json",
                 "Authorization": token
+                },
+                body: JSON.stringify(graphqlQuery),
 
-              },
-            body: JSON.stringify({carId, checkIndex}),
+        });
 
-        })
+
         const res = await apiResponse.json();
         console.log(res);
         console.log(apiResponse.status);
 
-        const userCars = [res];
-        setUser(res.data.checkComplete);
+        setUser(res.data.addEditDeleteCheck);
         navigate("/");    
     }
 

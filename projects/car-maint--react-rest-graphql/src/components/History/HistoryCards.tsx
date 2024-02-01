@@ -50,22 +50,81 @@ const HistoryCards = ({check}:{
         // console.log(checkIndex);
         const url = process.env.REACT_APP_CURRENT_URL!;
 
-        const apiResponse = await fetch(url+"/car/check/historyItem/delete", {
-            method: "PATCH",
+        const graphqlQuery = {
+            query: `
+                mutation updateCheck (
+                    $checkupInfo: checksTypeInput,
+                    $carId: String!,
+                    $action: String!,
+                    $checkIndex: Int,
+                    $historyIndex: Int,
+                ) {
+                    deleteCheckHistoryItem(checkInput: {
+                        checkupInfo: $checkupInfo,
+                        carId: $carId,
+                        action: $action,
+                        checkIndex: $checkIndex,
+                        historyIndex: $historyIndex,
+
+                        })
+                        {
+                            _id
+                            email
+                            name
+                            token
+                            cars {
+                                _id
+                                brand
+                                carModel
+                                image
+                                lastCheck
+                                nextCheck
+                                userId
+                                checks {
+                                    name
+                                    color
+                                    history {
+                                        addDate
+                                        initialCheck
+                                        nextCheck
+                                        checkedOn
+                                        notes
+                                    }
+                                }
+                                createdAt
+                                updatedAt
+                            }
+                            
+                        }
+                }
+
+            `,      
+            variables: {
+                carId: carId,
+                action: "treeDelete",
+                checkIndex: (checkIndex)? parseInt(checkIndex): "",
+                historyIndex: historyIndex,                
+            }
+        }
+            
+
+        const apiResponse = await fetch(url+"/graphql/check", {
+            method: "POST",
             headers: {
                 "Content-type": "application/json",
                 "Authorization": token
-              },
-            body: JSON.stringify({carId, checkIndex, historyIndex}),
+                },
+                body: JSON.stringify(graphqlQuery),
 
-        })
+        });
+
+
         const res = await apiResponse.json();
         console.log(res);
         console.log(apiResponse.status);
 
-        const userCars = [res];
-        setUser(res.data.checkDelete);
-        navigate("/");    
+        setUser(res.data.deleteCheckHistoryItem);
+        // navigate("/");    
 
     };
 

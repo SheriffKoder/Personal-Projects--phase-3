@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import React from "react"
 import GradientButtonBorderRounded from "../misc/GradientButtonBorderRounded";
 import { ChangeEventHandler } from "react";
@@ -23,6 +23,8 @@ const CheckupNew = () => {
     const userCars = userInfo.cars;
 
     const token = useContext(userContext)?.userState.token;
+
+    const user_action = useRef("add");
 
 
     //if the check history has more than one item, we will not want to view the previous check input
@@ -72,49 +74,129 @@ const CheckupNew = () => {
 
         const url = process.env.REACT_APP_CURRENT_URL!;
 
-        //push the check info to the API to add it to the car
-        if (!checkIndex && !historyIndex) {
+        //Decide to add or edit
+        //Add: push the check info to the API to add it to the car
+        //edit check if there are indexes of a current check in the url
+        (!checkIndex && !historyIndex) ? user_action.current = "add" : user_action.current = "edit";
 
-            const apiResponse = await fetch(url+"/car/check/new", {
-                method: "PATCH",
-                headers: {
-                    "Content-type": "application/json",
-                    "Authorization": token
-                  },
-                body: JSON.stringify({...checkupInfo,carId}),
+
+        const graphqlQuery = {
+            query: `
+                mutation updateCheck (
+                    $checkupInfo: checksTypeInput,
+                    $carId: String!,
+                    $action: String!,
+                    $checkIndex: Int,
+                    $historyIndex: Int,
+                ) {
+                    addEditDeleteCheck(checkInput: {
+                        checkupInfo: $checkupInfo,
+                        carId: $carId,
+                        action: $action,
+                        checkIndex: $checkIndex,
+                        historyIndex: $historyIndex,
+
+                        })
+                        {
+                            _id
+                            email
+                            name
+                            token
+                            cars {
+                                _id
+                                brand
+                                carModel
+                                image
+                                lastCheck
+                                nextCheck
+                                userId
+                                checks {
+                                    name
+                                    color
+                                    history {
+                                        addDate
+                                        initialCheck
+                                        nextCheck
+                                        checkedOn
+                                        notes
+                                    }
+                                }
+                                createdAt
+                                updatedAt
+                            }
+                            
+                        }
+                }
+
+            `,      
+            variables: {
+                checkupInfo: {...checkupInfo},
+                carId: carId,
+                action: user_action.current,
+                checkIndex: (checkIndex)? parseInt(checkIndex): "",
+                historyIndex: (historyIndex) ? parseInt(historyIndex) : "",                
+            }
+        }
+            
+
+        const apiResponse = await fetch(url+"/graphql/check", {
+            method: "POST",
+            headers: {
+                "Content-type": "application/json",
+                "Authorization": token
+                },
+                body: JSON.stringify(graphqlQuery),
+
+        });
+
+
+        const res = await apiResponse.json();
+        console.log(res);
+        console.log(apiResponse.status);
+
+        setUser(res.data.addEditDeleteCheck);
+        navigate("/");    
+
+            // const apiResponse = await fetch(url+"/car/check/new", {
+            //     method: "PATCH",
+            //     headers: {
+            //         "Content-type": "application/json",
+            //         "Authorization": token
+            //       },
+            //     body: JSON.stringify({...checkupInfo,carId}),
     
-            })
-            const res = await apiResponse.json();
-            console.log(res);
-            console.log(apiResponse.status);
+            // })
+            // const res = await apiResponse.json();
+            // console.log(res);
+            // console.log(apiResponse.status);
     
-            const userCars = [res];
-            setUser(res.data.checkNew);
-            navigate("/");    
+            // const userCars = [res];
+            // setUser(res.data.checkNew);
+            // navigate("/");    
         
         
         //edit check if there are indexes of a current check in the url
-        } else {
+        // } else {
 
-            const apiResponse = await fetch(url+"/car/check/edit", {
-                method: "PATCH",
-                headers: {
-                    "Content-type": "application/json",
-                    "Authorization": token
-                  },
-                body: JSON.stringify({...checkupInfo, carId, checkIndex, historyIndex}),
+        //     const apiResponse = await fetch(url+"/car/check/edit", {
+        //         method: "PATCH",
+        //         headers: {
+        //             "Content-type": "application/json",
+        //             "Authorization": token
+        //           },
+        //         body: JSON.stringify({...checkupInfo, carId, checkIndex, historyIndex}),
     
-            })
-            const res = await apiResponse.json();
-            console.log(res);
-            console.log(apiResponse.status);
+        //     })
+        //     const res = await apiResponse.json();
+        //     console.log(res);
+        //     console.log(apiResponse.status);
     
-            const userCars = [res];
-            setUser(res.data.checkEdit);
-            navigate("/");    
+        //     const userCars = [res];
+        //     setUser(res.data.checkEdit);
+        //     navigate("/");    
 
 
-        }
+        // }
         
             
    

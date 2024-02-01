@@ -151,7 +151,7 @@ const Nav = () => {
 
                     <button 
                         // onClick={()=>navigate(`/signOut/`)}
-                        onClick={()=>{setUser(emptyUser)}}
+                        onClick={()=>{setUser(emptyUser);}}
                         className="rounded-full border border-[#226798] 
                         px-2 py-[1px] text-xs ml-1 w-[4.5rem]
                         bg-[#226798]
