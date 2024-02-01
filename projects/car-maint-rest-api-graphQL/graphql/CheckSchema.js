@@ -1,5 +1,5 @@
 "use strict";
-const { buildSchema: CarSchema } = require("graphql");
+const { buildSchema: CheckSchema } = require("graphql");
 // ! for required
 //Define types as in the models
 //Define types for the form inputs
@@ -58,7 +58,7 @@ you need to have a dummy rootQuery at least defined here
 
 
 */
-module.exports = CarSchema(`
+module.exports = CheckSchema(`
 
     type checksType {
         addDate: String
@@ -103,30 +103,21 @@ module.exports = CarSchema(`
 
 
     input checksTypeInput {
-        addDate: String
-        initialCheck: String
-        nextCheck: String
-        checkedOn: String
-        notes: String
-    }
-
-    input checkModelInput {
-        name: String!
+        title: String!,
         color: String!
-        history: [checksTypeInput]
+        initialCheck: String!
+        nextCheck: String!
+        notes: String!
+        checkedOn: String!
     }
 
 
-
-
-
-
-    input CarInputType {
-        brand: String!
-        carModel: String!
-        image: String!
-        _id: ID!
-        action: String!
+    input CheckInputType {
+        checkupInfo: checksTypeInput,
+        carId: String!,
+        action: String!,
+        checkIndex: Int,
+        historyIndex: Int,
     }
 
 
@@ -143,11 +134,12 @@ module.exports = CarSchema(`
 
 
     type RootMutation {
-        addEditDeleteCar(carInput: CarInputType ): UserResolverReturn!
+        addEditDeleteCheck( checkInput: CheckInputType ): UserResolverReturn!
+        deleteCheckHistoryItem( checkInput: CheckInputType ) : UserResolverReturn!
     }
 
     type RootQuery {
-        dummyQuery(userInput: UserLoginInputType ) : dummyStringReturn!
+        dummyQuery(userInput: UserLoginInputType ) : dummyStringReturn
     }
 
     schema {

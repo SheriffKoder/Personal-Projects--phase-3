@@ -36,12 +36,12 @@ module.exports = {
             throw error;
         }
 
-        const {brand, carModel, image, _id, edit} = args.carInput;
+        const {brand, carModel, image, _id, action} = args.carInput;
         console.log(args);
         // console.log(name);
 
 
-        if (edit === "false") {
+        if (action === "add") {
 
             const newCar = await new CarModel({
                 brand: brand,
@@ -68,7 +68,7 @@ module.exports = {
             }
         } 
         
-        else if (edit === "true") {
+        else if (action === "edit") {
             
             const currentCar = await CarModel.findById(_id);
 
@@ -112,7 +112,7 @@ module.exports = {
 
             }
 
-        } else if (edit === "delete") {
+        } else if (action === "delete") {
 
             const currentCar = await CarModel.findById(_id);
 

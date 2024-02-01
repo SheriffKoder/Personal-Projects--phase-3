@@ -15,6 +15,10 @@ const graphqlAuthSchema = require("./graphql/AuthSchema");
 const graphqlCarResolver = require("./graphql/CarResolvers");
 const graphqlCarSchema = require("./graphql/CarSchema");
 
+const graphqlCheckResolver = require("./graphql/CheckResolvers");
+const graphqlCheckSchema = require("./graphql/CheckSchema");
+
+
 //API 0.3 - GraphQL - Authentication
 const auth = require("./middleware/isAuth");
 import { clearImage } from "./util/clearImage";
@@ -190,6 +194,11 @@ app.use("/graphql/auth", graphqlHTTP({
 app.use("/graphql/car", graphqlHTTP({
     schema: graphqlCarSchema,
     rootValue: graphqlCarResolver,
+}));
+
+app.use("/graphql/check", graphqlHTTP({
+    schema: graphqlCheckSchema,
+    rootValue: graphqlCheckResolver,
 }));
 
 // app.use("/graphql/login", graphqlHTTP({

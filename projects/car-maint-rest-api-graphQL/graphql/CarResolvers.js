@@ -31,10 +31,10 @@ module.exports = {
                 const error = new Error("Not Authenticated to update the car");
                 throw error;
             }
-            const { brand, carModel, image, _id, edit } = args.carInput;
+            const { brand, carModel, image, _id, action } = args.carInput;
             console.log(args);
             // console.log(name);
-            if (edit === "false") {
+            if (action === "add") {
                 const newCar = yield new carModel_1.default({
                     brand: brand,
                     carModel: carModel,
@@ -56,7 +56,7 @@ module.exports = {
                     return Object.assign(Object.assign({}, updatedUser._doc), { _id: updatedUser._id.toString(), cars: updatedUser.cars, token: req.token });
                 }
             }
-            else if (edit === "true") {
+            else if (action === "edit") {
                 const currentCar = yield carModel_1.default.findById(_id);
                 if (currentCar) {
                     // console.log(req.userId);
@@ -86,7 +86,7 @@ module.exports = {
                     }
                 }
             }
-            else if (edit === "delete") {
+            else if (action === "delete") {
                 const currentCar = yield carModel_1.default.findById(_id);
                 if (!currentCar) {
                     const error = new Error("Car to be deleted is not found");

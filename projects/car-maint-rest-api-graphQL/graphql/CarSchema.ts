@@ -133,7 +133,7 @@ module.exports = CarSchema(`
         carModel: String!
         image: String!
         _id: ID!
-        edit: String!
+        action: String!
     }
 
 
