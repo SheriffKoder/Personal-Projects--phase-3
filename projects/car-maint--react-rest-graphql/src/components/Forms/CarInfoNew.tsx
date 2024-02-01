@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import React from "react"
 import GradientButtonBorderRounded from "../misc/GradientButtonBorderRounded";
 import CarInfo from "../Home/HomeComponents/CarInfo";
@@ -21,6 +21,8 @@ const CarInfoNew = () => {
     const setUser = useContext(userContext)?.updateUser;
     const userInfo = useContext(userContext)?.userState
     const userCars = useContext(userContext)?.userState;
+
+    const user_action = useRef("add");
 
     const {carId} = useParams();
     const token = useContext(userContext)?.userState.token;
@@ -146,122 +148,87 @@ const CarInfoNew = () => {
         ///////////////////////
 
 
-
-        
-        let graphqlQuery;
-
-        //Add a new car query, mainly the edit value
-        if (carInfo._id === "") {         
-            graphqlQuery = {
-                query: `
-                    mutation {
-                        addEditDeleteCar(carInput: {
-                            brand: "${carInfo.brand}",
-                            carModel: "${carInfo.carModel}",
-                            image: "${imageUrl}",
-                            _id: "${carInfo._id}",
-                            edit: "false",
-                            
-                            })
-                            {
-                                _id
-                                email
-                                name
-                                token
-                                cars {
-                                    _id
-                                    brand
-                                    carModel
-                                    image
-                                    lastCheck
-                                    nextCheck
-                                    userId
-                                    checks {
-                                        name
-                                        color
-                                        history {
-                                            addDate
-                                            initialCheck
-                                            nextCheck
-                                            checkedOn
-                                            notes
-                                        }
-                                    }
-                                    createdAt
-                                    updatedAt
-                                }
-                                
-                            }
-                    }
-                `
-            }
-        } else {
-            graphqlQuery = {
-                query: `
-                    mutation {
-                        addEditDeleteCar(carInput: {
-                            brand: "${carInfo.brand}",
-                            carModel: "${carInfo.carModel}",
-                            image: "${imageUrl}",
-                            _id: "${carInfo._id}",
-                            edit: "true",
-
-                            
-                            })
-                            {
-                                _id
-                                email
-                                name
-                                token
-                                cars {
-                                    _id
-                                    brand
-                                    carModel
-                                    image
-                                    lastCheck
-                                    nextCheck
-                                    userId
-                                    checks {
-                                        name
-                                        color
-                                        history {
-                                            addDate
-                                            initialCheck
-                                            nextCheck
-                                            checkedOn
-                                            notes
-                                        }
-                                    }
-                                    createdAt
-                                    updatedAt
-                                }
-                                
-                            }
-                    }
-                `
-            }
-        }
+        //decide to add or edit
+        (carInfo._id === "") ? user_action.current = "add" : user_action.current = "edit";
     
-        if (graphqlQuery) {
-            //API 0.3 - GraphQl
-            // console.log(graphqlQuery);
-            const apiResponse = await fetch(url+"/graphql/car", {
-                method: "POST",
-                headers: {
-                    "Content-type": "application/json",
-                    "Authorization": token
-                    },
-                    body: JSON.stringify(graphqlQuery),
+    
+        const graphqlQuery = {
+            query: `
+                mutation updateCar (
+                    $carBrand: String!,
+                    $carModel: String!,
+                    $carImage: String!,
+                    $carId: ID!,
+                    $action: String!,
+                ) {
+                    addEditDeleteCar(carInput: {
+                        brand: $carBrand,
+                        carModel: $carModel,
+                        image: $carImage,
+                        _id: $carId,
+                        action: $action,
 
-            })
-            const res = await apiResponse.json();
-            console.log(res);
-            console.log(apiResponse.status);
+                        
+                        })
+                        {
+                            _id
+                            email
+                            name
+                            token
+                            cars {
+                                _id
+                                brand
+                                carModel
+                                image
+                                lastCheck
+                                nextCheck
+                                userId
+                                checks {
+                                    name
+                                    color
+                                    history {
+                                        addDate
+                                        initialCheck
+                                        nextCheck
+                                        checkedOn
+                                        notes
+                                    }
+                                }
+                                createdAt
+                                updatedAt
+                            }
+                            
+                        }
+                }
 
-            const userCars = [res];
-            setUser(res.data.addEditDeleteCar);
-            navigate("/");    
+            `,      
+            variables: {
+                carBrand: carInfo.brand,
+                carModel: carInfo.carModel,
+                carImage: imageUrl,
+                carId: carInfo._id,
+                action: user_action.current,                  
+            }
         }
+
+        //API 0.3 - GraphQl
+        // console.log(graphqlQuery);
+        const apiResponse = await fetch(url+"/graphql/car", {
+            method: "POST",
+            headers: {
+                "Content-type": "application/json",
+                "Authorization": token
+                },
+                body: JSON.stringify(graphqlQuery),
+
+        })
+        const res = await apiResponse.json();
+        console.log(res);
+        console.log(apiResponse.status);
+
+        const userCars = [res];
+        setUser(res.data.addEditDeleteCar);
+        navigate("/");    
 
  
         
@@ -279,7 +246,7 @@ const CarInfoNew = () => {
                         carModel: "${carInfo.carModel}",
                         image: "${carInfo.image}",
                         _id: "${carInfo._id}",
-                        edit: "delete",
+                        action: "delete",
 
                         
                         })
