@@ -1,16 +1,15 @@
+import Hero from "@/components/Home/Hero";
+import StarsCanvas from "@/components/Home/StarsCanvas";
 import Image from "next/image";
-import Hero from "@/components/Home/Hero/Hero";
-import StarsCanvas from "@/components/Home/Hero/StarsCanvas";
 
+//this is the home page components wrapper
 export default function Home() {
   return (
-    <main>
-      <h1>Here is the Home-page component</h1>
+    <div className="relative z-0">
+      <Hero/>
+      <StarsCanvas/>
+    </div>
 
-      <div className="relative z-0">
-        <Hero />
-        <StarsCanvas/>
-      </div>
-    </main>
+
   );
 }
