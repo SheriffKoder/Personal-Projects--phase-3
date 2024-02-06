@@ -6,8 +6,10 @@ import Image from "next/image";
 export default function Home() {
   return (
     <div className="relative z-0">
-      <Hero/>
       <StarsCanvas/>
+      <Hero/>
+      <div className="earth_ambient min-h-[80vh]">
+      </div>
     </div>
 
 

@@ -2,7 +2,7 @@
 import React from "react"
 
 import { lazy, Suspense } from "react";
-import { Canvas, useLoader } from "@react-three/fiber";
+import { Canvas, useLoader, useFrame } from "@react-three/fiber";
 // import { Preload, useGLTF} from "@react-three/drei";
 import { OrbitControls, Preload, useGLTF, Stats, Circle} from "@react-three/drei";
 
@@ -32,16 +32,36 @@ import { useState, useRef, useEffect } from "react";
 
 const Earth = () => {
 
-    const {scene} = useGLTF("./3d/planet/scene.gltf");
+    const gltf = useLoader(GLTFLoader, "./3d/earth2/earth7.glb");    //gltf.scene
+    // const {scene} = useGLTF("./3d/earth4/scene.gltf");
 
 
+    // const myModel = new GLTFLoader().load("./3d/planet/scene.gltf", (model) => {
+    //     model.scene.scale.set(0.03, 0.03, 0.03);
+    // });
+
+    let rotation = {
+        x: 0,
+        y: 0,
+    }
+    const earth_ref = useRef({rotation});
+
+    useFrame((state, delta) => {
+
+
+        //speed of rotation with x/y axis
+        earth_ref.current.rotation.x -= delta /(-1*600);
+        earth_ref.current.rotation.y -= delta /(-2*600);
+      });
+
+      
     return (
 
         <mesh>
-            <hemisphereLight intensity={0.15}
+            {/* <hemisphereLight intensity={0.15}
             groundColor="black"/>
 
-            <pointLight intensity={1} />
+            <pointLight intensity={1} /> */}
 
             {/* <spotLight
             position={[-20, 50, 10]}
@@ -50,12 +70,20 @@ const Earth = () => {
             intensity={1}
             castShadow
             shadow-mapSize={1024} /> */}
-
+{/* 
             <primitive
                 object={scene}
                 scale={2}
                 position={[0, 0, 0]}
                 rotation={[0, 0, 0]}
+            /> */}
+            <primitive
+            ref={earth_ref}
+            object={gltf.scene}
+            children-0-castShadow
+            scale={10}
+            position={[0, -13, 0]}      //7,11,0
+            rotation={[-0.51, -1.6, 0.2]} //-0.15, -2.7
             />
 
         </mesh>
@@ -71,13 +99,16 @@ const Earth = () => {
 
 const EarthCanvas = () => {
 
-    const gltf = useLoader(GLTFLoader, "./3d/earth2/earth7.glb");    //gltf.scene
-    const {scene} = useGLTF("./3d/earth4/scene.gltf");
+    // const [rotateSpeed,setRotateSpeed] = useState(0.3);
 
+    useEffect(()=> {
 
-        const myModel = new GLTFLoader().load("./3d/planet/scene.gltf", (model) => {
-          model.scene.scale.set(0.03, 0.03, 0.03);
-        });
+        // setTimeout(()=> {
+        //     setRotateSpeed(0.24);
+        // }, 5000);
+
+    },[])
+
 
     return (
 
@@ -86,7 +117,11 @@ const EarthCanvas = () => {
             shadows
             frameloop="demand"
             gl={{preserveDrawingBuffer: true}}
-            camera={{position: [0, 0, 15], fov:25}}
+            camera={{
+                position: [0, 0, 15], fov:25,
+                // near: 0.1,
+                // far: 200,
+            }}
         >
 
 
@@ -100,27 +135,21 @@ const EarthCanvas = () => {
                 enableZoom={false}
                 maxPolarAngle={Math.PI /2}
                 minPolarAngle={Math.PI /2}
-                />
-                <Earth/> */}
+                />*/}
+                <Earth/>
 
             {/* <Preload all /> */}
 
   
-            <primitive
-            object={gltf.scene}
-            children-0-castShadow
-            scale={10}
-            position={[0, -13, 0]}      //7,11,0
-            rotation={[-0.51, -1.6, 0.2]} //-0.15, -2.7
-            />
+           
         
             <OrbitControls
-            autoRotate
-            autoRotateSpeed={0.3}
+            autoRotate={true}
+            autoRotateSpeed={0.8}
             enableZoom={true}
             maxPolarAngle={Math.PI /2}
             minPolarAngle={Math.PI /2}
-            target={[0, 0, 0]}
+            // target={[0, 0, 0]}
 
             />
 
@@ -129,6 +158,7 @@ const EarthCanvas = () => {
             autoRotate 
             /> */}
 
+            {/* add some shadow or low light area on the earth model on the left */}
             <directionalLight
             position={[1.3, 1.0, 4.4]}
             castShadow

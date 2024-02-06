@@ -8,8 +8,10 @@ const Loader3d = () => {
   const { progress } = useProgress();
 
   return (
-    <Html>
+    <Html className="" style={{width: "200px", textAlign: "center", 
+    marginLeft: "-6rem", marginTop:"18rem"}}>
       <span className="">
+        Arriving Earth...
       </span>
 
       <p style={{fontSize:14, color: "#f1f1f1", fontWeight: 800, marginTop: 0}}>

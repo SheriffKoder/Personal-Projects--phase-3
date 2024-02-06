@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import {styles} from "../../styles/styles";
 import EarthCanvas from "./EarthCanvas";
 import { slideIn } from "@/utils/motion";
+import StarsCanvas from "./StarsCanvas";
 
 // import dynamic from "next/dynamic";
 // const EarthCanvas = dynamic(()=> import("../../components/Home/EarthCanvas"), {
@@ -21,7 +22,7 @@ const Hero = () => {
   return (
 
     <div className="flex flex-col gap-10 overflow-hidden
-     w-full h-[90vh] relative">
+     w-full h-[102vh] relative">
 
         {/* text div */}
         <div className="absolute inset-0 top-[120px]
@@ -35,10 +36,13 @@ const Hero = () => {
             </p>
         </div>
 
-        <div className="flex-1 earth-model z-[1]">
+        <div className="flex-1 earth-model z-[1] absolute">
             <EarthCanvas/>
 
         </div>
+
+        {/* adding stars here too would make it denser in the hero area */}
+        <StarsCanvas />
 
     </div>
   )

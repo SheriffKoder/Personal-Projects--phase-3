@@ -25,6 +25,8 @@ img {
 }
 
 
+/*///////////////////////////////////////////*/
+/* to set some overlay over the earth model */
 .earth-model {
   position: relative;
   mix-blend-mode: lighten;
@@ -49,8 +51,32 @@ background: linear-gradient(
   rgba(0, 13, 132, 0.12) 15%, 
    rgba(0, 68, 255, 0.075) 100%);
 
-
 }
+
+.earth_ambient {
+  background-color: rgba(0, 13, 132, 0.09);
+}
+
+.fadeIn_animation {
+  animation-name: fadeIn_keyframe;
+  animation-duration: 0.6s;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+
+@keyframes fadeIn_keyframe {
+  0% { 
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/*///////////////////////////////////////////*/
+/*///////////////////////////////////////////*/
+
+
 
 
 /* ////////////////// video css ////////////////// */
