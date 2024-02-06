@@ -8,8 +8,16 @@ const Loader3d = () => {
   const { progress } = useProgress();
 
   return (
-    <Html className="" style={{width: "200px", textAlign: "center", 
-    marginLeft: "-6rem", marginTop:"18rem"}}>
+    <Html className="" style={{
+      textAlign: "center", 
+      width: "200px",
+      marginTop:"18rem", 
+      position: "relative",
+      bottom: "0",
+      marginLeft: "-6rem", 
+
+
+    }}>
       <span className="">
         Arriving Earth...
       </span>
@@ -25,3 +33,18 @@ const Loader3d = () => {
 }
 
 export default Loader3d;
+
+
+/*
+    width: "100vw", 
+    marginLeft: "-6rem", 
+    marginTop:"18rem", 
+    backgroundImage: 'url("/images/earthFallback.png")', 
+    // backgroundColor: "red",
+    position: "absolute",
+    bottom: "0",
+    backgroundPosition: "center",
+    backgroundRepeat: "no-repeat",
+    backgroundSize: "cover",
+
+*/

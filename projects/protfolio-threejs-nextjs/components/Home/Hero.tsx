@@ -22,27 +22,27 @@ const Hero = () => {
   return (
 
     <div className="flex flex-col gap-10 overflow-hidden
-     w-full h-[102vh] relative">
+    w-full h-[102vh] relative">
 
-        {/* text div */}
-        <div className="absolute inset-0 top-[120px]
-        pt-[30vh] pl-10">
-            <h1 className="text-[3rem]">
-                Welcome to my Profile
-            </h1>
+       {/* text div */}
+       <div className="absolute inset-0 top-[120px]
+       pt-[30vh] pl-10">
+           <h1 className="text-[3rem]">
+               Welcome to my Profile
+           </h1>
 
-            <p className="text-[1.1rem]">
-                This is the main page
-            </p>
-        </div>
+           <p className="text-[1.1rem]">
+               This is the main page
+           </p>
+       </div>
 
-        <div className="flex-1 earth-model z-[1] absolute">
-            <EarthCanvas/>
+       <div className="flex-1 earth-model z-[1] absolute">
+           <EarthCanvas/>
 
-        </div>
+       </div>
 
-        {/* adding stars here too would make it denser in the hero area */}
-        <StarsCanvas />
+       {/* adding stars here too would make it denser in the hero area */}
+       <StarsCanvas />
 
     </div>
   )

@@ -162,13 +162,72 @@ const EarthCanvas = () => {
             <directionalLight
             position={[1.3, 1.0, 4.4]}
             castShadow
-            intensity={Math.PI * 2}
+            intensity={Math.PI * 1.8}
             />
 
-            {/* <hemisphereLight intensity={1.8}
+
+            {/* trying to make a spotlight without spot intensity */}
+            {/*
+            <directionalLight
+            position={[0.2, -0.02, -0.23  ]}
+            castShadow
+            intensity={Math.PI * 2.5}
+            />
+
+            <directionalLight
+            position={[0.1, -0.02, -0.23  ]}
+            castShadow
+            intensity={Math.PI * 1.5}
+            />
+         
+
+            <directionalLight
+            position={[0.0, -0.02, -0.4  ]}
+            castShadow
+            intensity={Math.PI * 0.5}
+            />
+
+            <directionalLight
+            position={[-0.1, -0.02, -0.23  ]}
+            castShadow
+            intensity={Math.PI * 0.5}
+            />
+
+            <directionalLight
+            position={[-0.2, -0.5, -0.1  ]}
+            castShadow
+            intensity={Math.PI * 0.5} 
+            />
+            */}
+            {/* /////////////////////////////////////////// */}
+
+
+
+
+
+
+            {/* <directionalLight
+            position={[0.2, -0.01, -0.25  ]}
+            castShadow
+            intensity={Math.PI * 2}
+            /> */}
+
+            {/* <hemisphereLight intensity={0.2 }
             groundColor="blue"/> */}
 
-            {/* <pointLight intensity={1} /> */}
+            {/* <pointLight intensity={1} color="black"/> */}
+
+            {/* <ambientLight intensity={0.1}/> */}
+
+            {/* <spotLight 
+            intensity={1}  
+            castShadow 
+            // penumbra={0.5} 
+            color="#ffffff20f" 
+            decay={1.7} 
+            distance={0}
+            position={[0,0.000001,0]}
+            /> */}
 
             {/* <spotLight
             position={[-20, 50, 10]}
@@ -176,7 +235,7 @@ const EarthCanvas = () => {
             penumbra={1}
             intensity={1}
             castShadow
-            shadow-mapSize={1024} /> */}
+            shadow-mapSize={1024} />
 
             {/* <Preload all /> */}
 

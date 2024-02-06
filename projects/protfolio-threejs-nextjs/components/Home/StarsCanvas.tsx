@@ -51,7 +51,9 @@ const Stars = (props) => {
 
 const StarsCanvas = () => {
   return (
-    <div className="w-full h-[85%] absolute inset-0 z-[-1]">
+
+    // the stars will fill whatever component it will be rendered on
+    <div className="w-full h-[95%] absolute inset-0 z-[-1]">
       <Canvas
       camera={{
         position: [0,0,1]
