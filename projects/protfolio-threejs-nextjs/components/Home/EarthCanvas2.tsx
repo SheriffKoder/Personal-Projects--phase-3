@@ -57,7 +57,7 @@ const Earth = () => {
       
     return (
 
-        <mesh ref={earth_ref} scale={10}>
+        <mesh ref={earth_ref} scale={1}>
             {/* <hemisphereLight intensity={0.15}
             groundColor="black"/>
 
@@ -79,9 +79,9 @@ const Earth = () => {
             /> */}
             <primitive
             object={gltf.scene}
-            scale={8}
-            position={[0, -10, 0]}      //7,11,0
-            rotation={[-2, 0, 0]} //-0.15, -2.7
+            scale={1}
+            // position={[0, -1, 0]}      //7,11,0
+            rotation={[0.4, -1.8, 0.2]} //-0.15, -2.7
             />
 
         </mesh>

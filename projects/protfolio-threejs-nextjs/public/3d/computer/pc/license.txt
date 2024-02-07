@@ -1,0 +1,11 @@
+Model Information:
+* title:	Alienware Aurora R9 3D Model
+* source:	https://sketchfab.com/3d-models/alienware-aurora-r9-3d-model-40572a8b1c584f6098d5b8c5c6be15ba
+* author:	Naman Deep (https://sketchfab.com/namandeep444)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Alienware Aurora R9 3D Model" (https://sketchfab.com/3d-models/alienware-aurora-r9-3d-model-40572a8b1c584f6098d5b8c5c6be15ba) by Naman Deep (https://sketchfab.com/namandeep444) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

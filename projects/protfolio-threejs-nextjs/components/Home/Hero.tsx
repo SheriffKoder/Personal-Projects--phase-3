@@ -6,7 +6,7 @@ import {styles} from "../../styles/styles";
 import EarthCanvas from "./EarthCanvas";
 import { slideIn } from "@/utils/motion";
 import StarsCanvas from "./StarsCanvas";
-
+import Cube from "../earth";
 // import dynamic from "next/dynamic";
 // const EarthCanvas = dynamic(()=> import("../../components/Home/EarthCanvas"), {
 //     ssr: false,
@@ -36,8 +36,9 @@ const Hero = () => {
            </p>
        </div>
 
-       <div className="flex-1 earth-model z-[1] absolute">
+       <div className="flex-1 earth-model">
            <EarthCanvas/>
+           {/* <Cube /> */}
 
        </div>
 

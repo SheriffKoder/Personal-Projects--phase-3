@@ -30,6 +30,7 @@ img {
 .earth-model {
   position: relative;
   mix-blend-mode: lighten;
+  z-index: -1;
 
 }
 
@@ -58,7 +59,43 @@ background: linear-gradient(
 }
 
 
+/*////////////////////////////////////////////////////////////*/
+/* projects component */
 
+.hero_brush_mask {
+  mask-image: url("/assets/brush.png");
+  mask-size: 85%;
+  mask-repeat: no-repeat;
+  position: absolute;
+  mask-position: 50% 55%;
+  overflow: hidden;
+
+  /* top: 15%; */
+  right: -2%;
+  height: 100%;
+  width: 100%;
+
+  opacity: 1;
+  filter: brightness(0.8);
+
+  /* background-position: center; */
+  /* background-repeat: no-repeat; */
+  /* background-size: cover; */
+  /* z-index: 5; */
+}
+
+
+
+@media screen and (min-width: 1000px) {
+  .hero_brush_mask {
+    mask-size: 75%;
+    top: 0;
+    right: -20%;
+    height: 100%;
+    width: 100%;
+
+  }
+}
 
 
 .fadeIn_animation {
