@@ -3,6 +3,7 @@
 import { useRef } from 'react'
 import { Canvas, useLoader, useFrame } from "@react-three/fiber";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+import { Preload, useGLTF} from "@react-three/drei";
 
 import { TextureLoader } from 'three/src/loaders/TextureLoader.js'
 import { OrbitControls } from '@react-three/drei'
@@ -24,25 +25,20 @@ function Shape () {
 
     });
 
-    const gltf1 = useLoader(GLTFLoader, "./3d/computer/iphone.glb");    //gltf.scene
+    // const gltf1 = useLoader(GLTFLoader, "./3d/computer/iphone.glb");    //gltf.scene
+    const {scene} = useGLTF("./3d/computer/pc/scene.gltf");
 
 
 
     return (
-        <mesh scale={0.6} ref={mesh}>
+        <mesh scale={0.6} ref={mesh}
+        >
 
-        {/* to */}
-        {/* // <mesh scale={0.83} ref={mesh}> */}
             <primitive
-            object={gltf1.scene}
-            rotation={[-0.3,-0.44,-0.09]}
-            position={[2,-1.8,0]}
+            object={scene}
+            // rotation={[-0.3,-0.44,-0.09]}
+            // position={[2,-1.8,0]}
             
-            //to
-            // rotation={[0,-0.2,0.01]}
-            // position={[3,-2.1,0]}
-            // position={[3.8,-2.1,0]}  //mobile
-
             />
 
         </mesh>
@@ -50,7 +46,7 @@ function Shape () {
 }
 
 
-export default function Phone() {
+export default function PC() {
 
 
 
@@ -66,7 +62,7 @@ export default function Phone() {
        
             <Shape/>
 
-            <ambientLight intensity={0.4}/>
+            <ambientLight intensity={1}/>
             <directionalLight position={[0,1,3]}/>
 
             {/* 
@@ -79,16 +75,17 @@ export default function Phone() {
             {/* <ambientLight intensity={0.1}/>
             <directionalLight intensity={3.5} position={[1, 0, -0.25]}/> */}
 
-            <spotLight
+            {/* <spotLight
                 intensity={10}
                 position={[3,0.2,2]}
-            />
+            /> */}
 
-            <spotLight
+            {/* <spotLight
                 intensity={10}
                 position={[0,0.3,2]}
-            />
-            {/* <OrbitControls/> */}
+            /> */}
+
+            <OrbitControls/>
         </Canvas>
     </div>
     );

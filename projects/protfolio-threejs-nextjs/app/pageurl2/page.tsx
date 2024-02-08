@@ -14,6 +14,11 @@ const Phone = dynamic(()=> import("@/components/earth/model-four"), {
   loading: () => <p className="absolute top-[50%] right-[50%]">Loading...</p>
 })
 
+const PC = dynamic(()=> import("@/components/earth/model-five"), {
+  ssr:false,
+  loading: () => <p className="absolute top-[50%] right-[50%]">Loading...</p>
+})
+
 const page = () => {
   return (
 
@@ -27,7 +32,7 @@ const page = () => {
       <div className="border border-white-100 h-[80%] w-[100%]
       flex flex-col lg:flex-row lg:relative">
 
-        <Image src="/assets/brickwall.jpg" alt="Furniture" width={1000} height={1200}
+        <Image src="/assets/brickwall.jpg" alt="Furniture" width={1200} height={1200}
           className="hero_brush_mask hidden lg:block">
         </Image>
 
@@ -51,8 +56,11 @@ const page = () => {
           </Image>
 
           <div className="computerModel_Container relative flex items-center justify-center w-full h-full">
+            {/* <PC/> */}
             <Computer/>
-            <Phone />
+
+            {/* need a lighter phone model */}
+            {/* <Phone /> */}
           </div>
 
         </div>

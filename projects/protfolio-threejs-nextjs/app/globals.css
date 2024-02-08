@@ -64,14 +64,14 @@ background: linear-gradient(
 
 .hero_brush_mask {
   mask-image: url("/assets/brush.png");
-  mask-size: 85%;
+  mask-size: 90%;
   mask-repeat: no-repeat;
   position: absolute;
-  mask-position: 50% 55%;
+  mask-position: 65% 55%;
   overflow: hidden;
 
   /* top: 15%; */
-  right: -2%;
+  /* right: -2%; */
   height: 100%;
   width: 100%;
 
@@ -90,9 +90,10 @@ background: linear-gradient(
   .hero_brush_mask {
     mask-size: 75%;
     top: 0;
-    right: -20%;
+    right: 0%;
     height: 100%;
     width: 100%;
+    mask-position: 120% 55%;
 
   }
 }
