@@ -1,6 +1,9 @@
 "use client"
-import React from "react"
 
+// this is the earth7.glb centered on page
+
+
+import React from "react"
 import { lazy, Suspense } from "react";
 import { Canvas, useLoader, useFrame } from "@react-three/fiber";
 // import { Preload, useGLTF} from "@react-three/drei";

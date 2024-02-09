@@ -69,7 +69,8 @@ background: linear-gradient(
   position: absolute;
   mask-position: 65% 55%;
   overflow: hidden;
-
+  /* background:  blue;
+  background-blend-mode: "overlay"; */
   /* top: 15%; */
   /* right: -2%; */
   height: 100%;
@@ -90,10 +91,9 @@ background: linear-gradient(
   .hero_brush_mask {
     mask-size: 75%;
     top: 0;
-    right: 0%;
     height: 100%;
     width: 100%;
-    mask-position: 120% 55%;
+    mask-position: 140% 55%;
 
   }
 }

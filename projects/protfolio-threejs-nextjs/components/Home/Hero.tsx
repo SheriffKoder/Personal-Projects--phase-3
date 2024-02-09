@@ -6,7 +6,7 @@ import {styles} from "../../styles/styles";
 import EarthCanvas from "./EarthCanvas";
 import { slideIn } from "@/utils/motion";
 import StarsCanvas from "./StarsCanvas";
-import Cube from "../earth";
+import Cube from "../myModels/index-cube-1";
 // import dynamic from "next/dynamic";
 // const EarthCanvas = dynamic(()=> import("../../components/Home/EarthCanvas"), {
 //     ssr: false,

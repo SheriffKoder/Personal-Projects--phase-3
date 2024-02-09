@@ -1,5 +1,8 @@
 "use client"
 
+// this is a low poly sphere earth model
+
+
 import { useRef } from 'react'
 import { Canvas, useLoader, useFrame } from '@react-three/fiber'
 
