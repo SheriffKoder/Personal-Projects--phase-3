@@ -12,7 +12,15 @@ import { useTexture } from '@react-three/drei';
 import {OptPhone} from "./optPhone";
 import {OptImac, optImac} from "./optImac";
 
-function Shape () {
+import { orbitType } from "@/constants/constants";
+import { useSpring, useMotionValue } from 'framer-motion';
+import { motion } from "framer-motion-3d";  //sep lib
+
+
+function Shape ({orbitControl}:{
+    // Orbit: orbitType,
+    orbitControl: string
+}) {
 
         // const [color, normal, aoMap] = useLoader(TextureLoader, [
     //     "./earth3d/color.jpg",
@@ -29,6 +37,100 @@ function Shape () {
 
     });
 
+    //////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////
+    const springOptions = {
+        damping: 60,
+    }
+    const mouse = {
+        rotation_y: useSpring(useMotionValue(-0.75), springOptions),
+        scale: useSpring(useMotionValue(1), springOptions),
+        position_x: useSpring(useMotionValue(0), springOptions),
+
+    };
+
+    //slight rotation to back on page entry
+    const rotation_0 = () => {
+
+        mouse.rotation_y.set(-0.5);
+        // mouse.scale.set(1.5);
+        // mouse.position_x.set(-1.2);
+
+    }
+
+    //project view
+    const rotation_1 = () => {
+
+        const { innerWidth, innerHeight } = window;
+
+        console.log(innerWidth);
+
+        mouse.rotation_y.set(0);
+        mouse.scale.set(1.5);
+
+        if (innerWidth >= 1537) {
+            mouse.position_x.set(-1.2); 
+        } else {
+            mouse.position_x.set(0); 
+
+        }
+
+    }
+
+    //back from project
+    const rotation_2 = () => {
+
+        mouse.rotation_y.set(-0.5);
+        mouse.scale.set(1);
+        mouse.position_x.set(0);
+
+    }
+
+
+    //adjust x if the user resized window from mobile to desktop to view the models properly
+    //as the rotations are triggered from a clickable button that will not be triggered on resize
+    const windowResizeListen = () => {
+        const { innerWidth, innerHeight } = window;
+        if (innerWidth >= 1537) {
+            // mouse.position_x.set(-1.2); 
+            mesh.current.position.x = -1.2;
+
+        } else {
+            // mouse.position_x.set(0); 
+            mesh.current.position.x = 0;
+
+        }
+    }
+
+
+    //make if for mobile, check window width
+    useEffect(() => {
+
+        if (orbitControl === "default") {
+            rotation_0();
+        } else if (orbitControl === "view") {
+            rotation_1();
+        } else if (orbitControl === "back") {
+            rotation_2();
+        }
+
+        // rotation_0();
+        window.addEventListener("resize", windowResizeListen);
+
+        // window.addEventListener("mousemove", rotation_1);
+        // window.addEventListener("wheel", rotation_3);
+
+
+        return () => {
+            // window.removeEventListener("mouse", rotation_1);
+            // window.removeEventListener("wheel", rotation_3);
+
+        };
+    },[orbitControl]);
+    //////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////
+
+
     const gltf1 = useLoader(GLTFLoader, "./3d/computer/imac.glb");    //gltf.scene
     const gltf2 = useGLTF("./3d/computer/imac/scene.gltf");
 
@@ -44,18 +146,22 @@ function Shape () {
 
 
     // gltf2.materials.DisplayImage.map.name = "./assets/tech/css.png";
-
+    // console.log(Orbit);
     return (
 
         // to
-        // <group rotation-y={-0} rotation-x={0} scale={1.5} position={[-1,0,0]}>
-        //phone
-        // <group rotation-y={-0} rotation-x={0} scale={1.5} position={[0,0,0]}>
+        // <group rotation-y={-0} scale={1.5} position={[-1,0,0]}>
+        // {/* //phone view port */}
+        // {/* // <group rotation-y={-0} rotation-x={0} scale={1.5} position={[0,0,0]}> */}
 
-        <group rotation-y={-0.5}>
+        // <group rotation-y={-0.5} scale={1} position={[0,0,0]} >
+        // <group rotation-y={Orbit.rotation.y} scale={Orbit.scale} position-x={Orbit.position.x} >
+        <motion.group ref={mesh} 
+        rotation-y={mouse.rotation_y} scale={mouse.scale} position-x={mouse.position_x} >
+
 
             {/* computer, will use this as the optImac displays a glitchy apple logo */}
-            <mesh scale={7} ref={mesh}>
+            {/* <mesh scale={7} ref={mesh}>
 
                 <primitive
                 // object={gltf1.scene}
@@ -72,7 +178,7 @@ function Shape () {
                 // position={[-0.1,-0.03,0.8]}
                 // position={[-0,-0.03,0.8]} //mobile
                 />
-            </mesh>
+            </mesh> */}
 
 
             {/* computer screen */}
@@ -112,10 +218,10 @@ function Shape () {
 
             {/* </mesh> */}
 
-            {/* <OptImac
+            <OptImac
             position={[0,0,0.0]}
             scale={7}
-            /> */}
+            />
 
             <OptPhone
             scale={1.5}
@@ -124,15 +230,18 @@ function Shape () {
             myWallpaper={texture_1}
             />
 
-        </group>
+        </motion.group>
 
     )
 }
 
 
-export default function computer() {
+export default function computer({orbitControl}: {
+    // Orbit: orbitType,
+    orbitControl: string,
+}) {
 
-
+    // console.log(Orbit);
 
     return (
         <div className="absolute top-0 left-0 w-full h-full">
@@ -147,13 +256,13 @@ export default function computer() {
             {/* Environment lights, float like animation */}
             {/* <Environment preset="city" background blur={4}/> */}
             {/* <Float> */}
-                <Shape/>
+                <Shape orbitControl={orbitControl}/>
                 
             {/* </Float> */}
 
 
             {/* ground shadows */}
-            <ContactShadows position-y={-1.9} opacity={0.4} blur={2}/>
+            {/* <ContactShadows position-y={-1.9} opacity={0.4} blur={2}/> */}
 
 
             <ambientLight intensity={2}/>
@@ -177,8 +286,11 @@ export default function computer() {
 
 
 
-            <OrbitControls/>
-        </Canvas>
+            {/* <OrbitControls
+                enableZoom={false}   //true by default
+                enablePan={false}    //true by default with right click
+            /> */}
+            </Canvas>
     </div>
     );
     

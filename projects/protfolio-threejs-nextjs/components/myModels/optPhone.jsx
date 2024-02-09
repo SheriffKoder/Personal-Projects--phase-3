@@ -20,20 +20,20 @@ export function OptPhone (props) {
     <group {...props} dispose={null}>
       <group scale={0.01}>
         <group scale={100}>
-          <mesh geometry={nodes.Frame_Antenna_0001.geometry} material={materials['Antenna.001']} />
+          {/* <mesh geometry={nodes.Frame_Antenna_0001.geometry} material={materials['Antenna.001']} /> */}
           <mesh geometry={nodes.Frame_Frame2_0001.geometry} material={materials['Frame2.001']} />
           <mesh geometry={nodes.Frame_Frame_0001.geometry} material={materials['Frame.001']} />
-          <mesh geometry={nodes.Frame_Mic_0001.geometry} material={materials['material.001']} />
-          <mesh geometry={nodes.Frame_Port_0001.geometry} material={materials['Port.001']} />
-          <mesh geometry={nodes.Apple_Logo_Logo_0001.geometry} material={materials['Logo.001']} />
+          {/* <mesh geometry={nodes.Frame_Mic_0001.geometry} material={materials['material.001']} /> */}
+          {/* <mesh geometry={nodes.Frame_Port_0001.geometry} material={materials['Port.001']} /> */}
+          {/* <mesh geometry={nodes.Apple_Logo_Logo_0001.geometry} material={materials['Logo.001']} /> */}
           <mesh geometry={nodes.Body_Bezel_0001.geometry} material={materials['Bezel.001']} />
           <mesh geometry={nodes.Body_Body_0001.geometry} material={materials['Body.001']} />
-          <mesh geometry={nodes.Body_Camera_Glass_0001.geometry} material={materials['Camera_Glass.001']} />
-          <mesh geometry={nodes.Body_Lens_0001.geometry} material={materials['Lens.001']} />
-          <mesh geometry={nodes.Body_Material_0001.geometry} material={materials['Material.003']} />
-          <mesh geometry={nodes.Body_Mic_0001.geometry} material={materials['material.001']} />
-          <mesh geometry={nodes.Body_Wallpaper_0001.geometry} material={materials['Wallpaper.001']} />
-          <mesh geometry={nodes.Body001_Screen_Glass_0001.geometry} material={materials['Screen_Glass.001']} />
+          {/* <mesh geometry={nodes.Body_Camera_Glass_0001.geometry} material={materials['Camera_Glass.001']} /> */}
+          {/* <mesh geometry={nodes.Body_Lens_0001.geometry} material={materials['Lens.001']} /> */}
+          {/* <mesh geometry={nodes.Body_Material_0001.geometry} material={materials['Material.003']} /> */}
+          {/* <mesh geometry={nodes.Body_Mic_0001.geometry} material={materials['material.001']} /> */}
+          {/* <mesh geometry={nodes.Body_Wallpaper_0001.geometry} material={materials['Wallpaper.001']} /> */}
+          {/* <mesh geometry={nodes.Body001_Screen_Glass_0001.geometry} material={materials['Screen_Glass.001']} /> */}
           {/* /// */}
           {/* <mesh geometry={nodes.Body001_Screen_Glass_0002.geometry} material={materials['printable.001']}  */}
           <mesh geometry={nodes.Body001_Screen_Glass_0002.geometry}
@@ -57,21 +57,21 @@ export function OptPhone (props) {
 
           </mesh>
           {/* /// */}
-          <mesh geometry={nodes.Button_Frame_0001.geometry} material={materials['Frame.001']} />
-          <mesh geometry={nodes.Camera_Body_0001.geometry} material={materials['Body.001']} />
+          {/* <mesh geometry={nodes.Button_Frame_0001.geometry} material={materials['Frame.001']} /> */}
+          {/* <mesh geometry={nodes.Camera_Body_0001.geometry} material={materials['Body.001']} /> */}
           <mesh geometry={nodes.Camera_Camera_Frame001_0001.geometry} material={materials['Camera_Frame.002']} />
-          <mesh geometry={nodes.Camera_Glass_0001.geometry} material={materials['Glass.001']} />
-          <mesh geometry={nodes.Camera_Mic_0001.geometry} material={materials['material.001']} />
-          <mesh geometry={nodes.Camera001_Black_Glass_0001.geometry} material={materials['Black_Glass.001']} />
-          <mesh geometry={nodes.Camera001_Body_0001.geometry} material={materials['Body.001']} />
-          <mesh geometry={nodes.Camera001_Camera_Frame_0001.geometry} material={materials['Camera_Frame.003']} />
-          <mesh geometry={nodes.Camera001_Camera_Glass_0001.geometry} material={materials['Camera_Glass.001']} />
-          <mesh geometry={nodes.Camera001_Flash_0001.geometry} material={materials['Flash.001']} />
+          {/* <mesh geometry={nodes.Camera_Glass_0001.geometry} material={materials['Glass.001']} /> */}
+          {/* <mesh geometry={nodes.Camera_Mic_0001.geometry} material={materials['material.001']} /> */}
+          {/* <mesh geometry={nodes.Camera001_Black_Glass_0001.geometry} material={materials['Black_Glass.001']} /> */}
+          {/* <mesh geometry={nodes.Camera001_Body_0001.geometry} material={materials['Body.001']} /> */}
+          {/* <mesh geometry={nodes.Camera001_Camera_Frame_0001.geometry} material={materials['Camera_Frame.003']} /> */}
+          {/* <mesh geometry={nodes.Camera001_Camera_Glass_0001.geometry} material={materials['Camera_Glass.001']} /> */}
+          {/* <mesh geometry={nodes.Camera001_Flash_0001.geometry} material={materials['Flash.001']} /> */}
           <mesh geometry={nodes.Camera001_Gray_Glass_0001.geometry} material={materials['Gray_Glass.001']} />
-          <mesh geometry={nodes.Camera001_Lens_0001.geometry} material={materials['Lens.001']} />
-          <mesh geometry={nodes.Camera001_Port_0001.geometry} material={materials['Port.001']} />
-          <mesh geometry={nodes.Camera003_Material002_0001.geometry} material={materials['Material.004']} />
-          <mesh geometry={nodes.Circle003_Frame_0001.geometry} material={materials['Frame.001']} />
+          {/* <mesh geometry={nodes.Camera001_Lens_0001.geometry} material={materials['Lens.001']} /> */}
+          {/* <mesh geometry={nodes.Camera001_Port_0001.geometry} material={materials['Port.001']} /> */}
+          {/* <mesh geometry={nodes.Camera003_Material002_0001.geometry} material={materials['Material.004']} /> */}
+          {/* <mesh geometry={nodes.Circle003_Frame_0001.geometry} material={materials['Frame.001']} /> */}
         </group>
       </group>
     </group>
