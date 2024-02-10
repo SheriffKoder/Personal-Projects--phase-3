@@ -10,10 +10,10 @@ import { Decal } from '@react-three/drei';
 
 export function OptImac(props) {
 
-  const texture_1 = useTexture("/assets/brickwall.jpg");  //texture importing method fixes the brightness issue
 
 
   const { nodes, materials } = useGLTF('/3d/computer/opt-imac.glb')
+
   return (
     <group {...props} dispose={null}>
       <group rotation={[-Math.PI / 2, 0, 0]} scale={0.067}>
@@ -27,29 +27,19 @@ export function OptImac(props) {
             {/* <mesh geometry={nodes.Cube001_1.geometry} material={materials['DisplayImage.004']} /> */}
             {/* <mesh geometry={nodes.Cube001_1001.geometry} material={materials.myWallpaper}/> */}
 
-            {/* <mesh geometry={nodes.Cube001_1001.geometry} >
+            <mesh geometry={nodes.Cube001_1001.geometry} >
             
-              <meshBasicMaterial transparent opacity={0} />
-                <Decal
-                // debug
-                position={[0, 0, 0]}
-                rotation={[0,0,0]}
-                // scale={2}
-                >
-                    <meshBasicMaterial
-                    map={texture_1}
+            <meshBasicMaterial
+                    map={props.myWallpaper}
                     polygonOffset
                     polygonOffsetFactor={-1}
                     transparent
-                    />
-
-                </Decal>
-        
-            </mesh> */}
+                    />                        
+            </mesh>
         
           </group>
           {/* expensive */}
-          {/* <mesh geometry={nodes.Cube003_0.geometry} material={materials['MetalDiffuse.004']} />  */}
+          <mesh geometry={nodes.Cube003_0.geometry} material={materials['MetalDiffuse.004']} /> 
           {/* <mesh geometry={nodes['56-apple-512_0'].geometry} material={materials['AppleLogoBack.004']} position={[-0.012, 0.013, 2.056]} rotation={[-Math.PI / 2, 0, -Math.PI]} scale={2.068} /> */}
           <mesh geometry={nodes.Circle_0.geometry} material={materials['AppleLogoFront.004']} position={[0, -0.9, -2.796]} rotation={[Math.PI / 2, 0, 0]} scale={0.321} />
           {/* <mesh geometry={nodes.Cube_0.geometry} material={materials['DiskSDVent.004']} position={[0, -0.366, 3.462]} scale={[4.052, 1, 0.016]} /> */}
