@@ -41,10 +41,12 @@ export function OptPhone (props) {
 
             <meshBasicMaterial transparent opacity={0} />
             <Decal
-            // debug
+            debug
             position={[0, 0, 0]}
             rotation={[0,0,0]}
-            scale={1}
+            // scale={0.5}
+            scale-x={0.9}
+            scale-y={1}
             >
                 <meshBasicMaterial
                 map={props.myWallpaper}

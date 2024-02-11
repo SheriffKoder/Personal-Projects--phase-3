@@ -10,7 +10,8 @@ import { OrbitControls } from '@react-three/drei'
 import { useTexture } from '@react-three/drei';
 
 import {OptPhone} from "./optPhone";
-import {OptImac, optImac} from "./optImac";
+import {OptPhone42} from "./optPhone42";
+import {OptImac} from "./optImac";
 
 import { orbitType } from "@/constants/constants";
 import { useSpring, useMotionValue } from 'framer-motion';
@@ -136,9 +137,10 @@ function Shape ({orbitControl}:{
 
     // npx gltfjsx public/3d/computer/opt-iphone3.glb -o components/myModels/optPhone.jsx -r public
     const gltf3 = useLoader(GLTFLoader, "./3d/computer/iphone3.glb");    //gltf.scene
+    const gltf4 = useLoader(GLTFLoader, "./3d/computer/iphone4.glb");    //gltf.scene
 
     const texture_1 = useTexture("/assets/brickwall.jpg");  //texture importing method fixes the brightness issue
-    const texture_2 = useTexture("/assets/phonescreen.jpg");  //texture importing method fixes the brightness issue
+    const texture_2 = useTexture("/assets/pw3.png");  //texture importing method fixes the brightness issue
 
     // console.log(useGLTF("./3d/computer/imac/scene.gltf"));
 
@@ -196,9 +198,9 @@ function Shape ({orbitControl}:{
             {/* <mesh scale={1.5} ref={mesh}> */}
 
             {/* to */}
-            {/* // <mesh scale={0.83} ref={mesh}>
-                <primitive
-                object={gltf3.scene}
+            {/* // <mesh scale={0.83} ref={mesh}>*/}
+                {/* <primitive
+                object={gltf4.scene}
 
                 //separate here
                 // rotation={[-0.3,-0.44,-0.09]}
@@ -217,15 +219,22 @@ function Shape ({orbitControl}:{
 
                 />
 
-            {/* </mesh> */}
+            </mesh> */}
 
             <OptImac
             position={[0,0,0.0]}
             scale={7}
             myWallpaper={texture_1}
             />
-
+{/* 
             <OptPhone
+            scale={1.5}
+            position={[1.8,-1,0.8]}                           
+            rotation={[-0.1,3.15,0]} 
+            myWallpaper={texture_2}
+            /> */}
+
+            <OptPhone42
             scale={1.5}
             position={[1.8,-1,0.8]}                           
             rotation={[-0.1,3.15,0]} 
