@@ -11,15 +11,15 @@ const Computer = dynamic(()=> import("@/components/myModels/model-three"), {
   ssr:false,
   loading: () => <p className="absolute top-[50%] right-[50%]">Loading...</p>
 })
-const Phone = dynamic(()=> import("@/components/myModels/model-four"), {
-  ssr:false,
-  loading: () => <p className="absolute top-[50%] right-[50%]">Loading...</p>
-})
+// const Phone = dynamic(()=> import("@/components/myModels/model-four"), {
+//   ssr:false,
+//   loading: () => <p className="absolute top-[50%] right-[50%]">Loading...</p>
+// })
 
-const PC = dynamic(()=> import("@/components/myModels/model-five"), {
-  ssr:false,
-  loading: () => <p className="absolute top-[50%] right-[50%]">Loading...</p>
-})
+// const PC = dynamic(()=> import("@/components/myModels/model-five"), {
+//   ssr:false,
+//   loading: () => <p className="absolute top-[50%] right-[50%]">Loading...</p>
+// })
 
 import { orbitType } from "@/constants/constants";
 
@@ -119,8 +119,6 @@ const page = () => {
             {/* <PC/> */}
             <Computer orbitControl={orbitControl}/>
 
-            {/* need a lighter phone model */}
-            {/* <Phone /> */}
           </div>
 
         </div>

@@ -18,7 +18,7 @@ import Cube from "../myModels/index-cube-1";
 //bg-[#4a19867a]
 
 
-const Hero = () => {
+const Contact = () => {
   return (
 
     <div className="flex flex-col gap-10 overflow-hidden
@@ -32,7 +32,7 @@ const Hero = () => {
            </h1>
 
            <p className="text-[1.1rem]">
-               This is the main page
+               This is the contact page
            </p>
        </div>
 
@@ -49,4 +49,4 @@ const Hero = () => {
   )
 }
 
-export default Hero
+export default Contact
