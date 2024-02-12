@@ -10,7 +10,7 @@ import {
 
 // cube with mouse movement animation
 
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Canvas, useLoader, useFrame } from '@react-three/fiber'
 
 import { TextureLoader } from 'three/src/loaders/TextureLoader.js'
@@ -24,17 +24,53 @@ import { motion } from "framer-motion-3d";  //sep lib
 import * as THREE from "three";
 import { Bloom, EffectComposer } from "@react-three/postprocessing";
 import { useTexture } from '@react-three/drei';
-
+import { useControls } from "leva";
 
 // scroll movements 2
 function Shape () {
 
-// function Shape () {
+// useControls({
+//         red_red: {value: 10, min: 0, max: 20, 
+//             onChange: (value) => {
+//               setRed_red((pos)=>(value))}},
+//         red_green: {value: 0.3, min: 0, max: 20,
+//             onChange: (value) => {
+//               setRed_green((pos)=>(value))}},
+//         red_blue: {value: 1, min: 0, max: 20,
+//             onChange: (value) => {
+//               setRed_blue((pos)=>(value))}},
+//         args_x: {value: 0.9, min: 0, max: 10,
+//             onChange: (value) => {
+//               setArgs_x((pos)=>(value))}},
+//         args_y: {value: 1, min: 0, max: 10,
+//             onChange: (value) => {
+//               setArgs_y((pos)=>(value))}},
+//         args_z: {value: 3, min: 0, max: 10,
+//             onChange: (value) => {
+//               setArgs_z((pos)=>(value))}},
+//         args_n: {value:1, min: 0, max: 15,
+//             onChange: (value) => {
+//               setArgs_n((pos)=>(value))}},
+      
 
 
-const shiningRed = new THREE.Color(10, 0.3, 1);
+//     });
+
+    const [red_red, setRed_red] = useState(10);
+    const [red_green, setRed_green] = useState(0.3);
+    const [red_blue, setRed_blue] = useState(1);
+    const [args_x, setArgs_x] = useState(0.9);
+    const [args_y, setArgs_y] = useState(1);
+    const [args_z, setArgs_z] = useState(3);
+    const [args_n, setArgs_n] = useState(1);
+
+const shiningRed = new THREE.Color(red_red, red_green, red_blue);
 const shiningWhite = new THREE.Color(0.5, 0.0, 0.1);
 const shiningBlue = new THREE.Color(0.3, 1, 10);
+
+// const shiningRed = new THREE.Color(10, 0.3, 1);
+// const shiningWhite = new THREE.Color(0.5, 0.0, 0.1);
+// const shiningBlue = new THREE.Color(0.3, 1, 10);
 
     const mesh = useRef(null);
     //////////////////////////////////////////////////////
@@ -63,7 +99,7 @@ const shiningBlue = new THREE.Color(0.3, 1, 10);
         //   position={[0, 0.51, 0]}
           rotation={[0,0,0.4]}
         >
-        <ringGeometry args={[0.9, 1, 3, 1]} />
+        <ringGeometry args={[args_x, args_y, args_z, args_n]} />
           <meshStandardMaterial
             color={shiningRed}
             // toneMapped={false}
@@ -125,6 +161,24 @@ function Shape2 () {
 
 export default function Neon() {
 
+  //1,1.3,0.4
+  //1,0.5,0.5
+//   useControls({
+//     luminanceThreshold: {value: 1, min: -5, max: 10, 
+//         onChange: (value) => {
+//           setLuminanceThreshold((pos)=>(value))}},
+//     intensity: {value: 1.3, min: -5, max: 10,
+//         onChange: (value) => {
+//           setIntensity((pos)=>(value))}},
+//     radius: {value:0.4, min: -5, max: 10,
+//         onChange: (value) => {
+//           setRadius((pos)=>(value))}},
+
+// });
+
+const [luminanceThreshold, setLuminanceThreshold] = useState(1);
+const [intensity, setIntensity] = useState(1.3);
+const [radius, setRadius] = useState(0.4);
 
 
     return (
@@ -144,15 +198,15 @@ export default function Neon() {
             <EffectComposer>
                 <Bloom
                 mipmapBlur
-                luminanceThreshold={1}
-                intensity={1.3}
-                radius={0.4}
+                luminanceThreshold={luminanceThreshold}
+                intensity={intensity}
+                radius={radius}
                 />
             </EffectComposer>
             {/* </Float> */}
 
             {/* ground shadows */}
-            <ContactShadows position-y={-1.9} opacity={0.4} blur={2}/>
+            {/* <ContactShadows position-y={-1.9} opacity={0.4} blur={2}/> */}
 
 
 

@@ -16,12 +16,22 @@ import {OptImac} from "./optImac";
 import { orbitType } from "@/constants/constants";
 import { useSpring, useMotionValue } from 'framer-motion';
 import { motion } from "framer-motion-3d";  //sep lib
+import { LightScene } from './drafts/EarthLights';
+
+import { Plane, TorusKnot, useHelper } from "@react-three/drei";
+import { useControls } from "leva";
+import { DirectionalLight, DirectionalLightHelper, Mesh, PointLight, PointLightHelper, RectAreaLight, SpotLight, SpotLightHelper } from "three";
+import { RectAreaLightHelper } from "three/examples/jsm/Addons.js";
 
 
 function Shape ({orbitControl}:{
     // Orbit: orbitType,
     orbitControl: string
 }) {
+
+
+
+
 
         // const [color, normal, aoMap] = useLoader(TextureLoader, [
     //     "./earth3d/color.jpg",
@@ -241,6 +251,8 @@ function Shape ({orbitControl}:{
             myWallpaper={texture_2}
             />
 
+
+
         </motion.group>
 
     )
@@ -254,6 +266,7 @@ export default function computer({orbitControl}: {
 
     // console.log(Orbit);
 
+
     return (
         <div className="absolute top-0 left-0 w-full h-full">
         <Canvas
@@ -262,6 +275,8 @@ export default function computer({orbitControl}: {
                         // near: 0.1,
                         // far: 200,
                     }}
+
+
         >
 
             {/* Environment lights, float like animation */}
@@ -276,13 +291,13 @@ export default function computer({orbitControl}: {
             {/* <ContactShadows position-y={-1.9} opacity={0.4} blur={2}/> */}
 
 
-            <ambientLight intensity={2}/>
+            {/* <ambientLight intensity={2}/>
             <directionalLight position={[0,0,1]}
-            intensity={1}/>
+            intensity={1}/> */}
 
-            {/* 
-            <ambientLight intensity={0.1}/>
-            <directionalLight intensity={3.5} position={[3, 4.5, -3.5]}/> */}
+            
+            {/* <ambientLight intensity={0.1}/> */}
+            {/* <directionalLight intensity={3.5} position={[3, 4.5, -3.5]}/> */}
 
             {/* <ambientLight intensity={0.1}/>
             <directionalLight intensity={3.5} position={[1, 0, 0.25]}/> */}
@@ -290,11 +305,20 @@ export default function computer({orbitControl}: {
             {/* <ambientLight intensity={0.1}/>
             <directionalLight intensity={3.5} position={[1, 0, -0.25]}/> */}
 
-            <spotLight
+            {/* <spotLight
                 intensity={10}
                 position={[-3,1,3]}
-            />
+            /> */}
 
+            {/* <LightScene/> */}
+
+<directionalLight intensity={4} position={[3.15, 0.1, 4.5]}/>
+<spotLight
+                intensity={23}
+                position={[-2.3,1.85,3.7]}
+                distance={8.8}
+                angle={0.85}
+            />
 
 
             <OrbitControls

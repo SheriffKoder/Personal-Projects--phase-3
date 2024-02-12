@@ -7,6 +7,7 @@ import EarthCanvas from "./EarthCanvas";
 import { slideIn } from "@/utils/motion";
 import StarsCanvas from "./StarsCanvas";
 import Cube from "../myModels/index-cube-1";
+import Cube2 from "../myModels/index-earth-2";
 // import dynamic from "next/dynamic";
 // const EarthCanvas = dynamic(()=> import("../../components/Home/EarthCanvas"), {
 //     ssr: false,
@@ -26,7 +27,7 @@ const Contact = () => {
 
        {/* text div */}
        <div className="absolute inset-0 top-[120px]
-       pt-[30vh] pl-10">
+       pt-[30vh] pl-10 z-0">
            <h1 className="text-[3rem]">
                Welcome to my Profile
            </h1>
@@ -37,8 +38,9 @@ const Contact = () => {
        </div>
 
        <div className="flex-1 earth-model">
-           <EarthCanvas/>
+           {/* <EarthCanvas/> */}
            {/* <Cube /> */}
+           <Cube2/>
 
        </div>
 

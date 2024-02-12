@@ -30,7 +30,7 @@ img {
 .earth-model {
   position: relative;
   mix-blend-mode: lighten;
-  z-index: -1;
+  z-index: 1;
 
 }
 
@@ -51,6 +51,7 @@ background: linear-gradient(
   rgba(0, 13, 132, 0.15) 10%, 
   rgba(0, 13, 132, 0.12) 15%, 
    rgba(0, 68, 255, 0.075) 100%);
+   z-index:0;
 
 } 
 
