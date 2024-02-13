@@ -1,19 +1,32 @@
 "use client"
 
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import Page from "../projects/page"
 import Home from "../contact/page"
 import ImageList from "@/components/Scroll/ImageList"
 
+import Link from "next/link"
+import { AnimatePresence } from "framer-motion"
+import { usePathname } from "next/navigation"
 
 const page = () => {
-
-
+   
+  //for the exit animation of the transition effect
+  const path = usePathname().split("/")[1];
+  const [play1, setPlay1] = useState("false");
  
 
   return (
     <div className="p-32 flex flex-col w-full items-center justify-center">
-       <ImageList/>
+     <AnimatePresence mode="wait">
+   
+
+      {/* <ImageList key={play1} setPlay1={setPlay1} play1={play1}/> */}
+      <ImageList/>
+
+      </AnimatePresence>
+       
+
     </div>
   )
 }
