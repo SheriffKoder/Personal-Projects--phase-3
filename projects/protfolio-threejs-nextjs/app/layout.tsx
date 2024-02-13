@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 
 import StarsCanvas from "@/components/Contact/StarsCanvas";
+import SmoothScroll from "@/components/Scroll/SmoothScroll";
 
 
 const inter = Inter({ subsets: ["latin"] });
@@ -22,9 +23,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.className} relative`}>
+
+        <SmoothScroll>
       {/* <StarsCanvas/> */}
         {children}
-        
+        </SmoothScroll>
+
       </body>
     </html>
   );
