@@ -30,6 +30,8 @@ export default function RootLayout({
         {/* <SmoothScroll> */}
       {/* <StarsCanvas/> */}
         <Nav/>
+
+        {/* all children lifted up beneath the nav length */}
         <div className="mt-[-2.5rem]">
         {children}
         </div>

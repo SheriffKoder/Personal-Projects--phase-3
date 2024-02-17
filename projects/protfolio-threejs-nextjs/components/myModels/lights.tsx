@@ -14,12 +14,12 @@ export const LightScene = () => {
 
 
     //get values from the UI
-    const { x, y, z, intensity } = useControls({
-        intensity: {value: 1, min: 0, max: 20},
-        x: {value: 1, min: -5, max: 5},
-        y: {value: 1, min: -5, max: 5},
-        z: {value: 1, min: -5, max: 5},
-    });
+    // const { x, y, z, intensity } = useControls({
+    //     intensity: {value: 1, min: 0, max: 20},
+    //     x: {value: 1, min: -5, max: 5},
+    //     y: {value: 1, min: -5, max: 5},
+    //     z: {value: 1, min: -5, max: 5},
+    // });
 
 
     // 2
@@ -33,8 +33,8 @@ export const LightScene = () => {
    
 
     // 4
-    const pointLightRef = useRef<PointLight>(null!);
-    useHelper(pointLightRef, PointLightHelper, 2, "red");
+    // const pointLightRef = useRef<PointLight>(null!);
+    // useHelper(pointLightRef, PointLightHelper, 2, "red");
    
     // 5
     // const spotLightRef = useRef<SpotLight>(null!);
@@ -52,19 +52,19 @@ export const LightScene = () => {
 
 
     //6
-    // const rectLightRef = useRef<RectAreaLight>(null!);
-    // useHelper(rectLightRef, RectAreaLightHelper, "red");
+    const rectLightRef = useRef<RectAreaLight>(null!);
+    useHelper(rectLightRef, RectAreaLightHelper, "red");
    
-    // const { x, y, z, intensity, width, height, color } = useControls({
-    //     intensity: {value: 1, min: 0, max: 30},
-    //     x: {value: 1, min: 0, max: 5},
-    //     y: {value: 1, min: 0, max: 5},
-    //     z: {value: 1, min: 0, max: 5},
-    //     width: { value: 3, min: 1, max: 10 }, 
-    //     height: { value: 3, min: 1, max: 10 }, 
-    //     color: '#fff',
+    const { x, y, z, intensity, width, height, color } = useControls({
+        intensity: {value: 1, min: 0, max: 30},
+        x: {value: 1, min: -4, max: 5},
+        y: {value: 1, min: -4, max: 5},
+        z: {value: 1, min: -4, max: 5},
+        width: { value: 3, min: -10, max: 10 }, 
+        height: { value: 3, min: -10, max: 10 }, 
+        color: '#fff',
 
-    // });
+    });
 
 
 
@@ -86,8 +86,8 @@ export const LightScene = () => {
 
             {/* 4 */}
             {/* like the directional but less bright */}
-            <pointLight position={[x,y,z]} intensity={intensity} 
-            ref={pointLightRef}/>
+            {/* <pointLight position={[x,y,z]} intensity={intensity} 
+            ref={pointLightRef}/> */}
 
             {/* 5 */}
             {/* spot light*/}
@@ -96,9 +96,9 @@ export const LightScene = () => {
 
             {/* 5 */}
             {/* light from a square shape, like a bright window source */}
-            {/* <rectAreaLight position={[x,y,z]} intensity={intensity}
-            color={color} width={width} height={height} 
-            ref={rectLightRef}/> */}
+            <rectAreaLight position={[x,y,z]} intensity={intensity}
+            color={color} width={width} height={height}
+            ref={rectLightRef}/>
 
             {/* like the a far away sun that lights are parallel */}
             {/* <Plane scale={10} rotation-x={-Math.PI /2} position-y={-2} /> */}

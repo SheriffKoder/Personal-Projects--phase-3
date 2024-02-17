@@ -26,7 +26,8 @@ img {
 
 
 
-.gradient_text_1 {
+
+gr, .gradient_text_1 {
   background: -webkit-linear-gradient(
     
   55deg, 
@@ -376,9 +377,69 @@ background: linear-gradient(
 
 
 
+/* ////////////////////////////////////////////////////////////////////////////// */
+/* ////////////////////////////////////////////////////////////////////////////// */
+
+li.active {
+  /* border-bottom: 2px solid transparent; */
+  position: relative;
+
+}
+
+li.active::after {
+  /* border-image: linear-gradient(to right, #387ca4 , #39d0b7d4); */
+  /* border-image-slice: 1; */
+  position: absolute;
+  content: "";
+  width: 0%;
+  height: 2px;
+  background: linear-gradient(to right, #387ca4 , #39d0b7d4);
+  bottom: 0;
+  left: 0;
+  animation: borderAnimation 0.4s forwards linear;
+  animation-delay: 1s;
+
+}
+
+@keyframes borderAnimation {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+.ambientBackground {
+  @apply bg-[#020811]
+}
+.gradientRoundButton {
+  @apply rounded-[1rem]  bg-gradient-to-r from-[#387ca4] to-[#39d0b7b4]
+}
+
+.gradientGreyButton {
+  @apply bg-[#4747475c] rounded-[1rem]
+}
+
+.mainText_padding_left{
+  @apply pl-[7rem]
+}
+
+.lightHeader {
+  @apply text-xl 
+}
+  
+.gradientBoldHeader {
+  @apply text-6xl font-bold gradient_text_1
+}
+
+.normalHeader {
+  @apply text-2xl font-normal
+} 
 
 
-
+/* ////////////////////////////////////////////////////////////////////////////// */
+/* ////////////////////////////////////////////////////////////////////////////// */
 
 
 .app {
