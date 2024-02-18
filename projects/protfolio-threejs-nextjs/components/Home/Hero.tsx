@@ -29,8 +29,8 @@ const Hero = () => {
           </span> */}
 
           <span className="lightHeader mt-2 text-xl font-extralight">
-            I design and build beautiful and interactive sites<br/>
-            on the web with ReactJS, NodeJS, ThreeJS and more...  
+            I design and build beautiful and interactive websites<br/>
+            with ReactJS, NodeJS, ThreeJS and more...  
           </span>
 
            <span className="mt-6 flex flex-row gap-4">

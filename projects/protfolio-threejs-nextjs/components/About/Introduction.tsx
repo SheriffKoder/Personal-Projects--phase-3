@@ -2,14 +2,14 @@ import React from "react"
 import Image from "next/image"
 const Introduction = () => {
   return (
-    <div className="w-full border border-[#151515] px-[7rem] max-w-[1600px] mx-auto
+    <div className="w-full border border-[#151515] max-w-[1600px] mx-auto px-4
     ">
 
             <h1 className="text-2xl uppercase">
                 About me
             </h1>
 
-            <div className="flex flex-col md:flex-row gap-8">
+            <div className="flex flex-col lg:flex-row gap-8">
                 <div className="flex-1">
 
                     <h1 className="gradientBoldHeader uppercase">
@@ -48,8 +48,8 @@ const Introduction = () => {
                 </div>
 
                 <div className="my-auto mx-auto">
-                    <Image src="/images/avatar.png" height={300} width={300} alt="hi"
-                        className="rounded-full border-4 opacity-90">
+                    <Image src="/images/avatar2.png" height={300} width={300} alt="profile-photo"
+                        className="rounded-full border-4 opacity-90 bg-gradient-to-r from-[#50a3d4] from-30% to-[#39d0b7b4]">
 
                     </Image>
                 </div>

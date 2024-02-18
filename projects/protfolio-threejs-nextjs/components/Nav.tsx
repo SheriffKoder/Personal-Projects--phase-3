@@ -11,7 +11,7 @@ const Nav = () => {
     console.log(path);
 
   return (
-    <nav className="sticky top-0 w-full h-[3rem] bg-[#370a1000]
+    <nav className="sticky top-0 w-full h-[3rem] bg-[#370a1000] z-[10]
     
     ">
 
@@ -39,12 +39,12 @@ const Nav = () => {
                         </Link>
                     </li>
                     <li className={`gradient_text_hover_1 py-4 ${path === "about" ? "active" : null}`}>
-                        <Link href="/">
+                        <Link href="/about">
                             About
                         </Link>
                     </li>
                     <li className={`gradient_text_hover_1 py-4 ${path === "projects" ? "active" : null}`}>
-                        <Link href="/">
+                        <Link href="/projects">
                             Projects
                         </Link>
                     </li>
@@ -52,7 +52,7 @@ const Nav = () => {
                         <Link className="gradientRoundButton py-[0.1rem] px-3
                         focus:opacity-95 hover:opacity-95" 
                         
-                        href="/">
+                        href="/contact">
                             Contact
                         </Link>
                     </li>

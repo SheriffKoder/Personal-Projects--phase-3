@@ -46,7 +46,7 @@ gr, .gradient_text_1 {
 
 
 .gradient_text_hover_1 {
-
+    /* empty */
 }
 
 
@@ -67,6 +67,8 @@ gr, .gradient_text_1 {
   -webkit-text-fill-color: transparent;
 }
 
+
+/* animation for the bar at the top of the page */
 .gradient_nav_animation {
   animation: Animation 20s ease infinite;
   background-size: 200% 200%;
@@ -410,12 +412,158 @@ li.active::after {
   }
 }
 
+/* /////////////////////////////////////////////////////////////////////////////////////////// */
+/* about containers */
+.glass_background {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+
+}
+
+.button_background {
+  background: linear-gradient(to bottom, rgb(46, 46, 46, 0.7) 0%,rgb(24, 24, 24, 0.7) 49%);
+
+}
+
+.openAnimation {
+  animation: openAnimationKeyframe 0.4s forwards linear;
+
+}
+
+@keyframes openAnimationKeyframe {
+  from {
+    height: 70px;
+  }
+  to {
+    height: auto;
+  }
+}
+
+.closeAnimation {
+  animation: closeAnimationKeyframe 0.4s forwards linear;
+
+}
+
+@keyframes closeAnimationKeyframe {
+  from {
+    height: 800px;
+  }
+  to {
+    height: 70px;
+  }
+}
+
+
+.openAnimationBG {
+  opacity: 0.8;
+background: -webkit-linear-gradient(
+    
+  55deg, rgb(8, 107, 164)
+  
+  0%, rgb(30, 198, 167)
+
+  100%
+  );  
+
+  animation: openGradientbackgroundAnim 4s forwards linear;
+  background-size: 100% 100%;
+
+
+}
+
+@keyframes openGradientbackgroundAnim { 
+  0%{background-size:100% 100%;}
+
+  100%{background-size:300% 100%;}
+}
+
+.closeAnimationBG {
+  opacity: 0.8;
+  background: -webkit-linear-gradient(
+      
+    55deg, rgb(8, 107, 164)
+    
+    0%, rgb(30, 198, 167)
+  
+    100%
+    );  
+  
+    animation: closeGradientbackgroundAnim 4s forwards linear;
+    background-size: 100% 100%;
+  
+  
+  }
+  
+  @keyframes closeGradientbackgroundAnim { 
+    0%{background-size:300% 100%;}
+    100%{background-size:100% 100%;}
+  }
+  
+.hoverAnimationBG {
+  opacity: 0;
+background: -webkit-linear-gradient(
+    
+  55deg, rgb(8, 107, 164)
+  
+  0%, rgb(30, 198, 167)
+
+  100%
+  );  
+
+  animation: hoverGradientbackgroundAnim 1s forwards linear;
+
+
+}
+
+@keyframes hoverGradientbackgroundAnim { 
+  0%{opacity: 0}
+  100%{opacity:0.8}
+}
+
+
+.hoverOutAnimationBG {
+  opacity: 0.8;
+background: -webkit-linear-gradient(
+    
+  55deg, rgb(8, 107, 164)
+  
+  0%, rgb(30, 198, 167)
+
+  100%
+  );  
+
+  animation: hoverOutGradientbackgroundAnim 1s forwards linear;
+
+
+}
+
+@keyframes hoverOutGradientbackgroundAnim { 
+  0%{opacity: 0.8}
+  100%{opacity:0}
+}
+
+
+
+
+/* /////////////////////////////////////////////////////////////////////////////////////////// */
+
+
+.gradientBGButton {
+  @apply bg-gradient-to-r from-[#387ca4] to-[#39d0b7b4] opacity-20
+}
+
+
 .ambientBackground {
-  @apply bg-[#020811]
+  @apply bg-[#020812]
 }
 .gradientRoundButton {
   @apply rounded-[1rem]  bg-gradient-to-r from-[#387ca4] to-[#39d0b7b4]
 }
+
 
 .gradientGreyButton {
   @apply bg-[#4747475c] rounded-[1rem]
@@ -430,7 +578,7 @@ li.active::after {
 }
   
 .gradientBoldHeader {
-  @apply text-6xl font-bold gradient_text_1
+  @apply text-4xl lg:text-6xl font-bold gradient_text_1
 }
 
 .normalHeader {
