@@ -84,7 +84,9 @@ gr, .gradient_text_1 {
 }
 
 
-
+.no_wrap {
+  /* word-wrap: ; */
+}
 
 
 
@@ -546,6 +548,12 @@ background: -webkit-linear-gradient(
   100%{opacity:0}
 }
 
+.centered_centered {
+  position: fixed;
+  top: 30%;
+  left: 30%;
+  transform: translate(-50%, -50%);
+}
 
 
 
@@ -574,16 +582,21 @@ background: -webkit-linear-gradient(
 }
 
 .lightHeader {
-  @apply text-xl 
+  @apply lg:text-xl text-lg 
 }
   
 .gradientBoldHeader {
-  @apply text-4xl lg:text-6xl font-bold gradient_text_1
+  @apply text-3xl lg:text-4xl font-bold gradient_text_1
 }
 
 .normalHeader {
   @apply text-2xl font-normal
 } 
+
+
+.blueLink {
+  @apply text-blue-600 cursor-pointer underline
+}
 
 
 /* ////////////////////////////////////////////////////////////////////////////// */

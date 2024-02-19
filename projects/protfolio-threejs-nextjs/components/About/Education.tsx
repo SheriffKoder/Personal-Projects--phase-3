@@ -12,15 +12,19 @@ const Education = () => {
 
 
   return (
-    <div className="w-full border border-[#151515] max-w-[1600px] mx-auto h-auto mt-8 mb-8
+    <div className="w-full border border-[#15151500] max-w-[1600px] mx-auto h-auto mt-8
     ">
 
         <div className={`glass_background rounded-[17px] min-h-[70px] w-full p-1 overflow-hidden
         ${open ? "openAnimation" : "closeAnimation"}`}
         >
             <div className={`button_background rounded-[13px] h-[60px] w-full flex items-center px-[1rem] 
-            relative
-            `}>
+            relative cursor-pointer
+            `}
+            onMouseEnter={()=>(setHover(true))}
+            onMouseLeave={()=>(setHover(false))}
+            onClick={()=>{setOpen((prev)=> !prev)}}
+            >
 
                 <div className={`absolute top-0 left-0 h-full rounded-[13px] w-full 
                 ${open ? "openAnimationBG" : "closeAnimationBG"}
@@ -28,9 +32,7 @@ const Education = () => {
                 ${!hover && !open ? "hoverOutAnimationBG" : ""}
 
                 `}
-                onMouseEnter={()=>(setHover(true))}
-                onMouseLeave={()=>(setHover(false))}
-                onClick={()=>{setOpen((prev)=> !prev)}}
+               
                 />
 
                 <span className="z-[1]">
@@ -42,13 +44,16 @@ const Education = () => {
                 )}
                 </span>
 
-                <span className="text-2xl z-[1]">
-                    Education
+                <span className="text-sm md:text-xl lg:text-2xl z-[1]">
+                    Education (Engineering)
                 </span>
                 
             </div>
 
             <div className="flex flex-col items-center py-8 text-xl gap-4 px-4">
+
+
+                    {/* School */}
                     <span className="text-center max-w-[680px] opacity-90">
                         <h1 className="text-2xl font-semibold gradient_text_1">School</h1>
                         <p>Been to different schools depending on my location.</p>
@@ -63,6 +68,7 @@ const Education = () => {
                     </span>
                     
 
+                    {/* University */}
                     <span className="text-center flex flex-col w-full lg:flex-row">
                        
                         <div className="w-[20%]">
@@ -102,6 +108,8 @@ const Education = () => {
                         <div className="h-2 w-2 bg-white rounded-full"/>
                     </span>
 
+
+                    {/* Embedded Systems */}
                     <span className="text-center max-w-[680px] opacity-90">
                         <h1 className="text-2xl font-semibold gradient_text_1">Post-Graduate Course</h1>
                         <p><b>Enhanced Embedded Systems - EmbeddedFab</b></p>
@@ -115,6 +123,7 @@ const Education = () => {
 
                     </span>
 
+
                     <span className="flex lg:flex-col gap-2 flex-row my-4 lg:my-0">
                         <div className="h-2 w-2 bg-white rounded-full"/>
                         <div className="h-2 w-2 bg-white rounded-full"/>
@@ -122,6 +131,7 @@ const Education = () => {
                     </span>
 
                    
+                   {/* Vodafone */}
                     <span className="text-center flex flex-col lg:flex-row w-full">
                        
                        <div className="w-[20%]">

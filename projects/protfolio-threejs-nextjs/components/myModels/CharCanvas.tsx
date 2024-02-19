@@ -63,7 +63,7 @@ const Experience = () => {
     return (
     <>
      
-        <group position={[0, 0.1, 0]} scale={0.4} rotation={[-0.3,0.1,0]}>
+        <group position={[0.1, 0.1, 0]} scale={0.4} rotation={[-0.3,0.1,0]}>
         
         <group scale={2.7} position={[-0.7,-0.95,1.5]} 
         rotation={[0,-2.1,0]}>

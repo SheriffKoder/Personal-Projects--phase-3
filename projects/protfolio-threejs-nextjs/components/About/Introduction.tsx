@@ -2,7 +2,7 @@ import React from "react"
 import Image from "next/image"
 const Introduction = () => {
   return (
-    <div className="w-full border border-[#151515] max-w-[1600px] mx-auto px-4
+    <div className="w-full border border-[#15151500] max-w-[1600px] mx-auto px-4
     ">
 
             <h1 className="text-2xl uppercase">
@@ -27,9 +27,9 @@ const Introduction = () => {
                         it was an exciting journey because i learnt many new skills and everyday there were <gr>new challenges to face and solve, new people to talk to and meet.</gr>
                         <br/>
                         <br/>
-                        but during 2020, as i had more time to reflect. even though it was going well with me in the <gr>Real-Estate</gr> career, 
-                        i decided that i should start
-                        working in a field that is <u>more relevant</u> to my <gr>talents and personal interests,</gr>
+                        A couple of years ago i had more time to reflect. even though it was going well with me in the <gr>Real-Estate</gr> career, 
+                        i decided that i should find a field to work in
+                        that is <u>more relevant</u> to my <gr>talents and personal interests,</gr>
                         <i> to work on something that it's challenges do actually take me a step further in the development of the skills i would like to master.
                         </i>
                         <br/>
@@ -48,7 +48,7 @@ const Introduction = () => {
                 </div>
 
                 <div className="my-auto mx-auto">
-                    <Image src="/images/avatar2.png" height={300} width={300} alt="profile-photo"
+                    <Image src="/images/avatar2.png" height={300} width={300} alt="profile-photo" priority
                         className="rounded-full border-4 opacity-90 bg-gradient-to-r from-[#50a3d4] from-30% to-[#39d0b7b4]">
 
                     </Image>

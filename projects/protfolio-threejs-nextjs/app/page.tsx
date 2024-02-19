@@ -1,4 +1,5 @@
 import Hero from "@/components/Home/Hero";
+import Tech from "@/components/Home/Tech";
 import TransitionEffect from "@/components/TransitionEffect";
 import Image from "next/image";
 
@@ -7,7 +8,10 @@ export default function Home() {
   return (
       <>
       {/* <TransitionEffect/> */}
-      <Hero/>
+      <div className="w-full ambientBackground">
+        <Hero/>
+        <Tech/>
+      </div>
       </>
 
   );
