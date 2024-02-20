@@ -1,17 +1,55 @@
+"use client"
+
+import { useState } from "react";
+import { useEffect } from "react";
 import Hero from "@/components/Home/Hero";
 import Tech from "@/components/Home/Tech";
 import TransitionEffect from "@/components/TransitionEffect";
 import Image from "next/image";
 
+import Parallax from "@/components/Animations/Parallax";
+import LinkProvider from "@/components/context";
+import Nav2 from "@/components/Nav2";
+
+
 //this is the home page components wrapper
 export default function Home() {
+
+
+  // useEffect( () => {
+
+  //   (
+
+  //     async () => {
+
+  //         const LocomotiveScroll = (await import('locomotive-scroll')).default
+
+  //         const locomotiveScroll = new LocomotiveScroll();
+
+  //     }
+
+  //   )()
+
+  // }, [])
+
+  useEffect(()=> {
+
+  })
+
   return (
       <>
-      {/* <TransitionEffect/> */}
-      <div className="w-full ambientBackground">
-        <Hero/>
-        <Tech/>
-      </div>
+        <div className="w-full ambientBackground">
+        <LinkProvider>
+            <Nav2/>
+            <Hero/>
+
+          <Tech/>
+          </LinkProvider>
+          <div className="w-full max-w-[1600px] h-[90vh] border-2 border-[#ffffffa9] mx-auto
+        flex flex-col items-center justify-center relative">
+
+        </div>
+        </div>
       </>
 
   );

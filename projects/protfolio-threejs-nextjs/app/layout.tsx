@@ -5,6 +5,8 @@ import Nav from "@/components/Nav";
 
 // import StarsCanvas from "@/components/Contact/StarsCanvas";
 // import SmoothScroll from "@/components/Scroll/SmoothScroll";
+import LinkProvider from "@/components/context";
+
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -27,7 +29,7 @@ export default function RootLayout({
      
     <html lang="en" className="">
       <body className={`${inter.className} relative`}>
-        {/* <SmoothScroll> */}
+        
       {/* <StarsCanvas/> */}
         <Nav/>
 
@@ -35,7 +37,6 @@ export default function RootLayout({
         <div className="mt-[-2.5rem]">
         {children}
         </div>
-        {/* </SmoothScroll> */}
 
       </body>
     </html>

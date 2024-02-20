@@ -65,15 +65,15 @@ const Experience = () => {
      
         <group position={[0.1, 0.1, 0]} scale={0.4} rotation={[-0.3,0.1,0]}>
         
-        <group scale={2.7} position={[-0.7,-0.95,1.5]} 
-        rotation={[0,-2.1,0]}>
-            <Laptop2/>
-        </group>
+            <group scale={2.7} position={[-0.7,-0.95,1.5]} 
+            rotation={[0,-2.1,0]}>
+                <Laptop2/>
+            </group>
 
-        <group position={[0.2,-3.2,-0.2]} rotation-y={-0.7} scale={3}>
-        <Avatar/>
-    
-        </group>
+            <group position={[0.2,-3.2,-0.2]} rotation-y={-0.7} scale={3}>
+            <Avatar/>
+        
+            </group>
 
         </group>
     </>

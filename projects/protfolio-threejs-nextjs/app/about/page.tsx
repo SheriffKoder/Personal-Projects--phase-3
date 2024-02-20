@@ -6,11 +6,16 @@ import Learning from '@/components/About/Learning'
 
 import TransitionEffect from '@/components/Animations/TransitionEffect'
 
-import {motion} from "framer-motion";
+import {motion, useInView} from "framer-motion";
 
-import React from 'react'
+import React, {useEffect, useRef, useState} from "react"
+import { SectionWrapper } from "@/hoc";
+
 
 const page = () => {
+
+
+
   return (
 
     <div className="w-full min-h-screen h-auto ambientBackground">
@@ -50,4 +55,4 @@ const page = () => {
   )
 }
 
-export default page
+export default SectionWrapper(page, "about");
