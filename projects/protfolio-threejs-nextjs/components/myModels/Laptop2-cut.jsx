@@ -11,6 +11,7 @@ import React, { useRef, useMemo, useLayoutEffect } from 'react'
 import * as THREE from "three"
 import { MeshReflectorMaterial, useGLTF } from '@react-three/drei'
 import { Camera, MeshBasicMaterial } from 'three'
+import { useTexture } from '@react-three/drei';
 
 
 //function generates rounded corner rectangle
@@ -39,7 +40,9 @@ export function BoxBlendGeometry({ width = 1, height = 1, radius = 0.2, depth = 
 
 
 export function Laptop2_body(props) {
-  const { nodes, materials } = useGLTF('/models/laptop2.glb')
+  const { nodes, materials } = useGLTF('/models/laptop2.glb');
+
+
   return (
     <group {...props} dispose={null}>
       <group position={[0.121, 0.007, 0]}>
@@ -75,12 +78,21 @@ export function Laptop2_body(props) {
 }
 
 export function Laptop2_screen(props) {
-  const { nodes, materials } = useGLTF('/models/laptop2.glb')
+  const { nodes, materials } = useGLTF('/models/laptop2.glb');
+  const texture_1 = useTexture("/images/laptop-wallpaper.png");
+
   return (
     <group {...props} dispose={null}>
       <group position={[0.121, 0.007, 0]}>
         <mesh geometry={nodes.Object_6.geometry} material={materials.MacBookPro}/>
                  {/* <mesh geometry={nodes.Object_8.geometry} material={materials.MacBookPro} /> */}
+
+
+        <mesh rotation-y={-Math.PI /2} position={[-0.01, 0.125, 0]}>
+          <planeGeometry args={[0.342,0.21]}/>
+          <meshBasicMaterial map={texture_1} />
+
+        </mesh>
 
       </group>
       {/* <mesh geometry={nodes.Object_4.geometry} material={materials.MacBookPro} /> */}

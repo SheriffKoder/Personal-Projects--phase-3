@@ -79,13 +79,14 @@ const Tech = () => {
             {/* when the ref is in view, the isInView will be true and trigger the laptop animation */}
 
 
-              <span className="absolute text-4xl font-semibold centered_centered2">
+              {/* <span className="absolute text-4xl font-semibold centered_centered2">
                 Technologies
-              </span>
+              </span> */}
 
-              <LaptopCanvas openLid={isInView} />
+              {/* <LaptopCanvas openLid={isInView} /> */}
 
-              <motion.div className="bg-[#00000073] w-[80%] h-[500px] centered_centered rounded-[17px]"
+              <motion.div className="bg-[#000000] w-[80%] h-[500px] centered_centered rounded-[17px]
+              border"
               // variants={opacity} initial="initial" animate="open"
               style={{
                 transform: !isInView ? "translateY(200px) translateX(-50%)" : "translateY(0px) translateX(-50%)",
@@ -96,6 +97,9 @@ const Tech = () => {
               }}
 
               > 
+
+              </motion.div>
+
                 {/* animate={isInView ? "open" : "closed"} */}
 
 
@@ -121,7 +125,6 @@ const Tech = () => {
                     </div>
                 </Tilt> */}
 
-              </motion.div>
            
 
           </div>

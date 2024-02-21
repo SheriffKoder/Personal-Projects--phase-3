@@ -596,6 +596,10 @@ background: -webkit-linear-gradient(
   @apply text-3xl lg:text-4xl font-bold gradient_text_1
 }
 
+.BoldHeader {
+  @apply text-3xl lg:text-4xl
+}
+
 .normalHeader {
   @apply text-2xl font-normal
 } 

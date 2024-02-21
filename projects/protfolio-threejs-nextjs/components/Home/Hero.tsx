@@ -56,9 +56,13 @@ const Hero = () => {
             <span className="pl-[0.5rem]"> my name is</span>  */}
           </span> 
           
-          <span className="gradientBoldHeader uppercase" >
-            Sheriff Koder
+          <span>
+            {/* <span className="BoldHeader mr-1 uppercase font-light opacity-60">Hi, i'm</span> */}
+            <span className="gradientBoldHeader uppercase" >
+              Sheriff Koder
             </span>
+          
+          </span>
           
           <span className="lightHeader font-thin">A full-stack
             <span className="font-semibold uppercase"> Web developer</span>
