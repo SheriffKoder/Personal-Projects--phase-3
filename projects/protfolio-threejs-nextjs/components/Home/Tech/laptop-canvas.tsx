@@ -108,22 +108,18 @@ const Model = ({openLid}: {openLid: boolean}) => {
         <group rotation={[0,0.025,0.002]}>
 
             <motion.group scale={1} ref={mesh}
-        position={[0, mouse.position_y, mouse.position_z]}
-        rotation={[mouse.rotation_x, mouse.rotation_y, mouse.rotation_z]}>
-             <mesh scale={19}
-            position={[0, -2, 0]}
-            rotation={[0.1, 1.55, 0]}
-            >
+            position={[0, mouse.position_y, mouse.position_z]}
+            rotation={[mouse.rotation_x, mouse.rotation_y, mouse.rotation_z]}>
+             
+                <mesh scale={19}
+                position={[0, -2, 0]}
+                rotation={[0.1, 1.55, 0]}
+                >              
+                    <Laptop2_screen/>
+                </mesh>
 
-
-              
-                <Laptop2_screen/>
-
-
-              
-
-            </mesh>
             </motion.group>
+
 
             <mesh scale={19}
             position={[0, -2, 0]}
@@ -134,6 +130,9 @@ const Model = ({openLid}: {openLid: boolean}) => {
 
 
             </mesh>
+
+
+            
         </group>       
 
 
