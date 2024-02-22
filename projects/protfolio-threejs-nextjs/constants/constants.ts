@@ -1,39 +1,32 @@
 import {
-    mobile,
-    backend,
-    creator,
-    web,
+
     javascript,
     typescript,
     html,
     css,
     reactjs,
-    redux,
     tailwind,
     nodejs,
     mongodb,
     git,
-    figma,
-    docker,
-    meta,
-    starbucks,
-    tesla,
-    shopify,
-    carrent,
-    jobit,
-    tripguide,
     threejs,
+
+    mysql,
+    graphql,
+    sequelize,
+    expressjs,
+
   } from "../public/assets";
 
 
   
-  const technologies = [
+  export const technologies1 = [
     {
-      name: "HTML 5",
+      name: "HTML5",
       icon: html,
     },
     {
-      name: "CSS 3",
+      name: "CSS3",
       icon: css,
     },
     {
@@ -45,52 +38,58 @@ import {
       icon: typescript,
     },
     {
-      name: "React JS",
+      name: "ReactJS",
       icon: reactjs,
     },
     {
-      name: "Redux Toolkit",
-      icon: redux,
-    },
-    {
-      name: "Tailwind CSS",
+      name: "TailwindCSS",
       icon: tailwind,
     },
     {
-      name: "Node JS",
+      name: "ThreeJS",
+      icon: threejs,
+    },
+
+  
+  ];
+  
+  export const technologies2 = [
+  
+    {
+      name: "ExpressJS",
+      icon: expressjs,
+    },
+    {
+      name: "NodeJS",
       icon: nodejs,
     },
     {
       name: "MongoDB",
       icon: mongodb,
     },
+
     {
-      name: "Three JS",
-      icon: threejs,
+      name: "GraphQL",
+      icon: graphql,
     },
+
+  
+  ];
+
+  export const technologies3 = [
     {
       name: "git",
       icon: git,
     },
     {
-      name: "figma",
-      icon: figma,
+      name: "mySQL",
+      icon: mysql,
     },
     {
-      name: "docker",
-      icon: docker,
+      name: "Sequelize",
+      icon: sequelize,
     },
   ];
   
 
-export type xyz = {
-    x: number,
-    y: number,
-    z: number
-}
 
-export type orbitType = {
-    rotation: xyz,
-    scale: number,
-    position: xyz,
-}

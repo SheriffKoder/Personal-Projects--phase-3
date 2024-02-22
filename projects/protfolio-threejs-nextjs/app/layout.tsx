@@ -6,6 +6,7 @@ import Nav from "@/components/Nav";
 // import StarsCanvas from "@/components/Contact/StarsCanvas";
 // import SmoothScroll from "@/components/Scroll/SmoothScroll";
 import LinkProvider from "@/components/context";
+import Footer from "@/components/footer";
 
 
 const inter = Inter({ subsets: ["latin"] });
@@ -34,10 +35,11 @@ export default function RootLayout({
         <Nav/>
 
         {/* all children lifted up beneath the nav length */}
-        <div className="mt-[-2.5rem]">
+        <main className="mt-[-2.5rem] mb-[4rem]">
         {children}
-        </div>
+        </main>
 
+        <Footer/>
       </body>
     </html>
   );

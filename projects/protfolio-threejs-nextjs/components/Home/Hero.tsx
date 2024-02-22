@@ -119,17 +119,19 @@ const Hero = () => {
               </div>
             </a>
         </div> */}
+        {isInView && (
 
-        <div className="absolute bottom-0 w-[99%] flex justify-center items-center"
-        >
-          {/* <div className="border-2 rounded-full w-10 h-10 mb-8"> */}
-            <a href="#tech" className="border-2 border-white rounded-full w-8 h-8 mb-8 z-[1]
-            flex items-center justify-center opacity-50">
-              <CaretDown2 size={40} color="#ffff"/>
-            </a>
+          <div className="absolute bottom-0 w-[99%] flex justify-center items-center"
+          >
+            {/* <div className="border-2 rounded-full w-10 h-10 mb-8"> */}
+              <a href="#tech-comp" className="border-2 border-white rounded-full w-8 h-8 mb-8 z-[1]
+              flex items-center justify-center opacity-50">
+                <CaretDown2 size={40} color="#ffff"/>
+              </a>
 
-          {/* </div> */}
-        </div>
+            {/* </div> */}
+          </div>
+        )}
 
 
 

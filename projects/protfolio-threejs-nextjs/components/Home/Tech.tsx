@@ -23,6 +23,9 @@ import { staggerContainer } from "@/utils/motion";
 import { useContext } from "react"
 import { linkContext } from "../context";
 
+import { technologies1, technologies2, technologies3 } from "@/constants/constants";
+import Image from "next/image";
+
 const Tech = () => {
 
   const container2 = useRef(null);
@@ -51,7 +54,7 @@ const Tech = () => {
   
 
   return (
-       <div className="w-full max-w-[1600px] h-[90vh] border-2 border-[#ffffffa9] mx-auto
+       <div className="w-full max-w-[1600px] h-[90vh] mx-auto
        flex flex-col items-center justify-center relative" id="tech-comp"
        >
 
@@ -75,28 +78,77 @@ const Tech = () => {
           {/* <div className="w-[100px] h-[1px] border border-red-600 relative"/> */}
 
           {/* id for the link in the hero to scroll to */}
-          <div className="h-[50%] lg:h-full w-full" id="tech" ref={laptopRef} >
+          <div className="h-[50%] lg:h-full w-full px-4" id="tech" ref={laptopRef} >
             {/* when the ref is in view, the isInView will be true and trigger the laptop animation */}
 
 
-              {/* <span className="absolute text-4xl font-semibold centered_centered2">
-                Technologies
-              </span> */}
+              <span className="absolute text-4xl font-semibold centered_centered2">
+                Technologies Used
+              </span>
 
-              {/* <LaptopCanvas openLid={isInView} /> */}
+              <LaptopCanvas openLid={isInView} />
 
-              <motion.div className="bg-[#000000] w-[80%] h-[500px] centered_centered rounded-[17px]
-              border"
+              <motion.div className="bg-[#020812e6] 
+              w-full h-full max-w-[1400px]
+              centered_centered rounded-[17px]
+              py-10 flex flex-col gap-[1rem] items-center justify-center
+              "
               // variants={opacity} initial="initial" animate="open"
               style={{
-                transform: !isInView ? "translateY(200px) translateX(-50%)" : "translateY(0px) translateX(-50%)",
+                // transform: !isInView ? "translateY(200px) translateX(-50%)" : "translateY(0px) translateX(-50%)",
                 opacity: isInView ? 1 : 0,
-                transition: "all 2s cubic-bezier(0.17, 0.55, 0.55, 1) 8.5s",
+                transition: "all 1.5s cubic-bezier(0.17, 0.55, 0.55, 1) 8.5s",
                 // transitionDelay: "2.5s",
                 //time-s, delay-s
-              }}
+              }}>
 
-              > 
+                <div>
+                <h3 className="text-center lightHeader mb-2">Primary Skills</h3>
+                  <div className="flex flex-row gap-3 flex-wrap w-full justify-center">
+                    {technologies1.map((tech, index)=> (
+                      <div key={index} className={`px-6 py-2 mt-2 rounded-[5px] border border-[#ffffff21]
+                      flex items-center justify-center gap-3 pl-[1rem] ${tech.name}_bg`}>
+                        <div className="opacity-90">
+                          <Image src={tech.icon} height={30} width={30} alt={tech.name}
+                          style={{objectFit:"contain"}}></Image>
+                        </div>
+                        <h3 className={`opacity-95 ${tech.name}_text`}>{tech.name}</h3>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div>
+                  <div className="flex flex-row gap-3 flex-wrap w-full justify-center">
+                    {technologies2.map((tech, index)=> (
+                      <div key={index} className={`px-6 py-2 mt-2 rounded-[5px] border border-[#ffffff21]
+                      flex items-center justify-center gap-3 pl-[1rem] ${tech.name}_bg`}>
+                        <div className="opacity-90">
+                          <Image src={tech.icon} height={30} width={30} alt={tech.name}
+                          style={{objectFit:"contain"}}></Image>
+                        </div>
+                        <h3 className={`opacity-95 ${tech.name}_text`}>{tech.name}</h3>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                  
+                <div className="mt-[1rem]">
+                  <h3 className="text-center lightHeader mb-2">Secondary Skills</h3>
+                  <div className="flex flex-row gap-3 flex-wrap w-full justify-center">
+                    {technologies3.map((tech, index)=> (
+                      <div key={index} className={`px-6 py-2 mt-2 rounded-[5px] border border-[#ffffff21]
+                      flex items-center justify-center gap-3 pl-[1rem] ${tech.name}_bg`}>
+                        <div className="opacity-90">
+                          <Image src={tech.icon} height={30} width={30} alt={tech.name}
+                          style={{objectFit:"contain"}}></Image>
+                        </div>
+                        <h3 className={`opacity-95 ${tech.name}_text`}>{tech.name}</h3>
+                      </div>
+                    ))}
+                  </div>
+                </div>
 
               </motion.div>
 
