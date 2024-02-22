@@ -29,13 +29,14 @@ export default function RootLayout({
 
      
     <html lang="en" className="">
-      <body className={`${inter.className} relative`}>
+      <body className={`${inter.className} relative overflow-x-hidden`}>
         
       {/* <StarsCanvas/> */}
+      
         <Nav/>
 
         {/* all children lifted up beneath the nav length */}
-        <main className="mt-[-2.5rem] mb-[4rem]">
+        <main className="mt-[-3rem]">
         {children}
         </main>
 

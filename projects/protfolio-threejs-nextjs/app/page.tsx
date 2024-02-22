@@ -10,6 +10,7 @@ import Image from "next/image";
 import Parallax from "@/components/Animations/Parallax";
 import LinkProvider from "@/components/context";
 import Nav2 from "@/components/Nav2";
+import Contact from "@/components/Home/Contact";
 
 
 //this is the home page components wrapper
@@ -38,17 +39,21 @@ export default function Home() {
 
   return (
       <>
-        <div className="w-full ambientBackground">
+        <div className="w-full pb-[10rem] ambientBackground">
         <LinkProvider>
             <Nav2/>
             <Hero/>
 
           <Tech/>
-          </LinkProvider>
-          <div className="w-full max-w-[1600px] h-[90vh] border-2 border-[#ffffffa9] mx-auto
-        flex flex-col items-center justify-center relative">
 
-        </div>
+          <div className="w-full max-w-[1600px] h-[90vh] border-2 border-[#ffffffa9] mx-auto
+          flex flex-col items-center justify-center relative">
+
+          </div>
+
+          <Contact/>
+          </LinkProvider>
+
         </div>
       </>
 

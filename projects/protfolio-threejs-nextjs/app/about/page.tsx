@@ -18,7 +18,7 @@ const page = () => {
 
   return (
 
-    <div className="w-full min-h-screen h-auto ambientBackground">
+    <div className="w-full min-h-screen h-auto ambientBackground pb-[10rem]">
         <TransitionEffect/>
         <div className="lg:pt-[8rem] pt-[2rem] flex flex-col gap-14 px-4 lg:px-[7rem]
         max-w-[1600px] mx-auto">

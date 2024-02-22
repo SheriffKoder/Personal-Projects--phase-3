@@ -45,7 +45,7 @@ const Tech = () => {
   }, [isInView]);
 
   useEffect(()=>{
-    document.getElementById("tech")?.addEventListener("mouseover", ()=> {
+    document.getElementById("tech-comp")?.addEventListener("mouseover", ()=> {
       setActive("tech")
       // console.log(active);
 
@@ -55,7 +55,7 @@ const Tech = () => {
 
   return (
        <div className="w-full max-w-[1600px] h-[90vh] mx-auto
-       flex flex-col items-center justify-center relative" id="tech-comp"
+       flex flex-col items-center justify-center relative" id="tech"
        >
 
         {/* <p>
@@ -78,7 +78,7 @@ const Tech = () => {
           {/* <div className="w-[100px] h-[1px] border border-red-600 relative"/> */}
 
           {/* id for the link in the hero to scroll to */}
-          <div className="h-[50%] lg:h-full w-full px-4" id="tech" ref={laptopRef} >
+          <div className="h-[50%] lg:h-full w-full px-4" id="tech-comp" ref={laptopRef} >
             {/* when the ref is in view, the isInView will be true and trigger the laptop animation */}
 
 

@@ -36,27 +36,27 @@ const Nav = () => {
             {/* list or a menu button */}
             <span className="pr-4">
                 <ul className="flex flex-row gap-12 uppercase text-xs font-semibold">
-                    <li className={`gradient_text_hover_1 py-4 ${path === "" ? "active" : null}
+                    <li className={`py-4 ${path === "" ? "active no_select" : "gradient_text_hover_1"}
                     `}>
                         <Link href="/">
                             Home
                         </Link>
                     </li>
-                    <li className={`gradient_text_hover_1 py-4 ${path === "about" ? "active" : null}
+                    <li className={`py-4 ${path === "about" ? "active no_select" : "gradient_text_hover_1"}
                     `}>
                     
                         <Link href="/about">
                             About
                         </Link>
                     </li>
-                    <li className={`gradient_text_hover_1 py-4 ${path === "projects" ? "active" : null}
+                    <li className={` py-4 ${path === "projects" ? "active no_select" : "gradient_text_hover_1"}
                     `}>
 
                         <Link href="/projects">
                             Projects
                         </Link>
                     </li>
-                    <li className={`py-4 ${path === "contact" ? "active" : null}
+                    <li className={`py-4 ${path === "contact" ? "no_select" : null}
                     `}>
                         <Link className="gradientRoundButton py-[0.1rem] px-3
                         focus:opacity-95 hover:opacity-95" 
