@@ -1,6 +1,9 @@
 import React from "react"
 import Image from "next/image"
 import { Tilt } from "react-tilt"
+
+// things i make sure of
+
 const contents = [
     {
         title: "Multi device support",
@@ -62,27 +65,6 @@ const Extra1 = () => {
                 ))
             }
 
-            {/* tilt card */}
-                {/* <Tilt className="w-[250px]">
-                    <div 
-                    // variants={fadeIn("right", "spring", 0.5, 0.75)}
-                    className="w-full green-pink-gradient p-[1px] rounded-[20px] shadow-card">
-
-                      <div
-                      className="bg-red-800 rounded-[20px] py-5 px-12 min-h-[280px]
-                      flex justify-evenly items-center flex-col"
-                      options={{
-                        max:0,
-                        scale: 0,
-                        speed: 450
-                      }}
-                      >
-                          <img src={icon} alt={title} className="w-16 h-16 object-contain"/>
-                          <h3>hi</h3>
-                      </div>
-
-                    </div>
-                </Tilt> */}
             
         </div>
 

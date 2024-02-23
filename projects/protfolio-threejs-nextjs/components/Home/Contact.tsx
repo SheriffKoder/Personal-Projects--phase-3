@@ -7,11 +7,12 @@ const Contact = () => {
         <h1 className="BoldHeader">What about we have a talk ? </h1>
         <div>
             <Link className="py-[0.1rem] px-4
-            focus:opacity-95 hover:opacity-95 text-1xl lg:text-2xl
+            text-1xl lg:text-2xl
             bg-gradient-to-r from-[#387ca4] to-[#39d0b7b4]
-            rounded-full font-medium text-[#e1e1e1] hover:text-white"                     
+            rounded-full font-medium text-[#ffffff]
+            focus:opacity-90 hover:opacity-90"                     
             href="/contact">
-                Contact me
+                contact me
             </Link>
         </div>
     </div>

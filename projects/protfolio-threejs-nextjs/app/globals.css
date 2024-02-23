@@ -1133,7 +1133,7 @@ background: -webkit-linear-gradient(
 }
 
 .mainText_padding_left{
-  @apply pl-[7rem]
+  @apply px-[7rem]
 }
 
 .lightHeader {

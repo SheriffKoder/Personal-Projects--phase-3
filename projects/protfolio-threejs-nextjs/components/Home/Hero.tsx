@@ -76,14 +76,16 @@ const Hero = () => {
 
            <span className="mt-6 flex flex-row gap-4 items-center">
 
-                <Link href="/" className="lg:px-4 px-3 py-1 lg:py-2 text-xs lg:font-semibold uppercase gradientRoundButton focus:opacity-95 hover:opacity-95">
+                <Link href="/" className="lg:px-4 px-3 py-1
+                 gradientRoundButton focus:opacity-95 hover:opacity-95
+                lg:text-base text-sm">
                     contact
                 </Link>
 
                 <span 
                 className="px-4 py-1 lg:text-base text-sm font-base gradientGreyButton focus:opacity-95 hover:opacity-95">
                     <Link href="/about" className="gradient_text_1 w-full h-full">
-                    check out all info about me <span className="hidden xl:contents">(background, education, career...)</span>
+                    check out all info about me <span className="hidden 2xl:contents">(background, education, career...)</span>
 
                     </Link>
                 </span>

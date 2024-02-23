@@ -14,6 +14,8 @@ import Contact from "@/components/Home/Contact";
 import Preloader from "@/components/Preloader/Preloader";
 import { AnimatePresence } from "framer-motion";
 import Extra1 from "@/components/Home/Extra1";
+import Extra2 from "@/components/Home/Extra2";
+import Extra3 from "@/components/Home/Extra3";
 
 
 //this is the home page components wrapper
@@ -55,24 +57,26 @@ export default function Home() {
 
           {/* allow the exit animation from framer motion */}
           <AnimatePresence mode="wait">
-          {
+          {/* {
             isLoading && <Preloader/>
-          }
+          } */}
           </AnimatePresence>
           
           
           <Nav2/>
 
           <div className="max-w-[1600px]">
-            {/* <Hero/> */}
-          
+            <Hero/>
+            <Extra1/>
+
             <Tech/>
 
             {/* <div className="w-full max-w-[1600px] h-[90vh] border-2 border-[#ffffffa9] mx-auto
             flex flex-col items-center justify-center relative">
 
             </div> */}
-            <Extra1/>
+            <Extra3/>
+            <Extra2/>
 
             <Contact/>
           </div>

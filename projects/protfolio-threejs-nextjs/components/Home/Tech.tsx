@@ -93,7 +93,7 @@ const Tech = () => {
               <motion.div className="bg-[#020812e6] 
               w-full h-full max-w-[1400px]
               centered_centered rounded-[17px]
-              py-10 flex flex-col gap-[1rem] items-center justify-center
+              py-10 flex flex-col gap-[1rem] items-start justify-center mainText_padding_left
               "
               // variants={opacity} initial="initial" animate="open"
               style={{
@@ -104,10 +104,27 @@ const Tech = () => {
                 //time-s, delay-s
               }}>
 
-                
+                <span className="mb-8 flex flex-col gap-3">
+                  <h4 className="gradientBoldHeader mb-2">About my Skills</h4>
+                  <span>
+                    <p>By now i am able to design and build websites with modern front-end frameworks.</p>
+                    <p>and design and build backend routes to connect these websites to a NoSQL database if needed.</p>
+                  </span>
+
+                  <span>
+                    <p>My on-going goal is to get better at building more beautiful, more optimized and more functional websites.</p>
+                  </span>
+
+                  <p className="max-w-[750px]">For every project I may or may not have all the needed tools/skills to do it.
+                    but my greatest asset to complete a project is my desire and ability to learn
+                    what is needed to achieve the end result.
+                  </p>
+                </span>
+
+                <h3 className="lightHeader mb-2">Highly practiced Skills</h3>
                 <div>
-                <h3 className="text-center lightHeader mb-2">Primary Skills</h3>
-                  <div className="flex flex-row gap-3 flex-wrap w-full justify-center">
+                <h3 className="mb-2">Front-End</h3>
+                  <div className="flex flex-row gap-3 flex-wrap w-full justify-start">
                     {technologies1.map((tech, index)=> (
                       <div key={index} className={`px-6 py-2 mt-2 rounded-[5px] border border-[#ffffff21]
                       flex items-center justify-center gap-3 pl-[1rem] ${tech.name}_bg`}>
@@ -122,7 +139,8 @@ const Tech = () => {
                 </div>
 
                 <div>
-                  <div className="flex flex-row gap-3 flex-wrap w-full justify-center">
+                <h3 className="mb-2">Back-End</h3>
+                  <div className="flex flex-row gap-3 flex-wrap w-full justify-start">
                     {technologies2.map((tech, index)=> (
                       <div key={index} className={`px-6 py-2 mt-2 rounded-[5px] border border-[#ffffff21]
                       flex items-center justify-center gap-3 pl-[1rem] ${tech.name}_bg`}>
@@ -136,12 +154,12 @@ const Tech = () => {
                   </div>
                 </div>
 
-                  
-                <div className="mt-[1rem]">
-                  <h3 className="text-center lightHeader mb-2">Secondary Skills</h3>
-                  <div className="flex flex-row gap-3 flex-wrap w-full justify-center">
+
+                <h3 className="lightHeader mt-[1rem]">Lightly practiced Skills</h3>
+                <div className="">
+                  <div className="flex flex-row gap-3 flex-wrap w-full justify-start">
                     {technologies3.map((tech, index)=> (
-                      <div key={index} className={`px-6 py-2 mt-2 rounded-[5px] border border-[#ffffff21]
+                      <div key={index} className={`px-6 py-2 rounded-[5px] border border-[#ffffff21]
                       flex items-center justify-center gap-3 pl-[1rem] ${tech.name}_bg`}>
                         <div className="opacity-90">
                           <Image src={tech.icon} height={30} width={30} alt={tech.name}

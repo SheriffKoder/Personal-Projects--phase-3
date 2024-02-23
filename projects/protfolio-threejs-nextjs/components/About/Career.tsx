@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import Image from 'next/image'
 import CaretDown from '@/public/icons/caret-down'
 import CaretUp from '@/public/icons/caret-up'
@@ -25,7 +25,24 @@ const Career = () => {
         if (container) container.style.display = "none";
     }
 
+ 
 
+
+    const UnitsContainer = useRef(null); 
+    const CbeContainer = useRef(null); 
+
+    //auto open the career section if redirected with an href #id
+    useEffect(() => { 
+
+        let career = window.location.href.toString().split("?career_")[1];
+        console.log(career);
+        setOpen(Boolean(career));   //set to true if there is a link to open the div
+        setTimeout(()=> {
+            if (career === "units") UnitsContainer.current.scrollIntoView({ behavior: "smooth", block: "start", inline: "start" }); 
+            if (career === "cbe") CbeContainer.current.scrollIntoView({ behavior: "smooth", block: "start", inline: "start" });     
+        }, 1000)
+
+    },[]);
 
   return (
     <div className="w-full border border-[#15151500] max-w-[1600px] mx-auto h-auto
@@ -60,7 +77,7 @@ const Career = () => {
                 )}
                 </span>
 
-                <span className="text-sm md:text-xl lg:text-2xl z-[1]">
+                <span className="text-sm md:text-xl lg:text-2xl z-[1]" ref={UnitsContainer}>
                     Previous Career (Real-Estate)
                 </span>
                 
@@ -131,7 +148,7 @@ const Career = () => {
                     </span>
 
 
-                    <span className="flex lg:flex-col gap-2 flex-row my-4">
+                    <span className="flex lg:flex-col gap-2 flex-row my-4" ref={CbeContainer}>
                         <div className="h-2 w-2 bg-white rounded-full"/>
                         <div className="h-2 w-2 bg-white rounded-full"/>
                         <div className="h-2 w-2 bg-white rounded-full"/>
