@@ -88,6 +88,8 @@ const Tech = () => {
 
               <LaptopCanvas openLid={isInView} />
 
+
+              
               <motion.div className="bg-[#020812e6] 
               w-full h-full max-w-[1400px]
               centered_centered rounded-[17px]
@@ -102,6 +104,7 @@ const Tech = () => {
                 //time-s, delay-s
               }}>
 
+                
                 <div>
                 <h3 className="text-center lightHeader mb-2">Primary Skills</h3>
                   <div className="flex flex-row gap-3 flex-wrap w-full justify-center">
@@ -155,27 +158,7 @@ const Tech = () => {
                 {/* animate={isInView ? "open" : "closed"} */}
 
 
-                {/* tilt card */}
-                {/* <Tilt className="w-[250px]">
-                    <div 
-                    // variants={fadeIn("right", "spring", 0.5, 0.75)}
-                    className="w-full green-pink-gradient p-[1px] rounded-[20px] shadow-card">
-
-                      <div
-                      className="bg-red-800 rounded-[20px] py-5 px-12 min-h-[280px]
-                      flex justify-evenly items-center flex-col"
-                      options={{
-                        max:0,
-                        scale: 0,
-                        speed: 450
-                      }}
-                      >
-                          <img src={icon} alt={title} className="w-16 h-16 object-contain"/>
-                          <h3>hi</h3>
-                      </div>
-
-                    </div>
-                </Tilt> */}
+                
 
            
 

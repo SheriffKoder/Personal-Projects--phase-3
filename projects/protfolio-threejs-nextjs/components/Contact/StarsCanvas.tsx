@@ -53,7 +53,7 @@ const StarsCanvas = () => {
   return (
 
     // the stars will fill whatever component it will be rendered on
-    <div className="w-full h-[95%] absolute inset-0 z-[-1]">
+    <div className="absolute inset-0 z-[0]">
       <Canvas
       camera={{
         position: [0,0,1]

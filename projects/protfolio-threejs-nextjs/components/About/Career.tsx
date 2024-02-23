@@ -108,7 +108,7 @@ const Career = () => {
                             <div className="absolute top-[10%] left-[0%] w-full h-full hidden items-center justify-center"
                             id="career-rec-1">
                                 <div className="w-[420px] h-[550px] rounded-[17px] border-2 absolute">
-                                    <Image src={"/images/career-rec-1.jpeg"} fill alt="recommendation letter 1"
+                                    <Image src={"/images/about/career-rec-1.jpeg"} fill alt="recommendation letter 1"
                                     className="rounded-[17px] overflow-hidden"
                                     />
                                     <div className="absolute top-[2%] right-[2%] cursor-pointer"
@@ -121,7 +121,7 @@ const Career = () => {
                         </div>
                     
                         <div className="lg:w-[20%] w-full my-4 order-1 lg:my-0 lg:order-3 flex flex-col">
-                            <Image src="/images/career-logo-1.png" height={100} width={100} alt="Units"
+                            <Image src="/images/about/career-logo-1.png" height={100} width={100} alt="Units"
                             className="mx-auto"/>
 
                             
@@ -178,7 +178,7 @@ const Career = () => {
                             <div className="absolute top-[10%] left-[0%] w-full h-full hidden items-center justify-center"
                             id="career-rec-2">
                                 <div className="w-[420px] h-[550px] rounded-[17px] border-2 absolute">
-                                    <Image src={"/images/career-rec-2.jpeg"} fill alt="recommendation letter 1"
+                                    <Image src={"/images/about/career-rec-2.jpeg"} fill alt="recommendation letter 1"
                                     className="rounded-[17px] overflow-hidden"
                                     />
                                     <div className="absolute top-[2%] right-[2%] cursor-pointer"
@@ -191,7 +191,7 @@ const Career = () => {
                         </div>
                     
                         <div className="lg:w-[20%] w-full my-4 order-1 lg:my-0 lg:order-3 flex flex-col">
-                            <Image src="/images/career-logo-2.jpg" height={125} width={125} alt="Coldwell Banker logo"
+                            <Image src="/images/about/career-logo-2.jpg" height={125} width={125} alt="Coldwell Banker logo"
                             className="mx-auto"/>
 
                             
@@ -242,7 +242,7 @@ const Career = () => {
                         </div>
                     
                         <div className="lg:w-[20%] w-full my-4 order-1 lg:my-0 lg:order-3 flex flex-col">
-                            <Image src="/images/career-logo-3.png" height={125} width={125} alt="Orascom Development logo"
+                            <Image src="/images/about/career-logo-3.png" height={125} width={125} alt="Orascom Development logo"
                             className="mx-auto"/>
 
                             
@@ -294,7 +294,7 @@ const Career = () => {
                        </div>
                    
                        <div className="lg:w-[20%] w-full my-4 order-1 lg:my-0 lg:order-3 flex flex-col">
-                       <Image src="/images/career-logo-4.jpg" height={100} width={100} alt="Manazel logo"
+                       <Image src="/images/about/career-logo-4.jpg" height={100} width={100} alt="Manazel logo"
                             className="rounded-[17px] overflow-hidden mx-auto"/>
                            
 

@@ -79,7 +79,7 @@ export function Laptop2_body(props) {
 
 export function Laptop2_screen(props) {
   const { nodes, materials } = useGLTF('/models/laptop2.glb');
-  const texture_1 = useTexture("/images/laptop-wallpaper.png");
+  const texture_1 = useTexture("/images/tech/laptop-wallpaper.png");
 
   return (
     <group {...props} dispose={null}>

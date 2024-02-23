@@ -7,6 +7,7 @@ import Link from "next/link";
 import { AnimatePresence } from "framer-motion";  //needed for the exist option in transition effect to work
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+import StarsCanvas from "@/components/Contact/StarsCanvas";
 //this is the home page components wrapper
 export default function Home() {
   const path = usePathname().split("/")[1];
@@ -15,7 +16,7 @@ export default function Home() {
   const [play, SetPlay] = useState("false");
 
   return (
-    <div className="h-[calc(100vh-150px)] w-[100vw] relative">
+    <div className="h-[calc(100vh-150px)] w-[100vw] relative z-[0]">
     {/* // <div className="relative z-0"> */}
     
       <TransitionEffect/>
@@ -25,6 +26,7 @@ export default function Home() {
 
       
       <Contact/>
+      <StarsCanvas/>
       {/* </AnimatePresence> */}
 
       {/* // background-color but not over the hero overlay */}

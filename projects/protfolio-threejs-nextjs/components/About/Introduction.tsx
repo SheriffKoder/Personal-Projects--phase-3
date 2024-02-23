@@ -51,7 +51,7 @@ const Introduction = () => {
                 </div>
 
                 <div className="my-auto mx-auto order-1 lg:order-2">
-                    <Image src="/images/avatar2.png" height={300} width={300} alt="profile-photo" priority
+                    <Image src="/images/about/avatar2.png" height={300} width={300} alt="profile-photo" priority
                         className="rounded-full border-4 opacity-90 bg-gradient-to-r from-[#50a3d4] from-30% to-[#39d0b7b4]">
 
                     </Image>

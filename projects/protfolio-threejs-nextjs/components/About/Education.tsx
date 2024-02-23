@@ -91,10 +91,10 @@ const Education = () => {
                         </div>
                     
                         <div className="lg:w-[20%] w-full my-4 order-1 lg:my-0 lg:order-3 flex flex-col">
-                            <Image src="/images/uniLogo1.png" height={300} width={300} alt="MSA University Logo"
+                            <Image src="/images/about/uniLogo1.png" height={300} width={300} alt="MSA University Logo"
                             className="mx-auto"/>
 
-                            <Image src="/images/uniLogo2.jpg" height={150} width={150} alt="Greenwich University Logo"
+                            <Image src="/images/about/uniLogo2.jpg" height={150} width={150} alt="Greenwich University Logo"
                             className="rounded-[17px] overflow-hidden mx-auto"/>
 
                         </div>
@@ -152,7 +152,7 @@ const Education = () => {
                        </div>
                    
                        <div className="lg:w-[20%] w-full my-4 order-1 lg:my-0 lg:order-3 flex flex-row lg:flex-col">
-                            <Image src="/images/vf-logo.png" height={200} width={200} alt="Vodafone Logo"
+                            <Image src="/images/about/vf-logo.png" height={200} width={200} alt="Vodafone Logo"
                             className="opacity-80 mx-auto"/>
                        </div>
 
