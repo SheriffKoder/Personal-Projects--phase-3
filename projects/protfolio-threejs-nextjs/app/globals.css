@@ -1110,7 +1110,44 @@ background: -webkit-linear-gradient(
   transform: translate(-50%, 0%);
 }
 
+/*////////////////////////////////////////////////////////////*/
+/* projects component */
 
+.hero_brush_mask {
+  mask-image: url("/images/projects/brush.png");
+  mask-size: 90%;
+  mask-repeat: no-repeat;
+  position: absolute;
+  mask-position: 65% 55%;
+  overflow: hidden;
+  /* background:  blue;
+  background-blend-mode: "overlay"; */
+  /* top: 15%; */
+  /* right: -2%; */
+  height: 100%;
+  width: 100%;
+
+  opacity: 1;
+  filter: brightness(0.8);
+
+  /* background-position: center; */
+  /* background-repeat: no-repeat; */
+  /* background-size: cover; */
+  /* z-index: 5; */
+}
+
+
+
+@media screen and (min-width: 1000px) {
+  .hero_brush_mask {
+    mask-size: 75%;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    mask-position: 140% 55%;
+
+  }
+}
 
 /* /////////////////////////////////////////////////////////////////////////////////////////// */
 

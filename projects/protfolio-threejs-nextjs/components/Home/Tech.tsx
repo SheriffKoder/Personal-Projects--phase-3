@@ -115,7 +115,7 @@ const Tech = () => {
                     <p>My on-going goal is to get better at building more beautiful, more optimized and more functional websites.</p>
                   </span>
 
-                  <p className="max-w-[750px]">For every project I may or may not have all the needed tools/skills to do it.
+                  <p className="max-w-[750px]">For every project I may or may not have all the needed tools/skills to do it
                     but my greatest asset to complete a project is my desire and ability to learn
                     what is needed to achieve the end result.
                   </p>

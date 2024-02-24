@@ -92,4 +92,6 @@ import {
   ];
   
 
-
+  export const allTechnologies = [
+   ...technologies1, ...technologies2, ...technologies3 
+  ]
