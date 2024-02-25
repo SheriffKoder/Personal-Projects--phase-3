@@ -1149,6 +1149,37 @@ background: -webkit-linear-gradient(
   }
 }
 
+
+:root {
+  --clr-neon: #387ca4;
+  --clr-bg: #6f777c;
+}
+
+.neon_button_selected {
+  border: var(--clr-neon) 0.125em solid;
+  
+  box-shadow: 
+  inset 0 0 0.5em 0 var(--clr-neon), 
+  0 0 1em var(--clr-neon);
+  
+  position: relative;
+  transition: background-color 100ms linear;
+}
+
+.neon_button_notselected {
+  border: var(--clr-bg) 0.125em solid;
+  
+  box-shadow: 
+  inset 0 0 0.25em 0 var(--clr-bg), 
+  0 0 0.5em var(--clr-bg);
+  
+  position: relative;
+  transition: background-color 100ms linear;
+}
+
+
+
+
 /* /////////////////////////////////////////////////////////////////////////////////////////// */
 
 

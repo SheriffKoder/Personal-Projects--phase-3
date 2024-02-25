@@ -62,8 +62,8 @@ const Projects = () => {
       name: "Project name 1",
       description: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit reiciendis aut omnis nobis deserunt a, sed, aliquid laboriosam dicta atque dolor ad voluptates velit saepe dignissimos similique quae. Deleniti, animi.
       Voluptates molestiae officia voluptatem rerum, nostrum accusantium deleniti asperiores officiis omnis quibusdam veniam, porro voluptatum pariatur? Modi quidem obcaecati doloremque doloribus ipsum aperiam animi. Debitis harum dolores ipsum pariatur id!`,
-      image2: "/images/projects/brickwall.jpg", 
-      image1: "/images/projects/pw3.png",
+      image1: "/images/projects/brickwall.jpg", 
+      image2: "/images/projects/pw3.png",
       tech: ["HTML5", "CSS3"],
       link: "https://www.google.com",
     },
@@ -76,8 +76,15 @@ const Projects = () => {
       tech: ["HTML5", "CSS3"],
       link: "https://www.google.com",
     },
-
-
+    {
+      name: "Project name 3",
+      description: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit reiciendis aut omnis nobis deserunt a, sed, aliquid laboriosam dicta atque dolor ad voluptates velit saepe dignissimos similique quae. Deleniti, animi.
+      Voluptates molestiae officia voluptatem rerum, nostrum accusantium deleniti asperiores officiis omnis quibusdam veniam, porro voluptatum pariatur? Modi quidem obcaecati doloremque doloribus ipsum aperiam animi. Debitis harum dolores ipsum pariatur id!`,
+      image1: "/images/projects/brickwall.jpg", 
+      image2: "/images/projects/pw3.png",
+      tech: ["HTML5", "CSS3"],
+      link: "https://www.google.com",
+    }
   ]
 
   // const [Orbit,setOrbit] = useState<orbitType>({
@@ -101,12 +108,10 @@ const Projects = () => {
   //   console.log(Orbit);
   // },[Orbit])
 
-    const initial = projects.length % 2 === 0 ? 0 : 0;
-    const [slideUp, setSlideUp] = useState(initial);
-    const slideIndex = useRef(2);
+    const [slideUp, setSlideUp] = useState(projects.length % 2 === 0 ? 90 : 0);
+    const slideIndex = useRef(0);
     const [index2, setIndex2] = useState(0);
-    const [ lastIndex, setLastIndex ] = useState(3-1);
-    const [ currentProject, setCurrentProject ] = useState((index2+1 === projects.length) ? 0: index2+1);
+
 
     const [orbitControl,setOrbitControl] = useState("");
     const rotateModels = () => {
@@ -115,9 +120,7 @@ const Projects = () => {
     }
 
     // console.log(isInView);
-    const project_box_1 = document.getElementById("project_box_1");
-    const project_box_2 = document.getElementById("project_box_2");
-    const project_box_3 = document.getElementById("project_box_3");
+
 
     useEffect(()=> {
       if (isInView === true) {
@@ -127,12 +130,9 @@ const Projects = () => {
     },[isInView]);
 
     useEffect(()=> {
-      console.log("//////");
-      // console.log("index2 "+ index2);
-      // console.log(slideIndex.current);
-      // console.log("currentProject " + currentProject);
-      console.log("slideIndex "+ slideIndex)
-    }, [slideIndex]);
+      console.log(slideUp);
+      console.log(slideIndex.current);
+    }, [slideUp]);
 
   return (
 
@@ -158,191 +158,70 @@ const Projects = () => {
 
         {/* /////////////////////////////////////////////////////////////////////// */}
         {/* Projects icons */}
-        <div className="w-[15%] flex flex-col items-center justify-center gap-8">
+        <div className="w-[15%] border flex flex-col items-center justify-center gap-8">
           
           <div className="h-[50px] w-full z-[1] flex items-center justify-center" 
-          onClick={()=>{setSlideUp((prev)=>prev+150+32); slideIndex.current=slideIndex.current-1;
-            setLastIndex((prev)=>prev === 0 ? projects.length-1 : prev-1);
-            if (project_box_2?.classList.contains("neon_button_selected")) {
-              // project_box_1?.classList.remove("neon_button_selected");
-              // project_box_1?.classList.add("neon_button_notselected");
-              project_box_2?.classList.remove("neon_button_selected");
-              project_box_2?.classList.add("neon_button_notselected");
-              // project_box_3?.classList.remove("neon_button_selected");
-              // project_box_3?.classList.add("neon_button_notselected");
-            }
-
-
-
-          setTimeout(()=> {
-            setSlideUp(initial); 
-            setIndex2((prev)=>prev === 0 ? projects.length-1 :prev-1)
-
-          }, 150);
-
-          setTimeout(()=> {
-            
-            if (project_box_1?.classList.contains("neon_button_selected")) {
-              project_box_1?.classList.remove("neon_button_selected");
-              project_box_1?.classList.add("neon_button_notselected");
-              // project_box_2?.classList.remove("neon_button_notselected");
-              // project_box_2?.classList.add("neon_button_selected");
-            }
-            
-
-
-            if (project_box_3?.classList.contains("neon_button_selected")) {
-              setCurrentProject((index2 === projects.length) ? 0: index2)
-            } else {
-              setCurrentProject((index2 === projects.length) ? 0: index2)
-            }
-
-            if (!project_box_1?.classList.contains("neon_button_selected") && !project_box_3?.classList.contains("neon_button_selected")) {
-              project_box_2?.classList.remove("neon_button_notselected");
-              project_box_2?.classList.add("neon_button_selected");
-            }
-
-
-          }, 600);
-            
-            }}>
+          onClick={()=>{setSlideUp((prev)=>prev+150+32); slideIndex.current=slideIndex.current-1
+            setIndex2((prev)=>prev === 0 ? projects.length-1 :prev-1)}}>
             {/* { slideIndex.current > 1 && ( */}
             <CaretUp color={"#ffff"} size={"50px"}/>
             {/* ) */}
             {/* } */}
           </div>
           
-          <div className="overflow-y-hidden w-full">
+          <div className="overflow-hidden border border-yellow-300">
             <motion.div className="flex flex-col gap-8 items-center justify-center 
             max-h-[calc((150px*3)+(2rem*2))]
-            
-            " initial={{y:initial}} 
-            animate={{y:slideUp}} transition={{ease: "easeInOut", duration: slideUp === initial ? 0:0.1, delay:0.0}}>
+            border border-red-700
+            " 
+            // initial={{y:projects.length % 2 === 0 ? 90 : 0}} 
+            // animate={slideUp !==0 ? {y:slideUp} :{}} transition={{ease: "easeInOut", duration: 0.75, delay:0}}
+            >
               {/* { projects.length < 3 && ( */}
-
-
-
-              <div className="min-w-[150px] min-h-[150px] neon_button_notselected rounded-[10px]">
-              {projects[index2-1 < 0 ? projects.length-1 : index2-1].name}
-              </div>
+              {/* <div className="min-w-[150px] min-h-[150px] border-2 border-[#387ca4] rounded-[10px]">
+              {index === 0 ? projects[projects.length-1].name : projects[projects.length-1].name}
+              </div> */}
               {/* ) */}
               {/* } */}
 
               {/* {projects.map((project, index)=> (
                 <div className={`min-w-[150px] min-h-[150px] border-2  rounded-[10px]
-                ${index === slideIndex.current ? "border-[#a4385a]" : "border-[#387ca4]" }`}
+                ${index === slideIndex.current-1 ? "border-[#a4385a]" : "border-[#387ca4]" }`}
                 key={index}>
                   {project.name}
                 </div>
               ))} */}
 
-                {/* first div */}
-                <div className={`min-w-[150px] min-h-[150px] neon_button_notselected rounded-[10px]
-                `}
-                id="project_box_1"
-                onMouseEnter={(e)=>{setCurrentProject(index2);
-                project_box_1?.classList.remove("neon_button_notselected");
-                project_box_1?.classList.add("neon_button_selected");
-                project_box_2?.classList.remove("neon_button_selected");
-                project_box_2?.classList.add("neon_button_notselected");
-                project_box_3?.classList.remove("neon_button_selected");
-                project_box_3?.classList.add("neon_button_notselected");
-              
-              }}
-                // onMouseLeave={()=>{setCurrentProject((index2+1 === projects.length) ? 0: index2+1)}}
-                >
+              <div className={`min-w-[150px] min-h-[150px] border-2  rounded-[10px]
+                ${index === slideIndex.current-1 ? "border-[#a4385a]" : "border-[#387ca4]" }`}
+                key={index}>
                   {projects[index2].name}
                 </div>
 
-                {/* main second div */}
-                <div className={`min-w-[150px] min-h-[150px]   rounded-[10px]
-                neon_button_selected }`}
-                id="project_box_2"
-                onMouseEnter={()=>{
-                  setCurrentProject((index2+1 === projects.length) ? 0: index2+1)
-                  project_box_1?.classList.add("neon_button_notselected");
-                  project_box_1?.classList.remove("neon_button_selected");
-                  project_box_2?.classList.add("neon_button_selected");
-                  project_box_2?.classList.remove("neon_button_notselected");
-                  project_box_3?.classList.remove("neon_button_selected");
-                  project_box_3?.classList.add("neon_button_notselected");
-                }}
-                >
-                  {/* (index2+1 === projects.length) ? 0: index2+1 */}
+                <div className={`min-w-[150px] min-h-[150px] border-2  rounded-[10px]
+                ${index === slideIndex.current-1 ? "border-[#a4385a]" : "border-[#387ca4]" }`}
+                key={index}>
                   {projects[(index2+1 === projects.length) ? 0: index2+1].name}
                 </div>
 
-                {/* third div */}
-                <div className={`min-w-[150px] min-h-[150px] neon_button_notselected  rounded-[10px]
-                `}
-                id="project_box_3"
-                onMouseEnter={()=>{
-                  setCurrentProject((index2+2 === projects.length) ? 0: (index2+1 === projects.length) ? 1 : index2+2)
-                  project_box_1?.classList.add("neon_button_notselected");
-                  project_box_1?.classList.remove("neon_button_selected");
-                  project_box_2?.classList.remove("neon_button_selected");
-                  project_box_2?.classList.add("neon_button_notselected");
-                  project_box_3?.classList.remove("neon_button_notselected");
-                  project_box_3?.classList.add("neon_button_selected");
-                }}
-                
-                  // onMouseLeave={()=>{setCurrentProject((index2+1 === projects.length) ? 0: index2+1)}}
-                >
+                <div className={`min-w-[150px] min-h-[150px] border-2  rounded-[10px]
+                ${index === slideIndex.current-1 ? "border-[#a4385a]" : "border-[#387ca4]" }`}
+                key={index}>
                   {projects[(index2+2 === projects.length) ? 0: (index2+1 === projects.length) ? 1 : index2+2].name}
                 </div>
               
-                {/* below dummy div */}
-                <div className="min-w-[150px] min-h-[150px] neon_button_notselected rounded-[10px]">
-                  {projects[lastIndex].name}
-                </div>
-
-
-              </motion.div>
+              {/* { projects.length < 3 && ( */}
+              {/* <div className="min-w-[150px] min-h-[150px] border-2 border-[#387ca4] rounded-[10px]">
+              {projects[index+2].name}
+              </div> */}
+              {/* ) */}
+              {/* } */}
+            </motion.div>
           </div>
 
           <div className="h-[50px] w-full z-[1] flex items-center justify-center" 
-          onClick={()=>{setSlideUp((prev)=>prev-150-32); slideIndex.current=slideIndex.current+1;
-            setLastIndex((prev)=>prev+1 === projects.length ? 0 : prev+1);
-            if (project_box_2?.classList.contains("neon_button_selected")) {
-              // project_box_1?.classList.remove("neon_button_selected");
-              // project_box_1?.classList.add("neon_button_notselected");
-              project_box_2?.classList.remove("neon_button_selected");
-              project_box_2?.classList.add("neon_button_notselected");
-              // project_box_3?.classList.remove("neon_button_selected");
-              // project_box_3?.classList.add("neon_button_notselected");
-            }
-            setTimeout(()=> {
-              setSlideUp(initial); 
-              setIndex2((prev)=>prev === projects.length-1 ? 0: prev+1)
-              }, 150);
-
-            setTimeout(()=> {
-              if (project_box_3?.classList.contains("neon_button_selected")) {
-                project_box_3?.classList.remove("neon_button_selected");
-                project_box_3?.classList.add("neon_button_notselected");
-                project_box_2?.classList.remove("neon_button_notselected");
-                project_box_2?.classList.add("neon_button_selected");
-              }
-              // project_box_2?.classList.remove("neon_button_notselected");
-              // project_box_2?.classList.add("neon_button_selected");
-
-              if (project_box_1?.classList.contains("neon_button_selected")) {
-                // setCurrentProject((index2-2 < 0 ? projects.length-1 : index2-2))
-              } else {
-                setCurrentProject((index2-1 < 0 ? projects.length-1 : index2-1))
-              }
-
-              if (!project_box_1?.classList.contains("neon_button_selected") && !project_box_3?.classList.contains("neon_button_selected")) {
-                project_box_2?.classList.remove("neon_button_notselected");
-                project_box_2?.classList.add("neon_button_selected");
-              }
-
-            }, 600);
-
-           
-            
-            }}>
-
+          onClick={()=>{setSlideUp((prev)=>prev-150-32); slideIndex.current=slideIndex.current+1
+          setIndex2((prev)=>prev === projects.length-1 ? 0 :prev+1)}}>
             {/* { slideIndex.current < projects.length && ( */}
             <CaretDown  color={"#ffff"} size={"50px"} />
             {/* ) */}
@@ -356,16 +235,16 @@ const Projects = () => {
         {/* /////////////////////////////////////////////////////////////////////// */}
         {/* Project description */}
         <div className="flex-1 border flex flex-col px-[3rem] py-[5%] gap-[1rem] z-[1]">
-            <h4 className="font-semibold text-4xl">{projects[currentProject].name}</h4>
+            <h4 className="font-semibold text-4xl">{projects[index].name}</h4>
             <p>
-              {projects[currentProject].description}
+              {projects[index].description}
             </p>
 
 
             <div>
                 <button 
                 className="px-4 py-0 lg:text-base text-sm font-base gradientGreyButton focus:opacity-95 hover:opacity-95">
-                    <Link href={projects[currentProject].link} className="gradient_text_1 w-full h-full">
+                    <Link href={projects[index].link} className="gradient_text_1 w-full h-full">
                     visit site
                     </Link>
                 </button>
@@ -375,7 +254,7 @@ const Projects = () => {
             <div className="flex flex-row flex-wrap gap-2">
               {
               
-              projects[currentProject].tech.map((tech, index) => {
+              projects[index].tech.map((tech, index) => {
 
                 const technology = allTechnologies.filter((tech2)=> tech2.name === tech);
 
@@ -414,9 +293,7 @@ const Projects = () => {
 
           <div className="relative flex items-center justify-center w-full h-full" ref={container3}>
             {/* <PC/> */}
-            <Computer orbitControl={orbitControl} 
-            texture_1_url={projects[currentProject].image1} 
-            texture_2_url={projects[currentProject].image2}/>
+            {/* <Computer orbitControl={orbitControl} texture_1_url={projects[index].image1} texture_2_url={projects[index].image2}/> */}
             <button className="rounded-[5px] h-8 w-8 bg-black absolute bottom-[5%] right-[48%]
             flex items-center justify-center opacity-80 border-2 border-white"
             onClick={()=>{orbitControl === "default" || orbitControl === "back" ? setOrbitControl("view") : setOrbitControl("back") }}>
