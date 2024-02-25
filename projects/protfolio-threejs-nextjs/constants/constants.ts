@@ -5,6 +5,7 @@ import {
     html,
     css,
     reactjs,
+    nextjs,
     tailwind,
     nodejs,
     mongodb,
@@ -40,6 +41,10 @@ import {
     {
       name: "ReactJS",
       icon: reactjs,
+    },
+    {
+      name: "NextJS",
+      icon: nextjs,
     },
     {
       name: "TailwindCSS",

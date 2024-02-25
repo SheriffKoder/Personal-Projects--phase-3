@@ -50,31 +50,47 @@ const Projects = () => {
   const [index, setIndex] = useState(0);
   const projects = [
     {
-      name: "Project name 0",
+      name: "Amazon (Semi-Clone)",
       description: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit reiciendis aut omnis nobis deserunt a, sed, aliquid laboriosam dicta atque dolor ad voluptates velit saepe dignissimos similique quae. Deleniti, animi.
       Voluptates molestiae officia voluptatem rerum, nostrum accusantium deleniti asperiores officiis omnis quibusdam veniam, porro voluptatum pariatur? Modi quidem obcaecati doloremque doloribus ipsum aperiam animi. Debitis harum dolores ipsum pariatur id!`,
-      image1: "/images/projects/brickwall.jpg", 
-      image2: "/images/projects/pw3.png",
-      tech: ["HTML5", "CSS3"],
+      image1: "/images/projects/assets/amazon/wallpaper1.png",
+      image2: "/images/projects/assets/amazon/wallpaper2.png",
+      tech: ["HTML5", "CSS3", "JavaScript", "TypeScript", "ExpressJS", "NodeJS", "MongoDB"],
       link: "https://www.google.com",
+      icon: "/images/projects/assets/amazon/amazon-icon.jpg"
     },
     {
-      name: "Project name 1",
+      name: "Real-Estate Admin",
       description: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit reiciendis aut omnis nobis deserunt a, sed, aliquid laboriosam dicta atque dolor ad voluptates velit saepe dignissimos similique quae. Deleniti, animi.
       Voluptates molestiae officia voluptatem rerum, nostrum accusantium deleniti asperiores officiis omnis quibusdam veniam, porro voluptatum pariatur? Modi quidem obcaecati doloremque doloribus ipsum aperiam animi. Debitis harum dolores ipsum pariatur id!`,
-      image2: "/images/projects/brickwall.jpg", 
-      image1: "/images/projects/pw3.png",
-      tech: ["HTML5", "CSS3"],
+      image1: "/images/projects/assets/realestateadmin/wallpaper1.png",
+      image2: "/images/projects/assets/realestateadmin/wallpaper2.png",
+      tech: ["HTML5", "CSS3", "JavaScript", "TailwindCSS", "TypeScript", "MongoDB", "NextJS"],
       link: "https://www.google.com",
+      icon: "/images/projects/assets/realestateadmin/re-icon.png"
+
     },
     {
-      name: "Project name 2",
+      name: "Car Maintenance 1 (RESTful)",
       description: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit reiciendis aut omnis nobis deserunt a, sed, aliquid laboriosam dicta atque dolor ad voluptates velit saepe dignissimos similique quae. Deleniti, animi.
       Voluptates molestiae officia voluptatem rerum, nostrum accusantium deleniti asperiores officiis omnis quibusdam veniam, porro voluptatum pariatur? Modi quidem obcaecati doloremque doloribus ipsum aperiam animi. Debitis harum dolores ipsum pariatur id!`,
-      image1: "/images/projects/brickwall.jpg", 
-      image2: "/images/projects/pw3.png",
-      tech: ["HTML5", "CSS3"],
+      image1: "/images/projects/assets/carmaint1/wallpaper1.png",
+      image2: "/images/projects/assets/carmaint1/wallpaper2.png",
+      tech: ["HTML5", "CSS3", "JavaScript", "TailwindCSS", "TypeScript", "MongoDB", "ReactJS"],
       link: "https://www.google.com",
+      icon: "/images/projects/assets/carmaint1/carmaint1-icon.png"
+
+    },
+    {
+      name: "Car Maintenance 2 (RESTful GraphQL)",
+      description: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit reiciendis aut omnis nobis deserunt a, sed, aliquid laboriosam dicta atque dolor ad voluptates velit saepe dignissimos similique quae. Deleniti, animi.
+      Voluptates molestiae officia voluptatem rerum, nostrum accusantium deleniti asperiores officiis omnis quibusdam veniam, porro voluptatum pariatur? Modi quidem obcaecati doloremque doloribus ipsum aperiam animi. Debitis harum dolores ipsum pariatur id!`,
+      image1: "/images/projects/assets/carmaint2/wallpaper1.png",
+      image2: "/images/projects/assets/carmaint2/wallpaper2.png",
+      tech: ["HTML5", "CSS3", "JavaScript", "TailwindCSS", "TypeScript", "MongoDB", "ReactJS", "GraphQL"],
+      link: "https://www.google.com",
+      icon: "/images/projects/assets/carmaint2/carmaint2-icon.png"
+
     },
 
 
@@ -222,8 +238,13 @@ const Projects = () => {
 
 
 
-              <div className="min-w-[150px] min-h-[150px] neon_button_notselected rounded-[10px]">
-              {projects[index2-1 < 0 ? projects.length-1 : index2-1].name}
+              <div className="min-w-[150px] min-h-[150px] neon_button_notselected rounded-[10px]"
+              style={{
+                backgroundImage: `url('${projects[index2-1 < 0 ? projects.length-1 : index2-1].icon}')`,
+                backgroundSize: "contain"
+              }}
+              >
+              {/* {projects[index2-1 < 0 ? projects.length-1 : index2-1].name} */}
               </div>
               {/* ) */}
               {/* } */}
@@ -238,7 +259,7 @@ const Projects = () => {
 
                 {/* first div */}
                 <div className={`min-w-[150px] min-h-[150px] neon_button_notselected rounded-[10px]
-                `}
+                overflow-hidden`}
                 id="project_box_1"
                 onMouseEnter={(e)=>{setCurrentProject(index2);
                 project_box_1?.classList.remove("neon_button_notselected");
@@ -249,15 +270,26 @@ const Projects = () => {
                 project_box_3?.classList.add("neon_button_notselected");
               
               }}
+              style={{
+                backgroundImage: `url('${projects[index2].icon}')`,
+                backgroundSize: "contain"
+              }}
                 // onMouseLeave={()=>{setCurrentProject((index2+1 === projects.length) ? 0: index2+1)}}
                 >
-                  {projects[index2].name}
+                  {/* {projects[index2].name} */}
+                  {/* <Image src={projects[index2].icon} fill alt={projects[index2].name+" icon"}
+                  >
+                  </Image> */}
                 </div>
 
                 {/* main second div */}
-                <div className={`min-w-[150px] min-h-[150px]   rounded-[10px]
-                neon_button_selected }`}
+                <div className={`min-w-[150px] min-h-[150px] rounded-[10px]
+                neon_button_selected overflow-hidden }`}
                 id="project_box_2"
+                style={{
+                  backgroundImage: `url('${projects[(index2+1 === projects.length) ? 0: index2+1].icon}')`,
+                  backgroundSize: "contain"
+                }}
                 onMouseEnter={()=>{
                   setCurrentProject((index2+1 === projects.length) ? 0: index2+1)
                   project_box_1?.classList.add("neon_button_notselected");
@@ -269,7 +301,11 @@ const Projects = () => {
                 }}
                 >
                   {/* (index2+1 === projects.length) ? 0: index2+1 */}
-                  {projects[(index2+1 === projects.length) ? 0: index2+1].name}
+                  {/* {projects[(index2+1 === projects.length) ? 0: index2+1].name} */}
+                  {/* <Image src={projects[(index2+1 === projects.length) ? 0: index2+1].icon} fill alt={projects[(index2+1 === projects.length) ? 0: index2+1].name+" icon"}
+                  className="overflow-hidden"
+                  style={{objectFit: "contain"}}>
+                  </Image> */}
                 </div>
 
                 {/* third div */}
@@ -285,15 +321,23 @@ const Projects = () => {
                   project_box_3?.classList.remove("neon_button_notselected");
                   project_box_3?.classList.add("neon_button_selected");
                 }}
+                style={{
+                  backgroundImage: `url('${projects[(index2+2 === projects.length) ? 0: (index2+1 === projects.length) ? 1 : index2+2].icon}')`,
+                  backgroundSize: "contain"
+                }}
                 
                   // onMouseLeave={()=>{setCurrentProject((index2+1 === projects.length) ? 0: index2+1)}}
                 >
-                  {projects[(index2+2 === projects.length) ? 0: (index2+1 === projects.length) ? 1 : index2+2].name}
+                  {/* {projects[(index2+2 === projects.length) ? 0: (index2+1 === projects.length) ? 1 : index2+2].name} */}
                 </div>
               
                 {/* below dummy div */}
-                <div className="min-w-[150px] min-h-[150px] neon_button_notselected rounded-[10px]">
-                  {projects[lastIndex].name}
+                <div className="min-w-[150px] min-h-[150px] neon_button_notselected rounded-[10px]"
+                style={{
+                  backgroundImage: `url('${projects[lastIndex].icon}')`,
+                  backgroundSize: "contain"
+                }}>
+                  {/* {projects[lastIndex].name} */}
                 </div>
 
 

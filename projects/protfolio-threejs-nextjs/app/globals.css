@@ -781,6 +781,38 @@ body {
 
 }
 
+.NextJS_bg {
+  /* background: -webkit-linear-gradient(#eee, #333); */
+  background: #000000; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right, rgba(129,196,99, 0.09), rgba(129,196,99, 0.06)
+  ); 
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right, rgba(255,255,255, 0.05), rgba(255,255,255, 0.04)
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+  border-color: rgba(255,255,255, 0.13);
+  
+
+}
+
+.NextJS_text {
+  /* background: -webkit-linear-gradient(#eee, #333); */
+  background: #ffff; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right, rgba(107, 201, 134, 0.75), rgba(107, 201, 134, 0.4)
+  ); 
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right, rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 0.4)
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+}
+
 .git_bg {
   /* background: -webkit-linear-gradient(#eee, #333); */
   background: #000000; /* fallback for old browsers */
