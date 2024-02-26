@@ -14,22 +14,22 @@ export const LightScene = () => {
 
 
     //get values from the UI
-    const { x, y, z, intensity } = useControls({
-        intensity: {value: 1, min: 0, max: 20},
-        x: {value: 1, min: -5, max: 5},
-        y: {value: 1, min: -5, max: 5},
-        z: {value: 1, min: -5, max: 5},
-    });
+    // const { x, y, z, intensity } = useControls({
+    //     intensity: {value: 1, min: 0, max: 20},
+    //     x: {value: 1, min: -5, max: 5},
+    //     y: {value: 1, min: -5, max: 5},
+    //     z: {value: 1, min: -5, max: 5},
+    // });
 
 
     // 2
     //basic and matcap are not affected if no lights
-    // const {intensity} = useControls({intensity: {value: 1, min: 0, max: 5}});
+    const {intensity} = useControls({intensity: {value: 1, min: 0, max: 5}});
 
     // 3
-    const directionalLightRef = useRef<DirectionalLight>(null!);
+    // const directionalLightRef = useRef<DirectionalLight>(null!);
     //helper gui options
-    useHelper(directionalLightRef, DirectionalLightHelper, 2, "red");
+    // useHelper(directionalLightRef, DirectionalLightHelper, 2, "red");
    
 
     // 4
@@ -77,12 +77,12 @@ export const LightScene = () => {
             {/* <ambientLight intensity={intensity}/> */}
 
             {/* 2 */}
-            {/* <hemisphereLight args={["#fff", "#333"]} intensity={intensity} /> */}
+            <hemisphereLight args={["#fff", "#ffffff"]} intensity={intensity} />
 
             {/* 3 */}
             {/* directional from above */}
-            <directionalLight position={[x,y,z]} intensity={intensity} 
-            ref={directionalLightRef}/>
+            {/* <directionalLight position={[x,y,z]} intensity={intensity} 
+            ref={directionalLightRef}/> */}
 
             {/* 4 */}
             {/* like the directional but less bright */}
