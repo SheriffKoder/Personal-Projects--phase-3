@@ -1277,12 +1277,19 @@ background: -webkit-linear-gradient(
 
 }  */
 
+.centered_centered3 {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 
 /* /////////////////////////////////////////////////////////////////////////////////////////// */
 
 
 .gradientBGButton {
-  @apply bg-gradient-to-r from-[#387ca4] to-[#39d0b7b4] opacity-20
+  @apply bg-gradient-to-r from-[#387ca4] to-[#39d0b7b4]
 }
 
 
@@ -1312,6 +1319,14 @@ background: -webkit-linear-gradient(
 
 .BoldHeader {
   @apply text-3xl lg:text-4xl
+}
+
+.subMainHeader {
+  @apply text-2xl lg:text-3xl
+}
+
+.MainHeader {
+  @apply text-5xl lg:text-6xl
 }
 
 .normalHeader {

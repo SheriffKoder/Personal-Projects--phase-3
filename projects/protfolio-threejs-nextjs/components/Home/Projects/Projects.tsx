@@ -363,12 +363,19 @@ const Projects = () => {
             </p>
 
 
-            <div>
+            <div className="mt-2 flex flex-row gap-2">
                 <button 
                 className="px-4 py-0 lg:text-base text-sm font-base gradientGreyButton focus:opacity-95 hover:opacity-95">
                     <Link href={projects[currentProject].link} className="gradient_text_1 w-full h-full">
                     visit site
                     </Link>
+                </button>
+
+                <button 
+                className="px-4 py-0 lg:text-base text-sm font-base gradientGreyButton focus:opacity-95 hover:opacity-95">
+                  <Link href={`/projects/${projects[currentProject].id}`} className="gradient_text_1 w-full h-full">
+                  more details
+                  </Link>
                 </button>
             </div>
 
