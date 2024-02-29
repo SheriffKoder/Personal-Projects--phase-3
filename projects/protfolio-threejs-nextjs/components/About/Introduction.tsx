@@ -1,5 +1,8 @@
 import React from "react"
 import Image from "next/image"
+
+import { scaleAnimation } from "@/utils/scaleAnimation"
+
 const Introduction = () => {
   return (
     <div className="w-full border border-[#15151500] max-w-[1600px] mx-auto
@@ -50,9 +53,15 @@ const Introduction = () => {
                     </p>
                 </div>
 
-                <div className="my-auto mx-auto order-1 lg:order-2">
+                <div className="my-auto mx-auto order-1 lg:order-2 
+                rounded-full border-4 opacity-90 
+                bg-gradient-to-r from-[#50a3d4] from-30% to-[#39d0b7b4]
+                overflow-hidden">
                     <Image src="/images/about/avatar2.png" height={300} width={300} alt="profile-photo" priority
-                        className="rounded-full border-4 opacity-90 bg-gradient-to-r from-[#50a3d4] from-30% to-[#39d0b7b4]">
+                        className=""
+                        id={"about_avatar"}
+                        onMouseEnter={()=>{scaleAnimation("about_avatar")}}
+                        onMouseLeave={()=>{scaleAnimation("about_avatar")}}>
 
                     </Image>
                 </div>

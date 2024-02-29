@@ -7,6 +7,10 @@ import Image from "next/image"
 import { clientProjects, featuredProjects, PracticeProjects, DraftProjects } from "@/constants/constants"
 import { allTechnologies } from "@/constants/constants"
 import Link from "next/link"
+import TransitionEffect from "@/components/Animations/TransitionEffect"
+
+import { scaleAnimation } from "@/utils/scaleAnimation"
+
 
 const page = () => {
 
@@ -38,47 +42,21 @@ const page = () => {
   //   console.log(PracticeProjects.length);
   // })
 
-  const showDetails = () => {
-    detailsContainer.current.style.display="block";
-  }
 
-  const HideDetails = () => {
-    // let detailsContainer = document.getElementById("detailsContainer");
-    // detailsContainer && detailsContainer?.style.display="none";
-    detailsContainer.current.style.display="none";
 
-  }
+  
 
-  const detailsContainer = useRef(null);
-  const [detailsProject, setDetailsProject] = useState({});
-
+  // const detailsContainer = useRef(null);
+  // const [detailsProject, setDetailsProject] = useState({});
+  // const [detailsProject, setDetailsProject] = useState(featuredProjects[2]);
+  // const [detailsVisibility, setDetailsVisibility] = useState(true);
   
 
   return (
     <div className="min-h-[100vh] ambientBackground cursor-default relative">
-
-      <div className="w-screen h-screen glass_background centered_centered3 z-[100]
-      flex items-center justify-center" ref={detailsContainer}>
-        
-        <div className="w-[80vw] h-[80vh]  bg-black 
-        flex flex-col p-[1rem] rounded-[17px] relative centered_centered3
-        
-        "
-        style={{display: "block"}}
-        >
-          <div className="w-5 h-5 rounded-[5px] bg-red-700 absolute right-0" onClick={HideDetails}>x</div>
-        
-          <div className="h-[30%] w-full relative rounded-[10px] overflow-hidden">
-            <Image src={detailsProject.image1} fill alt={detailsProject.name+" main image"}
-            style={{objectFit: "contain"}}/>
-          </div>
-          <div className="flex-1">
-            <h1>{detailsProject.name}</h1>
-            <p>{detailsProject.longerDescription}</p>
-          </div>
-        
-        </div>
-      </div>
+      <TransitionEffect/>
+      
+      {/* <ProjectDetails detailsProject={detailsProject} detailsVisibility={detailsVisibility} setDetailsVisibility={setDetailsVisibility}/> */}
 
 
         
@@ -148,16 +126,20 @@ const page = () => {
                               projectCategory.projects.slice(practicePage[index],practicePage[index]+pageLimit).map((project, index) => (
     
                                 <div className="rounded-[17px] border NextJS_bg h-[300px] w-full
-                                flex flex-row p-2 gap-[2rem]" key={project.name}>
+                                flex flex-row p-2 gap-[2rem] fadeIn_animation" key={project.name}>
         
                                   {/* left half */}
                                   <div className="w-[30%] relative rounded-[12px] overflow-hidden">
-                                    <Image src={project?.icon} fill alt={project.name+" website icon"} />
+                                    <Image src={project?.icon} fill alt={project.name+" website icon"} 
+                                    className="image_scale_animation"
+                                    id={project.id}
+                                    onMouseEnter={()=>{scaleAnimation(project.id)}}
+                                    onMouseLeave={()=>{scaleAnimation(project.id)}}/>
                                   </div>
         
         
                                   {/* right half */}
-                                  <div className="flex-1 flex flex-col gap-2 py-2">
+                                  <div className="flex-1 flex flex-col py-2 px-2">
         
                                       {/* name */}
                                       <h3 className="text text-2xl font-semibold">
@@ -195,24 +177,32 @@ const page = () => {
                                       </span>
         
                                       {/* links */}
-                                      <div className="mt-2 flex flex-row gap-2">
+                                      <div className="flex flex-row gap-2 mt-auto">
                                         {
                                         project.link && (
                                           <button 
                                           className="px-4 py-0 lg:text-base text-sm font-base gradientGreyButton focus:opacity-95 hover:opacity-95">
                                             <Link href={project.link} className="gradient_text_1 w-full h-full">
-                                            visit site
+                                            {
+                                            project.type === "site" && ("visit site")
+                                            }
+                                            {
+                                            project.type === "page" && ("view page")
+                                            }
                                             </Link>
                                           </button>
                                         )}
                                         
                                         {
                                         project.id && (
-                                          <button 
-                                          className="px-4 py-0 lg:text-base text-sm font-base gradientGreyButton gradient_text_1 focus:opacity-95 hover:opacity-95"
-                                          onClick={()=>{setDetailsProject(project); showDetails()}}>
-                                            more details
-                                          </button>
+                                          <span className="px-4 py-0 lg:text-base text-sm font-base gradientGreyButton focus:opacity-95 hover:opacity-95">
+                                            <Link
+                                            href={`/projects/${project.id}`}
+                                            className="gradient_text_1"                                            
+                                            >
+                                              more details
+                                            </Link>
+                                          </span>
                                         )}
 
                                       </div>
@@ -289,12 +279,6 @@ const page = () => {
                         )                         
                       })
                     }
-
-
-
-
-
-
 
                 </div>
 

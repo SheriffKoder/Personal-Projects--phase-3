@@ -7,10 +7,13 @@ import { usePathname } from "next/navigation"
 const Footer = () => {
 
     const path = usePathname().split("/")[1];
+    //single project page check
+    const path2 = usePathname().split("/");
 
+    // console.log(path2);
   return (
     <footer className={`w-[100vw] h-[150px] bg-[#00000000] flex items-center justify-center z-[10]
-    ${path === "contact" ? "bg-[#00000000]" : "bg-[#0000]"} `}>
+    ${(path === "contact" || (path2.length > 2 && path2[1] === "projects")) ? "bg-[#00000000]" : "bg-[#0000]"} `}>
         <div className="max-w-[1600px] flex flex-col items-center justify-center">
 
                 <ul className="flex flex-row gap-12 text-xs font-light opacity-90">

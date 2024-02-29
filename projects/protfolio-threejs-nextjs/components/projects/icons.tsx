@@ -267,7 +267,7 @@ export const ButtonCanvas = ({projects}: {
 
         <Experience projects={projects}/>
         {/* <ambientLight intensity={0.2}/> */}
-        <OrbitControls/>
+        {/* <OrbitControls/> */}
         {/* <LightScene/> */}
         {/* <LightScene/> */}
         {/* <spotLight position={[-0.4, -0.3, 1.3]} distance={0} angle={0.88} color={0xc4dcff} intensity={2.5}/>

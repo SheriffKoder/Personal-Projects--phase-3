@@ -117,14 +117,24 @@ import {
       name: "Amazon (Semi-Clone)",
       description: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit reiciendis aut omnis nobis deserunt a, sed, aliquid laboriosam dicta atque dolor ad voluptates velit saepe dignissimos similique quae. Deleniti, animi.
       Voluptates molestiae officia voluptatem rerum, nostrum accusantium deleniti asperiores officiis omnis quibusdam veniam, porro voluptatum pariatur? Modi quidem obcaecati doloremque doloribus ipsum aperiam animi. Debitis harum dolores ipsum pariatur id!`,
-      image1: "/images/projects/brickwall.jpg", 
-      image2: "/images/projects/pw3.png",
+      image1: "/images/projects/assets/amazon/wallpaper1.png",
+      image2: "/images/projects/assets/amazon/wallpaper2.png",
       tech: ["HTML5", "CSS3", "JavaScript", "TypeScript", "ExpressJS", "NodeJS", "MongoDB"],
       link: "https://www.google.com",
       icon: "/images/projects/assets/amazon/amazon-icon.jpg",
       id: "practice-1",
-      longerDescription: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit reiciendis aut omnis nobis deserunt a, sed, aliquid laboriosam dicta atque dolor ad voluptates velit saepe dignissimos similique quae. Deleniti, animi.`,
-
+      longerDescription: 
+      `Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit reiciendis aut 
+      omnis nobis deserunt a, sed, aliquid laboriosam dicta atque dolor ad voluptates velit saepe 
+      dignissimos similique quae. Deleniti, animi.
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit reiciendis aut 
+      omnis nobis deserunt a, sed, aliquid laboriosam dicta atque dolor ad voluptates velit saepe 
+      dignissimos similique quae. Deleniti, animi.
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit reiciendis aut 
+      omnis nobis deserunt a, sed, aliquid laboriosam dicta atque dolor ad voluptates velit saepe 
+      dignissimos similique quae. Deleniti, animi.`,
+      type: "site",
+      
     },
     {
       name: "Real-Estate Admin",
@@ -137,6 +147,7 @@ import {
       icon: "/images/projects/assets/realestateadmin/re-icon.png",
       id: "practice-2",
       longerDescription: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit reiciendis aut omnis nobis deserunt a, sed, aliquid laboriosam dicta atque dolor ad voluptates velit saepe dignissimos similique quae. Deleniti, animi.`,
+      type: "site"
 
     },
     {
@@ -150,7 +161,7 @@ import {
       icon: "/images/projects/assets/carmaint1/carmaint1-icon.png",
       id: "practice-3",
       longerDescription: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit reiciendis aut omnis nobis deserunt a, sed, aliquid laboriosam dicta atque dolor ad voluptates velit saepe dignissimos similique quae. Deleniti, animi.`,
-
+      type: "site"
     },
     {
       name: "Car Maintenance 2 (RESTful GraphQL)",
@@ -163,6 +174,7 @@ import {
       icon: "/images/projects/assets/carmaint2/carmaint2-icon.png",
       id: "practice-4",
       longerDescription: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit reiciendis aut omnis nobis deserunt a, sed, aliquid laboriosam dicta atque dolor ad voluptates velit saepe dignissimos similique quae. Deleniti, animi.`,
+      type: "site"
 
     },
     
@@ -181,4 +193,8 @@ import {
     PracticeProjects[0], PracticeProjects[1], PracticeProjects[2], PracticeProjects[3], 
   ]
 
+
+  export const allProjects = [
+    ...clientProjects, ...PracticeProjects, ...DraftProjects
+  ]
   

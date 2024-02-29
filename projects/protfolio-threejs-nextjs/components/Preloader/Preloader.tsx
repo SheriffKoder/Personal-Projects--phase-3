@@ -8,6 +8,7 @@ const Preloader = () => {
 
   const words = ["Hello", "Bonjour", "Ciao", "Olà", "やあ", "مرحبا", "Guten tag", "Hallo"]
 
+  document.body.style.cursor = "wait";
 
   useEffect(()=> {
     if (index == words.length -1 ) return;
