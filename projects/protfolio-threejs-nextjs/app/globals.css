@@ -109,9 +109,9 @@ gr, .gradient_text_1 {
 /*///////////////////////////////////////////*/
 /* to set some overlay over the earth model */
 .earth-model {
-  position: relative;
+  /* position: relative;
   mix-blend-mode: lighten;
-  z-index: 1;
+  z-index: 1; */
 
 }
 
@@ -132,7 +132,7 @@ background: linear-gradient(
   rgba(0, 13, 132, 0.15) 10%, 
   rgba(0, 13, 132, 0.12) 15%, 
    rgba(0, 68, 255, 0.075) 100%);
-   z-index:0;
+   /* z-index:0; */
 
 } 
 
@@ -1407,21 +1407,22 @@ background: -webkit-linear-gradient(
 /* /////////////////////////////////////////////////////////////////////////////////////////// */
 /* social icons */
 
+/* white text icons need a white background to apply colors on their background */
 .social_icon_box_container_white {
-  background: rgb(255, 255, 255);
+  background: rgba(67, 67, 67, 0.613);
   /* background: rgb(22, 22, 22); */
   /* mix-blend-mode: screen; */
   mix-blend-mode:multiply;
-  height: 1.5rem;
-  width: 1.5rem;
+  height: 5rem;
+  width: 5rem;
 
 }
 .social_icon_box_white {
 
   
   /* padding: 0.3rem; */
-  border-radius: 50%;
-  background-color: rgba(0, 0, 0, 0.65);
+  /* border-radius: 50%; */
+  background-color: rgb(255, 0, 0);
   color: white;
 }
 
@@ -1429,17 +1430,17 @@ background: -webkit-linear-gradient(
 .social_icon_box_container {
   background: rgb(22, 22, 22);
   mix-blend-mode: screen;
-  height: 1.5rem;
-  width: 1.5rem;
+  /* height: 5rem; */
+  /* width: 5rem; */
  
 }
 .social_icon_box {
 
 
 
-  padding: 0.3rem;
-  border-radius: 5px;
-  background-color: rgba(172, 172, 172, 0.65);
+  /* padding: 0.3rem; */
+  /* border-radius: 5px; */
+  /* background-color: rgb(255, 255, 255); */
   color: black;
 }
 
@@ -1507,7 +1508,7 @@ background: -webkit-linear-gradient(
 
 /*///////////////////////////////////////////*/
 /* to set some overlay over the earth model */
-.earth-model {
+/* .earth-model {
   position: relative;
   mix-blend-mode: lighten;
   z-index: 0;
@@ -1518,12 +1519,10 @@ background: -webkit-linear-gradient(
   content: "";
   display: block;
   position: absolute;
-  /* background: #0044ff0f; */
   width: 100%;
   height: 100%;
   bottom: 0;
   left: 0;
-  /* background: rgb(0,0,0); */
 background: linear-gradient(
   0deg, 
   rgba(0, 2, 10, 1) 0%,
@@ -1533,7 +1532,7 @@ background: linear-gradient(
    rgba(0, 68, 255, 0.075) 100%);
    z-index:0;
 
-} 
+}  */
 
 .earth_ambient {
   background-color: rgba(0, 13, 132, 0.09);

@@ -11,7 +11,7 @@ import Parallax from "@/components/Animations/Parallax";
 import LinkProvider from "@/components/context";
 import Nav2 from "@/components/Nav2";
 import Contact from "@/components/Home/Contact";
-import Preloader from "@/components/Preloader/Preloader";
+import Preloader from "@/components/Helpers/Preloader/Preloader";
 import { AnimatePresence } from "framer-motion";
 import Extra1 from "@/components/Home/Extra1";
 import Extra2 from "@/components/Home/Extra2";

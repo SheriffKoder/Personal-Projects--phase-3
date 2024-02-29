@@ -77,27 +77,47 @@ const page = () => {
                     rounded-[10px] pb-3">
 
                         {/* the images */}
-                        <div className="w-full flex flex-row gap-2 order-0">
-                            <div className="">
+                        <div className="w-[97%] flex flex-row gap-2 order-0 min-h-[min(40vw,411px)]">
+                            <div className="p-[min(0.5em,0.75rem)] bg-black border border-[#898989] rounded-[17px] relative flex-1 h-full">
                                 <div className="
-                                relative  overflow-hidden flex flex-col items-center">
-                                    <Image src={currentProject.image1} width={1154} height={719} alt={currentProject.name+" desktop view"}
+                                relative  overflow-hidden flex flex-col items-center w-full h-full">
+                                    <Image src={currentProject.image1} fill alt={currentProject.name+" desktop view"}
                                     style={{objectFit: "fill"}}
-                                    className="
+                                    className="rounded-[8px] overflow-hidden
                                     " priority/>
                                 </div>
-                                <p className="w-full text-center text-xs mt-2 opacity-40 font-light">Desktop view</p>
+                                <div className="w-full absolute bottom-[min(0.5em,0.75rem)]">
+                                    <div className="w-[calc(98.5%-min(0.5em,0.75rem))] text-center text-xs font-light flex
+                                    px-[0.8rem] left-0 h-[1.2rem]
+                                    bg-black py-1">
+                                        <div className="w-full opacity-40">Desktop view</div>
+                                    </div>
+                                </div>
                             </div>
                             { currentProject.image2 && (
-                                <div>
+                                <div className="p-[min(0.3vw,0.125rem)] bg-black border border-[#898989]
+                                rounded-[min(3vw,25px)] 
+                                w-[25%] h-full relative">
                                     <div className="
-                                    relative
+                                    relative w-full h-full
                                     ">
-                                    <Image src={currentProject.image2} width={396/1.0865} height={785/1.0865} alt={currentProject.name+" desktop view"}
+                                    <Image src={currentProject.image2} fill alt={currentProject.name+" desktop view"}
                                     style={{objectFit: "fill"}}
-                                    priority/>
+                                    priority
+                                    className="rounded-[min(3vw,23px)] overflow-hidden"/>
                                     </div>
-                                    <p className="w-full text-center text-xs mt-2 opacity-40 font-light">Mobile view</p>
+                                    
+                                    {/* <div className="w-[50%] mx-auto text-center 
+                                    absolute bottom-[min(1.8vw,1rem)] left-0 h-[1rem] bg-black px-1">
+                                        <div className="w-full opacity-40">Desktop view</div>
+                                    </div> */}
+                                    <div className="w-full h-[1.5rem] absolute text-[2vw]
+                                    bottom-[max(0.2em,0.3rem)] flex flex-row justify-center">
+                                        <div className="bg-black rounded-full px-[max(1em,0.8rem)] flex ml-[-4px]">
+                                            <div className="opacity-40 text-[min(1em,0.75rem)]  font-light my-auto">Mobile view</div>
+                                        </div>
+                                    </div>
+
                                 </div>
                             )}
                         </div>

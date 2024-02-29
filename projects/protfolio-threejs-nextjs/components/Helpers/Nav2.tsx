@@ -7,7 +7,7 @@ import { usePathname } from "next/navigation"
 import { SectionWrapper } from "@/hoc";
 
 import { useContext } from "react"
-import { linkContext } from "./context"
+import { linkContext } from "../context"
 
 
 const Nav2 = () => {

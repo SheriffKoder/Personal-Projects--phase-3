@@ -24,6 +24,8 @@ import {
   } from "../public/assets";
 
 
+  //////////////////////////////////////////////////////////////
+
   export const socials = [
     {
       name: "x",
