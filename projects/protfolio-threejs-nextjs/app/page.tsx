@@ -57,17 +57,17 @@ export default function Home() {
         <LinkProvider>
 
           {/* allow the exit animation from framer motion */}
-          <AnimatePresence mode="wait">
+          {/* <AnimatePresence mode="wait">
           {
             isLoading && <Preloader/>
           }
-          </AnimatePresence>
+          </AnimatePresence> */}
           
           
           <Nav2/>
 
           <div className="max-w-[1600px] flex flex-col mx-auto">
-            {/* <Hero/> */}
+            <Hero/>
             {/* <Extra1/> */}
 
             {/* <Tech/> */}

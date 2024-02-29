@@ -125,7 +125,7 @@ const page = () => {
                             {
                               projectCategory.projects.slice(practicePage[index],practicePage[index]+pageLimit).map((project, index) => (
     
-                                <div className="rounded-[17px] border NextJS_bg h-[300px] w-full
+                                <div className="rounded-[17px] border ProjectCard_bg h-[300px] w-full
                                 flex flex-row p-2 gap-[2rem] fadeIn_animation" key={project.name}>
         
                                   {/* left half */}

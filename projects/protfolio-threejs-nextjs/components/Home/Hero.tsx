@@ -123,10 +123,10 @@ const Hero = () => {
         </div> */}
         {isInView && (
 
-          <div className="absolute bottom-0 w-[99%] flex justify-center items-center"
+          <div className="absolute bottom-0 w-[99%] flex justify-center items-center mb-8"
           >
             {/* <div className="border-2 rounded-full w-10 h-10 mb-8"> */}
-              <a href="#tech-comp" className="border-2 border-white rounded-full w-8 h-8 mb-8 z-[1]
+              <a href="#tech-comp" className="border-2 border-white rounded-full w-8 h-8  z-[1]
               flex items-center justify-center opacity-50">
                 <CaretDown2 size={40} color="#ffff"/>
               </a>
@@ -134,6 +134,17 @@ const Hero = () => {
             {/* </div> */}
           </div>
         )}
+
+        {/* <div className="absolute bottom-0 left-[2rem]
+        rounded-full bg-[#ffffff0c] mb-8 px-4 w-[300px] overflow-hidden whitespace-nowrap"
+          >
+              <span className=" font-extralight gradient_text_1 w-[30%] mr-2">
+                status: 
+              </span>
+              <span className="overflow-hidden w-[70%] gradient_text_1 font-extralight">
+                <span className="status_animation">fixing and deploying practice projects</span>
+              </span>
+          </div> */}
 
 
 

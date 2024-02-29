@@ -88,6 +88,21 @@ gr, .gradient_text_1 {
   /* word-wrap: ; */
 }
 
+.status_animation {
+  margin-left: 0;
+  animation: text_circulate 20s linear infinite;
+
+}
+
+@keyframes text_circulate {
+  0% {
+    margin-left: 300px;
+  }
+
+  100% {
+    margin-left: -400px;
+  }
+}
 
 
 
@@ -757,7 +772,7 @@ body {
   ); 
   /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(
-    to right, rgba(255,255,255, 0.05), rgba(255,255,255, 0.04)
+    to right, rgba(50,50,50, 0.35), rgba(50,50,50, 0.02)
   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
   border-color: rgba(255,255,255, 0.13);
@@ -785,14 +800,14 @@ body {
   /* background: -webkit-linear-gradient(#eee, #333); */
   background: #000000; /* fallback for old browsers */
   background: -webkit-linear-gradient(
-    to right, rgba(129,196,99, 0.09), rgba(129,196,99, 0.06)
+    to right, rgba(0, 0, 0, 0.03), rgba(255,255,255, 0.03)
   ); 
   /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(
-    to right, rgba(255,255,255, 0.05), rgba(255,255,255, 0.04)
+    to right, rgba(0, 0, 0, 0.03), rgba(255,255,255, 0.03)
   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
-  border-color: rgba(255,255,255, 0.13);
+  border-color: rgba(255,255,255, 0.1);
   
 
 }
@@ -801,11 +816,11 @@ body {
   /* background: -webkit-linear-gradient(#eee, #333); */
   background: #ffff; /* fallback for old browsers */
   background: -webkit-linear-gradient(
-    to right, rgba(107, 201, 134, 0.75), rgba(107, 201, 134, 0.4)
+    to right, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.3)
   ); 
   /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(
-    to right, rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 0.4)
+    to right, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.3)
   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
   -webkit-background-clip: text;
@@ -905,6 +920,40 @@ body {
   -webkit-text-fill-color: transparent;
 
 }
+
+
+.Accessibility_bg {
+  /* background: -webkit-linear-gradient(#eee, #333); */
+  background: #000000; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right, rgba(54,121,189,0.09), rgba(48,161,219,0.02)
+  ); 
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right, rgba(54,121,189,0.09), rgba(48,161,219,0.02)
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+  border-color: rgba(48,161,219,0.2);
+
+}
+
+.Accessibility_text {
+  /* background: -webkit-linear-gradient(#eee, #333); */
+  background: #ffff; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right, rgba(54,121,189,0.75), rgba(48,161,219,0.35)
+  ); 
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right, rgba(54,121,189,0.75), rgba(48,161,219,0.35)
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+}
+
+
 
 
 /* ////////////////////////////////////////////////////////////////////////////// */
@@ -1338,6 +1387,68 @@ background: -webkit-linear-gradient(
    z-index:0;
 
 } 
+
+.ProjectCard_bg {
+  /* background: -webkit-linear-gradient(#eee, #333); */
+  background: #000000; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right, rgba(129,196,99, 0.09), rgba(129,196,99, 0.06)
+  ); 
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right, rgba(255,255,255, 0.05), rgba(255,255,255, 0.04)
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+  border-color: rgba(255,255,255, 0.13);
+  
+
+}
+
+/* /////////////////////////////////////////////////////////////////////////////////////////// */
+/* social icons */
+
+.social_icon_box_container_white {
+  background: rgb(255, 255, 255);
+  /* background: rgb(22, 22, 22); */
+  /* mix-blend-mode: screen; */
+  mix-blend-mode:multiply;
+  height: 1.5rem;
+  width: 1.5rem;
+
+}
+.social_icon_box_white {
+
+  
+  /* padding: 0.3rem; */
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.65);
+  color: white;
+}
+
+
+.social_icon_box_container {
+  background: rgb(22, 22, 22);
+  mix-blend-mode: screen;
+  height: 1.5rem;
+  width: 1.5rem;
+ 
+}
+.social_icon_box {
+
+
+
+  padding: 0.3rem;
+  border-radius: 5px;
+  background-color: rgba(172, 172, 172, 0.65);
+  color: black;
+}
+
+.social_icon_box:hover {
+  background: rgb(127, 127, 127);;
+  text-shadow: 0px 0px 10px rgb(0, 0, 0);
+  transition: background var(--timing1) ease-in-out;
+
+}
 
 
 /* /////////////////////////////////////////////////////////////////////////////////////////// */

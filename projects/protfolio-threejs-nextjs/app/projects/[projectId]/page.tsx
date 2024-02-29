@@ -57,8 +57,8 @@ const page = () => {
             ">
                 {/* navigation current location links that has the property title */}
                 <div className="text-shadow-3 
-                w-full text-xs flex flex-row gap-1 opacity-70 mb-2">
-                    <Link className="font-semibold" href="/projects">Projects</Link>
+                w-full text-xs flex flex-row gap-1 opacity-70 mb-2 font-light">
+                    <Link className="underline" href="/projects">Projects</Link>
                     &#62;
                     <span className="gradient_text_1 capitalize">
                         <span>
@@ -78,7 +78,7 @@ const page = () => {
 
                         {/* the images */}
                         <div className="w-full flex flex-row gap-2 order-0">
-                            <div>
+                            <div className="">
                                 <div className="
                                 relative  overflow-hidden flex flex-col items-center">
                                     <Image src={currentProject.image1} width={1154} height={719} alt={currentProject.name+" desktop view"}

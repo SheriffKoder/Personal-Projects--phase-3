@@ -16,9 +16,26 @@ import {
     graphql,
     sequelize,
     expressjs,
+    acc,
+
+    x,
+    linkedin,
 
   } from "../public/assets";
 
+
+  export const socials = [
+    {
+      name: "x",
+      icon: x,
+      link: "https://www.x.com"
+    },
+    {
+      name: "linkedin",
+      icon: linkedin,
+      link: "https://www.x.com"
+    },
+  ];
 
   
   export const technologies1 = [
@@ -94,6 +111,10 @@ import {
       name: "Sequelize",
       icon: sequelize,
     },
+    {
+      name: "Accessibility",
+      icon: acc,
+    },
   ];
   
 
@@ -119,7 +140,7 @@ import {
       Voluptates molestiae officia voluptatem rerum, nostrum accusantium deleniti asperiores officiis omnis quibusdam veniam, porro voluptatum pariatur? Modi quidem obcaecati doloremque doloribus ipsum aperiam animi. Debitis harum dolores ipsum pariatur id!`,
       image1: "/images/projects/assets/amazon/wallpaper1.png",
       image2: "/images/projects/assets/amazon/wallpaper2.png",
-      tech: ["HTML5", "CSS3", "JavaScript", "TypeScript", "ExpressJS", "NodeJS", "MongoDB"],
+      tech: ["HTML5", "CSS3", "JavaScript", "Accessibility","TypeScript", "ExpressJS", "NodeJS", "MongoDB"],
       link: "https://www.google.com",
       icon: "/images/projects/assets/amazon/amazon-icon.jpg",
       id: "practice-1",
@@ -134,7 +155,7 @@ import {
       omnis nobis deserunt a, sed, aliquid laboriosam dicta atque dolor ad voluptates velit saepe 
       dignissimos similique quae. Deleniti, animi.`,
       type: "site",
-      
+
     },
     {
       name: "Real-Estate Admin",
