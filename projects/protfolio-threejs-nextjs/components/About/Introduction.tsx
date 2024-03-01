@@ -2,16 +2,17 @@ import React from "react"
 import Image from "next/image"
 
 import { scaleAnimation } from "@/utils/scaleAnimation"
+import { goals } from "@/constants/constants"
 
 const Introduction = () => {
   return (
-    <div className="w-full border border-[#15151500] max-w-[1600px] mx-auto
+    <div className="w-full border border-[#15151500] max-w-[2000px] mx-auto
     ">
 
            
 
-            <div className="flex flex-col lg:flex-row gap-8 px-4">
-                <div className="lg:flex-1 order-2 lg:order-1">
+            <div className="flex flex-col lg:flex-row gap-8 px-4 lg:items-start lg:justify-between">
+                <div className="lg:flex-1 order-2 lg:order-1 lg:pl-[5rem]">
 
                     <h1 className="text-2xl uppercase">
                         About me
@@ -21,7 +22,7 @@ const Introduction = () => {
                         Introduction
                     </h1>
 
-                    <p className="mt-4 text-xl">
+                    <p className="mt-4 text-lg">
                         My name is <gr>Sherif Khodeir</gr>, I have graduated from a reputable university in Egypt
                         with a Bachelor degree in <gr>Electrical Engineering and Electronics</gr>,
                         i have always been interested in <gr>technology, computers and arts</gr> .
@@ -53,43 +54,83 @@ const Introduction = () => {
                     </p>
                 </div>
 
-                <div className="my-auto mx-auto order-1 lg:order-2 
-                rounded-full border-4 opacity-90 
-                bg-gradient-to-r from-[#50a3d4] from-30% to-[#39d0b7b4]
-                overflow-hidden">
-                    <Image src="/images/about/avatar2.png" height={300} width={300} alt="profile-photo" priority
-                        className=""
-                        id={"about_avatar"}
-                        onMouseEnter={()=>{scaleAnimation("about_avatar")}}
-                        onMouseLeave={()=>{scaleAnimation("about_avatar")}}>
+                <div className=" mx-auto order-1 lg:order-2 flex flex-col lg:w-[40%]
+                relative mb-[4rem] w-full
+                
+                ">
+                    <div className="inline-block mx-auto
+                    rounded-full border-4 opacity-90
+                    bg-gradient-to-r from-[#50a3d4] from-30% to-[#39d0b7b4]
+                    overflow-hidden 
+                    ">
+                        <Image src="/images/about/avatar2.png" height={300} width={300} alt="profile-photo" priority
+                            className=""
+                            id={"about_avatar"}
+                            onMouseEnter={()=>{scaleAnimation("about_avatar")}}
+                            onMouseLeave={()=>{scaleAnimation("about_avatar")}}>
+                        </Image>
+                    </div>
 
-                    </Image>
+                    <div className="absolute top-[100%] w-full z-[1] ">
+                        
+                        <details className="mt-4 p-[3px] rounded-[9px] mx-auto
+                         max-w-[500px]
+                        text-base glass_background_about">
+                            <summary className="px-4 py-1 rounded-[6px] opacity-95
+                            bg-gradient-to-r from-[#387ca4] to-[#39d0b7b4]">
+                                <span className="font-semibold">current status:</span> {goals[0].title}
+                            </summary>
+                            <ul className="px-4 py-2 mt-2 flex flex-col gap-2">
+                                {
+                                    goals.map((goal, index)=> (
+                                        <li key={goal.title+" "+index}
+                                        className={`flex gap-1 px-1
+                                        ${goal.progress === "Done" && "opacity-60"}
+                                        `}
+                                        >
+                                            <details
+                                            open={goal.progress !== "Done" && true}
+                                            >
+                                                <summary>
+                                                    {/* { goal.progress !== "Done" ? ( <span>&raquo;</span> ) : ( <span>&#10003;</span> ) } */}
+                                                    {goal.title}
+                                                </summary>
+                        
+                                                <ul className="list-disc mb-2">
+                                                    {
+                                                    goal.steps.length > 0 && (
+                                                        goal.steps.map((step, index)=> (
+                                                            <li className={`text-sm ml-8 font-extralight
+                                                            ${step.progress === "Done" && "text-teal-600"}
+                                                            ${step.progress === "Not Yet" && "text-white opacity-90"}
+                                                            ${step.progress === "In Progress" && "text-amber-500"}
+                                                            `}>
+                                                                {step.title+" ["+step.progress+"]"}
+                                                            </li>
+                                                        ))
+                                                    )
+                                                    }
+                                                </ul>
+                                            </details>
+                                        </li>
+                                    ))
+                                }
+
+
+                                <li className="mt-2 w-full h-[1rem] flex flex-row justify-center items-center gap-4">
+                                    <span className="h-2 w-2 rounded-full bg-white"></span>
+                                    <span className="h-2 w-2 rounded-full bg-white"></span>
+                                    <span className="h-2 w-2 rounded-full bg-white"></span>
+                                </li>
+                            </ul>
+
+                        </details>
+                    </div>
                 </div>
                 
         </div>
 
-        <details className="mt-4 bg-red-800 p-[3px] rounded-[9px] 
-        text-base glass_background w-full lg:w-[50%]">
-            <summary className="px-4 py-1 rounded-[9px] 
-            bg-gradient-to-r from-[#387ca4] to-[#39d0b7b4]">
-                My goal list
-            </summary>
-            
-            <ul className="px-4 pb-2 mt-2 flex flex-col gap-2">
 
-                <li className="flex gap-1 px-1"><span>&raquo;</span>Make projects for others</li>
-                <li className="flex gap-1 opacity-60"><span>&#10003;</span> Learn: ThreeJS and modern animations</li>
-                <li className="flex gap-1 opacity-60"><span>&#10003;</span> Practice: convert the (Car Mainenance App)'s API to a GraphQL version </li>
-                <li className="flex gap-1 opacity-60"><span>&#10003;</span> Practice: make a web-app with ReactJS and Mongoose (RESTful API) as a Database (Car Maintenance App)</li>
-                <li className="flex gap-1 opacity-60"><span>&#10003;</span> Practice: make a website using NextJS with a Mongoose Database (Real-Estate Admin website)</li>
-                <li className="flex gap-1 opacity-60"><span>&#10003;</span> Learn: a front-end framework (ReactJS, NextJS)</li>
-                <li className="flex gap-1 opacity-60"><span>&#10003;</span> Practice: make a website and use #1 skills and hookup with a backend for storage (Amazon clone website)</li>
-                <li className="flex gap-1 opacity-60"><span>&#10003;</span> Learn: how to setup a back-end using MongoDB/Mongoose</li>
-                <li className="flex gap-1 opacity-60"><span>&#10003;</span> Learn: HTML, CSS, Javascript #1</li>
-            </ul>
-
-
-        </details>
 
     </div>
   )

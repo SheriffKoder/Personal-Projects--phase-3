@@ -424,7 +424,7 @@ const Projects = () => {
             {/* <PC/> */}
             <Computer orbitControl={orbitControl} 
             texture_1_url={projects[currentProject].image1} 
-            texture_2_url={projects[currentProject].image2}/>
+            texture_2_url={projects[currentProject].imagex}/>
             <button className="rounded-[5px] h-8 w-8 bg-black absolute bottom-[5%] right-[48%]
             flex items-center justify-center opacity-80 border-2 border-white"
             onClick={()=>{orbitControl === "default" || orbitControl === "back" ? setOrbitControl("view") : setOrbitControl("back") }}>

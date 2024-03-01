@@ -20,11 +20,11 @@ const page = () => {
 
     <div className="w-full min-h-screen h-auto ambientBackground pb-[10rem]">
         <TransitionEffect/>
-        <div className="lg:pt-[8rem] pt-[2rem] flex flex-col gap-14 px-4 lg:px-[7rem]
-        max-w-[1600px] mx-auto">
+        <div className="lg:pt-[8rem] pt-[2rem] flex flex-col gap-14 px-4
+        max-w-[2500px] mx-auto">
             
             <Introduction/>
-            <ul className="flex flex-col gap-4 lg:gap-14 min-h-[360px]">
+            <ul className="flex flex-col gap-4 lg:gap-14 min-h-[360px] lg:px-[7rem] max-w-[1600px] mx-auto">
               <motion.li
               initial={{y:200, opacity: 0}}
               whileInView={{y:0, opacity:1, transition: {duration: 0.5, ease: "easeInOut"} }}

@@ -42,12 +42,12 @@ export function OptPhone42(props) {
           {/* <mesh geometry={nodes.Screen_Wallpaper_0001_1.geometry} material={materials['myWallpaper.002']} /> */}
 
           <mesh geometry={nodes.Screen_Wallpaper_0001_1.geometry}>
-          <meshBasicMaterial />
+          <meshBasicMaterial color={"black"}/>
             <Decal
             // debug
-            position={[0,0.5,0]}
+            position={[0.006,0.49,0]}
             rotation={[0,0,0]}
-            scale={[0.5,1,0.1]}
+            scale={[0.443,0.96,0.1]}
             // scale-x={0.5}
             // scale-y={1}
                 

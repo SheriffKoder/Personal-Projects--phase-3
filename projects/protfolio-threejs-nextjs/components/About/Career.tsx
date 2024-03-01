@@ -83,7 +83,7 @@ const Career = () => {
                 
             </div>
 
-            <div className="flex flex-col items-center py-8 text-xl gap-4 px-4">
+            <div className="flex flex-col items-center py-8 text-lg gap-4 px-4">
                     
 
                     {/* Units */}

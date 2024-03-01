@@ -39,6 +39,63 @@ import {
     },
   ];
 
+  export const goals = [
+    {
+      title: "Build and Deploy my portfolio",
+      progress: "In progress",
+      steps: [
+        {title: "make the website responsive", progress: "Not Yet"},
+        {title: "sort the home components", progress: "In Progress"},
+        {title: "Design, build and style all the sites components", progress: "Done"}
+
+      ]
+    },
+    {
+      title: "Learn: ThreeJS and modern animations",
+      progress: "Done",
+      steps: []
+    },
+    {
+      title: "Practice: convert the (Car Mainenance App)'s API to a GraphQL version",
+      progress: "Done",
+      steps: []
+    },
+    {
+      title: "Practice: make a web-app with ReactJS and Mongoose (RESTful API) as a Database (Car Maintenance App)",
+      progress: "Done",
+      steps: []
+    },
+    {
+      title: "Practice: make a website using NextJS with a Mongoose Database (Real-Estate Admin website)",
+      progress: "Done",
+      steps: []
+    },
+    {
+      title: "Learn: a front-end framework (ReactJS, NextJS)",
+      progress: "Done",
+      steps: []
+    },
+    {
+      title: "Practice: make a website and use #1 skills and hookup with a backend for storage (Amazon clone website)",
+      progress: "Done",
+      steps: []
+    },
+    {
+      title: "Learn: how to setup a back-end using MongoDB/Mongoose",
+      progress: "Done",
+      steps: []
+    },
+    {
+      title: "Learn: HTML, CSS, Javascript #1",
+      progress: "Done",
+      steps: []
+    },
+
+
+  ]
+
+
+  //////////////////////////////////////////////////////////////
   
   export const technologies1 = [
     {
@@ -142,6 +199,7 @@ import {
       Voluptates molestiae officia voluptatem rerum, nostrum accusantium deleniti asperiores officiis omnis quibusdam veniam, porro voluptatum pariatur? Modi quidem obcaecati doloremque doloribus ipsum aperiam animi. Debitis harum dolores ipsum pariatur id!`,
       image1: "/images/projects/assets/amazon/wallpaper1.png",
       image2: "/images/projects/assets/amazon/wallpaper2.png",
+      imagex: "/images/projects/assets/amazon/wallpaperx.png",
       tech: ["HTML5", "CSS3", "JavaScript", "Accessibility","TypeScript", "ExpressJS", "NodeJS", "MongoDB"],
       link: "https://www.google.com",
       icon: "/images/projects/assets/amazon/amazon-icon.jpg",
@@ -165,6 +223,7 @@ import {
       Voluptates molestiae officia voluptatem rerum, nostrum accusantium deleniti asperiores officiis omnis quibusdam veniam, porro voluptatum pariatur? Modi quidem obcaecati doloremque doloribus ipsum aperiam animi. Debitis harum dolores ipsum pariatur id!`,
       image1: "/images/projects/assets/realestateadmin/wallpaper1.png",
       image2: "/images/projects/assets/realestateadmin/wallpaper2.png",
+      imagex: "/images/projects/assets/realestateadmin/wallpaperx.png",
       tech: ["HTML5", "CSS3", "JavaScript", "TailwindCSS", "TypeScript", "MongoDB", "NextJS"],
       link: "https://www.google.com",
       icon: "/images/projects/assets/realestateadmin/re-icon.png",
@@ -179,6 +238,7 @@ import {
       Voluptates molestiae officia voluptatem rerum, nostrum accusantium deleniti asperiores officiis omnis quibusdam veniam, porro voluptatum pariatur? Modi quidem obcaecati doloremque doloribus ipsum aperiam animi. Debitis harum dolores ipsum pariatur id!`,
       image1: "/images/projects/assets/carmaint1/wallpaper1.png",
       image2: "/images/projects/assets/carmaint1/wallpaper2.png",
+      imagex: "/images/projects/assets/carmaint1/wallpaperx.png",
       tech: ["HTML5", "CSS3", "JavaScript", "TailwindCSS", "TypeScript", "MongoDB", "ReactJS"],
       link: "https://www.google.com",
       icon: "/images/projects/assets/carmaint1/carmaint1-icon.png",
@@ -192,6 +252,7 @@ import {
       Voluptates molestiae officia voluptatem rerum, nostrum accusantium deleniti asperiores officiis omnis quibusdam veniam, porro voluptatum pariatur? Modi quidem obcaecati doloremque doloribus ipsum aperiam animi. Debitis harum dolores ipsum pariatur id!`,
       image1: "/images/projects/assets/carmaint2/wallpaper1.png",
       image2: "/images/projects/assets/carmaint2/wallpaper2.png",
+      imagex: "/images/projects/assets/carmaint2/wallpaperx.png",
       tech: ["HTML5", "CSS3", "JavaScript", "TailwindCSS", "TypeScript", "MongoDB", "ReactJS", "GraphQL"],
       link: "https://www.google.com",
       icon: "/images/projects/assets/carmaint2/carmaint2-icon.png",

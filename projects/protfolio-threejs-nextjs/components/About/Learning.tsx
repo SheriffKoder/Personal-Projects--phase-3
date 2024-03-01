@@ -67,10 +67,9 @@ const Learning = () => {
                 
             </div>
 
-            <div className="flex flex-col items-center py-8 text-xl gap-4 px-4">
+            <div className="flex flex-col items-center py-8 text-lg gap-4 px-4">
                     
 
-                    {/* Units */}
                     <span className="flex flex-col w-[80%] lg:flex-row">
 
 
@@ -332,8 +331,8 @@ const Learning = () => {
 
 
                             {/* ////////////////////////////////////////////  Conclusion  ///////////////////////////////////////////// */}
-                            <h2 className="gradient_text_1 text-2xl">
-                                As you can see it has been quite a journey, and i am satisfied with the result
+                            <h2 className="gradient_text_1 text-2xl mb-2">
+                                It has been quite a journey, And still better to come
                             </h2>
                             <p>
                                 Now i can use HTML, CSS, Javascript in their basic form

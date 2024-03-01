@@ -9,7 +9,7 @@ import Image from "next/image";
 
 import Parallax from "@/components/Animations/Parallax";
 import LinkProvider from "@/components/context";
-import Nav2 from "@/components/Nav2";
+import Nav2 from "@/components/Helpers/Nav2";
 import Contact from "@/components/Home/Contact";
 import Preloader from "@/components/Helpers/Preloader/Preloader";
 import { AnimatePresence } from "framer-motion";
@@ -67,18 +67,18 @@ export default function Home() {
           <Nav2/>
 
           <div className="max-w-[1600px] flex flex-col mx-auto">
-            <Hero/>
+            {/* <Hero/> */}
             {/* <Extra1/> */}
 
             {/* <Tech/> */}
 
-            {/* <Projects/> */}
+            <Projects/>
 
             {/* <div className="w-full max-w-[1600px] h-[90vh] border-2 border-[#ffffffa9] mx-auto
             flex flex-col items-center justify-center relative">
 
             </div> */}
-            <Extra3/>
+            {/* <Extra3/> */}
             {/* <Extra2/> */}
 
             <Contact/>
