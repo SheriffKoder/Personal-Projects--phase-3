@@ -2,7 +2,7 @@
 import React from 'react'
 
 type CloseSVGProps = {
-  size: number,
+  size: string,
   color1: string,
   color2: string,
 }

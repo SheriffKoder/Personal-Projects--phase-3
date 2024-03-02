@@ -2,7 +2,7 @@
 import React from 'react'
 
 type QouteProps = {
-  size: number,
+  size: string,
   color: string,
 }
 
