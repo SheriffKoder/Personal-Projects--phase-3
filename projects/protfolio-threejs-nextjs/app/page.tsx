@@ -19,6 +19,10 @@ import Extra3 from "@/components/Home/Extra3";
 import Projects from "@/components/Home/Projects/Projects";
 import Git from "@/components/Home/Git";
 
+import dynamic from 'next/dynamic'
+const DynamicComponentWithNoSSR = dynamic(() => import("@/components/Helpers/Preloader/Preloader"), {
+  ssr: false
+})
 
 //this is the home page components wrapper
 export default function Home() {
@@ -37,9 +41,9 @@ export default function Home() {
 
           setTimeout(() => {
             setIsLoading(false);
-            if (typeof document !== 'undefined') {
-            document.body.style.cursor = "default";
-            }
+            // if (document !== undefined) {
+            // document.body.style.cursor = "default";
+            // }
             //if scrolled return to top of page
             if (window !== undefined) {
             window.scrollTo(0,0);
@@ -49,6 +53,7 @@ export default function Home() {
       }
 
     )()
+
 
   }, [])
 
@@ -64,7 +69,8 @@ export default function Home() {
           {/* allow the exit animation from framer motion */}
           <AnimatePresence mode="wait">
           {
-            isLoading && <Preloader/>
+            isLoading && <DynamicComponentWithNoSSR/> 
+            // <Preloader/>
           }
           </AnimatePresence>
           

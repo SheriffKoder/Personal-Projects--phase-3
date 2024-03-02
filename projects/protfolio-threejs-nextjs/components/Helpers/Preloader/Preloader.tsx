@@ -17,6 +17,14 @@ const Preloader = () => {
     }, index == 0 ? 1000: 150)
   }, [index]);
 
+  useEffect(()=> {
+    setTimeout(() => {
+      if (typeof document !== "undefined") {
+      document.body.style.cursor = "default";
+      }
+    }, 2000);
+  }, []);
+
 
 
 
