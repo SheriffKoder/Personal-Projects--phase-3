@@ -28,8 +28,8 @@ const Career = () => {
  
 
 
-    const UnitsContainer = useRef(null); 
-    const CbeContainer = useRef(null); 
+    const UnitsContainer = useRef<HTMLDivElement>(null); 
+    const CbeContainer = useRef<HTMLDivElement>(null); 
 
     //auto open the career section if redirected with an href #id
     useEffect(() => { 
@@ -38,8 +38,11 @@ const Career = () => {
         console.log(career);
         setOpen(Boolean(career));   //set to true if there is a link to open the div
         setTimeout(()=> {
-            if (career === "units") UnitsContainer.current.scrollIntoView({ behavior: "smooth", block: "start", inline: "start" }); 
-            if (career === "cbe") CbeContainer.current.scrollIntoView({ behavior: "smooth", block: "start", inline: "start" });     
+            if (UnitsContainer.current !== null && CbeContainer.current !== null) {
+                if (career === "units") UnitsContainer.current.scrollIntoView({ behavior: "smooth", block: "start", inline: "start" }); 
+                if (career === "cbe") CbeContainer.current.scrollIntoView({ behavior: "smooth", block: "start", inline: "start" });     
+            }
+           
         }, 1000)
 
     },[]);
