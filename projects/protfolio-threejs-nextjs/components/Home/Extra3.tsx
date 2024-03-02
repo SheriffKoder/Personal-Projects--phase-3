@@ -33,7 +33,7 @@ const Extra3 = () => {
     <div className="h-[300px] flex flex-col items-center justify-center my-[5rem]
     gap-8">
         
-        <h1 className="w-full text-center  text-2xl lg:text-3xl font-medium capitalize  ">
+        <h1 className="w-full text-center BoldHeader font-bold capitalize  ">
             Why Choose me</h1>
 
         <div className="w-[80%] flex flex-row gap-8 rounded-[17px]

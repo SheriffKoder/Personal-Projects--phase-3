@@ -30,13 +30,13 @@ img {
 gr, .gradient_text_1 {
   background: -webkit-linear-gradient(
     
-  55deg, 
+  0deg, 
   
-  rgba(83,152,191,255)
+  rgb(58, 142, 191)
   
   0%, 
   
-  rgba(57,208,183,255)
+  rgba(57,208,183,1)
 
   100%
   );  

@@ -54,7 +54,7 @@ export default function Home() {
 
   return (
       <>
-        <div className="w-full pb-[10rem] ambientBackground flex flex-col items-center">
+        <div className="w-full pb-[5rem] ambientBackground flex flex-col items-center">
         <LinkProvider>
 
           {/* allow the exit animation from framer motion */}
@@ -68,22 +68,38 @@ export default function Home() {
           <Nav2/>
 
           <div className="max-w-[1600px] flex flex-col mx-auto">
-            {/* <Hero/> */}
-            {/* <Extra1/> */}
+            <Hero/>
 
-            {/* <Tech/> */}
+            <div className="mb-[5rem]">
+              <Tech/>
+            </div>
+            <Extra1/>
+  
 
-            {/* <Projects/> */}
+            <div className="mt-[15rem]">
+              <Projects/>
+            </div>
 
             {/* <div className="w-full max-w-[1600px] h-[90vh] border-2 border-[#ffffffa9] mx-auto
             flex flex-col items-center justify-center relative">
 
             </div> */}
-            <Extra3/>
-            {/* <Extra2/> */}
-            <Git/>
+            <div className="mt-[15rem]">
+              <Extra3/>
+            </div>
 
-            <Contact/>
+            <div className="mt-[3rem]">
+              <Git/>
+            </div>
+
+            <div className="mt-[7rem]">
+              <Extra2/>
+            </div>
+
+            <div className="mt-[5rem]">
+              <Contact/>
+            </div>
+
           </div>
 
 

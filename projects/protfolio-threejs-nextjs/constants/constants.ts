@@ -20,7 +20,6 @@ import {
 
     x,
     linkedin,
-    github2,
     github
 
   } from "../public/assets";
@@ -46,8 +45,9 @@ import {
       title: "Build and Deploy my portfolio",
       progress: "In progress",
       steps: [
-        {title: "make the website responsive", progress: "Not Yet"},
-        {title: "sort the home components", progress: "In Progress"},
+        {title: "Deploy website", progress: "In Progress"},
+        {title: "make the website responsive, final fixes", progress: "Not Yet"},
+        {title: "sort the home components", progress: "Done"},
         {title: "Design, build and style all the sites components", progress: "Done"}
 
       ]

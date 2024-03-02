@@ -1,6 +1,6 @@
 "use client";
 
-import React, {useEffect, useRef, useState} from "react"
+import React, {ReactElement, ReactHTMLElement, useEffect, useRef, useState} from "react"
 import Image from "next/image";
 import Link from "next/link";
 
@@ -92,6 +92,9 @@ const Projects = () => {
     const project_box_2 = document.getElementById("project_box_2");
     const project_box_3 = document.getElementById("project_box_3");
 
+    const borderColor = "#ffffff0";
+
+
     useEffect(()=> {
       if (isInView === true) {
         setOrbitControl("default");
@@ -109,17 +112,19 @@ const Projects = () => {
 
   return (
 
-    <div className="w-full border h-[75vh] my-[20rem] flex flex-col" >
+    <div className="w-full h-[75vh] flex flex-col" 
+    style={{border: `1px solid ${borderColor}`}}>
 
 
-      <div className="w-full BoldHeader font-semibold text-center">
+      <div className="w-full gradientBoldHeader text-center mb-2">
         <h1>
           Highlighted Projects
         </h1>
       </div>
 
-      <div className="border border-white-100 flex-1 w-[100%]
-      flex flex-col 2xl:flex-row 2xl:relative"> 
+      <div className="flex-1 w-[100%]
+      flex flex-col 2xl:flex-row 2xl:relative"
+      style={{border: `1px solid ${borderColor}`}}> 
        
 
         {/* /////////////////////////////////////////////////////////////////////// */}
@@ -356,7 +361,8 @@ const Projects = () => {
 
         {/* /////////////////////////////////////////////////////////////////////// */}
         {/* Project description */}
-        <div className="flex-1 border flex flex-col px-[3rem] py-[5%] gap-[1rem] z-[1]">
+        <div className="flex-1 flex flex-col px-[3rem] py-[5%] gap-[1rem] z-[1]"
+        style={{border: `1px solid ${borderColor}`}}>
             <h4 className="font-semibold text-4xl">{projects[currentProject].name}</h4>
             <p>
               {projects[currentProject].description}
@@ -410,7 +416,8 @@ const Projects = () => {
 
 
         {/* div2 */}
-        <div className="border border-white-100 2xl:w-[40%] h-[30%] 2xl:h-[100%] my-auto flex items-center justify-center relative overflow-hidden">
+        <div className="2xl:w-[40%] h-[30%] 2xl:h-[100%] my-auto flex items-center justify-center relative overflow-hidden"
+        style={{border: `1px solid ${borderColor}`}}>
 
           {/* <Image src="/assets/brickwall.jpg" alt="Furniture" width={700} height={900}
             className="hero_brush_mask lg:hidden">
@@ -426,8 +433,9 @@ const Projects = () => {
             texture_1_url={projects[currentProject].image1} 
             texture_2_url={projects[currentProject].imagex}/>
             <button className="rounded-[5px] h-8 w-8 bg-black absolute bottom-[5%] right-[48%]
-            flex items-center justify-center opacity-80 border-2 border-white"
-            onClick={()=>{orbitControl === "default" || orbitControl === "back" ? setOrbitControl("view") : setOrbitControl("back") }}>
+            flex items-center justify-center opacity-80 -2"
+            onClick={()=>{orbitControl === "default" || orbitControl === "back" ? setOrbitControl("view") : setOrbitControl("back") }}
+            style={{border: `1px solid ${borderColor}`}}>
               <Image 
               src={orbitControl === "default" || orbitControl === "back" ? "/icons/zoom-in.png" : "/icons/zoom-out.png" }
               height={17} width={17} alt=""
@@ -446,7 +454,8 @@ const Projects = () => {
       <div className="w-full flex items-center justify-center">
         <Link href="/" className="lg:px-4 px-3 py-1
         gradientRoundButton focus:opacity-95 hover:opacity-95
-        lg:text-base text-sm">
+        lg:text-base text-sm font-medium"
+        style={{borderRadius: "100px"}}>
           view all projects
         </Link>
       </div>
