@@ -1,6 +1,6 @@
 
 
-export const scaleAnimation = (projectId) => {
+export const scaleAnimation = (projectId:string) => {
     const image = document.querySelector(`#${projectId}`);
     if (image) {
       if (image.classList.contains("image_scaleIn_animation"))

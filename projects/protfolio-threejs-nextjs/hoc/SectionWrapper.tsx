@@ -1,11 +1,14 @@
 
+import React from "react";
 import {motion} from "framer-motion";
 import { staggerContainer } from "@/utils/motion";
 
 
-
 //use: apply to all components exported with a SectionWrapper Wrap
-const SectionWrapper = (Component, idName) => {
+const SectionWrapper = ({Component, idName}:{
+  Component: React.FC,
+  idName: string,
+}) => {
 
 
   return (
