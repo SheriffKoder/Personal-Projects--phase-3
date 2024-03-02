@@ -37,7 +37,9 @@ export default function Home() {
 
           setTimeout(() => {
             setIsLoading(false);
+            if (typeof document !== 'undefined') {
             document.body.style.cursor = "default";
+            }
             //if scrolled return to top of page
             if (window !== undefined) {
             window.scrollTo(0,0);
