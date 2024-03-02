@@ -23,6 +23,6 @@
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", 
   ".next/types/**/*.ts", "utils/motion.js", 
-  "components/Animations/Parallax.jsx", "components/Contact/StarsCanvas.jsxree.jsx", "components/Contact/StarsCanvas.js", "components/Home/Tech/laptop-canvas.jsx", "components/Home/Tech/anim.jsx", "components/myModels/lights.jsx", "components/myModels/Earth/index-earth-2.jsx"],
+  "components/Animations/Parallax.jsx", "components/Contact/StarsCanvas.jsxree.jsx", "components/Contact/StarsCanvas.js", "components/Home/Tech/laptop-canvas.jsx", "components/Home/Tech/anim.jsx", "components/myModels/lights.jsx", "components/myModels/Earth/index-earth-2.jsx", "hoc/SectionWrapper.jsx", "public/icons/caret-down2.jsx, "public/icons/caret-up.jsx"", , "public/icons/close-svg.jsx, public/icons/caret-down.tsxpublic/icons/caret-down.jsx"],
   "exclude": ["node_modules"]
 }
