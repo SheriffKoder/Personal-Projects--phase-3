@@ -23,27 +23,27 @@ const Introduction = () => {
                     </h1>
 
                     <p className="mt-4 text-lg">
-                        My name is <gr>Sherif Khodeir</gr>, I have graduated from a reputable university in Egypt
-                        with a Bachelor degree in <gr>Electrical Engineering and Electronics</gr>,
-                        i have always been interested in <gr>technology, computers and arts</gr> .
-                        this is why i am passionate about <gr>Web Development</gr> as it combines all of these points
+                        My name is <span className="gr">Sherif Khodeir</span>, I have graduated from a reputable university in Egypt
+                        with a Bachelor degree in <span className="gr">Electrical Engineering and Electronics</span>,
+                        i have always been interested in <span className="gr">technology, computers and arts</span> .
+                        this is why i am passionate about <span className="gr">Web Development</span> as it combines all of these points
                         <br/>
                         <br/>
-                        before i started <gr>Web development</gr>, i worked in the <gr>Real-Estate</gr> field for many years, 
-                        it was an exciting journey because i learnt many new skills and everyday there were <gr>new challenges to face and solve, new people to talk to and meet.</gr>
+                        before i started <span className="gr">Web development</span>, i worked in the <span className="gr">Real-Estate</span> field for many years, 
+                        it was an exciting journey because i learnt many new skills and everyday there were <span className="gr">new challenges to face and solve, new people to talk to and meet.</span>
                         <br/>
                         <br/>
-                        A couple of years ago i had more time to reflect. even though it was going well with me in the <gr>Real-Estate</gr> career, 
+                        A couple of years ago i had more time to reflect. even though it was going well with me in the <span className="gr">Real-Estate</span> career, 
                         i decided that i should find a field to work in
-                        that is <u>more relevant</u> to my <gr>talents and personal interests,</gr>
+                        that is <u>more relevant</u> to my <span className="gr">talents and personal interests,</span>
                         <i> to work on something that it's challenges do actually take me a step further in the development of the skills i would like to master.
                         </i>
                         <br/>
                         <br/>
-                        At this time i did not know anything about <gr>Web Development</gr>, so i started with a <u>vision in my mind</u> and from <u>level 0</u>. 
+                        At this time i did not know anything about <span className="gr">Web Development</span>, so i started with a <u>vision in my mind</u> and from <u>level 0</u>. 
                         knowing that with <u>consistency and perseverance</u> i can reach higher levels 
-                        so i kept learning as often as i can and gradually over time <u>increasing the time dedicated</u> to <gr>Web Development</gr> over <gr>Real-Estate</gr>.
-                        until <gr>Web-development</gr> became the <b>full-time</b> job and <gr>Real-estate</gr> became the <b>part-time</b>.
+                        so i kept learning as often as i can and gradually over time <u>increasing the time dedicated</u> to <span className="gr">Web Development</span> over <span className="gr">Real-Estate</span>.
+                        until <span className="gr">Web-development</span> became the <b>full-time</b> job and <span className="gr">Real-estate</span> became the <b>part-time</b>.
                         <br/>
                         <br/>
                         <span className="text-sm font-light">
