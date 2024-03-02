@@ -99,7 +99,7 @@ const Tech = () => {
               style={{
                 // transform: !isInView ? "translateY(200px) translateX(-50%)" : "translateY(0px) translateX(-50%)",
                 opacity: isInView ? 1 : 0,
-                transition: "all 2.5s cubic-bezier(0.17, 0.55, 0.55, 1) 3.5s",
+                transition: "all 3.5s cubic-bezier(0.17, 0.55, 0.55, 1) 3s",
                 // transitionDelay: "2.5s",
                 //time-s, delay-s
               }}>
