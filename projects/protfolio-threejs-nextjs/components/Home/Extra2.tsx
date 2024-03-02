@@ -43,10 +43,10 @@ const Extra2 = () => {
 
     function delayAnimation (slider__container: any){
         //give [delay], after fadeOut(600ms) finishes
-        // setTimeout(()=> {
+        setTimeout(()=> {
             handleSliderIndex(fade);
 
-        // },100);
+        },600);
     }
 
     function handleSliderIndex (direction: number) {

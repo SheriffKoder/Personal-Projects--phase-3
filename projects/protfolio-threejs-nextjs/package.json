@@ -28,7 +28,9 @@
     "next-auth": "^4.24.5",
     "nodemailer": "^6.9.10",
     "react": "^18",
+    "react-activity-calendar": "^2.2.7",
     "react-dom": "^18",
+    "react-github-calendar": "^4.1.2",
     "react-tilt": "^1.0.2",
     "react-vertical-timeline-component": "^3.6.0",
     "three": "^0.161.0"

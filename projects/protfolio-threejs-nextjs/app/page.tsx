@@ -17,6 +17,7 @@ import Extra1 from "@/components/Home/Extra1";
 import Extra2 from "@/components/Home/Extra2";
 import Extra3 from "@/components/Home/Extra3";
 import Projects from "@/components/Home/Projects/Projects";
+import Git from "@/components/Home/Git";
 
 
 //this is the home page components wrapper
@@ -72,14 +73,15 @@ export default function Home() {
 
             {/* <Tech/> */}
 
-            <Projects/>
+            {/* <Projects/> */}
 
             {/* <div className="w-full max-w-[1600px] h-[90vh] border-2 border-[#ffffffa9] mx-auto
             flex flex-col items-center justify-center relative">
 
             </div> */}
-            {/* <Extra3/> */}
+            <Extra3/>
             {/* <Extra2/> */}
+            <Git/>
 
             <Contact/>
           </div>

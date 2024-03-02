@@ -7,7 +7,6 @@ const nextConfig = {
         EmailPass : process.env.EmailPass,
         myEmail : process.env.myEmail,
       },
-
     
 };
 

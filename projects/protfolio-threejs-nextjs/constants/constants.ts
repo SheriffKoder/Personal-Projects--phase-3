@@ -20,6 +20,8 @@ import {
 
     x,
     linkedin,
+    github2,
+    github
 
   } from "../public/assets";
 
