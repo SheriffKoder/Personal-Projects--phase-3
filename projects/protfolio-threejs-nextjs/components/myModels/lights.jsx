@@ -111,7 +111,7 @@ const Objects = () => {
 
     const matcap = useTexture("./matcap.png");
 
-    const torusKnotBasicRef = useRef<Mesh>();
+    const torusKnotBasicRef = useRef();
     const torusKnotStandardRef = useRef();
     const torusKnotLambertRef = useRef();
     const torusKnotMatcapRef = useRef();

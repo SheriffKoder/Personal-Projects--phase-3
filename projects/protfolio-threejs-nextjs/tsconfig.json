@@ -21,6 +21,8 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "utils/motion.js", "components/myModels/index-earth-1tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", 
+  ".next/types/**/*.ts", "utils/motion.js", 
+  "components/Animations/Parallax.jsx", "components/Contact/StarsCanvas.jsxree.jsx", "components/Contact/StarsCanvas.js", "components/Home/Tech/laptop-canvas.jsx", "components/Home/Tech/anim.jsx", "components/myModels/lights.jsx", "components/myModels/Earth/index-earth-2.jsx"],
   "exclude": ["node_modules"]
 }

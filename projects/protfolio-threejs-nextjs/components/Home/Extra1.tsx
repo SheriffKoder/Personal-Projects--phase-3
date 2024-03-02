@@ -41,14 +41,16 @@ const Extra1 = () => {
 
             {
                 contents.map((content)=> (
-                    <Tilt className="flex-1">
+                    <Tilt 
+                    className="flex-1"
+                    options={{
+                        max:45,
+                        scale: 1,
+                        speed: 450
+                      }}>
                         <div className="extra1_card_bg border p-4 flex flex-col items-center justify-center
                         rounded-[7px] text-center min-h-full"
-                        options={{
-                            max:45,
-                            scale: 1,
-                            speed: 450
-                          }}>
+                        >
                             <div className={`mb-2 flex-1 relative`}>
                                 <div className="radialContainer"></div>
 

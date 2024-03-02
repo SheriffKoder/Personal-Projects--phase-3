@@ -150,9 +150,7 @@ export function Button2 (props) {
 
 useGLTF.preload("/models/button.glb");
 
-const Experience = ({projects}: {
-  projects: any
-}) => {
+const Experience = ({projects}) => {
 
     // useControls({
     //     position_x: {value: 0.0, min: -20, max: 20, 
@@ -256,9 +254,7 @@ const Experience = ({projects}: {
   )
 }
 
-export const ButtonCanvas = ({projects}: {
-  projects: any
-}) => {
+export const ButtonCanvas = ({projects}) => {
     return (
         <Canvas
         shadows

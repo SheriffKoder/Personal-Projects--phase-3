@@ -24,12 +24,7 @@ import { DirectionalLight, DirectionalLightHelper, Mesh, PointLight, PointLightH
 import { RectAreaLightHelper } from "three/examples/jsm/Addons.js";
 
 
-function Shape ({orbitControl, texture_1_url, texture_2_url}:{
-    // Orbit: orbitType,
-    orbitControl: string,
-    texture_1_url: string,
-    texture_2_url: string,
-}) {
+function Shape ({orbitControl, texture_1_url, texture_2_url}) {
 
 
 
@@ -268,12 +263,7 @@ function Shape ({orbitControl, texture_1_url, texture_2_url}:{
 }
 
 
-export default function computer({orbitControl, texture_1_url, texture_2_url}: {
-    // Orbit: orbitType,
-    orbitControl: string,
-    texture_1_url: string,
-    texture_2_url: string,
-}) {
+export default function computer({orbitControl, texture_1_url, texture_2_url}) {
 
     // console.log(Orbit);
 

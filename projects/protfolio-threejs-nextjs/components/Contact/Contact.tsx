@@ -21,7 +21,7 @@ import Image from "next/image";
 
 //bg-[#4a19867a]
 import Link from "next/link";
-import Galaxy from "../myModels/Earth/index-galaxy";
+// import Galaxy from "../myModels/Earth/index-galaxy";
 import SocialIcons from "../Helpers/social";
 
 const Contact = () => {

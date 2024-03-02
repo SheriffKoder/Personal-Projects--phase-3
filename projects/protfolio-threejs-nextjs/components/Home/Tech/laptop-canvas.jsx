@@ -24,7 +24,7 @@ import { useSpring, useMotionValue } from 'framer-motion';
 import { motion } from "framer-motion-3d";  //sep lib
 
 
-const Model = ({openLid}: {openLid: boolean}) => {
+const Model = ({openLid}) => {
 
     // useControls({
     //         position_x: {value: 0.0, min: -20, max: 20, step: 0.01,
@@ -144,7 +144,7 @@ const Model = ({openLid}: {openLid: boolean}) => {
 
 
 
-const LaptopCanvas = ({openLid}: {openLid: boolean}) => {
+const LaptopCanvas = ({openLid}) => {
 
    const [camera_x, setCamera_x] = useState(0);
     const [camera_y, setCamera_y] = useState(0);

@@ -42,14 +42,16 @@ const Extra3 = () => {
 
             {
                 contents.map((content)=> (
-                    <Tilt className="w-[45%] mx-auto">
+                    <Tilt 
+                    className="w-[45%] mx-auto"
+                    options={{
+                        max:45,
+                        scale: 1,
+                        speed: 450
+                      }}>
                         <div className="extra1_card_bg border p-4 flex flex-row items-center justify-center
                         rounded-[7px] min-h-full gap-4"
-                        options={{
-                            max:45,
-                            scale: 1,
-                            speed: 450
-                          }}>
+                        >
                             <div className={`w-[30%] relative`}>
                                 <div className="radialContainer"></div>
 

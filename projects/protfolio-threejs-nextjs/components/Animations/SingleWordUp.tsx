@@ -32,7 +32,10 @@ const singleWord = {
 }
 
 //1:04:59 https://www.youtube.com/watch?v=Yw7yWHigGKI
-const SingleWordUp = ({text, className}) => {
+const SingleWordUp = ({text, className}: {
+    text: string,
+    className: string,
+}) => {
   return (
     
         <motion.div variants={quote} initial="initial" animate="animate"
