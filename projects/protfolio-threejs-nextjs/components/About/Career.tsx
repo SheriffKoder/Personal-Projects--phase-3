@@ -11,19 +11,7 @@ const Career = () => {
     const [open, setOpen] = useState(false);
     const [hover, setHover] = useState(false);
 
-    const showImage = (id:string) => {
 
-        let container = document.getElementById(id);
-        
-        if (container) container.style.display = "flex";
-
-    }
-
-    const hideImage = (id:string) => {
-        let container = document.getElementById(id);
-        
-        if (container) container.style.display = "none";
-    }
 
  
 
@@ -31,8 +19,27 @@ const Career = () => {
     const UnitsContainer = useRef<HTMLDivElement>(null); 
     const CbeContainer = useRef<HTMLDivElement>(null); 
 
+    const CareerRec1 = useRef<HTMLDivElement>(null);
+    const CareerRec2 = useRef<HTMLDivElement>(null);
+
+    // const showImage = (id:string) => {
+
+    //     let container = document.getElementById(id);
+        
+    //     if (container) container.style.display = "flex";
+
+    // }
+
+    // const hideImage = (id:string) => {
+    //     let container = document.getElementById(id);
+        
+    //     if (container) container.style.display = "none";
+    // }
+    
     //auto open the career section if redirected with an href #id
     useEffect(() => { 
+
+
 
         let career = window.location.href.toString().split("?career_")[1];
         console.log(career);
@@ -121,19 +128,20 @@ const Career = () => {
 
                             
                             <button className="px-4 py-1 gradientRoundButton mt-4"
-                            onClick={()=>showImage("career-rec-1")}>
+                            onClick={()=>{CareerRec1.current && (CareerRec1.current.style.display = "flex")}}>
                                 Recommendation Letter
                             </button>
 
                             <div className="absolute top-[10%] left-[0%] w-full h-full hidden items-center justify-center"
-                            id="career-rec-1">
+                            // id="career-rec-1" 
+                            ref={CareerRec1}>
                                 <div className="w-[420px] h-[550px] rounded-[17px] border-2 absolute">
                                     <Image src={"/images/about/career-rec-1.jpeg"} fill alt="recommendation letter 1"
                                     className="rounded-[17px] overflow-hidden"
                                     />
                                     <div className="absolute top-[2%] right-[2%] cursor-pointer"
-                                    onClick={()=>hideImage("career-rec-1")}>
-                                        <CloseSvg size={25} color1={"#e90059"} color2={"#ffffff"}/>
+                                    onClick={()=>{CareerRec1.current && (CareerRec1.current.style.display = "none")}}>
+                            <CloseSvg size={25} color1={"#e90059"} color2={"#ffffff"}/>
                                     </div>
                                 </div>
                             </div>
@@ -191,19 +199,20 @@ const Career = () => {
 
                             
                             <button className="px-4 py-1 gradientRoundButton mt-4"
-                            onClick={()=>showImage("career-rec-2")}>
-                                Recommendation Letter
+                            onClick={()=>{CareerRec2.current && (CareerRec2.current.style.display = "flex")}}>
+                            Recommendation Letter
                             </button>
 
                             <div className="absolute top-[10%] left-[0%] w-full h-full hidden items-center justify-center"
-                            id="career-rec-2">
+                            // id="career-rec-2"
+                            ref={CareerRec2}>
                                 <div className="w-[420px] h-[550px] rounded-[17px] border-2 absolute">
                                     <Image src={"/images/about/career-rec-2.jpeg"} fill alt="recommendation letter 1"
                                     className="rounded-[17px] overflow-hidden"
                                     />
                                     <div className="absolute top-[2%] right-[2%] cursor-pointer"
-                                    onClick={()=>hideImage("career-rec-2")}>
-                                        <CloseSvg size={25} color1={"#e90059"} color2={"#ffffff"}/>
+                                    onClick={()=>{CareerRec2.current && (CareerRec2.current.style.display = "none")}}>
+                                    <CloseSvg size={25} color1={"#e90059"} color2={"#ffffff"}/>
                                     </div>
                                 </div>
                             </div>

@@ -12,19 +12,7 @@ const Learning = () => {
     const [open, setOpen] = useState(false);
     const [hover, setHover] = useState(false);
 
-    const showImage = (id:string) => {
 
-        let container = document.getElementById(id);
-        
-        if (container) container.style.display = "flex";
-
-    }
-
-    const hideImage = (id:string) => {
-        let container = document.getElementById(id);
-        
-        if (container) container.style.display = "none";
-    }
 
 
 

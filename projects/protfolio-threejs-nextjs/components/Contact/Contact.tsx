@@ -1,4 +1,6 @@
-import React, { useState } from "react"
+"use client"
+
+import React, { useState, useRef } from "react"
 import { ChangeEventHandler, FormEventHandler } from "react";
 
 //1.2
@@ -36,6 +38,7 @@ const Contact = () => {
 
   const { name, email, content } = emailBody;
 
+  const messageContainer_inquiry = useRef<HTMLDivElement>(null)
 
   const handleChange: ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement > = ({ target }) => {
 
@@ -47,24 +50,25 @@ const Contact = () => {
 // display a message to the user when email is successfully submitted
 const showEmailConfirm = () => {
 
-  let container = document.getElementById("messageContainer_inquiry");
+  // let container = document.getElementById("messageContainer_inquiry");
 
 
   /////////////////////////////
-  if (container) {
+  if (messageContainer_inquiry.current !== null) {
 
-    container.style.display = "flex";
+    // container.style.display = "flex";
+    messageContainer_inquiry.current.style.display = "flex";
 
 
     //fade-in
-    container.classList.add("fadeIn_animation");
+    messageContainer_inquiry.current.classList.add("fadeIn_animation");
 
     //wait - to show
     setTimeout(()=> {
-      if (container) {
+      if (messageContainer_inquiry.current !== null) {
         //fade-out after waiting and showed
-        container.classList.remove("fadeIn_animation");
-        container.classList.add("fadeOut_animation");
+        messageContainer_inquiry.current.classList.remove("fadeIn_animation");
+        messageContainer_inquiry.current.classList.add("fadeOut_animation");
 
         //wait for fade out to finish then hide the container - duration of the css animation is 0.6s
         // setTimeout(()=> {
@@ -106,7 +110,7 @@ const showEmailConfirm = () => {
     w-full absolute top-0 h-[100vh] z-[1] items-center justify-center">
          
 
-      <span id="messageContainer_inquiry"
+      <span ref={messageContainer_inquiry}
         className="border-[rgba(255,255,255,0.02)] shadow-lg
         absolute z-[4] top-[50%] left-[50%] centered_centered2 text-xs py-2 px-8
         bg-[#081b3c] text-white 

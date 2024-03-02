@@ -88,9 +88,13 @@ const Projects = () => {
     }
 
     // console.log(isInView);
-    const project_box_1 = document.getElementById("project_box_1");
-    const project_box_2 = document.getElementById("project_box_2");
-    const project_box_3 = document.getElementById("project_box_3");
+    // const project_box_1 = document.getElementById("project_box_1");
+    // const project_box_2 = document.getElementById("project_box_2");
+    // const project_box_3 = document.getElementById("project_box_3");
+    const project_box_1 = useRef<HTMLDivElement>(null);
+    const project_box_2 = useRef<HTMLDivElement>(null);
+    const project_box_3 = useRef<HTMLDivElement>(null);
+
 
     const borderColor = "#ffffff0";
 
@@ -139,13 +143,16 @@ const Projects = () => {
         <div className="w-[15%] flex flex-col items-center justify-center gap-8">
           
           <div className="h-[50px] w-full z-[1] flex items-center justify-center" 
-          onClick={()=>{setSlideUp((prev)=>prev+150+32); slideIndex.current=slideIndex.current-1;
+          onClick={()=>{
+            setSlideUp((prev)=>prev+150+32); slideIndex.current=slideIndex.current-1;
             setLastIndex((prev)=>prev === 0 ? projects.length-1 : prev-1);
-            if (project_box_2?.classList.contains("neon_button_selected")) {
+
+            if (project_box_1.current !== null && project_box_2.current !== null && project_box_3.current !== null) {
+            if (project_box_2.current.classList.contains("neon_button_selected")) {
               // project_box_1?.classList.remove("neon_button_selected");
               // project_box_1?.classList.add("neon_button_notselected");
-              project_box_2?.classList.remove("neon_button_selected");
-              project_box_2?.classList.add("neon_button_notselected");
+              project_box_2.current.classList.remove("neon_button_selected");
+              project_box_2.current.classList.add("neon_button_notselected");
               // project_box_3?.classList.remove("neon_button_selected");
               // project_box_3?.classList.add("neon_button_notselected");
             }
@@ -160,30 +167,32 @@ const Projects = () => {
 
           setTimeout(()=> {
             
-            if (project_box_1?.classList.contains("neon_button_selected")) {
-              project_box_1?.classList.remove("neon_button_selected");
-              project_box_1?.classList.add("neon_button_notselected");
-              // project_box_2?.classList.remove("neon_button_notselected");
-              // project_box_2?.classList.add("neon_button_selected");
-            }
+            if (project_box_1.current !== null && project_box_2.current !== null && project_box_3.current !== null) {
+              if (project_box_1.current.classList.contains("neon_button_selected")) {
+                project_box_1.current.classList.remove("neon_button_selected");
+                project_box_1.current.classList.add("neon_button_notselected");
+                // project_box_2?.classList.remove("neon_button_notselected");
+                // project_box_2?.classList.add("neon_button_selected");
+              }
+          
             
 
 
-            if (project_box_3?.classList.contains("neon_button_selected")) {
+            if (project_box_3.current.classList.contains("neon_button_selected")) {
               setCurrentProject((index2 === projects.length) ? 0: index2)
             } else {
               setCurrentProject((index2 === projects.length) ? 0: index2)
             }
 
-            if (!project_box_1?.classList.contains("neon_button_selected") && !project_box_3?.classList.contains("neon_button_selected")) {
-              project_box_2?.classList.remove("neon_button_notselected");
-              project_box_2?.classList.add("neon_button_selected");
+            if (!project_box_1.current.classList.contains("neon_button_selected") && !project_box_3.current.classList.contains("neon_button_selected")) {
+              project_box_2.current.classList.remove("neon_button_notselected");
+              project_box_2.current.classList.add("neon_button_selected");
             }
 
-
+            }  
           }, 600);
             
-            }}>
+            }}}>
             {/* { slideIndex.current > 1 && ( */}
             <CaretUp color={"#ffff"} size={"50px"}/>
             {/* ) */}
@@ -224,13 +233,15 @@ const Projects = () => {
                 overflow-hidden`}
                 id="project_box_1"
                 onMouseEnter={(e)=>{setCurrentProject(index2);
-                project_box_1?.classList.remove("neon_button_notselected");
-                project_box_1?.classList.add("neon_button_selected");
-                project_box_2?.classList.remove("neon_button_selected");
-                project_box_2?.classList.add("neon_button_notselected");
-                project_box_3?.classList.remove("neon_button_selected");
-                project_box_3?.classList.add("neon_button_notselected");
-              
+
+                if (project_box_1.current !== null && project_box_2.current !== null && project_box_3.current !== null) {
+                project_box_1.current.classList.remove("neon_button_notselected");
+                project_box_1.current.classList.add("neon_button_selected");
+                project_box_2.current.classList.remove("neon_button_selected");
+                project_box_2.current.classList.add("neon_button_notselected");
+                project_box_3.current.classList.remove("neon_button_selected");
+                project_box_3.current.classList.add("neon_button_notselected");
+                }
               }}
               style={{
                 backgroundImage: `url('${projects[index2].icon}')`,
@@ -254,12 +265,14 @@ const Projects = () => {
                 }}
                 onMouseEnter={()=>{
                   setCurrentProject((index2+1 === projects.length) ? 0: index2+1)
-                  project_box_1?.classList.add("neon_button_notselected");
-                  project_box_1?.classList.remove("neon_button_selected");
-                  project_box_2?.classList.add("neon_button_selected");
-                  project_box_2?.classList.remove("neon_button_notselected");
-                  project_box_3?.classList.remove("neon_button_selected");
-                  project_box_3?.classList.add("neon_button_notselected");
+                  if (project_box_1.current !== null && project_box_2.current !== null && project_box_3.current !== null) {
+                  project_box_1.current.classList.add("neon_button_notselected");
+                  project_box_1.current.classList.remove("neon_button_selected");
+                  project_box_2.current.classList.add("neon_button_selected");
+                  project_box_2.current.classList.remove("neon_button_notselected");
+                  project_box_3.current.classList.remove("neon_button_selected");
+                  project_box_3.current.classList.add("neon_button_notselected");
+                  }
                 }}
                 >
                   {/* (index2+1 === projects.length) ? 0: index2+1 */}
@@ -276,12 +289,14 @@ const Projects = () => {
                 id="project_box_3"
                 onMouseEnter={()=>{
                   setCurrentProject((index2+2 === projects.length) ? 0: (index2+1 === projects.length) ? 1 : index2+2)
-                  project_box_1?.classList.add("neon_button_notselected");
-                  project_box_1?.classList.remove("neon_button_selected");
-                  project_box_2?.classList.remove("neon_button_selected");
-                  project_box_2?.classList.add("neon_button_notselected");
-                  project_box_3?.classList.remove("neon_button_notselected");
-                  project_box_3?.classList.add("neon_button_selected");
+                  if (project_box_1.current !== null && project_box_2.current !== null && project_box_3.current !== null) {
+                  project_box_1.current.classList.add("neon_button_notselected");
+                  project_box_1.current.classList.remove("neon_button_selected");
+                  project_box_2.current.classList.remove("neon_button_selected");
+                  project_box_2.current.classList.add("neon_button_notselected");
+                  project_box_3.current.classList.remove("neon_button_notselected");
+                  project_box_3.current.classList.add("neon_button_selected");
+                  }
                 }}
                 style={{
                   backgroundImage: `url('${projects[(index2+2 === projects.length) ? 0: (index2+1 === projects.length) ? 1 : index2+2].icon}')`,
@@ -309,13 +324,16 @@ const Projects = () => {
           <div className="h-[50px] w-full z-[1] flex items-center justify-center" 
           onClick={()=>{setSlideUp((prev)=>prev-150-32); slideIndex.current=slideIndex.current+1;
             setLastIndex((prev)=>prev+1 === projects.length ? 0 : prev+1);
-            if (project_box_2?.classList.contains("neon_button_selected")) {
-              // project_box_1?.classList.remove("neon_button_selected");
-              // project_box_1?.classList.add("neon_button_notselected");
-              project_box_2?.classList.remove("neon_button_selected");
-              project_box_2?.classList.add("neon_button_notselected");
-              // project_box_3?.classList.remove("neon_button_selected");
-              // project_box_3?.classList.add("neon_button_notselected");
+
+            if (project_box_1.current !== null && project_box_2.current !== null && project_box_3.current !== null) {
+              if (project_box_2.current.classList.contains("neon_button_selected")) {
+                // project_box_1?.classList.remove("neon_button_selected");
+                // project_box_1?.classList.add("neon_button_notselected");
+                project_box_2.current.classList.remove("neon_button_selected");
+                project_box_2.current.classList.add("neon_button_notselected");
+                // project_box_3?.classList.remove("neon_button_selected");
+                // project_box_3?.classList.add("neon_button_notselected");
+              }
             }
             setTimeout(()=> {
               setSlideUp(initial); 
@@ -323,24 +341,26 @@ const Projects = () => {
               }, 150);
 
             setTimeout(()=> {
-              if (project_box_3?.classList.contains("neon_button_selected")) {
-                project_box_3?.classList.remove("neon_button_selected");
-                project_box_3?.classList.add("neon_button_notselected");
-                project_box_2?.classList.remove("neon_button_notselected");
-                project_box_2?.classList.add("neon_button_selected");
-              }
-              // project_box_2?.classList.remove("neon_button_notselected");
-              // project_box_2?.classList.add("neon_button_selected");
+              if (project_box_1.current !== null && project_box_2.current !== null && project_box_3.current !== null) {
+                if (project_box_3.current.classList.contains("neon_button_selected")) {
+                  project_box_3.current.classList.remove("neon_button_selected");
+                  project_box_3.current.classList.add("neon_button_notselected");
+                  project_box_2.current.classList.remove("neon_button_notselected");
+                  project_box_2.current.classList.add("neon_button_selected");
+                }
+                // project_box_2?.classList.remove("neon_button_notselected");
+                // project_box_2?.classList.add("neon_button_selected");
 
-              if (project_box_1?.classList.contains("neon_button_selected")) {
-                // setCurrentProject((index2-2 < 0 ? projects.length-1 : index2-2))
-              } else {
-                setCurrentProject((index2-1 < 0 ? projects.length-1 : index2-1))
-              }
+                if (project_box_1.current.classList.contains("neon_button_selected")) {
+                  // setCurrentProject((index2-2 < 0 ? projects.length-1 : index2-2))
+                } else {
+                  setCurrentProject((index2-1 < 0 ? projects.length-1 : index2-1))
+                }
 
-              if (!project_box_1?.classList.contains("neon_button_selected") && !project_box_3?.classList.contains("neon_button_selected")) {
-                project_box_2?.classList.remove("neon_button_notselected");
-                project_box_2?.classList.add("neon_button_selected");
+                if (!project_box_1.current.classList.contains("neon_button_selected") && !project_box_3.current.classList.contains("neon_button_selected")) {
+                  project_box_2.current.classList.remove("neon_button_notselected");
+                  project_box_2.current.classList.add("neon_button_selected");
+                }
               }
 
             }, 600);
