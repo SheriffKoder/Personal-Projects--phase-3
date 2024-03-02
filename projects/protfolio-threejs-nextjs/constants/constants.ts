@@ -46,8 +46,9 @@ import {
       progress: "In progress",
       steps: [
         {title: "Deploy website", progress: "In Progress"},
-        {title: "make the website responsive, final fixes", progress: "Not Yet"},
-        {title: "sort the home components", progress: "Done"},
+        {title: "Final fixes for all components", progress: "Not Yet"},
+        {title: "Make the website responsive", progress: "Not Yet"},
+        {title: "Sort the home components", progress: "Done"},
         {title: "Design, build and style all the sites components", progress: "Done"}
 
       ]
