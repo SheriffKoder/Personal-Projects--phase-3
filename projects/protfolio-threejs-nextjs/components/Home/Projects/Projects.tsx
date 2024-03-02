@@ -472,7 +472,7 @@ const Projects = () => {
 
 
       <div className="w-full flex items-center justify-center">
-        <Link href="/" className="lg:px-4 px-3 py-1
+        <Link href="/projects" className="lg:px-4 px-3 py-1
         gradientRoundButton focus:opacity-95 hover:opacity-95
         lg:text-base text-sm font-medium"
         style={{borderRadius: "100px"}}>
