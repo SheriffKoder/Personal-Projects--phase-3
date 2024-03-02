@@ -100,7 +100,7 @@ const Learning = () => {
                             {/* ////////////////////////////////////////////  Udacity  ///////////////////////////////////////////// */}
                             <p className="text-2xl mt-[4rem]"><b>Course: Web Development Challenger Track (Udacity)</b></p>
                             <div className="h-[2px] w-[400px] bg-white opacity-60 rounded-full mt-2 mb-4 mx-auto"/>
-                            <p>A course introducing HTML, CSS, duration about <gr>1 month</gr></p>
+                            <p>A course introducing HTML, CSS, duration about <span className="gr">1 month</span></p>
 
                             <div className="w-full flex flex-row items-center justify-center gap-4 text-sm">
                                 <a href="/files/challengerTrackCert.pdf" target="_blank"
@@ -116,8 +116,8 @@ const Learning = () => {
                             {/* ////////////////////////////////////////////  Book  ///////////////////////////////////////////// */}
                             <p className="text-2xl mt-[4rem]"><b>Book: Head First JavaScript Programming</b></p>
                             <div className="h-[2px] w-[400px] bg-white opacity-60 rounded-full mt-2 mb-4 mx-auto"/>
-                            <p>A 700 pages book that took me about <gr>2-3 months</gr> to complete as i read it twice and took notes to stay with me for future reference</p>
-                            <p>This book teaches in a friendly manner <gr>javascript from the very basics to advanced levels</gr> with some interesting projects</p>
+                            <p>A 700 pages book that took me about <span className="gr">2-3 months</span> to complete as i read it twice and took notes to stay with me for future reference</p>
+                            <p>This book teaches in a friendly manner <span className="gr">javascript from the very basics to advanced levels</span> with some interesting projects</p>
 
                             <div className="w-full flex flex-row items-center justify-center gap-4 text-sm">
                                 <div
@@ -150,7 +150,7 @@ const Learning = () => {
                             <div className="h-[2px] w-[400px] bg-white opacity-60 rounded-full mt-2 mb-4 mx-auto"/>
 
                             <div className="flex flex-col gap-2">
-                            <p>This is a very long course, took me about <gr>6 months</gr> to complete, 
+                            <p>This is a very long course, took me about <span className="gr">6 months</span> to complete, 
                             that would be due to the fact that the course covers each subject in the smallest detail,
                             always referring to external links (i read them all even the extras) for video/video-series or other articles written by other developers on the subject being discussed
                             and contained a lot of theoretical explanations beside the code.</p>
@@ -184,7 +184,7 @@ const Learning = () => {
                             <div className="flex flex-col gap-2">
                                 <p> Kevin is a great teacher, i have been following his videos on Youtube for a long time.</p>
                                 <p> He has a simple and sleek approach to css, and was kind enough to construct a course,
-                                    dedicated to <gr>teach how to approach making websites responsive</gr> in <gr>21 days</gr>
+                                    dedicated to <span className="gr">teach how to approach making websites responsive</span> in <span className="gr">21 days</span>
                                 </p>
                                 <p> This course and other Kevin teachings have greatly influenced my design 
                                     and code even in my next advanced steps
@@ -226,7 +226,7 @@ const Learning = () => {
                                 <p>The instructor Maximilian Schwarzmüller is a great teacher, he constructed the course very well and presented NodeJS from 
                                     its beginnings to its advanced forms.</p>
                                 <p>It is also a lengthy course to complete and practice, the 40h duration is tricky, it is meant for straight watching. 
-                                    but in reality the 500+ videos took me about <gr>2.5 months</gr> to complete as i made sure to code 
+                                    but in reality the 500+ videos took me about <span className="gr">2.5 months</span> to complete as i made sure to code 
                                     along and take notes to assist me in the future.</p>
 
                                 <p className="mt-4 gradient_text_1"><b>By the end of this course i was able to:</b></p>
@@ -262,7 +262,7 @@ const Learning = () => {
                                 <p>As i have seen "JQuery" been mentioned on many places around the web, 
                                     i was curious to check it out on the side with NodeJS and discover what i can do with it</p>
                                 <p>In this course i learnt how to use jQuery to select DOM elements, create animations for DOM elements and to fetch from APIs
-                                    in <gr>1 Week</gr>
+                                    in <span className="gr">1 Week</span>
                                 </p>
                             </div>
                             
