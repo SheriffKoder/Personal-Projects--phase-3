@@ -30,22 +30,24 @@ const Git = () => {
     const [blockMargin, setBlockMargin] = useState(4);
 
 
-    window.addEventListener("resize", ()=> {
-        // console.log(window.innerWidth/110);
-        setBlockSize((window.innerWidth/130 < 12 ? window.innerWidth/130 : 12));
-        setFontSize((window.innerWidth/65 < 12 ? window.innerWidth/65 : 12));
-        setBlockRadius((window.innerWidth < 900 ? 1 : (window.innerWidth < 550 ? 0 : 2)));
-        setBlockMargin((window.innerWidth < 900 ? 2 : (window.innerWidth < 550 ? 1 : 4)));
 
-
-
-    });
 
     useEffect(()=> {
         setBlockSize((window.innerWidth/130 < 12 ? window.innerWidth/130 : 12))
         setFontSize((window.innerWidth/65 < 12 ? window.innerWidth/65 : 12));
         setBlockRadius((window.innerWidth < 900 ? 1 : (window.innerWidth < 550 ? 0 : 2)));
         setBlockMargin((window.innerWidth < 900 ? 2 : (window.innerWidth < 550 ? 1 : 4)));
+
+        window.addEventListener("resize", ()=> {
+            // console.log(window.innerWidth/110);
+            setBlockSize((window.innerWidth/130 < 12 ? window.innerWidth/130 : 12));
+            setFontSize((window.innerWidth/65 < 12 ? window.innerWidth/65 : 12));
+            setBlockRadius((window.innerWidth < 900 ? 1 : (window.innerWidth < 550 ? 0 : 2)));
+            setBlockMargin((window.innerWidth < 900 ? 2 : (window.innerWidth < 550 ? 1 : 4)));
+    
+    
+    
+        });
 
 
     },[])

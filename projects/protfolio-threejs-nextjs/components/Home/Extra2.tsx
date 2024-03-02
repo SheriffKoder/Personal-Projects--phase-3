@@ -107,10 +107,12 @@ const Extra2 = () => {
     }
 
     function startTimer () {
-        tm.current = window.setInterval(() => {
-            // console.log("timer");
-            setPrevFade(fade); setFade(fade+1);
-        }, 7000);
+        if (typeof window !== "undefined") {
+            tm.current = window.setInterval(() => {
+                // console.log("timer");
+                setPrevFade(fade); setFade(fade+1);
+            }, 7000);
+        }
     }
 
     ////////////////////////////////////////////////////////////////////////////////////

@@ -69,18 +69,20 @@ function Shape ({orbitControl, texture_1_url, texture_2_url}) {
     //project view
     const rotation_1 = () => {
 
-        const { innerWidth, innerHeight } = window;
+        if (typeof window !== "undefined") {
+            const { innerWidth, innerHeight } = window;
 
-        console.log(innerWidth);
+            console.log(innerWidth);
 
-        mouse.rotation_y.set(0);
-        mouse.scale.set(1.5);
+            mouse.rotation_y.set(0);
+            mouse.scale.set(1.5);
 
-        if (innerWidth >= 1537) {
-            mouse.position_x.set(-1.2); 
-        } else {
-            mouse.position_x.set(0); 
+            if (innerWidth >= 1537) {
+                mouse.position_x.set(-1.2); 
+            } else {
+                mouse.position_x.set(0); 
 
+            }
         }
 
     }
@@ -98,15 +100,15 @@ function Shape ({orbitControl, texture_1_url, texture_2_url}) {
     //adjust x if the user resized window from mobile to desktop to view the models properly
     //as the rotations are triggered from a clickable button that will not be triggered on resize
     const windowResizeListen = () => {
-        const { innerWidth, innerHeight } = window;
-        if (innerWidth >= 1537) {
-            // mouse.position_x.set(-1.2); 
-            mesh.current.position.x = -1.2;
-
-        } else {
-            // mouse.position_x.set(0); 
-            mesh.current.position.x = 0;
-
+        if (typeof window !== "undefined") {
+            const { innerWidth, innerHeight } = window;
+            if (innerWidth >= 1537) {
+                // mouse.position_x.set(-1.2);
+                mesh.current.position.x = -1.2;
+            } else {
+                // mouse.position_x.set(0);
+                mesh.current.position.x = 0;
+            }
         }
     }
 

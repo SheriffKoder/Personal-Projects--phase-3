@@ -25,28 +25,30 @@ export default function Home() {
 
   const [isLoading, setIsLoading] = useState(true);
 
-  useEffect( () => {
+  // useEffect( () => {
 
-    (
+  //   (
 
-      async () => {
+  //     async () => {
 
-          const LocomotiveScroll = (await import('locomotive-scroll')).default
+  //         const LocomotiveScroll = (await import('locomotive-scroll')).default
 
-          const locomotiveScroll = new LocomotiveScroll();
+  //         const locomotiveScroll = new LocomotiveScroll();
 
-          setTimeout(() => {
-            setIsLoading(false);
-            document.body.style.cursor = "default";
-            //if scrolled return to top of page
-            window.scrollTo(0,0);
-          }, 2000);
+  //         setTimeout(() => {
+  //           setIsLoading(false);
+  //           document.body.style.cursor = "default";
+  //           //if scrolled return to top of page
+  //           if (window !== undefined) {
+  //           window.scrollTo(0,0);
+  //           }
+  //         }, 2000);
 
-      }
+  //     }
 
-    )()
+  //   )()
 
-  }, [])
+  // }, [])
 
   //home page loader
 
