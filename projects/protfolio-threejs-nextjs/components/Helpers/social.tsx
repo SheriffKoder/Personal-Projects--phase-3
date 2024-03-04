@@ -10,15 +10,21 @@ const SocialIcons = ({radius, size, background, size2, padding}:{
   size2: number,
   padding: string
 }) => {
+
+  const ref = React.useRef<HTMLImageElement>(null)
   return (
     <>
     {
     socials.map((social, index)=> (
-        <Link href={social.link} className={`relative social_icon_box_container h-[${size}] w-[${size}`}>
+        <Link href={social.link} className={`relative social_icon_box_container h-[${size}] w-[${size}`}
+        key={social.name+" icon"}>
 
             <Image src={social.icon} height={size2} width={size2} alt={social.name+" icon"}
             className="social_icon_box"
-            style={{backgroundColor: background, borderRadius: radius, padding: padding}}>
+            style={{backgroundColor: background, borderRadius: radius, padding: padding}}
+           
+
+            ref={ref}>
             </Image>
         </Link>
     ))

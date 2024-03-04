@@ -28,7 +28,7 @@
   "components/Home/Tech/laptop-canvas.jsx", 
   "components/Home/Tech/anim.jsx", 
   "components/myModels/lights.jsx", 
-  "components/myModels/Earth/index-earth-2.jsx", 
+  "components/myModels/Earth/index-earth-2.tsx", 
   "hoc/SectionWrapper.jsx", 
   "public/icons/caret-down2.jsx", 
   "public/icons/caret-up.jsx" , 

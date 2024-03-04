@@ -62,7 +62,7 @@ const Hero = () => {
             text-[80%] flex-wrap
             ">
 
-              <Link href="/contact" className="lg:px-4 px-3 py-0
+              <Link href="/contact" className="lg:px-4 px-3 py-1
               gradientRoundButton focus:opacity-95 hover:opacity-95
               text-[min(0.9em,1rem)]
               ">
@@ -96,7 +96,7 @@ const Hero = () => {
 
           {/* display this component-link when the ref is in view, hide when out of this component */}
           {isInView && (
-            <div className="absolute bottom-[0.5rem] w-[99%] flex justify-center items-center"
+            <div className="absolute bottom-[2rem] w-[99%] flex justify-center items-center"
             >
                 <a href="#tech-comp" className="border-2 border-white rounded-full w-8 h-8
                 flex items-center justify-center opacity-50">

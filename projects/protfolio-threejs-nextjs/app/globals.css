@@ -1468,10 +1468,24 @@ background: -webkit-linear-gradient(
 }
 
 .social_icon_box:hover {
-  background: rgb(127, 127, 127);;
+  background-color: rgb(255, 255, 255);;
   text-shadow: 0px 0px 10px rgb(0, 0, 0);
   transition: background var(--timing1) ease-in-out;
 
+}
+
+.placeHolder {
+
+ animation: placeHolder 2s infinite;
+ opacity: 0;
+ animation-delay: 6s;
+
+}
+
+@keyframes placeHolder { 
+  0%{opacity: 0;}
+  50%{opacity: 1;}
+  100%{opacity: 0;}
 }
 
 

@@ -3,7 +3,7 @@
 // this is a low poly sphere earth model
 
 
-import { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Canvas, useLoader, useFrame } from '@react-three/fiber'
 
 import { TextureLoader } from 'three/src/loaders/TextureLoader.js'
@@ -12,6 +12,8 @@ import { PointLight, SphereGeometry } from 'three'
 import { useHelper } from '@react-three/drei'
 import { useControls } from 'leva'
 import { EarthLightScene } from './EarthLights'
+
+import { BufferGeometry, NormalBufferAttributes, Mesh, Material, Object3DEventMap } from 'three'
 
 function Shape () {
 
@@ -22,16 +24,18 @@ function Shape () {
     
     // ]);
 
-    const mesh = useRef<SphereGeometry>(null);
+    const mesh = React.useRef<Mesh<BufferGeometry<NormalBufferAttributes>, Material | Material[], Object3DEventMap>>(null);
 
     useFrame((state, delta) => {
         
         //speed of rotation with x/y axis
-        mesh.current.rotation.x += delta * 0.002;
-        mesh.current.rotation.y += delta * 0.003;
+        if (mesh.current !== null) {
+            mesh.current.rotation.x += delta * 0.0025 * 1;
+            mesh.current.rotation.z += delta * 0.001 * 1;
+            mesh.current.rotation.y += delta * 0.002 * 1;
+
+        }
         
-
-
     });
 
     // const spotLightRef = useRef<SpotLight>(null!);
@@ -47,13 +51,13 @@ function Shape () {
 //         position_z: {value: 1, min: -20, max: 20,
 //             onChange: (value) => {
 //                 setPosition_z((pos)=>(value))}},
-//         rotation_x: {value: 0.0, min: -10, max: 10,
+//         rotation_x: {value: 0.1, min: -10, max: 10,
 //             onChange: (value) => {
 //                 setRotation_x((pos)=>(value))}},
-//         rotation_y: {value: 4.2, min: -10, max: 10,
+//         rotation_y: {value: 3.8, min: -10, max: 10,
 //             onChange: (value) => {
 //                 setRotation_y((pos)=>(value))}},
-//         rotation_z: {value: 0.7, min: -10, max: 10,
+//         rotation_z: {value: 0.8, min: -10, max: 10,
 //             onChange: (value) => {
 //                 setRotation_z((pos)=>(value))}},
 //         scale: {value: 12, min: 0, max: 15,
@@ -75,19 +79,13 @@ function Shape () {
     const [position_x, setPosition_x] = useState(0.0);
     const [position_y, setPosition_y] = useState(-13.5);
     const [position_z, setPosition_z] = useState(1);
-    const [rotation_x, setRotation_x] = useState(0);
-    const [rotation_y, setRotation_y] = useState(4.2);
-    const [rotation_z, setRotation_z] = useState(0.7);
+    const [rotation_x, setRotation_x] = useState(0.1);
+    const [rotation_y, setRotation_y] = useState(3.8);
+    const [rotation_z, setRotation_z] = useState(0.8);
     const [scale, setScale] = useState(12);
     const [x, setX] = useState(1);
     const [y, setY] = useState(64);
     const [z, setZ] = useState(64);
-
-
-    //use the texture loader type of loader
-    const texture_1 = useLoader(TextureLoader, "/assets/tech/css.png")
-    const texture_2 = useLoader(TextureLoader, "/assets/tech/docker.png")
-    const texture_3 = useLoader(TextureLoader, "/assets/tech/figma.png")
 
 
     // const color2 = useLoader(TextureLoader, "/assets/earth/color2.jpeg")
@@ -154,10 +152,10 @@ export default function Cube2() {
 
     // });
 
-    const [camera_x, setCamera_x] = useState(0);
-    const [camera_y, setCamera_y] = useState(0);
-    const [camera_z, setCamera_z] = useState(15);
-    const [fov, setFOV] = useState(25);
+    // const [camera_x, setCamera_x] = useState(0);
+    // const [camera_y, setCamera_y] = useState(0);
+    // const [camera_z, setCamera_z] = useState(15);
+    // const [fov, setFOV] = useState(25);
     
 
     //simulate pointLight movement
@@ -185,7 +183,7 @@ export default function Cube2() {
     <div className='w-full h-full'>
         <Canvas
         camera={{
-            position: [camera_x, camera_y, camera_z], fov:fov,
+            position: [0, 0, 15], fov:25,
             // near: 0.1,
             // far: 200,
         }}
