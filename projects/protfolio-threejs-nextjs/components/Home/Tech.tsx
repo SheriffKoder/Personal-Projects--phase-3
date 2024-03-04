@@ -21,7 +21,6 @@ import { staggerContainer } from "@/utils/motion";
 
 
 import { useContext } from "react"
-import { linkContext } from "../context";
 
 import { technologies1, technologies2, technologies3 } from "@/constants/constants";
 import Image from "next/image";
@@ -32,25 +31,8 @@ const Tech = () => {
   const laptopRef = useRef(null);
 
   const isInView = useInView(container2, { once: true });
-  const isInView2 = useInView(laptopRef);
 
 
-  const active = useContext(linkContext).activeLink;
-  const setActive = useContext(linkContext).updateLink;
-
-    useEffect(()=> {
-      // console.log(active);
-      setActive("tech")
-      // console.log(active);
-  }, [isInView]);
-
-  useEffect(()=>{
-    document.getElementById("tech-comp")?.addEventListener("mouseover", ()=> {
-      setActive("tech")
-      // console.log(active);
-
-    })
-  },[]);
   
 
   return (
