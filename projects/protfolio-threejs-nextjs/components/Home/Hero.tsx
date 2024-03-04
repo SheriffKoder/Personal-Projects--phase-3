@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useRef,useEffect } from "react"
 import {CharCanvas} from "../myModels/CharCanvas"
 
 import {motion} from "framer-motion";
@@ -9,142 +9,102 @@ import FadeUp from "../Animations/FadeUp";
 import SingleWordUp from "../Animations/SingleWordUp";
 import CaretDown2 from "@/public/icons/caret-down2";
 
-import { useContext,useRef,useEffect } from "react";
-import { linkContext } from "../context";
 import { useInView } from "framer-motion";
 
 const Hero = () => {
 
-  
+  // used for the next-component link
   const container = useRef(null);
   const isInView = useInView(container);
 
-  const active = useContext(linkContext).activeLink;
-  const setActive = useContext(linkContext).updateLink;
-
-    useEffect(()=> {
-        setActive("about")
-        // console.log(active);
-    }, [isInView])
-
-    useEffect(()=>{
-        document.getElementById("home-comp")?.addEventListener("mouseover focus", ()=> {
-          setActive("about")
-          // console.log(active);
-
-        })
-    },[]);
-
 
   return (
-        <div className=" w-full h-[92vh] 
-        pt-[8rem] flex px-4 flex-col gap-12 lg:flex-row lg:items-center lg:justify-between max-w-[1600px] mx-auto
-        relative"
-      id="home-comp">    
+        <div className="max-h-[99vh] h-[99vh]
+        flex px-4 
+        flex-col gap-6 justify-center items-center pt-[4rem]
+        lg:flex-row lg:items-center lg:justify-evenly lg:gap-12 lg:pt-[8rem]
+        mx-auto relative min-w-full"
+        id="heroContainer_comp">    
 
-        <span className="w-full h-[1px] bg-transparent absolute top-0" ref={container}></span>
+          {/* an element at the top of the component used as a trigger for the caret down button
+          which transfers to the next component on the page */}
+          <span className="w-full h-[1px] bg-transparent absolute top-0" ref={container}></span>
 
-        {/* Hero text */}
-        <FadeUp>
-        <div
-        className="flex flex-col order-2 lg:order-1 items-center text-center lg:items-start lg:text-start lg:ml-[4rem]
-        "
-        >
-          
-          <span className="lightHeader">
-            {/* Welcome to my page,
-            <span className="pl-[0.5rem]"> my name is</span>  */}
-          </span> 
-          
-          <span>
-            {/* <span className="BoldHeader mr-1 uppercase font-light opacity-60">Hi, i'm</span> */}
-            <span className="gradientBoldHeader uppercase" >
+          {/* ///////////////////////////// Hero text  /////////////////////////////*/}
+          {/* id's are used for landscape media queries in globals.css */}
+          {/* combine text with vw and em's in children for a responsive text size */}
+          {/* <FadeUp> */}
+          <div className="text-[calc(1rem+0.25vw)]
+          flex flex-col order-2 items-center text-center h-[30%]
+          lg:order-1 lg:text-start lg:items-start  lg:ml-[4rem] lg:flex-1
+          max-w-[460px]
+          "
+          id="heroText_comp">
+            
+            <span className="gradient_text_1 text-[min(1.75em,2.25rem)] font-bold uppercase
+            lg:text-[text-[min(2em,2.25rem)]" >
               Sheriff Koder
             </span>
-          
-          </span>
-          
-          <span className="lightHeader font-thin">A full-stack
-            <span className="font-semibold uppercase"> Web developer</span>
-          </span>
-          
-
-          <span className="lightHeader mt-2 font-extralight">
-            I design and build beautiful and interactive websites<br/>
-            with ReactJS, NodeJS, ThreeJS and more...  
-          </span>
-
-           <span className="mt-6 flex flex-row gap-4 items-center">
-
-                <Link href="/" className="lg:px-4 px-3 py-1
-                 gradientRoundButton focus:opacity-95 hover:opacity-95
-                lg:text-base text-sm">
-                    contact
-                </Link>
-
-                <span 
-                className="px-4 py-1 lg:text-base text-sm font-base gradientGreyButton focus:opacity-95 hover:opacity-95">
-                    <Link href="/about" className="gradient_text_1 w-full h-full">
-                    check out all info about me <span className="hidden 2xl:contents">(background, education, career...)</span>
-
-                    </Link>
-                </span>
+            
+            
+            <span className="text-[min(1em,1.25rem)] font-thin">A full-stack
+              <span className="font-semibold uppercase"> Web developer</span>
             </span>
-        
-        
-        </div>
-        </FadeUp>
+            
 
+            <span className="text-[min(0.75em,1rem)] mt-2 font-extralight">
+              I design and build beautiful and interactive websites<br/>
+              with ReactJS, NodeJS, ThreeJS and more...  
+            </span>
 
+            {/* ////// links ////// */}
+            <span className="mt-6 flex flex-row gap-4 items-center
+            text-[80%] flex-wrap
+            ">
 
-        {/* <div className="flex-1 items-center justify-center flex lg:h-[70%] overflow-hidden"> */}
-        <div className="order-1 h-[40%] lg:h-[80%] lg:w-[40%] lg:order-2">
-            {/* Hero */}
-            <CharCanvas/>
-        </div>
+              <Link href="/contact" className="lg:px-4 px-3 py-0
+              gradientRoundButton focus:opacity-95 hover:opacity-95
+              text-[min(0.9em,1rem)]
+              ">
+                  contact
+              </Link>
 
-        {/* <div className="">
-            <a href="#tech">
-              <div className="w-[35px] h-[64px] rounded-3xl border-4 flex justify-center items-start p-2">
-                <motion.dev
-                animate={{
-                  y: [0, 24, 0]
-                }}
-                transition={{
-                  duration: 1.5,
-                  repeat: Infinity,
-                  repeatType: "loop"
-                }}
-                className="w-3 h-3 rounded-full bg-white mb-1"
-                />
+              <span className="px-4 py-1 font-base 
+              gradientGreyButton focus:opacity-95 hover:opacity-95
+              text-[min(0.9em,1rem)]">
 
-              </div>
-            </a>
-        </div> */}
-        {isInView && (
+                  <Link href="/about" className="gradient_text_1 w-full h-full">
+                    check out all info about me 
+                    {/* <span className="hidden 2xl:contents">(background, education, career...)</span> */}
+                  </Link>
+              </span>
 
-          <div className="absolute bottom-0 w-[99%] flex justify-center items-center mb-8"
-          >
-            {/* <div className="border-2 rounded-full w-10 h-10 mb-8"> */}
-              <a href="#tech-comp" className="border-2 border-white rounded-full w-8 h-8  z-[1]
-              flex items-center justify-center opacity-50">
-                <CaretDown2 size={40} color="#ffff"/>
-              </a>
-
-            {/* </div> */}
+            </span>
+          
+          
           </div>
-        )}
+          {/* </FadeUp> */}
 
-        {/* <div className="absolute bottom-0 left-[2rem]
-        rounded-full bg-[#ffffff0c] mb-8 px-4 w-[300px] overflow-hidden whitespace-nowrap"
-          >
-              <span className=" font-extralight gradient_text_1 w-[30%] mr-2">
-                status: 
-              </span>
-              <span className="overflow-hidden w-[70%] gradient_text_1 font-extralight">
-                <span className="status_animation">fixing and deploying practice projects</span>
-              </span>
-          </div> */}
+          {/* order-1 h-[60%] lg:h-[80%] lg:min-w-[40%]  */}
+          {/* ///////////////////////////// Human 3d model  /////////////////////////////*/}
+          <div className="md2:w-[40vw] md2:h-[40vw] w-[40vh] h-[40vh]
+          order-1 lg:order-2"
+          id="heroChar_comp">
+              <CharCanvas/>
+          </div>
+
+
+          {/* display this component-link when the ref is in view, hide when out of this component */}
+          {isInView && (
+            <div className="absolute bottom-[0.5rem] w-[99%] flex justify-center items-center"
+            >
+                <a href="#tech-comp" className="border-2 border-white rounded-full w-8 h-8
+                flex items-center justify-center opacity-50">
+                  <CaretDown2 size={40} color="#ffff"/>
+                </a>
+
+            </div>
+          )}
 
 
 

@@ -35,7 +35,7 @@ const Nav = () => {
 
             {/* list or a menu button */}
             <span className="pr-4">
-                <ul className="flex flex-row gap-12 uppercase text-xs font-semibold">
+                <ul className="flex flex-row gap-[min(5vw,3rem)] uppercase text-xs font-semibold">
                     <li className={`py-4 ${path === "" ? "active no_select" : "gradient_text_hover_1"}
                     `}>
                         <Link href="/">

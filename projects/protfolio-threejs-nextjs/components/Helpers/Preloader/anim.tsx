@@ -1,5 +1,5 @@
 
-export const slideUp = {
+export const slideLeft = {
     initial: {
         x: "0"
     },

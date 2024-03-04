@@ -37,10 +37,10 @@ export function Button (props) {
           }
           material={materials["None.004"]}
         >
-              <meshLambertMaterial color="#232323"/>
+              {/* <meshLambertMaterial color="#232323"/> */}
 
 
-              {/* <meshLambertMaterial color={shiningBlue}/>
+              <meshLambertMaterial color={shiningBlue}/>
 
               <EffectComposer>
                 <Bloom
@@ -49,7 +49,7 @@ export function Button (props) {
                 intensity={intensity}
                 radius={radius}
                 />
-              </EffectComposer> */}
+              </EffectComposer>
 
         </mesh>
 

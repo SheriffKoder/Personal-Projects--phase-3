@@ -84,10 +84,6 @@ img {
 }
 
 
-.no_wrap {
-  /* word-wrap: ; */
-}
-
 .status_animation {
   margin-left: 0;
   animation: text_circulate 20s linear infinite;
@@ -1575,6 +1571,42 @@ background: linear-gradient(
   pointer-events: none;
 
 }
+
+/* ////////////////////////////////////////////////////////////////////////////// */
+/* ////////////////////////////////////////////////////////////////////////////// */
+/* responsive */
+
+
+/* ///////////////////////// @Home/Hero */
+
+
+@media (orientation: landscape) {
+  #heroContainer_comp {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  #heroText_comp {
+    order:1;
+    padding-top: 0;
+    height: 100%;
+    justify-content: center;
+    align-items: start;
+    padding-left: 2rem;
+    text-align: start;
+  }
+
+  #heroChar_comp {
+    order:2;
+    width: 60vh;
+    height: 60vh;
+  }
+
+
+}
+
+
+
 
 
 /* ////////////////////////////////////////////////////////////////////////////// */

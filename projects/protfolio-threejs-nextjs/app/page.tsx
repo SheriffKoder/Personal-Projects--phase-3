@@ -8,8 +8,6 @@ import Tech from "@/components/Home/Tech";
 import Image from "next/image";
 
 import Parallax from "@/components/Animations/Parallax";
-import LinkProvider from "@/components/context";
-import Nav2 from "@/components/Helpers/Nav2";
 import Contact from "@/components/Home/Contact";
 import Preloader from "@/components/Helpers/Preloader/Preloader";
 import { AnimatePresence } from "framer-motion";
@@ -19,10 +17,9 @@ import Extra3 from "@/components/Home/Extra3";
 import Projects from "@/components/Home/Projects/Projects";
 import Git from "@/components/Home/Git";
 
-import dynamic from 'next/dynamic'
-const DynamicComponentWithNoSSR = dynamic(() => import("@/components/Helpers/Preloader/Preloader"), {
-  ssr: false
-})
+
+
+
 
 //this is the home page components wrapper
 export default function Home() {
@@ -32,62 +29,52 @@ export default function Home() {
   useEffect( () => {
 
     (
-
       async () => {
-
           const LocomotiveScroll = (await import('locomotive-scroll')).default
-
           const locomotiveScroll = new LocomotiveScroll();
-
-          setTimeout(() => {
-            setIsLoading(false);
-            // if (document !== undefined) {
-            // document.body.style.cursor = "default";
-            // }
-            //if scrolled return to top of page
-            if (window !== undefined) {
-            window.scrollTo(0,0);
-            }
-          }, 2000);
-
       }
+    )();
 
-    )()
+    // after 2200ms i.e the preloader functionality finishes
+    // set isLoading to false to remove the preloader component
+    // and if the user scrolled the page, return to point X/Y = 0/0
+    setTimeout(() => {
+      setIsLoading(false);
+      if (window !== undefined) {
+      window.scrollTo(0,0);
+      }
+    }, 2200);
 
 
   }, [])
 
-  //home page loader
 
 
 
   return (
       <>
         <div className="w-full pb-[5rem] ambientBackground flex flex-col items-center">
-        <LinkProvider>
 
-          {/* allow the exit animation from framer motion */}
-          <AnimatePresence mode="wait">
+          {/* AnimatePresence to allow the exit animation from 
+          the slideLeft variant on the PreLoader Component */}
+          {/* <AnimatePresence mode="wait">
           {
-            isLoading && <DynamicComponentWithNoSSR/> 
-            // <Preloader/>
+            isLoading && <Preloader/>
           }
-          </AnimatePresence>
+          </AnimatePresence> */}
           
           
-          <Nav2/>
-
-          <div className="max-w-[1600px] flex flex-col mx-auto">
+          <div className="w-full max-w-[1600px] flex flex-col mx-auto">
             <Hero/>
 
             <div className="mb-[5rem]">
-              <Tech/>
+              {/* <Tech/> */}
             </div>
-            <Extra1/>
+            {/* <Extra1/> */}
   
 
             <div className="mt-[15rem]">
-              <Projects/>
+              {/* <Projects/> */}
             </div>
 
             {/* <div className="w-full max-w-[1600px] h-[90vh] border-2 border-[#ffffffa9] mx-auto
@@ -95,25 +82,23 @@ export default function Home() {
 
             </div> */}
             <div className="mt-[15rem]">
-              <Extra3/>
+              {/* <Extra3/> */}
             </div>
 
             <div className="mt-[3rem]">
-              <Git/>
+              {/* <Git/> */}
             </div>
 
             <div className="mt-[7rem]">
-              <Extra2/>
+              {/* <Extra2/> */}
             </div>
 
             <div className="mt-[5rem]">
-              <Contact/>
+              {/* <Contact/> */}
             </div>
 
           </div>
 
-
-          </LinkProvider>
 
         </div>
       </>

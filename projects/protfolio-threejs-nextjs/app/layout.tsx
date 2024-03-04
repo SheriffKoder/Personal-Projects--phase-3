@@ -5,7 +5,6 @@ import Nav from "@/components/Nav";
 
 // import StarsCanvas from "@/components/Contact/StarsCanvas";
 // import SmoothScroll from "@/components/Scroll/SmoothScroll";
-import LinkProvider from "@/components/context";
 import Footer from "@/components/footer";
 
 
@@ -40,7 +39,7 @@ export default function RootLayout({
         {children}
         </main>
 
-        <Footer/>
+        {/* <Footer/> */}
       </body>
     </html>
   );

@@ -86,7 +86,8 @@ export const CharCanvas = () => {
     return (
         <Canvas
         shadows
-        camera={{position: [0,2,5], fov: 10}}>
+        camera={{position: [0,2,5], fov: 10}}
+        >
 
 
         <Experience/>
