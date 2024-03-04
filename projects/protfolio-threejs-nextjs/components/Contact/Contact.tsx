@@ -4,7 +4,7 @@ import React, { useState, useRef } from "react"
 import { ChangeEventHandler, FormEventHandler } from "react";
 
 //1.2
-import { motion } from "framer-motion";
+import { easeInOut, motion } from "framer-motion";
 import {styles} from "../../styles/styles";
 // import EarthCanvas from "./EarthCanvas";
 import { slideIn } from "@/utils/motion";
@@ -138,8 +138,8 @@ const showEmailConfirm = () => {
        {/* text div */}
      
 
-      <motion.h2 className="text-[8rem] absolute bottom-[20%]"
-      initial={{y:0, opacity: 0}} animate={{y:-100, opacity: 1}} transition={{ease: [.76, 0, 0.24, 1], duration: 1.5, delay:3}}>
+      <motion.h2 className="text-[8rem] absolute bottom-[15%]"
+      initial={{y:0, opacity: 0}} animate={{y:-130, opacity: 1}} transition={{ease: "easeInOut", duration: 1.5, delay:3}}>
 
         <span className="flex flex-row justify-center relative">Hello World
         <div className="placeHolder h-[10rem] right-[-2rem] mt-[1rem]  absolute w-[1px] bg-white"/>  
