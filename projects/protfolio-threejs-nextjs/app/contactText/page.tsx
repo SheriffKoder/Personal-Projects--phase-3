@@ -1,6 +1,6 @@
 "use client"
 
-import Contact from "@/components/Contact/Contact";
+import ContactText from "@/components/Contact/ContactText";
 import TransitionEffect from "@/components/Animations/TransitionEffect";
 import Image from "next/image";
 import Link from "next/link";
@@ -25,7 +25,7 @@ export default function Home() {
       {/* <Contact key={play} SetPlay={SetPlay}/> */}
 
       
-      <Contact/>
+      <ContactText/>
       <StarsCanvas/>
       {/* </AnimatePresence> */}
 

@@ -51,7 +51,7 @@ const Footer = () => {
                     {
                         path !== "contact" && (
                                 
-                        <div className="ml-auto flex flex-row gap-2 absolute right-[2rem] bottom-[-1.5rem]">
+                        <div className="ml-auto flex flex-row gap-2 absolute right-[2rem] bottom-[-1.45rem]">
                             <SocialIcons radius={"0.3rem"} size={"1.5rem"} background={"#ffffff7d"}
                             size2={24} padding={"0.3rem"}/>
                             
@@ -65,7 +65,8 @@ const Footer = () => {
                 <span>&#169; SHERIFF KODER</span>
 
                 <span className="w-[17px] flex items-center justify-center mt-[-2px]">
-                    <Image src={"/icons/ss-c-logo.png"} height={15} width={17} alt="logo">
+                    <Image src={"/icons/ss-c-logo.png"} height={15} width={17} alt="sheriffkoder.com website's logo"
+                    style={{height: "17px", width: "19px"}}>
                     </Image>
                 </span>
             </span>

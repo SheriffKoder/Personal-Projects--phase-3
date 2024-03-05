@@ -4,6 +4,9 @@ import { motion } from 'framer-motion';
 
 import React from 'react'
 
+// wrap jsx between <FadeUp></FadeUp>
+
+
 const FadeUp = ({children}: {
     children: React.ReactNode
 }) => {

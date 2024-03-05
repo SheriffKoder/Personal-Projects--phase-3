@@ -20,7 +20,7 @@ const Hero = () => {
 
   return (
         <div className="max-h-[99vh] h-[99vh]
-        flex px-4 
+        flex
         flex-col gap-6 justify-center items-center pt-[4rem]
         lg:flex-row lg:items-center lg:justify-evenly lg:gap-12 lg:pt-[8rem]
         mx-auto relative min-w-full"
@@ -93,7 +93,7 @@ const Hero = () => {
               <CharCanvas/>
           </div>
 
-
+          {/* next-component link */}
           {/* display this component-link when the ref is in view, hide when out of this component */}
           {isInView && (
             <div className="absolute bottom-[2rem] w-[99%] flex justify-center items-center"

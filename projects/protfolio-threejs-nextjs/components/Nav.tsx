@@ -1,20 +1,26 @@
 "use client"
 
-import React from "react"
+import React, { useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 
 
 const Nav = () => {
+
+    // get the current visited page as a string to set its link to .active class
     const path = usePathname().split("/")[1];
+
+    // change the src of the logo image on hover
+    const [iconSrc, setIconSrc] = useState("/icons/ss-w-logo.png");
 
 
   return (
-    <nav className="sticky top-0 w-full h-[3rem] bg-[#370a1000] z-[10]
-    
-    ">
+    // id to give css styling
+    <nav className="sticky top-0 w-full h-[3rem] z-[10]
+    " id="main_navigation">
 
+        {/* thin line at the top of the nav with background animation */}
         <div className="h-[2px] w-full gradient_nav_animation
         bg-gradient-to-r from-[#5398bf] from-20% via-[#39d0b753] via-60% to-transparent"/>
 
@@ -22,9 +28,13 @@ const Nav = () => {
         mt-1
         "
         >
-            <span className="pl-6">
+
+            {/* the logo */}
+            <span className="pl-6"
+            onMouseEnter={()=>{setIconSrc("/icons/ss-c-logo.png")}}
+            onMouseLeave={()=>{setIconSrc("/icons/ss-w-logo.png")}}>
                 <Link href="/">
-                <Image src="/icons/ss-w-logo.png" height={22} width={22} alt="logo">
+                <Image src={iconSrc} height={22} width={22} alt="sheriffkoder.com website's logo">
 
                 </Image>
                 </Link>
@@ -66,13 +76,6 @@ const Nav = () => {
                         </Link>
                     </li>
                     
-                    {/* <li className="py-4">
-                        <span className="px-4 py-1 text-base font-base gradientGreyButton">
-                            <Link href="/" className="gradient_text_1 w-full h-full">
-                                Contact
-                            </Link>
-                        </span>
-                    </li> */}
 
                 </ul>
                 
@@ -83,4 +86,4 @@ const Nav = () => {
   )
 }
 
-export default Nav
+export default Nav;
