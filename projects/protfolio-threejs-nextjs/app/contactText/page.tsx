@@ -19,7 +19,7 @@ export default function Home() {
     <div className="h-[calc(100vh-150px)] w-[100vw] relative z-[0]">
     {/* // <div className="relative z-0"> */}
     
-      <TransitionEffect/>
+      {/* <TransitionEffect/> */}
       {/* <AnimatePresence mode="wait"> */}
       
       {/* <Contact key={play} SetPlay={SetPlay}/> */}

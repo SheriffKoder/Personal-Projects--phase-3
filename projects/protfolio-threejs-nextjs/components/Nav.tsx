@@ -19,8 +19,9 @@ const Nav = () => {
     // id to give css styling
     <nav className="sticky top-0 w-full h-[3rem] z-[10]
     " id="main_navigation">
+        { path !== "contactText" && (
 
-        {/* thin line at the top of the nav with background animation */}
+        <>
         <div className="h-[2px] w-full gradient_nav_animation
         bg-gradient-to-r from-[#5398bf] from-20% via-[#39d0b753] via-60% to-transparent"/>
 
@@ -29,7 +30,6 @@ const Nav = () => {
         "
         >
 
-            {/* the logo */}
             <span className="pl-6"
             onMouseEnter={()=>{setIconSrc("/icons/ss-c-logo.png")}}
             onMouseLeave={()=>{setIconSrc("/icons/ss-w-logo.png")}}>
@@ -43,7 +43,6 @@ const Nav = () => {
      
 
 
-            {/* list or a menu button */}
             <span className="pr-4">
                 <ul className="flex flex-row gap-[min(5vw,3rem)] uppercase text-xs font-semibold">
                     <li className={`py-4 ${path === "" ? "active no_select" : "gradient_text_hover_1"}
@@ -82,6 +81,8 @@ const Nav = () => {
             </span>
 
         </div>
+        </>
+            )}
     </nav>
   )
 }
