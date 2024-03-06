@@ -64,13 +64,14 @@ export default function Home() {
           </AnimatePresence> */}
           
           
-          <div className="w-full max-w-[1600px] flex flex-col mx-auto px-4 ">
+          <div className="w-full max-w-[1600px] flex flex-col mx-auto ">
+
             <Hero/>
 
-            <div className="mb-[5rem]">
+            <div className="mb-[5rem] border">
               <Tech/>
             </div>
-            {/* <Extra1/> */}
+            <Extra1/>
   
 
             <div className="mt-[15rem]">

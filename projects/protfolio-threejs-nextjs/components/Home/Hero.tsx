@@ -42,7 +42,7 @@ const Hero = () => {
           id="heroText_comp">
             
             <span className="gradient_text_1 text-[min(1.75em,2.25rem)] font-bold uppercase
-            lg:text-[text-[min(2em,2.25rem)]" >
+            lg:text-[min(calc(1.5rem+1vw),46px)]" >
               Sheriff Koder
             </span>
             
@@ -96,10 +96,10 @@ const Hero = () => {
           {/* next-component link */}
           {/* display this component-link when the ref is in view, hide when out of this component */}
           {isInView && (
-            <div className="absolute bottom-[2rem] w-[99%] flex justify-center items-center"
+            <div className="absolute bottom-[2rem] w-full flex"
             >
-                <a href="#tech-comp" className="border-2 border-white rounded-full w-8 h-8
-                flex items-center justify-center opacity-50">
+                <a href="#tech-comp" className="mx-auto border-2 border-white rounded-full w-8 h-8
+                flex items-center justify-center opacity-50 cursor-pointer z-[1] ">
                   <CaretDown2 size={40} color="#ffff"/>
                 </a>
 
