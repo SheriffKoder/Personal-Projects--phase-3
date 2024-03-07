@@ -19,7 +19,6 @@ const Footer = () => {
     ${(path === "contact" || (path2.length > 2 && path2[1] === "projects")) ? "bg-[#00000000]" : "bg-[#0000]"} `}>
         <div className="max-w-[1600px] flex flex-col items-center justify-center w-full">
 
-                { path !== "contactText" && (
                 <div className="w-full flex flex-row justify-center items-center relative">
                     <ul className="flex flex-row gap-12 text-xs font-light opacity-90">
                         <li className={`py-4
@@ -59,7 +58,6 @@ const Footer = () => {
                         </div>
                     )}
                 </div>
-                )}
 
 
             {/* z to show on the contact page */}

@@ -68,7 +68,7 @@ export default function Home() {
 
             <Hero/>
 
-            <div className="mb-[5rem] border">
+            <div className="mb-[5rem]">
               <Tech/>
             </div>
             <Extra1/>
