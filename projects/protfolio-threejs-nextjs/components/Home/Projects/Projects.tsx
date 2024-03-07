@@ -79,7 +79,7 @@ const Projects = () => {
     const slideIndex = useRef(2);
     const [index2, setIndex2] = useState(0);
     const [ lastIndex, setLastIndex ] = useState(3-1);
-    const [ currentProject, setCurrentProject ] = useState((index2+1 === projects.length) ? 0: index2+1);
+    const [ currentProject, setCurrentProject ] = useState(0);
 
     const [orbitControl,setOrbitControl] = useState("");
     const rotateModels = () => {
@@ -98,6 +98,8 @@ const Projects = () => {
 
     const borderColor = "#ffffff0";
 
+    const projectDescription = useRef<HTMLDivElement>(null);
+
 
     useEffect(()=> {
       if (isInView === true) {
@@ -114,9 +116,22 @@ const Projects = () => {
       console.log("slideIndex "+ slideIndex)
     }, [slideIndex]);
 
+
+
+
+    const changeProject = (index:number) => {
+
+      projectDescription.current?.classList.remove("fadeIn_animation");
+      setTimeout(()=> {
+      projectDescription.current?.classList.add("fadeIn_animation");
+      setCurrentProject(index);
+
+      }, 10);
+    }
+
   return (
 
-    <div className="w-full h-[75vh] flex flex-col" 
+    <div className="w-full h-[100vh] flex flex-col px-3" 
     style={{border: `1px solid ${borderColor}`}}>
 
 
@@ -126,253 +141,61 @@ const Projects = () => {
         </h1>
       </div>
 
+
+      {/* div holding the icons, description, 3d model */}
       <div className="flex-1 w-[100%]
-      flex flex-col 2xl:flex-row 2xl:relative"
+      flex flex-col 2xl:relative
+      md2:flex-row"
       style={{border: `1px solid ${borderColor}`}}> 
        
 
         {/* /////////////////////////////////////////////////////////////////////// */}
-        <div style={{backgroundImage: `${myImage}, ${myColor}`, backgroundBlendMode: blendMode}}
+        {/* <div style={{backgroundImage: `${myImage}, ${myColor}`, backgroundBlendMode: blendMode}}
               className="hero_brush_mask hidden 2xl:block">
-        </div>
+        </div> */}
 
 
 
         {/* /////////////////////////////////////////////////////////////////////// */}
         {/* Projects icons */}
-        <div className="w-[15%] flex flex-col items-center justify-center gap-8">
+        <div className="flex flex-row items-center justify-center w-full mt-4
+        md2:flex-col md2:w-[15%]
+        max-w-[600px] max-h-[500px] mx-auto">
           
-          <div className="h-[50px] w-full z-[1] flex items-center justify-center" 
-          onClick={()=>{
-            setSlideUp((prev)=>prev+150+32); slideIndex.current=slideIndex.current-1;
-            setLastIndex((prev)=>prev === 0 ? projects.length-1 : prev-1);
-
-            if (project_box_1.current !== null && project_box_2.current !== null && project_box_3.current !== null) {
-            if (project_box_2.current.classList.contains("neon_button_selected")) {
-              // project_box_1?.classList.remove("neon_button_selected");
-              // project_box_1?.classList.add("neon_button_notselected");
-              project_box_2.current.classList.remove("neon_button_selected");
-              project_box_2.current.classList.add("neon_button_notselected");
-              // project_box_3?.classList.remove("neon_button_selected");
-              // project_box_3?.classList.add("neon_button_notselected");
-            }
-
-
-
-          setTimeout(()=> {
-            setSlideUp(initial); 
-            setIndex2((prev)=>prev === 0 ? projects.length-1 :prev-1)
-
-          }, 150);
-
-          setTimeout(()=> {
-            
-            if (project_box_1.current !== null && project_box_2.current !== null && project_box_3.current !== null) {
-              if (project_box_1.current.classList.contains("neon_button_selected")) {
-                project_box_1.current.classList.remove("neon_button_selected");
-                project_box_1.current.classList.add("neon_button_notselected");
-                // project_box_2?.classList.remove("neon_button_notselected");
-                // project_box_2?.classList.add("neon_button_selected");
-              }
-          
-            
-
-
-            if (project_box_3.current.classList.contains("neon_button_selected")) {
-              setCurrentProject((index2 === projects.length) ? 0: index2)
-            } else {
-              setCurrentProject((index2 === projects.length) ? 0: index2)
-            }
-
-            if (!project_box_1.current.classList.contains("neon_button_selected") && !project_box_3.current.classList.contains("neon_button_selected")) {
-              project_box_2.current.classList.remove("neon_button_notselected");
-              project_box_2.current.classList.add("neon_button_selected");
-            }
-
-            }  
-          }, 600);
-            
-            }}}>
-            {/* { slideIndex.current > 1 && ( */}
+          <div className="z-[1] flex items-center justify-center
+          rotate-[270deg] md2:rotate-0">
             <CaretUp color={"#ffff"} size={"50px"}/>
-            {/* ) */}
-            {/* } */}
+          </div>
+
+
+          <div className="flex-1 flex flex-row justify-around
+          md2:flex-col
+          ">
+            {
+            projects.map((project, index) => (
+                <div className={`
+                ${projects[currentProject].name == project.name ? "neon_button_selected" : "neon_button_notselected"} 
+                h-[min(15vw,75px)] 
+                w-[min(15vw,75px)] 
+                rounded-[min(2vw,10px)]`}
+              style={{
+                backgroundImage: `url('${project.icon}')`,
+                backgroundSize: "contain"
+              }}
+              key={project.name+"icon"}
+              onClick={()=>{changeProject(index); }}>
+              </div>
+              ))
+            }
+
+
           </div>
           
-          <div className="overflow-y-hidden w-full">
-            <motion.div className="flex flex-col gap-8 items-center justify-center 
-            max-h-[calc((150px*3)+(2rem*2))]
-            
-            " initial={{y:initial}} 
-            animate={{y:slideUp}} transition={{ease: "easeInOut", duration: slideUp === initial ? 0:0.1, delay:0.0}}>
-              {/* { projects.length < 3 && ( */}
+ 
 
-
-
-              <div className="min-w-[150px] min-h-[150px] neon_button_notselected rounded-[10px]"
-              style={{
-                backgroundImage: `url('${projects[index2-1 < 0 ? projects.length-1 : index2-1].icon}')`,
-                backgroundSize: "contain"
-              }}
-              >
-              {/* {projects[index2-1 < 0 ? projects.length-1 : index2-1].name} */}
-              </div>
-              {/* ) */}
-              {/* } */}
-
-              {/* {projects.map((project, index)=> (
-                <div className={`min-w-[150px] min-h-[150px] border-2  rounded-[10px]
-                ${index === slideIndex.current ? "border-[#a4385a]" : "border-[#387ca4]" }`}
-                key={index}>
-                  {project.name}
-                </div>
-              ))} */}
-
-                {/* first div */}
-                <div className={`min-w-[150px] min-h-[150px] neon_button_notselected rounded-[10px]
-                overflow-hidden`}
-                id="project_box_1"
-                onMouseEnter={(e)=>{setCurrentProject(index2);
-
-                if (project_box_1.current !== null && project_box_2.current !== null && project_box_3.current !== null) {
-                project_box_1.current.classList.remove("neon_button_notselected");
-                project_box_1.current.classList.add("neon_button_selected");
-                project_box_2.current.classList.remove("neon_button_selected");
-                project_box_2.current.classList.add("neon_button_notselected");
-                project_box_3.current.classList.remove("neon_button_selected");
-                project_box_3.current.classList.add("neon_button_notselected");
-                }
-              }}
-              style={{
-                backgroundImage: `url('${projects[index2].icon}')`,
-                backgroundSize: "contain"
-              }}
-                // onMouseLeave={()=>{setCurrentProject((index2+1 === projects.length) ? 0: index2+1)}}
-                >
-                  {/* {projects[index2].name} */}
-                  {/* <Image src={projects[index2].icon} fill alt={projects[index2].name+" icon"}
-                  >
-                  </Image> */}
-                </div>
-
-                {/* main second div */}
-                <div className={`min-w-[150px] min-h-[150px] rounded-[10px]
-                neon_button_selected overflow-hidden }`}
-                id="project_box_2"
-                style={{
-                  backgroundImage: `url('${projects[(index2+1 === projects.length) ? 0: index2+1].icon}')`,
-                  backgroundSize: "contain"
-                }}
-                onMouseEnter={()=>{
-                  setCurrentProject((index2+1 === projects.length) ? 0: index2+1)
-                  if (project_box_1.current !== null && project_box_2.current !== null && project_box_3.current !== null) {
-                  project_box_1.current.classList.add("neon_button_notselected");
-                  project_box_1.current.classList.remove("neon_button_selected");
-                  project_box_2.current.classList.add("neon_button_selected");
-                  project_box_2.current.classList.remove("neon_button_notselected");
-                  project_box_3.current.classList.remove("neon_button_selected");
-                  project_box_3.current.classList.add("neon_button_notselected");
-                  }
-                }}
-                >
-                  {/* (index2+1 === projects.length) ? 0: index2+1 */}
-                  {/* {projects[(index2+1 === projects.length) ? 0: index2+1].name} */}
-                  {/* <Image src={projects[(index2+1 === projects.length) ? 0: index2+1].icon} fill alt={projects[(index2+1 === projects.length) ? 0: index2+1].name+" icon"}
-                  className="overflow-hidden"
-                  style={{objectFit: "contain"}}>
-                  </Image> */}
-                </div>
-
-                {/* third div */}
-                <div className={`min-w-[150px] min-h-[150px] neon_button_notselected  rounded-[10px]
-                `}
-                id="project_box_3"
-                onMouseEnter={()=>{
-                  setCurrentProject((index2+2 === projects.length) ? 0: (index2+1 === projects.length) ? 1 : index2+2)
-                  if (project_box_1.current !== null && project_box_2.current !== null && project_box_3.current !== null) {
-                  project_box_1.current.classList.add("neon_button_notselected");
-                  project_box_1.current.classList.remove("neon_button_selected");
-                  project_box_2.current.classList.remove("neon_button_selected");
-                  project_box_2.current.classList.add("neon_button_notselected");
-                  project_box_3.current.classList.remove("neon_button_notselected");
-                  project_box_3.current.classList.add("neon_button_selected");
-                  }
-                }}
-                style={{
-                  backgroundImage: `url('${projects[(index2+2 === projects.length) ? 0: (index2+1 === projects.length) ? 1 : index2+2].icon}')`,
-                  backgroundSize: "contain"
-                }}
-                
-                  // onMouseLeave={()=>{setCurrentProject((index2+1 === projects.length) ? 0: index2+1)}}
-                >
-                  {/* {projects[(index2+2 === projects.length) ? 0: (index2+1 === projects.length) ? 1 : index2+2].name} */}
-                </div>
-              
-                {/* below dummy div */}
-                <div className="min-w-[150px] min-h-[150px] neon_button_notselected rounded-[10px]"
-                style={{
-                  backgroundImage: `url('${projects[lastIndex].icon}')`,
-                  backgroundSize: "contain"
-                }}>
-                  {/* {projects[lastIndex].name} */}
-                </div>
-
-
-              </motion.div>
-          </div>
-
-          <div className="h-[50px] w-full z-[1] flex items-center justify-center" 
-          onClick={()=>{setSlideUp((prev)=>prev-150-32); slideIndex.current=slideIndex.current+1;
-            setLastIndex((prev)=>prev+1 === projects.length ? 0 : prev+1);
-
-            if (project_box_1.current !== null && project_box_2.current !== null && project_box_3.current !== null) {
-              if (project_box_2.current.classList.contains("neon_button_selected")) {
-                // project_box_1?.classList.remove("neon_button_selected");
-                // project_box_1?.classList.add("neon_button_notselected");
-                project_box_2.current.classList.remove("neon_button_selected");
-                project_box_2.current.classList.add("neon_button_notselected");
-                // project_box_3?.classList.remove("neon_button_selected");
-                // project_box_3?.classList.add("neon_button_notselected");
-              }
-            }
-            setTimeout(()=> {
-              setSlideUp(initial); 
-              setIndex2((prev)=>prev === projects.length-1 ? 0: prev+1)
-              }, 150);
-
-            setTimeout(()=> {
-              if (project_box_1.current !== null && project_box_2.current !== null && project_box_3.current !== null) {
-                if (project_box_3.current.classList.contains("neon_button_selected")) {
-                  project_box_3.current.classList.remove("neon_button_selected");
-                  project_box_3.current.classList.add("neon_button_notselected");
-                  project_box_2.current.classList.remove("neon_button_notselected");
-                  project_box_2.current.classList.add("neon_button_selected");
-                }
-                // project_box_2?.classList.remove("neon_button_notselected");
-                // project_box_2?.classList.add("neon_button_selected");
-
-                if (project_box_1.current.classList.contains("neon_button_selected")) {
-                  // setCurrentProject((index2-2 < 0 ? projects.length-1 : index2-2))
-                } else {
-                  setCurrentProject((index2-1 < 0 ? projects.length-1 : index2-1))
-                }
-
-                if (!project_box_1.current.classList.contains("neon_button_selected") && !project_box_3.current.classList.contains("neon_button_selected")) {
-                  project_box_2.current.classList.remove("neon_button_notselected");
-                  project_box_2.current.classList.add("neon_button_selected");
-                }
-              }
-
-            }, 600);
-
-           
-            
-            }}>
-
-            {/* { slideIndex.current < projects.length && ( */}
+          <div className="z-[1] flex items-center justify-center
+          rotate-[270deg] md2:rotate-0">
             <CaretDown  color={"#ffff"} size={"50px"} />
-            {/* ) */}
-            {/* } */}
           </div>
         </div>
 
@@ -381,15 +204,20 @@ const Projects = () => {
 
         {/* /////////////////////////////////////////////////////////////////////// */}
         {/* Project description */}
-        <div className="flex-1 flex flex-col px-[3rem] py-[5%] gap-[1rem] z-[1]"
-        style={{border: `1px solid ${borderColor}`}}>
-            <h4 className="font-semibold text-4xl">{projects[currentProject].name}</h4>
-            <p>
+        {/* technologies like in the @home/tech component */}
+
+        <div className="flex flex-col gap-[min(1vw,1rem)] z-[1] mx-4 mt-8 text-[calc(1rem+0.25vw)]
+        md2:justify-start md2:mt-[12.5vh] md2:flex-1 fadeIn_animation"
+        style={{border: `1px solid ${borderColor}`}}
+        ref={projectDescription}>
+
+            <h4 className="font-semibold text-[min(1em,1.25rem)]">{projects[currentProject].name}</h4>
+            <p className="text-[min(0.75em,1rem)] opacity-60">
               {projects[currentProject].description}
             </p>
 
 
-            <div className="mt-2 flex flex-row gap-2">
+            <div className="my-2 flex flex-row gap-2">
                 <button 
                 className="px-4 py-0 lg:text-base text-sm font-base gradientGreyButton focus:opacity-95 hover:opacity-95">
                     <Link href={projects[currentProject].link} className="gradient_text_1 w-full h-full">
@@ -405,30 +233,39 @@ const Projects = () => {
                 </button>
             </div>
 
-
             <div className="flex flex-row flex-wrap gap-2">
               {
               
-              projects[currentProject].tech.map((tech, index) => {
+              projects[currentProject].tech.map((technology, index) => {
 
-                const technology = allTechnologies.filter((tech2)=> tech2.name === tech);
+                const tech = allTechnologies.filter((tech2)=> tech2.name === technology)[0];
 
                 return (
-                <div key={index} className={`px-3 py-1 mt-1 rounded-[3px] border border-[#ffffff21]
-                flex items-center justify-center gap-1 pl-[0.5rem] ${technology[0].name}_bg`}>
-                  <div className="opacity-90">
-                    <Image src={technology[0].icon} height={18} width={18} alt={technology[0].name}
-                    style={{objectFit:"contain"}}></Image>
-                  </div>
-                  <h3 className={`opacity-95 ${technology[0].name}_text text-sm`}>{technology[0].name}</h3>
-                </div>                
+                  <div key={tech.name+ " "+index} className={`
+                  pr-[min(1.5rem,calc(0.5rem+1.5vw))]
+                  pl-[min(1.5rem*0.75,calc(0.5rem+1.5vw)*0.8)]
+                  py-[min(0.6rem,0.75vw)]
+                  md2:mt-2 mt-1 rounded-[5px] border border-[#ffffff21]
+                  flex flex-row items-center justify-start md2:gap-3 gap-2 ${tech.name}_bg
+                  text-[calc(1rem+0.6vw)]`}>
+                    <div className="opacity-90 w-[min(30px,calc(0.75rem+1vw))] h-[min(30px,calc(0.75rem+1vw))]
+                    flex relative">
+                      <Image src={tech.icon} fill alt={tech.name}
+                      sizes="30px"
+                      style={{objectFit:"contain"}}></Image>
+                    </div>
+                    <h3 className={`opacity-95 ${tech.name}_text
+                    text-[min(0.6em,1rem)]`}>
+                      {tech.name}
+                    </h3>
+                  </div>        
                 )
 
 
                 
               })}
             </div>
-        </div>
+          </div>
 
 
 
@@ -436,22 +273,20 @@ const Projects = () => {
 
 
         {/* div2 */}
-        <div className="2xl:w-[40%] h-[30%] 2xl:h-[100%] my-auto flex items-center justify-center relative overflow-hidden"
+        {/* <div className="2xl:w-[40%] h-[30%] 2xl:h-[100%] my-auto flex items-center justify-center relative overflow-hidden"
         style={{border: `1px solid ${borderColor}`}}>
 
-          {/* <Image src="/assets/brickwall.jpg" alt="Furniture" width={700} height={900}
-            className="hero_brush_mask lg:hidden">
-          </Image> */}
 
           <div style={{backgroundImage: `${myImage}, ${myColor}`, backgroundBlendMode: blendMode}}
             className="hero_brush_mask 2xl:hidden">
           </div>
 
           <div className="relative flex items-center justify-center w-full h-full">
-            {/* <PC/> */}
+
             <Computer orbitControl={orbitControl} 
             texture_1_url={projects[currentProject].image1} 
             texture_2_url={projects[currentProject].imagex}/>
+
             <button className="rounded-[5px] h-8 w-8 bg-black absolute bottom-[5%] right-[48%]
             flex items-center justify-center opacity-80 -2"
             onClick={()=>{orbitControl === "default" || orbitControl === "back" ? setOrbitControl("view") : setOrbitControl("back") }}
@@ -462,16 +297,16 @@ const Projects = () => {
               className="invert mt-[-1px]"></Image>
             </button>
 
-          </div>
-
-
         </div>
+
+
+        </div> */}
 
 
       </div>
 
 
-      <div className="w-full flex items-center justify-center">
+      {/* <div className="w-full flex items-center justify-center">
         <Link href="/projects" className="lg:px-4 px-3 py-1
         gradientRoundButton focus:opacity-95 hover:opacity-95
         lg:text-base text-sm font-medium"
@@ -479,7 +314,7 @@ const Projects = () => {
         ref={container3}>
           view all projects
         </Link>
-      </div>
+      </div> */}
 
     </div>
     

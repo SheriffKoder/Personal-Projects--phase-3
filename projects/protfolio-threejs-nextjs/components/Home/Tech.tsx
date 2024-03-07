@@ -36,7 +36,7 @@ const Tech = () => {
               ">
 
                 <span className="absolute bottom-[calc(2rem+13vw+5vh)] z-[0]
-                text-[calc(1.5rem+1vw)] w-full text-center font-semibold"
+                text-[calc(1rem+1vw)] w-full text-center font-semibold"
                 ref={container2}>
                   Technologies Used
                 </span>

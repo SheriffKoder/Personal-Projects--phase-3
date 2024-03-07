@@ -66,16 +66,16 @@ export default function Home() {
           
           <div className="w-full max-w-[1600px] flex flex-col mx-auto ">
 
-            <Hero/>
+            {/* <Hero/> */}
 
             <div className="mb-[5rem]">
-              <Tech/>
+              {/* <Tech/> */}
             </div>
             <Extra1/>
   
 
             <div className="mt-[15rem]">
-              {/* <Projects/> */}
+              <Projects/>
             </div>
 
             {/* <div className="w-full max-w-[1600px] h-[90vh] border-2 border-[#ffffffa9] mx-auto
