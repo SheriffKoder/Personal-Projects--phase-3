@@ -131,50 +131,47 @@ const Projects = () => {
 
   return (
 
-    <div className=" "
-    id="homeTech_container">
+    <div className="w-full h-[100vh] md2:h-auto flex flex-col px-3" 
+    style={{border: `1px solid ${borderColor}`}}>
 
-      <div className=""
-      id="homeTech_title">
-        <h1 className="gradientBoldHeader text-center relative">
+
+      <div className="w-full gradientBoldHeader text-center mb-2">
+        <h1>
           Highlighted Projects
-
-          <div id="homeTech_projectsLink"
-          className="flex items-center justify-center">
-            <div className="text-[calc(1rem+0.3vw)] bg-[#4747475c] 
-            rounded-full">
-
-              <Link href="/projects" className="text-[min(0.6em,1rem)] px-3 py-1
-              gradient_text_1  focus:opacity-95 hover:opacity-95
-              "
-              style={{borderRadius: "100px"}}
-              ref={container3}>
-                view all projects
-              </Link>
-            </div>
-          </div>
-
         </h1>
-
-        
-
       </div>
 
 
+      {/* div holding the icons, description, 3d model */}
+      <div className="flex-1 w-[100%]
+      flex flex-col 2xl:relative px-[3vw]
+      md2:flex-row md2:gap-4 md2:justify-start"
+      style={{border: `1px solid ${borderColor}`}}> 
+       
 
-      <div className=""
-      id="homeTech_icons">
+        {/* /////////////////////////////////////////////////////////////////////// */}
+        {/* <div style={{backgroundImage: `${myImage}, ${myColor}`, backgroundBlendMode: blendMode}}
+              className="hero_brush_mask hidden 2xl:block">
+        </div> */}
 
+
+
+        {/* /////////////////////////////////////////////////////////////////////// */}
+        {/* Projects icons */}
+        <div className="flex flex-row items-center justify-center w-full mt-4
+        md2:flex-col md2:w-[15%]
+        max-w-[600px] max-h-[500px] mx-auto md2:mt-[-2rem]
+        lg:max-w-[100px]">
+          
           <div className="z-[1] flex items-center justify-center
-          " 
-          id="homeTech_caret1">
+          rotate-[270deg] md2:rotate-0">
             <CaretUp color={"#ffff"} size={"50px"}/>
           </div>
 
 
-          <div className="flex-1 flex flex-row justify-around"
-          id="homeTech_icons_projects">
-
+          <div className="flex-1 flex flex-row justify-around
+          md2:flex-col md2:gap-4
+          ">
             {
             projects.map((project, index) => (
                 <div className={`
@@ -191,37 +188,35 @@ const Projects = () => {
               </div>
               ))
             }
+
+
           </div>
           
-          <div className="z-[1] flex items-center justify-center"
-          id="homeTech_caret1">
+ 
+
+          <div className="z-[1] flex items-center justify-center
+          rotate-[270deg] md2:rotate-0">
             <CaretDown  color={"#ffff"} size={"50px"} />
           </div>
+        </div>
 
 
-      </div>
 
 
+        {/* /////////////////////////////////////////////////////////////////////// */}
+        {/* Project description */}
+        {/* technologies like in the @home/tech component */}
 
-      <div className="
-      lg:ml-[5vw]
-      2xl:ml-0
-      "
-      id="homeTech_textModels_container">
+        <div className="h-[40vh] md2:h-full flex flex-col md1:flex-row pt-8 relative md2:flex-1 border
+        max-w-[1250px] xl:mr-auto">
 
-        <div className=" 
-        flex flex-col gap-[min(1vw,1rem)] z-[1] text-[calc(1rem+0.25vw)]
-        fadeIn_animation 
-        md2:mt-[min(5vh,1rem)]
-        xl:ml-[5rem]
-        2xl:ml-0
-        "
-        id="homeTech_text"
-        ref={projectDescription}>
-
-              <h4 className="font-semibold text-[min(1em,1.5rem)]">
-                {projects[currentProject].name}
-              </h4>
+          <div className="flex flex-col gap-[min(1vw,1rem)] z-[1] mx-4 text-[calc(1rem+0.25vw)]
+          md2:justify-start  fadeIn_animation
+          md1:max-w-[400px] md1:mx-0 h-full md2:max-w-[70%] border
+          "
+          style={{border: `1px solid ${borderColor}`}}
+          ref={projectDescription}>
+              <h4 className="font-semibold text-[min(1em,1.25rem)]">{projects[currentProject].name}</h4>
               <p className="text-[min(0.75em,1rem)] opacity-60">
                 {projects[currentProject].description}
               </p>
@@ -246,13 +241,13 @@ const Projects = () => {
                   const tech = allTechnologies.filter((tech2)=> tech2.name === technology)[0];
                   return (
                     <div key={tech.name+ " "+index} className={`
-                    pr-[min(1.1rem,calc(0.5rem+1vw))]
-                    pl-[min(1.1rem*0.75,calc(0.5rem+1vw)*0.8)]
-                    py-[min(0.2rem,0.5vw)]
+                    pr-[min(1.5rem,calc(0.5rem+1vw))]
+                    pl-[min(1.5rem*0.75,calc(0.5rem+1vw)*0.8)]
+                    py-[min(0.6rem,0.5vw)]
                     md2:mt-1 mt-0 rounded-[5px] border border-[#ffffff21]
-                    flex flex-row items-center justify-start gap-2 ${tech.name}_bg
+                    flex flex-row items-center justify-start md2:gap-3 gap-2 ${tech.name}_bg
                     text-[calc(1rem+0.3vw)]`}>
-                      <div className="opacity-90 w-[min(20px,calc(0.75rem+1vw))] h-[min(20px,calc(0.75rem+1vw))]
+                      <div className="opacity-90 w-[min(30px,calc(0.75rem+1vw))] h-[min(30px,calc(0.75rem+1vw))]
                       flex relative">
                         <Image src={tech.icon} fill alt={tech.name}
                         sizes="30px"
@@ -268,37 +263,50 @@ const Projects = () => {
                 })}
               </div>
 
-        </div>
+              {/* <div className="w-full flex items-center justify-center mt-auto">
+                <Link href="/projects" className="lg:px-4 px-3 py-1
+                gradientRoundButton focus:opacity-95 hover:opacity-95
+                lg:text-base text-sm font-medium"
+                style={{borderRadius: "100px"}}
+                ref={container3}>
+                  view all projects
+                </Link>
+              </div> */}
+          </div>
 
-        <div className="lg1120:mt-[-3vw]"
-        id="homeTech_models">
-
-
-          <div className="relative flex items-center justify-center w-full h-full
-          ">
+          {/* div2 */}
+          <div className="absolute 
+          bottom-[calc(-75%)] w-full h-[60%] md:h-[calc(60%+10vmax)]
+          md1:right-0 md1:top-0 md1:w-[50%] md1:h-full
+          md2:right-0 border border-red-700 md2:w-[40%] md2:top-[25%]
+          lg:right-[-3rem] lg:top-[15%]
+          xl:absolute xl:h-[400px] xl:top-0 xl:right-[-5%]"
+          style={{border: `1px solid ${borderColor}`}}>
+            {/* <div style={{backgroundImage: `${myImage}, ${myColor}`, backgroundBlendMode: blendMode}}
+              className="hero_brush_mask 2xl:hidden">
+            </div> */}
+            <div className="relative flex items-center justify-center w-full h-full
+             ">
               <Computer orbitControl={orbitControl}
               texture_1_url={projects[currentProject].image1}
               texture_2_url={projects[currentProject].imagex}/>
-
-
-              <button className="rounded-[5px] h-8 w-8 bg-black 
+              <button className="rounded-[5px] h-8 w-8 bg-black absolute bottom-[5%] right-[48%]
               flex items-center justify-center opacity-80 -2"
               onClick={()=>{orbitControl === "default" || orbitControl === "back" ? setOrbitControl("view") : setOrbitControl("back") }}
-              style={{border: `1px solid ${borderColor}`}}
-              id="homeTech_magnifyButton">
+              style={{border: `1px solid ${borderColor}`}}>
                 <Image
                 src={orbitControl === "default" || orbitControl === "back" ? "/icons/zoom-in.png" : "/icons/zoom-out.png" }
                 height={17} width={17} alt=""
-                className="invert mt-[-1px]">
-                </Image>
+                className="invert mt-[-1px]"></Image>
               </button>
-
-              
           </div>
-
-
+          </div>
         </div>
+
+
       </div>
+
+
 
 
     </div>
