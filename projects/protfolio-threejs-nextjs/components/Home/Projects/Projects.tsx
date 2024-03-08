@@ -131,7 +131,7 @@ const Projects = () => {
 
   return (
 
-    <div className="w-full h-[100vh] flex flex-col px-3" 
+    <div className="w-full h-[100vh] md2:h-auto flex flex-col px-3" 
     style={{border: `1px solid ${borderColor}`}}>
 
 
@@ -144,8 +144,8 @@ const Projects = () => {
 
       {/* div holding the icons, description, 3d model */}
       <div className="flex-1 w-[100%]
-      flex flex-col 2xl:relative
-      md2:flex-row"
+      flex flex-col 2xl:relative px-[3vw]
+      md2:flex-row md2:gap-4 md2:justify-start"
       style={{border: `1px solid ${borderColor}`}}> 
        
 
@@ -160,7 +160,8 @@ const Projects = () => {
         {/* Projects icons */}
         <div className="flex flex-row items-center justify-center w-full mt-4
         md2:flex-col md2:w-[15%]
-        max-w-[600px] max-h-[500px] mx-auto">
+        max-w-[600px] max-h-[500px] mx-auto md2:mt-[-2rem]
+        lg:max-w-[100px]">
           
           <div className="z-[1] flex items-center justify-center
           rotate-[270deg] md2:rotate-0">
@@ -169,7 +170,7 @@ const Projects = () => {
 
 
           <div className="flex-1 flex flex-row justify-around
-          md2:flex-col
+          md2:flex-col md2:gap-4
           ">
             {
             projects.map((project, index) => (
@@ -206,115 +207,107 @@ const Projects = () => {
         {/* Project description */}
         {/* technologies like in the @home/tech component */}
 
-        <div className="flex flex-col gap-[min(1vw,1rem)] z-[1] mx-4 mt-8 text-[calc(1rem+0.25vw)]
-        md2:justify-start md2:mt-[12.5vh] md2:flex-1 fadeIn_animation"
-        style={{border: `1px solid ${borderColor}`}}
-        ref={projectDescription}>
+        <div className="h-[40vh] md2:h-full flex flex-col md1:flex-row pt-8 relative md2:flex-1 border
+        max-w-[1250px] xl:mr-auto">
 
-            <h4 className="font-semibold text-[min(1em,1.25rem)]">{projects[currentProject].name}</h4>
-            <p className="text-[min(0.75em,1rem)] opacity-60">
-              {projects[currentProject].description}
-            </p>
-
-
-            <div className="my-2 flex flex-row gap-2">
-                <button 
-                className="px-4 py-0 lg:text-base text-sm font-base gradientGreyButton focus:opacity-95 hover:opacity-95">
-                    <Link href={projects[currentProject].link} className="gradient_text_1 w-full h-full">
-                    visit site
+          <div className="flex flex-col gap-[min(1vw,1rem)] z-[1] mx-4 text-[calc(1rem+0.25vw)]
+          md2:justify-start  fadeIn_animation
+          md1:max-w-[400px] md1:mx-0 h-full md2:max-w-[70%] border
+          "
+          style={{border: `1px solid ${borderColor}`}}
+          ref={projectDescription}>
+              <h4 className="font-semibold text-[min(1em,1.25rem)]">{projects[currentProject].name}</h4>
+              <p className="text-[min(0.75em,1rem)] opacity-60">
+                {projects[currentProject].description}
+              </p>
+              <div className="my-2 flex flex-row gap-2">
+                  <button
+                  className="px-4 py-0 lg:text-base text-sm font-base gradientGreyButton focus:opacity-95 hover:opacity-95">
+                      <Link href={projects[currentProject].link} className="gradient_text_1 w-full h-full">
+                      visit site
+                      </Link>
+                  </button>
+                  <button
+                  className="px-4 py-0 lg:text-base text-sm font-base gradientGreyButton focus:opacity-95 hover:opacity-95">
+                    <Link href={`/projects/${projects[currentProject].id}`} className="gradient_text_1 w-full h-full">
+                    more details
                     </Link>
-                </button>
-
-                <button 
-                className="px-4 py-0 lg:text-base text-sm font-base gradientGreyButton focus:opacity-95 hover:opacity-95">
-                  <Link href={`/projects/${projects[currentProject].id}`} className="gradient_text_1 w-full h-full">
-                  more details
-                  </Link>
-                </button>
-            </div>
-
-            <div className="flex flex-row flex-wrap gap-2">
-              {
-              
-              projects[currentProject].tech.map((technology, index) => {
-
-                const tech = allTechnologies.filter((tech2)=> tech2.name === technology)[0];
-
-                return (
-                  <div key={tech.name+ " "+index} className={`
-                  pr-[min(1.5rem,calc(0.5rem+1.5vw))]
-                  pl-[min(1.5rem*0.75,calc(0.5rem+1.5vw)*0.8)]
-                  py-[min(0.6rem,0.75vw)]
-                  md2:mt-2 mt-1 rounded-[5px] border border-[#ffffff21]
-                  flex flex-row items-center justify-start md2:gap-3 gap-2 ${tech.name}_bg
-                  text-[calc(1rem+0.6vw)]`}>
-                    <div className="opacity-90 w-[min(30px,calc(0.75rem+1vw))] h-[min(30px,calc(0.75rem+1vw))]
-                    flex relative">
-                      <Image src={tech.icon} fill alt={tech.name}
-                      sizes="30px"
-                      style={{objectFit:"contain"}}></Image>
+                  </button>
+              </div>
+              <div className="flex flex-row flex-wrap gap-2">
+                {
+          
+                projects[currentProject].tech.map((technology, index) => {
+                  const tech = allTechnologies.filter((tech2)=> tech2.name === technology)[0];
+                  return (
+                    <div key={tech.name+ " "+index} className={`
+                    pr-[min(1.5rem,calc(0.5rem+1vw))]
+                    pl-[min(1.5rem*0.75,calc(0.5rem+1vw)*0.8)]
+                    py-[min(0.6rem,0.5vw)]
+                    md2:mt-1 mt-0 rounded-[5px] border border-[#ffffff21]
+                    flex flex-row items-center justify-start md2:gap-3 gap-2 ${tech.name}_bg
+                    text-[calc(1rem+0.3vw)]`}>
+                      <div className="opacity-90 w-[min(30px,calc(0.75rem+1vw))] h-[min(30px,calc(0.75rem+1vw))]
+                      flex relative">
+                        <Image src={tech.icon} fill alt={tech.name}
+                        sizes="30px"
+                        style={{objectFit:"contain"}}></Image>
+                      </div>
+                      <h3 className={`opacity-95 ${tech.name}_text
+                      text-[min(0.6em,1rem)]`}>
+                        {tech.name}
+                      </h3>
                     </div>
-                    <h3 className={`opacity-95 ${tech.name}_text
-                    text-[min(0.6em,1rem)]`}>
-                      {tech.name}
-                    </h3>
-                  </div>        
-                )
+                  )
+          
+                })}
+              </div>
 
-
-                
-              })}
-            </div>
+              {/* <div className="w-full flex items-center justify-center mt-auto">
+                <Link href="/projects" className="lg:px-4 px-3 py-1
+                gradientRoundButton focus:opacity-95 hover:opacity-95
+                lg:text-base text-sm font-medium"
+                style={{borderRadius: "100px"}}
+                ref={container3}>
+                  view all projects
+                </Link>
+              </div> */}
           </div>
 
-
-
-
-
-
-        {/* div2 */}
-        {/* <div className="2xl:w-[40%] h-[30%] 2xl:h-[100%] my-auto flex items-center justify-center relative overflow-hidden"
-        style={{border: `1px solid ${borderColor}`}}>
-
-
-          <div style={{backgroundImage: `${myImage}, ${myColor}`, backgroundBlendMode: blendMode}}
-            className="hero_brush_mask 2xl:hidden">
+          {/* div2 */}
+          <div className="absolute 
+          bottom-[calc(-75%)] w-full h-[60%] md:h-[calc(60%+10vmax)]
+          md1:right-0 md1:top-0 md1:w-[50%] md1:h-full
+          md2:right-0 border border-red-700 md2:w-[40%] md2:top-[25%]
+          lg:right-[-3rem] lg:top-[15%]
+          xl:absolute xl:h-[400px] xl:top-0 xl:right-[-5%]"
+          style={{border: `1px solid ${borderColor}`}}>
+            {/* <div style={{backgroundImage: `${myImage}, ${myColor}`, backgroundBlendMode: blendMode}}
+              className="hero_brush_mask 2xl:hidden">
+            </div> */}
+            <div className="relative flex items-center justify-center w-full h-full
+             ">
+              <Computer orbitControl={orbitControl}
+              texture_1_url={projects[currentProject].image1}
+              texture_2_url={projects[currentProject].imagex}/>
+              <button className="rounded-[5px] h-8 w-8 bg-black absolute bottom-[5%] right-[48%]
+              flex items-center justify-center opacity-80 -2"
+              onClick={()=>{orbitControl === "default" || orbitControl === "back" ? setOrbitControl("view") : setOrbitControl("back") }}
+              style={{border: `1px solid ${borderColor}`}}>
+                <Image
+                src={orbitControl === "default" || orbitControl === "back" ? "/icons/zoom-in.png" : "/icons/zoom-out.png" }
+                height={17} width={17} alt=""
+                className="invert mt-[-1px]"></Image>
+              </button>
           </div>
-
-          <div className="relative flex items-center justify-center w-full h-full">
-
-            <Computer orbitControl={orbitControl} 
-            texture_1_url={projects[currentProject].image1} 
-            texture_2_url={projects[currentProject].imagex}/>
-
-            <button className="rounded-[5px] h-8 w-8 bg-black absolute bottom-[5%] right-[48%]
-            flex items-center justify-center opacity-80 -2"
-            onClick={()=>{orbitControl === "default" || orbitControl === "back" ? setOrbitControl("view") : setOrbitControl("back") }}
-            style={{border: `1px solid ${borderColor}`}}>
-              <Image 
-              src={orbitControl === "default" || orbitControl === "back" ? "/icons/zoom-in.png" : "/icons/zoom-out.png" }
-              height={17} width={17} alt=""
-              className="invert mt-[-1px]"></Image>
-            </button>
-
+          </div>
         </div>
-
-
-        </div> */}
 
 
       </div>
 
 
-      {/* <div className="w-full flex items-center justify-center">
-        <Link href="/projects" className="lg:px-4 px-3 py-1
-        gradientRoundButton focus:opacity-95 hover:opacity-95
-        lg:text-base text-sm font-medium"
-        style={{borderRadius: "100px"}}
-        ref={container3}>
-          view all projects
-        </Link>
-      </div> */}
+
 
     </div>
     
