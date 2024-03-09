@@ -66,7 +66,7 @@ export default function Home() {
           
           <div className="w-full max-w-[1600px] flex flex-col mx-auto ">
 
-            {/* <Hero/> */}
+            <Hero/>
 
             <div className="mb-[5rem]">
               {/* <Tech/> */}
