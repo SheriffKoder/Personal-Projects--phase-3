@@ -69,7 +69,7 @@ export default function Home() {
             <Hero/>
 
             <div className="mb-[5rem]">
-              {/* <Tech/> */}
+              <Tech/>
             </div>
             <Extra1/>
   
