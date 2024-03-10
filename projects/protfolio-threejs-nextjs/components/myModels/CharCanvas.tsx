@@ -82,26 +82,23 @@ const Experience = () => {
 
 
 
-export const CharCanvas = () => {
+const CharCanvas = () => {
     return (
-        <Canvas
-        shadows
-        camera={{position: [0,2,5], fov: 10}}
-        >
-
-
-        <Experience/>
-        {/* <ambientLight intensity={0.2}/> */}
-        {/* <OrbitControls/> */}
-        {/* <LightScene/> */}
-        <spotLight position={[-0.4, -0.3, 1.3]} distance={0} angle={0.88} color={0xc4dcff} intensity={2.5}/>
-        <spotLight position={[1.2, 1.5, 1]} distance={7} angle={0.52} intensity={10} color={0x007bff}/>
-        <spotLight position={[1.2, 1.5, 1]} distance={7} angle={0.52} intensity={4}/>
-
-        </Canvas>
+            <Canvas
+            shadows
+            camera={{position: [0,2,5], fov: 10}}
+            >
+            <Experience/>
+            {/* <ambientLight intensity={0.2}/> */}
+            {/* <OrbitControls/> */}
+            {/* <LightScene/> */}
+            <spotLight position={[-0.4, -0.3, 1.3]} distance={0} angle={0.88} color={0xc4dcff} intensity={2.5}/>
+            <spotLight position={[1.2, 1.5, 1]} distance={7} angle={0.52} intensity={10} color={0x007bff}/>
+            <spotLight position={[1.2, 1.5, 1]} distance={7} angle={0.52} intensity={4}/>
+            </Canvas>
     )
 }
 
 // #007bff
 
-
+export default CharCanvas;

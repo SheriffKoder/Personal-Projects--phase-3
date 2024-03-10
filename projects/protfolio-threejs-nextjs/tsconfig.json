@@ -35,6 +35,6 @@
   "public/icons/close-svg.jsx", 
   "public/icons/caret-down.tsx", 
   "public/icons/caret-down.jsx"
-],
+, "components/myModels/CharCanvas.tsx"],
   "exclude": ["node_modules"]
 }

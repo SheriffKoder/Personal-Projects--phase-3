@@ -2,11 +2,20 @@
 
 import React, {useRef} from "react"
 import {motion, useInView} from "framer-motion";
-import LaptopCanvas from "./Tech/laptop-canvas";
+// import LaptopCanvas from "./Tech/laptop-canvas";
 import { SectionWrapper } from "@/hoc";
 import Image from "next/image";
 
 import { technologies1, technologies2, technologies3 } from "@/constants/constants";
+
+//lazy loading because for high textures
+import dynamic from 'next/dynamic';
+const LaptopCanvas = dynamic(()=> import("./Tech/laptop-canvas"), {
+  ssr:false,
+  loading: () => 
+  <div className="w-full h-full flex items-center justify-center"><span className="loadingSpinner mt-[25vmax]"></span></div>
+})
+
 
 const Tech = () => {
 

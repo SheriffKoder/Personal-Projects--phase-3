@@ -1274,7 +1274,7 @@ background: -webkit-linear-gradient(
   
   box-shadow: 
   inset 0 0 0.25em 0 var(--clr-bg), 
-  0 0 0.5em var(--clr-bg);
+  0 0 0.25em var(--clr-bg);
   
   position: relative;
   transition: background-color 100ms linear;
@@ -1617,8 +1617,27 @@ background: linear-gradient(
   }
 
 }
+/* from-[#387ca4] to-[#39d0b7b4] */
+/* ///////////////////////// @Home/projects */
 
-/* ///////////////////////// @Home/Tech */
+.loadingSpinner {
+  position: absolute;
+  font-size: 30px;
+  height: 1em;
+  width: 1em;
+  border: solid #83838331;
+  border-bottom: solid #00e0bba0;
+  border-width: 0.157em;
+  border-radius: 50%;
+  animation: rotateSpinner 2s linear infinite;
+ }
+ 
+ @keyframes rotateSpinner { 
+   0%{rotate: 0;}
+   100%{rotate: 360deg;}
+ }
+ 
+
 
 #homeTech_container {
   height: 90vh;
@@ -1667,13 +1686,13 @@ background: linear-gradient(
 #homeTech_text {
   width: 100%;
   flex:1;
-  padding: 1rem min(5vw,3rem) 0 min(5vw,3rem);
+  padding: 5vw min(7vw,3rem) 0 min(7vw,3rem);
 
 }
 
 #homeTech_models {
   width: 100%;
-  height: 50vw;
+  height: 65vw;
   min-height: 30%;
 
 }
@@ -1683,7 +1702,7 @@ background: linear-gradient(
   #homeTech_magnifyButton {
     position: absolute;
     bottom: 1rem;
-    right: 1rem;
+    /* right: 1rem; */
   }
 }
 
@@ -1696,6 +1715,9 @@ background: linear-gradient(
 
 @media (orientation: landscape) {
 
+  #homeTech_container {
+    /* height: auto; */
+  }
   #homeTech_title {
     width: 100%;
     height: 15%;
@@ -1715,6 +1737,8 @@ background: linear-gradient(
 
   #homeTech_textModels_container {
     flex-direction: row;
+    overflow-x: hidden;
+    overflow-y: scroll;
   }
   
   #homeTech_text {
@@ -1726,8 +1750,25 @@ background: linear-gradient(
   #homeTech_models {
     width: 50%;
     height: 100%;
+    margin-top: 1rem;
+    margin-right: 2rem;
   
   }
+
+  @media (min-width: 1049px) {
+    #homeTech_title {
+      align-items: end;
+
+    }
+
+    #homeTech_textModels_container {
+      padding-left: 3vw;
+      overflow-y: hidden;
+
+    }
+  }
+
+
 
   @media (min-width: 1536px) {
 
@@ -1735,7 +1776,6 @@ background: linear-gradient(
       flex-direction: row;
       flex-wrap: wrap;
       max-height: 750px;
-      border: 1px solid white;
       width: 80vw;
       margin: 0 auto;
 
@@ -1745,8 +1785,13 @@ background: linear-gradient(
     #homeTech_title {
       width: 100%;
       height: 10%;
-      border: 1px solid white;
+      position: relative;
 
+    }
+
+    #homeTech_title h1 {
+      position: absolute;
+      bottom: -1.5vw;
     }
 
     #homeTech_projectsLink {
@@ -1754,17 +1799,17 @@ background: linear-gradient(
       right: -10rem;
       top: 0;
       height: 100%;
-      border: 1px solid white;
     }
 
     #homeTech_icons {
-      width: 10%;
+      width: 13%;
       height: 90%;
       
-      max-width: 100px;
-      max-height: 500px;
+      /* max-width: 100px; */
+      max-height: 550px;
       flex-direction: column;
-      /* margin: auto 0; */
+      align-items: end;
+      margin: auto 0;
     }
 
     #homeTech_caret1, #homeTech_caret2 {
@@ -1779,6 +1824,7 @@ background: linear-gradient(
       flex: 1;
       height: 90%;
       flex-direction: row;
+      padding-left: 0;
     }
 
    }

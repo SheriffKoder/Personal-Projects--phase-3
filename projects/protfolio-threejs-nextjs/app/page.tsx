@@ -66,15 +66,15 @@ export default function Home() {
           
           <div className="w-full max-w-[1600px] flex flex-col mx-auto ">
 
-            <Hero/>
+            {/* <Hero/> */}
 
-            <div className="mb-[5rem]">
-              <Tech/>
+            <div className="mb-[7rem]">
+              {/* <Tech/> */}
             </div>
             <Extra1/>
   
 
-            <div className="mt-[15rem]">
+            <div className="mt-[7rem]">
               <Projects/>
             </div>
 

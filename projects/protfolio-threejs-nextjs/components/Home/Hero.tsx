@@ -1,9 +1,14 @@
 import React, { useRef,useEffect } from "react"
-import {CharCanvas} from "../myModels/CharCanvas"
+
+//lazy loading because for high textures
+import dynamic from 'next/dynamic';
+const CharCanvas = dynamic(()=> import("../myModels/CharCanvas"), {
+  ssr:false,
+  loading: () => 
+  <div className="w-full h-full flex items-center justify-center"><span className="loadingSpinner"></span></div>
+})
 
 import {motion} from "framer-motion";
-
-
 import Link from "next/link";
 import FadeUp from "../Animations/FadeUp";
 import SingleWordUp from "../Animations/SingleWordUp";

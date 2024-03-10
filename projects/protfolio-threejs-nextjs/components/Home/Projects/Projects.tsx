@@ -19,7 +19,8 @@ import { featuredProjects as projects } from "@/constants/constants";
 //lazy loading because for high textures
 const Computer = dynamic(()=> import("./model-three"), {
   ssr:false,
-  loading: () => <p className="absolute top-[50%] right-[50%]">Loading...</p>
+  loading: () => 
+  <span className="loadingSpinner"></span>
 })
 // const Phone = dynamic(()=> import("@/components/myModels/model-four"), {
 //   ssr:false,
@@ -131,28 +132,13 @@ const Projects = () => {
 
   return (
 
-    <div className=" "
+    <div className="relative"
     id="homeTech_container">
 
       <div className=""
       id="homeTech_title">
         <h1 className="gradientBoldHeader text-center relative">
           Highlighted Projects
-
-          <div id="homeTech_projectsLink"
-          className="flex items-center justify-center">
-            <div className="text-[calc(1rem+0.3vw)] bg-[#4747475c] 
-            rounded-full">
-
-              <Link href="/projects" className="text-[min(0.6em,1rem)] px-3 py-1
-              gradient_text_1  focus:opacity-95 hover:opacity-95
-              "
-              style={{borderRadius: "100px"}}
-              ref={container3}>
-                view all projects
-              </Link>
-            </div>
-          </div>
 
         </h1>
 
@@ -162,10 +148,11 @@ const Projects = () => {
 
 
 
-      <div className=""
+      <div className="2xl:pt-[3.5vw]"
       id="homeTech_icons">
 
           <div className="z-[1] flex items-center justify-center
+          lg:w-[min(15vw,75px)]
           " 
           id="homeTech_caret1">
             <CaretUp color={"#ffff"} size={"50px"}/>
@@ -181,7 +168,8 @@ const Projects = () => {
                 ${projects[currentProject].name == project.name ? "neon_button_selected" : "neon_button_notselected"} 
                 h-[min(15vw,75px)] 
                 w-[min(15vw,75px)] 
-                rounded-[min(2vw,10px)]`}
+                rounded-[min(2vw,10px)]
+                cursor-pointer`}
               style={{
                 backgroundImage: `url('${project.icon}')`,
                 backgroundSize: "contain"
@@ -193,7 +181,8 @@ const Projects = () => {
             }
           </div>
           
-          <div className="z-[1] flex items-center justify-center"
+          <div className="z-[1] flex items-center justify-center
+          lg:w-[min(15vw,75px)]"
           id="homeTech_caret1">
             <CaretDown  color={"#ffff"} size={"50px"} />
           </div>
@@ -202,19 +191,27 @@ const Projects = () => {
       </div>
 
 
-
+      {/* xl:ml-[5rem]
+        2xl:ml-0 */}
       <div className="
       lg:ml-[5vw]
       2xl:ml-0
+      overflow-y-hidden
       "
       id="homeTech_textModels_container">
+
+        {/* /////////////////////////////////////////////////////////////////////// */}
+        <div style={{backgroundImage: `${myImage}, ${myColor}`, backgroundBlendMode: blendMode}}
+              className="hero_brush_mask hidden lg:block">
+        </div>
 
         <div className=" 
         flex flex-col gap-[min(1vw,1rem)] z-[1] text-[calc(1rem+0.25vw)]
         fadeIn_animation 
         md2:mt-[min(5vh,1rem)]
-        xl:ml-[5rem]
-        2xl:ml-0
+        lg:justify-center
+        lg:mt-[-1vw]
+        
         "
         id="homeTech_text"
         ref={projectDescription}>
@@ -276,13 +273,18 @@ const Projects = () => {
 
           <div className="relative flex items-center justify-center w-full h-full
           ">
+
+            <div style={{backgroundImage: `${myImage}, ${myColor}`, backgroundBlendMode: blendMode}}
+              className="hero_brush_mask lg:hidden">
+            </div>
+
               <Computer orbitControl={orbitControl}
               texture_1_url={projects[currentProject].image1}
               texture_2_url={projects[currentProject].imagex}/>
 
-
+              {/* z-[1] to not allow the all projects button to get in the way of clicking this element */}
               <button className="rounded-[5px] h-8 w-8 bg-black 
-              flex items-center justify-center opacity-80 -2"
+              flex items-center justify-center opacity-80 z-[1]"
               onClick={()=>{orbitControl === "default" || orbitControl === "back" ? setOrbitControl("view") : setOrbitControl("back") }}
               style={{border: `1px solid ${borderColor}`}}
               id="homeTech_magnifyButton">
@@ -298,6 +300,21 @@ const Projects = () => {
 
 
         </div>
+      </div>
+
+      <div className="w-full h-[5%] bg-transparent absolute bottom-[-2rem] xl:bottom-0
+       flex items-center justify-center" ref={container3}>
+        <div className="text-[calc(1rem+0.3vw)] bg-[#4747475c] 
+            rounded-full flex items-center justify-center">
+
+              <Link href="/projects" className="text-[min(0.6em,1rem)] px-3 py-1
+              gradient_text_1  focus:opacity-95 hover:opacity-95
+              "
+              style={{borderRadius: "100px"}}
+              >
+                view all projects
+              </Link>
+            </div>
       </div>
 
 
