@@ -136,44 +136,6 @@ background: linear-gradient(
 }
 
 
-/*////////////////////////////////////////////////////////////*/
-/* projects component */
-
-.hero_brush_mask {
-  mask-image: url("/assets/brush.png");
-  mask-size: 90%;
-  mask-repeat: no-repeat;
-  position: absolute;
-  mask-position: 65% 55%;
-  overflow: hidden;
-  /* background:  blue;
-  background-blend-mode: "overlay"; */
-  /* top: 15%; */
-  /* right: -2%; */
-  height: 100%;
-  width: 100%;
-
-  opacity: 1;
-  filter: brightness(0.8);
-
-  /* background-position: center; */
-  /* background-repeat: no-repeat; */
-  /* background-size: cover; */
-  /* z-index: 5; */
-}
-
-
-
-@media screen and (min-width: 1000px) {
-  .hero_brush_mask {
-    mask-size: 75%;
-    top: 0;
-    height: 100%;
-    width: 100%;
-    mask-position: 140% 55%;
-
-  }
-}
 
 
 .fadeIn_animation {
@@ -1216,41 +1178,6 @@ background: -webkit-linear-gradient(
 /*////////////////////////////////////////////////////////////*/
 /* projects component */
 
-.hero_brush_mask {
-  mask-image: url("/images/projects/brush.png");
-  mask-size: 90%;
-  mask-repeat: no-repeat;
-  position: absolute;
-  mask-position: 65% 55%;
-  overflow: hidden;
-  /* background:  blue;
-  background-blend-mode: "overlay"; */
-  /* top: 15%; */
-  /* right: -2%; */
-  height: 100%;
-  width: 100%;
-
-  opacity: 1;
-  filter: brightness(0.8);
-
-  /* background-position: center; */
-  /* background-repeat: no-repeat; */
-  /* background-size: cover; */
-  /* z-index: 5; */
-}
-
-
-
-@media screen and (min-width: 1000px) {
-  .hero_brush_mask {
-    mask-size: 75%;
-    top: 0;
-    height: 100%;
-    width: 100%;
-    mask-position: 140% 55%;
-
-  }
-}
 
 
 :root {
@@ -1630,12 +1557,55 @@ background: linear-gradient(
   border-width: 0.157em;
   border-radius: 50%;
   animation: rotateSpinner 2s linear infinite;
+
  }
  
  @keyframes rotateSpinner { 
    0%{rotate: 0;}
    100%{rotate: 360deg;}
  }
+
+
+
+ .hero_brush_mask {
+  /* font-size: 3vw; */
+  mask-image: url("/images/projects/brush.png");
+  mask-size: 50vmax;
+  mask-repeat: no-repeat;
+  position: absolute;
+  mask-position: 50% 50%;
+  overflow: hidden;
+  z-index: 0;
+  /* background:  blue;
+  background-blend-mode: "overlay"; */
+  /* top: 15%; */
+  /* right: -2%; */
+  height: 100%;
+  width: 100%;
+
+  opacity: 1;
+  filter: brightness(0.8);
+
+  /* background-position: center; */
+  /* background-repeat: no-repeat; */
+  /* background-size: cover; */
+  /* z-index: 5; */
+}
+
+
+
+@media screen and (min-width: 700px) {
+  .hero_brush_mask {
+    mask-size: min(45vmax,900px);
+  }
+}
+
+@media screen and (min-width: 2500px) {
+  .hero_brush_mask {
+    mask-position: 40% 50%;
+  }
+}
+
  
 
 
@@ -1655,6 +1625,8 @@ background: linear-gradient(
   align-items: center;
   justify-content: center;
   gap: 0.5rem ;
+  padding-bottom: 0.5rem;
+
 }
 
 #homeTech_icons {
@@ -1668,6 +1640,10 @@ background: linear-gradient(
 
   max-width: 600px;
   margin: 0 auto;
+
+  /* to be over the brick background */
+  z-index: 1;
+
 }
 
 #homeTech_caret1, #homeTech_caret2 {
@@ -1723,13 +1699,13 @@ background: linear-gradient(
     height: 15%;
 
     /* justify-content: flex-end; */
-    padding-bottom: 1rem;
+    padding-bottom: 2.5rem;
 
   }
   
   #homeTech_icons {
     width: 100%;
-    height: 15%;
+    height: 25%;
   }
 
  
@@ -1744,6 +1720,8 @@ background: linear-gradient(
   #homeTech_text {
     width: 50%;
     height: 100%;
+    padding-top: 4vw;
+
   
   }
   
@@ -1758,6 +1736,7 @@ background: linear-gradient(
   @media (min-width: 1049px) {
     #homeTech_title {
       align-items: end;
+      padding-bottom: 1rem;
 
     }
 
@@ -1776,6 +1755,7 @@ background: linear-gradient(
       flex-direction: row;
       flex-wrap: wrap;
       max-height: 750px;
+      max-width: 1600px;
       width: 80vw;
       margin: 0 auto;
 
@@ -1825,6 +1805,12 @@ background: linear-gradient(
       height: 90%;
       flex-direction: row;
       padding-left: 0;
+    }
+
+    #homeTech_text {
+      padding-top: 0vw;
+  
+    
     }
 
    }

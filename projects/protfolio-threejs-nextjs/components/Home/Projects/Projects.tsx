@@ -41,7 +41,7 @@ const Computer = dynamic(()=> import("./model-three"), {
 const Projects = () => {
 
   const myColor = "linear-gradient(rgba(13, 0, 255, 0.5),rgba(0, 122, 252, 0.5))";
-  const myImage = "url('/images/projects/brickwall.jpg')";
+  const myImage = "url('/images/projects/brickwall.jpeg')";
   const blendMode = "multiply"
 
   const container3 = useRef(null);
@@ -201,9 +201,9 @@ const Projects = () => {
       id="homeTech_textModels_container">
 
         {/* /////////////////////////////////////////////////////////////////////// */}
-        <div style={{backgroundImage: `${myImage}, ${myColor}`, backgroundBlendMode: blendMode}}
+        {/* <div style={{backgroundImage: `${myImage}, ${myColor}`, backgroundBlendMode: blendMode}}
               className="hero_brush_mask hidden lg:block">
-        </div>
+        </div> */}
 
         <div className=" 
         flex flex-col gap-[min(1vw,1rem)] z-[1] text-[calc(1rem+0.25vw)]
@@ -275,7 +275,7 @@ const Projects = () => {
           ">
 
             <div style={{backgroundImage: `${myImage}, ${myColor}`, backgroundBlendMode: blendMode}}
-              className="hero_brush_mask lg:hidden">
+              className="hero_brush_mask">
             </div>
 
               <Computer orbitControl={orbitControl}
