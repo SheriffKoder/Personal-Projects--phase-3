@@ -1,6 +1,6 @@
 "use client";
 
-import React, {ReactElement, ReactHTMLElement, useEffect, useRef, useState} from "react"
+import React, {useEffect, useRef, useState} from "react"
 import Image from "next/image";
 import Link from "next/link";
 
@@ -10,7 +10,7 @@ import {motion, useInView} from "framer-motion";
 import CaretUp from "@/public/icons/caret-up";
 import CaretDown from "@/public/icons/caret-down";
 
-
+// constants to fill the project information
 import { allTechnologies } from "@/constants/constants";
 import { featuredProjects as projects } from "@/constants/constants";
 
@@ -22,17 +22,7 @@ const Computer = dynamic(()=> import("./model-three"), {
   loading: () => 
   <span className="loadingSpinner"></span>
 })
-// const Phone = dynamic(()=> import("@/components/myModels/model-four"), {
-//   ssr:false,
-//   loading: () => <p className="absolute top-[50%] right-[50%]">Loading...</p>
-// })
 
-// const PC = dynamic(()=> import("@/components/myModels/model-five"), {
-//   ssr:false,
-//   loading: () => <p className="absolute top-[50%] right-[50%]">Loading...</p>
-// })
-
-// import { orbitType } from "@/constants/constants";
 
 
 
@@ -40,41 +30,21 @@ const Computer = dynamic(()=> import("./model-three"), {
 
 const Projects = () => {
 
-  const myColor = "linear-gradient(rgba(13, 0, 255, 0.5),rgba(0, 122, 252, 0.5))";
-  const myImage = "url('/images/projects/brickwall.jpeg')";
-  const blendMode = "multiply"
+    // constants to be used as a background behind the 3d model
+    const myColor = "linear-gradient(rgba(13, 0, 255, 0.5),rgba(0, 122, 252, 0.5))";
+    const myImage = "url('/images/projects/brickwall.jpeg')";
+    const blendMode = "multiply"
 
-  const container3 = useRef(null);
-  const isInView = useInView(container3, { once: true });
+    const container3 = useRef(null);
+    const isInView = useInView(container3, { once: true });
 
-
-  const texture_1_url = "/images/projects/brickwall.jpg";
-  const texture_2_url = "/images/projects/pw3.png";
+    // constants can be used to pass to the 3d model as wallpapers for desktop and mobile
+    // but are not used now as the projects constant contains images
+    const texture_1_url = "/images/projects/brickwall.jpg";
+    const texture_2_url = "/images/projects/pw3.png";
   
-  const [index, setIndex] = useState(0);
 
-
-  // const [Orbit,setOrbit] = useState<orbitType>({
-  //   rotation: {x:0, y:-0.5, z:0},
-  //   scale: 1,
-  //   position: {x: 0, y: 0, z:0},
-  // });
-
-  // const rotateModels = () => {
-  //   console.log(Orbit);
-  //   setOrbit({
-  //     rotation: {x:0, y:0, z:0},
-  //     scale: 1.5,
-  //     position: {x: -1.2, y: 0, z:0},
-  //   });
-  //   console.log(Orbit);
-
-  // }
-
-  // useEffect(()=> {
-  //   console.log(Orbit);
-  // },[Orbit])
-
+    //constants WERE used for the caret icons to change project
     const initial = projects.length % 2 === 0 ? 0 : 0;
     const [slideUp, setSlideUp] = useState(initial);
     const slideIndex = useRef(2);
@@ -82,75 +52,64 @@ const Projects = () => {
     const [ lastIndex, setLastIndex ] = useState(3-1);
     const [ currentProject, setCurrentProject ] = useState(0);
 
+
+    // used to pass to the 3d model a string which triggers specific animations
+    //"default" = adjust position on page entry, "back" = zoom out, view" = zoom in
     const [orbitControl,setOrbitControl] = useState("");
     const rotateModels = () => {
       setOrbitControl("view");
-    
     }
 
-    // console.log(isInView);
-    // const project_box_1 = document.getElementById("project_box_1");
-    // const project_box_2 = document.getElementById("project_box_2");
-    // const project_box_3 = document.getElementById("project_box_3");
+
+    //constants WERE used for the caret icons to change project
     const project_box_1 = useRef<HTMLDivElement>(null);
     const project_box_2 = useRef<HTMLDivElement>(null);
     const project_box_3 = useRef<HTMLDivElement>(null);
 
 
-    const borderColor = "#ffffff0";
-
+    // ref used on the project contents jsx element to trigger a fade css animation on project change
     const projectDescription = useRef<HTMLDivElement>(null);
 
 
+    // adjust 3d model position on page entry
     useEffect(()=> {
       if (isInView === true) {
         setOrbitControl("default");
       }
-      // console.log(isInView);
     },[isInView]);
 
-    useEffect(()=> {
-      console.log("//////");
-      // console.log("index2 "+ index2);
-      // console.log(slideIndex.current);
-      // console.log("currentProject " + currentProject);
-      console.log("slideIndex "+ slideIndex)
-    }, [slideIndex]);
 
 
-
-
+    // trigger a fade css animation on project change on the project contents jsx element 
     const changeProject = (index:number) => {
 
       projectDescription.current?.classList.remove("fadeIn_animation");
-      setTimeout(()=> {
-      projectDescription.current?.classList.add("fadeIn_animation");
-      setCurrentProject(index);
 
+      //10ms to wait for the remove to finish then can add again, otherwise add/remove can overlap causing no animation
+      setTimeout(()=> {
+        projectDescription.current?.classList.add("fadeIn_animation");
+        setCurrentProject(index);
       }, 10);
+
     }
 
   return (
 
-    <div className="relative"
-    id="homeTech_container">
+    // main container of all
+    <div className="relative" id="homeTech_container">
 
-      <div className=""
-      id="homeTech_title">
+      {/* title container */}
+      <div className="" id="homeTech_title">
         <h1 className="gradientBoldHeader text-center relative">
           Highlighted Projects
-
         </h1>
-
-        
-
       </div>
 
 
+      {/* icons container */}
+      <div className="2xl:pt-[3.5vw]" id="homeTech_icons">
 
-      <div className="2xl:pt-[3.5vw]"
-      id="homeTech_icons">
-
+          {/* caret up */}
           <div className="z-[1] flex items-center justify-center
           lg:w-[min(15vw,75px)]
           " 
@@ -158,7 +117,7 @@ const Projects = () => {
             <CaretUp color={"#ffff"} size={"50px"}/>
           </div>
 
-
+          {/* projects icons that changes displayed content if clicked*/}
           <div className="flex-1 flex flex-row justify-around"
           id="homeTech_icons_projects">
 
@@ -181,18 +140,16 @@ const Projects = () => {
             }
           </div>
           
+          {/* caret down */}
           <div className="z-[1] flex items-center justify-center
           lg:w-[min(15vw,75px)]"
           id="homeTech_caret1">
             <CaretDown  color={"#ffff"} size={"50px"} />
           </div>
 
-
       </div>
 
-
-      {/* xl:ml-[5rem]
-        2xl:ml-0 */}
+      {/* container holding both the project's description and the 3d model */}
       <div className="
       lg:ml-[5vw]
       2xl:ml-0
@@ -201,17 +158,18 @@ const Projects = () => {
       id="homeTech_textModels_container">
 
         {/* /////////////////////////////////////////////////////////////////////// */}
+        {/* background image was used before, to at the back between the description and the model */}
         {/* <div style={{backgroundImage: `${myImage}, ${myColor}`, backgroundBlendMode: blendMode}}
               className="hero_brush_mask hidden lg:block">
         </div> */}
 
+        {/* project's description */}
         <div className=" 
         flex flex-col gap-[min(1vw,1rem)] z-[1] text-[calc(1rem+0.25vw)]
         fadeIn_animation 
         md2:mt-[min(5vh,1rem)]
         lg:justify-center
         lg:mt-[-1vw]
-        
         "
         id="homeTech_text"
         ref={projectDescription}>
@@ -219,27 +177,36 @@ const Projects = () => {
               <h4 className="font-semibold text-[min(1em,1.5rem)]">
                 {projects[currentProject].name}
               </h4>
+
               <p className="text-[min(0.75em,1rem)] opacity-60">
                 {projects[currentProject].description}
               </p>
+
+              {/* project buttons container */}
               <div className="my-2 flex flex-row gap-2">
+              
+                {projects[currentProject].link && (
                   <button
                   className="px-4 py-0 lg:text-base text-sm font-base gradientGreyButton focus:opacity-95 hover:opacity-95">
                       <Link href={projects[currentProject].link} className="gradient_text_1 w-full h-full">
                       visit site
                       </Link>
                   </button>
+                )}
+
                   <button
                   className="px-4 py-0 lg:text-base text-sm font-base gradientGreyButton focus:opacity-95 hover:opacity-95">
                     <Link href={`/projects/${projects[currentProject].id}`} className="gradient_text_1 w-full h-full">
                     more details
                     </Link>
                   </button>
+
               </div>
+
+              {/* list all the technologies of the project as icons */}
               <div className="flex flex-row flex-wrap gap-2">
                 {
-          
-                projects[currentProject].tech.map((technology, index) => {
+                  projects[currentProject].tech.map((technology, index) => {
                   const tech = allTechnologies.filter((tech2)=> tech2.name === technology)[0];
                   return (
                     <div key={tech.name+ " "+index} className={`
@@ -267,12 +234,11 @@ const Projects = () => {
 
         </div>
 
+        {/* 3d model container + back image */}
         <div className="lg1120:mt-[-3vw]"
         id="homeTech_models">
 
-
-          <div className="relative flex items-center justify-center w-full h-full
-          ">
+          <div className="relative flex items-center justify-center w-full h-full">
 
             <div style={{backgroundImage: `${myImage}, ${myColor}`, backgroundBlendMode: blendMode}}
               className="hero_brush_mask">
@@ -286,7 +252,6 @@ const Projects = () => {
               <button className="rounded-[5px] h-8 w-8 bg-black 
               flex items-center justify-center opacity-80 z-[1]"
               onClick={()=>{orbitControl === "default" || orbitControl === "back" ? setOrbitControl("view") : setOrbitControl("back") }}
-              style={{border: `1px solid ${borderColor}`}}
               id="homeTech_magnifyButton">
                 <Image
                 src={orbitControl === "default" || orbitControl === "back" ? "/icons/zoom-in.png" : "/icons/zoom-out.png" }
@@ -294,14 +259,13 @@ const Projects = () => {
                 className="invert mt-[-1px]">
                 </Image>
               </button>
-
-              
           </div>
-
 
         </div>
       </div>
+      {/* end of homeTech_textModels_container */}
 
+      {/* when viewed will trigger the default 3d model position animation set in the model file */}
       <div className="w-full h-[5%] bg-transparent absolute bottom-[-2rem] xl:bottom-0
        flex items-center justify-center" ref={container3}>
         <div className="text-[calc(1rem+0.3vw)] bg-[#4747475c] 
@@ -323,4 +287,4 @@ const Projects = () => {
   )
 }
 
-export default Projects
+export default Projects;

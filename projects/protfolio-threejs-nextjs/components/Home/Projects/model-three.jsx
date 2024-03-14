@@ -27,24 +27,6 @@ import { RectAreaLightHelper } from "three/examples/jsm/Addons.js";
 function Shape ({orbitControl, texture_1_url, texture_2_url}) {
 
 
-
-
-
-        // const [color, normal, aoMap] = useLoader(TextureLoader, [
-    //     "./earth3d/color.jpg",
-    //     "./earth3d/normal.jpg",
-    //     "./earth3d/occlusion.jpg"
-    
-    // ]);
-
-    const mesh = useRef(null);
-    useFrame((state, delta) => {
-        // mesh.current.rotation.x += delta * 0.1;
-        // mesh.current.rotation.y += delta * 0.1;
-        // mesh.current.rotation.z += delta * 0.1;
-
-    });
-
     //////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////
     const springOptions = {
@@ -59,14 +41,12 @@ function Shape ({orbitControl, texture_1_url, texture_2_url}) {
 
     //slight rotation to back on page entry
     const rotation_0 = () => {
-
         mouse.rotation_y.set(-0.5);
         // mouse.scale.set(1.5);
         // mouse.position_x.set(-1.2);
-
     }
 
-    //project view
+    //project view [zoom in]
     const rotation_1 = () => {
 
         if (typeof window !== "undefined") {
@@ -77,6 +57,8 @@ function Shape ({orbitControl, texture_1_url, texture_2_url}) {
             mouse.rotation_y.set(0);
             mouse.scale.set(1.5);
 
+            // determine position-x based on viewport if mobile or desktop, 
+            // it needs some difference to align as needed
             if (innerWidth >= 1537) {
                 mouse.position_x.set(-1.2); 
             } else {
@@ -87,7 +69,7 @@ function Shape ({orbitControl, texture_1_url, texture_2_url}) {
 
     }
 
-    //back from project
+    //back from project [zoom out]
     const rotation_2 = () => {
 
         mouse.rotation_y.set(-0.5);
@@ -97,8 +79,8 @@ function Shape ({orbitControl, texture_1_url, texture_2_url}) {
     }
 
 
-    //adjust x if the user resized window from mobile to desktop to view the models properly
-    //as the rotations are triggered from a clickable button that will not be triggered on resize
+    // adjust x if the user resized window from mobile to desktop to view the models properly
+    // as the rotations are triggered from a clickable button that will not be triggered on resize
     const windowResizeListen = () => {
         if (typeof window !== "undefined") {
             const { innerWidth, innerHeight } = window;
@@ -114,6 +96,7 @@ function Shape ({orbitControl, texture_1_url, texture_2_url}) {
 
 
     //make if for mobile, check window width
+    // based on the received orbitControl prop from the Projects.jsx trigger the needed position animation
     useEffect(() => {
 
         if (orbitControl === "default") {
@@ -137,118 +120,28 @@ function Shape ({orbitControl, texture_1_url, texture_2_url}) {
 
         };
     },[orbitControl]);
+
     //////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////
 
-
+    // npx gltfjsx public/3d/computer/opt-iphone3.glb -o components/myModels/optPhone.jsx -r public
     // const gltf1 = useLoader(GLTFLoader, "./3d/computer/imac.glb");    //gltf.scene
     // const gltf2 = useGLTF("./3d/computer/imac/scene.gltf");
 
-    // npx gltfjsx public/3d/computer/opt-iphone3.glb -o components/myModels/optPhone.jsx -r public
-    // const gltf3 = useLoader(GLTFLoader, "./3d/computer/iphone3.glb");    //gltf.scene
-    // const gltf4 = useLoader(GLTFLoader, "./3d/computer/iphone4.glb");    //gltf.scene
-
-    // const img = "brickwall";
     const texture_1 = useTexture(`${texture_1_url}`);  //texture importing method fixes the brightness issue
     const texture_2 = useTexture(`${texture_2_url}`);  //texture importing method fixes the brightness issue
 
-    // console.log(texture_1_url);
-    // const texture_1 = useTexture("'"+texture_1_url+"'");  //texture importing method fixes the brightness issue
-    // const texture_2 = useTexture("'"+texture_2_url+"'");  //texture importing method fixes the brightness issue
-
-
-
-    // console.log(useGLTF("./3d/computer/imac/scene.gltf"));
-
-    // const {nodes, materials} = useGLTF("./3d/computer/imac/scene.gltf");
-    // console.log(nodes);
-
-
-    // gltf2.materials.DisplayImage.map.name = "./assets/tech/css.png";
-    // console.log(Orbit);
     return (
 
-        // to
-        // <group rotation-y={-0} scale={1.5} position={[-1,0,0]}>
-        // {/* //phone view port */}
-        // {/* // <group rotation-y={-0} rotation-x={0} scale={1.5} position={[0,0,0]}> */}
 
-        // <group rotation-y={-0.5} scale={1} position={[0,0,0]} >
-        // <group rotation-y={Orbit.rotation.y} scale={Orbit.scale} position-x={Orbit.position.x} >
         <motion.group ref={mesh} 
-        rotation-y={mouse.rotation_y} scale={mouse.scale} position-x={mouse.position_x} >
-
-
-            {/* computer, will use this as the optImac displays a glitchy apple logo */}
-            {/* <mesh scale={7} ref={mesh}>
-
-                <primitive
-                // object={gltf1.scene}
-                object={gltf2.scene}
-
-                //separate
-                // rotation={[0,-0.5,0]}
-
-                //group
-                position={[0,0,0.0]}
-
-                // to xx
-                // rotation={[0,0,0]}
-                // position={[-0.1,-0.03,0.8]}
-                // position={[-0,-0.03,0.8]} //mobile
-                />
-            </mesh> */}
-
-
-            {/* computer screen */}
-            {/* <mesh position={[0,0.5,0.39]} rotation-x={-0.0858}>
-                <planeGeometry args={[16/3.55,9/3.5]} 
-                
-                />
-                <meshStandardMaterial map={texture_1}/>
-
-            </mesh> */}
-
-
-            {/* phone */}
-            {/* <mesh scale={1.5} ref={mesh}> */}
-
-            {/* to */}
-            {/* // <mesh scale={0.83} ref={mesh}>*/}
-                {/* <primitive
-                object={gltf4.scene}
-
-                //separate here
-                // rotation={[-0.3,-0.44,-0.09]}
-                // position={[2,-1.8,2.2]}
-
-                // phone 1 combined position
-                // position={[2.8,-1.6,0.9]}     
-                
-                position={[1.1,-0.75,0.4]}                           
-                rotation={[-0.1,3,0]}
-
-                //to xx
-                // rotation={[0,-0.2,0.01]}
-                // position={[1.8,-1.5,10.5]}
-                // position={[2.5,-1.5,10.5]}  //mobile
-
-                />
-
-            </mesh> */}
+        rotation-y={mouse.rotation_y} scale={mouse.scale} position-x={mouse.position_x}>
 
             <OptImac
             position={[0,0,0.0]}
             scale={7}
             myWallpaper={texture_1}
             />
-{/* 
-            <OptPhone
-            scale={1.5}
-            position={[1.8,-1,0.8]}                           
-            rotation={[-0.1,3.15,0]} 
-            myWallpaper={texture_2}
-            /> */}
 
             <OptPhone42
             scale={1.5}
@@ -256,8 +149,6 @@ function Shape ({orbitControl, texture_1_url, texture_2_url}) {
             rotation={[-0.1,3.15,0]} 
             myWallpaper={texture_2}
             />
-
-
 
         </motion.group>
 
@@ -267,20 +158,15 @@ function Shape ({orbitControl, texture_1_url, texture_2_url}) {
 
 export default function computer({orbitControl, texture_1_url, texture_2_url}) {
 
-    // console.log(Orbit);
-
-
     return (
         <div className="absolute top-0 left-0 w-full h-full">
-        <Canvas
-                    camera={{
-                        position: [0, 0, 15], fov:25,
-                        // near: 0.1,
-                        // far: 200,
-                    }}
-
-
-        >
+            <Canvas
+            camera={{
+                position: [0, 0, 15], fov:25,
+                // near: 0.1,
+                // far: 200,
+            }}
+            >
 
             {/* Environment lights, float like animation */}
             {/* <Environment preset="city" background blur={4}/> */}
@@ -294,40 +180,24 @@ export default function computer({orbitControl, texture_1_url, texture_2_url}) {
             {/* <ContactShadows position-y={-1.9} opacity={0.4} blur={2}/> */}
 
 
-            {/* <ambientLight intensity={2}/>
-            <directionalLight position={[0,0,1]}
-            intensity={1}/> */}
-
-            
-            {/* <ambientLight intensity={0.1}/> */}
-            {/* <directionalLight intensity={3.5} position={[3, 4.5, -3.5]}/> */}
-
-            {/* <ambientLight intensity={0.1}/>
-            <directionalLight intensity={3.5} position={[1, 0, 0.25]}/> */}
-
-            {/* <ambientLight intensity={0.1}/>
-            <directionalLight intensity={3.5} position={[1, 0, -0.25]}/> */}
-
-            {/* <spotLight
-                intensity={10}
-                position={[-3,1,3]}
-            /> */}
-
+            {/* used for light debugging */}
             {/* <LightScene/> */}
 
-                <directionalLight intensity={4} position={[3.15, 0.1, 4.5]}/>
-                <spotLight
-                intensity={23}
-                position={[-2.3,1.85,3.7]}
-                distance={8.8}
-                angle={0.85}
+            <directionalLight intensity={4} position={[3.15, 0.1, 4.5]}/>
+            
+            <spotLight
+            intensity={23}
+            position={[-2.3,1.85,3.7]}
+            distance={8.8}
+            angle={0.85}
             />
-
 
             {/* <OrbitControls
                 enableZoom={true}   //true by default
                 enablePan={true}    //true by default with right click
             /> */}
+
+
             </Canvas>
     </div>
     );
