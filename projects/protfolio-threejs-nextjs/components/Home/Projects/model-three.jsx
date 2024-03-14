@@ -52,7 +52,7 @@ function Shape ({orbitControl, texture_1_url, texture_2_url}) {
         if (typeof window !== "undefined") {
             const { innerWidth, innerHeight } = window;
 
-            console.log(innerWidth);
+            // console.log(innerWidth);
 
             mouse.rotation_y.set(0);
             mouse.scale.set(1.5);
@@ -134,7 +134,7 @@ function Shape ({orbitControl, texture_1_url, texture_2_url}) {
     return (
 
 
-        <motion.group ref={mesh} 
+        <motion.group
         rotation-y={mouse.rotation_y} scale={mouse.scale} position-x={mouse.position_x}>
 
             <OptImac
@@ -184,7 +184,7 @@ export default function computer({orbitControl, texture_1_url, texture_2_url}) {
             {/* <LightScene/> */}
 
             <directionalLight intensity={4} position={[3.15, 0.1, 4.5]}/>
-            
+
             <spotLight
             intensity={23}
             position={[-2.3,1.85,3.7]}
