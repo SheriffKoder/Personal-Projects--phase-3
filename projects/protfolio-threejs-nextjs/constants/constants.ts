@@ -197,7 +197,7 @@ import {
 
   export const PracticeProjects= [
     {
-      name: "Amazon (Semi-Clone)",
+      name: "Amazon (Partial-Clone)",
       description: `saepe dignissimos similique quae. Deleniti, animi. Voluptates molestiae officia voluptatem rerum, nostrum accusantium deleniti asperiores officiis omnis quibusdam veniam, porro voluptatum pariatur? Modi quidem obcaecati doloremque doloribus ipsum aperiam animi. Debitis harum dolores ipsum pariatur id!`,
       image1: "/images/projects/assets/amazon/wallpaper1.png",
       image2: "/images/projects/assets/amazon/wallpaper2.png",
