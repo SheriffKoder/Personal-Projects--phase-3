@@ -7,22 +7,22 @@ import { Tilt } from "react-tilt"
 const contents = [
     {
         title: "Dedication",
-        description: "As I am a dedicated and self-driven person, I am accustomed to the habit of progressing every day in my goals",
+        description: "As a dedicated and self-driven person, progressing every day in my goals is a habit",
         image: "/images/extra3/dedication.png",
-        className: "w-full scale-90"
+        className: "w-full scale-90 mr-2"
 
     },
     {
         title: "Ability to learn",
         description: "I am willing to learn new skills while working on projects to achieve the desired outcome",
         image: "/images/extra3/learning.png",
-        className: "scale-90"
+        className: "scale-90 mr-2 md2:p-2"
     },
     {
         title: "Passion",
         description: "Web-Development for me is a passion and the best thing is that I love what I do",
         image: "/images/extra3/passion.png",
-        className: "w-[65%]"
+        className: "p-2 md2:p-5 scale-80 mr-2"
     },
 ]
 
@@ -34,37 +34,57 @@ const Extra3 = () => {
     gap-8">
         
         <h1 className="w-full text-center BoldHeader font-bold capitalize  ">
-            Why Choose me</h1>
+            Why Choose me
+        </h1>
 
-        <div className="w-[80%] flex flex-row gap-8 rounded-[17px]
-        p-4 flex-wrap">
+       <div className="w-[90%] flex flex-col gap-8 rounded-[17px]
+        p-4 flex-wrap
+        max-w-[1400px]
+        md1:flex-row md1:justify-center">
 
 
             {
-                contents.map((content)=> (
+                contents.map((content, index)=> (
                     <Tilt 
-                    className="w-[45%] mx-auto"
                     options={{
-                        max:45,
-                        scale: 1,
-                        speed: 450
-                      }}>
-                        <div className="extra1_card_bg border p-4 flex flex-row items-center justify-center
-                        rounded-[7px] min-h-full gap-4"
+                    max:45,
+                    scale: 1,
+                    speed: 450
+                    }}
+                    key={content.title}>
+
+                        {/* inside the Tilt */}
+                        <div className="extra1_card_bg border py-2 pl-6 pr-3
+                        flex flex-row gap-4 items-center justify-center
+                        rounded-[7px] h-[15vw] min-h-[100px] max-w-[500px] mx-auto
+                        
+                        max-h-[150px] 
+                        "
                         >
-                            <div className={`w-[30%] relative`}>
+                            <div className={`w-[30%] h-full relative
+                            flex items-center justify-center
+                            `}>
                                 <div className="radialContainer"></div>
 
                                 <Image src={content.image} height={100} width={100} alt={content.title +" image"}
-                                className={`${content.className} opacity-90 mx-auto`}/>
+                                className={`${content.className} max-h-full 
+                                `}
+                                style={{objectFit: "contain", width: "auto", height: "auto"}}/>
                             </div>
-                           
-                           
-                            <span className="flex-1 flex flex-col items-start justify-center h-full">
-                                <span className="h-[1.5rem] capitalize">{content.title}</span>
-                                <span className="opacity-60 font-extralight text-sm flex-1"
-                                id="extra1_card_desc">{content.description}</span>
-                            </span>
+                            
+                            <div className="flex-1 flex flex-col gap-1 items-start 
+                            text-[calc(0.9rem+0.5vw)] h-full
+
+                            pt-[1vw] md2:pt-[min(2vw,1.5rem)]
+                            ">
+                                <span className="capitalize
+                                text-[min(0.8em,1rem)]">{content.title}</span>
+                                <span className="opacity-60 font-extralight
+                                text-[min(0.65em,0.9rem)] mb-auto"
+                                id="extra1_card_desc">
+                                    {content.description}
+                                </span>
+                            </div>
                         </div>
                     </Tilt>
 

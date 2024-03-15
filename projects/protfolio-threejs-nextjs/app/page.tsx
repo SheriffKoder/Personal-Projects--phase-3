@@ -71,11 +71,11 @@ export default function Home() {
             <div className="mb-[7rem]">
               {/* <Tech/> */}
             </div>
-            <Extra1/>
+            {/* <Extra1/> */}
   
 
             <div className="mt-[7rem]">
-              <Projects/>
+              {/* <Projects/> */}
             </div>
 
             {/* <div className="w-full max-w-[1600px] h-[90vh] border-2 border-[#ffffffa9] mx-auto
@@ -83,7 +83,7 @@ export default function Home() {
 
             </div> */}
             <div className="mt-[15rem]">
-              {/* <Extra3/> */}
+              <Extra3/>
             </div>
 
             <div className="mt-[3rem]">
