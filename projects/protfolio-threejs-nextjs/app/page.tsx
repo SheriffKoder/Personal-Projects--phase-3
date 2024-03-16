@@ -86,16 +86,16 @@ export default function Home() {
               <Extra3/>
             </div>
 
-            <div className="mt-[3rem]">
-              {/* <Git/> */}
+            <div className="mt-[2rem]">
+              <Git/>
             </div>
 
             <div className="mt-[7rem]">
-              {/* <Extra2/> */}
+              <Extra2/>
             </div>
 
             <div className="mt-[5rem]">
-              {/* <Contact/> */}
+              <Contact/>
             </div>
 
           </div>

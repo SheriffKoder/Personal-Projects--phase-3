@@ -10,14 +10,16 @@ import Link from "next/link";
 const quotes = [
     {
         contents: "Sherif is trustworthy in carrying out his assigned tasks to the best of his ability",
-        author: "Ramy El-Khouly - CEO Units Real Estate",
+        author: "Ramy El-Khouly",
+        position: "CEO Units Real Estate",
         avatar: "/images/rec/avatar-ramy.png",
         ref: "career_units"
 
     },
     {
         contents: "I consider Sherif as a gain to any team and I highly recommend working with him",
-        author: "Mohammed Samy - Senior VP Coldwell Banker Egypt",
+        author: "Mohammed Samy",
+        position: "Senior VP Coldwell Banker Egypt",
         avatar: "/images/rec/avatar-samy.png",
         ref: "career_cbe"
     },
@@ -137,30 +139,38 @@ const Extra2 = () => {
 
   return (
     <div className="h-[300px] flex flex-col items-center justify-center
-    gap-8">
+    lg:gap-4">
         
-        <h1 className="w-full text-center  text-2xl lg:text-3xl font-medium capitalize  ">
+        <h1 className="w-full text-center text-2xl lg:text-3xl font-medium capitalize  ">
             Recommendations
         </h1>
 
         <div className="w-[80%] max-w-[700px] flex flex-col gap-2
         p-4 items-center">
 
-            <div className="flex flex-row items-center gap-3">
-                <span className="h-[4px] bg-white w-[3rem]"></span>
-                <span className=""><Qoute color="#ffff" size="50px"/></span>
-                <span className="h-[4px] bg-white w-[3rem]"></span>
+            <div className="flex flex-row items-center lg:gap-3">
+                <span className={`h-[2px] lg:h-[4px] bg-white w-[3rem]`}></span>
+                <span className="scale-50 lg:scale-100"><Qoute color="#ffff" size="35px"/></span>
+                <span className={`h-[2px] lg:h-[4px] bg-white w-[3rem]`}></span>
             </div>
 
             <div id="slider__container" className="w-full">
-                <p className="text-2xl font-thin italic text-center h-[5rem]"
-                >"{quotes[sliderIndex].contents}."</p>
+                <p className="text-[min(2.5vmax,1.5rem)] font-[200] opacity-80 italic text-center 
+                h-[18vmax]
+                md:h-[min(18vmax,6rem)]">
+                    "{quotes[sliderIndex].contents}."
+                </p>
 
-                <Link href={`/about?${quotes[sliderIndex].ref}`} className="w-[95%] flex flex-row items-center gap-3 ml-auto">
-                    <p className="ml-auto">{quotes[sliderIndex].author}</p>
+                <Link href={`/about?${quotes[sliderIndex].ref}`} 
+                className="w-[95%] flex flex-row items-center gap-3 ml-auto text-[min(1.25vmax,0.85rem)]
+                md1:mr-[2rem]">
+                    <div className="flex flex-col flex-wrap ml-auto text-end">
+                        <p className="">{quotes[sliderIndex].author}</p>
+                        <p className="">{quotes[sliderIndex].position}</p>
+                    </div>
                     <Image src={quotes[sliderIndex].avatar} height={50} width={50} alt=""
-                    className="rounded-full overflow-hidden bg-[#eee] h-[50px] w-[50px]"
-                    style={{objectFit: "fill"}}>
+                    className="rounded-full overflow-hidden bg-[#eee]"
+                    style={{objectFit: "fill", height: "50px", width: "50px"}}>
                     </Image>
 
                 </Link>

@@ -30,7 +30,7 @@ const contents = [
 
 const Extra3 = () => {
   return (
-    <div className="h-[300px] flex flex-col items-center justify-center my-[5rem]
+    <div className="h-auto flex flex-col items-center justify-center my-[5rem]
     gap-8">
         
         <h1 className="w-full text-center BoldHeader font-bold capitalize  ">
