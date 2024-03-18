@@ -40,9 +40,9 @@ export default function Home() {
     // and if the user scrolled the page, return to point X/Y = 0/0
     setTimeout(() => {
       setIsLoading(false);
-      if (window !== undefined) {
-      window.scrollTo(0,0);
-      }
+      // if (window !== undefined) {
+      // window.scrollTo(0,0);
+      // }
     }, 2200);
 
 
@@ -57,25 +57,25 @@ export default function Home() {
 
           {/* AnimatePresence to allow the exit animation from 
           the slideLeft variant on the PreLoader Component */}
-          {/* <AnimatePresence mode="wait">
+          <AnimatePresence mode="wait">
           {
             isLoading && <Preloader/>
           }
-          </AnimatePresence> */}
+          </AnimatePresence>
           
           
           <div className="w-full max-w-[1600px] flex flex-col mx-auto ">
 
-            {/* <Hero/> */}
+            <Hero/>
 
             <div className="mb-[7rem]">
-              {/* <Tech/> */}
+              <Tech/>
             </div>
-            {/* <Extra1/> */}
+            <Extra1/>
   
 
             <div className="mt-[7rem]">
-              {/* <Projects/> */}
+              <Projects/>
             </div>
 
             {/* <div className="w-full max-w-[1600px] h-[90vh] border-2 border-[#ffffffa9] mx-auto

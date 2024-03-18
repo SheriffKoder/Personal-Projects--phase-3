@@ -20,6 +20,9 @@ const Preloader = () => {
 
   useEffect(()=> {
     if (index == words.length-1) {
+      if (window !== undefined) {
+        window.scrollTo(0,0);
+        }
       return;
     };
 
