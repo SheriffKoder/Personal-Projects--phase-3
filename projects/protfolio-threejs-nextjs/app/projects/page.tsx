@@ -54,49 +54,23 @@ const page = () => {
 
   return (
     <div className="min-h-[100vh] ambientBackground cursor-default relative">
-      <TransitionEffect/>
+      {/* <TransitionEffect/> */}
       
       {/* <ProjectDetails detailsProject={detailsProject} detailsVisibility={detailsVisibility} setDetailsVisibility={setDetailsVisibility}/> */}
 
 
         
-            <div className="max-w-[1600px] mx-auto flex flex-col min-h-full ">
+            <div className="max-w-[1600px] mx-auto flex flex-col min-h-full">
 
                 {/* button 3d models*/}
-                <div className="h-[30vw] max-h-[500px]  pt-[10vw]
-                flex flex-row flex-wrap gap-8 items-end justify-center">
-                    {/* {
-                    projects.map((project, index) => (
-
-                        <div>
-                                <div className="min-w-[100px] min-h-[100px] rounded-[10px]"
-                                style={{
-                                    backgroundImage: `url('${project.icon}')`,
-                                    backgroundSize: "contain"
-                                }}
-                                >
-                                </div>
-
-                                <div className="min-w-[110px] min-h-[110px] rounded-[10px] border
-                                 ">
-                                </div>
-
-                            
-                            
-                            
-                        </div>
-
-                       
-            
-                    ))
-                    } */}
-
-                            <ButtonCanvas projects={featuredProjects}/>
-
-                 
+                <div className="h-[35vw] max-h-[500px] pt-[calc(2rem+7vw)]
+                flex flex-row flex-wrap gap-8 items-end justify-center
+                md1:h-[30vw]">
+                    <ButtonCanvas projects={featuredProjects}/>
                 </div>
 
-                <div className="min-h-[100vh] flex flex-col mb-[5rem]">
+                <div className="min-h-[100vh] flex flex-col mb-[5rem] mt-[1rem] 
+                ">
 
                     <h1 className="MainHeader font-semibold mx-auto">
                       My Projects
@@ -112,24 +86,28 @@ const page = () => {
 
                         return (
                         <div className="max-w-[1200px] mx-auto mt-[5rem] w-full flex flex-col
-                        lg:px-0 px-[2rem]" key={projectCategory.name}>
+                        px-[2rem]" key={projectCategory.name}>
                           <h2 className="subMainHeader mb-[0.5rem]">
                             {projectCategory.name}
                           </h2>
                           <span className="w-[60%] h-[1px] bg-white opacity-60 mb-[2rem]"/>
     
+                          {/* project cards container */}
                           {projectCategory.projects.length > 0 ? (
-                          <div className="flex flex-col px-[2rem] gap-8">
+                          <div className="flex flex-col md1:px-[2rem] gap-8">
                           
-                            {/* the project */}
+                            {/* the project card */}
                             {
                               projectCategory.projects.slice(practicePage[index],practicePage[index]+pageLimit).map((project, index) => (
     
-                                <div className="rounded-[17px] border ProjectCard_bg h-[300px] w-full
-                                flex flex-row p-2 gap-[2rem] fadeIn_animation" key={project.name}>
+                                <div className="rounded-[17px] border ProjectCard_bg w-full
+                                flex flex-row p-2 gap-1 fadeIn_animation
+                                md2:h-[300px] md2:gap-[2rem]" key={project.name}>
         
                                   {/* left half */}
-                                  <div className="w-[30%] relative rounded-[12px] overflow-hidden">
+                                  <div className="md2:w-[30%] hidden md2:block 
+                                  relative rounded-[12px] overflow-hidden
+                                  ">
                                     <Image src={project?.icon} fill alt={project.name+" website icon"} 
                                     className="image_scale_animation"
                                     id={project.id}
@@ -142,33 +120,58 @@ const page = () => {
                                   <div className="flex-1 flex flex-col py-2 px-2">
         
                                       {/* name */}
-                                      <h3 className="text text-2xl font-semibold">
+                                      <h3 className="font-semibold
+                                      text-[min(1em,1.5rem)] 
+                                      md:text-[min(1.125em,1.5rem)] 
+                                      flex flex-row gap-2 items-center">
+
+                                        <div className="w-[2em] h-[2em] relative rounded-[2px] overflow-hidden
+                                        md2:hidden mb-2">
+                                          <Image src={project?.icon} fill alt={project.name+" website icon"} 
+                                          className="image_scale_animation"
+                                          id={project.id}
+                                          onMouseEnter={()=>{scaleAnimation(project.id)}}
+                                          onMouseLeave={()=>{scaleAnimation(project.id)}}/>
+                                        </div>
+
                                         {project.name}
                                       </h3>
         
                                       {/* description */}
-                                      <p className="opacity-80">
+                                      <p className="
+                                      text-[min(0.75em,1rem)]
+                                      md:text-[min(0.875em,1rem)] opacity-60 mb-2">
                                         {project.description}
                                       </p>
         
                                       {/* technologies */}
-                                      <span className="flex flex-row gap-2 flex-wrap items-center">
+                                      <span className="flex flex-row gap-2 flex-wrap items-center mb-6">
                                         {/* <h4 className="">Technologies used:</h4> */}
                                         {
-                                          project.tech.map((tech, index)=>
+                                          project.tech.map((technology, index)=>
                                             {
         
-                                              const technology = allTechnologies.filter((tech2)=> tech2.name === tech);
+                                              const tech = allTechnologies.filter((tech2)=> tech2.name === technology)[0];
                               
                                               return (
-                                              <div key={index} className={`px-2 py-1 mt-1 rounded-[3px] border border-[#ffffff21]
-                                              flex items-center justify-center gap-1  ${technology[0].name}_bg`}>
-                                                <div className="opacity-90">
-                                                  <Image src={technology[0].icon} height={10} width={10} alt={technology[0].name}
-                                                  style={{objectFit:"contain"}}></Image>
-                                                </div>
-                                                <h3 className={`opacity-95 ${technology[0].name}_text text-xs`}>{technology[0].name}</h3>
-                                              </div>                
+                                                <div key={tech.name+ " "+index} className={`
+                                                pr-[min(1.1rem,calc(0.5rem+1vw))]
+                                                pl-[min(1.1rem*0.75,calc(0.5rem+1vw)*0.8)]
+                                                py-[min(0.2rem,0.5vw)]
+                                                md2:mt-1 mt-0 rounded-[5px] border border-[#ffffff21]
+                                                flex flex-row items-center justify-start gap-2 ${tech.name}_bg
+                                                text-[calc(1rem+0.3vw)]`}>
+                                                  <div className="opacity-90 w-[min(20px,calc(0.75rem+1vw))] h-[min(20px,calc(0.75rem+1vw))]
+                                                  flex relative">
+                                                    <Image src={tech.icon} fill alt={tech.name}
+                                                    sizes="30px"
+                                                    style={{objectFit:"contain"}}></Image>
+                                                  </div>
+                                                  <h3 className={`opacity-95 ${tech.name}_text
+                                                  text-[min(0.6em,1rem)]`}>
+                                                    {tech.name}
+                                                  </h3>
+                                                </div>          
                                               )  
                                             })
                                           
@@ -177,11 +180,15 @@ const page = () => {
                                       </span>
         
                                       {/* links */}
-                                      <div className="flex flex-row gap-2 mt-auto">
+                                      <div className="flex flex-row gap-2 mt-auto
+                                      
+                                      ">
                                         {
                                         project.link && (
                                           <button 
-                                          className="px-4 py-0 lg:text-base text-sm font-base gradientGreyButton focus:opacity-95 hover:opacity-95">
+                                          className="px-4 py-0  font-base gradientGreyButton 
+                                          focus:opacity-95 hover:opacity-95
+                                          text-[min(0.75em,1rem)]">
                                             <Link href={project.link} className="gradient_text_1 w-full h-full">
                                             {
                                             project.type === "site" && ("visit site")
@@ -195,7 +202,9 @@ const page = () => {
                                         
                                         {
                                         project.id && (
-                                          <span className="px-4 py-0 lg:text-base text-sm font-base gradientGreyButton focus:opacity-95 hover:opacity-95">
+                                          <span className="px-4 py-0 font-base gradientGreyButton 
+                                          focus:opacity-95 hover:opacity-95
+                                          text-[min(0.75em,1rem)]">
                                             <Link
                                             href={`/projects/${project.id}`}
                                             className="gradient_text_1"                                            

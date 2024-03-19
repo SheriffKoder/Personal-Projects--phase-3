@@ -187,7 +187,7 @@ const Projects = () => {
               
                 {projects[currentProject].link && (
                   <button
-                  className="px-4 py-0 lg:text-base text-sm font-base gradientGreyButton focus:opacity-95 hover:opacity-95">
+                  className="px-4 py-0 text-[min(0.75em,1rem)]  font-base gradientGreyButton focus:opacity-95 hover:opacity-95">
                       <Link href={projects[currentProject].link} className="gradient_text_1 w-full h-full">
                       visit site
                       </Link>
@@ -195,7 +195,7 @@ const Projects = () => {
                 )}
 
                   <button
-                  className="px-4 py-0 lg:text-base text-sm font-base gradientGreyButton focus:opacity-95 hover:opacity-95">
+                  className="px-4 py-0 text-[min(0.75em,1rem)] font-base gradientGreyButton focus:opacity-95 hover:opacity-95">
                     <Link href={`/projects/${projects[currentProject].id}`} className="gradient_text_1 w-full h-full">
                     more details
                     </Link>
