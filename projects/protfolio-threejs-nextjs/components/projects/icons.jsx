@@ -233,7 +233,7 @@ const Experience = ({projects}) => {
           {
           projects.map((project, index)=>(
 
-            <group key={index}
+            <group key={project.name+"3d icon"+index}
             position={[
               0+index, 
               0, 0]} 
@@ -254,7 +254,7 @@ const Experience = ({projects}) => {
   )
 }
 
-export const ButtonCanvas = ({projects}) => {
+const ButtonCanvas = ({projects}) => {
     return (
         <Canvas
         shadows
@@ -276,3 +276,5 @@ export const ButtonCanvas = ({projects}) => {
         </Canvas>
     )
 }
+
+export default ButtonCanvas;

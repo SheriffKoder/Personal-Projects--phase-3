@@ -209,7 +209,7 @@ const Projects = () => {
                   projects[currentProject].tech.map((technology, index) => {
                   const tech = allTechnologies.filter((tech2)=> tech2.name === technology)[0];
                   return (
-                    <div key={tech.name+ " "+index} className={`
+                    <div key={projects[currentProject].name+""+tech.name+" "+index} className={`
                     pr-[min(1.1rem,calc(0.5rem+1vw))]
                     pl-[min(1.1rem*0.75,calc(0.5rem+1vw)*0.8)]
                     py-[min(0.2rem,0.5vw)]
