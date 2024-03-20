@@ -1,7 +1,7 @@
 "use client"
 import React, { useEffect, useState, useRef } from "react"
 
-import { ButtonCanvas } from "@/components/projects/icons"
+// import { ButtonCanvas } from "@/components/projects/icons"
 import Image from "next/image"
 
 import { allProjects } from "@/constants/constants"
