@@ -75,10 +75,10 @@ const page = () => {
                     rounded-[10px] pb-3">
 
                         {/* the images */}
-                        <div className="w-[97%] flex flex-row gap-2 order-0 min-h-[min(40vw,411px)] pt-1 px-1">
+                        <div className="w-[100%] flex flex-row gap-2 order-0 min-h-[min(40vw,411px)] pt-1 px-1">
                             
                             {/* image 1 - desktop view*/}
-                            <div className="relative flex-1 h-full max-w-[75%] mx-auto">
+                            <div className="relative flex-1 h-full max-w-[77%] mx-auto">
 
                                 <div className="relative flex flex-col items-center w-full h-full">
                                     <Image src={currentProject.image1} fill alt={currentProject.name+" desktop view"}
@@ -108,7 +108,7 @@ const page = () => {
 
                             {/* image 2 - mobile view */}
                             { currentProject.image2 && (
-                            <div className="w-[25%] h-full relative">
+                            <div className="w-[23%] h-full relative">
 
                                 <div className="relative w-full h-full">
                                     <Image src={currentProject.image2} fill alt={currentProject.name+" desktop view"}
@@ -152,9 +152,9 @@ const page = () => {
                                 </h1>
 
                                 <span className="flex items-center text-[min(0.75em,1rem)] 
-                                pb-[0.5rem] order-1 mx-auto 
+                                pb-[0.5rem] pt-[0.25rem] order-1 mx-auto 
                                 
-                                md1:pb-0 md1:order-2 md1:mx-0">
+                                md1:pb-0 md1:pt-[0rem] md1:order-2 md1:mx-0">
                                 {
                                 currentProject.link && (
                                     <button className="px-4 py-0 gradientGreyButton focus:opacity-95 hover:opacity-95">
