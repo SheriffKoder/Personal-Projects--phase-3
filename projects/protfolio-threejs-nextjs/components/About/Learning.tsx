@@ -17,11 +17,12 @@ const Learning = () => {
 
 
   return (
-    <div className="w-full border border-[#15151500] max-w-[1600px] mx-auto h-auto
+    <div className="w-full border border-[#15151500] max-w-[1600px] mx-auto h-auto mt-8
     ">
 
         <div className={`glass_background rounded-[17px] min-h-[70px] w-full p-1 overflow-hidden
-        ${open ? "openAnimation" : "closeAnimation"}`}
+        ${open ? "openAnimation" : "closeAnimation"}
+        max-w-[90%] mx-auto`}
         >
             <div className={`button_background rounded-[13px] h-[60px] w-full flex items-center px-[1rem] 
             relative cursor-pointer
@@ -61,20 +62,21 @@ const Learning = () => {
                     <span className="flex flex-col w-[80%] lg:flex-row">
 
 
-                        <div className="flex-1 order-2 opacity-90 relative text-center">
+                        <div className="flex-1 order-2 opacity-90 relative text-center text-[min(1.05rem,calc(0.75rem+0.5vw))]">
 
                             {/* ////////////////////////////////////////////////////////////////////////////////////////////////////// */}
                             {/* ////////////////////////////////////////////////////////////////////////////////////////////////////// */}
                                                                             {/* Phase 1 */}
                             {/* ////////////////////////////////////////////////////////////////////////////////////////////////////// */}
 
-                            <h1 className="text-3xl font-semibold gradient_text_1">Phase 1</h1>
+                            <h1 className="text-[2em] font-bold gradient_text_1">Phase 1</h1>
+                            <p className="font-extralight text-[0.85em] opacity-60">HTML, CSS, Javascript</p>
                             
 
                             {/* ////////////////////////////////////////////  Wordpress  ///////////////////////////////////////////// */}
                             {/* <div className="h-[2px] w-full bg-white opacity-60 rounded-full my-4 mb-10 mx-auto"/> */}
-                            <p className="text-2xl mt-[4rem]"><b>Videos: Wordpress</b></p>
-                            <div className="h-[2px] w-[400px] bg-white opacity-60 rounded-full mt-2 mb-4 mx-auto"/>
+                            <p className="text-[1.5em] mt-[4rem]"><b>Videos: Wordpress</b></p>
+                            <div className="h-[2px] w-[400px] max-w-[80%] bg-white opacity-60 rounded-full mt-2 mb-4 mx-auto"/>
                             <p>
                                 Watched a couple of videos by
                                 <Link href="https://www.youtube.com/@TylerMoore" className="mx-1 blueLink">
@@ -86,24 +88,24 @@ const Learning = () => {
                             
                             
                             {/* ////////////////////////////////////////////  Udacity  ///////////////////////////////////////////// */}
-                            <p className="text-2xl mt-[4rem]"><b>Course: Web Development Challenger Track (Udacity)</b></p>
-                            <div className="h-[2px] w-[400px] bg-white opacity-60 rounded-full mt-2 mb-4 mx-auto"/>
+                            <p className="text-[1.5em] mt-[4rem]"><b>Course: Web Development Challenger Track (Udacity)</b></p>
+                            <div className="h-[2px] w-[400px] max-w-[80%] bg-white opacity-60 rounded-full mt-2 mb-4 mx-auto"/>
                             <p>A course introducing HTML, CSS, duration about <span className="gr">1 month</span></p>
 
-                            <div className="w-full flex flex-row items-center justify-center gap-4 text-sm">
+                            <div className="w-full flex flex-row items-center justify-center gap-4">
                                 <a href="/files/challengerTrackCert.pdf" target="_blank"
-                                className="px-4 py-1 gradientRoundButton mt-4 w-[13rem]">
+                                className="px-4 py-0 gradientRoundButton mt-4 w-[13rem]">
                                     View Certificate
                                 </a>
                                 <a href="https://learn.udacity.com/nanodegrees/nd001-mena-nfp1/parts/0707d3a2-62dd-4e8c-86fa-348c2b8c2f46" target="_blank"
-                                className="px-4 py-1 gradientRoundButton mt-4 w-[13rem]">
+                                className="px-4 py-0 gradientRoundButton mt-4 w-[13rem]">
                                     Course's Site
                                 </a>
                             </div>
                             
                             {/* ////////////////////////////////////////////  Book  ///////////////////////////////////////////// */}
-                            <p className="text-2xl mt-[4rem]"><b>Book: Head First JavaScript Programming</b></p>
-                            <div className="h-[2px] w-[400px] bg-white opacity-60 rounded-full mt-2 mb-4 mx-auto"/>
+                            <p className="text-[1.5em] mt-[4rem]"><b>Book: Head First JavaScript Programming</b></p>
+                            <div className="h-[2px] w-[400px] max-w-[80%] bg-white opacity-60 rounded-full mt-2 mb-4 mx-auto"/>
                             <p>A 700 pages book that took me about <span className="gr">2-3 months</span> to complete as i read it twice and took notes to stay with me for future reference</p>
                             <p>This book teaches in a friendly manner <span className="gr">javascript from the very basics to advanced levels</span> with some interesting projects</p>
 
@@ -119,7 +121,7 @@ const Learning = () => {
                             </div>
 
 
-                            <span className="flex lg:flex-col gap-2 flex-row my-8 w-full items-center">
+                            <span className="flex lg:flex-col gap-2 flex-row my-8 w-full items-center justify-center">
                                 <div className="h-2 w-2 bg-white rounded-full"/>
                                 <div className="h-2 w-2 bg-white rounded-full"/>
                                 <div className="h-2 w-2 bg-white rounded-full"/>
@@ -130,12 +132,13 @@ const Learning = () => {
                             {/* ////////////////////////////////////////////////////////////////////////////////////////////////////// */}
                                                                             {/* Phase 2 */}
                             {/* ////////////////////////////////////////////////////////////////////////////////////////////////////// */}
-                            <h1 className="text-3xl font-semibold gradient_text_1">Phase 2</h1>
-                            
+                            <h1 className="text-[2em] font-bold gradient_text_1">Phase 2</h1>
+                            <p className="font-extralight text-[0.85em] opacity-60">Advanced HTML, CSS, Javascript and more extras</p>
+
 
                             {/* ////////////////////////////////////////////  Odin  ///////////////////////////////////////////// */}
-                            <p className="text-2xl mt-[4rem]"><b>Major Course: The Odin Project</b></p>
-                            <div className="h-[2px] w-[400px] bg-white opacity-60 rounded-full mt-2 mb-4 mx-auto"/>
+                            <p className="text-[1.5em] mt-[4rem]"><b>Major Course: The Odin Project</b></p>
+                            <div className="h-[2px] w-[400px] max-w-[80%] bg-white opacity-60 rounded-full mt-2 mb-4 mx-auto"/>
 
                             <div className="flex flex-col gap-2">
                             <p>This is a very long course, took me about <span className="gr">6 months</span> to complete, 
@@ -152,11 +155,11 @@ const Learning = () => {
 
                             <div className="w-full flex flex-row items-center justify-center gap-4 text-sm">
                                 <div
-                                className="px-4 py-1 bg-[#4747475c] mt-4 w-[13rem] rounded-[1rem]">
+                                className="px-4 py-0 bg-[#4747475c] mt-4 w-[13rem] rounded-[1rem]">
                                     No Certificate
                                 </div>
                                 <a href="https://www.theodinproject.com/" target="_blank"
-                                className="px-4 py-1 gradientRoundButton mt-4 w-[13rem]">
+                                className="px-4 py-0 gradientRoundButton mt-4 w-[13rem]">
                                     Course's Site
                                 </a>
                             </div>
@@ -167,8 +170,8 @@ const Learning = () => {
                            
 
                             {/* ////////////////////////////////////////////  Kevin Powell  ///////////////////////////////////////////// */}
-                            <p className="text-2xl mt-[4rem]"><b>Course: Conquering Responsive Layouts by Kevin Powell</b></p>
-                            <div className="h-[2px] w-[400px] bg-white opacity-60 rounded-full mt-2 mb-4 mx-auto"/>
+                            <p className="text-[1.5em] mt-[4rem]"><b>Course: Conquering Responsive Layouts by Kevin Powell</b></p>
+                            <div className="h-[2px] w-[400px] max-w-[80%] bg-white opacity-60 rounded-full mt-2 mb-4 mx-auto"/>
                             <div className="flex flex-col gap-2">
                                 <p> Kevin is a great teacher, i have been following his videos on Youtube for a long time.</p>
                                 <p> He has a simple and sleek approach to css, and was kind enough to construct a course,
@@ -181,17 +184,17 @@ const Learning = () => {
 
                             <div className="w-full flex flex-row items-center justify-center gap-4 text-sm">
                                 <div
-                                className="px-4 py-1 bg-[#4747475c] mt-4 w-[13rem] rounded-[1rem]">
+                                className="px-4 py-0 bg-[#4747475c] mt-4 w-[13rem] rounded-[1rem]">
                                     No Certificate
                                 </div>
                                 <a href="https://courses.kevinpowell.co/conquering-responsive-layouts" target="_blank"
-                                className="px-4 py-1 gradientRoundButton mt-4 w-[13rem]">
+                                className="px-4 py-0 gradientRoundButton mt-4 w-[13rem]">
                                     Course's Site
                                 </a>
                             </div>
 
 
-                            <span className="flex lg:flex-col gap-2 flex-row my-8 items-center">
+                            <span className="flex lg:flex-col gap-2 flex-row my-8 items-center justify-center">
                                 <div className="h-2 w-2 bg-white rounded-full"/>
                                 <div className="h-2 w-2 bg-white rounded-full"/>
                                 <div className="h-2 w-2 bg-white rounded-full"/>
@@ -202,13 +205,14 @@ const Learning = () => {
                             {/* ////////////////////////////////////////////////////////////////////////////////////////////////////// */}
                                                                             {/* Phase 3 */}
                             {/* ////////////////////////////////////////////////////////////////////////////////////////////////////// */}
-                            <h1 className="text-3xl font-semibold gradient_text_1">Phase 3</h1>
-                            
+                            <h1 className="text-[2em] font-semibold gradient_text_1">Phase 3</h1>
+                            <p className="font-extralight text-[0.85em] opacity-60">Backend and jQuery</p>
+
 
                             {/* ////////////////////////////////////////////  NodeJS  ///////////////////////////////////////////// */}
                             {/* <div className="h-[2px] w-full bg-white opacity-60 rounded-full my-4 mb-10 mx-auto"/> */}
-                            <p className="text-2xl mt-[4rem]"><b>Course: NodeJS - The Complete Guide <br/>(MVC, REST APIs, GraphQL, Deno) Backend</b></p>
-                            <div className="h-[2px] w-[400px] bg-white opacity-60 rounded-full mt-2 mb-4 mx-auto"/>
+                            <p className="text-[1.5em] mt-[4rem]"><b>Course: NodeJS - The Complete Guide <br/>(MVC, REST APIs, GraphQL, Deno) Backend</b></p>
+                            <div className="h-[2px] w-[400px] max-w-[80%] bg-white opacity-60 rounded-full mt-2 mb-4 mx-auto"/>
                             <div className="flex flex-col gap-2">
                                 <p>This is a <b>Great</b> course, i learnt so much from it not just NodeJS but also in Javascript and coding practices in general.</p>
                                 <p>The instructor Maximilian Schwarzmüller is a great teacher, he constructed the course very well and presented NodeJS from 
@@ -244,8 +248,8 @@ const Learning = () => {
 
 
                             {/* ////////////////////////////////////////////  jQuery  ///////////////////////////////////////////// */}
-                            <p className="text-2xl mt-[4rem]"><b>Course: The Complete jQuery Course <br/>From Beginner To Advanced!</b></p>
-                            <div className="h-[2px] w-[400px] bg-white opacity-60 rounded-full mt-2 mb-4 mx-auto"/>
+                            <p className="text-[1.5em] mt-[4rem]"><b>Course: The Complete jQuery Course <br/>From Beginner To Advanced!</b></p>
+                            <div className="h-[2px] w-[400px] max-w-[80%] bg-white opacity-60 rounded-full mt-2 mb-4 mx-auto"/>
                             <div className="flex flex-col gap-2">
                                 <p>As i have seen "JQuery" been mentioned on many places around the web, 
                                     i was curious to check it out on the side with NodeJS and discover what i can do with it</p>
@@ -256,17 +260,17 @@ const Learning = () => {
                             
                             <div className="w-full flex flex-row items-center justify-center gap-4 text-sm">
                                 <a href="/files/jQueryCert.pdf" target="_blank"
-                                className="px-4 py-1 gradientRoundButton mt-4 w-[13rem]">
+                                className="px-4 py-0 gradientRoundButton mt-4 w-[13rem]">
                                     View Certificate
                                 </a>
                                 <a href="https://www.udemy.com/course/jquery-tutorial/" target="_blank"
-                                className="px-4 py-1 gradientRoundButton mt-4 w-[13rem]">
+                                className="px-4 py-0 gradientRoundButton mt-4 w-[13rem]">
                                     Course's Site
                                 </a>
                             </div>
 
 
-                            <span className="flex lg:flex-col gap-2 flex-row my-8 items-center">
+                            <span className="flex lg:flex-col gap-2 flex-row my-8 items-center justify-center">
                                 <div className="h-2 w-2 bg-white rounded-full"/>
                                 <div className="h-2 w-2 bg-white rounded-full"/>
                                 <div className="h-2 w-2 bg-white rounded-full"/>
@@ -277,11 +281,12 @@ const Learning = () => {
                             {/* ////////////////////////////////////////////////////////////////////////////////////////////////////// */}
                                                                             {/* Phase 4 */}
                             {/* ////////////////////////////////////////////////////////////////////////////////////////////////////// */}
-                            <h1 className="text-3xl font-semibold gradient_text_1">Phase 4</h1>
+                            <h1 className="text-[2em] font-semibold gradient_text_1">Phase 4</h1>
+                            <p className="font-extralight text-[0.85em] opacity-60">frontend frameworks and project development</p>
 
                             {/* ////////////////////////////////////////////  ReactJS, NextJS  ///////////////////////////////////////////// */}
-                            <p className="text-2xl mt-[4rem]"><b>ReactJS, NextJS</b></p>
-                            <div className="h-[2px] w-[400px] bg-white opacity-60 rounded-full mt-2 mb-4 mx-auto"/>
+                            <p className="text-[1.5em] mt-[4rem]"><b>ReactJS, NextJS</b></p>
+                            <div className="h-[2px] w-[400px] max-w-[80%] bg-white opacity-60 rounded-full mt-2 mb-4 mx-auto"/>
                             <div className="flex flex-col gap-2">
                                 <p>My learning would have not been complete without modern front-end frameworks</p>
                                 <p>I changed the learning approach and decided to learn from selected videos on Youtube that would direct me to the result i want.</p>
@@ -296,8 +301,8 @@ const Learning = () => {
 
 
                             {/* ////////////////////////////////////////////  ThreeJS  ///////////////////////////////////////////// */}
-                            <p className="text-2xl mt-[4rem]"><b>ThreeJS (Youtube)</b></p>
-                            <div className="h-[2px] w-[400px] bg-white opacity-60 rounded-full mt-2 mb-4 mx-auto"/>
+                            <p className="text-[1.5em] mt-[4rem]"><b>ThreeJS (Youtube)</b></p>
+                            <div className="h-[2px] w-[400px] max-w-[80%] bg-white opacity-60 rounded-full mt-2 mb-4 mx-auto"/>
                             <div className="flex flex-col gap-2">
                                 <p>This is something i wanted to learn from the start of my journey, but i kept it until i acquire the basics of Web-Development first.</p>
                                 <p>ThreeJS is like the icing on the cake for modern websites where you can place 3D models on the website, and i am not talking about ThreeJS only here.</p>
@@ -311,7 +316,7 @@ const Learning = () => {
                             </div>
 
 
-                            <span className="flex lg:flex-col gap-2 flex-row my-8 items-center">
+                            <span className="flex lg:flex-col gap-2 flex-row my-8 items-center justify-center">
                                 <div className="h-2 w-2 bg-white rounded-full"/>
                                 <div className="h-2 w-2 bg-white rounded-full"/>
                                 <div className="h-2 w-2 bg-white rounded-full"/>
@@ -319,7 +324,7 @@ const Learning = () => {
 
 
                             {/* ////////////////////////////////////////////  Conclusion  ///////////////////////////////////////////// */}
-                            <h2 className="gradient_text_1 text-2xl mb-2">
+                            <h2 className="gradient_text_1 text-[1.5em] mb-2">
                                 It has been quite a journey, And still better to come
                             </h2>
                             <p>

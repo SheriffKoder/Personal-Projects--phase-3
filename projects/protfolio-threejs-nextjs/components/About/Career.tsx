@@ -55,11 +55,12 @@ const Career = () => {
     },[]);
 
   return (
-    <div className="w-full border border-[#15151500] max-w-[1600px] mx-auto h-auto
+    <div className="w-full border border-[#15151500] max-w-[1600px] mx-auto h-auto mt-8
     ">
 
         <div className={`glass_background rounded-[17px] min-h-[70px] w-full p-1 overflow-hidden
-        ${open ? "openAnimation" : "closeAnimation"}`}
+        ${open ? "openAnimation" : "closeAnimation"}
+        max-w-[90%] mx-auto`}
         >
             <div className={`button_background rounded-[13px] h-[60px] w-full flex items-center px-[1rem] 
             relative cursor-pointer
@@ -93,7 +94,8 @@ const Career = () => {
                 
             </div>
 
-            <div className="flex flex-col items-center py-8 text-lg gap-4 px-4">
+            <div className="flex flex-col items-center py-8 text-lg gap-4 px-4
+            text-[min(1.05rem,calc(0.75rem+0.5vw))]">
                     
 
                     {/* Units */}
@@ -104,8 +106,8 @@ const Career = () => {
                         <div className="w-[20%]">
                         </div>
 
-                        <div className="flex-1 order-2 opacity-90 relative">
-                            <h1 className="text-2xl font-semibold gradient_text_1">Property Consultant (11-2016 to 11-2017)</h1>
+                        <div className="flex-1 order-2 opacity-90 relative text-[min(1.05rem,calc(0.75rem+0.5vw))]">
+                            <h1 className="text-[1.5em] font-bold gradient_text_1">Property Consultant (11-2016 to 11-2017)</h1>
                             <p className="gradient_text_1">1 yr</p>
                             <p><b>UNITS Real-Estate (Agency)</b></p>
                             <div className="h-[2px] w-[200px] bg-white opacity-60 rounded-full my-4"/>
@@ -127,7 +129,7 @@ const Career = () => {
                             </ul>
 
                             
-                            <button className="px-4 py-1 gradientRoundButton mt-4"
+                            <button className="px-4 py-0 gradientRoundButton mt-4"
                             onClick={()=>{CareerRec1.current && (CareerRec1.current.style.display = "flex")}}>
                                 Recommendation Letter
                             </button>
@@ -174,8 +176,8 @@ const Career = () => {
                         <div className="w-[20%]">
                         </div>
 
-                        <div className="flex-1 order-2 opacity-90 relative">
-                            <h1 className="text-2xl font-semibold gradient_text_1">Property Consultant (11-2017 to 07-2020) </h1>
+                        <div className="flex-1 order-2 opacity-90 relative text-[min(1.05rem,calc(0.75rem+0.5vw))]">
+                            <h1 className="text-[1.5em] font-bold gradient_text_1">Property Consultant (11-2017 to 07-2020) </h1>
                             <p className="gradient_text_1">2yr 8mth </p>
                             <p><b>Coldwell Banker</b></p>
                             <div className="h-[2px] w-[200px] bg-white opacity-60 rounded-full my-4"/>
@@ -185,7 +187,7 @@ const Career = () => {
                             </p>
                             <div className="h-[2px] w-[200px] bg-white opacity-60 rounded-full my-4"/>
                             <p>My Role was to:</p>
-                            <ul className="list-disc px-10">
+                            <ul className="list-disc px-6 lg:px-10">
                                 <li className="">
                                     Manage my day to day actions and goals to result in sales increasing the team's overall score.
                                 </li>
@@ -198,7 +200,7 @@ const Career = () => {
                             </ul>
 
                             
-                            <button className="px-4 py-1 gradientRoundButton mt-4"
+                            <button className="px-4 py-0 gradientRoundButton mt-4"
                             onClick={()=>{CareerRec2.current && (CareerRec2.current.style.display = "flex")}}>
                             Recommendation Letter
                             </button>
@@ -244,8 +246,8 @@ const Career = () => {
                         <div className="w-[20%]">
                         </div>
 
-                        <div className="flex-1 order-2 opacity-90 relative">
-                            <h1 className="text-2xl font-semibold gradient_text_1">Senior Property Consultant (07-2020 to 05-2021) </h1>
+                        <div className="flex-1 order-2 opacity-90 relative text-[min(1.05rem,calc(0.75rem+0.5vw))]">
+                            <h1 className="text-[1.5em] font-bold gradient_text_1">Senior Property Consultant (07-2020 to 05-2021) </h1>
                             <p className="gradient_text_1">10mth </p>
                             <p><b>Orascom Development</b></p>
                             <div className="h-[2px] w-[200px] bg-white opacity-60 rounded-full my-4"/>
@@ -258,7 +260,7 @@ const Career = () => {
                             </p>
                             <div className="h-[2px] w-[200px] bg-white opacity-60 rounded-full my-4"/>
                             <p>My Role was to:</p>
-                            <ul className="list-disc px-10">
+                            <ul className="list-disc px-6 lg:px-10">
                                 <li>
                                     Study the market, competition and our projects to help deliver the correct products to the customers.
                                 </li>
@@ -294,8 +296,8 @@ const Career = () => {
                        <div className="w-[20%]">
                        </div>
 
-                       <div className="flex-1 order-2 opacity-90 relative">
-                           <h1 className="text-2xl font-semibold gradient_text_1">Senior Property Consultant (05-2021 to 12-2022) </h1>
+                       <div className="flex-1 order-2 opacity-90 relative text-[min(1.05rem,calc(0.75rem+0.5vw))]">
+                           <h1 className="text-[1.5em] font-bold gradient_text_1">Senior Property Consultant (05-2021 to 12-2022) </h1>
                            <p className="gradient_text_1">1yrs 7mths </p>
                            <p><b>Manazel Properties (Agency)</b></p>
                            <div className="h-[2px] w-[200px] bg-white opacity-60 rounded-full my-4"/>
@@ -307,7 +309,7 @@ const Career = () => {
                            </p>
                            <div className="h-[2px] w-[200px] bg-white opacity-60 rounded-full my-4"/>
                            <p>My Role was to:</p>
-                           <ul className="list-disc px-10">
+                           <ul className="list-disc px-6 lg:px-10">
                                <li>
                                    Find new properties to add to the company's inventory
                                </li>
@@ -346,8 +348,8 @@ const Career = () => {
                        <div className="w-[20%]">
                        </div>
 
-                       <div className="flex-1 order-2 opacity-90 relative">
-                           <h1 className="text-2xl font-semibold gradient_text_1">Freelance Property Consultant (01-2023 to Current) </h1>
+                       <div className="flex-1 order-2 opacity-90 relative text-[min(1.05rem,calc(0.75rem+0.5vw))]">
+                           <h1 className="text-[1.5em] font-bold gradient_text_1">Freelance Property Consultant (01-2023 to Current) </h1>
                            <p className="gradient_text_1">1+ yrs </p>
                            <p><b>Freelance</b></p>
                            <div className="h-[2px] w-[200px] bg-white opacity-60 rounded-full my-4"/>
