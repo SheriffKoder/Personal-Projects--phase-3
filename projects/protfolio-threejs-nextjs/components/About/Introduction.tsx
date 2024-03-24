@@ -6,13 +6,15 @@ import { goals } from "@/constants/constants"
 
 const Introduction = () => {
   return (
-    <div className="w-full border border-[#15151500] max-w-[2000px] mx-auto
+    <div className="w-[100vw] border border-[#15151500] max-w-[2000px] mx-auto
     ">
 
            
 
-            <div className="flex flex-col lg:flex-row gap-8 px-4 lg:items-start lg:justify-between">
-                <div className="lg:flex-1 order-2 lg:order-1 lg:pl-[5rem]">
+            <div className="flex flex-col md2:flex-row gap-8 px-4 md2:items-start md2:justify-between">
+                
+                <div className="md2:flex-1 order-2 md2:order-1 md2:pl-[2rem] lg:pl-[5rem]
+                text-[min(0.9rem,calc(0.75rem+0.5vw))] max-w-[600px] mx-auto md2:mx-0 md2:max-w-full">
 
                     <h1 className="text-2xl uppercase">
                         About me
@@ -22,7 +24,7 @@ const Introduction = () => {
                         Introduction
                     </h1>
 
-                    <p className="mt-4 text-lg">
+                    <p className="mt-4">
                         My name is <span className="gr">Sherif Khodeir</span>, I have graduated from a reputable university in Egypt
                         with a Bachelor degree in <span className="gr">Electrical Engineering and Electronics</span>,
                         i have always been interested in <span className="gr">technology, computers and arts</span> .
@@ -54,7 +56,7 @@ const Introduction = () => {
                     </p>
                 </div>
 
-                <div className=" mx-auto order-1 lg:order-2 flex flex-col lg:w-[40%]
+                <div className=" mx-auto order-1 m2:order-2 flex flex-col md2:w-[40%]
                 relative mb-[4rem] w-full
                 
                 ">
@@ -62,6 +64,7 @@ const Introduction = () => {
                     rounded-full border-4 opacity-90
                     bg-gradient-to-r from-[#50a3d4] from-30% to-[#39d0b7b4]
                     overflow-hidden 
+                    max-w-[250px]
                     ">
                         <Image src="/images/about/avatar2.png" height={300} width={300} alt="profile-photo" priority
                             className=""
@@ -71,15 +74,16 @@ const Introduction = () => {
                         </Image>
                     </div>
 
-                    <div className="absolute top-[100%] w-full z-[1] ">
+                    <div className="absolute top-[100%] w-full z-[1] text-[min(0.65rem,calc(0.75rem+0.5vw))] ">
                         
                         <details className="mt-4 p-[3px] rounded-[9px] mx-auto
-                         max-w-[500px]
-                        text-base glass_background_about">
+                         max-w-[300px] glass_background_about">
+                            
                             <summary className="px-4 py-1 rounded-[6px] opacity-95
                             bg-gradient-to-r from-[#387ca4] to-[#39d0b7b4]">
                                 <span className="font-semibold">current status:</span> {goals[0].title}
                             </summary>
+
                             <ul className="px-4 py-2 mt-2 flex flex-col gap-2">
                                 {
                                     goals.map((goal, index)=> (
@@ -100,7 +104,7 @@ const Introduction = () => {
                                                     {
                                                     goal.steps.length > 0 && (
                                                         goal.steps.map((step, index)=> (
-                                                            <li className={`text-sm ml-8 font-extralight
+                                                            <li className={` ml-8 font-extralight
                                                             ${step.progress === "Done" && "text-teal-600"}
                                                             ${step.progress === "Not Yet" && "text-white opacity-90"}
                                                             ${step.progress === "In Progress" && "text-amber-500"}

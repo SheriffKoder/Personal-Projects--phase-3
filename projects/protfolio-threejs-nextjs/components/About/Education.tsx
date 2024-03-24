@@ -16,7 +16,8 @@ const Education = () => {
     ">
 
         <div className={`glass_background rounded-[17px] min-h-[70px] w-full p-1 overflow-hidden
-        ${open ? "openAnimation" : "closeAnimation"}`}
+        ${open ? "openAnimation" : "closeAnimation"}
+        max-w-[90%] mx-auto`}
         >
             <div className={`button_background rounded-[13px] h-[60px] w-full flex items-center px-[1rem] 
             relative cursor-pointer
@@ -50,12 +51,13 @@ const Education = () => {
                 
             </div>
 
-            <div className="flex flex-col items-center py-8 text-lg gap-4 px-4">
+            <div className="flex flex-col items-center py-8 gap-4 px-4
+            text-[min(1.05rem,calc(0.75rem+0.5vw))]">
 
 
                     {/* School */}
                     <span className="text-center max-w-[680px] opacity-90">
-                        <h1 className="text-2xl font-semibold gradient_text_1">School</h1>
+                        <h1 className="text-[1.5em] font-bold gradient_text_1">School</h1>
                         <p>Been to different schools depending on my location.</p>
                         <p>Been taught since 4 yo in english, learnt some french language also.</p>
                         <p>Studied subjects like Maths (Algebra, Geometry), Physics, Arts, Computer, Biology, Chemistry, History etc..</p>
@@ -75,7 +77,7 @@ const Education = () => {
                         </div>
 
                         <div className="flex-1 order-2 opacity-90">
-                            <h1 className="text-2xl font-semibold gradient_text_1">University</h1>
+                            <h1 className="text-[1.5em] mb-1 font-bold gradient_text_1">University</h1>
                             <p><b>MSA University (October University for Modern Sciences & Arts) : Giza, Egypt</b></p>
                             <p><b>B.Sc in Engineering, Electrical Communication and Electronic Systems Engineering</b></p>
                             <p><b>With an awarded degree of BACHELOR OF SCIENCE from University of Greenwich, London, UK.</b></p>
@@ -111,7 +113,7 @@ const Education = () => {
 
                     {/* Embedded Systems */}
                     <span className="text-center max-w-[680px] opacity-90">
-                        <h1 className="text-2xl font-semibold gradient_text_1">Post-Graduate Course</h1>
+                        <h1 className="text-[1.5em] mb-1 font-bold gradient_text_1">Post-Graduate Course</h1>
                         <p><b>Enhanced Embedded Systems - EmbeddedFab</b></p>
                         <p>Embedded systems was the closest field to connect</p>
                         <p>between my University Courses and programming.</p>
@@ -138,7 +140,7 @@ const Education = () => {
                        </div>
 
                        <div className="flex-1 order-2 opacity-90">
-                       <h1 className="text-2xl font-semibold gradient_text_1">First Job</h1>
+                       <h1 className="text-[1.5em] mb-1 font-bold gradient_text_1">First Job</h1>
                             <p><b>Customer Service Representative - Vodafone UK Egypt</b></p>
                             <p>the reason i placed this here as a part of my education</p>
                             <p>Is because i do consider it more as an English language course.</p>
