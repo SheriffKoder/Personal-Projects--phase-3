@@ -1518,6 +1518,64 @@ background: linear-gradient(
 /* responsive */
 
 
+/* ///////////////////////// @contact */
+
+
+@media (orientation: landscape) and (max-width: 1000px )
+,(orientation: landscape) and (max-height: 635px )
+, (orientation: portrait) and (max-height: 635px ) 
+{
+
+  #contact__form__container {
+    padding-bottom: 0;
+    padding: max(1rem,min(1.5vw,1.5rem));
+    padding-bottom: 0;
+  }
+  
+  #contact__form {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  #contact__labels-1{
+    gap:0.75rem;
+    flex:1;
+    max-width: 300px;
+  }
+
+  #contact__labels-1 div label, #contact__labels-1 div input{
+    flex: 1;
+  }
+
+
+
+  #contact__container {
+    margin-top: -2rem;
+  }
+
+  #contact__text-area {
+    flex: 1;
+    height: auto;
+  }
+
+
+
+  #contact__submit-button {
+    margin-bottom: 0.5rem;
+  }
+
+  #contact_social-icons {
+    margin-top: 0.5rem;
+  }
+
+  #footer {
+    height: 85px;
+    position: fixed;
+    bottom: 0;
+  }
+
+}
+
 /* ///////////////////////// @Home/Hero */
 
 

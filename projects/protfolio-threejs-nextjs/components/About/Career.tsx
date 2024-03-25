@@ -5,6 +5,7 @@ import Image from 'next/image'
 import CaretDown from '@/public/icons/caret-down'
 import CaretUp from '@/public/icons/caret-up'
 import CloseSvg from '@/public/icons/close-svg'
+import ThreeDots from './threeDots'
 
 const Career = () => {
 
@@ -62,6 +63,9 @@ const Career = () => {
         ${open ? "openAnimation" : "closeAnimation"}
         max-w-[90%] mx-auto`}
         >
+
+            {/* when hovered, will change background color and reverse on hover out */}
+            {/* when clicked increase the height to show the information and content */}
             <div className={`button_background rounded-[13px] h-[60px] w-full flex items-center px-[1rem] 
             relative cursor-pointer
             `}
@@ -74,11 +78,11 @@ const Career = () => {
                 ${open ? "openAnimationBG" : "closeAnimationBG"}
                 ${hover && !open ? "hoverAnimationBG" : ""}
                 ${!hover && !open ? "hoverOutAnimationBG" : ""}
-
                 `}
                 
                 />
 
+                {/* caret icon with rotation depending on open state for this container */}
                 <span className="z-[1]">
                 {open ? (
                     <CaretUp color="white" size="40px" />
@@ -88,6 +92,7 @@ const Career = () => {
                 )}
                 </span>
 
+                {/* the button's title */}
                 <span className="text-sm md:text-xl lg:text-2xl z-[1]" ref={UnitsContainer}>
                     Previous Career (Real-Estate)
                 </span>
@@ -102,7 +107,7 @@ const Career = () => {
                     <span className="flex flex-col w-full lg:flex-row">
 
                        
-                       
+                        {/* empty space for a row alignment */}
                         <div className="w-[20%]">
                         </div>
 
@@ -129,13 +134,13 @@ const Career = () => {
                             </ul>
 
                             
+                            {/* /////// show the recommendation letter for this job */}
                             <button className="px-4 py-0 gradientRoundButton mt-4"
                             onClick={()=>{CareerRec1.current && (CareerRec1.current.style.display = "flex")}}>
                                 Recommendation Letter
                             </button>
 
                             <div className="absolute top-[10%] left-[0%] w-full h-full hidden items-center justify-center"
-                            // id="career-rec-1" 
                             ref={CareerRec1}>
                                 <div className="w-[420px] h-[550px] rounded-[17px] border-2 absolute">
                                     <Image src={"/images/about/career-rec-1.jpeg"} fill alt="recommendation letter 1"
@@ -143,19 +148,18 @@ const Career = () => {
                                     />
                                     <div className="absolute top-[2%] right-[2%] cursor-pointer"
                                     onClick={()=>{CareerRec1.current && (CareerRec1.current.style.display = "none")}}>
-                            <CloseSvg size={25} color1={"#e90059"} color2={"#ffffff"}/>
+                                        <CloseSvg size={25} color1={"#e90059"} color2={"#ffffff"}/>
                                     </div>
                                 </div>
                             </div>
+                            {/* /////// /////////////////////////////////////////// */}
 
                         </div>
                     
+                        {/* element to close/collapse i.e decrease width for this content area */}
                         <div className="lg:w-[20%] w-full my-4 order-1 lg:my-0 lg:order-3 flex flex-col">
                             <Image src="/images/about/career-logo-1.png" height={100} width={100} alt="Units"
                             className="mx-auto"/>
-
-                            
-
                         </div>
 
                     </span>
@@ -172,7 +176,7 @@ const Career = () => {
                     <span className="flex flex-col w-full lg:flex-row">
 
                        
-                       
+                        {/* empty space for a row alignment */}
                         <div className="w-[20%]">
                         </div>
 
@@ -199,7 +203,7 @@ const Career = () => {
                                 </li>
                             </ul>
 
-                            
+                            {/* /////// show the recommendation letter for this job */}
                             <button className="px-4 py-0 gradientRoundButton mt-4"
                             onClick={()=>{CareerRec2.current && (CareerRec2.current.style.display = "flex")}}>
                             Recommendation Letter
@@ -218,31 +222,28 @@ const Career = () => {
                                     </div>
                                 </div>
                             </div>
+                            {/* /////// /////////////////////////////////////////// */}
 
                         </div>
                     
+                        {/* empty space for a row alignment that contains images for this content */}
                         <div className="lg:w-[20%] w-full my-4 order-1 lg:my-0 lg:order-3 flex flex-col">
                             <Image src="/images/about/career-logo-2.jpg" height={125} width={125} alt="Coldwell Banker logo"
                             className="mx-auto"/>
-
-                            
-
                         </div>
 
                     </span>
 
 
-                    <span className="flex lg:flex-col gap-2 flex-row my-4">
-                        <div className="h-2 w-2 bg-white rounded-full"/>
-                        <div className="h-2 w-2 bg-white rounded-full"/>
-                        <div className="h-2 w-2 bg-white rounded-full"/>
-                    </span>
+                    <ThreeDots/>
+
 
 
 
                     {/* Orascom */}
                     <span className="flex flex-col w-full lg:flex-row">
                        
+                        {/* empty space for a row alignment */}
                         <div className="w-[20%]">
                         </div>
 
@@ -272,27 +273,22 @@ const Career = () => {
 
                         </div>
                     
+                        {/* empty space for a row alignment that contains images for this content */}
                         <div className="lg:w-[20%] w-full my-4 order-1 lg:my-0 lg:order-3 flex flex-col">
                             <Image src="/images/about/career-logo-3.png" height={125} width={125} alt="Orascom Development logo"
                             className="mx-auto"/>
-
-                            
-
                         </div>
 
                     </span>
 
 
-                    <span className="flex lg:flex-col gap-2 flex-row my-4">
-                        <div className="h-2 w-2 bg-white rounded-full"/>
-                        <div className="h-2 w-2 bg-white rounded-full"/>
-                        <div className="h-2 w-2 bg-white rounded-full"/>
-                    </span>
+                    <ThreeDots/>
 
 
                     {/* Manazel */}
                     <span className="flex flex-col w-full lg:flex-row">
                        
+                        {/* empty space for a row alignment */}
                        <div className="w-[20%]">
                        </div>
 
@@ -324,27 +320,23 @@ const Career = () => {
 
                        </div>
                    
+                        {/* empty space for a row alignment that contains images for this content */}
                        <div className="lg:w-[20%] w-full my-4 order-1 lg:my-0 lg:order-3 flex flex-col">
-                       <Image src="/images/about/career-logo-4.jpg" height={100} width={100} alt="Manazel logo"
+                            <Image src="/images/about/career-logo-4.jpg" height={100} width={100} alt="Manazel logo"
                             className="rounded-[17px] overflow-hidden mx-auto"/>
-                           
-
                        </div>
 
                    </span>
 
 
-                   <span className="flex lg:flex-col gap-2 flex-row my-4">
-                       <div className="h-2 w-2 bg-white rounded-full"/>
-                       <div className="h-2 w-2 bg-white rounded-full"/>
-                       <div className="h-2 w-2 bg-white rounded-full"/>
-                   </span>
+                    <ThreeDots/>
 
 
 
                     {/* Freelance */}
                     <span className="flex flex-col w-full lg:flex-row">
                        
+                        {/* empty space for a row alignment */}
                        <div className="w-[20%]">
                        </div>
 
@@ -366,19 +358,17 @@ const Career = () => {
 
                         </div>
 
+                        {/* empty space for a row alignment that can contain images for this content */}
                         <div className="lg:w-[20%] w-full my-4 order-1 lg:my-0 lg:order-3 flex flex-col">
                        </div>
 
                    </span>
 
 
-                   {/* <span className="flex lg:flex-col gap-2 flex-row my-4">
-                       <div className="h-2 w-2 bg-white rounded-full"/>
-                       <div className="h-2 w-2 bg-white rounded-full"/>
-                       <div className="h-2 w-2 bg-white rounded-full"/>
-                   </span> */}
-
+                    {/* single dot */}
                    <div className="h-2 w-2 bg-white rounded-full mt-4"/>
+
+                    {/* element to close/collapse i.e decrease width for this content area */}
                    <span className="lg:ml-auto lg:mr-[4rem] ml-4 flex flex-row items-center cursor-pointer"
                    onClick={()=>{setOpen((prev)=> !prev)}}>
                         <span>close</span>

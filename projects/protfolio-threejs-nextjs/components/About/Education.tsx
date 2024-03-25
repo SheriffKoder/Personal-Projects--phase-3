@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 import Image from 'next/image'
 import CaretDown from '@/public/icons/caret-down'
 import CaretUp from '@/public/icons/caret-up'
+import ThreeDots from './threeDots'
 
 const Education = () => {
 
@@ -19,6 +20,8 @@ const Education = () => {
         ${open ? "openAnimation" : "closeAnimation"}
         max-w-[90%] mx-auto`}
         >
+            {/* when hovered, will change background color and reverse on hover out */}
+            {/* when clicked increase the height to show the information and content */}
             <div className={`button_background rounded-[13px] h-[60px] w-full flex items-center px-[1rem] 
             relative cursor-pointer
             `}
@@ -31,11 +34,11 @@ const Education = () => {
                 ${open ? "openAnimationBG" : "closeAnimationBG"}
                 ${hover && !open ? "hoverAnimationBG" : ""}
                 ${!hover && !open ? "hoverOutAnimationBG" : ""}
-
                 `}
                
                 />
 
+                {/* caret icon with rotation depending on open state for this container */}
                 <span className="z-[1]">
                 {open ? (
                     <CaretUp color="white" size="40px" />
@@ -45,6 +48,7 @@ const Education = () => {
                 )}
                 </span>
 
+                {/* the button's title */}
                 <span className="text-sm md:text-xl lg:text-2xl z-[1]">
                     Education (Engineering)
                 </span>
@@ -63,16 +67,13 @@ const Education = () => {
                         <p>Studied subjects like Maths (Algebra, Geometry), Physics, Arts, Computer, Biology, Chemistry, History etc..</p>
                     </span>
 
-                    <span className="flex lg:flex-col gap-2 flex-row my-4 lg:my-0">
-                        <div className="h-2 w-2 bg-white rounded-full"/>
-                        <div className="h-2 w-2 bg-white rounded-full"/>
-                        <div className="h-2 w-2 bg-white rounded-full"/>
-                    </span>
+                    <ThreeDots/>
                     
 
                     {/* University */}
                     <span className="text-center flex flex-col w-full lg:flex-row">
                        
+                       {/* empty space for a row alignment */}
                         <div className="w-[20%]">
                         </div>
 
@@ -92,6 +93,7 @@ const Education = () => {
                             <p>I choose a graduation project more related to programming and circuit design and it was my first attempt to write code.</p>
                         </div>
                     
+                        {/* empty space for a row alignment that contains images for this content */}
                         <div className="lg:w-[20%] w-full my-4 order-1 lg:my-0 lg:order-3 flex flex-col">
                             <Image src="/images/about/uniLogo1.png" height={300} width={300} alt="MSA University Logo"
                             className="mx-auto"/>
@@ -104,11 +106,7 @@ const Education = () => {
                     </span>
 
 
-                    <span className="flex lg:flex-col gap-2 flex-row my-4 lg:my-0">
-                        <div className="h-2 w-2 bg-white rounded-full"/>
-                        <div className="h-2 w-2 bg-white rounded-full"/>
-                        <div className="h-2 w-2 bg-white rounded-full"/>
-                    </span>
+                    <ThreeDots/>
 
 
                     {/* Embedded Systems */}
@@ -126,16 +124,13 @@ const Education = () => {
                     </span>
 
 
-                    <span className="flex lg:flex-col gap-2 flex-row my-4 lg:my-0">
-                        <div className="h-2 w-2 bg-white rounded-full"/>
-                        <div className="h-2 w-2 bg-white rounded-full"/>
-                        <div className="h-2 w-2 bg-white rounded-full"/>
-                    </span>
+                    <ThreeDots/>
 
                    
                    {/* Vodafone */}
                     <span className="text-center flex flex-col lg:flex-row w-full">
                        
+                        {/* empty space for a row alignment */}
                        <div className="w-[20%]">
                        </div>
 
@@ -153,6 +148,7 @@ const Education = () => {
                             <p>not to mention my increased listening and communication skills.</p>
                        </div>
                    
+                        {/* empty space for a row alignment that contains images for this content */}
                        <div className="lg:w-[20%] w-full my-4 order-1 lg:my-0 lg:order-3 flex flex-row lg:flex-col">
                             <Image src="/images/about/vf-logo.png" height={200} width={200} alt="Vodafone Logo"
                             className="opacity-80 mx-auto"/>
@@ -160,7 +156,10 @@ const Education = () => {
 
                    </span>
 
+                    {/* single dot */}
                    <div className="h-2 w-2 bg-white rounded-full mt-4"/>
+
+                    {/* element to close/collapse i.e decrease width for this content area */}
                    <span className="lg:ml-auto lg:mr-[4rem] ml-4 flex flex-row items-center cursor-pointer"
                    onClick={()=>{setOpen((prev)=> !prev)}}>
                         <span>close</span>

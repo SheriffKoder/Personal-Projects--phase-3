@@ -6,13 +6,12 @@ import { goals } from "@/constants/constants"
 
 const Introduction = () => {
   return (
-    <div className="w-full border border-[#15151500] max-w-[2000px] mx-auto
-    ">
 
-           
+    <div className="w-full border border-[#15151500] max-w-[2000px] mx-auto">
 
             <div className="flex flex-col md2:flex-row gap-8 px-4 md2:items-start md2:justify-between">
                 
+                {/* title */}
                 <div className="md2:flex-1 order-2 md2:order-1 md2:pl-[2rem] lg:pl-[5rem]
                 text-[min(1rem,calc(0.75rem+0.5vw))] max-w-[600px] mx-auto md2:mx-0 md2:max-w-full">
 
@@ -57,9 +56,9 @@ const Introduction = () => {
                 </div>
 
                 <div className=" mx-auto order-1 m2:order-2 flex flex-col md2:w-[40%]
-                relative mb-[4rem] w-full
-                
-                ">
+                relative mb-[4rem] w-full">
+
+                    {/* user image/avatar */}
                     <div className="inline-block mx-auto
                     rounded-full border-4 opacity-90
                     bg-gradient-to-r from-[#50a3d4] from-30% to-[#39d0b7b4]
@@ -74,6 +73,7 @@ const Introduction = () => {
                         </Image>
                     </div>
 
+                    {/* goals drop down */}
                     <div className="absolute top-[100%] w-full z-[1] text-[min(0.65rem,calc(0.75rem+0.5vw))] 
                     lg:text-[min(0.85rem,calc(0.75rem+0.5vw))] ">
                         
@@ -103,9 +103,12 @@ const Introduction = () => {
                         
                                                 <ul className="list-disc mb-2">
                                                     {
+                                                    // set a text color depending on the goal progress value
                                                     goal.steps.length > 0 && (
                                                         goal.steps.map((step, index)=> (
-                                                            <li className={` ml-8 font-extralight
+                                                            <li 
+                                                            key={goal.title+" "+index+" "+step}
+                                                            className={` ml-8 font-extralight
                                                             ${step.progress === "Done" && "text-teal-600"}
                                                             ${step.progress === "Not Yet" && "text-white opacity-90"}
                                                             ${step.progress === "In Progress" && "text-amber-500"}

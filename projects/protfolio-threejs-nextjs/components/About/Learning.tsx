@@ -5,6 +5,7 @@ import Image from 'next/image'
 import CaretDown from '@/public/icons/caret-down'
 import CaretUp from '@/public/icons/caret-up'
 import Link from 'next/link'
+import ThreeDots from './threeDots'
 
 
 const Learning = () => {
@@ -24,6 +25,8 @@ const Learning = () => {
         ${open ? "openAnimation" : "closeAnimation"}
         max-w-[90%] mx-auto`}
         >
+            {/* when hovered, will change background color and reverse on hover out */}
+            {/* when clicked increase the height to show the information and content */}
             <div className={`button_background rounded-[13px] h-[60px] w-full flex items-center px-[1rem] 
             relative cursor-pointer
             `}
@@ -36,11 +39,11 @@ const Learning = () => {
                 ${open ? "openAnimationBG" : "closeAnimationBG"}
                 ${hover && !open ? "hoverAnimationBG" : ""}
                 ${!hover && !open ? "hoverOutAnimationBG" : ""}
-
                 `}
                 
                 />
 
+                {/* caret icon with rotation depending on open state for this container */}
                 <span className="z-[1]">
                 {open ? (
                     <CaretUp color="white" size="40px" />
@@ -50,6 +53,7 @@ const Learning = () => {
                 )}
                 </span>
 
+                {/* the button's title */}
                 <span className="text-sm md:text-xl lg:text-2xl z-[1]">
                     Learning Path (Web-Development)
                 </span>
@@ -59,7 +63,7 @@ const Learning = () => {
             <div className="flex flex-col items-center py-8 text-lg gap-4 px-4">
                     
 
-                    <span className="flex flex-col w-[80%] lg:flex-row">
+                    <span className="flex flex-col w-full lg:flex-row">
 
 
                         <div className="flex-1 order-2 opacity-90 relative text-center text-[min(1.05rem,calc(0.75rem+0.5vw))]">
@@ -92,13 +96,13 @@ const Learning = () => {
                             <div className="h-[2px] w-[400px] max-w-[80%] bg-white opacity-60 rounded-full mt-2 mb-4 mx-auto"/>
                             <p>A course introducing HTML, CSS, duration about <span className="gr">1 month</span></p>
 
-                            <div className="w-full flex flex-row items-center justify-center gap-4">
+                            <div className="w-full flex flex-row items-center justify-center gap-4 text-xs md2:text-sm">
                                 <a href="/files/challengerTrackCert.pdf" target="_blank"
-                                className="px-4 py-0 gradientRoundButton mt-4 w-[13rem]">
+                                className="px-3 py-1 gradientRoundButton mt-4 w-[12rem]">
                                     View Certificate
                                 </a>
                                 <a href="https://learn.udacity.com/nanodegrees/nd001-mena-nfp1/parts/0707d3a2-62dd-4e8c-86fa-348c2b8c2f46" target="_blank"
-                                className="px-4 py-0 gradientRoundButton mt-4 w-[13rem]">
+                                className="px-3 py-1 gradientRoundButton mt-4 w-[12rem]">
                                     Course's Site
                                 </a>
                             </div>
@@ -109,23 +113,19 @@ const Learning = () => {
                             <p>A 700 pages book that took me about <span className="gr">2-3 months</span> to complete as i read it twice and took notes to stay with me for future reference</p>
                             <p>This book teaches in a friendly manner <span className="gr">javascript from the very basics to advanced levels</span> with some interesting projects</p>
 
-                            <div className="w-full flex flex-row items-center justify-center gap-4 text-sm">
+                            <div className="w-full flex flex-row items-center justify-center gap-4 text-xs md2:text-sm">
                                 <div
-                                className="px-4 py-1 bg-[#4747475c] mt-4 w-[13rem] rounded-[1rem]">
+                                className="px-3 py-1 bg-[#4747475c] mt-4 w-[12rem] rounded-[1rem]">
                                     No Certificate
                                 </div>
                                 <a href="https://www.oreilly.com/library/view/head-first-javascript/9781449340124/" target="_blank"
-                                className="px-4 py-1 gradientRoundButton mt-4 w-[13rem]">
+                                className="px-3 py-1 gradientRoundButton mt-4 w-[12rem]">
                                     Books's Site
                                 </a>
                             </div>
 
 
-                            <span className="flex lg:flex-col gap-2 flex-row my-8 w-full items-center justify-center">
-                                <div className="h-2 w-2 bg-white rounded-full"/>
-                                <div className="h-2 w-2 bg-white rounded-full"/>
-                                <div className="h-2 w-2 bg-white rounded-full"/>
-                            </span>
+                            <ThreeDots/>
 
 
                             {/* ////////////////////////////////////////////////////////////////////////////////////////////////////// */}
@@ -153,13 +153,13 @@ const Learning = () => {
                             <p>HTML, CSS, Forms, Javascript, Git, Javascript testing, Advanced HTML/CSS, Accessibility, Responsiveness, ReactJS, NodeJS(skipped), Getting Hired </p>
                             </div>
 
-                            <div className="w-full flex flex-row items-center justify-center gap-4 text-sm">
+                            <div className="w-full flex flex-row items-center justify-center gap-4 text-xs md2:text-sm">
                                 <div
-                                className="px-4 py-0 bg-[#4747475c] mt-4 w-[13rem] rounded-[1rem]">
+                                className="px-3 py-1 bg-[#4747475c] mt-4 w-[12rem] rounded-[1rem]">
                                     No Certificate
                                 </div>
                                 <a href="https://www.theodinproject.com/" target="_blank"
-                                className="px-4 py-0 gradientRoundButton mt-4 w-[13rem]">
+                                className="px-3 py-1 gradientRoundButton mt-4 w-[12rem]">
                                     Course's Site
                                 </a>
                             </div>
@@ -182,23 +182,20 @@ const Learning = () => {
                                 </p>
                             </div>
 
-                            <div className="w-full flex flex-row items-center justify-center gap-4 text-sm">
+                            <div className="w-full flex flex-row items-center justify-center gap-4 text-xs md2:text-sm">
                                 <div
-                                className="px-4 py-0 bg-[#4747475c] mt-4 w-[13rem] rounded-[1rem]">
+                                className="px-3 py-1  bg-[#4747475c] mt-4 w-[12rem] rounded-[1rem]">
                                     No Certificate
                                 </div>
                                 <a href="https://courses.kevinpowell.co/conquering-responsive-layouts" target="_blank"
-                                className="px-4 py-0 gradientRoundButton mt-4 w-[13rem]">
+                                className="px-3 py-1 gradientRoundButton mt-4 w-[12rem]">
                                     Course's Site
                                 </a>
                             </div>
 
 
-                            <span className="flex lg:flex-col gap-2 flex-row my-8 items-center justify-center">
-                                <div className="h-2 w-2 bg-white rounded-full"/>
-                                <div className="h-2 w-2 bg-white rounded-full"/>
-                                <div className="h-2 w-2 bg-white rounded-full"/>
-                            </span>
+                            <ThreeDots/>
+
 
 
                             {/* ////////////////////////////////////////////////////////////////////////////////////////////////////// */}
@@ -235,13 +232,13 @@ const Learning = () => {
                             <p>Sessions & Cookies, Authentications, Validations, Error handling techniques</p>
                             <p>Payments, Uploading, Pagination, using Templatating Engines </p>
 
-                            <div className="w-full flex flex-row items-center justify-center gap-4 text-sm">
+                            <div className="w-full flex flex-row items-center justify-center gap-4 text-xs md2:text-sm">
                                 <a href="/files/NodeJsCert.pdf" target="_blank"
-                                className="px-4 py-1 gradientRoundButton mt-4 w-[13rem]">
+                                className="px-3 py-1 gradientRoundButton mt-4 w-[12rem]">
                                     View Certificate
                                 </a>
                                 <a href="https://www.udemy.com/course/nodejs-the-complete-guide/" target="_blank"
-                                className="px-4 py-1 gradientRoundButton mt-4 w-[13rem]">
+                                className="px-3 py-1 gradientRoundButton mt-4 w-[12rem]">
                                     Course's Site
                                 </a>
                             </div>
@@ -258,23 +255,20 @@ const Learning = () => {
                                 </p>
                             </div>
                             
-                            <div className="w-full flex flex-row items-center justify-center gap-4 text-sm">
+                            <div className="w-full flex flex-row items-center justify-center gap-4 text-xs md2:text-sm">
                                 <a href="/files/jQueryCert.pdf" target="_blank"
-                                className="px-4 py-0 gradientRoundButton mt-4 w-[13rem]">
+                                className="px-3 py-1  gradientRoundButton mt-4 w-[12rem]">
                                     View Certificate
                                 </a>
                                 <a href="https://www.udemy.com/course/jquery-tutorial/" target="_blank"
-                                className="px-4 py-0 gradientRoundButton mt-4 w-[13rem]">
+                                className="px-3 py-1 gradientRoundButton mt-4 w-[12rem]">
                                     Course's Site
                                 </a>
                             </div>
 
 
-                            <span className="flex lg:flex-col gap-2 flex-row my-8 items-center justify-center">
-                                <div className="h-2 w-2 bg-white rounded-full"/>
-                                <div className="h-2 w-2 bg-white rounded-full"/>
-                                <div className="h-2 w-2 bg-white rounded-full"/>
-                            </span>
+                            <ThreeDots/>
+
 
 
                             {/* ////////////////////////////////////////////////////////////////////////////////////////////////////// */}
@@ -316,11 +310,8 @@ const Learning = () => {
                             </div>
 
 
-                            <span className="flex lg:flex-col gap-2 flex-row my-8 items-center justify-center">
-                                <div className="h-2 w-2 bg-white rounded-full"/>
-                                <div className="h-2 w-2 bg-white rounded-full"/>
-                                <div className="h-2 w-2 bg-white rounded-full"/>
-                            </span>
+                            <ThreeDots/>
+
 
 
                             {/* ////////////////////////////////////////////  Conclusion  ///////////////////////////////////////////// */}
@@ -354,8 +345,10 @@ const Learning = () => {
                     {/* ////////////////////////////////////////////////////////////////////////////////////////////////////// */}
 
 
-
+                    {/* single dot */}
                    <div className="h-2 w-2 bg-white rounded-full mt-4"/>
+
+                    {/* element to close/collapse i.e decrease width for this content area */}
                    <span className="lg:ml-auto lg:mr-[4rem] ml-4 flex flex-row items-center cursor-pointer"
                    onClick={()=>{setOpen((prev)=> !prev)}}>
                         <span>close</span>

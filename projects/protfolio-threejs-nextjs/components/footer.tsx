@@ -16,48 +16,49 @@ const Footer = () => {
     // console.log(path2);
   return (
     <footer className={`w-[100vw] h-[150px] bg-[#00000000] flex items-center justify-center z-[10]
-    ${(path === "contact" || (path2.length > 2 && path2[1] === "projects")) ? "bg-[#00000000]" : "bg-[#0000]"} `}>
+    ${(path === "contact" || (path2.length > 2 && path2[1] === "projects")) ? "h-[100px] fixed bottom-0 bg-[#00000000]" : "bg-[#0000]"} `}
+    id="footer">
         <div className="max-w-[1600px] flex flex-col items-center justify-center w-full">
 
-                <div className="w-full flex flex-row justify-center items-center relative">
-                    <ul className="flex flex-row gap-12 text-xs font-light opacity-90">
-                        <li className={`py-4
-                        `}>
-                            <Link href="/" className={`${path === "" ? "no_select" : "gradient_text_hover_1"}`}>
-                                Home
-                            </Link>
-                        </li>
-                        <li className={`py-4
-                        `}>
-                    
-                            <Link href="/about" className={`${path === "about" ? "no_select" : "gradient_text_hover_1"}`}>
-                                About
-                            </Link>
-                        </li>
-                        <li className={`py-4
-                        `}>
-                            <Link href="/projects" className={`${path === "projects" ? "no_select" : "gradient_text_hover_1"}`}>
-                                Projects
-                            </Link>
-                        </li>
-                        <li className={` py-4
-                        `}>
-                            <Link href="/contact" className={`${path === "contact" ? "no_select" : "gradient_text_hover_1"}`}>
-                            Contact
-                            </Link>
-                        </li>
-                    </ul>
+            <div className="w-full flex flex-row justify-center items-center relative">
+                <ul className="flex flex-row gap-12 text-xs font-light opacity-90">
+                    <li className={`py-2
+                    `}>
+                        <Link href="/" className={`${path === "" ? "no_select" : "gradient_text_hover_1"}`}>
+                            Home
+                        </Link>
+                    </li>
+                    <li className={`py-2
+                    `}>
+                
+                        <Link href="/about" className={`${path === "about" ? "no_select" : "gradient_text_hover_1"}`}>
+                            About
+                        </Link>
+                    </li>
+                    <li className={`py-2
+                    `}>
+                        <Link href="/projects" className={`${path === "projects" ? "no_select" : "gradient_text_hover_1"}`}>
+                            Projects
+                        </Link>
+                    </li>
+                    <li className={` py-2
+                    `}>
+                        <Link href="/contact" className={`${path === "contact" ? "no_select" : "gradient_text_hover_1"}`}>
+                        Contact
+                        </Link>
+                    </li>
+                </ul>
 
-                    {
-                        path !== "contact" && (
-                                
-                        <div className="ml-auto flex flex-row gap-2 absolute right-[2rem] bottom-[-1.45rem]">
-                            <SocialIcons radius={"0.3rem"} size={"1.5rem"} background={"#ffffff7d"}
-                            size2={24} padding={"0.3rem"}/>
+                {
+                    path !== "contact" && (
                             
-                        </div>
-                    )}
-                </div>
+                    <div className="ml-auto flex flex-row gap-2 absolute right-[2rem] bottom-[-1.45rem]">
+                        <SocialIcons radius={"0.3rem"} size={"1.5rem"} background={"#ffffff7d"}
+                        size2={24} padding={"0.3rem"}/>
+                        
+                    </div>
+                )}
+            </div>
 
 
             {/* z to show on the contact page */}
