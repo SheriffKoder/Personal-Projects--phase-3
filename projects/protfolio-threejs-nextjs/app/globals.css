@@ -25,8 +25,10 @@ img {
 }
 
 
+/*/////////////////////////////////////////////////////////////////////*/
+/*/////////////////////////////////////////////////////////////////////*/
 
-
+/* the main gradient text color used on the website, gr is used in the @about/introduction */
 .gr, .gradient_text_1 {
   background: -webkit-linear-gradient(
     
@@ -68,23 +70,23 @@ img {
 }
 
 
-/* animation for the bar at the top of the page */
+/* animation for the bar at the top of the wesbite's navigation menu */
 .gradient_nav_animation {
-  animation: Animation 20s ease infinite;
+  animation: navAnimation 20s ease infinite;
   background-size: 200% 200%;
   /* background: linear-gradient(130deg, #ff7e00, #ffffff, #5cff00); */
 
 
 }
 
-@keyframes Animation { 
+@keyframes navAnimation { 
   0%{background-position:10% 0%}
   50%{background-position:91% 100%}
   100%{background-position:10% 0%}
 }
 
 
-.status_animation {
+/* .status_animation {
   margin-left: 0;
   animation: text_circulate 20s linear infinite;
 
@@ -98,11 +100,13 @@ img {
   100% {
     margin-left: -400px;
   }
-}
+} */
 
 
-/*///////////////////////////////////////////*/
-/* to set some overlay over the earth model */
+/*/////////////////////////////////////////////////////////////////////*/
+/*/////////////////////////////////////////////////////////////////////*/
+
+/* to set some overlay over the earth model in @contact page */
 .earth-model {
   /* position: relative;
   mix-blend-mode: lighten;
@@ -136,8 +140,25 @@ background: linear-gradient(
 }
 
 
+/* placeHolder styling for the @contact page's form */
+.placeHolder {
+  animation: placeHolder 2s infinite;
+  opacity: 0;
+  animation-delay: 6s;
+  animation-timing-function: cubic-bezier(.4,.55,1,.89);
+ 
+ }
+ 
+ @keyframes placeHolder { 
+   0%{opacity: 0;}
+   50%{opacity: 1;}
+   100%{opacity: 0;}
+ }
 
+/*/////////////////////////////////////////////////////////////////////*/
+/*/////////////////////////////////////////////////////////////////////*/
 
+/* animation used in @home/projects description, @projects cards description */
 .fadeIn_animation {
   animation-name: fadeIn_keyframe;
   animation-duration: 0.6s;
@@ -170,9 +191,10 @@ background: linear-gradient(
   }
 }
 
-/*/////////////////// preloader /////////////////////*/
-/*//////////////////////////////////////////////////*/
+/*/////////////////////////////////////////////////////////////////////*/
+/*/////////////////////////////////////////////////////////////////////*/
 
+/* styling for the preloader component "welcome text" used in the home page */
 body {
   cursor: wait;
 }
@@ -199,203 +221,12 @@ body {
 
 
 
-/*///////////////////////////////////////////*/
-/*///////////////////////////////////////////*/
 
+/*/////////////////////////////////////////////////////////////////////*/
+/*/////////////////////////////////////////////////////////////////////*/
 
-
-
-/* ////////////////// video css ////////////////// */
-.hash-span {
-  margin-top: -100px;
-  padding-bottom: 100px;
-  display: block;
-}
-
-.black-gradient {
-  background: #000000; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
-    to right,
-    #434343,
-    #000000
-  ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(
-    to right,
-    #434343,
-    #000000
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-}
-
-.violet-gradient {
-  background: #804dee;
-  background: linear-gradient(-90deg, #804dee 0%, rgba(60, 51, 80, 0) 100%);
-  background: -webkit-linear-gradient(
-    -90deg,
-    #804dee 0%,
-    rgba(60, 51, 80, 0) 100%
-  );
-}
-
-.green-pink-gradient {
-  background: "#00cea8";
-  background: linear-gradient(90.13deg, #00cea8 1.9%, #bf61ff 97.5%);
-  background: -webkit-linear-gradient(-90.13deg, #00cea8 1.9%, #bf61ff 97.5%);
-}
-
-.orange-text-gradient {
-  background: #f12711; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
-    to top,
-    #f12711,
-    #f5af19
-  ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(
-    to top,
-    #f12711,
-    #f5af19
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.green-text-gradient {
-  background: #11998e; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
-    to top,
-    #11998e,
-    #38ef7d
-  ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(
-    to top,
-    #11998e,
-    #38ef7d
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.blue-text-gradient {
-  /* background: -webkit-linear-gradient(#eee, #333); */
-  background: #56ccf2; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
-    to top,
-    #2f80ed,
-    #56ccf2
-  ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(
-    to top,
-    #2f80ed,
-    #56ccf2
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.pink-text-gradient {
-  background: #ec008c; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
-    to top,
-    #ec008c,
-    #fc6767
-  ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(
-    to top,
-    #ec008c,
-    #fc6767
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-/* canvas- styles */
-.canvas-loader {
-  font-size: 10px;
-  width: 1em;
-  height: 1em;
-  border-radius: 50%;
-  position: relative;
-  text-indent: -9999em;
-  animation: mulShdSpin 1.1s infinite ease;
-  transform: translateZ(0);
-}
-
-@keyframes mulShdSpin {
-  0%,
-  100% {
-    box-shadow: 0em -2.6em 0em 0em #ffffff,
-      1.8em -1.8em 0 0em rgba(255, 255, 255, 0.2),
-      2.5em 0em 0 0em rgba(255, 255, 255, 0.2),
-      1.75em 1.75em 0 0em rgba(255, 255, 255, 0.2),
-      0em 2.5em 0 0em rgba(255, 255, 255, 0.2),
-      -1.8em 1.8em 0 0em rgba(255, 255, 255, 0.2),
-      -2.6em 0em 0 0em rgba(255, 255, 255, 0.5),
-      -1.8em -1.8em 0 0em rgba(255, 255, 255, 0.7);
-  }
-  12.5% {
-    box-shadow: 0em -2.6em 0em 0em rgba(255, 255, 255, 0.7),
-      1.8em -1.8em 0 0em #ffffff, 2.5em 0em 0 0em rgba(255, 255, 255, 0.2),
-      1.75em 1.75em 0 0em rgba(255, 255, 255, 0.2),
-      0em 2.5em 0 0em rgba(255, 255, 255, 0.2),
-      -1.8em 1.8em 0 0em rgba(255, 255, 255, 0.2),
-      -2.6em 0em 0 0em rgba(255, 255, 255, 0.2),
-      -1.8em -1.8em 0 0em rgba(255, 255, 255, 0.5);
-  }
-  25% {
-    box-shadow: 0em -2.6em 0em 0em rgba(255, 255, 255, 0.5),
-      1.8em -1.8em 0 0em rgba(255, 255, 255, 0.7), 2.5em 0em 0 0em #ffffff,
-      1.75em 1.75em 0 0em rgba(255, 255, 255, 0.2),
-      0em 2.5em 0 0em rgba(255, 255, 255, 0.2),
-      -1.8em 1.8em 0 0em rgba(255, 255, 255, 0.2),
-      -2.6em 0em 0 0em rgba(255, 255, 255, 0.2),
-      -1.8em -1.8em 0 0em rgba(255, 255, 255, 0.2);
-  }
-  37.5% {
-    box-shadow: 0em -2.6em 0em 0em rgba(255, 255, 255, 0.2),
-      1.8em -1.8em 0 0em rgba(255, 255, 255, 0.5),
-      2.5em 0em 0 0em rgba(255, 255, 255, 0.7), 1.75em 1.75em 0 0em #ffffff,
-      0em 2.5em 0 0em rgba(255, 255, 255, 0.2),
-      -1.8em 1.8em 0 0em rgba(255, 255, 255, 0.2),
-      -2.6em 0em 0 0em rgba(255, 255, 255, 0.2),
-      -1.8em -1.8em 0 0em rgba(255, 255, 255, 0.2);
-  }
-  50% {
-    box-shadow: 0em -2.6em 0em 0em rgba(255, 255, 255, 0.2),
-      1.8em -1.8em 0 0em rgba(255, 255, 255, 0.2),
-      2.5em 0em 0 0em rgba(255, 255, 255, 0.5),
-      1.75em 1.75em 0 0em rgba(255, 255, 255, 0.7), 0em 2.5em 0 0em #ffffff,
-      -1.8em 1.8em 0 0em rgba(255, 255, 255, 0.2),
-      -2.6em 0em 0 0em rgba(255, 255, 255, 0.2),
-      -1.8em -1.8em 0 0em rgba(255, 255, 255, 0.2);
-  }
-  62.5% {
-    box-shadow: 0em -2.6em 0em 0em rgba(255, 255, 255, 0.2),
-      1.8em -1.8em 0 0em rgba(255, 255, 255, 0.2),
-      2.5em 0em 0 0em rgba(255, 255, 255, 0.2),
-      1.75em 1.75em 0 0em rgba(255, 255, 255, 0.5),
-      0em 2.5em 0 0em rgba(255, 255, 255, 0.7), -1.8em 1.8em 0 0em #ffffff,
-      -2.6em 0em 0 0em rgba(255, 255, 255, 0.2),
-      -1.8em -1.8em 0 0em rgba(255, 255, 255, 0.2);
-  }
-  75% {
-    box-shadow: 0em -2.6em 0em 0em rgba(255, 255, 255, 0.2),
-      1.8em -1.8em 0 0em rgba(255, 255, 255, 0.2),
-      2.5em 0em 0 0em rgba(255, 255, 255, 0.2),
-      1.75em 1.75em 0 0em rgba(255, 255, 255, 0.2),
-      0em 2.5em 0 0em rgba(255, 255, 255, 0.5),
-      -1.8em 1.8em 0 0em rgba(255, 255, 255, 0.7), -2.6em 0em 0 0em #ffffff,
-      -1.8em -1.8em 0 0em rgba(255, 255, 255, 0.2);
-  }
-  87.5% {
-    box-shadow: 0em -2.6em 0em 0em rgba(255, 255, 255, 0.2),
-      1.8em -1.8em 0 0em rgba(255, 255, 255, 0.2),
-      2.5em 0em 0 0em rgba(255, 255, 255, 0.2),
-      1.75em 1.75em 0 0em rgba(255, 255, 255, 0.2),
-      0em 2.5em 0 0em rgba(255, 255, 255, 0.2),
-      -1.8em 1.8em 0 0em rgba(255, 255, 255, 0.5),
-      -2.6em 0em 0 0em rgba(255, 255, 255, 0.7), -1.8em -1.8em 0 0em #ffffff;
-  }
-}
-
+/* technology cards backgrounds/text styling for each technology depending on the colors of the icon image for that technology, 
+appearing places like @home/tech, @home/projects, @projects cards, @singleProject description etc. */
 
 .HTML5_bg {
   /* background: -webkit-linear-gradient(#eee, #333); */
@@ -916,6 +747,8 @@ body {
 /* ////////////////////////////////////////////////////////////////////////////// */
 /* ////////////////////////////////////////////////////////////////////////////// */
 
+/* background styling for the tilt cards in components named extra */
+
 .extra1_card_bg {
   /* background: -webkit-linear-gradient(#eee, #333); */
   background: #000000; /* fallback for old browsers */
@@ -950,14 +783,17 @@ body {
   opacity: 70;
 }
 
-.radialContainer{
-  /* z-index: 1;
+/* .radialContainer{
+  z-index: 1;
   position: absolute;
   height: 100%;
   width:100%;
   background: linear-gradient(to bottom, rgb(123, 8, 255, 0.9), rgb(123, 8, 255,0.87));
-  mix-blend-mode:screen; */
-}
+  mix-blend-mode:screen;
+} */
+
+
+/* give a border to images used in tilt cards in @home/extra1 component */
 .bgImage{
   /* z-index: 0; */
   filter: 
@@ -972,6 +808,9 @@ body {
 
 /* ////////////////////////////////////////////////////////////////////////////// */
 /* ////////////////////////////////////////////////////////////////////////////// */
+
+
+/* navigation/nav links display a line width increasing animation when the corresponding page is active */
 
 li.active {
   /* border-bottom: 2px solid transparent; */
@@ -1002,10 +841,10 @@ li.active::after {
   }
 }
 
-/* /////////////////////////////////////////////////////////////////////////////////////////// */
-/* about containers */
+/* ////////////////////////////////////////////////////////////////////////////// */
+/* ////////////////////////////////////////////////////////////////////////////// */
 
-/* used in other components */
+/* used in multiple components */
 .glass_background {
   background: rgba(255, 255, 255, 0.05);
   /* border-radius: 16px; */
@@ -1016,6 +855,83 @@ li.active::after {
 
 }
 
+/* used in multiple components - to align at center of the page or parent component */
+.centered_centered {
+  position: absolute;
+  top: 0%;
+  left: 50%;
+  transform: translate(-50%, 0%);
+}
+
+/* used in multiple components - to align at center of the page or parent component */
+/* @contact/email confirm,  */
+.centered_centered2 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, 0%);
+}
+
+/* used in multiple components - to align at center of the page or parent component */
+.centered_centered3 {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+
+/* used in multiple components like @projects card images, @about user image*/
+.image_scaleIn_animation {
+
+  animation: scaleIn 0.5s forwards linear;
+  scale:1;
+
+}
+
+@keyframes scaleIn { 
+  0%{scale:1}
+  100%{scale:1.025}
+}
+
+.image_scaleOut_animation {
+
+  animation: scaleOut 0.5s forwards linear;
+  scale:1.025;
+
+}
+
+@keyframes scaleOut { 
+  0%{scale:1.025}
+  100%{scale:1}
+}
+
+/* used as a preloader for 3d models until they render */
+.loadingSpinner {
+  position: absolute;
+  font-size: 30px;
+  height: 1em;
+  width: 1em;
+  border: solid #83838331;
+  border-bottom: solid #00e0bba0;
+  border-width: 0.157em;
+  border-radius: 50%;
+  animation: rotateSpinner 2s linear infinite;
+
+ }
+ 
+ @keyframes rotateSpinner { 
+   0%{rotate: 0;}
+   100%{rotate: 360deg;}
+ }
+
+
+/* ////////////////////////////////////////////////////////////////////////////// */
+/* ////////////////////////////////////////////////////////////////////////////// */
+/* ////////////////////////////////////////////////////////////////////////////// */
+/* ////////////////////////////////////////////////////////////////////////////// */
+
+/* all below are stylings for the education, career, learning drop downs in @about page */
 
 .glass_background_about {
   background: rgba(2,8,18,0.8);
@@ -1043,6 +959,8 @@ li.active::after {
 
 }
 
+
+/* //////////////////////////////////////// */
 .openAnimation {
   animation: openAnimationKeyframe 0.4s forwards linear;
 
@@ -1057,6 +975,7 @@ li.active::after {
   }
 }
 
+/* //////////////////////////////////////// */
 .closeAnimation {
   animation: closeAnimationKeyframe 0.4s forwards linear;
 
@@ -1071,7 +990,7 @@ li.active::after {
   }
 }
 
-
+/* //////////////////////////////////////// */
 .openAnimationBG {
   opacity: 0.8;
 background: -webkit-linear-gradient(
@@ -1095,6 +1014,7 @@ background: -webkit-linear-gradient(
   100%{background-size:300% 100%;}
 }
 
+/* //////////////////////////////////////// */
 .closeAnimationBG {
   opacity: 0.8;
   background: -webkit-linear-gradient(
@@ -1110,16 +1030,17 @@ background: -webkit-linear-gradient(
     background-size: 100% 100%;
   
   
-  }
+}
   
-  @keyframes closeGradientbackgroundAnim { 
+@keyframes closeGradientbackgroundAnim { 
     0%{background-size:300% 100%;}
     100%{background-size:100% 100%;}
-  }
+}
   
+/* //////////////////////////////////////// */
 .hoverAnimationBG {
   opacity: 0;
-background: -webkit-linear-gradient(
+  background: -webkit-linear-gradient(
     
   55deg, rgb(8, 107, 164)
   
@@ -1130,7 +1051,6 @@ background: -webkit-linear-gradient(
 
   animation: hoverGradientbackgroundAnim 1s forwards linear;
 
-
 }
 
 @keyframes hoverGradientbackgroundAnim { 
@@ -1139,9 +1059,10 @@ background: -webkit-linear-gradient(
 }
 
 
+/* //////////////////////////////////////// */
 .hoverOutAnimationBG {
   opacity: 0.8;
-background: -webkit-linear-gradient(
+  background: -webkit-linear-gradient(
     
   55deg, rgb(8, 107, 164)
   
@@ -1160,26 +1081,20 @@ background: -webkit-linear-gradient(
   100%{opacity:0}
 }
 
-.centered_centered {
-  position: absolute;
-  top: 0%;
-  left: 50%;
-  transform: translate(-50%, 0%);
-}
-
-/* email confirm,  */
-.centered_centered2 {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, 0%);
-}
-
-/*////////////////////////////////////////////////////////////*/
-/* projects component */
+/* ////////////////////////////////////////////////////////////////////////////// */
+/* ////////////////////////////////////////////////////////////////////////////// */
+/* ////////////////////////////////////////////////////////////////////////////// */
+/* ////////////////////////////////////////////////////////////////////////////// */
 
 
 
+/* ////////////////////////////////////////////////////////////////////////////// */
+/* ////////////////////////////////////////////////////////////////////////////// */
+
+/* @home/projects component */
+
+
+/* styling for the project icons, in case activated/selected have a neon border */
 :root {
   --clr-neon: #387ca4;
   --clr-bg: #6f777c;
@@ -1208,35 +1123,10 @@ background: -webkit-linear-gradient(
 }
 
 
-.image_scaleIn_animation {
 
-  animation: scaleIn 0.5s forwards linear;
-  scale:1;
+/* ////////////////////////////////////////////////////////////////////////////// */
+/* ////////////////////////////////////////////////////////////////////////////// */
 
-}
-
-@keyframes scaleIn { 
-  0%{scale:1}
-  100%{scale:1.025}
-}
-
-.image_scaleOut_animation {
-
-  animation: scaleOut 0.5s forwards linear;
-  scale:1.025;
-
-}
-
-@keyframes scaleOut { 
-  0%{scale:1.025}
-  100%{scale:1}
-}
-
-
-
-
-
-/*////////////////////////////////////////////////////////////*/
 /* projects page */
 
 
@@ -1304,13 +1194,6 @@ background: -webkit-linear-gradient(
 
 }  */
 
-.centered_centered3 {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
 
 .projectIcons_overlay2 {
   position: relative;
@@ -1353,8 +1236,12 @@ background: -webkit-linear-gradient(
 
 }
 
-/* /////////////////////////////////////////////////////////////////////////////////////////// */
-/* social icons */
+/* ////////////////////////////////////////////////////////////////////////////// */
+/* ////////////////////////////////////////////////////////////////////////////// */
+
+/* social icons at @footer component @contact page*/
+/* the idea is to take a black icon image with transparent background
+and turn it to a transparent icon image with a gray semi transparent background */
 
 /* white text icons need a white background to apply colors on their background */
 .social_icon_box_container_white {
@@ -1366,6 +1253,7 @@ background: -webkit-linear-gradient(
   width: 5rem;
 
 }
+
 .social_icon_box_white {
 
   
@@ -1375,7 +1263,6 @@ background: -webkit-linear-gradient(
   color: white;
 }
 
-
 .social_icon_box_container {
   background: rgb(22, 22, 22);
   mix-blend-mode: screen;
@@ -1383,10 +1270,8 @@ background: -webkit-linear-gradient(
   /* width: 5rem; */
  
 }
+
 .social_icon_box {
-
-
-
   /* padding: 0.3rem; */
   /* border-radius: 5px; */
   /* background-color: rgb(255, 255, 255); */
@@ -1400,24 +1285,12 @@ background: -webkit-linear-gradient(
 
 }
 
-.placeHolder {
-
- animation: placeHolder 2s infinite;
- opacity: 0;
- animation-delay: 6s;
- animation-timing-function: cubic-bezier(.4,.55,1,.89);
-
-}
-
-@keyframes placeHolder { 
-  0%{opacity: 0;}
-  50%{opacity: 1;}
-  100%{opacity: 0;}
-}
 
 
-/* /////////////////////////////////////////////////////////////////////////////////////////// */
+/* ////////////////////////////////////////////////////////////////////////////// */
+/* ////////////////////////////////////////////////////////////////////////////// */
 
+/* some tailwind styling for buttons across the page */
 
 .gradientBGButton {
   @apply bg-gradient-to-r from-[#387ca4] to-[#39d0b7b4]
@@ -1435,6 +1308,9 @@ background: -webkit-linear-gradient(
 .gradientGreyButton {
   @apply bg-[#4747475c] rounded-[1rem]
 }
+
+
+/* some tailwind styling for text across the page - may be replaced in the code with more responsive values */
 
 .mainText_padding_left{
   @apply px-[7rem]
@@ -1464,42 +1340,10 @@ background: -webkit-linear-gradient(
   @apply text-2xl font-normal
 } 
 
+/* some link stylings */
 
 .blueLink {
   @apply text-blue-600 cursor-pointer underline
-}
-
-
-/*///////////////////////////////////////////*/
-/* to set some overlay over the earth model */
-/* .earth-model {
-  position: relative;
-  mix-blend-mode: lighten;
-  z-index: 0;
-
-}
-
-.earth-model::after {
-  content: "";
-  display: block;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  bottom: 0;
-  left: 0;
-background: linear-gradient(
-  0deg, 
-  rgba(0, 2, 10, 1) 0%,
-  rgba(0, 2, 23, 1) 3%, 
-  rgba(0, 13, 132, 0.15) 10%, 
-  rgba(0, 13, 132, 0.12) 15%, 
-   rgba(0, 68, 255, 0.075) 100%);
-   z-index:0;
-
-}  */
-
-.earth_ambient {
-  background-color: rgba(0, 13, 132, 0.09);
 }
 
 .no_select {
@@ -1515,11 +1359,13 @@ background: linear-gradient(
 
 /* ////////////////////////////////////////////////////////////////////////////// */
 /* ////////////////////////////////////////////////////////////////////////////// */
-/* responsive */
+/* ////////////////////////////////////////////////////////////////////////////// */
+/* ////////////////////////////////////////////////////////////////////////////// */
+/* more detailed responsive styling/adjustments */
 
-
+/* ////////////////////////////////////////////////////////////////////////////// */
+/* ////////////////////////////////////////////////////////////////////////////// */
 /* ///////////////////////// @contact */
-
 
 @media (orientation: landscape) and (max-width: 1000px )
 ,(orientation: landscape) and (max-height: 635px )
@@ -1576,6 +1422,8 @@ background: linear-gradient(
 
 }
 
+/* ////////////////////////////////////////////////////////////////////////////// */
+/* ////////////////////////////////////////////////////////////////////////////// */
 /* ///////////////////////// @Home/Hero */
 
 
@@ -1603,29 +1451,13 @@ background: linear-gradient(
 
 }
 /* from-[#387ca4] to-[#39d0b7b4] */
+
+/* ////////////////////////////////////////////////////////////////////////////// */
+/* ////////////////////////////////////////////////////////////////////////////// */
 /* ///////////////////////// @Home/projects */
 
-.loadingSpinner {
-  position: absolute;
-  font-size: 30px;
-  height: 1em;
-  width: 1em;
-  border: solid #83838331;
-  border-bottom: solid #00e0bba0;
-  border-width: 0.157em;
-  border-radius: 50%;
-  animation: rotateSpinner 2s linear infinite;
-
- }
- 
- @keyframes rotateSpinner { 
-   0%{rotate: 0;}
-   100%{rotate: 360deg;}
- }
-
-
-
- .hero_brush_mask {
+/* the brickwall background image for the computer-phone 3d models in @Home/projects */
+.hero_brush_mask {
   /* font-size: 3vw; */
   mask-image: url("/images/projects/brush.png");
   mask-size: 50vmax;
@@ -1651,7 +1483,6 @@ background: linear-gradient(
 }
 
 
-
 @media screen and (min-width: 700px) {
   .hero_brush_mask {
     mask-size: min(45vmax,900px);
@@ -1664,8 +1495,9 @@ background: linear-gradient(
   }
 }
 
- 
 
+/* ///////////////////////////////////// */
+/* @Home/projects defaults */
 
 #homeTech_container {
   height: 90vh;
@@ -1704,6 +1536,8 @@ background: linear-gradient(
 
 }
 
+/* instead of using more caret icons as the responsivity of the icons flex container changes from row to column
+will just rotate the icons */
 #homeTech_caret1, #homeTech_caret2 {
   rotate: 270deg;
 }
@@ -1731,6 +1565,12 @@ background: linear-gradient(
 
 }
 
+#homeTech_magnifyButton {
+  position: absolute;
+  bottom: 5%;
+  right: calc(50%-2rem);
+}
+
 
 @media (max-width: 450px) {
   #homeTech_magnifyButton {
@@ -1739,13 +1579,6 @@ background: linear-gradient(
     /* right: 1rem; */
   }
 }
-
-#homeTech_magnifyButton {
-  position: absolute;
-  bottom: 5%;
-  right: calc(50%-2rem);
-}
-
 
 @media (orientation: landscape) {
 
@@ -1876,7 +1709,8 @@ background: linear-gradient(
 }
 
 
-
+/* ////////////////////////////////////////////////////////////////////////////// */
+/* ////////////////////////////////////////////////////////////////////////////// */
 /* ///////////////////////// @Nav */
 
 #main_navigation {
@@ -1898,7 +1732,7 @@ background: linear-gradient(
 
 /* ////////////////////////////////////////////////////////////////////////////// */
 /* ////////////////////////////////////////////////////////////////////////////// */
-
+/* not used but kept for future useage */
 
 .app {
   @apply relative z-10 flex justify-center items-center flex-col max-w-7xl mx-auto sm:px-16 px-6;
