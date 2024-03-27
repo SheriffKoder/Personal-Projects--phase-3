@@ -58,8 +58,9 @@ const Hero = () => {
             
 
             <span className="text-[min(0.75em,1rem)] mt-2 font-extralight">
-              I design and build beautiful and interactive websites<br/>
-              with ReactJS, NodeJS, ThreeJS and more...  
+              I aspire to help my clients businesses shine and grow<br/>
+              by designing and building beautiful and interactive websites<br/>
+              with ReactJS, NodeJS, ThreeJS and more...
             </span>
 
             {/* ////// links ////// */}
@@ -79,7 +80,7 @@ const Hero = () => {
               text-[min(0.9em,1rem)]">
 
                   <Link href="/about" className="gradient_text_1 w-full h-full">
-                    check out all info about me 
+                    know more about me 
                     {/* <span className="hidden 2xl:contents">(background, education, career...)</span> */}
                   </Link>
               </span>

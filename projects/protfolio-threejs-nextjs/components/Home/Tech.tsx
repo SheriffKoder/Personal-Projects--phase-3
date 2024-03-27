@@ -78,11 +78,11 @@ const Tech = () => {
               <span className="mb-8 flex flex-col gap-3 text-[min(1.25rem,calc(0.75rem+0.5vw))]">
                 <h4 className="gradientBoldHeader mb-2">About my Skills</h4>
                 <span>
-                  <p>By now i am able to design and build websites with modern front-end frameworks.</p>
-                  <p>and design and build backend routes to connect these websites to a NoSQL database if needed.</p>
+                  <p>I am able to give your website an <b>edge</b> through thoughtfully designing the front-end according to the latest trends and building it with modern frameworks.</p>
+                  <p>Give your website more functionality and user control by having a back-end application connecting the website to a NoSQL database to create/read/update/delete information.</p>
                 </span>
                 <span>
-                  <p>My on-going goal is to get better at building more beautiful, more optimized and more functional websites.</p>
+                  <p>My on-going goal is to get better at building more beautiful, more optimized and more functional websites to make my clients websites standout.</p>
                 </span>
                 <p className="max-w-[750px]">For every project I may or may not have all the needed tools/skills to do it
                   but my greatest asset to complete a project is my desire and ability to learn
