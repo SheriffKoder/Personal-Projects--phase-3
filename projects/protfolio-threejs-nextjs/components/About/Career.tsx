@@ -111,17 +111,17 @@ const Career = () => {
                         <div className="w-[20%]">
                         </div>
 
-                        <div className="flex-1 order-2 opacity-90 relative text-[min(1.05rem,calc(0.75rem+0.5vw))]">
+                        <div className="flex-1 order-2 opacity-100 relative text-[min(1.05rem,calc(0.75rem+0.5vw))]">
                             <h1 className="text-[1.5em] font-bold gradient_text_1">Property Consultant (11-2016 to 11-2017)</h1>
                             <p className="gradient_text_1">1 yr</p>
                             <p><b>UNITS Real-Estate (Agency)</b></p>
                             <div className="h-[2px] w-[200px] bg-white opacity-60 rounded-full my-4"/>
                             <p>This was my first real job, it was very challenging. Given that i have never worked face to face 
-                                with such large number of un-familiar and diverse range of people to promote one self, 
-                                our company and products.</p>
+                                with such large number of un-familiar and diversity of people to promote myself, 
+                                my company and products.</p>
                             <div className="h-[2px] w-[200px] bg-white opacity-60 rounded-full my-4"/>
                             <p>My Role was to:</p>
-                            <ul className="list-disc px-10">
+                            <ul className="list-disc px-6 lg:px-10 text-sm opacity-90 font-light flex flex-col gap-2">
                                 <li className="">
                                     Approach and meet with new clients to promote the company's properties.
                                 </li>
@@ -180,26 +180,26 @@ const Career = () => {
                         <div className="w-[20%]">
                         </div>
 
-                        <div className="flex-1 order-2 opacity-90 relative text-[min(1.05rem,calc(0.75rem+0.5vw))]">
+                        <div className="flex-1 order-2 opacity-100 relative text-[min(1.05rem,calc(0.75rem+0.5vw))]">
                             <h1 className="text-[1.5em] font-bold gradient_text_1">Property Consultant (11-2017 to 07-2020) </h1>
                             <p className="gradient_text_1">2yr 8mth </p>
                             <p><b>Coldwell Banker</b></p>
                             <div className="h-[2px] w-[200px] bg-white opacity-60 rounded-full my-4"/>
                             <p>
-                                one of the largest real-estate firms in the country, provided frequent training courses (a plus)
+                                One of the largest real-estate firms in the country, provided frequent training courses (a plus for me)
                                 and allowed for more skill and personal growth through its larger teams and larger inventory which meant more client interaction.
                             </p>
                             <div className="h-[2px] w-[200px] bg-white opacity-60 rounded-full my-4"/>
                             <p>My Role was to:</p>
-                            <ul className="list-disc px-6 lg:px-10">
+                            <ul className="list-disc px-6 lg:px-10 text-sm opacity-90 font-light flex flex-col gap-2">
                                 <li className="">
-                                    Manage my day to day actions and goals to result in sales increasing the team's overall score.
+                                    Manage my day to day actions and goals to result in increasing my team's overall score.
                                 </li>
                                 <li>
-                                    Study the market, competition and our inventory to structure a products map to help deliver the correct products to the customers.
+                                    Study the market, competition and our inventory to structure a products map to help deliver the correct products to clients.
                                 </li>
                                 <li>
-                                    Manage pipeline and create new channels with new and exiting customers.
+                                    Manage pipeline and open new channels with new and exiting clients.
                                 </li>
                             </ul>
 
@@ -253,15 +253,15 @@ const Career = () => {
                             <p><b>Orascom Development</b></p>
                             <div className="h-[2px] w-[200px] bg-white opacity-60 rounded-full my-4"/>
                             <p>
-                                one of the largest real-estate developers in the country, 
-                                i joined the company as i was recommended for my character and work ethics.
+                                One of the largest real-estate developers in the country, 
+                                I joined the company as I was recommended for my character and work ethics.
                             </p>
                             <p>
-                                I also wanted to join the company as it has a very reliable name in the market, and believed this would be a great value for my clients.
+                                I also wanted to join the company as it has a very reliable name in the market and believed this would be a great chance to add value for my clients.
                             </p>
                             <div className="h-[2px] w-[200px] bg-white opacity-60 rounded-full my-4"/>
                             <p>My Role was to:</p>
-                            <ul className="list-disc px-6 lg:px-10">
+                            <ul className="list-disc px-6 lg:px-10 text-sm opacity-90 font-light flex flex-col gap-2">
                                 <li>
                                     Study the market, competition and our projects to help deliver the correct products to the customers.
                                 </li>
@@ -292,20 +292,18 @@ const Career = () => {
                        <div className="w-[20%]">
                        </div>
 
-                       <div className="flex-1 order-2 opacity-90 relative text-[min(1.05rem,calc(0.75rem+0.5vw))]">
+                       <div className="flex-1 order-2 opacity-100 relative text-[min(1.05rem,calc(0.75rem+0.5vw))]">
                            <h1 className="text-[1.5em] font-bold gradient_text_1">Senior Property Consultant (05-2021 to 12-2022) </h1>
                            <p className="gradient_text_1">1yrs 7mths </p>
                            <p><b>Manazel Properties (Agency)</b></p>
                            <div className="h-[2px] w-[200px] bg-white opacity-60 rounded-full my-4"/>
                            <p>
-                               At this time i wanted to leave the world of huge firms and work in a slower paced environment
+                            Joined this agency as it has smaller market scope which allowed me to have more experience and listings in specific regions where most of my clients would be interested in. 
                            </p>
-                           <p>
-                                As in this time i started to think about pursuing a new venture and needed more space to search and start
-                           </p>
+                          
                            <div className="h-[2px] w-[200px] bg-white opacity-60 rounded-full my-4"/>
                            <p>My Role was to:</p>
-                           <ul className="list-disc px-6 lg:px-10">
+                           <ul className="list-disc px-6 lg:px-10 text-sm opacity-90 font-light flex flex-col gap-2">
                                <li>
                                    Find new properties to add to the company's inventory
                                </li>
@@ -313,7 +311,7 @@ const Career = () => {
                                    Team up with other colleagues to share and discuss exiting and possible market opportunities
                                </li>
                                <li>
-                                    Open new opportunities with existing and new clients
+                                    Create new opportunities for existing and new clients
                                </li>
                            </ul>
 
@@ -340,20 +338,20 @@ const Career = () => {
                        <div className="w-[20%]">
                        </div>
 
-                       <div className="flex-1 order-2 opacity-90 relative text-[min(1.05rem,calc(0.75rem+0.5vw))]">
+                       <div className="flex-1 order-2 opacity-100 relative text-[min(1.05rem,calc(0.75rem+0.5vw))]">
                            <h1 className="text-[1.5em] font-bold gradient_text_1">Freelance Property Consultant (01-2023 to Current) </h1>
                            <p className="gradient_text_1">1+ yrs </p>
                            <p><b>Freelance</b></p>
                            <div className="h-[2px] w-[200px] bg-white opacity-60 rounded-full my-4"/>
                             <p>
-                                Working solo while studying was not the easiest route of all the previous,
-                                but it was vital to achieve the results i want in learning and practicing.
-                            </p>
-                            <p>
                                 As real-estate is more like a 24/7 job (you have to be ready and available all the time).
                             </p>
                             <p>
                                 Working as a freelance gave me the possibility to set separate times for work and study
+                            </p>
+                            <p className="mt-4 text-sm opacity-90 font-light">
+                                Working outside a company while studying was not easy 
+                                but it was a vital step to achieve the results I wanted in learning and practicing Web-development.
                             </p>
 
                         </div>

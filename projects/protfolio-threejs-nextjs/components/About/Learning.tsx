@@ -74,7 +74,7 @@ const Learning = () => {
                             {/* ////////////////////////////////////////////////////////////////////////////////////////////////////// */}
 
                             <h1 className="text-[2em] font-bold gradient_text_1">Phase 1</h1>
-                            <p className="font-extralight text-[0.85em] opacity-60">HTML, CSS, Javascript</p>
+                            <p className="font-extralight text-[0.85em]">HTML, CSS, Javascript</p>
                             
 
                             {/* ////////////////////////////////////////////  Wordpress  ///////////////////////////////////////////// */}
@@ -86,15 +86,16 @@ const Learning = () => {
                                 <Link href="https://www.youtube.com/@TylerMoore" className="mx-1 blueLink">
                                 Tyler Moore
                                 </Link>
-                                on how to setup some nice looking wordpress websites on youtube and followed along while creating a site for the company i was working on
+                                on how to setup some nice looking wordpress websites on youtube and followed along to create a website for a company I was working in.
                             </p>
-                            <p>however the idea was not very appealing to me as i wanted to create websites with more control and customization</p>
+                            <p>But I wanted to create websites with more control and customization, therefore I decided to learn HTML/CSS/Javascript.</p>
                             
                             
                             {/* ////////////////////////////////////////////  Udacity  ///////////////////////////////////////////// */}
                             <p className="text-[1.5em] mt-[4rem]"><b>Course: Web Development Challenger Track (Udacity)</b></p>
                             <div className="h-[2px] w-[400px] max-w-[80%] bg-white opacity-60 rounded-full mt-2 mb-4 mx-auto"/>
-                            <p>A course introducing HTML, CSS, duration about <span className="gr">1 month</span></p>
+                            <span>Introduction to <span className="gr">HTML and CSS</span>.</span>
+                            <div>Duration about <span className="gr">1 month</span></div>
 
                             <div className="w-full flex flex-row items-center justify-center gap-4 text-xs md2:text-sm">
                                 <a href="/files/challengerTrackCert.pdf" target="_blank"
@@ -110,9 +111,8 @@ const Learning = () => {
                             {/* ////////////////////////////////////////////  Book  ///////////////////////////////////////////// */}
                             <p className="text-[1.5em] mt-[4rem]"><b>Book: Head First JavaScript Programming</b></p>
                             <div className="h-[2px] w-[400px] max-w-[80%] bg-white opacity-60 rounded-full mt-2 mb-4 mx-auto"/>
-                            <p>A 700 pages book that took me about <span className="gr">2-3 months</span> to complete as i read it twice and took notes to stay with me for future reference</p>
-                            <p>This book teaches in a friendly manner <span className="gr">javascript from the very basics to advanced levels</span> with some interesting projects</p>
-
+                            <p>A 700 pages book. teaching in a friendly manner <span className="gr">javascript from the very basics to advanced levels</span> with some interesting projects</p>
+                            <div>Duration about <span className="gr">2 months</span></div>
                             <div className="w-full flex flex-row items-center justify-center gap-4 text-xs md2:text-sm">
                                 <div
                                 className="px-3 py-1 bg-[#4747475c] mt-4 w-[12rem] rounded-[1rem]">
@@ -132,7 +132,7 @@ const Learning = () => {
                             {/* ////////////////////////////////////////////////////////////////////////////////////////////////////// */}
                                                                             {/* Phase 2 */}
                             {/* ////////////////////////////////////////////////////////////////////////////////////////////////////// */}
-                            <h1 className="text-[2em] font-bold gradient_text_1">Phase 2</h1>
+                            <h1 className="text-[2em] font-bold gradient_text_1 pt-12">Phase 2</h1>
                             <p className="font-extralight text-[0.85em] opacity-60">Advanced HTML, CSS, Javascript and more extras</p>
 
 
@@ -141,17 +141,20 @@ const Learning = () => {
                             <div className="h-[2px] w-[400px] max-w-[80%] bg-white opacity-60 rounded-full mt-2 mb-4 mx-auto"/>
 
                             <div className="flex flex-col gap-2">
-                            <p>This is a very long course, took me about <span className="gr">6 months</span> to complete, 
-                            that would be due to the fact that the course covers each subject in the smallest detail,
-                            always referring to external links (i read them all even the extras) for video/video-series or other articles written by other developers on the subject being discussed
-                            and contained a lot of theoretical explanations beside the code.</p>
-                            <p>Also as it has many milestone projects for us students to do after completing each step 
-                                and i made sure to make most of them, especially if the project challenging, makes a 
-                                good practice and has a learning potential.</p>
+                            <p>
+                                A more detailed course. Covering many subjects in Web-Development in small details.
+                                With many external theoretical and practical references to read from on the subjects being discussed.
+                            </p>
+
+                            <p>
+                                Also the course contains many milestone projects to do after each step. 
+                                Which I made sure to complete most of them, especially if the project is challenging has a good learning outcome.</p>
 
                             <p className="mt-2 gradient_text_1"><b>Some of the course's highlights</b></p>
-                            <p>HTML, CSS, Forms, Javascript, Git, Javascript testing, Advanced HTML/CSS, Accessibility, Responsiveness, ReactJS, NodeJS(skipped), Getting Hired </p>
+                            <p className="gradient_text_1">HTML, CSS, Forms, Javascript, Git, Javascript testing, Advanced HTML/CSS, Accessibility, Responsiveness, ReactJS, NodeJS </p>
                             </div>
+                            <div>Duration about <span className="gr">6 months</span></div>
+
 
                             <div className="w-full flex flex-row items-center justify-center gap-4 text-xs md2:text-sm">
                                 <div
@@ -173,13 +176,11 @@ const Learning = () => {
                             <p className="text-[1.5em] mt-[4rem]"><b>Course: Conquering Responsive Layouts by Kevin Powell</b></p>
                             <div className="h-[2px] w-[400px] max-w-[80%] bg-white opacity-60 rounded-full mt-2 mb-4 mx-auto"/>
                             <div className="flex flex-col gap-2">
-                                <p> Kevin is a great teacher, i have been following his videos on Youtube for a long time.</p>
-                                <p> He has a simple and sleek approach to css, and was kind enough to construct a course,
-                                    dedicated to <span className="gr">teach how to approach making websites responsive</span> in <span className="gr">21 days</span>
+                                <p> Kevin is a great teacher and youtube instructor teaching quality topics about CSS in simple and clear way.</p>
+                                <p> His course teaches how to <span className="gr">correctly approach and make websites responsive</span>
                                 </p>
-                                <p> This course and other Kevin teachings have greatly influenced my design 
-                                    and code even in my next advanced steps
-                                </p>
+                                <div>Duration about <span className="gr">3 weeks</span> (side course)</div>
+
                             </div>
 
                             <div className="w-full flex flex-row items-center justify-center gap-4 text-xs md2:text-sm">

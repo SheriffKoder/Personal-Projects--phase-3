@@ -62,8 +62,7 @@ const Education = () => {
                     {/* School */}
                     <span className="text-center max-w-[680px] opacity-90">
                         <h1 className="text-[1.5em] font-bold gradient_text_1">School</h1>
-                        <p>Been to different schools depending on my location.</p>
-                        <p>Been taught since 4 yo in english, learnt some french language also.</p>
+                        <p>Been taught in english since I have been 4 years, learnt some french language also.</p>
                         <p>Studied subjects like Maths (Algebra, Geometry), Physics, Arts, Computer, Biology, Chemistry, History etc..</p>
                     </span>
 
@@ -77,20 +76,21 @@ const Education = () => {
                         <div className="w-[20%]">
                         </div>
 
-                        <div className="flex-1 order-2 opacity-90">
+                        <div className="flex-1 order-2 opacity-100">
                             <h1 className="text-[1.5em] mb-1 font-bold gradient_text_1">University</h1>
                             <p><b>MSA University (October University for Modern Sciences & Arts) : Giza, Egypt</b></p>
                             <p><b>B.Sc in Engineering, Electrical Communication and Electronic Systems Engineering</b></p>
-                            <p><b>With an awarded degree of BACHELOR OF SCIENCE from University of Greenwich, London, UK.</b></p>
+                            <p><b>With a BACHELOR OF SCIENCE awarded degree from the University of Greenwich, London, UK.</b></p>
                             <div className="h-[2px] w-[200px] bg-white opacity-60 rounded-full mx-auto my-4"/>
-                            <p>Some of the Courses i have taken</p>
-                            <p>Physics, 5 Math Courses, Electric Circuits Analysis, Digital Logic Design, Electromagnetic signals, Microprocessor Systems 
-                            Satellite Communication, Cryptography and more courses for different kinds of Electromagnetic Waves.
+                            <p>Some of the Courses I have taken:</p>
+                            <p className="text-sm opacity-90 mt-1 font-light">Physics, 5 Math Courses, Electric Circuits Analysis, Digital Logic Design, Electromagnetic signals, Microprocessor Systems 
+                            Satellite Communication, Cryptography and more courses to understand different kinds of Electromagnetic Waves, which are the basic of electrical communication.
                             </p>
 
                             <div className="h-[2px] w-[200px] bg-white opacity-60 rounded-full mx-auto my-4"/>
-                            <p>Some of the courses i enjoyed where the Math courses, Digital Logic Courses, Cryptography was cool too.</p>
-                            <p>I choose a graduation project more related to programming and circuit design and it was my first attempt to write code.</p>
+                            <p>Some of the courses I enjoyed: </p>
+                            <p className="text-sm opacity-90 mt-1 font-light">Math courses, Digital Logic Courses, Cryptography (encrypting/decrypting)</p>
+                            <p className="mt-2">I choose a graduation project more related to programming and circuit design and it was my first attempt to write code.</p>
                         </div>
                     
                         {/* empty space for a row alignment that contains images for this content */}
@@ -110,16 +110,19 @@ const Education = () => {
 
 
                     {/* Embedded Systems */}
-                    <span className="text-center max-w-[680px] opacity-90">
+                    <span className="text-center max-w-[680px]">
                         <h1 className="text-[1.5em] mb-1 font-bold gradient_text_1">Post-Graduate Course</h1>
                         <p><b>Enhanced Embedded Systems - EmbeddedFab</b></p>
                         <p>Embedded systems was the closest field to connect</p>
-                        <p>between my University Courses and programming.</p>
+                        <p>between my University Courses and programming</p>
+                        <p className="text-sm opacity-80 mt-1 font-light">i.e programming a micro-controller which contains one or more processor cores, along with additional peripherals (memory, serial interface, timer, programmable I/O peripherals, etc.) on the same chip.</p>
                         <div className="h-[2px] w-[200px] bg-white opacity-60 rounded-full mx-auto my-4"/>
                         <p>I learnt things like:</p>
-                        <p>Practicing programming languages like C++, Assembly.</p>
-                        <p>Understand Software development methods like (Agile, Scrum, Waterfall, V Model).</p>
-                        <p>Develop a personal project - ID Entry Controller and Register for Building Access.</p>
+                        <span className="text-sm opacity-90 mt-1 font-light">
+                            <p>Programming languages like C++, Assembly.</p>
+                            <p>Understand Software development methods like (Agile, Scrum, Waterfall, V Model).</p>
+                            <p>Develop a personal project - ID Entry Controller and Register for Building Access.</p>
+                        </span>
 
                     </span>
 
@@ -134,18 +137,22 @@ const Education = () => {
                        <div className="w-[20%]">
                        </div>
 
-                       <div className="flex-1 order-2 opacity-90">
+                       <div className="flex-1 order-2 opacity-100">
                        <h1 className="text-[1.5em] mb-1 font-bold gradient_text_1">First Job</h1>
                             <p><b>Customer Service Representative - Vodafone UK Egypt</b></p>
-                            <p>the reason i placed this here as a part of my education</p>
-                            <p>Is because i do consider it more as an English language course.</p>
+                            <p className="text-sm opacity-90 mt-1 font-light">
+                                I consider this job more as an education role due to the 
+                                benefits I gained in developing my english language
+                            </p> 
                             <div className="h-[2px] w-[200px] bg-white opacity-60 rounded-full mx-auto my-4"/>
-                            <p>The couple of months i spent working there, did take my language and communication skills to much higher levels.</p>
+                            <p>The couple of months I spent working there, did take my <p className="gr">language and communication skills</p> to much higher levels.</p>
                             <div className="h-[2px] w-[200px] bg-white opacity-60 rounded-full mx-auto my-4"/>
-                            <p><b>My role</b> was to talk with English people in the UK and solve their problems with the company's services in a fast, professional and friendly manner.</p>
-                            <div className="h-[2px] w-[200px] bg-white opacity-60 rounded-full mx-auto my-4"/>
-                            <p>this did make me much more confident in my language skills as i noticed that with practice, customers started to not realize that i am not actually in the UK.</p>
-                            <p>not to mention my increased listening and communication skills.</p>
+                            <span className="text-sm opacity-90 font-light">
+                                <p><b className="opacity-100 font-semibold text-base">My role</b> was to talk with English customers in the UK and solve their problems with the company's services in a fast, professional and friendly manner.</p>
+                                <div className="h-[2px] w-[200px] bg-white opacity-60 rounded-full mx-auto my-4"/>
+                                <p>this experience did make me much more confident in my language, listening and communication skills,
+                                    as i noticed that with time, customers started to be greatly satisfied with my service.</p>
+                            </span>
                        </div>
                    
                         {/* empty space for a row alignment that contains images for this content */}
