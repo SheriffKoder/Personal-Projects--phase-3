@@ -145,7 +145,7 @@ const Education = () => {
                                 benefits I gained in developing my english language
                             </p> 
                             <div className="h-[2px] w-[200px] bg-white opacity-60 rounded-full mx-auto my-4"/>
-                            <p>The couple of months I spent working there, did take my <p className="gr">language and communication skills</p> to much higher levels.</p>
+                            <span>The couple of months I spent working there, did take my <p className="gr">language and communication skills</p> to much higher levels.</span>
                             <div className="h-[2px] w-[200px] bg-white opacity-60 rounded-full mx-auto my-4"/>
                             <span className="text-sm opacity-90 font-light">
                                 <p><b className="opacity-100 font-semibold text-base">My role</b> was to talk with English customers in the UK and solve their problems with the company's services in a fast, professional and friendly manner.</p>

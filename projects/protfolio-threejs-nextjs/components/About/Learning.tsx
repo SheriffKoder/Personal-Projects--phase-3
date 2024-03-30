@@ -203,7 +203,7 @@ const Learning = () => {
                             {/* ////////////////////////////////////////////////////////////////////////////////////////////////////// */}
                                                                             {/* Phase 3 */}
                             {/* ////////////////////////////////////////////////////////////////////////////////////////////////////// */}
-                            <h1 className="text-[2em] font-semibold gradient_text_1">Phase 3</h1>
+                            <h1 className="text-[2em] font-semibold gradient_text_1 pt-12">Phase 3</h1>
                             <p className="font-extralight text-[0.85em] opacity-60">Backend and jQuery</p>
 
 
@@ -212,26 +212,27 @@ const Learning = () => {
                             <p className="text-[1.5em] mt-[4rem]"><b>Course: NodeJS - The Complete Guide <br/>(MVC, REST APIs, GraphQL, Deno) Backend</b></p>
                             <div className="h-[2px] w-[400px] max-w-[80%] bg-white opacity-60 rounded-full mt-2 mb-4 mx-auto"/>
                             <div className="flex flex-col gap-2">
-                                <p>This is a <b>Great</b> course, i learnt so much from it not just NodeJS but also in Javascript and coding practices in general.</p>
-                                <p>The instructor Maximilian Schwarzmüller is a great teacher, he constructed the course very well and presented NodeJS from 
-                                    its beginnings to its advanced forms.</p>
-                                <p>It is also a lengthy course to complete and practice, the 40h duration is tricky, it is meant for straight watching. 
-                                    but in reality the 500+ videos took me about <span className="gr">2.5 months</span> to complete as i made sure to code 
-                                    along and take notes to assist me in the future.</p>
+                                <p>The instructor Maximilian Schwarzmüller is a great teacher. 
+                                    His 500+ videos course presented NodeJS from 
+                                    its beginnings to its more advanced forms and applications alongside with teaching more about Javascript and better coding practices.</p>
 
-                                <p className="mt-4 gradient_text_1"><b>By the end of this course i was able to:</b></p>
-                                    <p>store from any front-end onto a MongoDB Database.</p>
+                                <p className="mt-4 gradient_text_1"><b>By the end of this course I was able to:</b></p>
+                                    <p>Store from any front-end onto a MongoDB Database.</p>
                                     <p>Create Databases that sends back HTML documents with Templating Engines.</p>
                                     <p>Create RESTful APIs (Databases) that can be accessed from any front-end application with the normal fetching methods or with GraphQL queries.</p>
-                                    <p>Application types can be many, like online shops and company & services sites etc. </p>
+                                    <p>Develop applications with many types. like online shops and company & services sites etc. </p>
                             </div>
 
                             <p className="mt-4 gradient_text_1"><b>What is was taught and practiced in this course</b></p>
-                            <p>Databases, SQL vs NoSQL, using SQL with Sequelize</p>
-                            <p>Express.js, NodeJS, MongoDB, Mongoose, GraphQL, Deno, RESTful APIs</p>
-                            <p>Then/Catch, Async/Await, Fetching Data, CRUD Operations</p>
-                            <p>Sessions & Cookies, Authentications, Validations, Error handling techniques</p>
-                            <p>Payments, Uploading, Pagination, using Templatating Engines </p>
+                            <div className="gr">
+                                <p>Databases, SQL vs NoSQL, using SQL with Sequelize</p>
+                                <p>Express.js, NodeJS, MongoDB, Mongoose, GraphQL, Deno, RESTful APIs</p>
+                                <p>Then/Catch, Async/Await, Fetching Data, CRUD Operations</p>
+                                <p>Sessions & Cookies, Authentications, Validations, Error handling techniques</p>
+                                <p>Payments, Uploading, Pagination, using Templatating Engines </p>
+                            </div>
+                            <div>Duration about <span className="gr">2.5 months</span></div>
+
 
                             <div className="w-full flex flex-row items-center justify-center gap-4 text-xs md2:text-sm">
                                 <a href="/files/NodeJsCert.pdf" target="_blank"
@@ -249,12 +250,15 @@ const Learning = () => {
                             <p className="text-[1.5em] mt-[4rem]"><b>Course: The Complete jQuery Course <br/>From Beginner To Advanced!</b></p>
                             <div className="h-[2px] w-[400px] max-w-[80%] bg-white opacity-60 rounded-full mt-2 mb-4 mx-auto"/>
                             <div className="flex flex-col gap-2">
-                                <p>As i have seen "JQuery" been mentioned on many places around the web, 
-                                    i was curious to check it out on the side with NodeJS and discover what i can do with it</p>
-                                <p>In this course i learnt how to use jQuery to select DOM elements, create animations for DOM elements and to fetch from APIs
-                                    in <span className="gr">1 Week</span>
-                                </p>
+                                <div>I thought about exploring <span className="gr">jQuery</span> as it is a very popular javascript framework and many people are using it</div>
+                                <p className="mt-4 gradient_text_1"><b>By the end of this course I was able to:</b></p>
+                                <span>
+                                    <p>use jQuery to select, manipulate and create animations with DOM elements.</p>
+                                    <p>use jQuery to fetch from APIs</p>
+                                </span>
                             </div>
+                            <div>Duration about <span className="gr">1 week</span> (side course)</div>
+
                             
                             <div className="w-full flex flex-row items-center justify-center gap-4 text-xs md2:text-sm">
                                 <a href="/files/jQueryCert.pdf" target="_blank"
@@ -276,19 +280,18 @@ const Learning = () => {
                             {/* ////////////////////////////////////////////////////////////////////////////////////////////////////// */}
                                                                             {/* Phase 4 */}
                             {/* ////////////////////////////////////////////////////////////////////////////////////////////////////// */}
-                            <h1 className="text-[2em] font-semibold gradient_text_1">Phase 4</h1>
+                            <h1 className="text-[2em] font-semibold gradient_text_1 pt-12">Phase 4</h1>
                             <p className="font-extralight text-[0.85em] opacity-60">frontend frameworks and project development</p>
 
                             {/* ////////////////////////////////////////////  ReactJS, NextJS  ///////////////////////////////////////////// */}
                             <p className="text-[1.5em] mt-[4rem]"><b>ReactJS, NextJS</b></p>
                             <div className="h-[2px] w-[400px] max-w-[80%] bg-white opacity-60 rounded-full mt-2 mb-4 mx-auto"/>
                             <div className="flex flex-col gap-2">
-                                <p>My learning would have not been complete without modern front-end frameworks</p>
-                                <p>I changed the learning approach and decided to learn from selected videos on Youtube that would direct me to the result i want.</p>
-                                <p>Building on the theoretical foundation i had from the Odin project</p>
-                                <p>Now i can build catchy front-ends with ReactJS or with NextJS</p>
-                                <p>and connect them to my NodeJS Database as can be seen on my
-                                    <Link href="/projects" className="blueLink mx-1">
+                                <p>Building on the theoretical foundation I had from the Odin project course and
+                                through selected tutorials I learnt how to use ReactJS, NextJS to be able to</p>
+                                <p className="gr">build websites with a rich front-end that contains many separated components and to use modern libraries like (framer-motion, gsap etc.) for styling, animations, interactivity and code separation/expansion </p>
+                                <p>and connect the front-end to back-end applications that use Mongoose (or other) Databases as can be seen on my
+                                    <Link href="/projects" className="blueLink ml-1">
                                         practice projects
                                     </Link>.
                                 </p>
@@ -299,15 +302,19 @@ const Learning = () => {
                             <p className="text-[1.5em] mt-[4rem]"><b>ThreeJS (Youtube)</b></p>
                             <div className="h-[2px] w-[400px] max-w-[80%] bg-white opacity-60 rounded-full mt-2 mb-4 mx-auto"/>
                             <div className="flex flex-col gap-2">
-                                <p>This is something i wanted to learn from the start of my journey, but i kept it until i acquire the basics of Web-Development first.</p>
-                                <p>ThreeJS is like the icing on the cake for modern websites where you can place 3D models on the website, and i am not talking about ThreeJS only here.</p>
-                                <p>Also other animations/libraries that can enhance the user experience with less code and more optimized output,
-                                    like smooth scrolling, parallax effect, framer-motion for animating various elements.
+                                <span><span className="gr">ThreeJS</span> is like the icing on the cake for modern websites where you use place 3D models in websites
                                 as can be seen on my website's
-                                    <Link href="/projects" className="blueLink mx-1">
-                                        Home page
-                                    </Link>.
-                                </p>
+                                    <Link href="/" className="blueLink ml-1">
+                                        Home
+                                    </Link>, 
+                                    <Link href="/projects" className="blueLink ml-1">
+                                        Projects
+                                    </Link>,
+                                    <Link href="/contact" className="blueLink ml-1">
+                                        Contact
+                                    </Link>,
+                                    pages.
+                                </span>
                             </div>
 
 
@@ -317,7 +324,7 @@ const Learning = () => {
 
                             {/* ////////////////////////////////////////////  Conclusion  ///////////////////////////////////////////// */}
                             <h2 className="gradient_text_1 text-[1.5em] mb-2">
-                                It has been quite a journey, And still better to come
+                                My learning journey does not end here as there are still many new things yet to discover, practice and use
                             </h2>
                             <p>
                                 Now i can use HTML, CSS, Javascript in their basic form
@@ -331,8 +338,13 @@ const Learning = () => {
                             <p>
                                 Now i can move forward into learning how to make more beautiful, more optimized, modern and personalized Websites and Web applications 
                             </p>
-
-
+                            <div className="mt-2 text-sm">
+                                you can also visit my 
+                                <Link href="/contact" className="blueLink mx-1">
+                                X profile
+                                </Link>
+                                and check what I'm currently working on
+                            </div>
 
                         
                         </div>

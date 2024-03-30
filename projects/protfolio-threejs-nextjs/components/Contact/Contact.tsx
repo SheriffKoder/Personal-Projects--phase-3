@@ -166,7 +166,7 @@ const showEmailConfirm = () => {
                 id="contact__labels-1">
                   <div className="flex flex-col gap-2 mdx:gap-0 mdx:flex-row h-14 mdx:h-7 items-center">
                     <label className="w-[10rem] block text-center mdx:text-start">
-                      Your Name
+                      Your Name*
                     </label>
                     <input
                       className="border-0 rounded-[5px]
@@ -188,7 +188,7 @@ const showEmailConfirm = () => {
                   {/* email */}
                   <div className="flex flex-col gap-2 mdx:gap-0 mdx:flex-row h-14 mdx:h-7 items-center">
                     <label className="mdx:w-[10rem] block text-center mdx:text-start" htmlFor="email">
-                      Your Email
+                      Your Email*
                     </label>
                     <input
                       className="border-0 rounded-[5px]

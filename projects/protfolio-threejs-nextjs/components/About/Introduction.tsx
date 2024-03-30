@@ -52,7 +52,7 @@ const Introduction = () => {
                         <br/>
                         <br/>
                         <span className="text-xs font-extralight">
-                        find more details about my Education, Previous Career and my Web Development's learning path in the below drop down menus
+                        find more details about my Education, Previous Career and my Web Development's learning path in the below drop down menus*
                         </span>
 
 
@@ -94,13 +94,13 @@ const Introduction = () => {
                                     goals.map((goal, index)=> (
                                         <li key={goal.title+" "+index}
                                         className={`flex gap-1 px-1
-                                        ${goal.progress === "Done" && "opacity-60"}
+                                        
                                         `}
                                         >
                                             <details
                                             open={goal.progress !== "Done" && true}
                                             >
-                                                <summary>
+                                                <summary className={`${goal.progress === "Done" && "opacity-60"}`}>
                                                     {/* { goal.progress !== "Done" ? ( <span>&raquo;</span> ) : ( <span>&#10003;</span> ) } */}
                                                     {goal.title}
                                                 </summary>
@@ -113,7 +113,7 @@ const Introduction = () => {
                                                             <li 
                                                             key={goal.title+" "+index+" "+step}
                                                             className={` ml-8 font-extralight
-                                                            ${step.progress === "Done" && "text-teal-600"}
+                                                            ${step.progress === "Done" && "text-teal-500"}
                                                             ${step.progress === "Not Yet" && "text-white opacity-90"}
                                                             ${step.progress === "In Progress" && "text-amber-500"}
                                                             `}>

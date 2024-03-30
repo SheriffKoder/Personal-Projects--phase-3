@@ -31,23 +31,32 @@ import {
     {
       name: "x",
       icon: x,
-      link: "https://www.x.com"
+      link: "https://twitter.com/KoderXE"
     },
     {
       name: "linkedin",
       icon: linkedin,
-      link: "https://www.x.com"
+      link: "https://www.linkedin.com"
     },
   ];
 
+  // Done, In Progress, Not Yet
   export const goals = [
     {
-      title: "Build and Deploy my portfolio",
+      title: "Practice projects final fixes",
       progress: "In progress",
       steps: [
-        {title: "Deploy website", progress: "In Progress"},
-        {title: "Final fixes for all components", progress: "Not Yet"},
-        {title: "Make the website responsive", progress: "Not Yet"},
+        {title: "Final fixes for all components", progress: "In Progress"},
+        {title: "Deploy projects to redirect from the portfolio website links", progress: "Not Yet"},
+      ]
+    },
+    {
+      title: "Build and Deploy my portfolio",
+      progress: "Done",
+      steps: [
+        {title: "Deploy website", progress: "Done"},
+        {title: "Final fixes for all components", progress: "Done"},
+        {title: "Make the website responsive", progress: "Done"},
         {title: "Sort the home components", progress: "Done"},
         {title: "Design, build and style all the sites components", progress: "Done"}
 
