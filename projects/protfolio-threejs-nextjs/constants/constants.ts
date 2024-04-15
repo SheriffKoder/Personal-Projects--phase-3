@@ -226,6 +226,7 @@ import {
       omnis nobis deserunt a, sed, aliquid laboriosam dicta atque dolor ad voluptates velit saepe 
       dignissimos similique quae. Deleniti, animi.`,
       type: "site",
+      date: "2023"
 
     },
     {
@@ -239,7 +240,8 @@ import {
       icon: "/images/projects/assets/realestateadmin/re-icon.png",
       id: "practice-2",
       longerDescription: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit reiciendis aut omnis nobis deserunt a, sed, aliquid laboriosam dicta atque dolor ad voluptates velit saepe dignissimos similique quae. Deleniti, animi.`,
-      type: "site"
+      type: "site",
+      date: "2024"
 
     },
     {
@@ -253,7 +255,8 @@ import {
       icon: "/images/projects/assets/carmaint1/carmaint1-icon.png",
       id: "practice-3",
       longerDescription: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit reiciendis aut omnis nobis deserunt a, sed, aliquid laboriosam dicta atque dolor ad voluptates velit saepe dignissimos similique quae. Deleniti, animi.`,
-      type: "site"
+      type: "site",
+      date: "2024"
     },
     {
       name: "Car Maintenance 2 (RESTful GraphQL)",
@@ -266,7 +269,8 @@ import {
       icon: "/images/projects/assets/carmaint2/carmaint2-icon.png",
       id: "practice-4",
       longerDescription: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit reiciendis aut omnis nobis deserunt a, sed, aliquid laboriosam dicta atque dolor ad voluptates velit saepe dignissimos similique quae. Deleniti, animi.`,
-      type: "site"
+      type: "site",
+      date: "2024"
 
     },
     
@@ -277,7 +281,28 @@ import {
   ];
 
   export const DraftProjects = [
-    
+    {
+      name: "Shop (express.js)",
+      description: `A simple shop application with the ability to add/delete products to/from a database `,
+      image1: "/images/projects/assets/drafts/shopexpress/wallpaper1.png",
+      // image2: "/images/projects/assets/amazon/wallpaper2.png",
+      // imagex: "/images/projects/assets/amazon/wallpaperx.png",
+      tech: ["HTML5", "CSS3", "JavaScript", "ExpressJS", "NodeJS", "MongoDB"],
+      link: "https://phase2-nodejs.onrender.com/products",
+      icon: "/images/projects/assets/drafts/shopexpress/shopexpress.png",
+      id: "draft-1",
+      longerDescription: 
+      `A simple CRUD shop website built during Maxmillan's Nodejs course. built with basic express.js and additional helper libraries
+      to handle the received and sent information.
+      the front-end is constructed with "ejs", an HTML/CSS/Javascript templating engine.
+      using the MVC (Model-view-controller) software architecture for code organization.
+      using express middlewares that forward to routes then use controller functions.
+      helper libraries like (multer: to store images locally, csrf protections, flash: to send messages to the front end as a response from the controller functions, express-session)
+      `,
+      type: "site",
+      date: "2023"
+
+    },
   ]
 
 

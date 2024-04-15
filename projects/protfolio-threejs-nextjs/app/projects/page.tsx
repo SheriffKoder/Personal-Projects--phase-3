@@ -159,8 +159,14 @@ const page = () => {
                                   {/* description */}
                                   <p className="
                                   text-[min(0.75em,1rem)]
-                                  md:text-[min(0.875em,1rem)] opacity-60 mb-2 mt-2">
+                                  md:text-[min(0.875em,1rem)] opacity-60 mt-2">
                                     {project.description}
+                                  </p>
+
+                                  <p className="
+                                  text-[min(0.75em,1rem)]
+                                  md:text-[min(0.875em,0.75rem)] opacity-40 mb-2">
+                                    Built in: {project.date}
                                   </p>
     
                                   {/* technologies - copied from @home/projects*/}
