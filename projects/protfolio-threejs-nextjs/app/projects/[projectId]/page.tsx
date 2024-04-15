@@ -107,7 +107,7 @@ const page = () => {
                             </div>
 
                             {/* image 2 - mobile view */}
-                            { currentProject.image2 && (
+                            { currentProject.image2 != "" && (
                             <div className="w-[23%] h-full relative">
 
                                 <div className="relative w-full h-full">

@@ -282,11 +282,12 @@ import {
 
   export const DraftProjects = [
     {
+      // phase2/courses/nodejs/section22 
       name: "Shop (express.js)",
       description: `A simple shop application with the ability to add/delete products to/from a database `,
       image1: "/images/projects/assets/drafts/shopexpress/wallpaper1.png",
-      // image2: "/images/projects/assets/amazon/wallpaper2.png",
-      // imagex: "/images/projects/assets/amazon/wallpaperx.png",
+      image2: "",
+      imagex: "",
       tech: ["HTML5", "CSS3", "JavaScript", "ExpressJS", "NodeJS", "MongoDB"],
       link: "https://phase2-nodejs.onrender.com/products",
       icon: "/images/projects/assets/drafts/shopexpress/shopexpress.png",
