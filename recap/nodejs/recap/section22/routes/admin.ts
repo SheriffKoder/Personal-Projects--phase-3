@@ -47,8 +47,8 @@ adminRouter.post("/add-product",
     ,
 
     body("productIntro", "Please enter a more descriptive introduction about the product")
-    .isString()
-    .isLength({min:10, max: 30})
+    // .isString()
+    // .isLength({min:10, max: 30})
     ,
 
     body("productDescriptionText", "Please enter a more descriptive description about the product")
@@ -128,7 +128,7 @@ adminRouter.post("/edit-product",
 
     body("productIntro", "Please enter a more descriptive introduction about the product")
     .isString()
-    .isLength({min:10, max: 30})
+    // .isLength({min:10, max: 30})
     ,
 
     body("productDescriptionText", "Please enter a more descriptive description about the product")

@@ -37,7 +37,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 // npm install --save multer
 // npm install --save @types/multer
 //12.1
-//# npm install --save pdfkit
+// npm install --save pdfkit
+//13.1
+// npm install --save stripe
 //module imports
 require("dotenv").config();
 const http = require("http");
@@ -235,61 +237,15 @@ mongoose.connect(process.env.MongoDbUri)
     //         user.save();
     //     }
     // });
-    app.listen(3000);
+    app.listen(8000);
 })
     .catch((err) => {
     console.log("mongoose connect error :: " + err);
 });
 //Async js requests //13
+//Payments //13.1
+//Git test 2
 /*
-
-
-//Async js requests //13 +1.5h
-
-till now we send requests to the server only as a client
-sometimes we want to send requests from the backend
-
-example,
-want to delete an item from the server,
-(a js code to remove it from dom)
-without reloading the page
-
-//the idea behind async requests:
-sending a request that contains just "some data"
-in a special format of "JSON"
-
-data sent to server > to a certain url or a route accepted by the server
-then the server reacts and returns a response
-
-that response is also sent behind the scenes
-a response in a json format
-
-once we are done with deleting
-the server will respond with some json data or a success message
-once we get that message in our browser
-we can delete the item from the DOM
-
-
-send to the server a request(JSON)
-then async/await on the response(JSON)
-
-the way we expose our route will be different here
-it will contain login
-
-server side script:
->> create public/js/admin.js
->> add a script link in the ejs in admin-products.ejs
-
-listen on a click on the delete button
->>button type=button, so will also remove the form wrap
-
-with the x-www-form-encoded-data
-and gather the inputs from ejs manually (productId, csrfToken)
-
-
-
-
-
 ///////////////////////////////////////////////////////////////////
 //The JSON Format
 
@@ -308,63 +264,12 @@ but with two important differences
 
 
 
-- work on the ejs
-    <button onclick="deleteProduct(this)" type="button" class="white-button-admin" aria-label="control, delete product"><a>Delete</a></button>                      <!-- <button type="submit" class="white-button-admin" aria-label="control, delete product"><a>Delete</a></button> -->
-    <script src="/public/js/admin-async.js"></script>
-- router
-    adminRouter.delete("/product/:productId", isAuthAdmin, adminController.deleteProduct);
-- controller
-        change req.body.prodId to req.params.prodId
-        res.status(200).json({
-            "message": "Success!"
-        });
-- add the admin-async.js
-    get the prodId, csrfToken of the elements near this button node
-    open a fetch method that refers to the prodId and has csrfToken in the header
-    then (promise resolved), .json the result(response body) and then delete the item from dom
-
-
-
-// create public/js/admin.js
-- fist will test with a console.log onclick
-
->> using btn.parentNode.querySelector("[name=productId]").value
-we can access the dom element's value
-
-want to send a http request to the router from inside our public js/admin.js
-we will use the fetch method supported by the browser
-we will not send json as we still did not use a json parser in app.js
-
-//btn.closest
-access the button's parent
 
 
 
 
-// ejs
->> add a script link in the ejs in admin-products.ejs
->>button type=button, so will also remove the form wrap
 
 
-// routes admin.js
-change the route verb from router.post to router.delete
-change the postDeleteProduct to deleteProduct
-keep the isAuth
-
-// admin.js controller
-change the postDeleteProduct controller to deleteProduct
-change req.body to req.params
-same logic
-will change the response returned
-> we will not return a response with a redirect
-> will return a response with json data
-
-//check app.js
-
-
-
-//so what else we can use an Async request on ?
-- quantity ..
 
 
 
@@ -372,123 +277,3 @@ will change the response returned
 
 
 */
-//Payments
-/*
-
-Payments with stripe
-take input
-verify input
-charge card, make payment,
-process order
-
-stripe sends back a confirmation token to the node app
-we send a charge object to stripe
-
-
-
-////stripe
-site > developers tab > test key API
-make a name, click new business at top left
-
->> grow your online business with payments > read the docs
-this will take us to the stripe documentation
-https://strp.com/docs/payments
-there you can learn about all the different ways of collecting payments
-
-
-
-//ejs
-cart order now href to /checkout
-checkout.ejs
-
-on the docs page > web tab > integrate strp js tab
-however new site is
-strp.com/docs/payment/quickstart
-at (3) copy
-    <script src="https://js.strp.com/v3/"></script>
-    and the provided test api key
-    const strp = strp("......");
-
->> in the checkout.ejs
-create a div
-place that script tag and a button
-
-> and in another script tag
-place the api key
-on button click use strp.redirectToCheckout
-which asks for sessionId in its passed object
-now we want the session
-
-
-
-//controller shop.js
-add getCheckout controller
-to display the the cart products and total price (like the invoice)
-
-to prepare a strp session to send to the ejs
-install strp # npm install --save strp
-"import" with secret key
-
-> in the getCheckout .then
-return the "stripe".checkout.sessions.create({config})
-and place the render in another then which receives the session
-
-> do the session config
-payment method, mapped items into a array of objects, urls for success/cancel
-
-> cancel will use getOrder controller
->> create getCheckoutSuccess in shop.js controller
-which is the same as postOrder
-
-
-
-
-//route shop.js
-add route to checkout
->> create routes for success/cancel urls
-
-
-
-as users could directly access the success_url without paying
-instead of "After the payment" page, you have to fulfill a payment
-
-using "fulfilling purchases with webhooks"
-where strp sends a request to a url of your choice
-which you have to manage in your application with routing/controlling
-and that then tells you that the order succeeded
-because stripe sends you that request behind the scenes
-a request validated by stripe not easy to fake
-but it requires a website hosted on the internet
-
-
-//13.1
-
-////get the stripe secret key from the site
-
-//// controller
-populate the user's cart.items.productId
-iterate over the user.cart.items to get the total price
-create a stripe.session
-        define success/cancel redirection
-then render the checkout page with sessionId of the returned session.id
-
-rename the postOrder controller to getCheckoutSuccess
-to use it in the router on stripe success
-
-
-//// routers
-remove post /create-order
-add /checkout, /checkout/success, /checkout/cancel
-
-as we used /checkout will use this link in the cart checkout link
-and the checkout will create the order instead
-
-
-////ejs
-cart link
-
-
-
-
-
-*/ 

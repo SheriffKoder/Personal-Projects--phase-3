@@ -371,6 +371,10 @@ input[type="checkbox"], input[type="radio"] {
 
 }
 
+.signup__name--field--message {
+    top: 2.8rem;
+}
+
 #login__password--login-link:enabled:hover, #login__password--login-link:enabled:focus,
 #login__email--continue:enabled:hover, #login__email--continue:enabled:focus,
 #signup__verify-button:enabled:hover, #signup__verify-button:enabled:focus
