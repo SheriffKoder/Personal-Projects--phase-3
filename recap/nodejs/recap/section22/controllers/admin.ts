@@ -275,7 +275,7 @@ exports.getAdminProducts = (req: Request_With_reqUser, res: Response, next: Next
         //page 1 1-1 * 2 = skip 0, limit 2 -- get 0-2
         //page 2 2-1 * 2 = skip 2, limit 2 -- get 2-4
         //page 3 3-1 * 2 = skip 4, limit 2 -- get 4-6
-        return ProductClassModel.find({userId: req.user._id})
+        return ProductClassModel.find({userId: req.user._id}).sort({date:-1}) //sort by reverse after adding a date in the products model's schema
         .skip((page-1)*ITEMS_PER_PAGE)
         .limit(ITEMS_PER_PAGE)
 
@@ -420,16 +420,17 @@ exports.postEditProduct = (req: Request_With_reqUser, res: Response, next: NextF
     let imageUrl: string = "";
     //12
     if (!image) {
-        allErrors = [...allErrors, {path: "productImage", msg: "please select a valid image type jpeg/jpg/png"}];
+        // allErrors = [...allErrors, {path: "productImage", msg: "please select a valid image type jpeg/jpg/png"}];
     } else if (image) {
         imageUrl = "/"+image.path;   //12
     }
 
 
+
     if (allErrors.length > 0) {
         return res.status(422).render("admin/edit-product",
         {
-            myTitle: "Add a product",
+            myTitle: "Edit your product",
             editing: true,
             hasError: true,
             product: {
@@ -471,6 +472,7 @@ exports.postEditProduct = (req: Request_With_reqUser, res: Response, next: NextF
         });
     }
 
+
     ProductClassModel.findById(prodId)
     .then((product) => {
 
@@ -487,7 +489,10 @@ exports.postEditProduct = (req: Request_With_reqUser, res: Response, next: NextF
             product.title = title;
             product.prevPrice = product.price;  ////
             product.price = price ;
-            product.imageUrl = imageUrl;
+            
+            //if there is a req.file then there should be a new url, if not keep the product.imageUrl unchanged
+            image ? (product.imageUrl = imageUrl) : null;
+
             // imageAlt = imageAlt;
             product.availability = availability;
             product.deliveryFees = deliveryFees;

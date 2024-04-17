@@ -140,6 +140,10 @@ const productSchema = new mongoose_1.Schema({
         ref: "User",
         required: true
     },
+    date: {
+        type: Date,
+        default: Date.now
+    },
 });
 //mongoose will take the "Product" turns into lower-case and make plural
 //this is how the "products" collection name came from

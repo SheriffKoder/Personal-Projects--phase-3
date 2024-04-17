@@ -38,7 +38,7 @@ exports.getProducts = (req: Request_With_reqUser, res: Response, next: NextFunct
         //page 1 1-1 * 2 = skip 0, limit 2 -- get 0-2
         //page 2 2-1 * 2 = skip 2, limit 2 -- get 2-4
         //page 3 3-1 * 2 = skip 4, limit 2 -- get 4-6
-        return ProductClassModel.find()
+        return ProductClassModel.find().sort({date:-1}) //sort by reverse after adding a date in the products model's schema
         .skip((page-1)*ITEMS_PER_PAGE)
         .limit(ITEMS_PER_PAGE)
 
@@ -304,7 +304,7 @@ exports.getOrders = (req: Request_With_reqUser, res: Response, next: NextFunctio
         //page 1 1-1 * 2 = skip 0, limit 2 -- get 0-2
         //page 2 2-1 * 2 = skip 2, limit 2 -- get 2-4
         //page 3 3-1 * 2 = skip 4, limit 2 -- get 4-6
-        return OrderClassModel.find({"user.userId": req.user._id})
+        return OrderClassModel.find({"user.userId": req.user._id}).sort({SortDate:-1}) //sort by reverse after adding SortDate in the products model's schema
         .skip((page-1)*ORDERS_PER_PAGE)
         .limit(ORDERS_PER_PAGE)
 

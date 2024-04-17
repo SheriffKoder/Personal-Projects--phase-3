@@ -1,18 +1,24 @@
 
+    <!-- the website's navigation bar -->
 
     <header>
         <nav id="main-navigation" aria-label="the main">
             <div class="main-navigation__wrapper">
             <div class="main-navigation__container">
+
+                <!-- /////////////////////////////////////////////////////////////// -->
+                <!-- left side of the navigation bar -->
                 <ul class="main-navigation__List-1">
                     <li class="main-navigation__List-1-link-small not_desktop"><a id="header-menu" aria-label="browse categories">=</a></li>
                     <!-- <li class="main-navigation__List-1-link-logo"><a href="" id="header-logo" aria-label="Amazon egypt home"></a><a href="" id="header-logo--text" aria-label="country selection, currently browsing amazon egypt shop" class="globalUrlExt"></a></li> -->
-                    <li class="main-navigation__List-1-link-logo"><a href="/products" id="header-logo"></a><a href="" id="header-logo--text" class="globalUrlExt"></a></li>
+                    <li class="main-navigation__List-1-link-logo"><a href="/" id="header-logo"></a><a href="" id="header-logo--text" class="globalUrlExt"></a></li>
                     <li class="main-navigation__List-1-link not_mobile"><a id="header-destination" href="" aria-label="choose delivery destination country">Deliver to<p></p></a></li>
                 </ul>
 
                 <div class="main-navigation__container-separator"></div>
 
+                <!-- /////////////////////////////////////////////////////////////// -->
+                <!-- right side of the navigation bar -->
                 <ul class="main-navigation__List-2">
                     <li class="main-navigation__List-2-link"><a href="">Language</a></li>
                     <li class="main-navigation__List-2-link login-link-container">
@@ -22,9 +28,9 @@
                             <a href="" class="not_mobile login-link-anchor login-link"><div class="login-link-text1">Hello, sign-in</div><div class="login-link-text2">Accounts & Lists</div></a>
                         <%}%>
 
+                        <!-- /////////////////////////////////////////////////////////////// -->
+                        <!-- the drop down menu -->
                         <span id="login-link--hover-menu" class="login-link--hover-menu <%= (!isAuthenticated) ? 'login-link--hover-menu--unlogged' : 'login-link--hover-menu--logged'%> ">
-
-
                             <% if (!isAuthenticated) { %>
                             <div class="login-link--hover-menu--section1 login-link--hover-menu--section1--unlogged">
                                 <form action="/login" method="GET">
@@ -45,8 +51,8 @@
                                                     <img src="/img/product-image.jpg">
                                                 </div>
                                                 <div class="hover-menu__item-container--info-container">
-                                                    <a href="">Zeina asdasd wqeqweqwe adasdasd</a>
-                                                    <p class="">EGP 78.00</p>
+                                                    <a href="">Baseball Hat</a>
+                                                    <p class="">EGP 149</p>
                                                     <button class="yellow-button">Add to Cart</button>
                                                 </div>
                                             </div>
@@ -95,11 +101,14 @@
                             </div>
 
                         </span>
+
                     </li>
-                    <li class="orders-link main-navigation__List-2-link not_mobile"><a href="">Orders</a></li>
+                    <li class="orders-link main-navigation__List-2-link not_mobile"><a href="/orders">Orders</a></li>
                     <li class="main-navigation__List-2-link-small"><a href="/cart">Cart</a></li>
                 </ul>
 
+                <!-- /////////////////////////////////////////////////////////////// -->
+                <!-- the search area in the navigation bar -->
                 <div class="main-navigation__search">
                     <form id="main-navigation__search-form" aria-label="the search area">
                         <select id="main-navigation__search-categories" aria-label="Browse categories">
@@ -121,6 +130,9 @@
             </div>
             <div class="sub_navigation__wrapper">
             <div class="sub-navigation__container">
+
+                <!-- /////////////////////////////////////////////////////////////// -->
+                <!-- the links at the bottom of the navigation bar -->
                 <ul class="sub_navigation__list-1" aria-label="list of recommended categories">
                     <li class="sub_navigation__list-1-link"><a href="">= All</a></li>
                     <li class="sub_navigation__list-1-link"><a href="">Today's Deals</a></li>

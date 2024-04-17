@@ -53,8 +53,10 @@ main {
 
 }
 
+
 .main__main__content__row1--cart--header {
     /* padding: 1rem 0; */
+    max-width: 800px;
 }
 
 .main__main__content__row1--cart--header h1 {
@@ -64,6 +66,8 @@ main {
 .main__main__content__row1--cart--header a {
     color: var(--product-rating-blue);
     cursor: pointer;
+    text-decoration: none;
+
 }
 
 .main__main__content__row1--cart--list {

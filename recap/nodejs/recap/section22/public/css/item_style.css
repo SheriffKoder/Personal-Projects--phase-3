@@ -264,9 +264,9 @@ a {
 
 
 /*the discount sticker*/
-.content__item__image--container::before {
+.Imagediscount {
     position: absolute;
-    content: "42% off";
+    content: "";
     top: 0.5rem;
     left: 0.5rem;
     background-color: var(--not-available-text);
@@ -278,6 +278,7 @@ a {
     font-size: 0.8rem;
     font-weight: 600;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     padding: 0.2rem;

@@ -13,7 +13,7 @@ const isAuthShop = require("../middleware/is-auth.js");
 
 // router.get("/", shopController.getIndex);
 
-shopRouter.get("/products", shopController.getProducts);
+shopRouter.get("/", shopController.getProducts);
 
 shopRouter.get("/products/:productId", shopController.getProduct);
 

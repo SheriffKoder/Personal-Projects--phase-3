@@ -34,6 +34,10 @@ const orderSchema = new mongoose_1.Schema({
         type: String,
         required: false
     },
+    SortDate: {
+        type: Date,
+        default: Date.now
+    },
 });
 // module.exports = mongoose.model("Order", orderSchema);
 const OrderClassModel = (0, mongoose_1.model)("Order", orderSchema);

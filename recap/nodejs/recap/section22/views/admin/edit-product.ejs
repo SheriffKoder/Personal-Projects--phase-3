@@ -116,11 +116,17 @@
 
         <form 
         class="main__main__wrapper" 
-        <%= (editing) ? action='/admin/edit-product' : action='/admin/add-product'%> 
+        <%= (editing) ? (action='/admin/edit-product') : (action='/admin/add-product')%> 
         method="POST"
         enctype="multipart/form-data"
         >
-            <h1>Add a Product</h1>
+            
+            <% if (!editing) { %>
+                <h1>Add a Product</h1>
+            <%} else {%>
+                <h1>Edit your product "<%=product.title%>"</h1>
+            <%}%>
+
 
             <div class="main__main--input-container">
                 <h2>Main Information</h2>
@@ -182,7 +188,14 @@
                         <% let imageError =""; %>
                         <% validationErrors.forEach(error => { if (error.path === 'productImage') { imageError = error.msg; } }) %>
 
-                        <label for="productImage">Select Image <small>(required)</small>
+                        <label for="productImage">
+                            
+                            <% if (!editing) {%>
+                                Select Image <small>(required)</small>
+                            <%} else {%>
+                                Change Image
+                            <%}%>
+
                             <% if (imageError !=="") {%>
                                 <span class="tooltip-container">
                                 <span class="input-container-tooltip">
@@ -195,7 +208,7 @@
                         <input 
                         class="<%= validationErrors.find(e => e.path === 'productImage') ? 'invalid' : '' %>"
                         <% if (editing || hasError) { %> value="<%=product.imageUrl%>" <%}%>
-                        required 
+                        <% if (!editing) { %> required <%}%> 
                         type="file" 
                         placeholder="product's image"
                         name="productImage" id="productImage">
@@ -623,7 +636,9 @@
 
 <%- include("../includes/index-footer.ejs") %>
 
+
 <script src="/js/main_add-product.js"></script>
+
 
 
 <%- include("../includes/html-end.ejs") %>

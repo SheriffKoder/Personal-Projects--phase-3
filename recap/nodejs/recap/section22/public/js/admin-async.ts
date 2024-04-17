@@ -26,9 +26,11 @@ const deleteProduct = (btn: HTMLButtonElement) => {
         console.log(csrf);
 
 
-        const productElement = btn.parentNode.parentNode;
+        const productElement = btn.parentNode.parentNode?.parentNode;
         console.log("productElement");
         console.log(productElement);
+
+        productElement?.parentNode?.removeChild(productElement); //will work on all modern browsers
 
         //in the headers we can encode our csrf token
         //the csrf token looks in the req body as well as 
@@ -51,8 +53,8 @@ const deleteProduct = (btn: HTMLButtonElement) => {
                 console.log(data);
                 if (productElement?.parentNode) {
                 // productElement.remove(); //will work on all modern browsers but not IE
-                productElement.parentNode.removeChild(productElement); //will work on all modern browsers
-                }
+                productElement?.parentNode?.removeChild(productElement); //will work on all modern browsers
+            }
 
             })
 

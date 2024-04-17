@@ -50,3 +50,4 @@ tooltips.forEach(tooltip => {
         e.target.classList.add("fadeOut");
     })
 })
+

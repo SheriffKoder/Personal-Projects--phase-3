@@ -4,7 +4,7 @@
 // const Schema = mongoose.Schema;
 
 
-import { Schema, Types, model } from 'mongoose'; //TS
+import { Date, Schema, Types, model } from 'mongoose'; //TS
 import { IProduct } from './product';
 
 interface IOrderProduct {
@@ -30,6 +30,7 @@ interface IOrder {
     status: string;
     deliveredDate: object;
     deliveredMethod: string;
+    SortDate: Date;
 };
 
 const orderSchema = new Schema<IOrder>({
@@ -60,6 +61,10 @@ const orderSchema = new Schema<IOrder>({
     deliveredMethod: {
         type: String,
         required: false
+    },
+    SortDate: {
+        type: Date,
+        default: Date.now
     },
 })
 

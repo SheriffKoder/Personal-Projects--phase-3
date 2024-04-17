@@ -37,6 +37,10 @@
 
         <div class="desktop_1 content__item__image--wrapper">
             <div class="content__item__image--container content__item__image--container--image">
+                <span class="Imagediscount">
+                    <div><%=Math.round((product.prevPrice/product.price)*100)-100%>%</div>
+                    <div>off</div>
+                </span>
                 <div id="img" style="background-image: url('<%=product.imageUrl%>');"></div>
                 <a href="www.google.com" class="content__item__image--container-after"></a>
             </div>
@@ -66,7 +70,7 @@
 
             <div class="content__item__pricing">
                 <% if (product.prevPrice > 0) {%>
-                <span class="content__item__pricing--discount">-<%=Math.round((product.price/product.prevPrice*100)*1)/1%>%</span>
+                <span class="content__item__pricing--discount">-<%=Math.round((product.prevPrice/product.price)*100)-100%>%</span>
                 <% } %>
                 <span class="content__item__pricing--price">
                     <span class="content__item__pricing--price--currency">EGP</span>

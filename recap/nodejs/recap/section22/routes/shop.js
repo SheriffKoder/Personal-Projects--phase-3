@@ -6,7 +6,7 @@ const shopController = require("../controllers/shop.js");
 //10
 const isAuthShop = require("../middleware/is-auth.js");
 // router.get("/", shopController.getIndex);
-shopRouter.get("/products", shopController.getProducts);
+shopRouter.get("/", shopController.getProducts);
 shopRouter.get("/products/:productId", shopController.getProduct);
 //7
 shopRouter.post("/cart", isAuthShop, shopController.postCart);

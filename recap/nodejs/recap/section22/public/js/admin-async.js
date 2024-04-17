@@ -1,6 +1,7 @@
 "use strict";
 //13
 const deleteProduct = (btn) => {
+    var _a, _b;
     console.log(btn);
     //want to give a request to /admin/product/productId 
     //as in the router params
@@ -16,9 +17,10 @@ const deleteProduct = (btn) => {
         let csrf;
         (csrfElement) ? csrf = csrfElement.value : "";
         console.log(csrf);
-        const productElement = btn.parentNode.parentNode;
+        const productElement = (_a = btn.parentNode.parentNode) === null || _a === void 0 ? void 0 : _a.parentNode;
         console.log("productElement");
         console.log(productElement);
+        (_b = productElement === null || productElement === void 0 ? void 0 : productElement.parentNode) === null || _b === void 0 ? void 0 : _b.removeChild(productElement); //will work on all modern browsers
         //in the headers we can encode our csrf token
         //the csrf token looks in the req body as well as 
         //the query parameters and the headers, so we could add it there
@@ -36,10 +38,11 @@ const deleteProduct = (btn) => {
                 return result.json(); //to display message on user's browser console
             })
                 .then((data) => {
+                var _a;
                 console.log(data);
                 if (productElement === null || productElement === void 0 ? void 0 : productElement.parentNode) {
                     // productElement.remove(); //will work on all modern browsers but not IE
-                    productElement.parentNode.removeChild(productElement); //will work on all modern browsers
+                    (_a = productElement === null || productElement === void 0 ? void 0 : productElement.parentNode) === null || _a === void 0 ? void 0 : _a.removeChild(productElement); //will work on all modern browsers
                 }
             });
         }

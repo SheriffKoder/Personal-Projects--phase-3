@@ -100,7 +100,7 @@ adminRouter.get("/products", isAuthAdmin, adminController.getAdminProducts);
 adminRouter.get("/edit-product/:productId", isAuthAdmin, adminController.getEditProduct);
 
 //
-adminRouter.post("/edit-product", 
+adminRouter.post("/edit-product/:productId", 
 [
 
     body("productTitle", "Please enter a product title, minimum 3 characters")

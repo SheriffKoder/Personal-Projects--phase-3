@@ -1,6 +1,6 @@
 // const mongoose = require("mongoose");
 
-import { Schema, Types, model } from 'mongoose'; //TS
+import { Date, Schema, Types, model } from 'mongoose'; //TS
 //allows to create new schemas
 // const Schema = mongoose.Schema;
 
@@ -64,6 +64,7 @@ interface IProduct {
         
 
     userId: Types.ObjectId;
+    date: Date;
 };
 
 
@@ -220,6 +221,11 @@ const productSchema = new Schema<IProduct>({
         //the "User model" as written in mongoose.model("User"..
         ref: "User",
         required: true
+    },
+
+    date: {
+        type: Date,
+        default: Date.now
     },
 
 
