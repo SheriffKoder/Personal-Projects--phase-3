@@ -26,7 +26,7 @@ let regions = {
         countryName: "Egypt", 
         ariaName: "Egypt", 
         countryCurrency: "EGP", 
-        countryLanguage: "Arabic", 
+        countryLanguage: "English", 
         urlExt: ".eg",
         deliveryFees: 26,
     }

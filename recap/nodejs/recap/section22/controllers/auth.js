@@ -185,7 +185,7 @@ exports.postLogin = (req, res, next) => {
                         //redirect when done saving
                         req.session.save((err) => {
                             console.log(err);
-                            res.redirect("/products");
+                            res.redirect("/");
                         });
                     }
                     else if (!doMatch) {
@@ -247,7 +247,7 @@ exports.postLogout = (req, res, next) => {
     console.log("logging out");
     req.session.destroy((err) => {
         console.log(err);
-        res.redirect("/products");
+        res.redirect("/");
     });
 };
 //10.2

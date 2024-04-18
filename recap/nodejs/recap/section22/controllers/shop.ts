@@ -15,7 +15,7 @@ interface Request_With_reqUser extends Request {
 }
 
 
-const ITEMS_PER_PAGE = 2;
+const ITEMS_PER_PAGE = 4;
 const ORDERS_PER_PAGE = 2;
 
 exports.getProducts = (req: Request_With_reqUser, res: Response, next: NextFunction) => {
@@ -142,7 +142,7 @@ exports.postCart = (req: Request_With_reqUser, res: Response, next: NextFunction
     .then(result => {
         console.log("product added to cart");
         console.log(requestedCount);
-        // res.redirect("/");
+        res.redirect("/cart");
 
     })
     .catch(err => {
@@ -246,6 +246,22 @@ exports.getCheckoutSuccess = (req: Request_With_reqUser, res: Response, next: Ne
                     totalCost1 = totalCost1 + (item.productId.price * item.quantity);
                 })
             }
+
+
+            //add products as sold
+            user.cart.items.map((item: IItems) => {
+                //using the spread operator and a special function 
+                //._doc to access just the data without meta data and pull out all the product data into a new object
+                // return {quantity: item.quantity, product: {...item.productId._doc}};
+                ProductClassModel.findById(item.productId)
+                .then(product => {
+                    if (product) {
+                        product.sold = product.sold + 1;
+                        product.availability = product.availability - 1;
+                        product.save();
+                    }
+                })
+            })
 
 
             const order = new OrderClassModel({

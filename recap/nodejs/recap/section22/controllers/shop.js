@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose = require('mongoose');
 const product_1 = require("../models/product");
-const ITEMS_PER_PAGE = 2;
+const ITEMS_PER_PAGE = 4;
 const ORDERS_PER_PAGE = 2;
 exports.getProducts = (req, res, next) => {
     //12.2
@@ -97,7 +97,7 @@ exports.postCart = (req, res, next) => {
         .then(result => {
         console.log("product added to cart");
         console.log(requestedCount);
-        // res.redirect("/");
+        res.redirect("/cart");
     })
         .catch(err => {
         console.log(err);
@@ -183,6 +183,20 @@ exports.getCheckoutSuccess = (req, res, next) => {
                         totalCost1 = totalCost1 + (item.productId.price * item.quantity);
                     });
                 }
+                //add products as sold
+                user.cart.items.map((item) => {
+                    //using the spread operator and a special function 
+                    //._doc to access just the data without meta data and pull out all the product data into a new object
+                    // return {quantity: item.quantity, product: {...item.productId._doc}};
+                    product_1.ProductClassModel.findById(item.productId)
+                        .then(product => {
+                        if (product) {
+                            product.sold = product.sold + 1;
+                            product.availability = product.availability - 1;
+                            product.save();
+                        }
+                    });
+                });
                 const order = new order_js_1.OrderClassModel({
                     user: {
                         email: req.user.email,

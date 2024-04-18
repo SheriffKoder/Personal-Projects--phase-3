@@ -37,10 +37,13 @@
 
         <div class="desktop_1 content__item__image--wrapper">
             <div class="content__item__image--container content__item__image--container--image">
+
+                <% if (product.price < product.prevPrice) { %>
                 <span class="Imagediscount">
                     <div><%=Math.round((product.prevPrice/product.price)*100)-100%>%</div>
                     <div>off</div>
                 </span>
+                <%}%>
                 <div id="img" style="background-image: url('<%=product.imageUrl%>');"></div>
                 <a href="www.google.com" class="content__item__image--container-after"></a>
             </div>
@@ -69,15 +72,15 @@
             </div>
 
             <div class="content__item__pricing">
-                <% if (product.prevPrice > 0) {%>
+                <% if (product.prevPrice > 0 && product.price < product.prevPrice) {%>
                 <span class="content__item__pricing--discount">-<%=Math.round((product.prevPrice/product.price)*100)-100%>%</span>
                 <% } %>
                 <span class="content__item__pricing--price">
                     <span class="content__item__pricing--price--currency">EGP</span>
-                    <span class="content__item__pricing--price--price"><%=product.price.toString().split(".")[0]%></span>
+                    <span class="content__item__pricing--price--price"><%=product.price.toString().split(".")[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",")%></span>
                     <span class="content__item__pricing--price--cents"><%=product.price.toString().split(".")[1]%></span>
                 </span>
-                <% if (product.prevPrice > 0) {%>
+                <% if (product.prevPrice > 0 && product.price < product.prevPrice) {%>
                 <div class="content__item__pricing--price--original-price">
                     List Price: 
                     <span class="original-price--price"> EGP<%=product.prevPrice%></span>
@@ -96,7 +99,7 @@
                 </span>
                 <span class="content__item__delivery--date">
                     <span>
-                        <%= (product.deliveryFees === "free") ? "FREE" : "26 EGP " %> delivery, by</a>
+                        <% (product.deliveryFees === false) ? "FREE" : "26 EGP " %> delivery, by</a>
                         <%= day[today.getDay()+2]%>
                         
                         <%= today.getDate() %>
@@ -123,7 +126,7 @@
 
                         <span class="content__item__ordering--price desktop-only">
                             <span class="content__item__ordering--price--currency">EGP</span>
-                            <span class="content__item__ordering--price--price"><%=product.price.toString().split(".")[0]%></span>
+                            <span class="content__item__ordering--price--price"><%=product.price.toString().split(".")[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",")%></span>
                             <span class="content__item__ordering--price--cents"><%=product.price.toString().split(".")[1]%></span>
                         </span>
 
@@ -131,7 +134,7 @@
 
 
                         <div>
-                            <a class="content__item__ordering--delivery-link"><%= (product.deliveryFees) ?  "FREE" : "26 EGP " %> Delivery</a>
+                            <a class="content__item__ordering--delivery-link"><%= (product.deliveryFees === false) ?  "FREE" : "26 EGP " %> Delivery</a>
                             <span class="content__item__ordering--delivery-date">
                                 <%= day[today.getDay()+1]%>
                                 ,
@@ -157,39 +160,41 @@
                     </span>
                     
                 <!-- <form action="/cart" method="POST"> -->
-                    <span class="content__item__ordering--select">
-                        <select name="requestedCount">
-                            <option selected>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
-                            <option>6</option>
-                            <option>7</option>
-                            <option>8</option>
-                            <option>9</option>
-                            <option>10</option>
-                        </select>
-                        <i class="content__item__ordering--select--logo"></i>
-                    </span>
-                        <button class="content__item__ordering--yellow-button yellow-button" type="submit">Add to Cart</button>
-                        <button class="content__item__ordering--orange-button orange-button" type="submit">Buy Now</button>
-                        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-                        <input type="hidden" name="productId" value="<%= product.id %>">
-                <!-- </form> -->
+                    <% if (product.availability > 0) { %> 
+                        <span class="content__item__ordering--select">
+                            <select name="requestedCount">
+                                <option selected>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                                <option>6</option>
+                                <option>7</option>
+                                <option>8</option>
+                                <option>9</option>
+                                <option>10</option>
+                            </select>
+                            <i class="content__item__ordering--select--logo"></i>
+                        </span>
+                            <button class="content__item__ordering--yellow-button yellow-button" type="submit">Add to Cart</button>
+                            <button class="content__item__ordering--orange-button orange-button" type="submit">Buy Now</button>
+                            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                            <input type="hidden" name="productId" value="<%= product.id %>">
+                    <!-- </form> -->
 
-            
-                <div class="content__item__other-info">
-                    <div>
-                        <span>Payment</span>
-                        <span><a href="">Secure transition</a></span></div>
-                    <div>
-                        <span>Ships from</span>
-                        <span>Amazon.eg</span></div>
-                    <div>
-                        <span>Sold by</span>
-                        <span><a href=""><%=product.userId.name%></a></span></div>
-                </div>
+                
+                        <div class="content__item__other-info">
+                            <div>
+                                <span>Payment</span>
+                                <span><a href="">Secure transition</a></span></div>
+                            <div>
+                                <span>Ships from</span>
+                                <span>Amazon.eg</span></div>
+                            <div>
+                                <span>Sold by</span>
+                                <span><a href=""><%=product.userId.name%></a></span></div>
+                        </div>
+                    <%}%>
 
             </div>
 
@@ -214,13 +219,18 @@
 
             <div class="content__item__ordering">
 
+            <% if (product.department === "Electronics") {%>
+            
             <div class="content__item__protection-plan full_width__border">
 
                 <div>Add a Protection Plan</div>
 
                 <a href="" class="content__item__protection-plan--content">
-                    <input type="checkbox" class="content__item__protection-plan--content--check" name="addProtection">
-                    <div class="content__item__protection-plan--content--info">
+                    <input type="checkbox" class="content__item__protection-plan--content--check" name="addProtection"
+                    <%=product.availability === 0 ? "disabled": null %>>
+                    <div class="content__item__protection-plan--content--info"
+                    
+                    >
                         <div>1 Year Extended Warranty Plan for</div>
                         <div>EGP <%= Math.round(product.price*0.1*100)/100%></div>
                     </div>
@@ -231,6 +241,7 @@
                 </div>
 
             </div>
+            <%}%>
 
             </form>
         </div>
@@ -238,11 +249,11 @@
         <div href="" class="content__item__seller-options--container">
             <h3>Other sellers on Amazon</h3>
             <a href="" class="content__item__seller-options full_width__border">
-                <div>Compare New & Used (5) from</div>
+                <div>Compare <%= product.department === "Electronics" ? "New & Used": null%> (5) from</div>
                 <div class="price-text--seller-options">
                     <span class="">EGP</span>
-                    <span class="">599</span>
-                    <span class="">00</span>
+                    <span class=""><%= (product.price*0.95).toString().split(".")[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",")%></span>
+                    <span class=""><%= (Math.round(product.price*0.95 * 100) / 100).toString().split(".")[1]%></span>
                 </div>
                 <div>FREE Shipping</div>    
             </a>
@@ -379,11 +390,22 @@
                                 <%= product.notesFeature1%>
                             </span>
                         </li>
-                        <li>
-                            <span>
-                                <%= product.notesFeature2%>
-                            </span>
-                        </li>
+
+                        <%if (product.notesFeature2 !== "") { %>
+                            <li>
+                                <span>
+                                    <%=product.notesFeature2%>
+                                </span>
+                            </li>
+                        <%}%>
+
+                        <%if (product.notesFeature3 !== "") { %>
+                            <li>
+                                <span>
+                                    <%=product.notesFeature3%>
+                                </span>
+                            </li>
+                        <%}%>
                     </dl>
                 </div>
 
@@ -395,12 +417,12 @@
                         <tr><td>Package Dimensions</td><td>Length: <%=product.size.length%> cm x Height: <%=product.size.height%> x Width: <%=product.size.width%></td></tr>
                         <tr><td>Package Weight</td>
                             <td>
-                            <% if (product.weight > 1000) { %>
+                            <% if (product.weight >= 1000) { %>
                             <% let totalWeight=(product.weight/1000).toString(); %>
                             
-                            <%=totalWeight.split(".")[0]%> Kilograms and
-                            <%=totalWeight.split(".")[1]*1000%> grams
-                            <% } else if (product.weight < 1000) { %>
+                            <%=totalWeight.split(".")[0]%> Kilograms
+                            <%=totalWeight.split(".")[1] > 0 ? "and "+totalWeight.split(".")[1]*100+" grams" : null%>
+                            <% } else if (product.weight <= 1000) { %>
                                 <%=product.weight%> grams
                             <% } %>
                             </td>

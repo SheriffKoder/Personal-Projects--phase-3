@@ -98,24 +98,41 @@ main {
     flex-direction: row;
     border-radius: 7px;
     /* padding: 0.5em; */
-    max-height: 14rem;
+    max-height: 15rem;
     /* font-size: 1em; */
     /*0.8 200's - 400's 1, 550 1.2 */
     /* width: 90%; */
-
+    width: 100%;
+    max-width: 700px;
 }
 
 
 .main__main__products-list--item--image--container {
-    max-height: 13em;
-    padding: 0.5em;
-    background-color: rgb(246, 246, 246);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* width: 40%; */
+    /* max-width: 260px; */
+    overflow: hidden;
+    border: 0.25em solid rgb(246, 246, 246);
+
+    /* max-width: 100px; */
+    /* max-height: 100px; */
+    /* height: 100%; */
+    width: 40%;
+    height: 15vh;
+    object-fit: cover;
+    /* max-height: 100px; */
 
 }
 
 .main__main__products-list--item--image {
     /* height: 100%; */
-    max-height: 10em;
+    /* max-height: 10em; */
+    height: 100%;
+    /* max-height: 10em; */
+    width: 100%;
+    object-fit: cover;
 
 }
 
@@ -380,13 +397,32 @@ main {
 
 }
 
-
-
 @media only screen and (min-width: 400px) { 
 
     .main__main__products-list--item--image--container {
-        height: 100%;
-        max-height:20rem;
+        height: 22vh;
+        width: 50%;
+        max-width: min(22vh,190px);
+        max-height: 190px;
+
+    }
+
+    .main__main__products-list--item--description-buttons {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+        gap: 0.5em;
+    }
+}
+
+@media only screen and (min-width: 900px) { 
+
+    .main__main__products-list--item--image--container {
+        /* height: 100%; */
+        /* max-height:20rem; */
+        /* max-width: 100%; */
+        /* width: 40%; */
+        /* max-width: 270px; */
 
     }
 
@@ -395,6 +431,9 @@ main {
         /* max-height: 10em; */
         height: 100%;
         max-height: 12em;
+        /* max-height: 10em; */
+        width: 100%;
+        /* object-fit: cover; */
 
     }
 
@@ -425,7 +464,7 @@ main {
 
 
 
-@media only screen and (min-width: 550px) {
+@media only screen and (min-width: 900px) {
 
     .main__main__products-list--text--content-wrapper {
  
@@ -439,6 +478,7 @@ main {
 
     .main__main__products-list--item {
         max-height: 20rem;
+        max-width: 100%;
     }
 
 
@@ -535,7 +575,7 @@ main {
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        padding: 0 0.5rem;
+        padding: 0 1.5rem 0 0.5rem;
 
     }
 

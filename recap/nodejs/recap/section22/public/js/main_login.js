@@ -87,6 +87,7 @@ $ (function() {
     const invalid_password_message = $(".login__password--field--message");
     const signIn_button = $("#login__password--login-link");
 
+
     const patterns = {
         telephone: /^\d{12}$/ ,         // only, country code+10 digits - login
         telephoneShort: /^\d{10}$/ ,         // only, 10 digits - signup
@@ -245,6 +246,11 @@ $ (function() {
     const invalid_password_message_signup = $(".signup__password--field--message");
     const invalid_tel_message_signup = $(".signup__telephone--field--message");
 
+    const nameMarker = $(".validationMarker_name");
+    const emailMarker = $(".validationMarker_email");
+    const phoneMarker = $(".validationMarker_phone");
+    const passwordMarker = $(".validationMarker_password");
+
     //// Disable the verify-mobile-number button
     signup_button.prop("disabled", true);
 
@@ -283,7 +289,7 @@ $ (function() {
             disable_button_form($(this));
         } else {
             $(this).css("border", "1px solid green");
-            invalid_email_message_signup.css({"font-style": "normal", position: "relative"}).html("&#x2705;");
+            emailMarker.html("&#x2705;");
             passEmail = true;
             enable_button_form();
         }
@@ -295,7 +301,7 @@ $ (function() {
             disable_button_form($(this));
         } else {
             $(this).css("border", "1px solid green");
-            invalid_name_message_signup.css({"font-style": "normal", position: "relative"}).html("&#x2705;");
+            nameMarker.html("&#x2705;");
             passName = true;
             enable_button_form();
         }
@@ -307,7 +313,7 @@ $ (function() {
             invalid_tel_message_signup.css({"font-style": "italic", "position": "static"}).text("the phone number should be the country code+10 digits*")
             disable_button_form($(this));
         } else {
-            invalid_tel_message_signup.css({"font-style": "normal", position: "relative"}).html("&#x2705;");
+            phoneMarker.html("&#x2705;");
             $(this).css("border", "1px solid green");
             passTel = true;
             enable_button_form();
@@ -321,7 +327,7 @@ $ (function() {
             invalid_password_message_signup.css({"font-style": "italic", "position": "static"}).text("password is less than 8 characters*");
             disable_button_form($(this));
         } else {
-            invalid_password_message_signup.css({"font-style": "normal", position: "relative"}).html("&#x2705;");
+            passwordMarker.html("&#x2705;");
             $(this).css("border", "1px solid green");
             passPassword = true;
             enable_button_form();

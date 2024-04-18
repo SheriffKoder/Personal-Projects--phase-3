@@ -13,7 +13,7 @@
 
         <aside class="main__main__top-bar" aria-label="products amount and sort by">
             <span class="main__main__top-bar-container">
-                <span><span aria-label="number of pages the results are spread">Page <%=currentPage%> of <%=lastPage%></span>, displaying <%=totalProducts%> products</span>
+                <span><span aria-label="number of pages the results are spread">Page <%=currentPage%> of <%=lastPage%></span>, total of <%=totalProducts%> products</span>
                 <select class="main__main__top-bar--sort" aria-label="sort products drop down select">
                     <option>Sort by: Featured</option>
                 </select>
@@ -103,12 +103,14 @@
                             <% for (let product of prods) { %>
                                 <!-- <a href="/products/<%= product._id%>" class="btn"> Details</a> -->
 
-                            <div class="main__main__products-list--item" aria-label="product number <%=i%>">
+                            <div class="main__main__products-list--item" aria-label="product number <%=i%>"
+                                ">
                                 <!-- <div class="main__main__products-list--item" aria-label="product number x"> -->
 
                                 
                                 <a href="/products/<%= product._id%>" class="main__main__products-list--item--image--container" href="">
-                                    <img src="<%= product.imageUrl %>" class="main__main__products-list--item--image" alt="<%= product.title %>">
+                                    <img src="<%= product.imageUrl %>" class="main__main__products-list--item--image" alt="<%= product.title %>"
+                                    ">
                                 </a>                        
                                 <div class="main__main__products-list--item--description" aria-label="product's details">
                                     
@@ -141,12 +143,24 @@
                                         EGP
                                         </span>
                                         <p class="main__main__products-list--item--description--price--number" aria-label="egyptian pounds">
-                                            <%= product.price.toString().split(".")[0] %>
+                                            <%= product.price.toString().split(".")[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",") %>
                                         </p>
                                         <span class="main__main__products-list--item--description--price--decimal" aria-label="cents">
                                             <%= product.price.toString().split(".")[1] %>
                                         </span>
                                     </span>
+
+                                    <% if (product.availability === 0) {%>
+                                        <span style="color: #B12704">
+                                            Out of stock
+                                        </span>
+                                    <%}%>
+
+                                    <% if (product.availability < 5) {%>
+                                        <span style="color: #B12704">
+                                            Only <%= product.availability %> left in stock - order soon.
+                                        </span>
+                                    <%}%>
 
                                     <span class="main__main__products-list--item--description--offer" aria-label="applicable offers">
                                         Extra 20% off with ValU
@@ -183,12 +197,14 @@
 
                                     <span class="main__main__products-list--item--description--spacer"></span>
 
+                                    <% if (product.availability > 0) {%>
                                     <span class="main__main__products-list--item--description-buttons">
                                         <form action="/cart" method="POST">
                                         <button class="main__main__products-list--item--description-buttons-add-to-cart" arial-label="Add product to cart" type="submit">Add to Cart</button>
                                         <input type="hidden" name="productId" value="<%= product.id %>">
                                         <form>
                                     </span>
+                                    <%}%>
 
 
                                 </div>

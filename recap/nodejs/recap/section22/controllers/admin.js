@@ -9,7 +9,7 @@ const { validationResult } = require("express-validator");
 //12
 const fileHelper = require("../util/file");
 //12.2
-const ITEMS_PER_PAGE = 2;
+const ITEMS_PER_PAGE = 5;
 exports.getAddProduct = (req, res, next) => {
     res.render("admin/edit-product", {
         myTitle: "Add a Product",

@@ -261,7 +261,7 @@ exports.postLogin = (req: Request_With_reqUser, res: Response, next: NextFunctio
                         //redirect when done saving
                         req.session.save((err) => {
                             console.log(err);
-                            res.redirect("/products");
+                            res.redirect("/");
                         })
 
                     } else if (!doMatch) {
@@ -344,7 +344,7 @@ exports.postLogout = (req: Request, res: Response, next: NextFunction) => {
     console.log("logging out");
     req.session.destroy((err)=> {
         console.log(err);
-        res.redirect("/products");
+        res.redirect("/");
     })
 
 };

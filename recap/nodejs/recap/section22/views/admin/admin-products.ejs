@@ -16,7 +16,7 @@
 
         <aside class="main__main__top-bar" aria-label="products amount and sort by">
             <span class="main__main__top-bar-container">
-                <span><span aria-label="number of pages the results are spread">Page <%=currentPage%> of <%=lastPage%></span>, displaying <%=totalProducts%> products</span>
+                <span><span aria-label="number of pages the results are spread">Page <%=currentPage%> of <%=lastPage%></span>, total of <%=totalProducts%> products</span>
                 <select class="main__main__top-bar--sort" aria-label="sort products drop down select">
                     <option>Sort by: Featured</option>
                 </select>
@@ -152,7 +152,7 @@
                                         EGP
                                     </span>
                                     <p class="main__main__products-list--item--description--price--number" aria-label="egyptian pounds">
-                                        <%= product.price.toString().split(".")[0] %>
+                                        <%= product.price.toString().split(".")[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",") %>
                                     </p>
                                     <span class="main__main__products-list--item--description--price--decimal" aria-label="cents">
                                         <%= product.price.toString().split(".")[1] %>
@@ -167,14 +167,16 @@
                                 aria-label="number of products sold"
                                 >
                                     <%= (product.sold <= 0) ? "Nothing sold yet" : "" %>
-                                    <%= (product.sold > 0 && product.sold < 100) ? product.sold+" items sold" : "" %>
+                                    <%= (product.sold === 1) ? product.sold+" item sold" : "" %>
+                                    <%= (product.sold > 1 && product.sold < 100) ? product.sold+" items sold" : "" %>
                                     <%= (product.sold >=100) ? "More than 99+ sold" : "" %>
 
                                 </span>
 
                                 <span class="main__main__products-list--item--description--available" aria-label="number of products available">                                    
                                     <%= (product.availability <= 0) ? "Out of stock" : "" %>
-                                    <%= (product.availability > 0 && product.availability < 100) ? product.availability+" items still available" : "" %>
+                                    <%= (product.availability === 1) ? product.availability+" item still available" : "" %>
+                                    <%= (product.availability > 1 && product.availability < 100) ? product.availability+" items still available" : "" %>
                                     <%= (product.availability >=100) ? "More than 99+ available" : "" %>
                                 </span>
 

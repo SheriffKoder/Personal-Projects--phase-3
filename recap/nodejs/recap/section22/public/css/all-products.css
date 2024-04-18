@@ -100,18 +100,31 @@ main {
 
 
 .main__main__products-list--item--image--container {
-    max-height: 15em;
-    padding: 0.5em;
-    background-color: rgb(246, 246, 246);
+    /* max-height: 15em; */
     display: flex;
     align-items: center;
     justify-content: center;
+    /* width: 40%; */
+    /* max-width: 260px; */
+    overflow: hidden;
+    border: 0.5em solid rgb(246, 246, 246);
+
+    /* max-width: 100px; */
+    /* max-height: 100px; */
+    /* height: 100%; */
+    width: 40%;
+    height: 100%;
+    object-fit: cover;
+
 
 }
 
 .main__main__products-list--item--image {
-    /* height: 100%; */
-    max-height: 10em;
+    height: 100%;
+    /* max-height: 10em; */
+    width: 100%;
+    /* object-fit: cover; */
+    
 
 }
 
@@ -318,14 +331,24 @@ main {
 @media only screen and (min-width: 400px) { 
 
     .main__main__products-list--item--image--container {
-        max-height:20rem;
+        /* height:100%; */
+        /* width: 40%; */
+        /* max-width: 100%; */
+        /* max-height: 100%; */
+        /* overflow: hidden; */
+        /* max-height: 200px; */
+        height: 22vh;
+        width: 50%;
     }
 
     .main__main__products-list--item--image {
         /* max-height: 13em; */
         /* max-height: 10em; */
-        height: 100%;
-        max-height: 12em;
+        /* height: 100%; */
+        /* max-height: 12em; */
+        /* width: 100%; */
+        object-fit: cover;
+        /* max-width: 100%; */
 
     }
 
@@ -458,6 +481,12 @@ main {
 
 @media only screen and (min-width: 900px) {
 
+    .main__main__products-list--item--image--container {
+        width: 40%;
+        max-height: 222px;
+
+    }
+
     .main__main__wrapper {
         width: 100%;
         display: flex;
@@ -562,11 +591,16 @@ main {
 
 @media only screen and (min-width: 1000px) {
 
+    .main__main__products-list--item--image--container {
+        width: 100%;
+    }
+
+
     .main__main__products-list--container {
         display: flex;
         flex-wrap: wrap;
         flex-direction: row;
-        gap: 0.5em;
+        gap: 1em;
     }
 
     .main__main__products-list--item {

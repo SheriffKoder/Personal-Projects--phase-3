@@ -46,17 +46,25 @@
                                         <label style="text-wrap:nowrap; margin-right: 1rem;" for="signup__name--field" class="signup__name-label">
                                             <h2>First and last name</h2>
                                         </label>
-                                        <span style="" class="signup__name--field--message" aria-live="polite">
+                                        <span class="signup__name--field--message" aria-live="polite">
                                             <% let nameError =""; %>
                                             <% validationErrors.forEach(error => { if (error.path === 'signUpFullName') { nameError = error.msg; } }) %>
                                             <%= nameError %>                                
                                         </span>
                                     </div>    
                                 </span>
+
+                                <div style="display: flex; flex-direction: row; width: 100%; position: relative;">
+                                    <span style="background-color: rgba(255, 0, 0, 0); height: 10px; width: 10px; position: absolute;
+                                    top: 30%; right: 15px; transform: translate(0%, 0%);
+                                    " class="validationMarker_name">
+
+                                    </span>
                                 <input 
                                 value="<%= oldInput.name%>"
                                 type="text" name="signUpFullName" id="signup__name--field" class="signup__name--field <%= validationErrors.find(e => e.path === 'signUpFullName') ? 'invalid' : '' %>" aria-label="required, enter your first and last name" required>
                                 </span>
+                                </div>
 
 
 
@@ -71,11 +79,20 @@
                                             <%= emailError %>                                
                                         </span>
                                 </span>
+
+                                <div style="display: flex; flex-direction: row; width: 100%; position: relative;">
+                                    <span style="background-color: rgba(255, 0, 0, 0); height: 10px; width: 10px; position: absolute;
+                                    top: 30%; right: 15px; transform: translate(0%, 0%);
+                                    " class="validationMarker_email">
+
+                                    </span>
                                     <input 
                                     style=""
                                     value="<%= oldInput.signUpEmail%>"
                                     type="text" name="signUpEmail" id="signup__email--field" class="signup__email--field <%= validationErrors.find(e => e.path === 'signUpEmail') ? 'invalid' : '' %>" aria-label="required, enter an email address in a valid form" required
                                     >
+                                </div>
+
                                 </span>
 
                                 <span class="signup__telephone__content">
@@ -88,16 +105,29 @@
                                             <% validationErrors.forEach(error => { if (error.path === 'signUpPhoneNumber') { phoneError = error.msg; } }) %>
                                             <%= phoneError %>
                                         </span>
+
                                     </span>
-    
-                                    <select class="signup__telephone--region" aria-label="country telephone number first two digits selection" name="countryCode">
-                                        <option <% if (oldInput.country === "EG") { %> selected <% } %> >EG +20</option>
-                                        <option <% if (oldInput.country === "UK"){ %> selected : <%}%> >UK +44</option>
-                                    </select>
-                                    <input 
-                                    value="<%= oldInput.phone%>"
-                                    type="tel" name="signUpPhoneNumber" id="signup__telephone--input" class="<%= validationErrors.find(e => e.path === 'signUpPhoneNumber') ? 'invalid' : '' %>" aria-label="required, enter an 10 digit telephone number" required
-                                    >
+
+                                    <div style="display: flex; flex-direction: row; width: 100%; position: relative;">
+                                        <span style="background-color: rgba(255, 0, 0, 0); height: 10px; width: 10px; position: absolute;
+                                        top: 30%; right: 15px; transform: translate(0%, 0%);
+                                        " class="validationMarker_phone">
+
+                                        </span>
+
+                                        <select class="signup__telephone--region" aria-label="country telephone number first two digits selection" name="countryCode">
+                                            <option <% if (oldInput.country === "EG") { %> selected <% } %> >EG +20</option>
+                                            <option <% if (oldInput.country === "UK"){ %> selected : <%}%> >UK +44</option>
+                                        </select>
+                                        <input
+                                        value="<%= oldInput.phone%>"
+                                        type="tel" name="signUpPhoneNumber" id="signup__telephone--input" class="<%= validationErrors.find(e => e.path === 'signUpPhoneNumber') ? 'invalid' : '' %>" aria-label="required, enter an 10 digit telephone number" required
+                                        >
+                                        
+                                        
+                                    </div>
+                                        
+                                        
                                 </span>
 
                                 <span class="signup__input-field">
@@ -113,11 +143,20 @@
                                     </span>
                                 </span>
 
-                                    <input 
-                                    class="signup__password--field <%= validationErrors.find(e => e.path === 'signUpPassword') ? 'invalid' : '' %>"
-                                    value="<%= oldInput.signUpPassword%>"
-                                    type="password" name="signUpPassword" id="signup__password--field" aria-label="required, enter a password not less than 8 characters, may be letters, numbers or symbols" required
-                                    >
+                                <div style="display: flex; flex-direction: row; width: 100%; position: relative;">
+                                    <span style="background-color: rgba(255, 0, 0, 0); height: 10px; width: 10px; position: absolute;
+                                    top: 30%; right: 15px; transform: translate(0%, 0%);
+                                    " class="validationMarker_password">
+
+                                    </span>                                        
+                                    
+                                    <input
+                                        class="signup__password--field <%= validationErrors.find(e => e.path === 'signUpPassword') ? 'invalid' : '' %>"
+                                        value="<%= oldInput.signUpPassword%>"
+                                        type="password" name="signUpPassword" id="signup__password--field" aria-label="required, enter a password not less than 8 characters, may be letters, numbers or symbols" required
+                                        >
+                                </div>
+                                
                                     <p class="signup__password--notify" aria-hidden="true" ><em>i</em> Passwords must be at least 8 characters</p>
                                 </span>
 
