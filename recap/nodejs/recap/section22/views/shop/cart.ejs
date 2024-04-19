@@ -7,7 +7,7 @@
 <%- include("../includes/html-start.ejs") %>
 
     <!-- if there are no items in stock in the cart this will be -1 -->
-    <% const someInStock = products.findIndex(p => p.productId.availability > 1) %>
+    <% const someInStock = products.findIndex(p => p.productId.availability > 0) %>
 
 
     <%- include("../includes/index-header.ejs") %>
@@ -51,13 +51,13 @@
                                 <li class="main__main__content__row1--cart--list--item--container" aria-label="cart item <%=i%>">
                                     <label><input type="checkbox" for="item1" aria-label="remove item from checkout"></label>
                                     <div id="item1" class="main__main__content__row1--cart--list--item">
-                                        <div class="cart--list--item--image" aria-label="item's image">
+                                        <a href="/products/<%= p._id%>" class="cart--list--item--image" aria-label="item's image">
                                             <img src="<%=p.productId.imageUrl%>" alt="<%=p.productId.title%>">
-                                        </div>
+                                        </a>
                                         <div class="cart--list--item--description" aria-label="item's description">
-                                            <h2 class="cart--list--item--description--name" aria-label="item's title">
+                                            <a href="/products/<%= p._id%>" class="cart--list--item--description--name" aria-label="item's title" style="text-decoration: none; color: black;">
                                                 <%=p.productId.title%>
-                                            </h2>
+                                            </a>
                                             <p class="cart--list--item--description--price" aria-label="item's price">
                                                 <span class="globalCurrency"></span> <%=p.productId.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")%>
                                             </p>
@@ -218,11 +218,11 @@
                             <% products.forEach(p => { %>
                                 <% if (p.productId.availability == 0) { %>
                             <li class="saved-item">
-                                <div class="saved-item--image-container">
+                                <a class="saved-item--image-container" href="/products/<%= p._id%>">
                                     <img src="<%=p.productId.imageUrl%>" alt="<%=p.productId.title%>">
-                                </div>
+                                </a>
                                 <div class="saved-item--description">
-                                    <a href="" class="saved-item--description--title"><%=p.productId.title%></a>
+                                    <a href="/products/<%= p._id%>" class="saved-item--description--title"><%=p.productId.title%></a>
                                     <a href="" class="saved-item--description--seller"><%=p.productId.seller%></a>
                                     <span class="saved-item--description--availability not_available_red">currently unavailable</span>
                                     <span class="saved-item--description-controls">
