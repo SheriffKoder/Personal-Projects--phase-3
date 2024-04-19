@@ -130,19 +130,21 @@ exports.getProduct = (req: Request_With_reqUser, res: Response, next: NextFuncti
 //7.b
 exports.postCart = (req: Request_With_reqUser, res: Response, next: NextFunction) => {
     const prodId = req.body.productId;
-    const requestedCount = req.body.requestedCount;
+    const requestedCount = req.body.requestedCount || 1;
     const increaseQtyAction = true;
     const changeQtyAction = false;
+
     ProductClassModel.findById(prodId)
     .then(product => {
         if (product) {
-            return req.user.addToCart(product, requestedCount, increaseQtyAction, changeQtyAction);
+            req.user.addToCart(product, requestedCount, increaseQtyAction, changeQtyAction);
         }
     })
     .then(result => {
         console.log("product added to cart");
         console.log(requestedCount);
-        res.redirect("/cart");
+        // res.redirect("/cart");
+        // const message = req.flash("error");
 
     })
     .catch(err => {
@@ -224,7 +226,10 @@ exports.getCheckoutSuccess = (req: Request_With_reqUser, res: Response, next: Ne
     .then(user => {
         //to make the map method work
         if(Array.isArray(user.cart.items)) {
-            const products = user.cart.items.map((item: IItems) => {
+
+            const inStockProducts = user.cart.items.filter(p => p.productId.availability > 0);
+
+            const products = inStockProducts.map((item: IItems) => {
                 //using the spread operator and a special function 
                 //._doc to access just the data without meta data and pull out all the product data into a new object
                 return {quantity: item.quantity, product: {...item.productId._doc}};
@@ -248,8 +253,8 @@ exports.getCheckoutSuccess = (req: Request_With_reqUser, res: Response, next: Ne
             }
 
 
-            //add products as sold
-            user.cart.items.map((item: IItems) => {
+            //update product availability / sold quantity in the database
+            inStockProducts.map((item: IItems) => {
                 //using the spread operator and a special function 
                 //._doc to access just the data without meta data and pull out all the product data into a new object
                 // return {quantity: item.quantity, product: {...item.productId._doc}};
@@ -284,6 +289,7 @@ exports.getCheckoutSuccess = (req: Request_With_reqUser, res: Response, next: Ne
 
     })
     .then(() => {
+        //clear cart function in models/user.ts file
         req.user.clearCart();
     })
     .then(() => {   //clearCart is returned in the model so can add .then
@@ -472,10 +478,10 @@ exports.getCheckout = (req: Request_With_reqUser, res: Response, next: NextFunct
     req.user.populate("cart.items.productId")
     .then((user) => {
 
-        products = user.cart.items;
+        products = user.cart.items.filter(p => p.productId.availability > 0);
 
         products.forEach(p => {
-            total = total + (p.quantity * p.productId.price);
+                total = total + (p.quantity * p.productId.price);
         });
 
         return stripe.checkout.sessions.create({

@@ -21,7 +21,8 @@
             <span class="select-caret-down"></span>
 
         </aside>
-        
+        <%- include("../includes/cartNotification.ejs") %>
+
 
 
         <div class="main__main__wrapper">
@@ -156,7 +157,7 @@
                                         </span>
                                     <%}%>
 
-                                    <% if (product.availability < 5) {%>
+                                    <% if (product.availability < 5 && product.availability != 0 ) {%>
                                         <span style="color: #B12704">
                                             Only <%= product.availability %> left in stock - order soon.
                                         </span>
@@ -199,10 +200,28 @@
 
                                     <% if (product.availability > 0) {%>
                                     <span class="main__main__products-list--item--description-buttons">
-                                        <form action="/cart" method="POST">
-                                        <button class="main__main__products-list--item--description-buttons-add-to-cart" arial-label="Add product to cart" type="submit">Add to Cart</button>
-                                        <input type="hidden" name="productId" value="<%= product.id %>">
-                                        <form>
+                                        <form action="/cart" method="POST" id="form<%=product._id%>">
+                                            <input type="hidden" name="productId" value="<%= product._id %>">
+                                            <input type="hidden" name="_csrf" value="<%=csrfToken%>">
+                                            <input type="hidden" name="requestedCount" value=1>
+
+                                            <!-- show added to cart notification -->
+                                            <button class="main__main__products-list--item--description-buttons-add-to-cart" arial-label="Add product to cart" type="button"
+                                            onclick="(()=>{
+                                                document.querySelector('#submitButton<%=product._id%>').setAttribute('disabled', 'true');
+                                                document.querySelector('.cartNotification').classList.remove('animateNotification');
+                                                setTimeout(()=> {
+                                                    document.querySelector('.cartNotification').classList.add('animateNotification');
+                                                    setTimeout(()=> {
+                                                    document.querySelector('.cartNotification').classList.remove('animateNotification');
+                                                    document.querySelector('#submitButton<%=product._id%>').removeAttribute('disabled');
+                                                    document.getElementById('form<%=product._id%>').submit();
+                                                },3000);
+                                                },500);
+                                                
+                                            })()" id="submitButton<%=product._id%>">Add to Cart</button>
+
+                                        </form>
                                     </span>
                                     <%}%>
 

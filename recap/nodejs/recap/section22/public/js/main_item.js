@@ -7,7 +7,6 @@ let slider_buttons = document.querySelectorAll(".content__item__image--slider--b
 let image = document.querySelector("#img");
 
 
-
 //on slider button click,
 //animate the image off-screen, change image, animate back the image, 
 //change button background to active, change previously active button background to inactive

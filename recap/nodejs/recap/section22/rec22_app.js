@@ -237,7 +237,7 @@ mongoose.connect(process.env.MongoDbUri)
     //         user.save();
     //     }
     // });
-    app.listen(8000);
+    app.listen(3000);
 })
     .catch((err) => {
     console.log("mongoose connect error :: " + err);

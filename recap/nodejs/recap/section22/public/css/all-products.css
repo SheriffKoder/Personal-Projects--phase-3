@@ -52,6 +52,33 @@ main {
 
 }
 
+.cartNotification {
+    position: fixed; 
+    bottom: -2vh; 
+    right: 50%; 
+    background-color: rgba(0, 0, 0, 0.702);
+    color: white;
+    border-radius: 25px;
+    transform: translate(50%, 50%);
+    
+    padding: 0.5rem 1rem;
+    font-weight: 600;
+}
+
+.animateNotification {
+    animation: cartNotificationAnim;
+    animation-duration: 4s;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+}
+
+@keyframes cartNotificationAnim {
+    0% {bottom: -2vh; opacity: 0;}
+    15% {bottom: 2vh; opacity: 1;}
+    50% {bottom: 2vh; opacity: 1;}
+    75% {opacity: 0; bottom: 2vh}
+    to {opacity: 0; bottom: -2vh}
+  }
 
 
 /*///////////////////////////////////////////////////////////////*/

@@ -96,10 +96,11 @@
             </ul>
         </nav>
 
-
+        <% if (!isAuthenticated) { %>
         <div class="main-footer__content-signin mobile_only">
             <p>Already a customer ? <a href="" aria-label="sign in link">Sign in</a></p>
         </div>
+        <%}%>
 
         <div id="footer_links_3" aria-label="" class="sr-only"></div>
         <div class="main-footer__content-description-wrapper" id="">

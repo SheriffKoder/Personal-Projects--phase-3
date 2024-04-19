@@ -171,7 +171,7 @@ exports.postLogin = (req: Request_With_reqUser, res: Response, next: NextFunctio
                         //redirect when done saving
                         return req.session.save((err) => {
                             console.log(err);
-                            res.redirect("/products");
+                            res.redirect("/");
                         })        
                     } else if (!doMatch) {
 
@@ -524,8 +524,9 @@ exports.getReset = (req: Request, res: Response, next: NextFunction) => {
 //send token with the email url
 exports.postReset = (req: Request, res: Response, next: NextFunction) => {
 
+    let userEmail = req.body.email;
 
-    console.log("Reset submitted");
+    console.log(`Reset submitted to ${req.body.email}`);
     crypto.randomBytes(32, (err: any, buffer: any) => {
 
         if (err) {
@@ -554,7 +555,7 @@ exports.postReset = (req: Request, res: Response, next: NextFunction) => {
 
             const mailOptions = {
                 from: "kodersheriff@gmail.com",
-                to: "kodersheriff@gmail.com",
+                to: userEmail,
                 subject: "(TEST) NODE AMZ: Password Reset!",
                 html: `
                     <p> You requested a password reset </p>

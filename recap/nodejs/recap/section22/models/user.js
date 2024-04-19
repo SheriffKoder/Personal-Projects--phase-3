@@ -62,6 +62,8 @@ userSchema.methods.addToCart = function (product, requestedCount, increaseQtyAct
     if (cartProductIndex >= 0) {
         if (increaseQtyAction) {
             newQuantity = this.cart.items[cartProductIndex].quantity + +requestedCount;
+            //if we are trying to add more quantity than the available limit, only set to the available limit
+            newQuantity > product.availability ? newQuantity = product.availability : null;
         }
         else if (changeQtyAction) {
             newQuantity = +requestedCount;
@@ -75,7 +77,7 @@ userSchema.methods.addToCart = function (product, requestedCount, increaseQtyAct
         items: updatedCartItems
     };
     this.cart = updatedCart;
-    return this.save();
+    this.save();
 };
 //7.d
 userSchema.methods.removeFromCart = function (productId) {
@@ -87,7 +89,9 @@ userSchema.methods.removeFromCart = function (productId) {
 };
 //8
 userSchema.methods.clearCart = function () {
-    this.cart = { items: [] };
+    // this.cart = {items: []};
+    //take out all items that have quantity more than 0, and just keep the 0 for future interest
+    this.cart.items = this.cart.items.filter((p) => p.productId.availability == 0);
     return this.save();
 };
 const UserClassModel = (0, mongoose_1.model)("User", userSchema);

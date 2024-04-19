@@ -1,3 +1,33 @@
+
+.cartNotification {
+    position: fixed; 
+    bottom: -2vh; 
+    right: 50%; 
+    background-color: rgba(0, 0, 0, 0.702);
+    color: white;
+    border-radius: 25px;
+    transform: translate(50%, 50%);
+    
+    padding: 0.5rem 1rem;
+    font-weight: 600;
+}
+
+.animateNotification {
+    animation: cartNotificationAnim;
+    animation-duration: 4s;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+}
+
+@keyframes cartNotificationAnim {
+    0% {bottom: -2vh; opacity: 0;}
+    15% {bottom: 2vh; opacity: 1;}
+    50% {bottom: 2vh; opacity: 1;}
+    75% {opacity: 0; bottom: 2vh}
+    to {opacity: 0; bottom: -2vh}
+  }
+  
+
 main {
     /* to grow vertically with added items */
     height: 100%;
@@ -587,6 +617,7 @@ a {
 
 
 /*/////////////////////////////////*/
+
 
 
 .content__item__protection-plan {
@@ -1244,7 +1275,7 @@ input[type="checkbox"] {
 
     .desktop_1 {
         width: var(--image-width);
-        height: 950px;
+        height: 750px;
         display: inline;
         order: 1;
         /* padding-right: 0.5rem; */
@@ -1254,7 +1285,8 @@ input[type="checkbox"] {
 
     .desktop_2 {
         width: 63%;
-        height: 950px;
+        /* height: 950px; */
+        height: 750px;
         display: inline;
         order: 2;
         display: flex;
@@ -1316,6 +1348,7 @@ input[type="checkbox"] {
         order: 4;
         width: var(--row-width);
         max-width: var(--row-width-max);
+        min-height: 200px;
 
     }
 

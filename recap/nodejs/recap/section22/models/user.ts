@@ -114,6 +114,10 @@ userSchema.methods.addToCart = function (product: IProduct, requestedCount: numb
     if (cartProductIndex >= 0) {
         if (increaseQtyAction) {
             newQuantity = this.cart.items[cartProductIndex].quantity + +requestedCount;
+
+            //if we are trying to add more quantity than the available limit, only set to the available limit
+            newQuantity > product.availability ? newQuantity = product.availability : null;
+
         } else if (changeQtyAction) {
             newQuantity = +requestedCount;
         }
@@ -128,7 +132,7 @@ userSchema.methods.addToCart = function (product: IProduct, requestedCount: numb
     }
 
     this.cart = updatedCart;
-    return this.save();
+    this.save();
 
 
 }
@@ -146,7 +150,9 @@ userSchema.methods.removeFromCart = function (productId: string) {
 
 //8
 userSchema.methods.clearCart = function () {
-    this.cart = {items: []};
+    // this.cart = {items: []};
+    //take out all items that have quantity more than 0, and just keep the 0 for future interest
+    this.cart.items = this.cart.items.filter((p: IItems) => p.productId.availability == 0);
     return this.save();
 }
 

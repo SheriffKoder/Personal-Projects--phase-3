@@ -24,6 +24,9 @@
 <div class="main__main__wrapper">
     <div class="main__main__content">
 
+        <%- include("../includes/cartNotification.ejs") %>
+
+
         
         <div class="content__item__header item-header--mobile">
             <a href="">Brand:<%=product.brand%></a>
@@ -117,7 +120,7 @@
                 </a>
             </div>
 
-            <form class="content__item__ordering--form-container" action="/cart" method="POST">
+            <form class="content__item__ordering--form-container" action="/cart" method="POST" id="form<%=product._id%>">
 
                 <div class="content__item__ordering">
 
@@ -163,23 +166,34 @@
                     <% if (product.availability > 0) { %> 
                         <span class="content__item__ordering--select">
                             <select name="requestedCount">
-                                <option selected>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
-                                <option>6</option>
-                                <option>7</option>
-                                <option>8</option>
-                                <option>9</option>
-                                <option>10</option>
+                                <% for(i=1; i<= product.availability && i < 11; i++) { %>
+                                        <option><%=i%></option>
+                                <%}%>
+                            </select>
+                                
+
                             </select>
                             <i class="content__item__ordering--select--logo"></i>
                         </span>
-                            <button class="content__item__ordering--yellow-button yellow-button" type="submit">Add to Cart</button>
+                            <button class="content__item__ordering--yellow-button yellow-button" arial-label="Add product to cart" type="button"
+                            onclick="(()=>{
+                                document.querySelector('#submitButton<%=product._id%>').setAttribute('disabled', 'true');
+                                document.querySelector('.cartNotification').classList.remove('animateNotification');
+                                setTimeout(()=> {
+                                    document.querySelector('.cartNotification').classList.add('animateNotification');
+                                    setTimeout(()=> {
+                                    document.querySelector('.cartNotification').classList.remove('animateNotification');
+                                    document.querySelector('#submitButton<%=product._id%>').removeAttribute('disabled');
+                                    document.getElementById('form<%=product._id%>').submit();
+                                },3000);
+                                },500);
+                                
+                            })()" id="submitButton<%=product._id%>">Add to Cart</button>
+
                             <button class="content__item__ordering--orange-button orange-button" type="submit">Buy Now</button>
                             <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                             <input type="hidden" name="productId" value="<%= product.id %>">
+
                     <!-- </form> -->
 
                 
