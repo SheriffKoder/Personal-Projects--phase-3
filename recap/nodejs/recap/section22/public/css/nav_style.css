@@ -137,6 +137,7 @@ main.dark::after {
     align-items: center;
     justify-content: center;
     border: 1px solid white;
+    margin-left: 0.5rem;
 
 }
 
@@ -1023,7 +1024,7 @@ media queries menu
 
 .main-navigation__List-1-link-small, .main-navigation__List-1-link,
 .main-navigation__List-2-link , .main-navigation__List-2-link-small {
-    margin-top: auto;
+    /* margin-top: auto; */
 
 }
 
