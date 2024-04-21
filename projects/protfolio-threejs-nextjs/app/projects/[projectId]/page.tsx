@@ -16,7 +16,13 @@ const page = () => {
     const currentProject = allProjects.filter((project) => project.id === id)[0];
 
 
+    useEffect(()=> {
 
+        const dsc = document.getElementById("project_description");
+        if (dsc)
+        dsc.innerHTML=currentProject.longerDescription;
+
+    }, [])
 
   return (
     <div className="h-[calc(100vh-150px)] ambientBackground cursor-default relative">
@@ -172,9 +178,10 @@ const page = () => {
                         
                             </div>
 
-                            <p className="max-w-[1000px] text-[min(0.75em,1rem)] opacity-80 font-light leading-5 md:leading-6">
-                                {currentProject.longerDescription}
-                            </p>
+                            <div className="blueLink2 max-w-[1000px] text-[min(0.75em,1rem)] opacity-80 font-light leading-5 md:leading-6"
+                            id="project_description">
+                                {/* {currentProject.longerDescription} */}
+                            </div>
 
 
                             <div className="mt-[1.5rem]">

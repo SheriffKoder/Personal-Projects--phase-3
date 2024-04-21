@@ -825,6 +825,24 @@ and turn it to a transparent icon image with a gray semi transparent background 
   @apply text-blue-600 cursor-pointer underline
 }
 
+/* to apply a blue link text to elements containing a <a> tag 
+used in the single project page project's description text */
+.blueLink2 a {
+  @apply text-blue-600 cursor-pointer underline
+}
+
+#project_description h2 {
+  font-weight: 700;
+  font-size: 0.95rem;
+  display: inline;
+}
+
+#project_description h3 {
+  font-weight: 600;
+  font-size: 0.95rem;
+  display: inline;
+}
+
 .no_select {
   -webkit-touch-callout: none; /* iOS Safari */
   -webkit-user-select: none; /* Safari, Chrome, Opera, Samsung */
