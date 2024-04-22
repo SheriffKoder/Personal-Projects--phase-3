@@ -78,7 +78,8 @@ export const PATCH = async (request:Request, {params}:any) => {
     const newInfo = await request.formData();
 
     // console.log(currentUserPage);
-    console.log(newInfo);
+    // console.log("newInfo");
+    // console.log(newInfo);
 
     //Part 11.01 - formData image upload
     //3. store a file if there is and get a path
@@ -91,6 +92,8 @@ export const PATCH = async (request:Request, {params}:any) => {
         await writeFile(path, buffer, (err)=>console.log(err));
         console.log(`image ${file.name} is saved in ${path}`);
         userAvatar = path.split("/public")[1];
+        console.log("userAvatar");
+        console.log(userAvatar);
     } else if (!file) {
         userAvatar = newInfo.get("avatar") as string;
     }
@@ -99,12 +102,13 @@ export const PATCH = async (request:Request, {params}:any) => {
 
 
     try {
-        const userInfo = await UserModel.findById(currentUserPage);
+        let userInfo = await UserModel.findById(currentUserPage);
 
-        console.log(userInfo);
-        
+        // console.log(userInfo);
+        console.log("userAvatar");
+        console.log(userAvatar);
 
-        if (userInfo && newInfo !== null) {
+        if (userInfo && newInfo != null) {
             // // we have info object from json, want to overwrite its keys with userInfo
             // userInfo.name = newInfo.name;
             // userInfo.avatar = newInfo.avatar;
@@ -115,19 +119,18 @@ export const PATCH = async (request:Request, {params}:any) => {
 
             //Part 11.01 - formData image upload
             //2. the fromData items are fetched differently
-            userInfo.name = newInfo.get("name") as string;
             userInfo.avatar = userAvatar;
-            userInfo.email = newInfo.get("email") as string;
-            userInfo.password = newInfo.get("password") as string;
-            // userInfo.phone = newInfo.get("phone") as number;
-            userInfo.position = newInfo.get("position") as string;
-            // console.log(userInfo);
+            userInfo.name = newInfo.get("name") as string;
+            // userInfo.email = newInfo.get("email") as string;
+            // userInfo.password = newInfo.get("password") as string;
+            userInfo.phone = Number(newInfo.get("phone") as unknown as number);
+            // userInfo.position = newInfo.get("position") as string;
 
-            await userInfo?.save();
-        
-            return new Response(JSON.stringify({userInfo}), {status: 200});
+            await userInfo.save();
 
         }
+
+        return new Response(JSON.stringify({userInfo}), {status: 200});
 
 
 

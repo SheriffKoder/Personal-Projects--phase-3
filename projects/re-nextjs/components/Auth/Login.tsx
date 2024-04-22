@@ -197,6 +197,9 @@ const Login_component = () => {
             //     router.push(`/agents/${agentId}`);
             //         hideLogin();
             //         hideDropDownMenu();
+            // let agentId = (session?.user.id);
+            // router.push(`/agents/${agentId}`);
+
             }
         }
         ////////////////////////////////////////////////////////////////////////////////////
@@ -214,17 +217,18 @@ const Login_component = () => {
     useEffect(() => {
         console.log(session?.user);
         // console.log(session?.user.id);
-        if (session?.user.id && loggedIn === false) {
+        if (session?.user.id && loggedIn === false && !sessionStorage.loggedIn) {
             loggedIn = true;
             let agentId = (session?.user.id);
+            sessionStorage.setItem("loggedIn", "true");
             router.push(`/agents/${agentId}`);
             hideLogin();
             hideDropDownMenu();
         }
         document.getElementById("errorMsgContainer_login")!.style.display="none";
 
-    //   }, [session]);
-    }, []);
+      }, [session]);
+    // }, []);
 
 
         

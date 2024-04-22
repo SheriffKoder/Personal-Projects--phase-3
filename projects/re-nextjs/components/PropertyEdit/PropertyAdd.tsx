@@ -62,7 +62,7 @@ const PropertyAdd_Component = ({propertyEditId, setPropertyEditId, setReload}:{
 
 
     //this state will fill the inputs
-    const [propertyInfo, setPropertyInfo] = useState({
+    const [propertyInfo, setPropertyInfo] = useState<any>({
         country: "",
         city: "",
         district: "",
@@ -88,7 +88,8 @@ const PropertyAdd_Component = ({propertyEditId, setPropertyEditId, setReload}:{
 
     const handleChange: ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement> = ({ target }) => {
         const { name, value } = target;
-        setPropertyInfo({ ...propertyInfo, [name]:value});
+        console.log(typeof(value));
+        setPropertyInfo({ ...propertyInfo, [name]: value});
     }
 
 
@@ -104,6 +105,12 @@ const PropertyAdd_Component = ({propertyEditId, setPropertyEditId, setReload}:{
 
         e.preventDefault();
 
+        // capitalize first letter for incoming string inputs 
+        // to have uniform values for the filter in allProperties page
+        for (const info in propertyInfo ){
+            typeof(propertyInfo[info]) === "string" ? propertyInfo[info] = propertyInfo[info].charAt(0).toUpperCase() + propertyInfo[info].slice(1) : null;
+            console.log(propertyInfo[info]);
+       }
         ////Part 11.01 - formData image upload
         let formData = new FormData();
         //add the form information to formData, getFormData_multiple is local function

@@ -350,7 +350,7 @@ const Home_Main = () => {
                   ))}
 
                 {/* go to the all-posts page button */}
-                <Link href="/news" className="bg-theme-text-brighter dark:bg-theme-text-dark text-white 
+                <Link href="/posts/all" className="bg-theme-text-brighter dark:bg-theme-text-dark text-white 
                 rounded-full py-1.5 px-3 w-[80%] max-w-[200px] text_shadow-3
                 opacity-80 hover:opacity-90 mx-auto mt-auto">
                         Check all news 
@@ -403,7 +403,7 @@ const Home_Main = () => {
               </div>
 
                 {/* go to the all-properties page button */}
-              <Link href="/properties" className="bg-theme-text-brighter dark:bg-theme-text-dark text-white 
+              <Link href="/properties/all" className="bg-theme-text-brighter dark:bg-theme-text-dark text-white 
                     rounded-full py-1.5 px-3 w-[80%] max-w-[200px]
                     opacity-80 hover:opacity-90 mx-auto mt-auto">
                             view all properties 

@@ -29,6 +29,8 @@ export interface PropertyDocument extends Document {
     property_update: string,
     property_userId: PopulatedDoc<Document<Types.ObjectId> & UserDocument>,
     property_description: string,
+    SortDate: Date;
+
   
   }
 
@@ -123,6 +125,10 @@ const propertySchema = new Schema<PropertyDocument, {}, Methods>({
     ref: "User",
     required: false,
   },
+  SortDate: {
+    type: Date,
+    default: Date.now
+},
 
 });
 

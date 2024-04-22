@@ -10,7 +10,12 @@ export const GET = async (request, {params}) => {
         await connectToDB();
 
         const post = await PostModel.findById(params.postId).populate("userId");
-        const posts = await PostModel.find({_id:{$ne:post?._id}}).populate("userId").limit(3);
+
+        //recommended posts
+        const posts = await PostModel.find({_id:{$ne:post?._id}})
+        .sort({SortDate:-1}).populate("userId").limit(3);
+        //sort by reverse after adding SortDate in the products model's schema
+
 
         return new Response(JSON.stringify({post,posts}), {status: 200});
 

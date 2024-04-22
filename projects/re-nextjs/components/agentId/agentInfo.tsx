@@ -134,10 +134,10 @@ const AgentInfo = ({user, setReload}:{
 
   return (
     <>
-
         <form className="w-full flex flex-col md:gap-2 gap-4 justify-center
         items-center max-w-[500px]"
-        onSubmit={handleUserEditSubmit}>
+        onSubmit={handleUserEditSubmit}
+        id="infoForm">
 
             <h2 className="text_shadow-3 font-semibold text-xl  w-full
             text-center md2:text-start mb-2 mt-2 text-[#000000c7] dark:text-[#ffffffe2]">

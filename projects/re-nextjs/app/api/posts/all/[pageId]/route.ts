@@ -18,10 +18,12 @@ export const GET = async (request:NextRequest, {params}:any) => {
     try {
         await connectToDB();
         // console.log(params);
-
+        
+        //sort by reverse after adding SortDate in the products model's schema
         //pagesEnd for the UI to know what "last page" button will be equivalent to
         const pagesEnd = await PostModel.find().countDocuments() / end;                     //page X
-        const posts = await PostModel.find().skip(start).limit(end).populate("userId");     //page X
+        const posts = await PostModel.find()
+        .sort({SortDate:-1}).skip(start).limit(end).populate("userId");                     //page X
         // const properties = await PropertyModel.find().skip(0).limit(3);                  //page 0
         // const properties = await PropertyModel.find().skip(3).limit(3);                  //page 1
         // const properties = await PropertyModel.find().skip(6).limit(3);                  //page 2

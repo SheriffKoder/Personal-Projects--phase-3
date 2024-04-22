@@ -14,6 +14,7 @@ export interface PostDocument extends Document {
     date_add: string,
     date_update: string,
     userId: PopulatedDoc<Document<Types.ObjectId> & UserDocument>,
+    SortDate: Date;
 
   
   }
@@ -46,6 +47,10 @@ const postSchema = new Schema<PostDocument, {}, Methods>({
     ref: "User",
     required: false,
   },
+  SortDate: {
+    type: Date,
+    default: Date.now
+},
 
 });
 

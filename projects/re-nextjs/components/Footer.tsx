@@ -16,19 +16,19 @@ const Footer = () => {
           </li>
 
           <li className="">
-            <Link href="/">
+            <Link href="/about">
               How it Works
             </Link>
           </li>
           
           <li className="">
-            <Link href="/">
+            <Link href="/posts/all">
               Our Blog & News
             </Link>
           </li>
 
           <li className="">
-            <Link href="/">
+            <Link href="/about">
               Help Center
             </Link>
           </li>
@@ -40,19 +40,19 @@ const Footer = () => {
           </li>
 
           <li className="">
-            <Link href="/">
+            <Link href="/about">
               Our Story
             </Link>
           </li>
           
           <li className="">
-            <Link href="/">
+            <Link href="/about">
               Contact Us
             </Link>
           </li>
 
           <li className="">
-            <Link href="/">
+            <Link href="/about">
               Partners & API
             </Link>
           </li>
@@ -64,19 +64,19 @@ const Footer = () => {
           </li>
 
           <li className="">
-            <Link href="/">
+            <Link href="/about">
               Careers
             </Link>
           </li>
           
           <li className="">
-            <Link href="/">
+            <Link href="/about">
               Diversity
             </Link>
           </li>
 
           <li className="">
-            <Link href="/">
+            <Link href="/about">
               Accessibility Statement
             </Link>
           </li>
@@ -98,13 +98,13 @@ const Footer = () => {
 
       <span className="text-sm mt-4 max-w-[80%] text-center">Copyright © 2022-2023 RE Comp, Inc.,  Richard P. company. All rights reserved.</span>
       <span className="text-sm flex flex-row gap-2 text-center">
-        <Link href="/">
+        <Link href="/about">
           Privacy
         </Link>
 
         <span>|</span>
 
-        <Link href="/">
+        <Link href="/about">
           Terms of Service
         </Link>
 

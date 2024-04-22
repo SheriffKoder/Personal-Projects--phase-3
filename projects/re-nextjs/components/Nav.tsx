@@ -185,7 +185,7 @@ const Nav = () => {
                   {/* //02X.07 */}
                   <li className=" py-2 w-full text-center dark:hover:bg-[#ffffff16]  hover:bg-[#dbdee5] rounded-b-[17px] ">
                   <button type="button" className="w-full flex justify-center"
-                  onClick={()=>{signOut({ redirect: false }).then(()=> {router.push("/");})}}
+                  onClick={()=>{signOut({ redirect: false }).then(()=> {sessionStorage.removeItem("loggedIn"); router.push("/");})}}
                   // onClick={()=>signOut()}
 
                   >

@@ -57,7 +57,7 @@ const page = () => {
         listing_type: "",    
     };
 
-    const clearFilter = () => { setSearchInput(emptyProperty);}
+    const clearFilter = () => { setSearchInput(emptyProperty); setPageId(1);}
 
     //Part 11.04 - search
     const [searchInput, setSearchInput] = useState(emptyProperty);

@@ -24,6 +24,8 @@ export interface UserDocument extends Document {
     properties_count: number;
     posts_count: number;
     update: string;
+    SortDate: Date;
+
 }
 
 interface Methods {
@@ -66,6 +68,10 @@ const userSchema = new Schema<UserDocument, {}, Methods>({
         type: Number, 
         required: false,
         default: 0
+    },
+    SortDate: {
+        type: Date,
+        default: Date.now
     },
     // properties: [
     //     {
