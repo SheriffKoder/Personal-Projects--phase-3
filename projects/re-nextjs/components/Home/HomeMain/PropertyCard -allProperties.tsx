@@ -131,15 +131,15 @@ const PropertyCard = ({property1, currentPage}:{property1:PropertyDocument, curr
           border border-[rgba(255,255,255,0.02)]
           dark:opacity-75 dark:hover:opacity-90 opacity-90 hover:opacity-100
           focus:opacity-100 dark:focus:opacity-90
-          ${currentPage === 'AllProperties' ? 'md2:h-[350px] xl:flex-col' : ''}
+          ${currentPage === 'AllProperties' ? 'md2:h-[330px] xl:flex-col' : ''}
 
           `}>
-
+                {/* xl:max-h-[136px] */}
                 {/* the property's image and slider buttons */}
                 <div className={`relative flex flex-row items-center justify-start text-start
                 ${currentPage === 'property' ? '' : 'xl:max-w-[50%]'} 
                 max-h-[23vh] rounded-t-[10px] overflow-hidden md:max-h-[22vw] lg:max-h-[18vw]
-                xl:max-h-[136px]
+                
                 ${currentPage === 'AllProperties' ? 'xl:min-w-full xl:max-h-[100%]' : ''}
 
                 `}>
@@ -171,7 +171,7 @@ const PropertyCard = ({property1, currentPage}:{property1:PropertyDocument, curr
 
                   <Link href={"/properties/single/"+property._id} key={property._id}
                   className="w-full">
-                    <div className="flex flex-col items-start px-2 pt-1 text-sm text-start">
+                    <div className="flex flex-col items-start px-2 pt-1 text-sm text-start xl:pb-1">
                       <div className="dark:text-[#ffffffde] capitalize">{property.property_type} for {property.property_listing_type}</div>
                       {/* <div className="dark:text-[#ffffffde] capitalize">In {property.property_country}, {property.property_city}</div> */}
                       <div className="dark:text-[#ffffffde] capitalize">in {property.property_city}, {property.property_district}</div>

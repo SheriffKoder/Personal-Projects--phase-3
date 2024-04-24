@@ -77,9 +77,9 @@ const page = async () => {
             <div className="dark:text-white text-black text-shadow-3 w-full text-xs flex flex-row gap-1 opacity-70 ml-2">
             
             <Link className=""href="/">Home</Link>
-            #62;
+            &#62;
             <Link className="" href="/properties">Properties</Link>
-            #62;
+            &#62;
             <span className="text-theme-text-brighter capitalize">
                 <span>
                     {property_title.current}
