@@ -10,8 +10,7 @@ export const GET = async () => {
     try {
         await connectToDB();
 
-        const properties = await PropertyModel.find({property_recommended: "Yes"}).limit(4).sort({SortDate:-1}) //sort by reverse after adding SortDate in the products model's schema;
-
+        const properties = await PropertyModel.find({property_recommended: "Yes"}).limit(4);
         return new Response(JSON.stringify(properties), {status: 200});
 
     } catch {

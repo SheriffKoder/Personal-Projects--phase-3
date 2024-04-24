@@ -122,7 +122,7 @@ const PropertyCard = ({property1, currentPage}:{property1:PropertyDocument, curr
     <>
     {property !== null ? (
       <div className={`latest_property bg-[#fffffff3] dark:bg-[rgba(255,255,255,0.03)]
-          flex flex-col 
+          flex flex-col max-w-[350px]
            
           h-auto w-full
           ${currentPage === 'property' ? 'xl:flex-col' : 'xl:flex-row'} 
