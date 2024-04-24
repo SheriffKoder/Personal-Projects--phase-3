@@ -124,7 +124,8 @@ const Home_Rec = () => {
             });
         })
 
-
+        console.log("Rec Properties");
+        console.log(jsonResponseRec);
         setPropertiesRec(jsonResponseRec);
         
 

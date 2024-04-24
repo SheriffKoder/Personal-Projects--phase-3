@@ -218,10 +218,10 @@ const Login_component = () => {
     useEffect(() => {
         console.log(session?.user);
         // console.log(session?.user.id);
-        if (session?.user.id && loggedIn === false && !sessionStorage.loggedIn) {
+        if (session?.user.id && loggedIn === false && !localStorage.loggedIn) {
             loggedIn = true;
             let agentId = (session?.user.id);
-            sessionStorage.setItem("loggedIn", "true");
+            localStorage.setItem("loggedIn", "true");
             router.push(`/agents/${agentId}`);
             hideLogin();
             hideDropDownMenu();
