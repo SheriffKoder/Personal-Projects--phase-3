@@ -121,10 +121,10 @@ export const PATCH = async (request:Request, {params}:any) => {
             //2. the fromData items are fetched differently
             userInfo.avatar = userAvatar;
             userInfo.name = newInfo.get("name") as string;
-            // userInfo.email = newInfo.get("email") as string;
-            // userInfo.password = newInfo.get("password") as string;
+            userInfo.email = newInfo.get("email") as string;
+            userInfo.password = newInfo.get("password") as string;
             userInfo.phone = Number(newInfo.get("phone") as unknown as number);
-            // userInfo.position = newInfo.get("position") as string;
+            userInfo.position = newInfo.get("position") as string;
 
             await userInfo.save();
 

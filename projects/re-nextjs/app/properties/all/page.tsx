@@ -26,6 +26,7 @@ const page = () => {
     const [reload2, setReload2] = useState(false);  //used in the search submit to re-render the ui with new properties or no properties (if not found)
 
     const [filterActive, setFilterActive] = useState(false);
+    const filterUsed = useRef(false);
 
     ///////////////////////////////////////////////////////////////////////////////////////
 
@@ -57,7 +58,8 @@ const page = () => {
         listing_type: "",    
     };
 
-    const clearFilter = () => { setSearchInput(emptyProperty); setPageId(1);}
+    // if we did not apply a filter stay on the same page, if we applied a filter and click clear - clear search inputs, return to page 1 and reset filterUsed value
+    const clearFilter = () => {  console.log(filterUsed); if (filterUsed.current === true) {setSearchInput(emptyProperty); setPageId(1); filterUsed.current = false;}}
 
     //Part 11.04 - search
     const [searchInput, setSearchInput] = useState(emptyProperty);
@@ -90,10 +92,15 @@ const page = () => {
         if (jsonResponse.filteredProperties.length > 0) {
             
             setProperties(jsonResponse.filteredProperties);
+            setPageId(1);
+
         } else {
             setDataCondition("no properties found in this search");
 
         }
+
+        filterUsed.current === false ? filterUsed.current = true : null;
+
         setReload2(false);
     
     
@@ -395,13 +402,15 @@ const page = () => {
             </select>
             ):("")}
 
-
+            {/* type = button to not reload the UI */}
             <button 
+            type="button"
             className="
             dark:bg-text-accent-dark bg-theme-text-brighter opacity-75 text-white
             px-3 py-1 rounded-[12px]
             focus:outline focus:outline-1 outline-[#0000002b] dark:outline-[#ffffff61]"
-            onClick={()=>{clearFilter();}}>
+            onClick={()=>{clearFilter();}}
+            >
                     Clear
             </button>
 

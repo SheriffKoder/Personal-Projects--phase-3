@@ -10,6 +10,7 @@ import { bodyNoScroll } from '@utils/bodyNoScroll';
 
 import { updateUser_lastUpdate } from "@utils/dateGenerate";
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 
 
@@ -21,6 +22,9 @@ const PostsContainer = ({setPostEditId, userAuthority, setReload, reload, userNa
     userName: string,
 
 }) => {
+
+    const router = useRouter();
+
 
     const { data: session, status } = useSession();      //get the session.user
     // const [reload, setReload] = useState(false);
@@ -82,6 +86,7 @@ const PostsContainer = ({setPostEditId, userAuthority, setReload, reload, userNa
             const response = await fetch(`/api/posts/user/${userId}/${pageId}`);
             const jsonResponse = await response.json();
 
+            console.log("jsonResponse");
             console.log(jsonResponse);
             //last page button value, to jump to the last page of results
             endPage.current = jsonResponse.pagesEnd;
@@ -164,14 +169,14 @@ const PostsContainer = ({setPostEditId, userAuthority, setReload, reload, userNa
                         <div className="md2:order-1 px-2 md2:py-2 md2:px-3 md:flex-1 md2:h-full flex flex-col
                         flex-1">
 
-                            <p className="flex flex-row items-baseline font-bold uppercase min-h-[3rem]">
+                            <p className="flex flex-row items-baseline font-bold uppercase min-h-[3rem]" onClick={()=>{router.push(`/posts/${post._id}`);}}>
                                 <span className="inline-block shrink-0 h-3 w-3 bg-red-500 opacity-80 rounded-full mr-4"></span>
                                 <span className="text-start dark:text-[#ffffffde] dot-text line-clamp-2">
                                 {post.title}
                                 </span>
                             </p>
                             
-                            <span className="flex flex-row items-baseline mt-2">
+                            <span className="flex flex-row items-baseline mt-2" onClick={()=>{router.push(`/posts/${post._id}`);}}>
                                 <span className="inline-block  shrink-0 h-3 w-3 bg-green-500 opacity-80 rounded-full mr-4"></span>
                                 <span className="text-start max-h-[4rem] max-w-[900px] text-sm dot-text line-clamp-3">
                                     {post.content}
@@ -179,44 +184,44 @@ const PostsContainer = ({setPostEditId, userAuthority, setReload, reload, userNa
                             </span>
 
                             <div className="flex-1 flex flex-col justify-end mt-auto">
-                            <span className="flex flex-row items-baseline mt-2 md2:flex-1 md2:h-full md2:items-end">
-                                    <span className="inline-block shrink-0 h-3 w-3 bg-[rgba(0,89,255,0.7)] rounded-full mr-4"></span>
-                                        <div className="flex flex-col w-full items-start 
-                                        md2:flex-row md2:justify-start md2:h-full md2:mb-[-0.25rem] md2:items-end md2:gap-2">
-                                            <div className="font-light text-xs w-full flex flex-row text-start
-                                            md2:w-auto md2:gap-1">
-                                                <span className="w-[4rem] md2:w-auto inline-block">Added:</span>
-                                                <span>{post.date_add}</span>
+                                <span className="flex flex-row items-baseline mt-2 md2:flex-1 md2:h-full md2:items-end">
+                                        <span className="inline-block shrink-0 h-3 w-3 bg-[rgba(0,89,255,0.7)] rounded-full mr-4"></span>
+                                            <div className="flex flex-col w-full items-start 
+                                            md2:flex-row md2:justify-start md2:h-full md2:mb-[-0.25rem] md2:items-end md2:gap-2">
+                                                <div className="font-light text-xs w-full flex flex-row text-start
+                                                md2:w-auto md2:gap-1">
+                                                    <span className="w-[4rem] md2:w-auto inline-block">Added:</span>
+                                                    <span>{post.date_add}</span>
+                                                </div>
+                                                <div className="font-light text-xs w-full flex flex-row text-start 
+                                                md2:w-auto md2:gap-1">
+                                                    <span className="w-[4rem] md2:w-auto inline-block">Updated:</span>
+                                                    <span>{post.date_update}</span>
+                                                </div>
                                             </div>
-                                            <div className="font-light text-xs w-full flex flex-row text-start 
-                                            md2:w-auto md2:gap-1">
-                                                <span className="w-[4rem] md2:w-auto inline-block">Updated:</span>
-                                                <span>{post.date_update}</span>
-                                            </div>
-                                        </div>
-                            </span>
+                                </span>
 
-                            <div className="text-sm font-light w-full flex flex-row gap-2
-                            mt-2 mb-1 justify-center
-                            md2:mt-auto md2:justify-end md2:mb-0">
+                                <div className="text-sm font-light w-full flex flex-row gap-2
+                                mt-2 mb-1 justify-center
+                                md2:mt-auto md2:justify-end md2:mb-0">
 
-                                <button type="button"
-                                onClick={() => {bodyNoScroll(); setPostEditId(post._id); showPostAdd();}}
-                                className="bg-theme-text-brighter dark:bg-theme-text-dark text-white 
-                                rounded-full w-[65px]
-                                opacity-40 hover:opacity-90 text-center">
-                                    Edit
-                                </button>
+                                    <button type="button"
+                                    onClick={() => {bodyNoScroll(); setPostEditId(post._id); showPostAdd();}}
+                                    className="bg-theme-text-brighter dark:bg-theme-text-dark text-white 
+                                    rounded-full w-[65px]
+                                    opacity-40 hover:opacity-90 text-center">
+                                        Edit
+                                    </button>
 
-                                <button type="button" 
-                                onClick={()=>{handlePostDelete(post._id);}}                           
-                                className="bg-theme-text-brighter dark:bg-theme-text-dark text-white 
-                                rounded-full w-[65px]
-                                opacity-40 hover:opacity-90 text-center">
-                                    Delete
-                                </button>
+                                    <button type="button" 
+                                    onClick={()=>{handlePostDelete(post._id);}}                           
+                                    className="bg-theme-text-brighter dark:bg-theme-text-dark text-white 
+                                    rounded-full w-[65px]
+                                    opacity-40 hover:opacity-90 text-center">
+                                        Delete
+                                    </button>
 
-                            </div>
+                                </div>
                             </div>
                         
                         </div>

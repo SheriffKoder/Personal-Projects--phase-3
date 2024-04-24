@@ -196,7 +196,7 @@ const SignUp_component = () => {
 useEffect(()=> {
     document.getElementById("errorMsgContainer_signUp")!.style.display="none";
 
-})
+},[]);
 
 
         
@@ -221,7 +221,7 @@ useEffect(()=> {
                 <span id="errorMsgContainer_signUp"
                 className="border-[rgba(255,255,255,0.02)] shadow-lg dark:shadow-inner 
                 absolute z-[2] top-[50%] left-[50%] centered_centered text-theme-text-dark text-xs
-                p-2 dark:bg-[#151515f8] bg-[#fdfdfd] rounded-[7px] hidden flex-col">
+                p-2 dark:bg-[#151515f8] bg-[#fdfdfd] rounded-[7px] flex-col">
                     
                     <span className="dark:text-white  text-black flex flex-row">
                         <span className="mt-auto ml-1 mr-2 opacity-70" id="errorMsg_signUp_title">

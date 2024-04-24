@@ -18,7 +18,7 @@ export const GET = async (request:NextRequest, {params}:any) => {
         await connectToDB();
         // console.log(params);
 
-        const pagesEnd = await PostModel.find({useId: params.userId}).countDocuments() / end;          //page X
+        const pagesEnd = await PostModel.find({userId: params.userId}).countDocuments() / end;          //page X
         const posts = await PostModel.find({userId: params.userId}).sort({SortDate:-1})
         .skip(start).limit(end);
         //sort by reverse after adding SortDate in the products model's schema

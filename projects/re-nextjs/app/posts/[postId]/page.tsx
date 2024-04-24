@@ -9,7 +9,8 @@ import { useEffect, useState } from "react";
 
 //single post page: we render the post info, and side posts
 
-const page = async () => {
+// const page = async () => {   // to use the loading.tsx
+const page = () => {
 
 
     type post_andRecPosts = {
