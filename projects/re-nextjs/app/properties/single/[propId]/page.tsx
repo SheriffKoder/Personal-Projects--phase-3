@@ -77,9 +77,9 @@ const page = async () => {
             <div className="dark:text-white text-black text-shadow-3 w-full text-xs flex flex-row gap-1 opacity-70 ml-2">
             
             <Link className=""href="/">Home</Link>
-            >
+            #62;
             <Link className="" href="/properties">Properties</Link>
-            >
+            #62;
             <span className="text-theme-text-brighter capitalize">
                 <span>
                     {property_title.current}
@@ -220,7 +220,9 @@ const page = async () => {
                                             outline-[#0000000f] hover:outline-[#0000002a]
                                             px-2 py-1 border-0 rounded-[7px] opacity-70 dark:hover:opacity-90 hover:opacity-100
                                             bg-[#279b72] dark:bg-[#32b084] text-white"
-                                            type="button" onClick={()=>handleInquiry(pageProperty.thisProperty)}>
+                                            type="button" onClick={()=>{
+                                                if (pageProperty != null) handleInquiry(pageProperty.thisProperty)
+                                            }}>
                                             
                                             {pageProperty.thisProperty.property_availability === "Yes" ? 
                                             (

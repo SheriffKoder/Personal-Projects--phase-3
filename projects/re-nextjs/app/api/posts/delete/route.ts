@@ -1,10 +1,11 @@
 import { connectToDB } from "@utils/database";
 import PostModel from "@models/postModel";
 import { decreaseUserScore } from "@utils/userScore";
+import { NextRequest } from "next/server";
 
 
 //Part 9.1
-export const DELETE = async (request) => {
+export const DELETE = async (request:NextRequest) => {
     
     try {
 

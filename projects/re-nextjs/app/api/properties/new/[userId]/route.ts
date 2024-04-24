@@ -11,10 +11,11 @@ import { writeFile } from "fs";
 
 //Part 10
 import { increaseUserScore } from "@utils/userScore";
+import { NextRequest } from "next/server";
 
 
 //add a new property
-export const POST = async (request: Request, {params}) => {
+export const POST = async (request:NextRequest, {params}:any) => {
 
         // const body = (await req.json());
 

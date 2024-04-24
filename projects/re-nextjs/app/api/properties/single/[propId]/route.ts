@@ -4,8 +4,9 @@
 //04.03
 import { connectToDB } from "@utils/database";
 import PropertyModel from "@models/propertyModel";
+import { NextRequest } from "next/server";
 
-export const GET = async (request, {params}) => {
+export const GET = async (request:NextRequest, {params}:any) => {
 
     try {
         await connectToDB();

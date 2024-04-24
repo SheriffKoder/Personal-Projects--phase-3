@@ -3,8 +3,9 @@
 
 import { connectToDB } from "@utils/database";
 import PostModel from "@models/postModel";
+import { NextRequest } from "next/server";
 
-export const GET = async (request, {params}) => {
+export const GET = async (request:NextRequest, {params}:any) => {
 
     try {
         await connectToDB();

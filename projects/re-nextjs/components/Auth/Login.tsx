@@ -69,7 +69,8 @@ const Login_component = () => {
         email: "",
         password: ""
     })
-    const inputCheckHandler = ({target}) => {
+
+    const inputCheckHandler : ChangeEventHandler<HTMLInputElement> = ({target}) => {
         // console.log(e.target.value);
         // console.log(target);
         const {name, value} = target;
@@ -80,7 +81,7 @@ const Login_component = () => {
 
         const patterns: {} = {
             // telephone: /^\d{12}$/ ,         // only, country code+10 digits - login
-            // telephoneShort: /^\d{10}$/ ,         // only, 10 digits - signup
+            // telephoneShort: /^\d{10}$/ ,         // only, 10 digits - sign-up
             // password: /^[\w@-]{8,20}$/,     //the pattern is repeated, looking for (a-z A-Z also 0-9 and _)or @ or -
             email: /^([a-zA-Z\d\.-\_]+)@([a-zA-Z\d-]+)\.([a-z]{2,8})\.?([a-z]{2,8})?$/,               //also dots \.
             //        // domain with . - .. @ .. domain .. dot .. com ..  .uk(optional)

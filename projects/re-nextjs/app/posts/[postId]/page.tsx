@@ -73,9 +73,9 @@ const page = () => {
         <div className="dark:text-white text-black text-shadow-3 w-full text-xs flex flex-row gap-1 opacity-70 ml-2">
           
           <Link className=""href="/#home-news">Home</Link>
-          >
+          #62;
           <Link className="" href="/news">News</Link>
-          >
+          #62;
           <span className="text-theme-text-brighter capitalize"><span>{post_andRecPosts.post.title}</span></span>
         </div>
 

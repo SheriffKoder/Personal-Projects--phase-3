@@ -1,9 +1,10 @@
 
 //Part 11.2 - send email with data passed to this api
 
+import { NextRequest } from "next/server";
 import nodemailer from "nodemailer";
 
-export const POST = async (req:Request) => {
+export const POST = async (req:NextRequest) => {
 
     try {
 

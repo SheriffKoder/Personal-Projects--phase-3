@@ -144,7 +144,7 @@ export const PATCH = async (request:Request, {params}:any) => {
 
 
 // if an admin deleted a user
-export const DELETE = async (request, {params}) => {
+export const DELETE = async (request:Request, {params}:any) => {
     
     try {
 

@@ -9,10 +9,11 @@ import { getToday_date } from "@utils/dateGenerate";
 import { join } from "path";
 import { writeFile } from "fs";
 import { increaseUserScore } from "@utils/userScore";
+import { NextRequest } from "next/server";
 
 
 //to fill the "edit post inputs" on edit (yes used the GET to fetch info to be returned to the form element)
-export const GET = async (request, {params}) => {
+export const GET = async (request:NextRequest, {params}:any) => {
 
     try {
         await connectToDB();

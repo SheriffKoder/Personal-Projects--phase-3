@@ -1,12 +1,22 @@
 "use client";
 
-import React from 'react'
+import React, { MutableRefObject } from 'react'
 
 import Image from "next/image";
 import { useState, useEffect, MouseEventHandler } from "react";
 import { useRef } from "react";
 
-const PropertyImage = ({pageProperty, property_title}) => {
+import { PropertyDocument } from "@models/propertyModel";
+
+type pagePropertyType = {
+    thisProperty: PropertyDocument,
+    recProperties: PropertyDocument[]
+}
+
+const PropertyImage = ({pageProperty, property_title}: {
+    pageProperty: pagePropertyType,
+    property_title: MutableRefObject<string>,
+}) => {
 
 
 

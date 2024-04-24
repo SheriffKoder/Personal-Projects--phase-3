@@ -1,9 +1,10 @@
 import { connectToDB } from "@utils/database";
 import UserModel from "@models/userModel";
 import { getToday_date } from "@utils/dateGenerate";
+import { NextRequest } from "next/server";
 
 
-export const PATCH = async (request, {params}) => {
+export const PATCH = async (request:NextRequest, {params}:any) => {
 
 
         try {

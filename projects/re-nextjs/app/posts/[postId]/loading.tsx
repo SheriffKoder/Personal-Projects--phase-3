@@ -3,7 +3,7 @@
 "use client";
 
 import { useEffect } from "react";
-import { bodyNoScroll, bodyScroll } from "@utils/bodyNoScroll";
+// import { bodyNoScroll, bodyScroll } from "@utils/bodyNoScroll";
 
 
 

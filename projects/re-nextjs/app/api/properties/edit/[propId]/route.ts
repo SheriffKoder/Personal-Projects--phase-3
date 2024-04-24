@@ -11,10 +11,11 @@ import { join } from "path";
 import { writeFile } from "fs";
 
 import { decreaseUserScore } from "@utils/userScore";
+import { NextRequest } from "next/server";
 
 
 //to fill the edit property form inputs
-export const GET = async (request, {params}) => {
+export const GET = async (request:NextRequest, {params}:any) => {
 
     try {
         await connectToDB();
@@ -33,7 +34,7 @@ export const GET = async (request, {params}) => {
 
 
 //edit property apply, edit properties image files
-export const PATCH = async (request, {params}) => {
+export const PATCH = async (request:NextRequest, {params}:any) => {
 
     // const propertyInfo = (await request.json());
 
@@ -100,12 +101,12 @@ export const PATCH = async (request, {params}) => {
             currentProperty.property_district = newInfo.get("district") as string;
 
             currentProperty.property_type = newInfo.get("type") as string;
-            currentProperty.property_area = newInfo.get("area");
-            currentProperty.property_beds = newInfo.get("bedrooms");
-            currentProperty.property_baths = newInfo.get("bathrooms");
+            currentProperty.property_area = Number(newInfo.get("area"));
+            currentProperty.property_beds = Number(newInfo.get("bedrooms"));
+            currentProperty.property_baths = Number(newInfo.get("bathrooms"));
 
             currentProperty.property_listing_type = newInfo.get("listing_type") as string;
-            currentProperty.property_price = newInfo.get("price");
+            currentProperty.property_price = Number(newInfo.get("price"));
             currentProperty.property_description =  newInfo.get("description") as string;
 
             //the images paths to be stored as an array to the database
@@ -136,7 +137,7 @@ export const PATCH = async (request, {params}) => {
 
 
 //Part 8
-export const DELETE = async (request, {params}) => {
+export const DELETE = async (request:NextRequest, {params}:any) => {
     
     try {
 

@@ -145,7 +145,7 @@ const page = () => {
             {/* nav links */}
             <div className="dark:text-white text-black text-shadow-3 w-full text-xs flex flex-row gap-1 opacity-70">        
                 <Link className=""href="/">Home</Link>
-                >
+                &#62;
                 <span className="text-theme-text-brighter">
                 { user.authority === "viewer" ? (`${user.userInfo.name}'s profile`) : ("Your Profile")}
                 </span>
