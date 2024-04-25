@@ -17,7 +17,8 @@ const MyLoading2 = ({loadingText}: {loadingText:string}) => {
                             </path> 
                         </svg>
                     </div> */}
-                    <p className="text-white text-[13px] dark:text-[#cc2750d3] text-[#d6003580]">
+                    {/* text-[#d6003580] */}
+                    <p className="text-[#000000b3] text-[13px] dark:text-[#cc2750d3] ">
                         {loadingText}
                     </p>
                 </div>

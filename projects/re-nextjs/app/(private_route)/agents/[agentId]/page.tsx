@@ -30,7 +30,7 @@ import PropertyAdd_Component from "@components/PropertyEdit/PropertyAdd";
 import PropertiesContainer from "@components/agentId/propertiesContainer";
 import PostsContainer from "@components/agentId/postsContainer";
 import MyLoading from "@components/Home/myLoading";
-import MyLoading2 from "@components/Home/HomeMain/myLoading2";
+import MyLoading2 from "@components/Home/myLoading2";
 
 
 

@@ -71,7 +71,7 @@ function MyLoading() {
 
 
   return (
-    <div className="absolute top-0 left-0 w-[100%] min-h-[100vh] dark:bg-[#000000] bg-white
+    <div className="absolute top-0 left-0 w-[100%] min-h-[100vh] dark:bg-[#000000] bg-[#ebeffc]
     flex items-center justify-center flex-col gap-2"
     id="loading_icon__container">
         <div id="loading_icon" className="">

@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { PostDocument } from "@models/postModel";
 import { useEffect, useState } from "react";
-import MyLoading2 from "@components/Home/HomeMain/myLoading2";
+import MyLoading2 from "@components/Home/myLoading2";
 
 
 //single post page: we render the post info, and side posts

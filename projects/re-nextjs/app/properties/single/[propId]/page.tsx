@@ -14,12 +14,7 @@ import { PropertyDocument } from "@models/propertyModel";
 import { useRouter } from "next/navigation";
 import PropertyImage from "@components/propertySingle/propertyImage";
 
-//send the property info to the sessionStorage to be taken in the about-contact page form -- and redirect to there
-const handleInquiry = (property: PropertyDocument) => {
-    sessionStorage.setItem("propertyInquiry", JSON.stringify(property));
-    const router = useRouter();
-    router.push("/about/#contact");
-}
+
 
 type pagePropertyType = {
     thisProperty: PropertyDocument,
@@ -28,6 +23,14 @@ type pagePropertyType = {
 
 //async because we will fetch outside a use effect for the loading.tsx to work
 const page = async () => {
+
+    const router = useRouter();
+
+    //send the property info to the sessionStorage to be taken in the about-contact page form -- and redirect to there
+    const handleInquiry = (property: PropertyDocument) => {
+        sessionStorage.setItem("propertyInquiry", JSON.stringify(property));
+        router.push("/about/#contact");
+    }
 
     const currentPage : string = "property";
 
