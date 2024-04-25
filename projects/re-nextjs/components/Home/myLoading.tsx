@@ -71,8 +71,8 @@ function MyLoading() {
 
 
   return (
-    <div className="absolute top-0 left-0 w-[100%] min-h-[100vh] bg-[#000000]
-    flex items-center justify-center"
+    <div className="absolute top-0 left-0 w-[100%] min-h-[100vh] dark:bg-[#000000] bg-white
+    flex items-center justify-center flex-col gap-2"
     id="loading_icon__container">
         <div id="loading_icon" className="">
         <svg className="bi bi-house" xmlns="http://www.w3.org/2000/svg" 
@@ -85,6 +85,9 @@ function MyLoading() {
                 </path> 
               </svg>
         </div>
+        {/* <p className="text-white text-[13px] dark:text-[#cc2750d3] text-[#d6003580]">
+            Loading...
+        </p> */}
     </div>
   )
 }

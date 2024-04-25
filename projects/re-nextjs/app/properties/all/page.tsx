@@ -237,7 +237,7 @@ const page = () => {
     <div className="dark:text-white text-black text-shadow-3 w-full text-xs flex flex-row gap-1 opacity-70">
         
         <Link className=""href="/">Home</Link>
-        &#62;
+        <span>&#62;</span>
         <span className="text-theme-text-brighter">Properties</span>
     </div>
 
@@ -359,10 +359,10 @@ const page = () => {
             rounded-[12px] dark:bg-[#ffffff11] bg-[#ffffff9b]
             focus:outline focus:outline-1 outline-[#0000002b] dark:outline-[#ffffff61]"
             name="country" value={country} onChange={handleChange}>
-                <option value="" disabled selected>select country</option>
+                <option value="" disabled>select country</option>
                 
-                 {propertiesCountries.current.map((country) => (
-                    <option>{country}</option>
+                 {propertiesCountries.current.map((country,index) => (
+                    <option key={country+" "+index}>{country}</option>
                 ))}
 
 
@@ -378,10 +378,10 @@ const page = () => {
             rounded-[12px] dark:bg-[#ffffff11] bg-[#ffffff9b]
             focus:outline focus:outline-1 outline-[#0000002b] dark:outline-[#ffffff61]"
             name="type" value={type} onChange={handleChange}>
-                <option value="" disabled selected>select type</option>
+                <option value="" disabled>select type</option>
 
-                 {propertiesTypes.current.map((type) => (
-                    <option>{type}</option>
+                 {propertiesTypes.current.map((type, index) => (
+                    <option key={type+" "+index}>{type}</option>
                 ))}
             </select>
             ):("")}
@@ -394,10 +394,10 @@ const page = () => {
             rounded-[12px] dark:bg-[#ffffff11] bg-[#ffffff9b]
             focus:outline focus:outline-1 outline-[#0000002b] dark:outline-[#ffffff61]"
             name="listing_type" value={listing_type} onChange={handleChange}>
-                <option value="" disabled selected>select listing type</option>
+                <option value="" disabled>select listing type</option>
 
-                 {listingTypes.current.map((listing) => (
-                    <option>{listing}</option>
+                 {listingTypes.current.map((listing, index) => (
+                    <option key={listing+" "+index}>{listing}</option>
                 ))}
             </select>
             ):("")}
@@ -438,7 +438,8 @@ const page = () => {
             {properties.length > 0 ? (
             <>
                 {properties.map((property: PropertyDocument) => (
-                <div className="h-auto w-full max-w-[390px] md:w-[calc(50%-16px)] lg:w-[calc(33.3%-16px)]">
+                <div className="h-auto w-full max-w-[390px] md:w-[calc(50%-16px)] lg:w-[calc(33.3%-16px)]"
+                key={property._id}>
                     <PropertyCard property1={property} currentPage="AllProperties" />
                 </div>
                 )

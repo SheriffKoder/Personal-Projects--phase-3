@@ -560,7 +560,7 @@ img {
   opacity: 0;
   animation-name: slide_right__text;
   animation-duration: 1s;
-  animation-delay: 1s;
+  animation-delay: 0.5s;
   animation-timing-function: ease-in;
   animation-fill-mode: forwards;
 

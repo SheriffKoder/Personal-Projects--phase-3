@@ -9,7 +9,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 import AgentCard from "@components/agentId/agentCard";
-import { bodyNoScroll } from "@utils/bodyNoScroll";
+import { bodyNoScroll, bodyScroll } from "@utils/bodyNoScroll";
 import { useEffect, useState } from "react";
 
 
@@ -29,6 +29,8 @@ import PropertyAdd_Component from "@components/PropertyEdit/PropertyAdd";
 //Part 10
 import PropertiesContainer from "@components/agentId/propertiesContainer";
 import PostsContainer from "@components/agentId/postsContainer";
+import MyLoading from "@components/Home/myLoading";
+import MyLoading2 from "@components/Home/HomeMain/myLoading2";
 
 
 
@@ -76,6 +78,7 @@ const page = () => {
 
 
   
+    
 
     useEffect(()=> {
 
@@ -104,21 +107,24 @@ const page = () => {
 
         //reload is set to true after adding/deleting/editing, which will trigger a user re-fetch
         //set to false to be used again
-        setReload(false);
+        if (session?.user) setReload(false);
 
         //call the fetch function above
-        fetchUserInfo();
+        if (session?.user && sessionId) 
+
+        // setTimeout(()=> {
+            fetchUserInfo();
+        // }, 10000);
 
     }, [session, sessionId, reload]);
-
-
-    
-
 
 
 
     return (
 
+        
+        <>
+        { user ? 
         <div className="mt-28 mx-auto w-full max-w-[1230px] flex flex-row items-center
         md2:items-stretch
         flex-wrap gap-8 mb-8 px-4 md2:px-8 relative">    
@@ -145,7 +151,7 @@ const page = () => {
             {/* nav links */}
             <div className="dark:text-white text-black text-shadow-3 w-full text-xs flex flex-row gap-1 opacity-70">        
                 <Link className=""href="/">Home</Link>
-                &#62;
+                <span>&#62;</span>
                 <span className="text-theme-text-brighter">
                 { user.authority === "viewer" ? (`${user.userInfo.name}'s profile`) : ("Your Profile")}
                 </span>
@@ -188,6 +194,7 @@ const page = () => {
                         <Image src={user.userInfo.avatar} height={150} width={150} alt=""
                         className="flex-1 h-full"
                         style={{objectFit:'cover'}}
+                        priority
                         ></Image>
 
                     </div>
@@ -288,7 +295,6 @@ const page = () => {
             as we do not need to show all users on a page viewed as a viewer (other agent's page)*/}
             { (user.userInfo.role === "admin" && user.authority === "owner") ? (
                 <AgentCard userIncoming={user} setUserIncoming={setUser} sessionId={sessionId}/>
-
             ) : ("")}
 
             {/* in case the profile page is not the admin's page and we will not show other agents
@@ -327,6 +333,11 @@ const page = () => {
             ):("")}
 
         </div>
+        
+        :
+            <MyLoading2 loadingText="Loading your information..."/>
+        }
+        </>
         
     )
 }

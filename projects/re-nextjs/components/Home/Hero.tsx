@@ -10,7 +10,7 @@ const Hero = () => {
   return (
 
     <div className="relative flex flex-col items-center">
-        <Image src="/images/furniture.avif" alt="Furniture" fill={true} 
+        <Image src="/images/furniture.avif" alt="Furniture" fill={true} priority
         className="mt-[-10px] hero-brush-mask w-full">
         </Image>
         

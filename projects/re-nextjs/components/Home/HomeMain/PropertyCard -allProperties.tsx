@@ -108,7 +108,6 @@ const PropertyCard = ({property1, currentPage}:{property1:PropertyDocument, curr
           // }
         });
 
-        console.log("filteredImages");
         // console.log(filteredImages);
   
         const tempProperty:PropertyDocument = property1;
@@ -156,7 +155,8 @@ const PropertyCard = ({property1, currentPage}:{property1:PropertyDocument, curr
                     className={`border-0 rounded-t-[10px] min-w-full min-h-[18vw]
                     ${currentPage === 'property' ? '' : 'xl:rounded-l-[10px] xl:rounded-tr-none'}
                     `}
-                    style={{objectFit:'cover'}}>
+                    style={{objectFit:'cover'}}
+                    priority>
                     </Image>
                   </Link>
 

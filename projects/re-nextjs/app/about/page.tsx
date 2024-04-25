@@ -193,7 +193,7 @@ Thanks, \n`
         <div className="dark:text-white text-black text-shadow-3 w-full text-xs flex flex-row gap-1 opacity-70">
             
             <Link className=""href="/">Home</Link>
-            &#62;
+            <span>&#62;</span>
             <span className="text-theme-text-brighter">About & Contact</span>
         </div>
 
@@ -214,7 +214,7 @@ Thanks, \n`
             </p>
           </div>
 
-          <Image src="/images/companyAbout.jpg" alt="text" width={300} height={300}
+          <Image src="/images/companyAbout.jpg" alt="text" width={300} height={300} priority
           className="border-0 rounded-[7px] w-full md2:max-w-[300px]">
           </Image>
 

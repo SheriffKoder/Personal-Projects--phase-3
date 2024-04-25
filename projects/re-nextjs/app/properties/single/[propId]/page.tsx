@@ -14,26 +14,24 @@ import { PropertyDocument } from "@models/propertyModel";
 import { useRouter } from "next/navigation";
 import PropertyImage from "@components/propertySingle/propertyImage";
 
+//send the property info to the sessionStorage to be taken in the about-contact page form -- and redirect to there
+const handleInquiry = (property: PropertyDocument) => {
+    sessionStorage.setItem("propertyInquiry", JSON.stringify(property));
+    const router = useRouter();
+    router.push("/about/#contact");
+}
+
+type pagePropertyType = {
+    thisProperty: PropertyDocument,
+    recProperties: PropertyDocument[]
+}
 
 //async because we will fetch outside a use effect for the loading.tsx to work
 const page = async () => {
 
-    const router = useRouter();
     const currentPage : string = "property";
 
-    let property_title = useRef("");    //the text that will be sent to the sessionStorage to fill the inquiry form in the about-contact page
-
-    type pagePropertyType = {
-        thisProperty: PropertyDocument,
-        recProperties: PropertyDocument[]
-    }
-
-    //send the property info to the sessionStorage to be taken in the about-contact page form -- and redirect to there
-    const handleInquiry = (property: PropertyDocument) => {
-        sessionStorage.setItem("propertyInquiry", JSON.stringify(property))
-        router.push("/about/#contact");
-    }
-
+    let property_title = "";    //the text that will be sent to the sessionStorage to fill the inquiry form in the about-contact page
 
     let pageProperty: pagePropertyType | null = null;
 
@@ -49,7 +47,7 @@ const page = async () => {
         
         if (pageProperty) {
             //set a title for the property manually
-            property_title.current = `${pageProperty.thisProperty.property_type} for ${pageProperty.thisProperty.property_listing_type} in <${pageProperty.thisProperty.property_country} ${pageProperty.thisProperty.property_city} ${pageProperty.thisProperty.property_district} ${pageProperty.thisProperty.property_area}sqm ${pageProperty.thisProperty.property_beds} bedrooms / ${pageProperty.thisProperty.property_baths} bathrooms`;
+            property_title = `${pageProperty.thisProperty.property_type} for ${pageProperty.thisProperty.property_listing_type} in <${pageProperty.thisProperty.property_country} ${pageProperty.thisProperty.property_city} ${pageProperty.thisProperty.property_district} ${pageProperty.thisProperty.property_area}sqm ${pageProperty.thisProperty.property_beds} bedrooms / ${pageProperty.thisProperty.property_baths} bathrooms`;
 
             //Part 11 - filter out empty strings in the images array in the property (i.e not used image slots)
             pageProperty.thisProperty.property_images = pageProperty.thisProperty.property_images
@@ -77,12 +75,12 @@ const page = async () => {
             <div className="dark:text-white text-black text-shadow-3 w-full text-xs flex flex-row gap-1 opacity-70 ml-2">
             
             <Link className=""href="/">Home</Link>
-            &#62;
+            <span>&#62;</span>
             <Link className="" href="/properties">Properties</Link>
-            &#62;
+            <span>&#62;</span>
             <span className="text-theme-text-brighter capitalize">
                 <span>
-                    {property_title.current}
+                    {property_title}
                 </span>
             </span>
             </div>
@@ -108,7 +106,7 @@ const page = async () => {
                         <span className="text-start dark:text-[#ffffffde] text_shadow-3 
                         slide_right__text__animation">
                             <span className="inline-block shrink-0 h-3 w-3 bg-red-500 opacity-80 rounded-full mr-4"></span>
-                            <span>{property_title.current}</span>
+                            <span>{property_title}</span>
                         </span>
                     </h4>
                 </div>        
@@ -296,7 +294,7 @@ const page = async () => {
                                             <div className="flex flex-row flex-wrap gap-4 md2:gap-8 md2:flex-col mt-auto">
                                                 {pageProperty.recProperties.map((property) => (
                                                     
-                                                    <div className="w-[calc(100%*(1/2)-8px)] md:w-[calc(100%*(1/3)-11px)] md2:w-full">
+                                                    <div key={property._id} className="w-[calc(100%*(1/2)-8px)] md:w-[calc(100%*(1/3)-11px)] md2:w-full">
                                                         <PropertyCard property1={property} currentPage="property" />
                                                     </div>
                                                 ))}

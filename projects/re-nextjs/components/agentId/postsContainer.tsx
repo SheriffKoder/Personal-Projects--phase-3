@@ -140,7 +140,7 @@ const PostsContainer = ({setPostEditId, userAuthority, setReload, reload, userNa
             <>
                 {userPosts.map((post) => (
 
-                    <div className="max-w-full 
+                    <div key={post._id} className="max-w-full 
                     bg-[#fffffff0] focus:bg-[#ffffff] hover:bg-[#ffffff] 
                     dark:bg-[#ffffff07] dark:hover:bg-[#ffffff0a] dark:focus:bg-[#ffffff0a]
                     flex flex-col rounded-[17px] box-shadow-1 p-1 border border-[rgba(255,255,255,0.02)]
@@ -161,7 +161,7 @@ const PostsContainer = ({setPostEditId, userAuthority, setReload, reload, userNa
                                 mb-4 md2:mb-0
                                 
                                 "
-                                style={{objectFit:'cover'}}>
+                                style={{objectFit:'cover'}} priority>
                                 </Image>
                             </Link>
                         </div>

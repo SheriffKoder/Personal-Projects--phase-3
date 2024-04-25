@@ -33,8 +33,8 @@ function Loading() {
   return (
     <div className="w-[100vw] h-[100vh] top-0 z-[99]">
 
-    <div className="w-[100%] h-[100vh] bg-[#000000]
-    flex items-center justify-center"
+    <div className="w-[100%] h-[100vh] bg-[#00000000]
+    flex items-center justify-center flex-col gap-2"
     id="loading_icon__container2">
         <div id="loading_icon2" className="">
         <svg className="bi bi-house" xmlns="http://www.w3.org/2000/svg" 
@@ -47,6 +47,9 @@ function Loading() {
                 </path> 
               </svg>
         </div>
+        {/* <p className="text-white text-[13px] dark:text-[#cc2750d3] text-[#d6003580]">
+          Loading property information...
+        </p> */}
     </div>
     </div>
 

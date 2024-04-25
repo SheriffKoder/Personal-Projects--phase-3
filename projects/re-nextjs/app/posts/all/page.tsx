@@ -68,7 +68,7 @@ const page = () => {
         <div className="dark:text-white text-black text-shadow-3 w-full text-xs flex flex-row gap-1 opacity-70">
           
           <Link className=""href="/">Home</Link>
-          &#62;
+          <span>&#62;</span>
           <span className="text-theme-text-brighter">News</span>
         </div>
 
@@ -94,7 +94,7 @@ const page = () => {
                     dark:bg-[#ffffff07] dark:hover:bg-[#ffffff0a] dark:focus:bg-[#ffffff0a]
                     flex flex-col rounded-[17px] box-shadow-1 p-2 border border-[rgba(255,255,255,0.02)]
                     text_shadow-2 lg:flex lg:flex-row lg:max-w-full h-[115vw] max-h-[750px] lg:h-[25vh]
-                    ">
+                    " key={post._id}>
 
                       <Link href={"/posts/"+post._id} key={post._id} className="lg:order-2  overflow-hidden
                       lg:h-full lg:w-[30%] h-[50vw] md2:h-[50vw]">
@@ -105,7 +105,7 @@ const page = () => {
                           
                           "
                           style={{objectFit:'cover'}}
-                          >
+                          priority>
                           </Image>
                       </Link>
                       

@@ -393,7 +393,7 @@ const Home_Main = () => {
               <div className="flex flex-row gap-6 my-6 flex-wrap justify-center lg:justify-start mx-auto">
 
               {properties_andPosts.properties.map((property: PropertyDocument) => (
-                <div className="
+                <div key={property._id} className="
                 
                 h-auto xl:w-[48%] md:w-[46%] lg:w-[47%] w-[100%] max-w-[390px] xl:max-w-[900px]">
                   <PropertyCard property1={property} currentPage="home"/>

@@ -268,7 +268,8 @@ const PropertyCardAdmin = ({setPropertyEditId, property1, currentPage="", setRel
                     ${currentPage === 'property' ? '' : 'xl:rounded-l-[10px] xl:rounded-tr-none'}
                     
                     `}
-                    style={{objectFit:'cover'}}>
+                    style={{objectFit:'cover'}}
+                    priority>
                     </Image>
                   </Link>
 

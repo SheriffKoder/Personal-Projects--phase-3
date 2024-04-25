@@ -167,7 +167,7 @@ const PropertyCard = ({property1, currentPage}:{property1:PropertyDocument, curr
           // }
         });
 
-        console.log("filteredImages");
+        // console.log("filteredImages");
         // console.log(filteredImages);
   
         const tempProperty:PropertyDocument = property1;

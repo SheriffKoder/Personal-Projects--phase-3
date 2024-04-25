@@ -101,7 +101,7 @@ const AgentCard = ({userIncoming, setUserIncoming, sessionId}:{
             {user.allAgents.map((agent: UserDocument) => (
             // <div className="h-auto w-full max-w-[390px] md:w-[calc(50%-16px)] md2:w-[calc(33.3%-16px)] ">
                 
-                <div className="bg-white rounded-[17px]
+                <div key={agent._id} className="bg-white rounded-[17px]
                 glass-container-background-2
                 border backdrop-blur-10 pt-4 pb-4 px-4
                 dark:bg-[#68585806] dark:border-[#ffffff05]
@@ -123,6 +123,7 @@ const AgentCard = ({userIncoming, setUserIncoming, sessionId}:{
                         <Image src={agent.avatar} height={150} width={150} alt=""
                         className="flex-1 h-full "
                         style={{objectFit:'cover'}}
+                        priority
                         ></Image>
 
                     </div>

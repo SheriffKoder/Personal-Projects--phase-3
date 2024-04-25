@@ -15,7 +15,8 @@ type pagePropertyType = {
 
 const PropertyImage = ({pageProperty, property_title}: {
     pageProperty: pagePropertyType,
-    property_title: MutableRefObject<string>,
+    // property_title: MutableRefObject<string>, //then use property_title.current in the jsx below
+    property_title: string,
 }) => {
 
 
@@ -105,12 +106,12 @@ const PropertyImage = ({pageProperty, property_title}: {
                                     </button>
 
 
-                                    <Image src={pageProperty.thisProperty.property_images[imageReference]} height={600} width={600} alt={property_title.current}
+                                    <Image src={pageProperty.thisProperty.property_images[imageReference]} height={600} width={600} alt={property_title}
                                     id={pageProperty.thisProperty._id.toString()}
                                     className="border-0
                                     rounded-[10px] w-full h-[calc(45vw-0.25rem)] max-h-[100%]"
                                     style={{objectFit:'cover'}}
-                                    >
+                                    priority>
                                     </Image>
 
                                     {/* right button */}
@@ -138,19 +139,19 @@ const PropertyImage = ({pageProperty, property_title}: {
                             text_shadow-2 max-w-[100%]  mt-[-1rem] mb-[0rem] md2:mt-[-0.5rem] md2:mb-[1rem]
                             ">
                                 <div className="flex flex-row gap-4 w-full items-center">
-                                    {pageProperty.thisProperty.property_images.map((image:string) => {
+                                    {pageProperty.thisProperty.property_images.map((image:string, index) => {
                                                 
                                         const thisImageReference = pageProperty!.thisProperty.property_images.findIndex(i => i === image);
 
                                         return (
-                                        <button 
+                                        <button type="button" key={pageProperty.thisProperty._id+" thumbnail image #"+index}
                                         className="border-0
                                         rounded-[7px] max-w-[50px] w-[10%]
                                         h-[99%]"
                                         onClick={()=>{animationCombination2(document.getElementById(pageProperty!.thisProperty._id.toString()), thisImageReference, pageProperty!.thisProperty.property_images.length); }}>
 
                                             {/* if the current image index is the same as imageReference value, darken */}
-                                            <Image src={image} height={300} width={300} alt={property_title.current}
+                                            <Image src={image} height={300} width={300} alt={property_title}
                                             style={{objectFit:'cover'}}
                                             className={`${(thisImageReference === imageReference? "brightness-50" : "")} 
                                             border-0 rounded-[7px] max-w-[50px] w-full h-[40px]`}
