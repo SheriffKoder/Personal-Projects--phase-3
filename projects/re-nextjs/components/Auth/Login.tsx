@@ -133,6 +133,8 @@ const Login_component = () => {
             if(errorText.innerHTML !== "") {
                 //show the input jsx container
                 document.getElementById("errorMsgContainer_login")!.style.display="flex";
+            } else {
+                document.getElementById("errorMsgContainer_login")!.style.display="none";
             }
         }
 
@@ -304,7 +306,8 @@ const Login_component = () => {
                         ">
                             <span className="min-w-[7rem] px-2 py-1 text_shadow-2 opacity-80 dark:opacity-90">E-Mail</span>
                             <input className="w-full input_field border-0 rounded-r-[6px] 
-                                dark:bg-[#ffffff09] dark:focus:bg-[#ffffff02]  px-2 
+                                dark:bg-[#ffffff09] dark:focus:bg-[#ffffff02]  px-2
+                                bg-[#ffff] focus:bg-[#ebeffc]
                                 border-[rgba(255,255,255,0.02)]" type="email"
                             name="email" value={email} onChange={handleChange} onBlur={inputCheckHandler}
                             />
@@ -320,6 +323,7 @@ const Login_component = () => {
                             <span className="min-w-[7rem] px-2 py-1 text_shadow-2 opacity-80 dark:opacity-90">password</span>
                             <input className="w-full input_field border-0 rounded-r-[6px] 
                                 dark:bg-[#ffffff09] dark:focus:bg-[#ffffff02]  px-2 
+                                bg-[#ffff] focus:bg-[#ebeffc]
                                 border-[rgba(255,255,255,0.02)]" type="password"
                                 name="password" value={password} onChange={handleChange} onBlur={inputCheckHandler}
                             />

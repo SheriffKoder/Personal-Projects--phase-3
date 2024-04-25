@@ -284,6 +284,7 @@ const PropertyAdd_Component = ({propertyEditId, setPropertyEditId, setReload}:{
 
                                 <input className="w-full input_field border-0 rounded-r-[6px] 
                                     dark:bg-[#ffffff09] dark:focus:bg-[#ffffff02]  px-2 
+                                    bg-[#ffff] focus:bg-[#ebeffc]
                                     border-[rgba(255,255,255,0.02)]" type="text" required
                                     // value={post.country}
                                     name="country" value={country} onChange={handleChange}
@@ -302,6 +303,7 @@ const PropertyAdd_Component = ({propertyEditId, setPropertyEditId, setReload}:{
 
                                 <input className="w-full input_field border-0 rounded-r-[6px] 
                                     dark:bg-[#ffffff09] dark:focus:bg-[#ffffff02]  px-2 
+                                    bg-[#ffff] focus:bg-[#ebeffc]
                                     border-[rgba(255,255,255,0.02)]" type="text" 
                                     // value={post.city}
                                     // onChange={(e) => {setPost({...post, city: e.target.value})}}
@@ -320,8 +322,8 @@ const PropertyAdd_Component = ({propertyEditId, setPropertyEditId, setReload}:{
                                 </span>
 
                                 <input className="w-full input_field border-0 rounded-r-[6px] 
-                                    dark:bg-[#ffffff09] dark:focus:bg-[#ffffff02]  px-2 
-                                    border-[rgba(255,255,255,0.02)]" type="text" required
+dark:bg-[#ffffff09] dark:focus:bg-[#ffffff02]  px-2 
+                                    bg-[#ffff] focus:bg-[#ebeffc]                                    border-[rgba(255,255,255,0.02)]" type="text" required
                                     // value={post.district}
                                     // onChange={(e) => {setPost({...post, district: e.target.value})}}
                                     name="district" value={district} onChange={handleChange} />
@@ -341,6 +343,7 @@ const PropertyAdd_Component = ({propertyEditId, setPropertyEditId, setReload}:{
 
                                 <input className="w-full input_field border-0 rounded-r-[6px] 
                                     dark:bg-[#ffffff09] dark:focus:bg-[#ffffff02]  px-2 
+                                    bg-[#ffff] focus:bg-[#ebeffc]
                                     border-[rgba(255,255,255,0.02)]" type="text" required
                                     placeholder="apartment, villa, office etc."
                                     // value={post.type}
@@ -362,6 +365,7 @@ const PropertyAdd_Component = ({propertyEditId, setPropertyEditId, setReload}:{
 
                                 <input className="w-full input_field border-0 rounded-r-[6px] 
                                     dark:bg-[#ffffff09] dark:focus:bg-[#ffffff02]  px-2 
+                                    bg-[#ffff] focus:bg-[#ebeffc]
                                     border-[rgba(255,255,255,0.02)]" type="number" required
                                     placeholder="in sqm" 
                                     // value={post.area}
@@ -383,8 +387,9 @@ const PropertyAdd_Component = ({propertyEditId, setPropertyEditId, setReload}:{
                                     </span>
 
                                     <input className="w-full input_field border-0 rounded-r-[6px] 
-                                        dark:bg-[#ffffff09] dark:focus:bg-[#ffffff02]  px-2 
-                                        border-[rgba(255,255,255,0.02)]" type="number" required
+                                    dark:bg-[#ffffff09] dark:focus:bg-[#ffffff02]  px-2 
+                                    bg-[#ffff] focus:bg-[#ebeffc]
+                                    border-[rgba(255,255,255,0.02)]" type="number" required
                                         min={1} max={10} 
                                         // value={post.bedrooms}
                                         // onChange={(e) => {setPost({...post, bedrooms: e.target.value})}}
@@ -403,6 +408,7 @@ const PropertyAdd_Component = ({propertyEditId, setPropertyEditId, setReload}:{
 
                                 <input className="w-full input_field border-0 rounded-r-[6px] 
                                     dark:bg-[#ffffff09] dark:focus:bg-[#ffffff02]  px-2 
+                                    bg-[#ffff] focus:bg-[#ebeffc]
                                     border-[rgba(255,255,255,0.02)]" type="number" required
                                     min={1} max={10} 
                                     // value={post.bathrooms}
@@ -426,6 +432,7 @@ const PropertyAdd_Component = ({propertyEditId, setPropertyEditId, setReload}:{
 
                                 <input className="w-full input_field border-0 rounded-r-[6px] 
                                     dark:bg-[#ffffff09] dark:focus:bg-[#ffffff02]  px-2 
+                                    bg-[#ffff] focus:bg-[#ebeffc]
                                     border-[rgba(255,255,255,0.02)]" type="text" required
                                     placeholder="rent, sale, etc." 
                                     // value={post.listing_type}
@@ -445,8 +452,8 @@ const PropertyAdd_Component = ({propertyEditId, setPropertyEditId, setReload}:{
                                 </span>
 
                                 <input className="w-full input_field border-0 rounded-r-[6px] 
-                                    dark:bg-[#ffffff09] dark:focus:bg-[#ffffff02]  px-2 
-                                    border-[rgba(255,255,255,0.02)]" type="number" required
+dark:bg-[#ffffff09] dark:focus:bg-[#ffffff02]  px-2 
+                                    bg-[#ffff] focus:bg-[#ebeffc]                                    border-[rgba(255,255,255,0.02)]" type="number" required
                                     placeholder="" 
                                     // value={post.price}
                                     // onChange={(e) => {setPost({...post, price: e.target.value})}}
