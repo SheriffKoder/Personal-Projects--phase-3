@@ -156,7 +156,8 @@ const showEmailConfirm = () => {
               Send me a message
             </h1>
 
-            <div className="glass_background py-4 px-8 rounded-[10px]"
+            <div className="glass_background py-4 px-8 rounded-[10px]
+            w-[calc(100vw-12vw)] max-w-[300px] lg:max-w-[450px]"
             id="contact__form__container">
               <form className="flex flex-col gap-4 text-xs md2:text-base" onSubmit={handleSubmit}
               id="contact__form">

@@ -97,7 +97,7 @@ const page = () => {
                       <span className="w-[60%] h-[1px] bg-white opacity-60 "/>
 
                       <p className=" text-[0.6rem] opacity-40 mt-[0.25rem] mb-[2rem]">
-                        {projectCategory.description}
+                        {projectCategory.description}{projectCategory.projects.length > 1 ? `, displaying ${projectCategory.projects.length} projects` : projectCategory.projects.length > 0 ? `, displaying ${projectCategory.projects.length} project` : null}
                       </p>
 
                       {/* project cards container for the current category */}
@@ -265,7 +265,8 @@ const page = () => {
 
                           <div className="flex flex-row justify-center items-center gap-2">
                           {
-                            Array.from(Array(Math.round(projectCategory.projects.length/pageLimit))).map((x, index2)=> (
+                            // not display page 1 if the quantity of projects available will fit only in page 1 i.e there is no page 2, else display
+                            projectCategory.projects.length > pageLimit && Array.from(Array(Math.round(projectCategory.projects.length/pageLimit))).map((x, index2)=> (
                               <button 
                               className={`h-6 w-6 gradientBGButton rounded-[5px] text-sm
                               ${practicePage[index] === index2 *2 ? "border" : null}`}

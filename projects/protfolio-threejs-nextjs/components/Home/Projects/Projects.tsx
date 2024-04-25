@@ -78,8 +78,6 @@ const Projects = () => {
       }
     },[isInView]);
 
-
-
     // trigger a fade css animation on project change on the project contents jsx element 
     const changeProject = (index:number) => {
 
@@ -124,9 +122,10 @@ const Projects = () => {
             {
             projects.map((project, index) => (
                 <div className={`
-                ${projects[currentProject].name == project.name ? "neon_button_selected" : "neon_button_notselected"} 
-                h-[min(15vw,75px)] 
+                ${projects[currentProject].name == project.name ? "neon_button_selected" : "neon_button_notselected"}
+                h-[min(15vw,75px)]
                 w-[min(15vw,75px)] 
+                ${project.star === true ? "relative" : null}  
                 rounded-[min(2vw,10px)]
                 cursor-pointer`}
               style={{
@@ -135,6 +134,17 @@ const Projects = () => {
               }}
               key={project.name+"icon"}
               onClick={()=>{changeProject(index); }}>
+
+                {project.star === true && 
+                <span className="
+                text-[calc(min(15vw,75px)/2.7)] h-[calc(min(15vw,75px)/2.7)] w-[calc(min(15vw,75px)/2.7)]
+                absolute top-[calc(-35%/2)]  right-[calc(-35%/2)] flex items-center justify-center
+                font-bold opacity-90
+                ">
+                <span className="starProj">&#x2605;</span>
+                </span>
+                }
+
               </div>
               ))
             }

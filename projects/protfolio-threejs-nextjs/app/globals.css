@@ -573,32 +573,69 @@ background: -webkit-linear-gradient(
 
 /* styling for the project icons, in case activated/selected have a neon border */
 :root {
-  --clr-neon: #387ca4;
-  --clr-bg: #6f777c;
+  --clr-neon: #4eb3ee;
+  --clr-bg: #5862697e;
 }
 
 .neon_button_selected {
-  border: var(--clr-neon) 0.125em solid;
+  border: var(--clr-neon) 0.2em solid;
   
   box-shadow: 
   inset 0 0 0.5em 0 var(--clr-neon), 
-  0 0 1em var(--clr-neon);
+  0 0 0.85em var(--clr-neon);
   
   position: relative;
   transition: background-color 100ms linear;
+}
+
+.starProj {
+  transform: rotate(12deg);
+  filter: grayscale(100%);
+  color: rgb(249, 225, 46);
+
+}
+
+.neon_button_notselected .starProj {
+  animation: 0.5s linear forwards rotStar2;
+}
+
+.neon_button_selected .starProj {
+  animation: 0.5s linear forwards rotStar;
+}
+
+@keyframes rotStar {
+  from {
+    transform: rotate(12deg);
+    filter: grayscale(100%);
+  }
+  to {
+    transform: rotate(65deg) translateY(1px);
+    filter: grayscale(0%);
+  }
+}
+
+@keyframes rotStar2 {
+
+  from {
+    transform: rotate(65deg);
+    filter: grayscale(0%);
+  }
+  to {
+    transform: rotate(12deg);
+    filter: grayscale(100%);
+  }
 }
 
 .neon_button_notselected {
-  border: var(--clr-bg) 0.125em solid;
+  border: var(--clr-bg) 0.2em solid;
   
   box-shadow: 
-  inset 0 0 0.25em 0 var(--clr-bg), 
-  0 0 0.25em var(--clr-bg);
+  inset 0 0 0.15em 0 var(--clr-bg), 
+  0 0 0.35em var(--clr-bg);
   
   position: relative;
   transition: background-color 100ms linear;
 }
-
 
 
 /* ////////////////////////////////////////////////////////////////////////////// */
@@ -828,7 +865,7 @@ and turn it to a transparent icon image with a gray semi transparent background 
 /* to apply a blue link text to elements containing a <a> tag 
 used in the single project page project's description text */
 .blueLink2 a {
-  @apply text-blue-600 cursor-pointer underline
+  @apply text-blue-500 cursor-pointer underline
 }
 
 #project_description h2 {

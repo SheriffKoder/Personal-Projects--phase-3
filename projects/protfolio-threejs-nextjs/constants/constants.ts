@@ -499,7 +499,7 @@ import {
 
 
   export const featuredProjects = [
-    PracticeProjects[0], PracticeProjects[1], PracticeProjects[2], PracticeProjects[3], 
+    {...PracticeProjects[0], star: false}, {...PracticeProjects[1], star: true}, {...PracticeProjects[2], star: false}, {...PracticeProjects[3], star: false}
   ]
 
 
