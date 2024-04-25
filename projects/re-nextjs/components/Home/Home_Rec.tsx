@@ -9,6 +9,8 @@ import { useEffect, useRef, useState } from "react";
 
 
 import { PropertyDocument } from "@models/propertyModel";
+import Link from "next/link";
+
 
 const Home_Rec = () => {
 
@@ -170,11 +172,12 @@ const Home_Rec = () => {
 
             {/* maintain 16:9 aspect ratio */}
             {/* the image and the property summarized info */}
-            <div className="rounded-[17px] border-0
+            <Link className="rounded-[17px] border-0
             w-full h-[calc(50vw)] max-h-[500px] max-w-[833px]
             relative 
             "
-            id="slider__container">
+            id="slider__container"
+            href={`/properties/single/${propertiesRec[sliderIndex]._id}`}>
 
                 {/* image */}
                 <Image src={propertiesRec[sliderIndex].property_images[0]} fill={true} alt={propertiesRec[sliderIndex].property_city}
@@ -191,7 +194,7 @@ const Home_Rec = () => {
                     <div>{propertiesRec[sliderIndex].property_area}m<sup>2</sup>, {propertiesRec[sliderIndex].property_beds} beds, {propertiesRec[sliderIndex].property_baths} baths </div>
                 </div>
 
-            </div>
+            </Link>
 
             <button 
                 onClick={()=>{setPrevFade(fade); setFade(fade+1);}}

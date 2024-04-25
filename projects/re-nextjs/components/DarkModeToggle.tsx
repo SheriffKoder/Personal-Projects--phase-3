@@ -4,7 +4,7 @@
 import { scrollScroll } from "@utils/bodyNoScroll";
 import { useState, useEffect } from "react";
 
-//the dark toggle icons, sessionStorage set on click/initial render/, icon management
+//the dark toggle icons, localStorage set on click/initial render/, icon management
 
 
 const DarkModeToggle = () => {
@@ -17,11 +17,11 @@ const DarkModeToggle = () => {
         const toggleSp = document.querySelector("#mySpan");
 
 
-        if (sessionStorage.theme === "light") {
+        if (localStorage.theme === "light") {
 
             setTheme("dark");
 
-        } else if (sessionStorage.theme === "dark") {
+        } else if (localStorage.theme === "dark") {
 
             setTheme("light");
         }
@@ -65,7 +65,7 @@ const DarkModeToggle = () => {
 
         }
 
-        sessionStorage.setItem("theme", theme);
+        localStorage.setItem("theme", theme);
 
         //move the icon left or right depending on the themes from/to
         window.document.documentElement.classList.remove(nextTheme);
@@ -87,27 +87,27 @@ const DarkModeToggle = () => {
 
         //not need to cause a re-render
         //on initial render set to light
-        // sessionStorage.setItem("theme", "light");
+        // localStorage.setItem("theme", "light");
 
         //use the correct theme from the start of page view
         //based on the inserted theme in jsx or the present session variable to avoid any starting bugs
-        if (sessionStorage.theme === "light" || sessionStorage.theme === "dark") {
-            window.document.documentElement.classList.add(sessionStorage.theme);
+        if (localStorage.theme === "light" || localStorage.theme === "dark") {
+            window.document.documentElement.classList.add(localStorage.theme);
         } 
-        else if (sessionStorage.theme ==  undefined && window.document.documentElement.classList.contains("dark")) {
-            sessionStorage.theme = "dark";
+        else if (localStorage.theme ==  undefined && window.document.documentElement.classList.contains("dark")) {
+            localStorage.theme = "dark";
             console.log("undefined theme");
-        } else if (sessionStorage.theme ==  undefined && window.document.documentElement.classList.contains("light")) {
-            sessionStorage.theme = "light";
+        } else if (localStorage.theme ==  undefined && window.document.documentElement.classList.contains("light")) {
+            localStorage.theme = "light";
             console.log("undefined theme");
 
         } else {
-            sessionStorage.theme = "light";
-            window.document.documentElement.classList.add(sessionStorage.theme);
+            localStorage.theme = "light";
+            window.document.documentElement.classList.add(localStorage.theme);
 
         }
 
-        setTheme(sessionStorage.theme);
+        setTheme(localStorage.theme);
     });
 
     return (

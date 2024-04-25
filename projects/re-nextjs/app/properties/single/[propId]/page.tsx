@@ -47,15 +47,19 @@ const page = async () => {
         
         if (pageProperty) {
             //set a title for the property manually
-            property_title = `${pageProperty.thisProperty.property_type} for ${pageProperty.thisProperty.property_listing_type} in <${pageProperty.thisProperty.property_country} ${pageProperty.thisProperty.property_city} ${pageProperty.thisProperty.property_district} ${pageProperty.thisProperty.property_area}sqm ${pageProperty.thisProperty.property_beds} bedrooms / ${pageProperty.thisProperty.property_baths} bathrooms`;
+            //check for the thisProperty key because nextJs gives an error .thisProperty does not exist
+            if (pageProperty.hasOwnProperty("thisProperty")) {
 
-            //Part 11 - filter out empty strings in the images array in the property (i.e not used image slots)
-            pageProperty.thisProperty.property_images = pageProperty.thisProperty.property_images
-            .filter((image: string) => {
-                if (image !== "") {
-                    return image;
-                }
-            });
+                property_title = `${pageProperty.thisProperty.property_type} for ${pageProperty.thisProperty.property_listing_type} in <${pageProperty.thisProperty.property_country} ${pageProperty.thisProperty.property_city} ${pageProperty.thisProperty.property_district} ${pageProperty.thisProperty.property_area}sqm ${pageProperty.thisProperty.property_beds} bedrooms / ${pageProperty.thisProperty.property_baths} bathrooms`;
+
+                //Part 11 - filter out empty strings in the images array in the property (i.e not used image slots)
+                pageProperty.thisProperty.property_images = pageProperty.thisProperty.property_images
+                .filter((image: string) => {
+                    if (image !== "") {
+                        return image;
+                    }
+                });
+            }
         }
     }
 
@@ -75,9 +79,9 @@ const page = async () => {
             <div className="dark:text-white text-black text-shadow-3 w-full text-xs flex flex-row gap-1 opacity-70 ml-2">
             
             <Link className=""href="/">Home</Link>
-            <span>&#62;</span>
+            &#62;
             <Link className="" href="/properties">Properties</Link>
-            <span>&#62;</span>
+            &#62;
             <span className="text-theme-text-brighter capitalize">
                 <span>
                     {property_title}

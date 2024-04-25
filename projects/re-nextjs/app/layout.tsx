@@ -21,6 +21,9 @@ export const metadata = {
   description: 'Search for your next home',
 }
 
+//for favicons just put icon.ico in the /app directory
+
+
 const RootLayout = ({ children }: { children: React.ReactNode}) => {
   
 
@@ -29,6 +32,7 @@ const RootLayout = ({ children }: { children: React.ReactNode}) => {
     <AuthProvider>
 
     <html className="relative" lang="en">
+
       {/* <body className="antialiased text-slate-500 dark:text-slate-400 bg-white dark:bg-slate-900"> */}
       <body className="w-full flex justify-center relative h-auto ">
 
