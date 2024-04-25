@@ -372,7 +372,7 @@ const PostAdd_Component = ({postEditId, setPostEditId, setReload}:{
 
                     <input className="w-full input_field border-0 rounded-r-[6px] 
                         dark:bg-[#ffffff09] dark:focus:bg-[#ffffff02]  px-2
-                        bg-[#ffff] focus:bg-[#ebeffc]
+                        bg-[#ffff] focus:bg-[#ebeffc]  text-[#000000b3] dark:text-white
                         border-[rgba(255,255,255,0.02)]" type="text" required
                         // value={post.country}
                         name="title" value={title} onChange={handleChange} onBlur={inputCheckHandler}
@@ -435,7 +435,7 @@ const PostAdd_Component = ({postEditId, setPostEditId, setReload}:{
                     <span>More details</span>
                     <textarea className="w-[100%] label_field px-4 py-2
                     dark:bg-[#ffffff07] rounded-[7px] border-2 border-[#ffffff02]
-                    bg-[#ffff] focus:bg-[#ebeffc]
+                    bg-[#ffff] focus:bg-[#ebeffc]  text-[#000000b3] dark:text-white
                     resize-none"
                     rows={6} placeholder="describe your property"
                     // value={post.description}

@@ -284,7 +284,7 @@ const PropertyAdd_Component = ({propertyEditId, setPropertyEditId, setReload}:{
 
                                 <input className="w-full input_field border-0 rounded-r-[6px] 
                                     dark:bg-[#ffffff09] dark:focus:bg-[#ffffff02]  px-2 
-                                    bg-[#ffff] focus:bg-[#ebeffc]
+                                    bg-[#ffff] focus:bg-[#ebeffc]  text-[#000000b3] dark:text-white
                                     border-[rgba(255,255,255,0.02)]" type="text" required
                                     // value={post.country}
                                     name="country" value={country} onChange={handleChange}
@@ -303,7 +303,7 @@ const PropertyAdd_Component = ({propertyEditId, setPropertyEditId, setReload}:{
 
                                 <input className="w-full input_field border-0 rounded-r-[6px] 
                                     dark:bg-[#ffffff09] dark:focus:bg-[#ffffff02]  px-2 
-                                    bg-[#ffff] focus:bg-[#ebeffc]
+                                    bg-[#ffff] focus:bg-[#ebeffc]  text-[#000000b3] dark:text-white
                                     border-[rgba(255,255,255,0.02)]" type="text" 
                                     // value={post.city}
                                     // onChange={(e) => {setPost({...post, city: e.target.value})}}
@@ -323,7 +323,7 @@ const PropertyAdd_Component = ({propertyEditId, setPropertyEditId, setReload}:{
 
                                 <input className="w-full input_field border-0 rounded-r-[6px] 
 dark:bg-[#ffffff09] dark:focus:bg-[#ffffff02]  px-2 
-                                    bg-[#ffff] focus:bg-[#ebeffc]                                    border-[rgba(255,255,255,0.02)]" type="text" required
+                                    bg-[#ffff] focus:bg-[#ebeffc]  text-[#000000b3] dark:text-white                                    border-[rgba(255,255,255,0.02)]" type="text" required
                                     // value={post.district}
                                     // onChange={(e) => {setPost({...post, district: e.target.value})}}
                                     name="district" value={district} onChange={handleChange} />
@@ -343,7 +343,7 @@ dark:bg-[#ffffff09] dark:focus:bg-[#ffffff02]  px-2
 
                                 <input className="w-full input_field border-0 rounded-r-[6px] 
                                     dark:bg-[#ffffff09] dark:focus:bg-[#ffffff02]  px-2 
-                                    bg-[#ffff] focus:bg-[#ebeffc]
+                                    bg-[#ffff] focus:bg-[#ebeffc]  text-[#000000b3] dark:text-white
                                     border-[rgba(255,255,255,0.02)]" type="text" required
                                     placeholder="apartment, villa, office etc."
                                     // value={post.type}
@@ -365,7 +365,7 @@ dark:bg-[#ffffff09] dark:focus:bg-[#ffffff02]  px-2
 
                                 <input className="w-full input_field border-0 rounded-r-[6px] 
                                     dark:bg-[#ffffff09] dark:focus:bg-[#ffffff02]  px-2 
-                                    bg-[#ffff] focus:bg-[#ebeffc]
+                                    bg-[#ffff] focus:bg-[#ebeffc]  text-[#000000b3] dark:text-white
                                     border-[rgba(255,255,255,0.02)]" type="number" required
                                     placeholder="in sqm" 
                                     // value={post.area}
@@ -388,7 +388,7 @@ dark:bg-[#ffffff09] dark:focus:bg-[#ffffff02]  px-2
 
                                     <input className="w-full input_field border-0 rounded-r-[6px] 
                                     dark:bg-[#ffffff09] dark:focus:bg-[#ffffff02]  px-2 
-                                    bg-[#ffff] focus:bg-[#ebeffc]
+                                    bg-[#ffff] focus:bg-[#ebeffc]  text-[#000000b3] dark:text-white
                                     border-[rgba(255,255,255,0.02)]" type="number" required
                                         min={1} max={10} 
                                         // value={post.bedrooms}
@@ -408,7 +408,7 @@ dark:bg-[#ffffff09] dark:focus:bg-[#ffffff02]  px-2
 
                                 <input className="w-full input_field border-0 rounded-r-[6px] 
                                     dark:bg-[#ffffff09] dark:focus:bg-[#ffffff02]  px-2 
-                                    bg-[#ffff] focus:bg-[#ebeffc]
+                                    bg-[#ffff] focus:bg-[#ebeffc]  text-[#000000b3] dark:text-white
                                     border-[rgba(255,255,255,0.02)]" type="number" required
                                     min={1} max={10} 
                                     // value={post.bathrooms}
@@ -432,7 +432,7 @@ dark:bg-[#ffffff09] dark:focus:bg-[#ffffff02]  px-2
 
                                 <input className="w-full input_field border-0 rounded-r-[6px] 
                                     dark:bg-[#ffffff09] dark:focus:bg-[#ffffff02]  px-2 
-                                    bg-[#ffff] focus:bg-[#ebeffc]
+                                    bg-[#ffff] focus:bg-[#ebeffc]  text-[#000000b3] dark:text-white
                                     border-[rgba(255,255,255,0.02)]" type="text" required
                                     placeholder="rent, sale, etc." 
                                     // value={post.listing_type}
@@ -453,7 +453,7 @@ dark:bg-[#ffffff09] dark:focus:bg-[#ffffff02]  px-2
 
                                 <input className="w-full input_field border-0 rounded-r-[6px] 
 dark:bg-[#ffffff09] dark:focus:bg-[#ffffff02]  px-2 
-                                    bg-[#ffff] focus:bg-[#ebeffc]                                    border-[rgba(255,255,255,0.02)]" type="number" required
+                                    bg-[#ffff] focus:bg-[#ebeffc]  text-[#000000b3] dark:text-white                                    border-[rgba(255,255,255,0.02)]" type="number" required
                                     placeholder="" 
                                     // value={post.price}
                                     // onChange={(e) => {setPost({...post, price: e.target.value})}}

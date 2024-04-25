@@ -260,8 +260,10 @@ const page = () => {
                 </span>
                 
                 <input className="w-full border-0 rounded-r-[6px] outline outline-none
-                    dark:bg-[#ffffff09] dark:focus:bg-[#ffffff02]  px-2 
-                    border-[rgba(255,255,255,0.02)]  
+                dark:bg-[#ffffff09] dark:focus:bg-[#ffffff02]  px-2 
+                bg-[#ffff] focus:bg-[#f2f4fa]  text-[#000000b3] dark:text-white
+                border-[rgba(255,255,255,0.02)]  input_field
+                    
                     " type="text"
                     name="searchText" value={searchText} onChange={handleChange}
                 />
