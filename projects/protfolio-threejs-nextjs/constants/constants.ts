@@ -310,15 +310,126 @@ import {
     },
     {
       name: "Real-Estate Admin",
-      description: `saepe dignissimos similique quae. Deleniti, animi. Voluptates molestiae officia voluptatem rerum, nostrum accusantium deleniti asperiores officiis omnis quibusdam veniam, porro voluptatum pariatur? Modi quidem obcaecati doloremque doloribus ipsum aperiam animi. Debitis harum dolores ipsum pariatur id!`,
+      description: `Be a real estate agent in Richard's real-estate agency.
+      Create an account to add, edit and delete blog-posts/properties. Manage other agents on your team.
+      Let clients see your latest entries and surely they will book a visit on a property with you!
+      `,
       image1: "/images/projects/assets/realestateadmin/wallpaper1.png",
       image2: "/images/projects/assets/realestateadmin/wallpaper2.png",
       imagex: "/images/projects/assets/realestateadmin/wallpaperx.png",
       tech: ["HTML5", "CSS3", "JavaScript", "TailwindCSS", "TypeScript", "MongoDB", "NextJS"],
-      link: "https://www.google.com",
+      link: "https://phase-3-one.vercel.app/",
       icon: "/images/projects/assets/realestateadmin/re-icon.png",
       id: "practice-2",
-      longerDescription: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit reiciendis aut omnis nobis deserunt a, sed, aliquid laboriosam dicta atque dolor ad voluptates velit saepe dignissimos similique quae. Deleniti, animi.`,
+      longerDescription: 
+      `
+        <h2>
+            A website for a real-estate agency to display their products and news posts.<br/>
+            Which also allows its agents to have customized accounts to add, edit, delete properties and posts
+            for visiting clients to navigate through the properties and book a visit or stay up to date with the latest market/company news.
+        </h2>
+        <br/>
+        <br/>
+      
+        <h3>How to use as a visitor</h3><br/>
+        open the homepage and start discovering<br/>
+        - recommended properties (auto slider)<br/>
+        - latest products and latest posts by the agency's agents<br/>
+        - switch between the website's light/dark themes from the navigation menu <br/>
+        <br/>
+        go to the "all properties" page<br/>
+        - search for a property by its description and use the filter to tune the results by the property's area, price etc.<br/>
+        - use the page numbering to navigate through the results.<br/>
+        - use the arrow icons on the property's image to view the property's different images.<br/>
+        <br/>
+        go to the "all posts" page<br/>
+        - checkout all the news and posts submitted by the company from the latest submit.<br/>
+        - use the page numbering to navigate through the results.<br/>
+        <br/>
+        go to the "about" page.<br/>
+        - know more about the agency and its location on the map<br/>
+        - send an email to the agency with your inquiry<br/>
+        <br/>
+        go to the "property" page<br/>
+        - view the different images of the property from the thumbnail image selector<br/>
+        - checkout the property details<br/>
+        - see also other properties related to this property you may be interested in<br/>
+        - click "book a visit" to send an email with your information to the company regarding this property to contact you back<br/>
+        <br/>
+        go to the "post" itself's page<br/>
+        - read the content, see the descriptive picture<br/>
+        - see also other posts related to this property you may be interested in<br/>
+        <br/>
+        <br/>      
+        <h3>How to use as an agent</h3><br/>
+        - use the navigation bar user icon to sign-up, sign-in, sign-out.<br/>
+        - when signing-up use ID# value of "1111" to create a normal agent account or "1234" to create an account with admin privileges (view/control/monitor other agents profiles from your profile).<br/>
+        - edit your information values and change your photo.<br/>
+        - add a new property or a new post.<br/>
+        - navigate through your posts/properties through the pagination numbered buttons.<br/>
+        - edit or delete some of your properties or posts.<br/>
+        - mark your property as "Favorite" to be displayed on the homepage's "our recommendations" area.<br/>
+        <br/>
+        Admin account privileges<br/>
+        - monitor other agents on your team by seeing their last update, number of properties/posts.<br/>
+        - remove an agent from the website.<br/>
+        - view another agent's profile which includes their information, properties and posts.<br/>
+        - edit other agents' information, properties and posts.<br/>
+        - add for other agents a new property or a post without changing their lastUpdate value.<br/>
+        - return back to your profile.<br/>
+        <br/>
+        <br/>
+        <br/>
+        <h3>Technical Description</h3><br/>
+        This is my first ReactJS/NextJS/TailwindCSS personal project,
+        I built it while still learning how to use these frameworks with Typescript in the same time,
+        so there was a learning curve involved.<br/>
+        I had a lot of front-end design features and back-end functionalities I wanted to implement which are successfully added to the website.<br/>
+        this project was built upon <a href="https://phase2-nodejs.onrender.com/products">this</a>
+        code-along nextJS application tutorial, which you can check out and see the difference as I have heavily amplified and customized what is practiced there.<br/>
+        <br/>
+        Javascript libraries used<br/>
+        - mongoDB, mongoose, bcrypt, nodemailer, react-google-maps, next-auth (authentication and sessions).<br/>
+        <br/>
+        <br/>
+        <h3>Technical Functionalities</h3><br/>
+        - Light/dark mode switcher and a loading UI.<br/>
+        - Recommended properties slider at the homepage that changes properties automatically, pause/resume with user's interaction.<br/>
+        - Navigation links at the top of any page other than the home page to guide the user or get back.<br/>
+        - Image slider on all property cards to navigate through the images the property has. present at (home, all properties and agent profile pages).<br/>
+        - A customized website vertical scroll bar.<br/>
+        - Booking a visit on a property fills up for the user the email content with the details of the property.<br/>
+        - Input validation when signing in, signing up with another validation feedback from the backend.<br/>
+        - Set a lastUpdate, number of properties, number of posts values on agents each time they make a change on a property or post for admins to monitor the agents' activity.<br/>
+        - Set a lastUpdate value on a property when its added or edited, for viewers to know when this property was last updated.<br/>
+        - Changing details for another agent do not change their user profile lastUpdate value but the property or post only will be updated.<br/>
+        - Retrieve the property/post details when editing them for agents to see all the previous details already filling the inputs.<br/>
+        - Save property inputs when adding/editing in uppercase for the filter to have more uniform values like "Rent, Sale" nor "Rent, rent, Sale, sale".<br/>
+        - Customized add image buttons when adding/editing a property or post.<br/>
+        - Integrate the add/edit property/post interfaces within the agent's profile page without routing to a new page.<br/>
+        - Integrate the sign-up/sign-in interfaces within the navigation bar without routing to a new page.<br/>
+        - Use default images if no image is provided when adding a new post, property or a user.<br/>
+        - When visiting another agent's profile as an admin, display to the admin agent that they are on a "view mode".<br/>
+        - Admins can delete an agent from the website/database.<br/>
+        - When signing-up a new agent profile, a new local folder in public/images is created with the new agent's id value, with separate folders to contain future images for profile, posts, properties.<br/>
+        - When deleting a an agent profile, the local folder created for the user "and" its contents will be deleted.<br/>
+        - View (retrieve) products, posts or agents by last added date.<br/>
+        <br/>
+        - Images input management:<br/>
+        you do not need to have all the images inputs to be filled when adding/editing a property.<br/>
+        for example if you remove the first image input while there is a second image, 
+        the second image will keep its order as the second input/image in the editing interface as a reference for agents,
+        but for clients they will see only the images available (in property card image sliders and the property's page).<br/>
+        <br/>
+        <br/>
+        Yet to be implemented<br/>
+        - properties/posts you may be interested in should be retrieved based on the current property/post's category/price range for example.<br/>
+        - clicking on the agent's name from property/post page redirect to a page containing the agent's submissions.<br/>
+        - property and post input validation.<br/>
+        - use a cloud image storage service to store images and return back their "urls" to be stored in the database.<br/>
+        - delete the agent's old image when updating their photo (if no cloud service is used).<br/>
+        `,
+
       type: "site",
       date: "2024"
 
@@ -396,3 +507,68 @@ import {
     ...clientProjects, ...PracticeProjects, ...DraftProjects
   ]
   
+
+
+/*
+  <h2>
+  description
+  <br/>
+  </h2>
+  <br/>
+  
+  <h3>How to use </h3><br/>
+  - 1 <br/>
+  - 2 <br/>
+  <br/>
+  
+  <h3> What users can do </h3><br/>
+  - 1 <br/>
+  - 2 <br/>
+  
+  <br/>
+  Also be a seller and:<br/>
+  - 1 <br/>
+  - 2 <br/>
+  <br/>
+  <br/>
+
+  <h3> Introduction </h3><br/>
+  <br/>
+  <br/>
+  <a href="https://phase2-nodejs.onrender.com/products">this project</a><br/>
+  <br/>
+  
+  <br/>
+  <br/>
+
+  <h3> Functionalities in this website </h3><br/>
+  F1 <br/>
+  - 1 <br/>
+  - 2 <br/>
+  <br/>
+  F2 <br/>
+  - 1 <br/>
+  - 2 <br/>
+  <br/>
+  
+  <br/>
+  <br/>
+
+  <h3> Technologies in this website </h3><br/>
+  - 1 <br/>
+  - 2 <br/>
+  <br/>
+
+  <h3> Javascript libraries used in this project: </h3><br/>
+  - <br/>
+
+  <br/>
+  <br/>
+
+  <h3> Yet to be implemented </h3><br/>
+  - 1 <br/>
+  
+  (implemented in newer projects)*
+  `
+*/
+
