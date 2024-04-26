@@ -588,22 +588,34 @@ background: -webkit-linear-gradient(
   transition: background-color 100ms linear;
 }
 
+.neon_button_notselected {
+  border: var(--clr-bg) 0.2em solid;
+  
+  box-shadow: 
+  inset 0 0 0.15em 0 var(--clr-bg), 
+  0 0 0.35em var(--clr-bg);
+  
+  position: relative;
+  transition: background-color 100ms linear;
+}
+
+
 .starProj {
   transform: rotate(12deg);
   filter: grayscale(100%);
-  color: rgb(249, 225, 46);
-
-}
-
-.neon_button_notselected .starProj {
-  animation: 0.5s linear forwards rotStar2;
+  /* color: rgb(249, 225, 46); */
+  color: rgb(255, 193, 21);
 }
 
 .neon_button_selected .starProj {
-  animation: 0.5s linear forwards rotStar;
+  animation: 0.5s linear forwards rotStarIn;
 }
 
-@keyframes rotStar {
+.neon_button_notselected .starProj {
+  animation: 0.5s linear forwards rotStarOut;
+}
+
+@keyframes rotStarIn {
   from {
     transform: rotate(12deg);
     filter: grayscale(100%);
@@ -614,7 +626,7 @@ background: -webkit-linear-gradient(
   }
 }
 
-@keyframes rotStar2 {
+@keyframes rotStarOut {
 
   from {
     transform: rotate(65deg);
@@ -626,16 +638,6 @@ background: -webkit-linear-gradient(
   }
 }
 
-.neon_button_notselected {
-  border: var(--clr-bg) 0.2em solid;
-  
-  box-shadow: 
-  inset 0 0 0.15em 0 var(--clr-bg), 
-  0 0 0.35em var(--clr-bg);
-  
-  position: relative;
-  transition: background-color 100ms linear;
-}
 
 
 /* ////////////////////////////////////////////////////////////////////////////// */

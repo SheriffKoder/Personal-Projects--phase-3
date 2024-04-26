@@ -136,12 +136,13 @@ const Projects = () => {
               onClick={()=>{changeProject(index); }}>
 
                 {project.star === true && 
-                <span className="
-                text-[calc(min(15vw,75px)/2.7)] h-[calc(min(15vw,75px)/2.7)] w-[calc(min(15vw,75px)/2.7)]
+                <span className="br brightness-[0.85]
+                text-[calc(min(15vw,75px)/3)] h-[calc(min(15vw,75px)/2.7)] w-[calc(min(15vw,75px)/2.7)]
                 absolute top-[calc(-35%/2)]  right-[calc(-35%/2)] flex items-center justify-center
-                font-bold opacity-90
+                font-bold opacity-100
                 ">
-                <span className="starProj">&#x2605;</span>
+                <span className="starProj">&#x2B50;</span>
+                {/* &#x2605; with text /2.7 not 3*/}
                 </span>
                 }
 
@@ -184,8 +185,18 @@ const Projects = () => {
         id="homeTech_text"
         ref={projectDescription}>
 
-              <h4 className="font-semibold text-[min(1em,1.5rem)]">
-                {projects[currentProject].name}
+              <h4 className="font-semibold text-[min(1em,1.5rem)] flex flex-row items-center">
+                <span className="pt-[2px]">{projects[currentProject].name}</span>
+
+                { projects[currentProject].star === true && 
+                <span className="text-[0.5em] text-black font-normal rounded-[min(1.4vw,7px)] py-[0.125rem] md2:py-[0.2rem] pl-2 pr-[5px] bg-yellow-600 ml-2 my-auto
+                flex flex-row items-center justify-center"
+                style={{letterSpacing: "0.5px"}}>
+                  starred
+                <span className="rotate-12">&#x2605;</span>
+                </span>
+                }
+                
               </h4>
 
               <p className="text-[min(0.75em,1rem)] opacity-60">
