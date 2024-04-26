@@ -129,7 +129,7 @@ img {
 }
 
 .toggle-animation-dark {
-  width: 1.5rem;
+  width: 23px;
   transition-property: width;
   transition-duration: 0.15s;
   transition-timing-function: linear;
@@ -208,8 +208,10 @@ img {
 .hidden-style {
   opacity: 0.2;
 }
+
 .agentNavIcon_background {
-  @apply bg-gray-200 dark:bg-[#4f4f4f2e];
+  @apply dark:bg-[#1e1e1e] bg-white;
+  /* bg-gray-200 dark:bg-[#4f4f4f2e]  */
 }
 
 
@@ -714,6 +716,35 @@ html.hide_scroll_dark::-webkit-scrollbar-thumb {
     margin-left: 6px;
   }
 }
+
+
+/*//////////////////////////////////////////////////////////*/
+/* responsive styling for the search area in @allproperties */
+.search_allProperties-input {
+  flex: 1;
+}
+
+@media screen and (max-width: 600px) {
+  .search_allProperties-input {
+    min-width: 100%;
+    margin-bottom: 0.5rem;
+  }
+  
+  
+  .search_allProperties-buttons {
+    display: flex;
+    flex-direction: row;
+    min-width: 100%;
+    gap: 0.5rem;
+    padding: 0 5px;
+  }
+  
+  .search_allProperties-buttons button {
+    flex: 1;
+    margin: 0;
+  }
+}
+/*//////////////////////////////////////////////////////////*/
 
 
 

@@ -249,9 +249,10 @@ const page = () => {
     items-center text-sm flex-wrap
     " onSubmit={handleSearchSubmit}>
 
-        <div className="w-full flex flex-row">
-            <label className="flex-1 flex flex-row justify-center text-center
-            label_field
+        <div className="w-full flex flex-row flex-wrap">
+            {/* in css width 100% on 600px+ flex-1 to allow buttons to be beside the search label+input  */}
+            <label className="flex flex-row justify-center text-center
+            label_field search_allProperties-input
             bg-[#ffffff07] rounded-[7px] border-2 border-[#ffffff02]
             
             ">
@@ -270,27 +271,31 @@ const page = () => {
                 
             </label>
             
-            {/* search submit button */}
-            <button type="submit"
-            className="ml-2 px-2 py-1 dark:bg-text-accent-dark bg-theme-text-brighter opacity-75 text-white rounded-[7px] flex items-center justify-center">
-                {filterActive ? ("apply"):("search")}
-            </button>
-            
-            {/* filter inputs container - toggle button */}
-            <span className="ml-2 px-2 py-1 dark:bg-text-accent-dark bg-theme-text-brighter opacity-75 text-white rounded-[7px] flex items-center justify-center cursor-pointer
-            "
-            onClick={()=> {
-                if(filterActive) { 
-                    hideFilter(); 
-                    setFilterActive(false); 
-                }else {  
-                    showFilter(); 
-                    setFilterActive(true);
-                }
-            }}
-            >
-                {filterActive? ("close"):("filter")}
-            </span>
+            <div className="mx-auto flex flex-row search_allProperties-buttons">
+                {/* search submit button */}
+                <button type="submit"
+                className="ml-2 px-2 py-1 dark:bg-text-accent-dark bg-theme-text-brighter opacity-75 text-white rounded-[7px]
+                flex items-center justify-center">
+                    {filterActive ? ("apply"):("search")}
+                </button>
+                
+                {/* filter inputs container - toggle button */}
+                <button type="button" className="ml-2 px-2 py-1 dark:bg-text-accent-dark bg-theme-text-brighter opacity-75 text-white rounded-[7px]
+                flex items-center justify-center cursor-pointer
+                "
+                onClick={()=> {
+                    if(filterActive) {
+                        hideFilter();
+                        setFilterActive(false);
+                    }else {
+                        showFilter();
+                        setFilterActive(true);
+                    }
+                }}
+                >
+                    {filterActive? ("close"):("filter")}
+                </button>
+            </div>
         </div>
 
         {/* filter inputs container */}

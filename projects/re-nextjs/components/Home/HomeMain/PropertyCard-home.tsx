@@ -1,5 +1,7 @@
 "use client";
 
+// used in home-main properties
+
 import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";

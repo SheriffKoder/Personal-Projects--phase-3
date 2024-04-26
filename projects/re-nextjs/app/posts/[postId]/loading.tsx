@@ -33,7 +33,7 @@ function Loading() {
   return (
     <div className="w-[100vw] h-[100vh] top-0 z-[99]">
 
-    <div className="w-[100%] h-[100vh] bg-[#000000]
+    <div className="w-[100%] h-[100vh] dark:bg-[#000000] bg-[#ebeffc]
     flex items-center justify-center"
     id="loading_icon__container2">
         <div id="loading_icon2" className="">

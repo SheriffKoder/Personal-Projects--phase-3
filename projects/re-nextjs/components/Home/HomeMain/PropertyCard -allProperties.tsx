@@ -4,6 +4,8 @@
 // as i wanted each to be responsive in a different way depending on the page
 // and using just one component to get the end result without complexity while coding
 
+// used in all properties page
+
 import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";

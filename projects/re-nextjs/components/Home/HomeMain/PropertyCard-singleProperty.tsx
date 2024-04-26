@@ -1,4 +1,5 @@
 "use client";
+//used in aside properties in a single property page
 
 import Link from "next/link";
 import Image from "next/image";
@@ -238,7 +239,7 @@ const PropertyCard = ({property1, currentPage}:{property1:PropertyDocument, curr
                 <div className="w-full text_shadow-2">
 
 
-                  <Link href={"/properties/"+property._id} key={property._id}
+                  <Link href={"/properties/single/"+property._id} key={property._id}
                   className="w-full">
                     <div className="flex flex-col items-start px-2 pt-1 text-sm text-start">
                       <div className="dark:text-[#ffffffde] capitalize">{property.property_type}</div>

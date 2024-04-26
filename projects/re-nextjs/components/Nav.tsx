@@ -26,18 +26,22 @@ const Nav = () => {
   const { data: session, status } = useSession();      //get the status
   const isAuth = status === "authenticated";  //use the status
   const router = useRouter();
+  const [userIconBG,setUserIconBG] = useState("bg-[#bebebe2e] dark:bg-[#4f4f4f2e]");
 
   //user icon drop down, to show login/signup or go to profile, signout etc...
   function handleDropDownIcon (input : string) {
-      document.querySelector(".nav-user-icon")?.classList.toggle("agentNavIcon_background");
       
       if( input === "leave" ) {
         document.querySelector(".nav-user-menu")?.classList.remove("flex");
         document.querySelector(".nav-user-menu")?.classList.add("hidden");
+        // document.querySelector(".nav-user-icon")?.classList.remove("agentNavIcon_background");
+        setUserIconBG("bg-[#bebebe2e] dark:bg-[#4f4f4f2e]");
 
       } else if ( input === "enter" ) {
         document.querySelector(".nav-user-menu")?.classList.add("flex");
         document.querySelector(".nav-user-menu")?.classList.remove("hidden");
+        // document.querySelector(".nav-user-icon")?.classList.add("agentNavIcon_background");
+        setUserIconBG("dark:bg-[#212121] bg-white");
 
       }
       
@@ -144,7 +148,21 @@ const Nav = () => {
           >
 
             {/* user icon */}
-            <button type="button" className=" nav-user-icon flex gap-2 flex-center rounded-full border-0 hover:bg-gray-200 dark:hover:bg-[#4f4f4f2e] h-7 w-7"
+            {/* optional bg */}
+            {/* .
+
+            
+            */}
+            <button type="button" className={`
+            nav-user-icon flex gap-2 flex-center rounded-full border-0 
+            h-7 w-7
+            ${userIconBG}
+            hover:dark:
+
+            `}
+            onMouseEnter={()=>{setUserIconBG("dark:bg-[#212121] bg-white")}}
+            onClick={()=>{setUserIconBG("dark:bg-[#212121] bg-white")}}
+            onMouseLeave={()=>{setUserIconBG("bg-[#bebebe2e] dark:bg-[#4f4f4f2e]")}}
             >
 
                   <svg xmlns="http://www.w3.org/2000/svg" 
