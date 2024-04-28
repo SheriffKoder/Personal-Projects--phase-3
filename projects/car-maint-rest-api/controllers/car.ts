@@ -7,7 +7,9 @@ import UserModel from "../models/userModel";
 // (req: Request, res:Response, next: NextFunction)
 
 const today = new Date();
-const todayString = today.getFullYear() + "-" + today.getMonth()+1 + "-" + today.getDate();
+const thisMonth = today.getMonth()+1;
+
+const todayString = today.getFullYear() + "-" + thisMonth + "-" + today.getDate();
 
 import { clearImage } from "../util/clearImage";
 
@@ -93,7 +95,7 @@ exports.addCar = async (req: Request_With_UserId, res:Response, next: NextFuncti
 
         // return res.status(201).json(newCar);
 
-        return res.status(200).json("create a new Car");
+        return res.status(200).json(user?.cars[0]);
 
 
     

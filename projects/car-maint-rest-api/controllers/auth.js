@@ -68,7 +68,16 @@ exports.signUp = (req, res, next) => __awaiter(void 0, void 0, void 0, function*
             password: encryptedPassword
         });
         yield newUser.save();
-        return res.status(201).json("Account created successfully !");
+        //API 0.2 - authentication
+        //create a token on a successful login
+        //to return its defined contents to the user 
+        const token = jwt.sign({
+            email: newUser.email,
+            userId: newUser._id.toString(),
+        }, "mySecret", { expiresIn: "1h" });
+        const userCars = yield carModel_1.default.find({ userId: newUser._id });
+        const userInfo = { name: newUser.name, email: newUser.email, _id: newUser._id };
+        return res.status(200).json({ userInfo, userCars, token });
         // return new Response(JSON.stringify("Account created successfully !"), {status: 201});
     }
     catch (error) {

@@ -17,7 +17,8 @@ const carModel_1 = __importDefault(require("../models/carModel"));
 const userModel_1 = __importDefault(require("../models/userModel"));
 // (req: Request, res:Response, next: NextFunction)
 const today = new Date();
-const todayString = today.getFullYear() + "-" + today.getMonth() + 1 + "-" + today.getDate();
+const thisMonth = today.getMonth() + 1;
+const todayString = today.getFullYear() + "-" + thisMonth + "-" + today.getDate();
 const clearImage_1 = require("../util/clearImage");
 //API 0.2 - authentication
 //API 0.2 - images
@@ -79,7 +80,7 @@ exports.addCar = (req, res, next) => __awaiter(void 0, void 0, void 0, function*
             yield user.save();
         }
         // return res.status(201).json(newCar);
-        return res.status(200).json("create a new Car");
+        return res.status(200).json(user === null || user === void 0 ? void 0 : user.cars[0]);
     }
     catch (error) {
         return res.status(500).json("Failed to create a new Car");
