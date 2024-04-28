@@ -112,24 +112,21 @@ const CarInfo =  ({info}: {
       <div className="border border-[#ffffff00] w-[40%] my-auto
       md:w-[20vw] md:min-w-[160px] max-w-[300px]">
         {/* <h2 className="pl-2 text-base">Car Details</h2> */}
-        <ul className="text-sm font-light pl-3 flex flex-col gap-0 md:gap-1 items-center
-        md:items-start">
-          <li>
-            Brand: {info.brand}
-          </li>
-
-          <li>
-            Model: {info.carModel}
+        <ul className="text-sm font-light pl-3 flex flex-col gap-1 md:gap-1 items-center
+        md:items-start text-center md:text-start">
+          <li className="flex flex-col">
+          <span className="font-medium">Brand & Model:</span> 
+          {info.brand} {info.carModel}
           </li>
 
           <li className="flex flex-col">
-            <span>Last Check</span> 
+          <span className="font-medium">Last Check</span> 
             <span>{NearestLastCheck}</span>
           </li>
 
           <li className="flex flex-col">
-            <span>Next Check</span> 
-            <span>{NearestNextCheck}</span>
+            <span className="font-medium">Next Check</span> 
+            <span>{NearestNextCheck ? NearestNextCheck : "not set"}</span>
           </li>
         </ul>
       </div>

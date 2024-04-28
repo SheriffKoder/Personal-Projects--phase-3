@@ -6,9 +6,14 @@ import { useNavigate } from "react-router-dom";
 import { ChangeEventHandler } from "react";
 import { FormEventHandler } from "react";
 
+import { useContext } from "react";
+import { userContext } from "../../context";
+
 const SignUp = () => {
 
     const navigate = useNavigate();
+    const setUser = useContext(userContext)?.updateUser;
+
 
     /////////////////////////////////////////////////////////////
     //API 0.1
@@ -43,6 +48,9 @@ const SignUp = () => {
         const res = await apiResponse.json();
         console.log(res);
         console.log(apiResponse.status);
+        setUser(res);
+        navigate("/");    
+
     }
 
     /////////////////////////////////////////////////////////////

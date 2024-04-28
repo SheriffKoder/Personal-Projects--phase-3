@@ -39,6 +39,7 @@ const App = () => {
 
   return (
 
+    // bg-gradient-to-bl from-[#6505a5] via-[#2f0590] to-[#1a2777]
 
     <div className="
       bg-gradient-to-bl from-[#05a570] via-[#2779b3] to-[#226798]
