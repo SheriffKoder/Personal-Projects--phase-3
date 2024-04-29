@@ -200,7 +200,7 @@ const CheckupNew = () => {
                                 placeholder="type your title here"/>
                             
                                 {/* color picker */}
-                                <label className="absolute right-[2px] top-[10%] 
+                                <label className="absolute right-[2px] top-[5%] 
                                 flex flex-row rounded-[5px]">
                             
                                     <span className="bg-white p-[2px] rounded-[7px]" aria-label="choose title color">

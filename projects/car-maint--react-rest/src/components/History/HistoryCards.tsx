@@ -402,7 +402,7 @@ const HistoryCards = ({check}:{
           
             })}
           
-            {/* first check */}
+            {/* first check/initial check */}
             {firstCheck !== currentCheck ? (
             <div className="
             w-full border border-[#ffffff00]
