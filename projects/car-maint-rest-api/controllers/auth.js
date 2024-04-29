@@ -68,6 +68,7 @@ exports.signUp = (req, res, next) => __awaiter(void 0, void 0, void 0, function*
             password: encryptedPassword
         });
         yield newUser.save();
+        // sign in after the user has been successfully created
         //API 0.2 - authentication
         //create a token on a successful login
         //to return its defined contents to the user 
