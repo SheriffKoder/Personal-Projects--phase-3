@@ -436,15 +436,105 @@ import {
     },
     {
       name: "Car Maintenance 1 (RESTful)",
-      description: `saepe dignissimos similique quae. Deleniti, animi. Voluptates molestiae officia voluptatem rerum, nostrum accusantium deleniti asperiores officiis omnis quibusdam veniam, porro voluptatum pariatur? Modi quidem obcaecati doloremque doloribus ipsum aperiam animi. Debitis harum dolores ipsum pariatur id!`,
+      description: `Do you have many checkups for your car that you often forget when the next check is ?
+      This app can help you track your checkups and make your maintenances on time to keep your car well maintained.
+      `,
       image1: "/images/projects/assets/carmaint1/wallpaper1.png",
       image2: "/images/projects/assets/carmaint1/wallpaper2.png",
       imagex: "/images/projects/assets/carmaint1/wallpaperx.png",
-      tech: ["HTML5", "CSS3", "JavaScript", "TailwindCSS", "TypeScript", "MongoDB", "ReactJS"],
+      tech: ["HTML5", "CSS3", "JavaScript", "TailwindCSS", "TypeScript", "MongoDB", "ReactJS", "ExpressJS"],
       link: "https://www.google.com",
       icon: "/images/projects/assets/carmaint1/carmaint1-icon.png",
       id: "practice-3",
-      longerDescription: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit reiciendis aut omnis nobis deserunt a, sed, aliquid laboriosam dicta atque dolor ad voluptates velit saepe dignissimos similique quae. Deleniti, animi.`,
+      longerDescription: `
+      <h2>Description</h2><br/>
+This app will help you stay on track on keeping your car well maintained.<br/>
+Where you can access it on any device that has a browser.<br/>
+the app allows you to add details for your car<br/>
+and add multiple checkups, each with a different name, color and due date.<br/>
+but not just track with a due date, also a check history and know where this check was completed and how many times.
+change.<br/>
+<br/>
+<br/>
+<h3>How to use</h3>
+<br/>
+- <b>Sign-up or login to you your account</b><br/>
+- Add a car to be promoted to access your profile.<br/>
+- Where you can edit the car's info or delete the car (deleting will remove all checkups).<br/>
+<br/>
+- <b>Add a new checkup</b><br/>
+- choose the checkup title, the title's color and see how it looks before applying.<br/>
+- select the next due date and add some notes.<br/>
+<br/>
+- Once added, you can see how many days remaining till the next check with a color indicator (Green=far ahead, Yellow=should do it soon, Red=overdue).<br/>
+<br/>
+- Edit/remove added checkups.<br/>
+- Once done with a checkup, mark it as completed.<br/>
+<br/>
+<b>When the checkup is completed you can:</b><br/>
+- update the checkup to add a new due date.<br/>
+- check the checkup history to view/edit/remove from previous completions.<br/>
+<br/>
+- use the navigation links, back to home to navigate through the app and the navigation bar to sign-out.<br/>
+<br/>
+<br/>
+<br/>
+<h2>Technical Introduction</h2><br/>
+Purpose: after building a project with NextJS, I wanted to build a project with vanilla React.<br/>
+Given that React does not support APIs and routing like NextJS,<br/>
+I had to develop a separate NodeJS API project to handle the react front-end API requests and save information to the database.<br/>
+which is something also I wanted to practice and learn, so this project is composed of two separate applications.<br/>
+<br/>
+<h3> Technologies in this website </h3><br/>
+  - Front-end: ReactJS w/ Typescript & TailwindCSS<br/>
+  - Back-end: REST API built with NodeJS, expressJS<br/>
+  - Database: MongoDB w/ Mongoose<br/>
+<br/>
+Back-end libraries used:<br/>
+- body-parser (use req.body.field), multer (local image storage), bcrypt (hashing passwords),
+express-validator (input validation), jwt authentication tokens).<br/>
+<br/>
+<br/>
+<h3> Functionalities in this website </h3><br/>
+<b>Front-end</b><br/>
+- Routing<br/>
+<div class="ml-2">if there is a no user in context, the users will will be redirected to the welcome page to login or sign-up.<br/></div>
+<br/>
+<div class="ml-2">if there is a user in context but has no car added yet, the users will will be redirected to add a car.<br/></div>
+  <br/>
+<div class="ml-2">if the there is a user in context (logged in) and has a car, the users can access their profile page to edit, add, delete their car or checkups.<br/></div>
+<br/>
+- Make the UI more mobile-like and feel more dynamic.<br/>
+- Make the app UI responsive and work with large screen sizes.<br/>
+- Allow checkups to have history instances and be able to manipulate these instances.<br/>
+- Users can see the title's color of checkups while editing/adding.<br/>
+- Display color and icon indicators to the user (car image status, checkup status, checkup completion status).<br/>
+- Use the same form components when adding/editing a car or a checkup.<br/>
+- Add navigation links to top and bottom of the pages.<br/>
+- Compare dates to display the difference in numbers to the user.<br/>
+- Save images locally.<br/>
+- Save user information in react's context instead of having to use a GET request on every page.<br/>
+- Authenticate requests sent to the backend with tokens.<br/>
+<br/>
+<b>Back-end</b><br/>
+- Input validation.<br/>
+- Password encryption (bcrypt).<br/>
+- User authentication (jwt tokens).<br/>
+- Image storage (multer).<br/>
+- Be able to access and manipulate (edit/delete/complete) from the multiple checks present in the car all-checks array separately.<br/>
+- Be able to manipulate a specific check history instances to edit or delete them from start/middle/end of the check array.<br/>
+<br/>
+please visit the github page for more details about the program's logic.
+<br/>
+<br/>
+Yet to be added:<br/>
+- view input feedback received from the API to the user on failure or success of entries.<br/>
+- use a cloud service to store car images and receive a url to store in the database.<br/>
+- use a third-party library to manipulate car images by removing the background.<br/>
+- avoid losing the react.context value when refreshing the page and thus have to login again.<br/>
+- send emails to users to notify on close due dates.<br/>
+- check user authentication when manipulating checks as done when manipulating the car information.<br/>
+`,
       type: "site",
       date: "2024"
     },
@@ -570,5 +660,8 @@ import {
   
   (implemented in newer projects)*
   `
+
+
+
 */
 

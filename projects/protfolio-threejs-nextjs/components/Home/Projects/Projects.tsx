@@ -179,8 +179,10 @@ const Projects = () => {
         flex flex-col gap-[min(1vw,1rem)] z-[1] text-[calc(1rem+0.25vw)]
         fadeIn_animation 
         md2:mt-[min(5vh,1rem)]
-        lg:justify-center
-        lg:mt-[-1vw]
+        
+        lg:mt-[4.5vw]
+        2xl:mt-[-1vw]
+        2xl:justify-center
         "
         id="homeTech_text"
         ref={projectDescription}>
@@ -189,7 +191,7 @@ const Projects = () => {
                 <span className="pt-[2px]">{projects[currentProject].name}</span>
 
                 { projects[currentProject].star === true && 
-                <span className="text-[0.5em] text-black font-normal rounded-[min(1.4vw,7px)] py-[0.125rem] md2:py-[0.2rem] pl-2 pr-[5px] bg-yellow-600 ml-2 my-auto
+                <span className="text-[0.5em] text-black font-normal rounded-[min(1.4vw,7px)] py-[0.125rem] md2:py-[0.2rem] pl-2 pr-[5px] bg-[#d7b82d] ml-2 my-auto
                 flex flex-row items-center justify-center"
                 style={{letterSpacing: "0.5px"}}>
                   starred
