@@ -25,24 +25,32 @@ const CheckupNew = () => {
     const token = useContext(userContext)?.userState.token;
 
 
-    //if the check history has more than one item, we will not want to view the previous check input
-    // let oldCheck;
-    // if (userCars && checkIndex) {
-    //     const currentCar = userCars?.filter((car) => car._id === carId)[0];
-    //     oldCheck = currentCar?.checks[+checkIndex].history.length > 1;
-    // }
-    
-    //want to allow editing the initial check only if this is the last item in the history (first one added)
-    let oldCheck;
-    if (userCars && checkIndex && historyIndex) {
+
+    // the check should be the initial check instance of the check
+    // if it is the last instance in the check history array i.e (first added)
+    // or there are no checkIndex present (which is not given in the add-new-check page url)
+    let isInitialCheck;
+    if (userCars && checkIndex) {
         const currentCar = userCars?.filter((car) => car._id === carId)[0];
-        const checkHistory = currentCar?.checks[+checkIndex].history; 
-        oldCheck = checkHistory[checkHistory.length-1] === checkHistory[+historyIndex];
+        const checkHistory = currentCar?.checks[+checkIndex].history;
+
+        if (checkHistory.length -1 === Number(historyIndex)) {
+            isInitialCheck = true;
+        } else {
+            isInitialCheck = false;
+        }
+
+        // oldCheck = checkHistory[checkHistory.length-1] === checkHistory[+historyIndex];
+        // console.log("checkHistory : "+checkHistory)
+    } else if (userCars && !checkIndex) {
+        isInitialCheck = true;
+
     }
     
 
-    console.log(oldCheck);
+    console.log(isInitialCheck);
 
+    
     const [checkupInfo, setCheckupInfo] = useState({
         title: "",
         color: "#058885",
@@ -228,7 +236,7 @@ const CheckupNew = () => {
 
 
                     {/* previous check (initialCheck) */}
-                    {oldCheck && (
+                    {isInitialCheck && (
                     <li>
                         <label className="flex flex-row rounded-[5px] overflow-hidden
                         focus-within:outline outline-offset-[3px] outline-2
