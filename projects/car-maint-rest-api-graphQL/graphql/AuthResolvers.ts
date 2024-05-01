@@ -38,7 +38,6 @@ module.exports = {
 
             const {name, email, password} = args.userInput;
 
-
             ////////////////////////////////////////////////////////////////
             ////////////////////////////////////////////////////////////////
             //validation
@@ -85,15 +84,31 @@ module.exports = {
             const userCreated = await newUser.save();
             // return res.status(201).json("Account created successfully !");
             ////////////////////////////////////////////////////////////////
+            console.log(userCreated);
+
+            //API 0.2 - authentication
+            //create a token on a successful login
+            //to return its defined contents to the user 
+            const token = jwt.sign({
+                email: userCreated.email,
+                userId: userCreated._id.toString(),
+            },
+            "mySecret", 
+            { expiresIn: "1h"}
+            );
 
 
+            //return the user's car
+            const userCars = await CarModel.find({userId: userCreated._id});
+            // const userInfo = {name: user.name, email: user.email, _id: user._id};
+
+            return {...userCreated._doc, _id: userCreated._id.toString(), cars:[] ,token: token};
 
             ////////////////////////////////////////////////////////////////
             ////////////////////////////////////////////////////////////////
             // ._doc return the user data without the metadata mongoose would create
             //with changing this user's id to
-            console.log(userCreated);
-            return {...userCreated._doc, _id: userCreated._id.toString(), cars:[], token: ""};
+            // return {...userCreated._doc, _id: userCreated._id.toString(), cars:[], token: ""};
 
             // return new Response(JSON.stringify("Account created successfully !"), {status: 201});
         

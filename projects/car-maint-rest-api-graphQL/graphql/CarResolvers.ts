@@ -6,7 +6,9 @@ import UserModel from "../models/userModel";
 // (req: Request, res:Response, next: NextFunction)
 
 const today = new Date();
-const todayString = today.getFullYear() + "-" + today.getMonth()+1 + "-" + today.getDate();
+
+const thisMonth = today.getMonth()+1;
+const todayString = today.getFullYear() + "-" + thisMonth + "-" + today.getDate();
 
 import { clearImage } from "../util/clearImage";
 

@@ -17,7 +17,8 @@ const carModel_1 = __importDefault(require("../models/carModel"));
 const userModel_1 = __importDefault(require("../models/userModel"));
 // (req: Request, res:Response, next: NextFunction)
 const today = new Date();
-const todayString = today.getFullYear() + "-" + today.getMonth() + 1 + "-" + today.getDate();
+const thisMonth = today.getMonth() + 1;
+const todayString = today.getFullYear() + "-" + thisMonth + "-" + today.getDate();
 const clearImage_1 = require("../util/clearImage");
 //API 0.2 - authentication
 //API 0.2 - images
