@@ -54,12 +54,13 @@ mutation {
     }
 }
 
-you need to have a dummy rootQuery at least defined here
 
 
 
 
-
+// the checkModel is not used or needed
+// the user query is not used but needed, as you need to have a dummy rootQuery at least defined here
+// we are only using one resolver here that depends on CarInputType and userResolverReturn complex type 
 
 
 */
