@@ -11,7 +11,7 @@ const WelcomePage = () => {
 
         <div className="flex-1 flex flex-col items-center justify-center">
             <div className="ml-4 md2:ml-auto flex flex-row w-full max-w-[90vw] md2:max-w-[900px] text-xs text_shadow mx-auto">
-                <span style={{color:"#00465f"}}>Welcome</span>
+                <span style={{color:"#b650ff"}}>Welcome</span>
             </div>
 
             <div className="flex flex-col items-center justify-center flex-1 px-4
@@ -62,7 +62,7 @@ const WelcomePage = () => {
                                     type="submit"
                                     className="w-full rounded-full px-3 py-1
                                     text-xs
-                                    bg-gradient-to-l from-[#05b5b2]  to-[#226798]
+                                    bg-gradient-to-l from-[#8506d9]  to-[#2c40c4]
                                     ">
                                         Login here
                                     </button>
@@ -95,7 +95,7 @@ const WelcomePage = () => {
                                     type="submit"
                                     className="w-full rounded-full px-3 py-1
                                     text-xs
-                                    bg-gradient-to-l from-[#05b5b2]  to-[#226798]
+                                    bg-gradient-to-l from-[#8506d9]  to-[#2c40c4]
                                     ">
                                         Sign up here
                                     </button>

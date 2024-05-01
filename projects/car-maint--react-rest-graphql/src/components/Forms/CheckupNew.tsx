@@ -27,23 +27,31 @@ const CheckupNew = () => {
     const user_action = useRef("add");
 
 
-    //if the check history has more than one item, we will not want to view the previous check input
-    // let oldCheck;
-    // if (userCars && checkIndex) {
-    //     const currentCar = userCars?.filter((car) => car._id === carId)[0];
-    //     oldCheck = currentCar?.checks[+checkIndex].history.length > 1;
-    // }
     
-    //want to allow editing the initial check only if this is the last item in the history (first one added)
-    let oldCheck;
-    if (userCars && checkIndex && historyIndex) {
+
+    // the check should be the initial check instance of the check
+    // if it is the last instance in the check history array i.e (first added)
+    // or there are no checkIndex present (which is not given in the add-new-check page url)
+    let isInitialCheck;
+    if (userCars && checkIndex) {
         const currentCar = userCars?.filter((car) => car._id === carId)[0];
-        const checkHistory = currentCar?.checks[+checkIndex].history; 
-        oldCheck = checkHistory[checkHistory.length-1] === checkHistory[+historyIndex];
+        const checkHistory = currentCar?.checks[+checkIndex].history;
+
+        if (checkHistory.length -1 === Number(historyIndex)) {
+            isInitialCheck = true;
+        } else {
+            isInitialCheck = false;
+        }
+
+        // oldCheck = checkHistory[checkHistory.length-1] === checkHistory[+historyIndex];
+        // console.log("checkHistory : "+checkHistory)
+    } else if (userCars && !checkIndex) {
+        isInitialCheck = true;
+
     }
     
 
-    console.log(oldCheck);
+    console.log(isInitialCheck);
 
     const [checkupInfo, setCheckupInfo] = useState({
         title: "",
@@ -133,8 +141,8 @@ const CheckupNew = () => {
                 checkupInfo: {...checkupInfo},
                 carId: carId,
                 action: user_action.current,
-                checkIndex: (checkIndex)? parseInt(checkIndex): "",
-                historyIndex: (historyIndex) ? parseInt(historyIndex) : "",                
+                checkIndex: (checkIndex)? parseInt(checkIndex): 0,
+                historyIndex: (historyIndex) ? parseInt(historyIndex) : 0,                
             }
         }
             
@@ -238,7 +246,7 @@ const CheckupNew = () => {
             </>
             )}
             
-            <span style={{color:"#00465f"}}>
+            <span style={{color:"#b650ff"}}>
                 {checkIndex ? "Edit Checkup" : "New Check-up" }
             </span>
         </div>
@@ -269,7 +277,7 @@ const CheckupNew = () => {
                             <div className="relative w-full
                             overflow-hidden rounded-[7px]
                             focus-within:outline outline-offset-[3px] outline-2
-                            outline-[#0bb97f]
+                            outline-[#8506d9]
                             ">
                                 <input className="text-[#ffffff] rounded-[7px]
                                 px-2 py-[1px] outline-none selection:bg-[#3c8bc374]
@@ -282,7 +290,7 @@ const CheckupNew = () => {
                                 placeholder="type your title here"/>
                             
                                 {/* color picker */}
-                                <label className="absolute right-[2px] top-[10%] 
+                                <label className="absolute right-[2px] top-[6%] 
                                 flex flex-row rounded-[5px]">
                             
                                     <span className="bg-white p-[2px] rounded-[7px]" aria-label="choose title color">
@@ -310,11 +318,11 @@ const CheckupNew = () => {
 
 
                     {/* previous check (initialCheck) */}
-                    {oldCheck && (
+                    {isInitialCheck && (
                     <li>
                         <label className="flex flex-row rounded-[5px] overflow-hidden
                         focus-within:outline outline-offset-[3px] outline-2
-                            outline-[#0bb97f] mx-2">
+                            outline-[#8506d9] mx-2">
                             <span className="flex-1 bg-[#00000000] pt-[1px]
                             text-start">
                                 Initial check 
@@ -339,7 +347,7 @@ const CheckupNew = () => {
                     <li>
                         <label className="flex flex-row rounded-[5px] overflow-hidden
                         focus-within:outline outline-offset-[3px] outline-2
-                            outline-[#0bb97f] mx-2">
+                            outline-[#8506d9] mx-2">
                             <span className="flex-1 bg-[#00000000] pt-[1px]
                             text-start">
                                 Next Check
@@ -360,7 +368,7 @@ const CheckupNew = () => {
                     <li>
                         <label className="flex flex-row rounded-[5px] overflow-hidden
                         focus-within:outline outline-offset-[3px] outline-2
-                            outline-[#0bb97f] mx-2">
+                            outline-[#8506d9] mx-2">
                             <span className="flex-1 bg-[#00000000] pt-[1px]
                             text-start">
                                 Checked on
@@ -369,7 +377,7 @@ const CheckupNew = () => {
                             px-2 py-[1px] outline-none selection:bg-[#3c8bc374]
                             bg-[#e3f4ff]" 
                             type="date"
-                            defaultValue={checkedOn}
+                            value={checkedOn}
                             name="checkedOn"
                             onChange={handleChange}/>
                         
@@ -390,7 +398,7 @@ const CheckupNew = () => {
                             px-2 py-2 selection:bg-[#3c8bc374]
                             bg-[#e3f4ffd9]
                             focus-within:outline outline-offset-[3px] outline-2
-                            outline-[#0bb97f]" 
+                            outline-[#8506d9]" 
                             rows={3}
                             defaultValue={notes}
                             name="notes"
@@ -398,7 +406,7 @@ const CheckupNew = () => {
                         
                         </label>
                     </li>
-
+                    {/* from-[#6505a5] via-[#2f0590] to-[#1a2777] */}
 
                     <li className="w-[70%] mx-auto gradient_button z-[0] relative">
                         <button 
@@ -406,7 +414,7 @@ const CheckupNew = () => {
                         type="submit"
                         className="w-full rounded-full px-3 py-1
                         text-xs
-                        bg-gradient-to-l from-[#05b5b2]  to-[#226798]
+                        bg-gradient-to-l from-[#8506d9]  to-[#2c40c4]
                         ">
                             {checkIndex ? "Apply Changes" : "Add Checkup" }
 

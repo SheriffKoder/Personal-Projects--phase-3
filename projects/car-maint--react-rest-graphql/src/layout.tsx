@@ -29,8 +29,8 @@ import UserProvider, { userContext } from './context';
 const Layout = () => {
 
     const context = useContext(userContext);
-    const userCars = context.userState.cars;
     console.log(context);
+    const userCars = context.userState.cars;
 
   return (
     <>        

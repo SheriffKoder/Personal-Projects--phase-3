@@ -251,6 +251,8 @@ const Login = () => {
 
         setUser(res.data.login);
         navigate("/");
+        // console.log(res.data.login);
+
     }
 
     /////////////////////////////////////////////////////////////
@@ -262,7 +264,7 @@ const Login = () => {
             <div className="ml-4 md2:ml-auto flex flex-row w-full max-w-[90vw] md2:max-w-[900px] text-xs text_shadow mx-auto">
                 <span onClick={()=>{navigate("/")}} className="cursor-pointer">Welcome</span>
                 <span className="right_caret h-full w-[1rem] text-transparent">.</span>
-                <span style={{color:"#00465f"}}>Login</span>
+                <span style={{color:"#b650ff"}}>Login</span>
             </div>
 
             <div className="flex flex-col items-center justify-center flex-1 px-4">
@@ -280,7 +282,7 @@ const Login = () => {
                         <li>
                             <label className="flex flex-row rounded-[5px] overflow-hidden
                             focus-within:outline outline-offset-[3px] outline-2
-                            outline-[#0bb97f]">
+                            outline-[#8506d9]">
                                 <span className="w-[30%] bg-[#00000053] pt-[1px]
                                 text-center">Email</span>
                                 <input className="w-[70%] text-[#000000d6]
@@ -295,7 +297,7 @@ const Login = () => {
                         <li>
                             <label className="flex flex-row rounded-[5px] overflow-hidden
                             focus-within:outline outline-offset-[3px] outline-2
-                            outline-[#0bb97f]">
+                            outline-[#8506d9]">
                                 <span className="w-[30%] bg-[#00000053] pt-[1px]
                                 text-center">Password</span>
                                 <input className="w-[70%] text-[#000000d6]
@@ -314,7 +316,7 @@ const Login = () => {
                             type="submit"
                             className="w-full rounded-full px-3 py-1
                             text-xs
-                            bg-gradient-to-l from-[#05b5b2]  to-[#226798]
+                            bg-gradient-to-l from-[#8506d9]  to-[#2c40c4]
                             ">
                                 Login
                             </button>
@@ -334,7 +336,7 @@ const Login = () => {
                             // onClick={()=>{setUser(loggedInUser); navigate("/")}}
                             className="w-full rounded-full px-3 py-1
                             text-xs
-                            bg-gradient-to-l from-[#05b5b2]  to-[#226798]
+                            bg-gradient-to-l from-[#8506d9]  to-[#2c40c4]
                             ">
                                 Login
                             </button>

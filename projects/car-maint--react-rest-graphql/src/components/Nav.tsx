@@ -152,9 +152,9 @@ const Nav = () => {
                     <button 
                         // onClick={()=>navigate(`/signOut/`)}
                         onClick={()=>{setUser(emptyUser);}}
-                        className="rounded-full border border-[#226798] 
+                        className="rounded-full border border-[#3853ff] 
                         px-2 py-[1px] text-xs ml-1 w-[4.5rem]
-                        bg-[#226798]
+                        bg-[#2c40c4]
                         hover:bg-[#ffffff2a] focus:bg-[#ffffff2a]
                         hover:border-[#ffffff2a] focus:border-[#ffffff2a]">
                             sign out

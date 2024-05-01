@@ -28,7 +28,7 @@ const NewUserCar = () => {
                 type="button"
                 className="w-full rounded-full px-3 py-1
                 text-xs
-                bg-gradient-to-l from-[#05b5b2]  to-[#226798]
+                bg-gradient-to-l from-[#8506d9]  to-[#2c40c4]
                 ">
                     Add Car
                 </button>

@@ -309,7 +309,7 @@ const CarInfoNew = () => {
             <div className="flex flex-row w-full max-w-[900px] text-xs text_shadow">
                 <span onClick={()=>{navigate("/")}} className="cursor-pointer">Home</span>
                 <span className="right_caret h-full w-[1rem] text-transparent">.</span>
-                <span style={{color:"#00465f"}}>Add Car</span>
+                <span style={{color:"#b650ff"}}>Add Car</span>
             </div>
 
             <div className="w-full flex flex-row justify-center items-center gap-2">
@@ -335,7 +335,7 @@ const CarInfoNew = () => {
                         <li>
                             <label className="flex flex-row rounded-[5px] overflow-hidden
                             focus-within:outline outline-offset-[3px] outline-2
-                            outline-[#0bb97f]">
+                            outline-[#8506d9]">
                                 <span className="w-[30%] bg-[#00000053] pt-[1px]
                                 text-center">Brand</span>
                                 <input className="w-[70%] text-[#000000d6]
@@ -353,7 +353,7 @@ const CarInfoNew = () => {
                         <li>
                             <label className="flex flex-row rounded-[5px] overflow-hidden
                             focus-within:outline outline-offset-[3px] outline-2
-                            outline-[#0bb97f]">
+                            outline-[#8506d9]">
                                 <span className="w-[30%] bg-[#00000053] pt-[1px]
                                 text-center">Model</span>
                                 <input className="w-[70%] text-[#000000d6]
@@ -372,7 +372,7 @@ const CarInfoNew = () => {
                         <li>
                             <label className="flex flex-row rounded-[5px] overflow-hidden
                             focus-within:outline outline-offset-[3px] outline-2
-                            outline-[#0bb97f]">
+                            outline-[#8506d9]">
                                 <span className="w-full bg-[#00000053] pt-[1px]
                                 text-center">Add Image</span>
                                 <input className="hidden" type="file"
@@ -389,7 +389,7 @@ const CarInfoNew = () => {
                                 type="submit"
                                 className="w-full rounded-full px-3 py-1
                                 text-xs
-                                bg-gradient-to-l from-[#05b5b2]  to-[#226798]
+                                bg-gradient-to-l from-[#8506d9]  to-[#2c40c4]
                                 ">
                                     {carInfo._id == "" ? ("Add Car"):("Apply Changes")}
                                 </button>
@@ -405,7 +405,8 @@ const CarInfoNew = () => {
                                 type="button"
                                 className="w-full rounded-full px-3 py-1
                                 text-xs
-                                bg-gradient-to-l from-[#81043a]  to-[#226798]
+                                bg-gradient-to-l from-[#8506d9]  to-[#2c40c4]
+
                                 ">
                                     Delete Car
                                 </button>

@@ -264,10 +264,10 @@ const CheckCard = ({checks, carId}: {
     
     <div className="flex flex-col flex-wrap lg:flex-row lg:gap-4 lg:justify-center">
 
-        {checks.length > 0 && checks.map((check) => { 
+        {checks.length > 0 && checks.map((check,index) => { 
          
             const info = {
-                _id: check.name,
+                _id: check.name+" "+index,
                 color: check.color,
                 name: check.name,
                 lastCheck: (check.history.length > 1 ? check.history[1].checkedOn : "not yet" ),

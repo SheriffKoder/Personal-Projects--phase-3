@@ -41,7 +41,7 @@ const App = () => {
 
 
     <div className="
-      bg-gradient-to-bl from-[#05a570] via-[#2779b3] to-[#226798]
+      bg-gradient-to-bl from-[#6505a5] via-[#2f0590] to-[#1a2777]
       min-h-[100vh] max-w-[100vw] text-white
       flex flex-col min-w-[350px]
       

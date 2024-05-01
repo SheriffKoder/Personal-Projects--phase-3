@@ -43,10 +43,34 @@ const SignUp = () => {
                         password: "${userInfo.password}"
                         
                       })
-                    {
+                      {
                         _id
                         email
                         name
+                        token
+                        cars {
+                            _id
+                            brand
+                            carModel
+                            image
+                            lastCheck
+                            nextCheck
+                            userId
+                            checks {
+                                name
+                                color
+                                history {
+                                    addDate
+                                    initialCheck
+                                    nextCheck
+                                    checkedOn
+                                    notes
+                                }
+                            }
+                            createdAt
+                            updatedAt
+                        }
+                        
                     }
                 }
             `
@@ -62,11 +86,11 @@ const SignUp = () => {
         })
         const res = await apiResponse.json();
         console.log(res);
-        // console.log(apiResponse.status);
+        console.log(apiResponse.status);
 
-        // setUser(res.data.signUp);
-        navigate("/login");
-
+        setUser(res.data.signUp);
+        // navigate("/");
+        console.log(res.data.signUp);
 
     }
 
@@ -80,7 +104,7 @@ const SignUp = () => {
         <div className="ml-4 md2:ml-auto flex flex-row w-full max-w-[900px] text-xs text_shadow mx-auto">
             <span onClick={()=>{navigate("/")}} className="cursor-pointer">Welcome</span>
             <span className="right_caret h-full w-[1rem] text-transparent">.</span>
-            <span style={{color:"#00465f"}}>Sign-up</span>
+            <span style={{color:"#b650ff"}}>Sign-up</span>
         </div>
 
         <div className="flex flex-col items-center justify-center flex-1 px-4">
@@ -97,7 +121,7 @@ const SignUp = () => {
                     <li>
                         <label className="flex flex-row rounded-[5px] overflow-hidden
                         focus-within:outline outline-offset-[3px] outline-2
-                        outline-[#0bb97f]">
+                        outline-[#8506d9]">
                             <span className="w-[30%] bg-[#00000053] pt-[1px]
                             text-center">Name</span>
                             <input className="w-[70%] text-[#000000d6]
@@ -111,7 +135,7 @@ const SignUp = () => {
                     <li>
                         <label className="flex flex-row rounded-[5px] overflow-hidden
                         focus-within:outline outline-offset-[3px] outline-2
-                        outline-[#0bb97f]">
+                        outline-[#8506d9]">
                             <span className="w-[30%] bg-[#00000053] pt-[1px]
                             text-center">Email</span>
                             <input className="w-[70%] text-[#000000d6]
@@ -125,7 +149,7 @@ const SignUp = () => {
                     <li>
                         <label className="flex flex-row rounded-[5px] overflow-hidden
                         focus-within:outline outline-offset-[3px] outline-2
-                        outline-[#0bb97f]">
+                        outline-[#8506d9]">
                             <span className="w-[30%] bg-[#00000053] pt-[1px]
                             text-center">Password</span>
                             <input className="w-[70%] text-[#000000d6]
@@ -141,7 +165,7 @@ const SignUp = () => {
                         type="submit"
                         className="w-full rounded-full px-3 py-1
                         text-xs
-                        bg-gradient-to-l from-[#05b5b2]  to-[#226798]
+                        bg-gradient-to-l from-[#8506d9]  to-[#2c40c4]
                         ">
                             create account
                         </button>

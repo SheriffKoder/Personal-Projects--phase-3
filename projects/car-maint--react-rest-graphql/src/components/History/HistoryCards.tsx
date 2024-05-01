@@ -241,7 +241,7 @@ const HistoryCards = ({check}:{
         <div className="flex flex-row w-full max-w-[900px] mb-8 text-xs text_shadow">
             <span onClick={()=>{navigate("/")}} className="cursor-pointer">Home</span>
             <span className="right_caret h-full w-[1rem] text-transparent">.</span>
-            <span style={{color:"#00465f"}}>History ( {check.name} )</span>
+            <span style={{color:"#b650ff"}}>History ( {check.name} )</span>
         </div>
         
         <div className="flex flex-col w-full max-w-[600px]">
@@ -319,7 +319,7 @@ const HistoryCards = ({check}:{
 
                         <li className="w-full flex flex-row ml-2">
                             <div className="min-w-[7rem]">
-                            Next Check: 
+                            <span className="mr-1">Next Check:</span>
                             {currentCheck.nextCheck !== "" ? currentCheck.nextCheck : "not set" }
                             </div>
                         </li>
@@ -327,9 +327,16 @@ const HistoryCards = ({check}:{
 
                         <li className="w-full flex flex-row ml-2">
                             <div className="min-w-[7rem]">
-                            Remaining: {check.history[0].nextCheck !== "" ? getDayDifference(check.history[0].nextCheck) : "not set"}
-                            {getDayDifference(check.history[0].nextCheck) > 1 && " Days"}
-                            {getDayDifference(check.history[0].nextCheck) === 1 && " Day"}
+                            <span className="mr-1">Remaining:</span> 
+                            {check.history[0].nextCheck == "" && "not set"}
+                            {getDayDifference(check.history[0].nextCheck) != 0 && check.history[0].nextCheck != "" && getDayDifference(check.history[0].nextCheck)}
+                            {getDayDifference(check.history[0].nextCheck) == 0 && null}
+
+                            {getDayDifference(check.history[0].nextCheck) > 1 && " Days before time"}
+                            {getDayDifference(check.history[0].nextCheck) === 1 && " Day before time"}
+                            {getDayDifference(check.history[0].nextCheck) === 0 && " Should be done Today"}
+                            {getDayDifference(check.history[0].nextCheck) === -1 && " Day behind"}
+                            {getDayDifference(check.history[0].nextCheck) < -1 && " Days behind"}
 
                             </div>
                         </li>
@@ -398,24 +405,24 @@ const HistoryCards = ({check}:{
                             <ul className="flex flex-col gap-1">
                 
                                 <li className="w-full flex flex-row ml-2">
-                                    <div className="min-w-[7rem]">Previous check was:</div>
+                                    <div className="min-w-[7rem] mr-1">Previous check was:</div>
                                     <div>{check.history[historyIndex-1].checkedOn}</div>
                                 </li>
                             
                                 <li className="w-full flex flex-row ml-2">
-                                    <div className="min-w-[7rem]">should be checked on: </div>
+                                    <div className="min-w-[7rem] mr-1">should be checked on: </div>
                                     <div>{info.nextCheck}</div>
                                 </li>
                 
 
                                 <li className="w-full flex flex-row ml-2">
-                                    <div className="min-w-[7rem]">was checked on: </div>
+                                    <div className="min-w-[7rem] mr-1">was checked on: </div>
                                     <div>{info.checkedOn}</div>
                                 </li>
 
 
                                 <li className="w-full flex flex-row ml-2">
-                                    <div className="min-w-[7rem]">duration:</div>
+                                    <div className="min-w-[7rem] mr-1">duration:</div>
                                     <div>
                                         {getDayDifference(info.nextCheck)}
                                         {getDayDifference(info.nextCheck) > 1 && " Days"}
@@ -424,12 +431,16 @@ const HistoryCards = ({check}:{
                                 </li>
                 
                                 <li className="w-full flex flex-row ml-2">
-                                    <div className="min-w-[7rem]">due by:</div>
+                                    <div className="min-w-[7rem] mr-1">due by:</div>
                                     <div>
                                         {/* {firstCheck.checkedOn - firstCheck.nextCheck} */}
-                                        {getDayDiffTwoDates(info.checkedOn, info.nextCheck)}
+                                        {Math.abs(getDayDiffTwoDates(info.checkedOn, info.nextCheck))}
+                                        
                                         {Math.abs(getDayDiffTwoDates(info.checkedOn, info.nextCheck)) > 1 && " Days"}
                                         {Math.abs(getDayDiffTwoDates(info.checkedOn, info.nextCheck)) === 1 && " Day"}
+
+                                        {getDayDiffTwoDates(info.checkedOn, info.nextCheck) > 0 && <span> overdue &#x26a0;</span>}
+                                        {getDayDiffTwoDates(info.checkedOn, info.nextCheck) < 0 && <span> ahead &#10004;</span>} 
                                     </div>                                
                                 </li>
                                 
@@ -494,26 +505,26 @@ const HistoryCards = ({check}:{
                     <ul className="flex flex-col gap-1">
 
                     <li className="w-full flex flex-row ml-2">
-                        <div className="min-w-[7rem]">Previous check was:</div>
+                        <div className="min-w-[7rem] mr-1">Previous check was:</div>
                         <div>
                             {firstCheck.initialCheck === "" ? "not set" : firstCheck.initialCheck}
                         </div>
                     </li>
                 
                     <li className="w-full flex flex-row ml-2">
-                        <div className="min-w-[7rem]">should be checked on: </div>
+                        <div className="min-w-[7rem] mr-1">should be checked on: </div>
                         <div>{firstCheck.nextCheck}</div>
                     </li>
     
 
                     <li className="w-full flex flex-row ml-2">
-                        <div className="min-w-[7rem]">was checked on: </div>
+                        <div className="min-w-[7rem] mr-1">was checked on: </div>
                         <div>{firstCheck.checkedOn}</div>
                     </li>
 
 
                     <li className="w-full flex flex-row ml-2">
-                        <div className="min-w-[7rem]">duration:</div>
+                        <div className="min-w-[7rem] mr-1">duration:</div>
                         {/* <div>calc (nextDate-today)</div> */}
                         <div>
                             {getDayDifference(firstCheck.nextCheck)}
@@ -524,12 +535,16 @@ const HistoryCards = ({check}:{
                     </li>
     
                     <li className="w-full flex flex-row ml-2">
-                        <div className="min-w-[7rem]">due by:</div>
+                        <div className="min-w-[7rem] mr-1">due by:</div>
                         <div>
                             {/* {firstCheck.checkedOn - firstCheck.nextCheck} */}
-                            {getDayDiffTwoDates(firstCheck.checkedOn, firstCheck.nextCheck)}
+                            {Math.abs(getDayDiffTwoDates(firstCheck.checkedOn, firstCheck.nextCheck))}
+                                        
                             {Math.abs(getDayDiffTwoDates(firstCheck.checkedOn, firstCheck.nextCheck)) > 1 && " Days"}
                             {Math.abs(getDayDiffTwoDates(firstCheck.checkedOn, firstCheck.nextCheck)) === 1 && " Day"}
+    
+                            {getDayDiffTwoDates(firstCheck.checkedOn, firstCheck.nextCheck) > 0 && <span> overdue &#x26a0;</span>}
+                            {getDayDiffTwoDates(firstCheck.checkedOn, firstCheck.nextCheck) < 0 && <span> ahead &#10004;</span>} 
                         </div>
                     </li>
                     
