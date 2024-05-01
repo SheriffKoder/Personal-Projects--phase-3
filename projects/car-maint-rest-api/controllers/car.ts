@@ -11,6 +11,20 @@ const thisMonth = today.getMonth()+1;
 
 const todayString = today.getFullYear() + "-" + thisMonth + "-" + today.getDate();
 
+// make months and days less than 10 to be stored with a 0 before
+// to be displayed in the date forms on the front end
+// as this completedOn, addedOn dates are API generated not front-end form generated
+let fixedDate = "";
+todayString.split("-").forEach((number, index)=> {
+    if (index === 1 || index === 2) {
+        (Number(number) < 10) ?  fixedDate = fixedDate+"-0"+number : fixedDate = fixedDate+"-"+number;
+    } else if (index === 0) {
+        fixedDate = fixedDate+number;
+    }
+})
+
+
+
 import { clearImage } from "../util/clearImage";
 
 //API 0.2 - user model car object
@@ -261,7 +275,7 @@ exports.newCheck = async (req: Request, res:Response, next: NextFunction) => {
                     name: title as string,
                     color: color as string,
                     history: [{
-                        addDate: todayString,
+                        addDate: fixedDate,
                         initialCheck: initialCheck,
                         nextCheck: nextCheck,
                         checkedOn: "",
@@ -418,12 +432,12 @@ exports.completeCheck = async (req: Request, res:Response, next: NextFunction) =
             // console.log(currentCar.checks[checkIndex].history);
                 //add the check base
                 //modify the currentCar base info and keep the history
-                tempCar.checks[+checkIndex].history[0].checkedOn = todayString;
+                tempCar.checks[+checkIndex].history[0].checkedOn = fixedDate;
 
             // console.log(currentCar.checks[checkIndex].history);
 
             tempCar.checks[+checkIndex].history.unshift({
-                addDate: todayString,
+                addDate: fixedDate,
                 checkedOn: "",
                 initialCheck: "",
                 nextCheck: "",
