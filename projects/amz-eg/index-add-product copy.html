@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amazon.eg</title>
+
+    <style>
+        @import url('https://fonts.cdnfonts.com/css/amazon-ember');
+        main {
+            /* height: 130vh; */
+        }
+    </style>
+
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+
+    <link rel="stylesheet" href="./css/basic.css">
+    <link rel="stylesheet" href="./css/nav_style.css">
+    <!-- <link rel="stylesheet" href="./css/admin-products.css"> -->
+    <link rel="stylesheet" href="./css/add-product_style.css">
+    <link rel="stylesheet" href="./css/footer_style.css">
+
+
+
+
+</head>
+<body>
+
+    <header>
+        <nav id="main-navigation" aria-label="the main">
+            <div class="main-navigation__wrapper">
+            <div class="main-navigation__container">
+                <ul class="main-navigation__List-1">
+                    <li class="main-navigation__List-1-link-small not_desktop">
+                        <a id="header-menu" aria-label="browse categories">=</a>
+                    
+                    </li>
+                    <li class="main-navigation__List-1-link-logo"><a href="./index-all.html" id="header-logo" aria-label="Amazon egypt home"></a><a href="" id="header-logo--text" aria-label="country selection, currently browsing amazon egypt shop">.eg</a></li>
+                    <li class="main-navigation__List-1-link not_mobile"><a href="" aria-label="choose delivery destination country">Deliver to</a></li>
+                </ul>
+
+                <div class="main-navigation__container-separator"></div>
+
+                <ul class="main-navigation__List-2">
+                    <li class="main-navigation__List-2-link not_mobile"><a href="">Language</a></li>
+                    <li class="main-navigation__List-2-link login-link">
+                        <a href="" class="">Login</a>
+                        <span id="login-link--hover-menu">
+                            <div class="login-link--hover-menu--section1">
+                                <ul class="login-link--hover-menu--section--buy-again">
+                                    <li class="hover-menu__item--header">
+                                        <h4>Buy it Again</h4>
+                                        <a href="">View All & Manage</a></li>
+                                    <li>
+                                        <div class="hover-menu__item-container">
+                                            <div class="hover-menu__item-container--image-container">
+                                                <img src="./img/product-image.jpg">
+                                            </div>
+                                            <div class="hover-menu__item-container--info-container">
+                                                <a href="">Zeina asdasd wqeqweqwe adasdasd</a>
+                                                <p class="">EGP 78.00</p>
+                                                <button class="yellow-button">Add to Cart</button>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="login-link--hover-menu--section2">
+                                <ul>
+                                    <li><h4>Your Lists</h4></li>
+                                    <li><a href="">Favorites</a></li>
+                                    <li><a href="">Create a List</a></li>
+
+                                </ul>
+
+                            </div>
+                            <div class="login-link--hover-menu--section3">
+                                <ul>
+                                    <li>
+                                        <h4>Your Account</h4>
+                                        <span class="mobile-menu-close--container">
+                                            <button class="mobile-menu-close">x</button>
+                                        </span>
+                                    </li>
+                                    <li><a href="./index.html">Your Products on Sale</a></li>
+                                    <li><a href="./index-add-product.html">Add a Product</a></li>
+                                    <li><a href="./index-orders.html">Your Orders</a></li>
+                                    <li><a href="">Logout</a></li>
+
+                                </ul>
+
+                            </div>
+
+                        </span>
+                    </li>
+                    <li class="main-navigation__List-2-link not_mobile"><a href="">Orders</a></li>
+                    <li class="main-navigation__List-2-link-small"><a href="">Cart</a></li>
+                </ul>
+
+                <div class="main-navigation__search">
+                    <form id="main-navigation__search-form" aria-label="the search area">
+                        <select id="main-navigation__search-categories" aria-label="Browse categories">
+                            <option>
+                            All Categories
+                        </option>
+                            <optgroup label="category1">
+                                <option>Electronics</option>
+                                <option>Home</option>
+                            </optgroup>
+                        </select>
+                        <span class="select-caret-down"></span>
+                        <input type="search" id="main-navigation__search-box" placeholder="Search Amazon.eg" autocomplete="off" aria-label="Search Amazon.eg" spellcheck="false" >
+                        <button type="submit" id="main-navigation__search-button" aria-label="Submit search"></button>
+                    </form>
+                </div>
+
+            </div>
+            </div>
+            <div class="sub_navigation__wrapper">
+            <div class="sub-navigation__container">
+                <ul class="sub_navigation__list-1" aria-label="list of recommended categories">
+                    <li class="sub_navigation__list-1-link"><a href="">= All</a></li>
+                    <li class="sub_navigation__list-1-link"><a href="">Today's Deals</a></li>
+                    <li class="sub_navigation__list-1-link"><a href="">Fashion</a></li>
+                    <li class="sub_navigation__list-1-link"><a href="">Mobile Phones</a></li>
+                    <li class="sub_navigation__list-1-link"><a href="">Prime</a></li>
+                    <li class="sub_navigation__list-1-link"><a href="">Electronics</a></li>
+                    <li class="sub_navigation__list-1-link"><a href="">Grocery</a></li>
+                    <li class="sub_navigation__list-1-link"><a href="">Home</a></li>
+
+                </ul>
+            </div>
+        </div>
+        </nav>
+    </header>
+
+    <main class="">
+
+        <form class="main__main__wrapper">
+            <h1>Add a Product</h1>
+
+            <div class="main__main--input-container">
+                <h2>Main Information</h2>
+                <div class="main__main--input-field-wrapper">
+                    <h3>Name and Price</h3>
+                    
+                    <div>
+                        <label for="productTitle">Product's title <small>(required)</small></label>
+                        <input required type="text" placeholder="product's title" name="productTitle">
+                    </div>
+
+                    <div>
+                        <label for="productPrice">Product's price <small>(required)</small></label>
+                        <input required type="text" placeholder="product's price" name="productPrice">
+                    </div>
+                </div>
+
+                <div class="main__main--input-field-wrapper">
+                    <h3>Product's Image</h3>
+
+                    <div>
+                        <label for="productTitle">Select Image <small>(required)</small></label>
+                        <input required type="text" placeholder="product's title" name="productTitle">
+                    </div>
+                    
+                    <div>
+                        <label for="productTitle">Image's Description <small>(required)</small></label>
+                        <input required type="text" placeholder="product's title" name="productTitle"> 
+                    </div>    
+
+                </div>
+
+
+                <div class="main__main--input-field-wrapper">
+                    <h3>Stock</h3>
+                    <div>
+                        <label for="productColor">How many items available <small>(required)</small></label>
+                        <input required type="number" placeholder="product's color" name="productAvailability">
+                    </div>
+                    <!-- <label for="productColor">How many items sold</label>
+                    <input type="text" placeholder="product's color" name="productColor"> -->
+
+                    <!-- <label for="productColor">Product's Availability</label>
+                    <input type="text" placeholder="product's color" name="productColor"> -->
+                </div>
+
+                <div class="main__main--input-field-wrapper check-box--wrapper">
+                    <h3>Customer delivery Option <small>(required)</small></h3>
+                    <p>Does the product's price include the delivery fees ?</p>
+                    <div class="check-box--container">
+                        <input required type="radio" name="productColor">
+                        <label for="delivery_included">Delivery Included</label>
+                    </div>
+                    <div class="check-box--container">
+                        <input required type="radio" name="productColor">
+                        <label for="delivery_not_included">Delivery Not Included</label>
+                    </div>
+                </div>
+
+
+            </div>
+
+
+            <div class="main__main--input-container">
+                <h2>Product's Description</h2>
+
+                <div class="main__main--input-field-wrapper">
+                    <h3>Description and Features</h3>
+
+                    <div class="input-field-container">
+                        <label for="productTitle">Product's Short Introduction <small>(required)</small></label>
+                        <input required type="text" placeholder="product's title" name="productTitle">        
+                    </div>
+
+                    <div>
+                        <label for="productDescriptionText">Product's Description <small>(required)</small></label>
+                        <textarea required id="productDescriptionText" name="productDescriptionText" placeholder="Describe your product"></textarea>
+                    </div>
+
+                    <div>
+                        <label for="productTitle">Product's Feature 1 <small>(required)</small></label>
+                        <input required type="text" placeholder="product's title" name="productTitle">        
+                    </div>
+
+                    <div>
+                        <label for="productTitle">Product's Feature 2<small>(optional)</small></label>
+                        <input type="text" placeholder="product's title" name="productTitle">        
+                    </div>
+
+                    <div>
+                        <label for="productTitle">Product's Feature 3 <small>(optional)</small></label>
+                        <input type="text" placeholder="product's title" name="productTitle">        
+                    </div>
+
+                </div>
+
+                <div class="main__main--input-field-wrapper">
+                    <h3>Categories</h3>
+
+                    <div class="input-field">
+                        <label for="productColor">Product's age category <small>(required)</small></label>
+                        <select required>
+                            <option>Adult</option>
+                            <option>Child</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="productColor">Product's Department <small>(required)</small></label>
+                        <select required id="productDepartment">
+                            <option>Select Department</option>
+                            <option>Electronics</option>
+                            <option>Clothing</option>
+                        </select>
+                    </div>
+
+                    <div id="productSection_Electronics">
+                        <label for="productColor">Product's Electronics Section <small>(required)</small></label>
+                        <select required>
+                            <option>Speakers</option>
+                            <option>Phones</option>
+                        </select>
+                    </div>
+
+                    <div id="productSection_Clothing">
+                        <label for="productColor">Product's Clothing Section <small>(required)</small></label>
+                        <select required>
+                            <option>Watches</option>
+                            <option>Garments</option>
+                        </select>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="main__main--input-container">
+                <h2>Product's Specifications</h2>
+                <div class="main__main--input-field-wrapper">
+                    <h3>Product's Details</h3>
+
+                    <div class="input-field-container">
+                        <label for="productColor">Product's brand <small>(required)</small></label>
+                        <input required type="text" placeholder="product's color" name="productColor">
+                    </div>
+
+                    <div class="input-field-container">
+                        <label for="productColor">Product's model <small>(optional)</small></label>
+                        <input type="text" placeholder="product's color" name="productColor">
+                    </div>
+
+                    <div class="input-field-container">
+                        <label for="productColor">Product's type <small>(optional)</small></label>
+                        <input type="text" placeholder="product's color" name="productColor">
+                    </div>
+
+                    <div class="input-field-container">
+                        <label for="productColor">Product's color <small>(optional)</small></label>
+                        <input type="text" placeholder="product's color" name="productColor">
+                    </div>
+
+                    <div class="input-field-container">
+                        <label for="productColor">Product's technology <small>(optional)</small></label>
+                        <input type="text" placeholder="product's color" name="productColor">
+                    </div>
+
+                    <div class="input-field-container">
+                        <label for="productColor">Product's main special features <small>(optional)</small></label>
+                        <input type="text" placeholder="product's color" name="productColor">
+                    </div>
+
+                    <div class="input-field-container">
+                        <label for="productColor">Product's included components <small>(optional)</small></label>
+                        <input type="text" placeholder="product's color" name="productColor">
+                    </div>
+
+                    <div class="input-field-container">
+                        <label for="productColor">Product's material <small>(required)</small></label>
+                        <input required type="text" placeholder="product's color" name="productColor">
+                    </div>
+
+                </div>
+
+                    <div class="main__main--input-field-wrapper">
+                        <h3>Manufacturing Details</h3>
+
+                        <div class="input-field-container">
+                            <label for="productColor">Manufacturing country <small>(required)</small></label>
+                            <input required type="text" placeholder="product's color" name="productColor">
+                        </div>
+
+                        <div class="input-field-container">
+                            <label for="productColor">Model Number <small>(required)</small></label>
+                            <input required type="text" placeholder="product's color" name="productColor">
+                        </div>
+
+                        <div class="input-field-container">
+                            <label for="productColor">Item's serial number <small>(required)</small></label>
+                            <input required type="text" placeholder="product's color" name="productColor">
+                        </div>
+
+                        <div class="input-field-container--size">
+
+                            <div class="input-field-container--size--input-container">
+                                <label for="productColor">Package's weight:</label>
+                                <div for="productColor">in (KG)</div>
+                                <input required type="text" placeholder="product's color" name="productColor">
+                                <span><small>required*</small></span>
+                            </div>
+
+                            <h4 for="productColor">Package's size: <small>all fields are required* in centimeters*</small></h4>
+
+                            <div class="input-field-container--size--input-container">
+                                <label for="productColor">Length:</label>
+                                <input required type="text" placeholder="product's color" name="productColor">
+                            </div>
+
+                            <div class="input-field-container--size--input-container">
+                                <label for="productColor">Height:</label>
+                                <input required type="text" placeholder="product's color" name="productColor">
+                            </div>
+
+                            <div class="input-field-container--size--input-container">
+                                <label for="productColor">Width:</label>
+                                <input required type="text" placeholder="product's color" name="productColor">
+                            </div>
+                        </div>
+
+                    </div>
+
+            </div>
+
+            <div class="submit-form--button--container">
+                <button class="submit-form--button"type="submit">Add Product to Amazon</button>
+            </div>
+
+        </form>
+
+
+    </main>
+
+
+    <footer class="main-footer" id="main-footer">
+
+        <nav class="main-footer__content-scrollLink" aria-label="Back to top of page">
+            <!-- <i class="fa fa-caret-up" style="font-size:13px"></i> -->
+            <div class="caret-up-white"></div>
+            <a href="#main-navigation">Back to top</a>
+        </nav>
+
+        <nav class="main-footer__content-links1-mobile" aria-label="links area about account control">
+            <a href="#footer_links_2" aria-label="skip to next link area" class="sr-only">next</a>
+            <ul class="main-footer__content-links1-mobile-list">
+                <li><a href="">Your Account</a></li>
+                <li><a href="">Your Addresses </a></li>
+                <li><a href="">Your amazon.eg</a></li>
+                <li><a href="">Sell</a></li>
+                <li><a href="">Customer Service</a></li>
+
+            </ul>
+
+            <ul class="main-footer__content-links1-mobile-list">
+                <li><a href="">Your Orders</a></li>
+                <li><a href="">Your Lists</a></li>
+                <li><a href="">Browsing History</a></li>
+                <li><a href="">Returns</a></li>
+            </ul>
+        </nav>
+
+        
+
+        <div class="main-footer__content-links1-wrapper">
+        <nav class="main-footer__content-links1" aria-label="link area contains more about amazon, account access, sell with amazon, help links">
+            <a href="#footer_links_2" aria-label="skip to next link area" class="sr-only">next</a>
+            <ul class="main-footer__content-links1-list">
+                <li><h3>header</h3></li>
+                <li><a href="">Your Account</a></li>
+                <li><a href="">Your Addresses </a></li>
+                <li><a href="">Your amazon.eg</a></li>
+                <li><a href="">Sell</a></li>
+                <li><a href="">Customer Service</a></li>
+
+            </ul>
+
+            <ul class="main-footer__content-links1-list">
+                <li><h3>header</h3></li>
+                <li><a href="">Your Account</a></li>
+                <li><a href="">Your Addresses </a></li>
+                <li><a href="">Your amazon.eg</a></li>
+                <li><a href="">Sell</a></li>
+                <li><a href="">Customer Service</a></li>
+
+            </ul>
+
+            <ul class="main-footer__content-links1-list">
+                <li><h3>header</h3></li>
+                <li><a href="">Your Account</a></li>
+                <li><a href="">Your Addresses </a></li>
+                <li><a href="">Your amazon.eg</a></li>
+                <li><a href="">Sell</a></li>
+                <li><a href="">Customer Service</a></li>
+
+            </ul>
+
+
+            <ul class="main-footer__content-links1-list">
+                <li><h3>header</h3></li>
+                <li><a href="">Your Orders</a></li>
+                <li><a href="">Your Lists</a></li>
+                <li><a href="">Browsing History</a></li>
+                <li><a href="">Returns</a></li>
+            </ul>
+        </nav>
+        </div>
+
+
+        <div  aria-label="" class="sr-only" id="footer_links_2"></div>
+        <nav class="main-footer__content-links2" id="" aria-label="language and region control">
+            <a href="#footer_links_3" aria-label="skip to next link area" class="sr-only">next</a>
+            <ul class="main-footer__content-links2-list" >
+                <li class="main-footer__content-links2-list-logo">
+                    <a href="" id="footer-logo"></a>
+                </li>
+                <li>
+                    <a href="" class="main-footer__content-links2-list-item1" aria-label="language selection">
+                        <span>English</span>
+                        <span class="select-caret-down"></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="" class="main-footer__content-links2-list-item2" aria-label="country selection">
+                        <span>Egypt</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+
+        <div class="main-footer__content-signin mobile_only">
+            <p>Already a customer ? <a href="" aria-label="sign in link">Sign in</a></p>
+        </div>
+
+        <div id="footer_links_3" aria-label="" class="sr-only"></div>
+        <div class="main-footer__content-description-wrapper" id="">
+        <nav class="main-footer__content-description" aria-label="links area more on amazon">
+            <a href="#footer_links_4" aria-label="skip to next link area"></a>
+            <table collapsing="0">
+                <tbody>
+                    <tr>
+                        <td class="footer__content-description-data">
+                            <a href="">
+                                Amazon Advertising
+                            </a>
+                            <span>
+                                Find, attract and engage customers
+                            </span>
+                        </td>
+
+                        <td class="footer__content-description-space"></td>
+
+                        <td class="footer__content-description-data">
+                            <a href="">
+                                Amazon Advertising
+                            </a>
+                            <span>
+                                Find, attract and engage customers
+                            </span>
+                        </td>
+
+                        <td class="footer__content-description-space"></td>
+
+                        <td class="footer__content-description-data">
+                            <a href="">
+                                Amazon Advertising
+                            </a>
+                            <span>
+                                Find, attract and engage customers
+                            </span>
+                        </td>
+
+                        <td class="footer__content-description-space"></td>
+
+                        <td class="footer__content-description-data">
+                            <a href="">
+                                Amazon Advertising
+                            </a>
+                            <span>
+                                Find, attract and engage customers
+                            </span>
+                        </td>
+
+                        <td class="footer__content-description-space"></td>
+
+                        <td class="footer__content-description-data">
+                            <a href="">
+                                Amazon Advertising
+                            </a>
+                            <span>
+                                Find, attract and engage customers
+                            </span>
+                        </td>
+
+                    </tr>
+
+                    <tr>
+                        <td>&nbsp;</td>
+                    </tr>
+
+                    <tr>
+                        <td class="footer__content-description-data">
+                            <a href="">
+                                Amazon Advertising
+                            </a>
+                            <span>
+                                Find, attract and engage customers
+                            </span>
+                        </td>
+
+                        <td class="footer__content-description-space"></td>
+
+                        <td class="footer__content-description-data">
+                            <a href="">
+                                Amazon Advertising
+                            </a>
+                            <span>
+                                Find, attract and engage customers
+                            </span>
+                        </td>
+
+                        <td class="footer__content-description-space"></td>
+
+                        <td class="footer__content-description-data">
+                            <a href="">
+                                Amazon Advertising
+                            </a>
+                            <span>
+                                Find, attract and engage customers
+                            </span>
+                        </td>
+
+                        <td class="footer__content-description-space"></td>
+
+                        <td class="footer__content-description-data">
+                            <a href="">
+                                Amazon Advertising
+                            </a>
+                            <span>
+                                Find, attract and engage customers
+                            </span>
+                        </td>
+
+                        <td class="footer__content-description-space"></td>
+
+                        <td class="footer__content-description-data">
+                            <a href="">
+                                Amazon Advertising
+                            </a>
+                            <span>
+                                Find, attract and engage customers
+                            </span>
+                        </td>
+
+                    </tr>                
+                </tbody>
+            </table>
+        </nav>
+        </div>
+
+        <div id="footer_links_4" aria-label="" class="sr-only"></div>
+        <div class="main-footer__content-cp-wrapper">
+            <nav class="main-footer__content-cp" id="" aria-label="link area Privacy and conditions area">
+                <a href="#main-footer" aria-label="return to the beginning of the footer" class="sr-only">repeat</a>
+                <ul class="main-footer__content-cp-list" >
+                    <li class="main-footer__content-cp-list-li"><a href="">Conditions of Use & Sale</a></li>
+                    <li class="main-footer__content-cp-list-li"><a href="">Privacy Notice</a></li>
+                    <li class="main-footer__content-cp-list-li"><a href="">Interest-Based Ads</a></li>
+                </ul>
+                <span>©1996–2023, Amazon.com, Inc. or its affiliates</span>
+            </nav>
+        </div>
+
+
+
+
+    </footer>
+    <a href="#main-footer" aria-label="return to the beginning of the footer" class="sr-only">repeat</a>
+
+    <script src="./js/code.jquery.com_jquery-3.7.0.js"></script>
+    <script src="./js/main_header.js"></script>
+    <script src="./js/main_add-product.js"></script>
+
+</body>
+</html>

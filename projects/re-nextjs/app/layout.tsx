@@ -19,12 +19,27 @@ import AuthProvider from "@components/AuthProvider";
 export const metadata = {
   title: 'RE Website',
   description: 'Search for your next home',
+  // icons: {
+  //   icon: [
+  //     {
+  //       media: '(prefers-color-scheme: light)',
+  //       url: '/favicon.png',
+  //       href: '/favicon.png',
+  //     },
+  //     {
+  //       media: '(prefers-color-scheme: dark)',
+  //       url: '/icon.png',
+  //       href: '/icon.png',
+  //     },
+  //   ],
+  // },
 }
 
 //for favicons just put icon.ico in the /app directory
 
 
 const RootLayout = ({ children }: { children: React.ReactNode}) => {
+  
   
 
 

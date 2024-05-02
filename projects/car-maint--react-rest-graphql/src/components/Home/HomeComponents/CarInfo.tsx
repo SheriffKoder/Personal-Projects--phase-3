@@ -54,11 +54,12 @@ const CarInfo =  ({info}: {
 
   const CarNextChecks = info.checks.map((check)=> {
     return check.history[0].nextCheck;
-  })
+  }).filter(p => p !== "");
 
   const CarLastChecks = info.checks.map((check)=> {
-    return check.history[0].checkedOn;
-  })
+    return check.history[check.history.length-1].checkedOn;
+  }).filter(p => p !== "");
+  
   // console.log(CarNextChecks);
   // const NearestNextCheck = "";
   const NearestNextCheck = getNearestDay(CarNextChecks)

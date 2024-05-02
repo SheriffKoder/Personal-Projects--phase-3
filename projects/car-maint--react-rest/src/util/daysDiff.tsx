@@ -30,13 +30,18 @@ export const getNearestDay = (arrayOfDates:string[]) => {
     //now we have an array of dates, want to get the nearest date
   //so if we are on index 1 compare with nearest, set as nearest if it is less and also more than today
   //go to index 2, compare with nearest, if so, set to set as nearest if not continue
-  
+  console.log(arrayOfDates);
+
   if (arrayOfDates.length === 0) {
     return "--";
+  } else if (arrayOfDates.length === 1) {
+    return arrayOfDates[0];
   } else {
+
     let nearestCheckDate = arrayOfDates[0]; //oldest by default and keep increasing
     let today = new Date();
-    let todayString = today.getFullYear() + "-" + today.getMonth()+1 + "-" + today.getDate();
+    const thisMonth = today.getMonth()+1;
+    const todayString = today.getFullYear() + "-" + thisMonth + "-" + today.getDate();
 
     // console.log(todayString);
     for (let i=1; i<arrayOfDates.length; i++) {
@@ -64,7 +69,7 @@ export const getNearestDay2 = (arrayOfDates:string[]) => {
     //now we have an array of dates, want to get the nearest date
   //so if we are on index 1 compare with nearest, set as nearest if it is less and also more than today
   //go to index 2, compare with nearest, if so, set to set as nearest if not continue
-  
+  console.log(arrayOfDates);
   if (arrayOfDates.length === 0) {
     return "--";
   } else {

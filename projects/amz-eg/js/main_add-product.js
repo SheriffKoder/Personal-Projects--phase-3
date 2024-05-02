@@ -15,24 +15,24 @@ smallElementsArray.forEach(tag => {
 });
 
 
-const selector = document.querySelector("#productDepartment");
-const section_electronics = document.querySelector("#productSection_Electronics");
-const section_clothing = document.querySelector("#productSection_Clothing");
+const DepartmentSelect = document.querySelector("#productDepartment");
+const SelectSection_Electronics = document.querySelector("#productSection_Electronics");
+const SelectSection_Clothing = document.querySelector("#productSection_Clothing");
 
 
-selector.addEventListener("change", (e)=> {
+DepartmentSelect.addEventListener("change", (e)=> {
     let section =  e.target.value;
 
     if (section === "Electronics") {
-        section_electronics.style.display = "inline";
-        section_clothing.style.display = "none";
+        SelectSection_Electronics.style.display = "inline";
+        SelectSection_Clothing.style.display = "none";
 
     } else if (section === "Clothing") {
-            section_electronics.style.display = "none";
-            section_clothing.style.display = "inline";
+        SelectSection_Electronics.style.display = "none";
+        SelectSection_Clothing.style.display = "inline";
     } else {
-        section_electronics.style.display = "none";
-        section_clothing.style.display = "none";
+        SelectSection_Electronics.style.display = "none";
+        SelectSection_Clothing.style.display = "none";
     }
 
-})
+});

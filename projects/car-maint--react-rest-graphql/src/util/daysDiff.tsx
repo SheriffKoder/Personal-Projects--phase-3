@@ -33,28 +33,31 @@ export const getNearestDay = (arrayOfDates:string[]) => {
   
   if (arrayOfDates.length === 0) {
     return "--";
-  } else {
-    let nearestCheckDate = arrayOfDates[0]; //oldest by default and keep increasing
-    let today = new Date();
-    let todayString = today.getFullYear() + "-" + today.getMonth()+1 + "-" + today.getDate();
+    
+    } else if (arrayOfDates.length === 1) {
+        return arrayOfDates[0];
+    } else {
+        let nearestCheckDate = arrayOfDates[0]; //oldest by default and keep increasing
+        let today = new Date();
+        let todayString = today.getFullYear() + "-" + today.getMonth()+1 + "-" + today.getDate();
 
-    // console.log(todayString);
-    for (let i=1; i<arrayOfDates.length; i++) {
-        if (arrayOfDates[i] < nearestCheckDate && arrayOfDates[i] > todayString) {
-        nearestCheckDate = arrayOfDates[i];
+        // console.log(todayString);
+        for (let i=1; i<arrayOfDates.length; i++) {
+            if (arrayOfDates[i] < nearestCheckDate && arrayOfDates[i] > todayString) {
+            nearestCheckDate = arrayOfDates[i];
 
+            }
         }
-    }
 
-    // console.log(nearestCheckDate);
+        // console.log(nearestCheckDate);
 
-        if(nearestCheckDate > todayString) {
-            return nearestCheckDate
-        } else if (nearestCheckDate.length < 1 ) {
-            return false;
-        } else {
-        return "overdue";
-        }
+            if(nearestCheckDate > todayString) {
+                return nearestCheckDate
+            } else if (nearestCheckDate.length < 1 ) {
+                return false;
+            } else {
+            return "overdue";
+            }
 
     }
 }
@@ -67,31 +70,34 @@ export const getNearestDay2 = (arrayOfDates:string[]) => {
   
   if (arrayOfDates.length === 0) {
     return "--";
-  } else {
+    
+    } else if (arrayOfDates.length === 1) {
+        return arrayOfDates[0];
+    } else {
 
-    let nearestCheckDate = arrayOfDates[0]; //oldest by default and keep increasing
-    let today = new Date();
-    let todayString = today.getFullYear() + "-" + today.getMonth()+1 + "-" + today.getDate();
+        let nearestCheckDate = arrayOfDates[0]; //oldest by default and keep increasing
+        let today = new Date();
+        let todayString = today.getFullYear() + "-" + today.getMonth()+1 + "-" + today.getDate();
 
-    // console.log(todayString);
-    for (let i=1; i<arrayOfDates.length; i++) {
-        if (arrayOfDates[i] < nearestCheckDate) {
-        nearestCheckDate = arrayOfDates[i];
+        // console.log(todayString);
+        for (let i=1; i<arrayOfDates.length; i++) {
+            if (arrayOfDates[i] < nearestCheckDate) {
+            nearestCheckDate = arrayOfDates[i];
 
+            }
         }
-    }
 
-    // console.log(nearestCheckDate);
+        // console.log(nearestCheckDate);
 
-    if(nearestCheckDate) {
-        return nearestCheckDate
-    } 
-    //else if (nearestCheckDate.length < 1 ) {
-    //     return "--";
-    // }
-    else {
-        return "no checks yet";
-    }
+        if(nearestCheckDate) {
+            return nearestCheckDate
+        } 
+        //else if (nearestCheckDate.length < 1 ) {
+        //     return "--";
+        // }
+        else {
+            return "no checks yet";
+        }
     
   }
 }

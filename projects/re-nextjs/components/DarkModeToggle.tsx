@@ -2,6 +2,7 @@
 
 "use client";
 import { scrollScroll } from "@utils/bodyNoScroll";
+import Head from "next/head";
 import { useState, useEffect } from "react";
 
 //the dark toggle icons, localStorage set on click/initial render/, icon management
@@ -111,7 +112,7 @@ const DarkModeToggle = () => {
     });
 
     return (
-
+      
         <div 
         id="toggleBG"
         className="relative flex flex-row rounded-full border-0 bg-[#bebebe2e] dark:bg-[#4f4f4f2e] h-8 w-16 cursor-pointer p-1">

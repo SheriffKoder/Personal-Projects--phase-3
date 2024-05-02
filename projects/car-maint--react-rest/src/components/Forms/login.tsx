@@ -195,7 +195,7 @@ const Login = () => {
         e.preventDefault();
         const url = process.env.REACT_APP_CURRENT_URL!;
 
-        const apiResponse = await fetch(url+"/auth/login", {
+        const apiResponse = await fetch(url.toString()+"/auth/login", {
             method: "POST",
             headers: {
                 "Content-type": "application/json"
