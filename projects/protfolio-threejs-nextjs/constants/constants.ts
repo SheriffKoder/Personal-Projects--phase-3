@@ -211,6 +211,7 @@ import {
       image1: "/images/projects/assets/amazon/wallpaper1.png",
       image2: "/images/projects/assets/amazon/wallpaper2.png",
       imagex: "/images/projects/assets/amazon/wallpaperx.png",
+      imageAnim:"",
       tech: ["HTML5", "CSS3", "JavaScript", "Accessibility","TypeScript", "ExpressJS", "NodeJS", "MongoDB"],
       link: "https://amazon-nodejs.onrender.com",
       icon: "/images/projects/assets/amazon/amazon-icon.jpg",
@@ -317,6 +318,7 @@ import {
       image1: "/images/projects/assets/realestateadmin/wallpaper1.png",
       image2: "/images/projects/assets/realestateadmin/wallpaper2.png",
       imagex: "/images/projects/assets/realestateadmin/wallpaperx.png",
+      imageAnim:"",
       tech: ["HTML5", "CSS3", "JavaScript", "TailwindCSS", "TypeScript", "MongoDB", "NextJS"],
       link: "https://phase-3-one.vercel.app/",
       icon: "/images/projects/assets/realestateadmin/re-icon.png",
@@ -442,8 +444,9 @@ import {
       image1: "/images/projects/assets/carmaint1/wallpaper1.png",
       image2: "/images/projects/assets/carmaint1/wallpaper2.png",
       imagex: "/images/projects/assets/carmaint1/wallpaperx.png",
+      imageAnim:"",
       tech: ["HTML5", "CSS3", "JavaScript", "TailwindCSS", "TypeScript", "MongoDB", "ReactJS", "ExpressJS"],
-      link: "https://www.google.com",
+      link: "https://carmaint-rest-full-react.vercel.app/",
       icon: "/images/projects/assets/carmaint1/carmaint1-icon.png",
       id: "practice-3",
       longerDescription: `
@@ -548,8 +551,9 @@ Yet to be added:<br/>
       image1: "/images/projects/assets/carmaint2/wallpaper1.png",
       image2: "/images/projects/assets/carmaint2/wallpaper2.png",
       imagex: "/images/projects/assets/carmaint2/wallpaperx.png",
+      imageAnim:"",
       tech: ["HTML5", "CSS3", "JavaScript", "TailwindCSS", "TypeScript", "MongoDB", "ReactJS", "GraphQL"],
-      link: "https://www.google.com",
+      link: "https://carmaint-graphql-react.vercel.app/",
       icon: "/images/projects/assets/carmaint2/carmaint2-icon.png",
       id: "practice-4",
       longerDescription: `
@@ -662,10 +666,11 @@ Yet to be added:<br/>
     {
       // phase2/courses/nodejs/section22 
       name: "Shop (express.js)",
-      description: `A simple shop application with the ability to add/delete products to/from a database `,
+      description: `A simple shop application with the ability to add/delete products to/from a database. `,
       image1: "/images/projects/assets/drafts/shopexpress/wallpaper1.png",
       image2: "",
       imagex: "",
+      imageAnim:"",
       tech: ["HTML5", "CSS3", "JavaScript", "ExpressJS", "NodeJS", "MongoDB"],
       link: "https://phase2-nodejs.onrender.com/products",
       icon: "/images/projects/assets/drafts/shopexpress/shopexpress.png",
@@ -683,9 +688,94 @@ Yet to be added:<br/>
       date: "2023"
 
     },
+    {
+      // phase2/courses/nodejs/section22 
+      name: "Promptopia",
+      description: `Sign in with your Google account to add/edit/delete posts. Done for the purpose of learning NextJS, Tailwind with a connected MongoDB database.`,
+      image1: "/images/projects/assets/drafts/shopexpress/wallpaper1.png",
+      image2: "",
+      imagex: "",
+      imageAnim:"",
+      tech: ["HTML5", "CSS3", "JavaScript", "NextJS", "TailwindCSS", "TypeScript", "MongoDB"],
+      link: "https://promptopia-two-umber.vercel.app",
+      icon: "/images/projects/assets/drafts/promptopia/icon.png",
+      id: "draft-2",
+      longerDescription: 
+      `
+      `,
+      type: "page",
+      date: "2023"
+
+    },
+    {
+      // phase2/courses/nodejs/section22 
+      name: "Movie Library",
+      description: `A website displaying the latest movies in theaters and their description with the Help of an API. Done for the purpose of learning ReactJS.`,
+      image1: "/images/projects/assets/drafts/movie-library/wallpaper1.png",
+      image2: "/images/projects/assets/drafts/movie-library/wallpaper2.png",
+      imagex: "",
+      imageAnim:"",
+      tech: ["HTML5", "CSS3", "JavaScript", "ReactJS"],
+      link: "https://react-movie-app-pink-tau.vercel.app/",
+      icon: "/images/projects/assets/drafts/movie-library/icon.png",
+      id: "draft-3",
+      longerDescription: 
+      `
+      Displaying the latest movies in theaters with their description and thumbnails with the help of the The Movie Database (TMDB) API.<br/>
+      The project emphasizes on the use of separate small components to be combined on a one major component.<br/>
+      The component styling was made through the "styled-components" third party library which allows for each component to have a file describing its css styling.<br/>
+      The configuration for fetching from the API was provided by the tutorial's author to explain from and focus on the idea of Learning reactJS.<br/>
+      This app was possible by <a href="https://www.youtube.com/@Weibenfalk">Thomas Vavenfeld</a>.<br/>
+      `,
+      type: "site",
+      date: "2023"
+
+    },
+    {
+      // phase2/courses/nodejs/section22 
+      name: "3D Calculator",
+      description: `A 3D calculator built only with HTML/CSS/Javascript`,
+      image1: "/images/projects/assets/drafts/calc/wallpaper1.png",
+      image2: "",
+      imagex: "",
+      imageAnim: "/images/projects/assets/drafts/calc/wallpaper1.gif",
+      tech: ["HTML5", "CSS3", "JavaScript"],
+      link: "https://calculator-kappa-self.vercel.app/",
+      icon: "/images/projects/assets/drafts/calc/icon.png",
+      id: "draft-4",
+      longerDescription: 
+      `
+      <h2>Calculator 3D Model</h2><br/>
+      One of my very early projects when I was starting learning HTML,CSS,Javascript.<br/>
+      There was an assignment in the Odin Project course to implement a simple calculator,<br/>
+      However I took it a step further to add more styling and functionality to emulate a CASIO scientific calculator in these points:<br/>
+      <br/>
+- Make a 3D effect with vanilla CSS.<br/>
+- Use any sign from * or X, / , + , -<br/>
+- Add and position a screen and buttons as an overlay over a real calculator image.<br/>
+- Accept long input lengths.<br/>
+- Calculate from inputs which can contain many and different signs together.<br/>
+- Be smart enough to know if it is valid to place a number, a sign, an open bracket or a closed bracket depending on the current input location in the input string.<br/>
+- Support nested brackets and be smart to not calculate input if the opened brackets are not closed yet properly.<br/>
+- Side by side brackets act as a multiplication calculation.<br/>
+- Support decimals.<br/>
+- Click DEL/keyboard backspace to remove from input.<br/>
+- Click =/keyboard-enter to display result.<br/>
+- Click AC/keyboard-CMD/keyboard-ESC to reset.<br/>
+<br/>
+<h3>Yet to be implemented</h3><br/>
+- the design allows to easily add future features of calculating more advanced
+calculations like tan(),cos(),sin(), power etc.<br/>
+- accept X or x as multiplication inputs in javascript calculations.<br/>
+- minor fixes and re-adjustments.<br/>
+      `,
+      type: "site",
+      date: "2023"
+
+    },
   ]
 
-
+  
   export const featuredProjects = [
     {...PracticeProjects[0], star: false}, {...PracticeProjects[1], star: true}, {...PracticeProjects[2], star: false}, {...PracticeProjects[3], star: false}
   ]
