@@ -40,9 +40,9 @@ const Sequelize = require("sequelize");
 //dialect makes sure we connect to mysql database, for using the correct syntax
 //host, by default it is set to localhost but we will set it here
 
-const sequelize = new Sequelize("SQL-Recap1", "root", "Blackvulture_92", {
+const sequelize = new Sequelize(process.env.DB_DBNAME, process.env.DB_USERNAME, process.env.DB_PASSWORD || "", {
     dialect: "mysql",
-    host: "localhost"
+    host: process.env.DB_HOST,
 });
 
 module.exports = sequelize;

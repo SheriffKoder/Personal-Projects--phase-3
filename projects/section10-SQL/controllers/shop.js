@@ -205,6 +205,8 @@ exports.postOrder = (req, res, next) => {
     .then(() => {
         //this will remove products from cart
         fetchedCart.setProducts(null); //(26)
+        res.redirect("/orders");
+
     })
 
 }

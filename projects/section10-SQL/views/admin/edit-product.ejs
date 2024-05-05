@@ -7,7 +7,7 @@
 <body>
     <%- include("../includes/navigation.ejs") %>
 
-
+    <%=console.log(typeof(product))%>
     <main>
         <form 
         class="product-form" 
@@ -29,8 +29,8 @@
             </div>
             <div class="form-control">
                 <label for="price">Price</label>
-                <input type="number" name="price" id="price" step="0.01"
-                value="<% if (editing) { %> <%=product.price%><%}%>"
+                <input type="text" name="price" id="price"
+                value="<% if (editing) { %> <%=Number(product.price)%><%}%>"
                 >
             </div>
             <div class="form-control">

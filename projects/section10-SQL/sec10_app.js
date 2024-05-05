@@ -1,5 +1,8 @@
 /*
 
+see this video to create a cloud SQL config for deployment
+https://www.youtube.com/watch?v=CXiT-DWn1zs
+
 Types of Storage: 
 Memory (variables)
 File
@@ -509,6 +512,7 @@ needs proper user identification
 const express = require("express");
 const app = express();
 const path = require("path");
+require("dotenv").config();
 
 const bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({extended:false}));
@@ -642,8 +646,7 @@ sequelize.sync()
 
 
 ////(2)listen to server
-app.listen(8000);
-
+app.listen(process.env.PORT || 3000);
 
 
 

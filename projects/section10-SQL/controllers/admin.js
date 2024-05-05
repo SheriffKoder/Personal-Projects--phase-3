@@ -59,17 +59,20 @@ exports.getEditProduct = (req, res, next) => {
 
     //Sequelize (4)
     //ProductClassModel.findByPk(prodId)
-    req.user.getProducts({ where: {id:prodId} }) //(10) //getProducts is given by sequelize automatically to find in the product model, as we did set a hasMany(product) relation in app.js!
+    //raw: true allows to return only the product's info without metadata, and [0] as we will get an array of one matching product
+    req.user.getProducts({ where: {id:prodId}, raw: true }) //(10) //getProducts is given by sequelize automatically to find in the product model, as we did set a hasMany(product) relation in app.js!
     .then((product) => {
         if (!product) {
             console.log("product does not exist to be edited");
             res.redirect("/");
         }
+        console.log("product");
+        console.log(product[0]);
         res.render("admin/edit-product", 
         {
-            product: product,
+            product: product[0],
             myTitle: "edit-Product page", 
-            path: "/admin/add-product", 
+            path: "/admin/edit-product", 
             editing: editMode
             
         });        
