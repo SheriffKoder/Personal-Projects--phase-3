@@ -1,7 +1,15 @@
 /*
 
-see this video to create a cloud SQL config for deployment
+// to install mySQL on Ubuntu
+https://www.youtube.com/watch?v=9h3ctGFTz9w
+
+// see this video to create a cloud SQL config for deployment
 https://www.youtube.com/watch?v=CXiT-DWn1zs
+
+// create a cloud mySQL database and make sure to include the PORT env variable
+https://console.clever-cloud.com/
+
+// skip to section 2 (sequelize) which defines the database's table without your assistance
 
 Types of Storage: 
 Memory (variables)
