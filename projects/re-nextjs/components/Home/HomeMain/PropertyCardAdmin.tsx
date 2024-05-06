@@ -245,7 +245,8 @@ const PropertyCardAdmin = ({setPropertyEditId, property1, currentPage="", setRel
           border border-[rgba(255,255,255,0.02)]
           dark:opacity-75 dark:hover:opacity-90 opacity-90 hover:opacity-100
           focus:opacity-100 dark:focus:opacity-90
-          xl:h-[190px]
+          xl:h-[205px]
+          md:h-[332px] md2:h-auto
           `}>
 
                 <div className={`relative flex flex-row items-center justify-center text-start
@@ -280,7 +281,7 @@ const PropertyCardAdmin = ({setPropertyEditId, property1, currentPage="", setRel
                   </button>
                 </div>
                 
-                <div className="w-full text_shadow-2">
+                <div className="w-full text_shadow-2 flex flex-col h-full">
 
 
                   <Link href={"/properties/single/"+property._id} key={property._id}
@@ -296,33 +297,40 @@ const PropertyCardAdmin = ({setPropertyEditId, property1, currentPage="", setRel
 
                     </div>
                   </Link>
+
+
                   {currentPage === 'agent' ? (
                         <div className="flex flex-col items-start px-2 pb-1 text-sm text-start">               
                           <div className="font-light text-sm">Added: {property.property_date}</div>
                           <div className="font-light text-sm">Updated: {property.property_update}</div>
-
-                          <div className="text-sm font-light w-full flex flex-row gap-2 justify-start mt-2 mb-1">
-
-                            <button type="button"
-                              onClick={() => {bodyNoScroll(); setPropertyEditId(property._id); showPropertyAdd();}}
-                              className="bg-theme-text-brighter dark:bg-theme-text-dark text-white 
-                              rounded-full w-[65px]
-                              opacity-40 hover:opacity-90 text-center">
-                                  Edit
-                              </button>
-
-                            <button type="button" onClick={()=>{handlePropertyDelete(property._id);}}
-                              className="bg-theme-text-brighter dark:bg-theme-text-dark text-white 
-                              rounded-full w-[65px]
-                              opacity-40 hover:opacity-90 text-center">
-                                  Delete
-                              </button>
-
-                          </div>
                         </div>
                       ):(
                         ""
                       )}
+                  {currentPage === "agent" && 
+                  <div className="
+                  text-sm font-light w-full flex flex-row gap-2 justify-center flex-1 mb-1
+                  pl-2 md:justify-start
+                  ">
+
+                    <button type="button"
+                      onClick={() => {bodyNoScroll(); setPropertyEditId(property._id); showPropertyAdd();}}
+                      className="bg-theme-text-brighter dark:bg-theme-text-dark text-white 
+                      rounded-full w-[65px]  mt-auto
+                      opacity-40 hover:opacity-90 text-center">
+                          Edit
+                      </button>
+
+                    <button type="button" onClick={()=>{handlePropertyDelete(property._id);}}
+                      className="bg-theme-text-brighter dark:bg-theme-text-dark text-white 
+                      rounded-full w-[65px] mt-auto
+                      opacity-40 hover:opacity-90 text-center">
+                          Delete
+                      </button>
+
+                  </div>
+                  
+                  }
                 </div>
 
 

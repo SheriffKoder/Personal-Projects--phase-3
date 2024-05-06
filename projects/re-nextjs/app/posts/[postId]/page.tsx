@@ -153,17 +153,30 @@ const page = () => {
                         
                         <span className="flex flex-row items-baseline">
                             <span className="text-start max-w-[900px] text-sm ">
-                                <span className="inline-block shrink-0 h-3 w-3 bg-green-500 opacity-80 rounded-full mr-2"></span>
-                                    {post_andRecPosts.post.content.indexOf("credits:") ? 
-                                    (
-                                    <>
-                                    <span>{post_andRecPosts.post.content.split("credits:")[0]}</span>
-                                    <a className="text-blue-500 underline" 
-                                    href={post_andRecPosts.post.content.split("credits:")[1]}>credits</a>
-                                    </>)
-                                    :
-                                    (post_andRecPosts.post.content)
-                                    }
+                                    <div className="max-w-[100%] flex flex-col gap-2">
+                                        {post_andRecPosts.post.content.indexOf("credits:") ?
+                                        
+                                        post_andRecPosts.post.content.split("credits:")[0].split("\r\n").map((p, index)=>
+                                        index == 0 ? <span>                                        
+                                            <span className="inline-block shrink-0 h-3 w-3 bg-green-500 opacity-80 rounded-full mr-2"></span>                                        
+                                            {p}
+                                            </span> 
+                                            : 
+                                            <span>{p}</span>
+                                        )
+                                        :
+                                        post_andRecPosts.post.content.split("\r\n").map((p, index)=>
+                                            index == 0 ? <span>                                        
+                                                <span className="inline-block shrink-0 h-3 w-3 bg-green-500 opacity-80 rounded-full mr-2"></span>                                        
+                                                {p}
+                                                </span> 
+                                                : 
+                                                <span>{p}</span>
+                                            )
+                                        }
+                                    </div>
+                                    <a className="text-blue-500 underline"
+                                        href={post_andRecPosts.post.content.split("credits:")[1]}>credits</a>
                             </span>
                         </span>
                     </div>

@@ -101,16 +101,16 @@ const AgentCard = ({userIncoming, setUserIncoming, sessionId}:{
             {user.allAgents.map((agent: UserDocument) => (
             // <div className="h-auto w-full max-w-[390px] md:w-[calc(50%-16px)] md2:w-[calc(33.3%-16px)] ">
                 
-                <div key={agent._id} className="bg-white rounded-[17px]
+                <div key={agent._id} className={`bg-white rounded-[17px]
                 glass-container-background-2
                 border backdrop-blur-10 pt-4 pb-4 px-4
                 dark:bg-[#68585806] dark:border-[#ffffff05]
                 text-[#000000dd] dark:text-[#ffffffd3]  
                 opacity-80 hover:opacity-100
                 flex flex-col items-center justify-center text-center capitalize text-l 
-                md2:w-[calc(33.3%-16px)] w-full sm:w-[calc(50%-16px)] lg:w-[calc(24%-16px)]
-                
-                ">
+                md2:w-[calc(33.3%-16px)] w-full  lg:w-[calc(24%-16px)]
+                ${user.allAgents.length === 1 ? 'sm-w-[100%] max-w-[205.4px]' : 'sm:w-[calc(50%-16px)]' }
+                `}>
 
                     <h3 className="text-base font-semibold">{agent.name}</h3>
                     <p className="text-xs font-light">{agent.position}</p>

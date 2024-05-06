@@ -209,19 +209,21 @@ const page = async () => {
                                     </div>
 
                                     {/* property description */}
-                                    <div>
-                                        <div>More Description:</div> 
-                                        <div className="max-w-[100%]">
-                                            {pageProperty.thisProperty.property_description.indexOf("credits:") ? 
-                                            (
-                                            <>
-                                            <span>{pageProperty.thisProperty.property_description.split("credits:")[0]}</span>
+                                    <div className="">
+                                        <div className="font-semibold">More Description:</div> 
+                                            <div className="max-w-[100%] flex flex-col gap-2">
+                                                {pageProperty.thisProperty.property_description.indexOf("credits:") ? 
+                                                
+                                                
+                                                pageProperty.thisProperty.property_description.split("credits:")[0].split("\r\n").map((p)=><span>{p}</span>)
+                                                
+                                                
+                                                :
+                                                pageProperty.thisProperty.property_description.split("\r\n").map((p)=><span>{p}</span>)
+                                                }
+                                            </div>
                                             <a className="text-blue-500 underline" 
-                                            href={pageProperty.thisProperty.property_description.split("credits:")[1]}>credits</a>
-                                            </>)
-                                            :
-                                            (pageProperty.thisProperty.property_description)
-                                            }</div>
+                                                href={pageProperty.thisProperty.property_description.split("credits:")[1]}>credits</a>
                                     </div>
 
                                     {/* inquiry button shown at the end on larger view-ports, tried other ways, this was the simplest and does the job */}
