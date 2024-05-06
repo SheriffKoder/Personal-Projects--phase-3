@@ -41,7 +41,7 @@ const page = () => {
     },
     {
       name: "Draft Projects",
-      description: "small/single page projects done for the purpose practicing new skills/designs",
+      description: "small or single page projects done for the purpose learning new skills or designs",
       projects: [...DraftProjects]
     }
 
@@ -212,7 +212,7 @@ const page = () => {
                                       className="px-4 py-0  font-base gradientGreyButton 
                                       focus:opacity-95 hover:opacity-95
                                       text-[min(0.75em,1rem)]">
-                                        <Link href={project.link} className="gradient_text_1 w-full h-full">
+                                        <Link href={project.link} className="gradient_text_1 w-full h-full" target="_blank">
                                         {
                                         project.type === "site" && ("visit site")
                                         }

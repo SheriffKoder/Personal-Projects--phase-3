@@ -130,7 +130,7 @@ const Projects = () => {
                 cursor-pointer`}
               style={{
                 backgroundImage: `url('${project.icon}')`,
-                backgroundSize: "contain"
+                backgroundSize: "100% 100%",
               }}
               key={project.name+"icon"}
               onClick={()=>{changeProject(index); }}>

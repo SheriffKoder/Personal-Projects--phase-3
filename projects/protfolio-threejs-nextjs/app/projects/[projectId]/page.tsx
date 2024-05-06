@@ -164,7 +164,7 @@ const page = () => {
                                 {
                                 currentProject.link && (
                                     <button className="px-4 py-0 gradientGreyButton focus:opacity-95 hover:opacity-95">
-                                        <Link href={currentProject.link} className="gradient_text_1 w-full">
+                                        <Link href={currentProject.link} className="gradient_text_1 w-full" target="_blank">
                                         {
                                         currentProject.type === "site" && ("visit site")
                                         }

@@ -663,10 +663,12 @@ Yet to be added:<br/>
   ];
 
   export const DraftProjects = [
+
+    // Shop ExpressJs
     {
       // phase2/courses/nodejs/section22 
-      name: "Shop (express.js)",
-      description: `A simple shop application with the ability to add/delete products to/from a database. `,
+      name: "Shop (MongoDB)",
+      description: `A simple shop website with the ability to add/edit products and make orders to/from a MongoDB database. `,
       image1: "/images/projects/assets/drafts/shopexpress/wallpaper1.png",
       image2: "",
       imagex: "",
@@ -677,7 +679,7 @@ Yet to be added:<br/>
       id: "draft-1",
       longerDescription: 
       `A simple CRUD shop website built during Maxmillan's Nodejs course. 
-      <br\>built with basic express.js and additional helper libraries to handle the received and sent information.
+      <br\>built with basic ExpressJS and additional helper libraries to handle the received and sent information.
       <br\><br\>
       the front-end is constructed with "ejs", a HTML/CSS/Javascript templating engine.
       <br\>using the MVC (Model-view-controller) software architecture for code organization
@@ -688,6 +690,8 @@ Yet to be added:<br/>
       date: "2023"
 
     },
+    
+    // Promptopia
     {
       // phase2/courses/nodejs/section22 
       name: "Promptopia",
@@ -707,13 +711,14 @@ Yet to be added:<br/>
       date: "2023"
 
     },
+    
+    // Movie-Library
     {
-      // phase2/courses/nodejs/section22 
       name: "Movie Library",
       description: `A website displaying the latest movies in theaters and their description with the Help of an API. Done for the purpose of learning ReactJS.`,
       image1: "/images/projects/assets/drafts/movie-library/wallpaper1.png",
       image2: "/images/projects/assets/drafts/movie-library/wallpaper2.png",
-      imagex: "",
+      imagex: "/images/projects/assets/drafts/movie-library/wallpaperx.png",
       imageAnim:"",
       tech: ["HTML5", "CSS3", "JavaScript", "ReactJS"],
       link: "https://react-movie-app-pink-tau.vercel.app/",
@@ -731,8 +736,9 @@ Yet to be added:<br/>
       date: "2023"
 
     },
+    
+    //3D Calculator
     {
-      // phase2/courses/nodejs/section22 
       name: "3D Calculator",
       description: `A 3D calculator built only with HTML/CSS/Javascript`,
       image1: "/images/projects/assets/drafts/calc/wallpaper1.png",
@@ -773,11 +779,63 @@ calculations like tan(),cos(),sin(), power etc.<br/>
       date: "2023"
 
     },
+
+    // mySQL shop
+    {
+      name: "Shop (mySQL)",
+      description: `A simple shop website with the ability to add/edit products and make orders to/from a mySQL database.`,
+      image1: "/images/projects/assets/drafts/mysql1/wallpaper1.png",
+      image2: "/images/projects/assets/drafts/mysql1/wallpaper2.png",
+      imagex: "",
+      imageAnim: "",
+      tech: ["HTML5", "CSS3", "JavaScript", "NodeJS", "ExpressJS", "mySQL", "Sequelize"],
+      link: "https://phase-3-1ty9.onrender.com/admin/products",
+      icon: "/images/projects/assets/drafts/mysql1/icon.png",
+      id: "draft-5",
+      longerDescription: 
+      `
+      <h3>The website demonstrates using a mySQL database to store product data.</h3><br/>
+      The investment in the front-end design is really simple, because the target was to learn how to connect the front-end and the back-end together and manage the products's info.<br/>
+      <br/>
+      Used the Sequelize library to facilitate the interaction with the mySQL database.<br/>
+      The idea of a mySQL database is to define the relation between (Product/Cart/Orders/Users).<br/>
+      <br/>
+      Used the MVC software architecture to separate functionalities and display specific data for each page visited.<br/>
+      <br/>
+      <h3>What can be done on this website:</h3><br/>
+      - an admin user is created by default.<br/>
+      - Add a product by filling in the details from the nav bar.<br/>
+      - The ability to edit with the old information present from the "Admin Products" page.<br/>
+      - Delete a product from the "Admin Products" page.<br/>
+      - Add a product to the user's cart and view the cart.<br/>
+      - Make an order from the cart and clear the cart items.<br/>
+      - View your orders.<br/>
+      <br/>
+      <h3>Technologies used:</h3><br/>
+      Back-end: Javascript, NodeJS, ExpressJS, Sequelize.<br/>
+      Front-end: HTML/CSS, ejs templating engine.<br/>
+      <br/>
+      <h3>Yet to be added:</h3><br/>
+      - Image upload support with an online cloud service.<br/>
+      - Add separate users by signing-up, signing in.<br/>
+      - Add sessions, authentication and input validation.<br/>
+      - Process orders by checking out and paying.<br/>
+      - and many other features mostly implemented in the <a href="https://www.sheriffkoder.com/projects/practice-1">Amazon's shopping website clone</a>.<br/>
+
+
+      `,
+      type: "site",
+      date: "2023"
+
+    },
+  
   ]
 
   
   export const featuredProjects = [
-    {...PracticeProjects[0], star: false}, {...PracticeProjects[1], star: true}, {...PracticeProjects[2], star: false}, {...PracticeProjects[3], star: false}
+    {...PracticeProjects[0], star: false}, {...PracticeProjects[1], star: true}, {...PracticeProjects[3], star: false}, {...DraftProjects[2], star: false}
+    // {...PracticeProjects[0], star: false}, {...PracticeProjects[1], star: true}, {...PracticeProjects[2], star: false}, {...PracticeProjects[3], star: false}
+
   ]
 
 
