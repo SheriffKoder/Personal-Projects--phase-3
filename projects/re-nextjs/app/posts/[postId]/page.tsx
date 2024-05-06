@@ -72,16 +72,16 @@ const page = () => {
         <div className="flex flex-col pb-6 pt-32 px-3">
 
         {post_andRecPosts !== null ? (
-        <div className="mx-auto max-w-[1230px]">
+        <div className="mx-auto lg:max-w-[1230px] max-w-[calc(100vw-1.5rem)]">
 
             {/* navigation current location links */}
-            <div className="dark:text-white text-black text-shadow-3 w-full text-xs flex flex-row gap-1 opacity-70 ml-2">
+            <div className="dark:text-white text-black text-shadow-3 w-full pr-3 text-xs flex flex-wrap flex-row gap-1 opacity-70 ml-2">
             
             <Link className=""href="/#home-news">Home</Link>
             <span>&#62;</span>
             <Link className="" href="/news">News</Link>
-            <span>&#62;</span>
-            <span className="text-theme-text-brighter capitalize"><span>{post_andRecPosts.post.title}</span></span>
+            <span className="">&#62;</span>
+            <span className="text-theme-text-brighter capitalize w-[80%] md:min-w-min"><span>{post_andRecPosts.post.title}</span></span>
             </div>
 
             {/* the post whole container */}
@@ -154,7 +154,16 @@ const page = () => {
                         <span className="flex flex-row items-baseline">
                             <span className="text-start max-w-[900px] text-sm ">
                                 <span className="inline-block shrink-0 h-3 w-3 bg-green-500 opacity-80 rounded-full mr-2"></span>
-                                    {post_andRecPosts.post.content}
+                                    {post_andRecPosts.post.content.indexOf("credits:") ? 
+                                    (
+                                    <>
+                                    <span>{post_andRecPosts.post.content.split("credits:")[0]}</span>
+                                    <a className="text-blue-500 underline" 
+                                    href={post_andRecPosts.post.content.split("credits:")[1]}>credits</a>
+                                    </>)
+                                    :
+                                    (post_andRecPosts.post.content)
+                                    }
                             </span>
                         </span>
                     </div>

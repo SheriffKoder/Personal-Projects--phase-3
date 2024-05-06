@@ -47,7 +47,7 @@ const PropertiesContainer = ({setPropertyEditId, userAuthority, setReload, reloa
                 if (userAuthority === "viewer") {
                 setDataCondition(`${userName} does not have any posts yet`)
                 } else {
-                setDataCondition("You do not have any posts yet");
+                setDataCondition("You do not have any properties yet");
                 }
             }
             setReload(false);

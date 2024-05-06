@@ -79,16 +79,14 @@ const page = async () => {
         <div className="mx-auto max-w-[1230px]">
 
             {/* navigation current location links that has the property title */}
-            <div className="dark:text-white text-black text-shadow-3 w-full text-xs flex flex-row gap-1 opacity-70 ml-2">
+            <div className="dark:text-white text-black text-shadow-3 w-full text-xs flex pr-3 flex-wrap flex-row gap-1 opacity-70 ml-2">
             
             <Link className=""href="/">Home</Link>
             &#62;
             <Link className="" href="/properties">Properties</Link>
             &#62;
-            <span className="text-theme-text-brighter capitalize">
-                <span>
+            <span className="text-theme-text-brighter capitalize w-[80%] md:min-w-min">
                     {property_title}
-                </span>
             </span>
             </div>
 
@@ -213,7 +211,17 @@ const page = async () => {
                                     {/* property description */}
                                     <div>
                                         <div>More Description:</div> 
-                                        <div>{pageProperty.thisProperty.property_description}</div>
+                                        <div className="max-w-[100%]">
+                                            {pageProperty.thisProperty.property_description.indexOf("credits:") ? 
+                                            (
+                                            <>
+                                            <span>{pageProperty.thisProperty.property_description.split("credits:")[0]}</span>
+                                            <a className="text-blue-500 underline" 
+                                            href={pageProperty.thisProperty.property_description.split("credits:")[1]}>credits</a>
+                                            </>)
+                                            :
+                                            (pageProperty.thisProperty.property_description)
+                                            }</div>
                                     </div>
 
                                     {/* inquiry button shown at the end on larger view-ports, tried other ways, this was the simplest and does the job */}

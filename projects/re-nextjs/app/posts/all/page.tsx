@@ -93,7 +93,8 @@ const page = () => {
                     bg-[#fffffff0] focus:bg-[#ffffff] hover:bg-[#ffffff] 
                     dark:bg-[#ffffff07] dark:hover:bg-[#ffffff0a] dark:focus:bg-[#ffffff0a]
                     flex flex-col rounded-[17px] box-shadow-1 p-2 border border-[rgba(255,255,255,0.02)]
-                    text_shadow-2 lg:flex lg:flex-row lg:max-w-full h-[115vw] max-h-[750px] lg:h-[25vh]
+                    text_shadow-2 lg:flex lg:flex-row lg:max-w-full h-[115vw] lg:h-[25vh]
+                    lg:min-h-[210px] max-h-[570px]
                     " key={post._id}>
 
                       <Link href={"/posts/"+post._id} key={post._id} className="lg:order-2  overflow-hidden
@@ -120,7 +121,7 @@ const page = () => {
                           
                           <span className="flex flex-row items-baseline mt-2">
                             <span className="inline-block  shrink-0 h-3 w-3 bg-green-500 opacity-80 rounded-full mr-4"></span>
-                            <span className="text-start max-h-[8rem] max-w-[900px] text-sm dot-text line-clamp-6 ">
+                            <span className="text-start max-h-[8rem] max-w-[900px] text-sm dot-text line-clamp-6 lg:line-clamp-4 ">
                               {post.content}
                             </span>
                           </span>

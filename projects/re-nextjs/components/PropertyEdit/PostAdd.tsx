@@ -437,7 +437,7 @@ const PostAdd_Component = ({postEditId, setPostEditId, setReload}:{
                     dark:bg-[#ffffff07] rounded-[7px] border-2 border-[#ffffff02]
                     bg-[#ffff] focus:bg-[#ebeffc]  text-[#000000b3] dark:text-white
                     resize-none"
-                    rows={6} placeholder="describe your property"
+                    rows={6} placeholder="describe your post"
                     // value={post.description}
                     // onChange={(e) => {setPost({...post, description: e.target.value})}}
                     name="content" value={content} onChange={handleChange} onBlur={inputCheckHandler}

@@ -695,7 +695,7 @@ dark:bg-[#ffffff09] dark:focus:bg-[#ffffff02]  px-2
                                     rounded-[9px] py-1 px-3 w-full
                                     opacity-80 hover:opacity-90 mx-auto"
                                     >
-                                        {action === "add" ? ("Add to properties" ) : ("Apply changes")}
+                                        {action === "add" ? ("Add property" ) : ("Apply changes")}
                                     </button>
                             </div>
 
