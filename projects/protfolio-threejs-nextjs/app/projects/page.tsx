@@ -35,7 +35,7 @@ const page = () => {
       projects: [...clientProjects]
     },
     {
-      name: "Practice Projects",
+      name: "Personal Projects",
       description: "large/complete projects done for the purpose of practicing new skills",
       projects: [...PracticeProjects]
     },
@@ -96,7 +96,8 @@ const page = () => {
                       {/* white thin line */}
                       <span className="w-[60%] h-[1px] bg-white opacity-60 "/>
 
-                      <p className=" text-[1rem] opacity-40 mt-[0.25rem] mb-[2rem]">
+                      {/* font size like the @home/projects description font size */}
+                      <p className=" text-[min(calc((1rem+0.25vw)*0.75),1rem)] opacity-40 mt-[0.25rem] mb-[2rem]">
                         {projectCategory.description}{projectCategory.projects.length > 1 ? `, displaying ${projectCategory.projects.length} projects` : projectCategory.projects.length > 0 ? `, displaying ${projectCategory.projects.length} project` : null}
                       </p>
 

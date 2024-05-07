@@ -742,7 +742,7 @@ background: -webkit-linear-gradient(
   /* background: -webkit-linear-gradient(#eee, #333); */
   background: #000000; /* fallback for old browsers */
   background: -webkit-linear-gradient(
-    to right, rgba(129,196,99, 0.09), rgba(129,196,99, 0.06)
+    to right, rgba(255,255,255, 0.05), rgba(255,255,255, 0.04)
   ); 
   /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(
@@ -751,6 +751,22 @@ background: -webkit-linear-gradient(
 
   border-color: rgba(255,255,255, 0.13);
   
+
+}
+
+.ProjectCard_bg:hover, .ProjectCard_bg:focus {
+
+  background: #000000; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right, rgba(255,255,255, 0.07), rgba(255,255,255, 0.06)
+    ); 
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right, rgba(255,255,255, 0.07), rgba(255,255,255, 0.06)
+    ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+  border-color: rgba(255,255,255, 0.15);
+
 
 }
 
