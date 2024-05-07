@@ -127,7 +127,8 @@ const PostsContainer = ({setPostEditId, userAuthority, setReload, reload, userNa
             className="
             bg-theme-text-brighter dark:bg-theme-text-dark text-white 
             rounded-[17px] text-sm py-0 px-3
-            opacity-60 hover:opacity-90 ml-auto w-[120px]">
+            dark:opacity-90 dark:hover:opacity-100 
+            opacity-80 hover:opacity-90 ml-auto w-[120px]">
                 Add a Post
             </button>
         </div>
@@ -145,6 +146,8 @@ const PostsContainer = ({setPostEditId, userAuthority, setReload, reload, userNa
                     dark:bg-[#ffffff07] dark:hover:bg-[#ffffff0a] dark:focus:bg-[#ffffff0a]
                     flex flex-col rounded-[17px] box-shadow-1 p-1 border border-[rgba(255,255,255,0.02)]
                     text_shadow-2
+                    dark:opacity-90 dark:hover:opacity-100 opacity-95 hover:opacity-100
+                    focus:opacity-90 dark:focus:opacity-100
                     md2:flex-row md:w-[calc(50%-16px)] md2:min-w-[100%] md2:h-[220px] h-[135vw] md:h-[calc(15vh+50vw)]
                     ">
 
@@ -209,7 +212,8 @@ const PostsContainer = ({setPostEditId, userAuthority, setReload, reload, userNa
                                     onClick={() => {bodyNoScroll(); setPostEditId(post._id); showPostAdd();}}
                                     className="bg-theme-text-brighter dark:bg-theme-text-dark text-white 
                                     rounded-full w-[65px]
-                                    opacity-40 hover:opacity-90 text-center">
+                                    dark:opacity-90 dark:hover:opacity-100 
+                                    opacity-80 hover:opacity-90 text-center">
                                         Edit
                                     </button>
 
@@ -217,7 +221,9 @@ const PostsContainer = ({setPostEditId, userAuthority, setReload, reload, userNa
                                     onClick={()=>{handlePostDelete(post._id);}}                           
                                     className="bg-theme-text-brighter dark:bg-theme-text-dark text-white 
                                     rounded-full w-[65px]
-                                    opacity-40 hover:opacity-90 text-center">
+                                    dark:opacity-90 dark:hover:opacity-100 
+                                    opacity-80 hover:opacity-90
+                                    text-center">
                                         Delete
                                     </button>
 

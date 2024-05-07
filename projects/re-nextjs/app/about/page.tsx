@@ -144,7 +144,7 @@ const page = () => {
         content:`Hello, i would like to inquire about property #${propertyInquiryParsed._id},\n 
 which is located in ${propertyInquiryParsed.property_country}, ${propertyInquiryParsed.property_city}, ${propertyInquiryParsed.property_district},
 of area ${propertyInquiryParsed.property_area}sqm, ${propertyInquiryParsed.property_beds} bedrooms / ${propertyInquiryParsed.property_baths} bathrooms,
-which is offered for ${propertyInquiryParsed.property_listing_type} for ${propertyInquiryParsed.property_price}.
+which is offered for ${propertyInquiryParsed.property_listing_type} for ${propertyInquiryParsed.property_price.toString().split(".")[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",")}.
 Thanks, \n`
       });
     

@@ -452,7 +452,7 @@ dark:bg-[#ffffff09] dark:focus:bg-[#ffffff02]  px-2
                                 </span>
 
                                 <input className="w-full input_field border-0 rounded-r-[6px] 
-dark:bg-[#ffffff09] dark:focus:bg-[#ffffff02]  px-2 
+                            dark:bg-[#ffffff09] dark:focus:bg-[#ffffff02]  px-2 
                                     bg-[#ffff] focus:bg-[#ebeffc]  text-[#000000b3] dark:text-white                                    border-[rgba(255,255,255,0.02)]" type="number" required
                                     placeholder="" 
                                     // value={post.price}

@@ -179,7 +179,7 @@ const PropertyCard = ({property1, currentPage}:{property1:PropertyDocument, curr
                       <div className="dark:text-[#ffffffde] capitalize">in {property.property_city}, {property.property_district}</div>
                       <div className="">{property.property_beds} beds / {property.property_baths} bath</div>
                       <div className="">Area: {property.property_area} sqm</div>
-                      <div className="font-light text-sm">Price: {property.property_price}</div>
+                      <div className="font-light text-sm">Price: £{property.property_price.toString().split(".")[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</div>
 
 
                     </div>

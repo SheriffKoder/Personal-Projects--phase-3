@@ -243,8 +243,8 @@ const PropertyCardAdmin = ({setPropertyEditId, property1, currentPage="", setRel
           gap-1
           rounded-[17px] box-shadow-1 p-1 relative
           border border-[rgba(255,255,255,0.02)]
-          dark:opacity-75 dark:hover:opacity-90 opacity-90 hover:opacity-100
-          focus:opacity-100 dark:focus:opacity-90
+          dark:opacity-90 dark:hover:opacity-100 opacity-95 hover:opacity-100
+          focus:opacity-90 dark:focus:opacity-100
           xl:h-[205px]
           md:h-[332px] md2:h-auto
           `}>
@@ -292,8 +292,8 @@ const PropertyCardAdmin = ({setPropertyEditId, property1, currentPage="", setRel
                       <div className="dark:text-[#ffffffde] capitalize">in {property.property_city}, {property.property_district}</div>
                       <div className="">{property.property_beds} beds / {property.property_baths} bath</div>
                       <div className="">Area: {property.property_area} sqm</div>
-                      <div className="font-light text-sm">Price: {property.property_price}</div>
-
+                      <div className="font-light text-sm">Price: £{property.property_price.toString().split(".")[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</div>
+                      
 
                     </div>
                   </Link>
@@ -317,14 +317,17 @@ const PropertyCardAdmin = ({setPropertyEditId, property1, currentPage="", setRel
                       onClick={() => {bodyNoScroll(); setPropertyEditId(property._id); showPropertyAdd();}}
                       className="bg-theme-text-brighter dark:bg-theme-text-dark text-white 
                       rounded-full w-[65px]  mt-auto
-                      opacity-40 hover:opacity-90 text-center">
+                      dark:opacity-90 dark:hover:opacity-100 
+                      opacity-80 hover:opacity-90
+                      text-center">
                           Edit
                       </button>
 
                     <button type="button" onClick={()=>{handlePropertyDelete(property._id);}}
                       className="bg-theme-text-brighter dark:bg-theme-text-dark text-white 
                       rounded-full w-[65px] mt-auto
-                      opacity-40 hover:opacity-90 text-center">
+                      dark:opacity-90 dark:hover:opacity-100 
+                      opacity-80 hover:opacity-90 text-center">
                           Delete
                       </button>
 

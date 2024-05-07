@@ -203,12 +203,15 @@ const PropertyCard = ({property1, currentPage}:{property1:PropertyDocument, curr
           border border-[rgba(255,255,255,0.02)]
           dark:opacity-75 dark:hover:opacity-90 opacity-90 hover:opacity-100
           focus:opacity-100 dark:focus:opacity-90
-
           `}>
 
+                {/* md:h-[15vw]  */}
                 <div className={`relative flex flex-row items-center justify-start text-start
                 ${currentPage === 'property' ? '' : 'xl:max-w-[50%]'} 
-                h-[7vh] rounded-t-[10px] overflow-hidden sm:h-[22vw] md:h-[15vw] md2:h-[10vw] lg:h-[10vw]
+                h-[7vh] rounded-t-[10px] overflow-hidden 
+                sm:h-[22vw] 
+                md2:h-[10vw] 
+                lg:h-[10vw]
                 xl:max-h-[120px]
 
                 `}>
@@ -245,10 +248,11 @@ const PropertyCard = ({property1, currentPage}:{property1:PropertyDocument, curr
                       <div className="dark:text-[#ffffffde] capitalize">{property.property_type}</div>
                       <div className="dark:text-[#ffffffde] capitalize">for {property.property_listing_type}</div>
                       {/* <div className="dark:text-[#ffffffde] capitalize">In {property.property_country}, {property.property_city}</div> */}
-                      <div className="dark:text-[#ffffffde] capitalize">in {property.property_city}, {property.property_district}</div>
+                      <div className="dark:text-[#ffffffde] capitalize
+                      h-[60px] md:h-[40px] md2:h-auto">in {property.property_city}, {property.property_district}</div>
                       <div className="">{property.property_beds} beds / {property.property_baths} bath</div>
                       <div className="">Area: {property.property_area} sqm</div>
-                      <div className="font-light text-sm">Price: {property.property_price}</div>
+                      <div className="font-light text-sm">Price: £{property.property_price.toString().split(".")[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</div>
 
 
                     </div>

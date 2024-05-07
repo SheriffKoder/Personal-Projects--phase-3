@@ -179,7 +179,7 @@ const Nav = () => {
           {/* user menu - logged in - positioned absolute*/}
           {/* {isAuth && ( */}
           {session?.user && (
-            <div className="nav-user-menu  hidden bg-gray-200 dark:bg-[#4f4f4f5d]"
+            <div className="nav-user-menu  hidden dark:bg-[#31313175] bg-[#ffffffd3]"
             // onMouseLeave={()=>handleDropDownIcon("leave")}
             onMouseLeave={()=>{handleDropDownIcon("leave"); console.log(session?.user);}}
             >

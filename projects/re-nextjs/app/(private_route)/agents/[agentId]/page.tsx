@@ -244,7 +244,8 @@ const page = () => {
                     className="
                     bg-theme-text-brighter dark:bg-theme-text-dark text-white 
                     rounded-[17px] text-sm py-1 px-3
-                    opacity-60 hover:opacity-90 ml-auto w-[120px]">
+                    dark:opacity-90 dark:hover:opacity-100 
+                    opacity-80 hover:opacity-90 ml-auto w-[120px]">
                         Add a Property 
                     </button>
                 </div>

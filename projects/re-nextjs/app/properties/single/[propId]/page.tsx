@@ -205,7 +205,8 @@ const page = async () => {
                                         <div>Bedrooms: {pageProperty.thisProperty.property_beds}</div>
                                         <div>Bathrooms: {pageProperty.thisProperty.property_baths}</div>
 
-                                        <div>Asking price: {pageProperty.thisProperty.property_price}</div>
+                                        <div>Asking price: £{pageProperty.thisProperty.property_price.toString().split(".")[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</div>
+                                        
                                     </div>
 
                                     {/* property description */}
@@ -311,7 +312,8 @@ const page = async () => {
                                             <div className="flex flex-row flex-wrap gap-4 md2:gap-8 md2:flex-col mt-auto">
                                                 {pageProperty.recProperties.map((property) => (
                                                     
-                                                    <div key={property._id} className="w-[calc(100%*(1/2)-8px)] md:w-[calc(100%*(1/3)-11px)] md2:w-full">
+                                                    // md:w-[calc(100%*(1/3)-11px)] 
+                                                    <div key={property._id} className="w-[calc(100%*(1/2)-8px)] md2:w-full">
                                                         <PropertyCard property1={property} currentPage="property" />
                                                     </div>
                                                 ))}
