@@ -13,7 +13,7 @@ export const GET = async () => {
         await connectToDB();
 
         const properties = await PropertyModel.find().limit(6).sort({SortDate:-1}) //sort by reverse after adding SortDate in the products model's schema;
-        const posts = await PostModel.find().limit(3).populate("userId").sort({SortDate:-1}) //sort by reverse after adding SortDate in the products model's schema;   //we need to display the author's name
+        const posts = await PostModel.find().limit(5).populate("userId").sort({SortDate:-1}) //sort by reverse after adding SortDate in the products model's schema;   //we need to display the author's name
 
 
         return new Response(JSON.stringify({properties,posts}), {status: 200});

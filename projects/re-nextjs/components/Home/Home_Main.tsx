@@ -305,22 +305,31 @@ const Home_Main = () => {
       "
       id="home-news">
             {/* here are the posts */}
-            <h4 className="text_shadow-3">Latest market news</h4>
+            <h4 className="text_shadow-3 font-semibold text-lg mb-[1.5rem]">Latest market news</h4>
 
             {/* posts container */}
-            <div className="flex flex-col gap-6 my-6">
+            <div className="flex flex-col gap-6 xl:my-0">
 
               {/* post */}
               {properties_andPosts?.posts.length > 0 ? (
                 <>
-                  {properties_andPosts.posts.map((post) => (
+                  {properties_andPosts.posts.map((post, index) => (
 
-                    <Link href={"/posts/"+post._id} key={post._id} className="max-w-full 
+                    <Link href={"/posts/"+post._id} key={post._id} className={`max-w-full 
                     bg-[#fffffff0] focus:bg-[#ffffff] hover:bg-[#ffffff] 
                     dark:bg-[#ffffff07] dark:hover:bg-[#ffffff0a] dark:focus:bg-[#ffffff0a]
                     flex flex-col rounded-[17px] box-shadow-1 p-4 md:p-3 border border-[rgba(255,255,255,0.02)]
                     text_shadow-2 h-[174px] md:h-[150px] lg:h-[184px]
-                    ">
+                    relative z-[1]
+                    ${index > 2 && 'hidden lg:flex xl:hidden'}
+                    
+                    `}
+                    >
+                        <div className="absolute top-0 left-0 w-full h-full z-[-1] rounded-[17px] 
+                        dark:opacity-10 opacity-20"
+                        style={{backgroundImage: `url(${post.image}`}}>
+                        </div>
+
                         <p className="flex flex-row items-baseline font-bold uppercase">
                           <span className="inline-block shrink-0 h-3 w-3 bg-red-500 opacity-80 rounded-full mr-4"></span>
                           <span className="text-start dark:text-[#ffffffde] dot-text line-clamp-1">
@@ -382,7 +391,7 @@ const Home_Main = () => {
           lg:max-w-[930px] w-[95%] mx-auto lg:mx-0 lg:ml-auto
       ">
             {/* here are the properties */}
-            <h4 className="text_shadow-3">Check out our latest properties</h4>
+            <h4 className="text_shadow-3 font-semibold text-lg">Check out our latest properties</h4>
 
             {/* latest properties container */}
             <div className="flex flex-col h-full">

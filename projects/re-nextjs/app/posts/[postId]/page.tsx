@@ -244,7 +244,14 @@ const page = () => {
                                     dark:bg-[#ffffff07] dark:hover:bg-[#ffffff0a] dark:focus:bg-[#ffffff0a]
                                     flex flex-col rounded-[17px] box-shadow-1 p-3 border border-[rgba(255,255,255,0.02)]
                                     text_shadow-2 text-xs w-full min-h-[158px]
+                                    relative z-[1]
                                     ">
+
+                                        <div className="absolute top-0 left-0 w-full h-full z-[-1] rounded-[17px] 
+                                        dark:opacity-10 opacity-20"
+                                        style={{backgroundImage: `url(${post.image}`}}>
+                                        </div>
+
                                         <p className="flex flex-row items-baseline font-bold uppercase">
                                         <span className="inline-block shrink-0 h-2 w-2 bg-red-500 opacity-50 rounded-full mr-2"></span>
                                         <span className="text-start dark:text-[#ffffffde] dot-text line-clamp-1">

@@ -248,7 +248,8 @@ const PropertyCard = ({property1, currentPage}:{property1:PropertyDocument, curr
                     <div className="flex flex-col items-start px-2 pt-1 text-sm text-start">
                       <div className="dark:text-[#ffffffde] capitalize">{property.property_type} for {property.property_listing_type}</div>
                       {/* <div className="dark:text-[#ffffffde] capitalize">In {property.property_country}, {property.property_city}</div> */}
-                      <div className="dark:text-[#ffffffde] capitalize">in {property.property_city}, {property.property_district}</div>
+                      <div className="dark:text-[#ffffffde] capitalize
+                      md:h-[2.5rem] md2:h-auto">in {property.property_city}, {property.property_district}</div>
                       <div className="">{property.property_beds} beds / {property.property_baths} bath</div>
                       <div className="">Area: {property.property_area} sqm</div>
                       <div className="font-light text-sm">Price: £{property.property_price.toString().split(".")[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</div>
