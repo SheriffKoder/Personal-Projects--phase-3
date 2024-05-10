@@ -110,7 +110,13 @@ const AgentCard = ({userIncoming, setUserIncoming, sessionId}:{
                 flex flex-col items-center justify-center text-center capitalize text-l 
                 md2:w-[calc(33.3%-16px)] w-full  lg:w-[calc(24%-16px)]
                 ${user.allAgents.length === 1 ? 'sm-w-[100%] max-w-[205.4px]' : 'sm:w-[calc(50%-16px)]' }
-                `}>
+                relative`}>
+
+                    <div className="absolute w-full h-full rounded-b-[10px] rounded-[17px] z-[-1] overflow-hidden border-2 dark:border-[#ffffff05] border-[#f0f0f0]">
+                        <div className="w-full h-full z-[0] opacity-[0.15] dark:opacity-10 rounded-[17px]"
+                          style={{backgroundImage: "url('/images/deco.png')", backgroundSize: "", backgroundPosition: "0px -40px" }}>
+                          </div>
+                    </div>
 
                     <h3 className="text-base font-semibold">{agent.name}</h3>
                     <p className="text-xs font-light">{agent.position}</p>

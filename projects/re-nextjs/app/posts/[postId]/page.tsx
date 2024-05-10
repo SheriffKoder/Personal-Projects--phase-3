@@ -191,7 +191,7 @@ const page = () => {
                 glass-container-background-2 backdrop-blur-10
                 dark:bg-[#ffffff07] dark:hover:bg-[#ffffff0a] dark:focus:bg-[#ffffff0a]
                 flex flex-col rounded-[7px] box-shadow-1 p-2 border border-[rgba(255,255,255,0.02)]
-                text_shadow-2 md2:rounded-[17px] md2:h-[977px]
+                text_shadow-2 md2:rounded-[17px] md2:h-auto
                 ">
                     <span className="flex flex-col items-baseline p-2 md2:p-2 md2:flex-col">
                         <span className="inline-block shrink-0 h-3 w-3 bg-[rgba(0,89,255,0.7)] rounded-full mr-4"></span>

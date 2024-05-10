@@ -5,9 +5,13 @@ import Link from "next/link"
 const Footer = () => {
   return (
     
-    <footer className="dark:text-[#ffffffab] text_shadow-3 w-full dark:bg-[#ffffff08] bg-[#ffffff40] font-light text-[#000000c1]
+    <footer className="dark:text-[#ffffffab] text_shadow-3 w-full dark:bg-[rgba(255,255,255,0.015)] bg-[rgba(255,255,255,0.15)] font-light text-[#000000c1]
     flex flex-col items-center justify-center
-    h-auto py-12 text-[0.9rem]">
+    h-auto py-12 text-[0.9rem] relative mt-24">
+
+      <div className="absolute w-full h-full rounded-b-[10px] top-0 left-0 z-[0] dark:opacity-[0.03] opacity-10"
+      style={{backgroundImage: "url('/images/deco.png')", backgroundSize: "20%", backgroundPosition: "10px -40px" }}>
+      </div>
 
       <div className="flex flex-row justify-between w-[90%] max-w-[500px] text-center">
         <ul className="flex flex-col items-center flex-1">

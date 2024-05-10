@@ -152,7 +152,7 @@ const PostsContainer = ({setPostEditId, userAuthority, setReload, reload, userNa
                     ">
 
                         <div className="
-                        md2:order-2 md2:w-[30%] md2:ml-8 overflow-hidden rounded-t-[10px] md2:rounded-tl-none md2:rounded-br-[10px] 
+                        md2:order-2 md2:w-[30%] md2:ml-1 overflow-hidden rounded-t-[10px] md2:rounded-tl-none md2:rounded-br-[10px] 
                         h-[40%] mb-4 md2:mb-0 md2:min-h-full flex
                         ">
                         
@@ -170,7 +170,12 @@ const PostsContainer = ({setPostEditId, userAuthority, setReload, reload, userNa
                         </div>
 
                         <div className="md2:order-1 px-2 md2:py-2 md2:px-3 md:flex-1 md2:h-full flex flex-col
-                        flex-1">
+                        flex-1 relative md2:pr-3">
+
+                            <div className="absolute w-full h-full rounded-b-[10px] top-0 left-0 z-[0] opacity-[0.07] dark:opacity-5"
+                            style={{backgroundImage: "url('/images/deco.png')", backgroundSize: "", backgroundPosition: "10px -40px" }}>
+
+                            </div>
 
                             <p className="flex flex-row items-baseline font-bold uppercase min-h-[3rem]" onClick={()=>{router.push(`/posts/${post._id}`);}}>
                                 <span className="inline-block shrink-0 h-3 w-3 bg-red-500 opacity-80 rounded-full mr-4"></span>

@@ -10,13 +10,28 @@ const Hero = () => {
   return (
 
     <div className="relative flex flex-col items-center">
-        <Image src="/images/furniture.avif" alt="Furniture" fill={true} priority
-        className="mt-[-10px] hero-brush-mask w-full">
-        </Image>
+        <div className="absolute w-full h-full">
+
+        <div className="absolute w-full h-full rounded-b-[10px] top-0 left-0 z-[-1] dark:opacity-[0.03] opacity-[0.07]"
+            style={{backgroundImage: "url('/images/deco.png')", backgroundSize: "", backgroundPosition: "-10px -40px" }}>
+
+            </div>
+
+            <div className="glass-container-background-1 hero-brush-mask w-full h-full mt-[-10px] dark:brightness-50">
+
+            </div>
+
+            <div className="absolute top-0 left-0 w-full h-full z-[2] opacity-[0.2]">
+                <Image src="/images/furniture.avif" alt="Furniture" fill={true} priority
+                className="mt-[-10px] hero-brush-mask w-full">
+                </Image>
+            </div>
+           
+        </div>
         
         <div className="main__hero flex flex-col justify-center
         before:opacity-[0.3] dark:before:opacity-[0.05] max-w-[1550px] max-h-[1000px]
-        ">
+        z-[2]">
             <header className="main__hero__text-container
             flex flex-col justify-center items-center lg:items-start
             py-7 lg:ml-[5%]"> 
@@ -34,9 +49,9 @@ const Hero = () => {
                 </h1>
 
                 <Link href="/about#contact" className=" text-[min(calc(1.0rem+0.2vw),(1.2rem))]
-                mt-3 bg-theme-text-brighter dark:bg-theme-text-dark text-white 
+                mt-3 bg-[#ab2546] dark:bg-[#ab2546] text-white 
                 rounded-full py-1.5 pr-3 pl-4 w-fit flex flex-row items-center justify-center
-                opacity-80 hover:opacity-90">
+                opacity-90 hover:opacity-100">
                         Speak to an Agent 
                         <span className="bg-[url('/icons/arrow-right.svg')] ml-2 h-4 w-4 bg-no-repeat bg-contain inline-block"></span>
                 </Link>

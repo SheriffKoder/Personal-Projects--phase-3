@@ -206,6 +206,7 @@ Thanks, \n`
         text-[#000000b3] dark:text-[#ffffffb0] text-center text-l flex flex-col gap-8
         items-center text-sm md2:flex-row
         ">
+          
 
           <div className="flex flex-col gap-4">
             <h1 className="font-semibold text-base">About Us</h1>

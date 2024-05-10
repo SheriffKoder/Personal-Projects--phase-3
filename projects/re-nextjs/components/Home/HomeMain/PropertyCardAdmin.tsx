@@ -294,7 +294,7 @@ const PropertyCardAdmin = ({setPropertyEditId, property1, currentPage="", setRel
                       <div className="">Area: {property.property_area} sqm</div>
                       <div className="font-light text-sm">Price: £{property.property_price.toString().split(".")[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</div>
                       
-                      <div className="absolute w-full h-full rounded-b-[10px] top-0 left-0 z-[-1] opacity-20"
+                      <div className="absolute w-full h-full rounded-b-[10px] top-0 left-0 z-[-1] opacity-20 dark:opacity-10"
                       style={{backgroundImage: "url('/images/deco.png')", backgroundSize: "110% 200%", backgroundPosition: "10px -40px" }}>
 
                       </div>
