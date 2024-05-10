@@ -201,7 +201,7 @@ const PropertyCard = ({property1, currentPage}:{property1:PropertyDocument, curr
           gap-1
           rounded-[17px] box-shadow-1 p-1 relative
           border border-[rgba(255,255,255,0.02)]
-          dark:opacity-75 dark:hover:opacity-90 opacity-90 hover:opacity-100
+          dark:opacity-75 dark:hover:opacity-90 opacity-90 hover:opacity-[0.999]
           focus:opacity-100 dark:focus:opacity-90
           `}>
 
@@ -239,7 +239,7 @@ const PropertyCard = ({property1, currentPage}:{property1:PropertyDocument, curr
                   </button>
                 </div>
                 
-                <div className="w-full text_shadow-2">
+                <div className="w-full text_shadow-2 relative">
 
 
                   <Link href={"/properties/single/"+property._id} key={property._id}
@@ -254,6 +254,10 @@ const PropertyCard = ({property1, currentPage}:{property1:PropertyDocument, curr
                       <div className="">Area: {property.property_area} sqm</div>
                       <div className="font-light text-sm">Price: £{property.property_price.toString().split(".")[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</div>
 
+                      <div className="absolute w-full h-full rounded-b-[10px] top-0 left-0 z-[-1] opacity-20"
+                      style={{backgroundImage: "url('/images/deco.png')", backgroundSize: "110% 200%", backgroundPosition: "10px -40px" }}>
+
+                      </div>
 
                     </div>
                   </Link>

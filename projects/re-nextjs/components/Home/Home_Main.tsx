@@ -319,7 +319,7 @@ const Home_Main = () => {
                     bg-[#fffffff0] focus:bg-[#ffffff] hover:bg-[#ffffff] 
                     dark:bg-[#ffffff07] dark:hover:bg-[#ffffff0a] dark:focus:bg-[#ffffff0a]
                     flex flex-col rounded-[17px] box-shadow-1 p-4 md:p-3 border border-[rgba(255,255,255,0.02)]
-                    text_shadow-2 h-[174px] md:h-[150px] lg:h-[184px]
+                    text_shadow-2 h-[174px] md:h-[150px] lg:h-[230px]
                     relative z-[1]
                     ${index > 2 && 'hidden lg:flex xl:hidden'}
                     
@@ -332,7 +332,7 @@ const Home_Main = () => {
 
                         <p className="flex flex-row items-baseline font-bold uppercase">
                           <span className="inline-block shrink-0 h-3 w-3 bg-red-500 opacity-80 rounded-full mr-4"></span>
-                          <span className="text-start dark:text-[#ffffffde] dot-text line-clamp-1">
+                          <span className="text-start dark:text-[#ffffffde] dot-text lg:line-clamp-4 line-clamp-1">
                             {post.title}
                           </span>
                         </p>
@@ -346,8 +346,8 @@ const Home_Main = () => {
 
                         <span className="flex-1 flex flex-col justify-end">
                         <span className="flex flex-row items-center mt-auto">
-                          <span className="mt-[1rem] inline-block shrink-0 h-3 w-3 bg-[rgba(0,89,255,0.7)] rounded-full mr-4"></span>
-                          <span className="w-full text-start font-light text-sm
+                          <span className="lg:mt-auto lg:mb-[1px] inline-block shrink-0 h-3 w-3 bg-[rgba(0,89,255,0.7)] rounded-full mr-4"></span>
+                          <span className="w-full text-start font-light text-xs
                           lowercase flex flex-row items-center">
                             <span className="opacity-60 lg:mt-auto">{post.date_update} by {post.userId.name} </span>
                             <p className="ml-auto mr-2 lg:mr-[-0.1rem] lg:mt-4 bg-theme-text-bright h-5 w-5 right_caret rounded-[5px] border-0"> </p>
@@ -389,7 +389,8 @@ const Home_Main = () => {
           dark:bg-[#68585806] dark:border-[#ffffff05] 
           text-[#000000b3] dark:text-[#ffffffb0] text-center text-l flex flex-col gap-1
           lg:max-w-[930px] w-[95%] mx-auto lg:mx-0 lg:ml-auto
-      ">
+      "
+      >
             {/* here are the properties */}
             <h4 className="text_shadow-3 font-semibold text-lg">Check out our latest properties</h4>
 
