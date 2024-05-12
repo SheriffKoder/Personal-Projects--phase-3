@@ -9,7 +9,7 @@ const Footer = () => {
     flex flex-col items-center justify-center
     h-auto py-12 text-[0.9rem] relative mt-24">
 
-      <div className="absolute w-full h-full rounded-b-[10px] top-0 left-0 z-[0] dark:opacity-[0.03] opacity-10"
+      <div className="absolute w-full h-full rounded-b-[10px] top-0 left-0 z-[0] dark:opacity-[0.03] opacity-[0.15]"
       style={{backgroundImage: "url('/images/deco.png')", backgroundSize: "20%", backgroundPosition: "10px -40px" }}>
       </div>
 

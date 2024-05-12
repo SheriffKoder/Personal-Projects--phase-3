@@ -97,11 +97,15 @@ const page = () => {
                 <div className="w-full 
                 bg-[#fffffff0] focus:bg-[#ffffff] hover:bg-[#ffffff] 
                 backdrop-blur-10
-                dark:bg-[#ffffff07] dark:hover:bg-[#ffffff0a] dark:focus:bg-[#ffffff0a]
+                dark:bg-[#ffffff03] dark:hover:bg-[#ffffff0a] dark:focus:bg-[#ffffff0a]
                 flex flex-col rounded-[7px] box-shadow-1 p-2 border border-[rgba(255,255,255,0.02)]
-                text_shadow-2
-                
+                text_shadow-2 relative
+        
                 ">
+
+                    <div className="absolute w-full h-full rounded-b-[10px] top-0 left-0 z-[0] opacity-[0.07]"
+                        style={{backgroundImage: "url('/images/deco.png')", backgroundSize: "25%", backgroundPosition: "0px -40px" }}>
+                    </div>
 
                     <h4 className="flex flex-row items-baseline font-bold uppercase px-2">
                         <span className="text-start dark:text-[#ffffffde] text_shadow-3 

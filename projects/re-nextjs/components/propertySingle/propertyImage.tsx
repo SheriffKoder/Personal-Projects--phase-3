@@ -92,6 +92,17 @@ const PropertyImage = ({pageProperty, property_title}: {
                                 <div className="flex flex-row items-center justify-center relative
                                 h-[45vw] w-full max-h-[600px]
                                 ">
+                                    
+
+
+                                    <Image src={pageProperty.thisProperty.property_images[imageReference]} height={600} width={600} alt={property_title}
+                                    id={pageProperty.thisProperty._id.toString()}
+                                    className="border-0
+                                    rounded-[10px] w-full h-[calc(45vw-0.25rem)] max-h-[100%]"
+                                    style={{objectFit:'cover'}}
+                                    priority>
+                                    </Image>
+
                                     {/* left button */}
                                     <button 
                                         onClick={()=>{animationCombination2(document.getElementById(pageProperty!.thisProperty._id.toString()), imageReference-1, pageProperty!.thisProperty.property_images.length)}}                            // onClick={()=>{prevFade=fade; fade=fade+1; animationCombination(slider__container);}}
@@ -105,14 +116,6 @@ const PropertyImage = ({pageProperty, property_title}: {
                                         bg-no-repeat bg-contain">
                                     </button>
 
-
-                                    <Image src={pageProperty.thisProperty.property_images[imageReference]} height={600} width={600} alt={property_title}
-                                    id={pageProperty.thisProperty._id.toString()}
-                                    className="border-0
-                                    rounded-[10px] w-full h-[calc(45vw-0.25rem)] max-h-[100%]"
-                                    style={{objectFit:'cover'}}
-                                    priority>
-                                    </Image>
 
                                     {/* right button */}
                                     <button 

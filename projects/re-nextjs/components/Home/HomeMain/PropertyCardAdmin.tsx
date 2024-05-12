@@ -251,21 +251,24 @@ const PropertyCardAdmin = ({setPropertyEditId, property1, currentPage="", setRel
 
                 <div className={`relative flex flex-row items-center justify-center text-start
                 ${currentPage === 'property' ? '' : 'xl:max-w-[50%]'} 
+                
                 md:max-h-[25vw] overflow-hidden rounded-t-[10px] xl:rounded-tr-none xl:rounded-bl-[10px]
                 md2:h-[18vw] xl:max-h-full h-full bg-[#0000001a]
+                
                 `}>
 
                   <button 
                     onClick={()=>{setPrevFade1(fade1); setFade1(fade1-1); animationCombination1(slider__container); }}
                     className="absolute bg-[#0a0a0a7d] left-1 rounded-[3px]
-                    bg-[url('/icons/arrow-left.svg')] h-4 w-4 bg-no-repeat bg-contain">
+                    bg-[url('/icons/arrow-left.svg')] h-4 w-4 bg-no-repeat bg-contain
+                    ">
                   </button>
 
                   <Link href={"/properties/single/"+property._id} key={property._id}
                   className="min-h-[50vw] md:min-h-[25vw] md2:min-h-[18vw] xl:min-h-[14vw]">
                     <Image src={property.property_images[imageReference]} height={400} width={400} alt={property.property_type+" "+property.property_country+" "+property.property_city+" "+property.property_district+" "+property.property_area+" "+property.property_beds+" bedrooms "+property.property_baths+" bathrooms "+property.property_listing_type}
                     id={property._id}
-                    className={`border-0 rounded-t-[10px] min-w-full min-h-[50vw] md:min-h-[25vw] md2:min-h-[18vw] xl:min-h-[14vw]
+                    className={`border-0 rounded-t-[10px] min-w-full sm:h-[50vw] md:h-auto md:min-h-[25vw] md2:min-h-[18vw] xl:min-h-[14vw]
                     ${currentPage === 'property' ? '' : 'xl:rounded-l-[10px] xl:rounded-tr-none'}
                     
                     `}
@@ -289,12 +292,12 @@ const PropertyCardAdmin = ({setPropertyEditId, property1, currentPage="", setRel
                     <div className="flex flex-col items-start px-2 pt-1 text-sm text-start">
                       <div className="dark:text-[#ffffffde] capitalize">{property.property_type} for {property.property_listing_type}</div>
                       {/* <div className="dark:text-[#ffffffde] capitalize">In {property.property_country}, {property.property_city}</div> */}
-                      <div className="dark:text-[#ffffffde] capitalize">in {property.property_city}, {property.property_district}</div>
+                      <div className="dark:text-[#ffffffde] capitalize line-clamp-1 xl:line-clamp-2">in {property.property_city}, {property.property_district}</div>
                       <div className="">{property.property_beds} beds / {property.property_baths} bath</div>
                       <div className="">Area: {property.property_area} sqm</div>
                       <div className="font-light text-sm">Price: £{property.property_price.toString().split(".")[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</div>
                       
-                      <div className="absolute w-full h-full rounded-b-[10px] top-0 left-0 z-[-1] opacity-20 dark:opacity-10"
+                      <div className="absolute w-full h-full rounded-b-[10px] top-0 left-0 z-[-1] opacity-10 dark:opacity-10"
                       style={{backgroundImage: "url('/images/deco.png')", backgroundSize: "110% 200%", backgroundPosition: "10px -40px" }}>
 
                       </div>
