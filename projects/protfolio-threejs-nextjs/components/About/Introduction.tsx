@@ -86,7 +86,7 @@ const Introduction = () => {
                             
                             <summary className="px-4 py-1 rounded-[6px] opacity-95
                             bg-gradient-to-r from-[#387ca4] to-[#39d0b7b4]">
-                                <span className="font-semibold">current status:</span> {goals[0].title}
+                                <span className="font-semibold">current goals:</span> {goals[0].title}
                             </summary>
 
                             <ul className="px-4 py-2 mt-2 flex flex-col gap-2">

@@ -42,12 +42,43 @@ import {
 
   // Done, In Progress, Not Yet
   export const goals = [
+
+    //
     {
-      title: "Practice projects final fixes",
+      title: "know more about NextJS",
+      progress: "In progress",
+    },
+    //
+    {
+      title: "know more about DBAs",
+      progress: "In progress",
+    },
+
+    //
+    {
+      title: "Components of interest re-create",
       progress: "In progress",
       steps: [
-        {title: "Final fixes for all previous projects", progress: "In Progress"},
-        {title: "Deploy projects to redirect from the portfolio website links", progress: "In Progress"},
+        {title: "Circular progress bar", progress: "Not Yet"}
+
+      ]
+    },
+
+    //
+    {
+      title: "Better at UIs",
+      progress: "In progress",
+      steps: [
+        {title: "GSAP: Animated Texts", progress: "In Progress"},
+      ]
+    },
+
+    {
+      title: "Practice projects final fixes",
+      progress: "Done",
+      steps: [
+        {title: "Final fixes for all previous projects", progress: "Done"},
+        {title: "Deploy projects to redirect from the portfolio website links", progress: "Done"},
       ]
     },
     {
