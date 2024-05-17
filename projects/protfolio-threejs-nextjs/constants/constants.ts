@@ -45,31 +45,20 @@ import {
 
     //
     {
-      title: "know more about NextJS",
-      progress: "In progress",
-    },
-    //
-    {
-      title: "know more about DBAs",
-      progress: "In progress",
-    },
-
-    //
-    {
-      title: "Components of interest re-create",
+      title: "Take courses to improve my knowledge & skills",
       progress: "In progress",
       steps: [
-        {title: "Circular progress bar", progress: "Not Yet"}
-
+        {title: "Algorithms and Data Structures Masterclass", progress: "In Progress"},
+        {title: "Next.js 14 & React", progress: "In Progress"}
       ]
     },
 
     //
     {
-      title: "Better at UIs",
+      title: "Learn to develop better UI components",
       progress: "In progress",
       steps: [
-        {title: "GSAP: Animated Texts", progress: "In Progress"},
+        {title: "GSAP: Animated text & content", progress: "In Progress"},
       ]
     },
 
