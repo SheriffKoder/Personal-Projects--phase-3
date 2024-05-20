@@ -1,6 +1,6 @@
 "use client"
 import {particles} from "@/app/cstThree/smoke/smoke"
-import {GUIFunction} from "@/app/cstThree/smoke/dat.gui.min.js"
+// import {GUIFunction} from "@/app/cstThree/smoke/dat.gui.min.js"
 import { useEffect } from "react";
 
 
