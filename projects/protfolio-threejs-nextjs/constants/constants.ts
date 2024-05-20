@@ -45,11 +45,15 @@ import {
 
     //
     {
-      title: "Take courses to improve my knowledge & skills",
+      title: "Improve my knowledge & skills (courses)",
       progress: "In progress",
       steps: [
         {title: "Algorithms and Data Structures Masterclass", progress: "In Progress"},
-        {title: "Next.js 14 & React", progress: "In Progress"}
+        {title: "Next.js 14 & React Complete course", progress: "In Progress"},
+        {title: "Learn about Next.js 14 & React", progress: "Done"},
+        {title: "Learn NodeJS/MongoDB to setup back-end APIs for database storage", progress: "Done"},
+        {title: "Complete the Odin project to Learn advanced HTML, CSS, Javascript and other skills", progress: "Done"},
+
       ]
     },
 
@@ -58,7 +62,9 @@ import {
       title: "Learn to develop better UI components",
       progress: "In progress",
       steps: [
-        {title: "GSAP: Animated text & content", progress: "In Progress"},
+        {title: "Learn and use GSAP", progress: "In Progress"},
+        {title: "Learn and use Three.js", progress: "Done"},
+        {title: "Learn and use framerMotion", progress: "Done"},
       ]
     },
 
@@ -83,11 +89,6 @@ import {
       ]
     },
     {
-      title: "Learn: ThreeJS and modern animations",
-      progress: "Done",
-      steps: []
-    },
-    {
       title: "Practice: convert the (Car Mainenance App)'s API to a GraphQL version",
       progress: "Done",
       steps: []
@@ -103,26 +104,10 @@ import {
       steps: []
     },
     {
-      title: "Learn: a front-end framework (ReactJS, NextJS)",
-      progress: "Done",
-      steps: []
-    },
-    {
       title: "Practice: make a website and use #1 skills and hookup with a backend for storage (Amazon clone website)",
       progress: "Done",
       steps: []
     },
-    {
-      title: "Learn: how to setup a back-end using MongoDB/Mongoose",
-      progress: "Done",
-      steps: []
-    },
-    {
-      title: "Learn: HTML, CSS, Javascript #1",
-      progress: "Done",
-      steps: []
-    },
-
 
   ]
 
