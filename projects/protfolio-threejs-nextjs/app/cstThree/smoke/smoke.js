@@ -27,6 +27,7 @@ export const particles = () => {
 // Simulation section
 
 
+
 //GUI
 // window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
 // ga('create', 'UA-105392568-1', 'auto');
@@ -35,21 +36,21 @@ export const particles = () => {
 
 
 const canvas = document.getElementsByTagName('canvas')[0];
-resizeCanvas();
+if (canvas) resizeCanvas();
 
 // adjust the controller config
 // change BACK_COLOR to change the canvas background color
 let config = {
     SIM_RESOLUTION: 128,
-    DYE_RESOLUTION: 1024,
+    DYE_RESOLUTION: 512,
     CAPTURE_RESOLUTION: 512,
-    DENSITY_DISSIPATION: 1,
-    VELOCITY_DISSIPATION: 0.2,
-    PRESSURE: 0.8,
-    PRESSURE_ITERATIONS: 20,
-    CURL: 30,
-    SPLAT_RADIUS: 0.25,
-    SPLAT_FORCE: 6000,
+    DENSITY_DISSIPATION: 3.5,     //1
+    VELOCITY_DISSIPATION: 0.48,    //0.2
+    PRESSURE: 0.59,                  //0.8
+    PRESSURE_ITERATIONS: 20,        //
+    CURL: 8,                   //30
+    SPLAT_RADIUS: 0.05,         //0.25
+    SPLAT_FORCE: 6000,          //
     SHADING: true,
     COLORFUL: true,
     COLOR_UPDATE_SPEED: 10,
@@ -62,7 +63,7 @@ let config = {
     BLOOM_INTENSITY: 0.8,
     BLOOM_THRESHOLD: 0.6,
     BLOOM_SOFT_KNEE: 0.7,
-    SUNRAYS: true,
+    SUNRAYS: false,              //true
     SUNRAYS_RESOLUTION: 196,
     SUNRAYS_WEIGHT: 1.0,
 }
@@ -83,6 +84,7 @@ function pointerPrototype () {
 let pointers = [];
 let splatStack = [];
 pointers.push(new pointerPrototype());
+
 
 const { gl, ext } = getWebGLContext(canvas);
 
@@ -1157,7 +1159,7 @@ initFramebuffers();
 
 // Disable entry animation
 // take a number, changes the amount of smoke elements at entry animation
-multipleSplats(parseInt(Math.random() * 20) + 5);
+// multipleSplats(parseInt(Math.random() * 20) + 5);
 
 let lastUpdateTime = Date.now();
 let colorUpdateTimer = 0.0;
@@ -1431,6 +1433,7 @@ function multipleSplats (amount) {
     }
 }
 
+
 function splat (x, y, dx, dy, color) {
     splatProgram.bind();
     gl.uniform1i(splatProgram.uniforms.uTarget, velocity.read.attach(0));
@@ -1456,61 +1459,43 @@ function correctRadius (radius) {
     return radius;
 }
 
+
+
+
 // Change the element that will trigger the animation
 const mainBody = document.querySelector("#mainContent");    //was "canvas" previously
 
 
 
+
 // event listeners
-mainBody.addEventListener('mouseenter', e => {
-    let posX = scaleByPixelRatio(e.offsetX);
-    let posY = scaleByPixelRatio(e.offsetY);
-    let pointer = pointers.find(p => p.id == -1);
-    if (pointer == null)
-        pointer = new pointerPrototype();
-    updatePointerDownData(pointer, -1, posX, posY);
-    console.log("hello")
-});
 
-// disable after 1 second
+
+// mainBody.addEventListener('mouseenter', e => {
+//     let posX = scaleByPixelRatio(e.clientX);
+//     let posY = scaleByPixelRatio(e.clientY);
+//     let pointer = pointers.find(p => p.id == -1);
+//     if (pointer == null)
+//         pointer = new pointerPrototype();
+//     updatePointerDownData(pointer, -1, posX, posY);
+// });
+
+
+
+
 mainBody.addEventListener('mousemove', e => {
-
-    // let posX = scaleByPixelRatio(e.offsetX);
-    // let posY = scaleByPixelRatio(e.offsetY);
-    // let pointer = pointers.find(p => p.id == -1);
-    // if (pointer == null)
-    //     pointer = new pointerPrototype();
-    // updatePointerDownData(pointer, -1, posX, posY);
-    // console.log("hello")
-
     let pointer = pointers[0];
-    if (!pointer.down) return;
-    let posX = scaleByPixelRatio(e.offsetX);
-    let posY = scaleByPixelRatio(e.offsetY);
+    // if (!pointer.down) return;
+    let posX = scaleByPixelRatio(e.clientX);
+    let posY = scaleByPixelRatio(e.clientY);
     updatePointerMoveData(pointer, posX, posY);
-    // console.log(posX);  //455 > 393
-    // console.log(posY);  // 237 > 207
-    // updatePointerMoveData(pointer, posX+1, posY+1);
-    // updatePointerMoveData(pointer, posX+2, posY+2);
-    // updatePointerMoveData(pointer, posX+3, posY+3);
-
-    // for (let i=0; i<200; i++) {
-    //         setTimeout(()=>{
-    //             updatePointerMoveData(pointer, posX+i, posY-i);
-    //         }, 50)
-    // }
-
-
-
-    // setTimeout(()=> {
-    //     updatePointerUpData(pointers[0]);
-
-    // }, 1000);
 });
+
 
 window.addEventListener('mouseup', () => {
     updatePointerUpData(pointers[0]);
 });
+
 
 mainBody.addEventListener('touchstart', e => {
     e.preventDefault();
@@ -1685,4 +1670,1579 @@ function hashCode (s) {
 };
 
 
+
+// manual simulation
+
+let objs = [];
+let time1 = 0;
+
+// RECORD an object for x,y,time between cursor movements
+// mainBody.addEventListener("mousemove", function record (e) {
+
+//         time1 !== 0 ? time1 = performance.now() : "";
+//         console.log(e.clientX);
+//         console.log(e.clientY);
+//         let pox = e.clientX;
+//         let poy = e.clientY;
+//         let time2 = performance.now();
+//         let total = time2-time1
+    
+//         objs.push({pox, poy, total});    
+    
+// });
+
+
+
+// apply or clear - console the object or clear on click on mainelement
+// let ready = false;
+// mainBody.addEventListener("click", e => {
+
+//     ready = !ready;
+//     if (ready) {
+//         console.log("ready");
+//         simulateMovement();
+//     } else {
+//         console.log("clearing");
+//         objs = [];
+//             updatePointerUpData(pointers[0]);
+
+//     }
+//     console.log(objs);
+
+// });
+
+// this is a saved object of mouse movement record
+let obj2 = [
+    {
+        "pox": 0,
+        "poy": 158,
+        "total": 2258
+    },
+    {
+        "pox": 0,
+        "poy": 158,
+        "total": 2258.60000000149
+    },
+    {
+        "pox": 29,
+        "poy": 150,
+        "total": 2301.800000000745
+    },
+    {
+        "pox": 35,
+        "poy": 149,
+        "total": 2302.4000000003725
+    },
+    {
+        "pox": 41,
+        "poy": 147,
+        "total": 2310.7000000011176
+    },
+    {
+        "pox": 47,
+        "poy": 145,
+        "total": 2317.5
+    },
+    {
+        "pox": 53,
+        "poy": 144,
+        "total": 2326.4000000003725
+    },
+    {
+        "pox": 58,
+        "poy": 142,
+        "total": 2333.9000000003725
+    },
+    {
+        "pox": 63,
+        "poy": 141,
+        "total": 2341.800000000745
+    },
+    {
+        "pox": 69,
+        "poy": 140,
+        "total": 2350
+    },
+    {
+        "pox": 74,
+        "poy": 138,
+        "total": 2358.4000000003725
+    },
+    {
+        "pox": 79,
+        "poy": 137,
+        "total": 2366.800000000745
+    },
+    {
+        "pox": 83,
+        "poy": 137,
+        "total": 2374
+    },
+    {
+        "pox": 87,
+        "poy": 135,
+        "total": 2381.9000000003725
+    },
+    {
+        "pox": 92,
+        "poy": 135,
+        "total": 2389.9000000003725
+    },
+    {
+        "pox": 96,
+        "poy": 135,
+        "total": 2398.9000000003725
+    },
+    {
+        "pox": 101,
+        "poy": 135,
+        "total": 2405.9000000003725
+    },
+    {
+        "pox": 106,
+        "poy": 134,
+        "total": 2413.800000000745
+    },
+    {
+        "pox": 111,
+        "poy": 134,
+        "total": 2422
+    },
+    {
+        "pox": 116,
+        "poy": 134,
+        "total": 2430.7000000011176
+    },
+    {
+        "pox": 120,
+        "poy": 134,
+        "total": 2438.300000000745
+    },
+    {
+        "pox": 125,
+        "poy": 134,
+        "total": 2445.4000000003725
+    },
+    {
+        "pox": 128,
+        "poy": 134,
+        "total": 2454.300000000745
+    },
+    {
+        "pox": 132,
+        "poy": 134,
+        "total": 2463
+    },
+    {
+        "pox": 136,
+        "poy": 134,
+        "total": 2470
+    },
+    {
+        "pox": 141,
+        "poy": 134,
+        "total": 2477.800000000745
+    },
+    {
+        "pox": 146,
+        "poy": 134,
+        "total": 2485.800000000745
+    },
+    {
+        "pox": 151,
+        "poy": 136,
+        "total": 2494.300000000745
+    },
+    {
+        "pox": 157,
+        "poy": 137,
+        "total": 2502.10000000149
+    },
+    {
+        "pox": 165,
+        "poy": 139,
+        "total": 2510.2000000011176
+    },
+    {
+        "pox": 171,
+        "poy": 140,
+        "total": 2518.300000000745
+    },
+    {
+        "pox": 178,
+        "poy": 142,
+        "total": 2525.5
+    },
+    {
+        "pox": 187,
+        "poy": 145,
+        "total": 2533.4000000003725
+    },
+    {
+        "pox": 194,
+        "poy": 146,
+        "total": 2542
+    },
+    {
+        "pox": 201,
+        "poy": 148,
+        "total": 2550.4000000003725
+    },
+    {
+        "pox": 208,
+        "poy": 150,
+        "total": 2557.9000000003725
+    },
+    {
+        "pox": 214,
+        "poy": 152,
+        "total": 2565.7000000011176
+    },
+    {
+        "pox": 220,
+        "poy": 154,
+        "total": 2574.10000000149
+    },
+    {
+        "pox": 227,
+        "poy": 156,
+        "total": 2581.5
+    },
+    {
+        "pox": 233,
+        "poy": 157,
+        "total": 2590.300000000745
+    },
+    {
+        "pox": 240,
+        "poy": 159,
+        "total": 2598
+    },
+    {
+        "pox": 246,
+        "poy": 161,
+        "total": 2605.60000000149
+    },
+    {
+        "pox": 252,
+        "poy": 163,
+        "total": 2614
+    },
+    {
+        "pox": 259,
+        "poy": 165,
+        "total": 2622.10000000149
+    },
+    {
+        "pox": 265,
+        "poy": 168,
+        "total": 2630.10000000149
+    },
+    {
+        "pox": 272,
+        "poy": 171,
+        "total": 2638
+    },
+    {
+        "pox": 279,
+        "poy": 173,
+        "total": 2646.4000000003725
+    },
+    {
+        "pox": 284,
+        "poy": 175,
+        "total": 2654.4000000003725
+    },
+    {
+        "pox": 290,
+        "poy": 178,
+        "total": 2661.9000000003725
+    },
+    {
+        "pox": 297,
+        "poy": 180,
+        "total": 2670.300000000745
+    },
+    {
+        "pox": 302,
+        "poy": 184,
+        "total": 2679.2000000011176
+    },
+    {
+        "pox": 308,
+        "poy": 187,
+        "total": 2685.9000000003725
+    },
+    {
+        "pox": 314,
+        "poy": 190,
+        "total": 2695.10000000149
+    },
+    {
+        "pox": 343,
+        "poy": 202,
+        "total": 2747.300000000745
+    },
+    {
+        "pox": 347,
+        "poy": 203,
+        "total": 2750.10000000149
+    },
+    {
+        "pox": 350,
+        "poy": 205,
+        "total": 2758.4000000003725
+    },
+    {
+        "pox": 354,
+        "poy": 206,
+        "total": 2765.4000000003725
+    },
+    {
+        "pox": 357,
+        "poy": 208,
+        "total": 2774.2000000011176
+    },
+    {
+        "pox": 360,
+        "poy": 209,
+        "total": 2781.800000000745
+    },
+    {
+        "pox": 364,
+        "poy": 211,
+        "total": 2790.300000000745
+    },
+    {
+        "pox": 367,
+        "poy": 213,
+        "total": 2797.5
+    },
+    {
+        "pox": 371,
+        "poy": 215,
+        "total": 2808.9000000003725
+    },
+    {
+        "pox": 374,
+        "poy": 217,
+        "total": 2813.5
+    },
+    {
+        "pox": 379,
+        "poy": 219,
+        "total": 2821.800000000745
+    },
+    {
+        "pox": 382,
+        "poy": 221,
+        "total": 2829.9000000003725
+    },
+    {
+        "pox": 387,
+        "poy": 224,
+        "total": 2838.300000000745
+    },
+    {
+        "pox": 390,
+        "poy": 227,
+        "total": 2846.10000000149
+    },
+    {
+        "pox": 394,
+        "poy": 229,
+        "total": 2854.7000000011176
+    },
+    {
+        "pox": 398,
+        "poy": 232,
+        "total": 2861.60000000149
+    },
+    {
+        "pox": 403,
+        "poy": 235,
+        "total": 2869.5
+    },
+    {
+        "pox": 407,
+        "poy": 239,
+        "total": 2877.5
+    },
+    {
+        "pox": 411,
+        "poy": 242,
+        "total": 2886.4000000003725
+    },
+    {
+        "pox": 416,
+        "poy": 245,
+        "total": 2894.10000000149
+    },
+    {
+        "pox": 421,
+        "poy": 249,
+        "total": 2901.4000000003725
+    },
+    {
+        "pox": 426,
+        "poy": 253,
+        "total": 2910.10000000149
+    },
+    {
+        "pox": 430,
+        "poy": 256,
+        "total": 2917.5
+    },
+    {
+        "pox": 435,
+        "poy": 260,
+        "total": 2927.9000000003725
+    },
+    {
+        "pox": 440,
+        "poy": 264,
+        "total": 2934.10000000149
+    },
+    {
+        "pox": 446,
+        "poy": 268,
+        "total": 2941.7000000011176
+    },
+    {
+        "pox": 452,
+        "poy": 273,
+        "total": 2949.7000000011176
+    },
+    {
+        "pox": 458,
+        "poy": 278,
+        "total": 2959.60000000149
+    },
+    {
+        "pox": 463,
+        "poy": 283,
+        "total": 2965.9000000003725
+    },
+    {
+        "pox": 468,
+        "poy": 288,
+        "total": 2973.60000000149
+    },
+    {
+        "pox": 473,
+        "poy": 293,
+        "total": 2982.2000000011176
+    },
+    {
+        "pox": 478,
+        "poy": 299,
+        "total": 2989.7000000011176
+    },
+    {
+        "pox": 483,
+        "poy": 305,
+        "total": 2997.800000000745
+    },
+    {
+        "pox": 489,
+        "poy": 310,
+        "total": 3006.10000000149
+    },
+    {
+        "pox": 494,
+        "poy": 315,
+        "total": 3014.2000000011176
+    },
+    {
+        "pox": 499,
+        "poy": 320,
+        "total": 3022.7000000011176
+    },
+    {
+        "pox": 504,
+        "poy": 325,
+        "total": 3029.9000000003725
+    },
+    {
+        "pox": 508,
+        "poy": 330,
+        "total": 3038.7000000011176
+    },
+    {
+        "pox": 513,
+        "poy": 335,
+        "total": 3045.800000000745
+    },
+    {
+        "pox": 518,
+        "poy": 341,
+        "total": 3053.7000000011176
+    },
+    {
+        "pox": 524,
+        "poy": 347,
+        "total": 3061.800000000745
+    },
+    {
+        "pox": 530,
+        "poy": 354,
+        "total": 3069.9000000003725
+    },
+    {
+        "pox": 535,
+        "poy": 361,
+        "total": 3077.9000000003725
+    },
+    {
+        "pox": 540,
+        "poy": 367,
+        "total": 3086.10000000149
+    },
+    {
+        "pox": 546,
+        "poy": 374,
+        "total": 3093.9000000003725
+    },
+    {
+        "pox": 550,
+        "poy": 380,
+        "total": 3102.60000000149
+    },
+    {
+        "pox": 555,
+        "poy": 386,
+        "total": 3109.60000000149
+    },
+    {
+        "pox": 559,
+        "poy": 392,
+        "total": 3118.800000000745
+    },
+    {
+        "pox": 564,
+        "poy": 398,
+        "total": 3125.60000000149
+    },
+    {
+        "pox": 569,
+        "poy": 405,
+        "total": 3136
+    },
+    {
+        "pox": 575,
+        "poy": 412,
+        "total": 3141.800000000745
+    },
+    {
+        "pox": 581,
+        "poy": 418,
+        "total": 3150.60000000149
+    },
+    {
+        "pox": 586,
+        "poy": 425,
+        "total": 3158.300000000745
+    },
+    {
+        "pox": 592,
+        "poy": 432,
+        "total": 3166.2000000011176
+    },
+    {
+        "pox": 598,
+        "poy": 441,
+        "total": 3174.300000000745
+    },
+    {
+        "pox": 603,
+        "poy": 447,
+        "total": 3181.7000000011176
+    },
+    {
+        "pox": 608,
+        "poy": 454,
+        "total": 3190
+    },
+    {
+        "pox": 613,
+        "poy": 461,
+        "total": 3198.2000000011176
+    },
+    {
+        "pox": 617,
+        "poy": 467,
+        "total": 3205.9000000003725
+    },
+    {
+        "pox": 622,
+        "poy": 474,
+        "total": 3213.9000000003725
+    },
+    {
+        "pox": 627,
+        "poy": 480,
+        "total": 3221.60000000149
+    },
+    {
+        "pox": 631,
+        "poy": 486,
+        "total": 3229.9000000003725
+    },
+    {
+        "pox": 637,
+        "poy": 491,
+        "total": 3238.5
+    },
+    {
+        "pox": 640,
+        "poy": 497,
+        "total": 3245.300000000745
+    },
+    {
+        "pox": 645,
+        "poy": 503,
+        "total": 3253.5
+    },
+    {
+        "pox": 649,
+        "poy": 509,
+        "total": 3261.60000000149
+    },
+    {
+        "pox": 654,
+        "poy": 515,
+        "total": 3270.60000000149
+    },
+    {
+        "pox": 658,
+        "poy": 520,
+        "total": 3277.7000000011176
+    },
+    {
+        "pox": 662,
+        "poy": 526,
+        "total": 3285.10000000149
+    },
+    {
+        "pox": 666,
+        "poy": 532,
+        "total": 3293.4000000003725
+    },
+    {
+        "pox": 670,
+        "poy": 538,
+        "total": 3301.4000000003725
+    },
+    {
+        "pox": 674,
+        "poy": 544,
+        "total": 3309.9000000003725
+    },
+    {
+        "pox": 678,
+        "poy": 550,
+        "total": 3317.300000000745
+    },
+    {
+        "pox": 681,
+        "poy": 556,
+        "total": 3325.60000000149
+    },
+    {
+        "pox": 685,
+        "poy": 561,
+        "total": 3334
+    },
+    {
+        "pox": 689,
+        "poy": 566,
+        "total": 3342.10000000149
+    },
+    {
+        "pox": 693,
+        "poy": 571,
+        "total": 3350.2000000011176
+    },
+    {
+        "pox": 696,
+        "poy": 577,
+        "total": 3358.4000000003725
+    },
+    {
+        "pox": 710,
+        "poy": 596,
+        "total": 3393.9000000003725
+    },
+    {
+        "pox": 714,
+        "poy": 601,
+        "total": 3398.7000000011176
+    },
+    {
+        "pox": 717,
+        "poy": 605,
+        "total": 3405.4000000003725
+    },
+    {
+        "pox": 721,
+        "poy": 611,
+        "total": 3414.5
+    },
+    {
+        "pox": 724,
+        "poy": 615,
+        "total": 3422.5
+    },
+    {
+        "pox": 727,
+        "poy": 619,
+        "total": 3430
+    },
+    {
+        "pox": 730,
+        "poy": 622,
+        "total": 3438.2000000011176
+    },
+    {
+        "pox": 732,
+        "poy": 626,
+        "total": 3447
+    },
+    {
+        "pox": 736,
+        "poy": 630,
+        "total": 3454.300000000745
+    },
+    {
+        "pox": 738,
+        "poy": 634,
+        "total": 3462.9000000003725
+    },
+    {
+        "pox": 741,
+        "poy": 638,
+        "total": 3469.60000000149
+    },
+    {
+        "pox": 744,
+        "poy": 643,
+        "total": 3477.60000000149
+    },
+    {
+        "pox": 747,
+        "poy": 647,
+        "total": 3485.2000000011176
+    },
+    {
+        "pox": 751,
+        "poy": 652,
+        "total": 3493.300000000745
+    },
+    {
+        "pox": 754,
+        "poy": 656,
+        "total": 3502
+    },
+    {
+        "pox": 758,
+        "poy": 661,
+        "total": 3510.60000000149
+    },
+    {
+        "pox": 761,
+        "poy": 665,
+        "total": 3518
+    },
+    {
+        "pox": 765,
+        "poy": 670,
+        "total": 3525.60000000149
+    },
+    {
+        "pox": 768,
+        "poy": 673,
+        "total": 3533.800000000745
+    },
+    {
+        "pox": 771,
+        "poy": 676,
+        "total": 3542.10000000149
+    },
+    {
+        "pox": 774,
+        "poy": 679,
+        "total": 3549.9000000003725
+    },
+    {
+        "pox": 776,
+        "poy": 682,
+        "total": 3558.10000000149
+    },
+    {
+        "pox": 778,
+        "poy": 686,
+        "total": 3565.9000000003725
+    },
+    {
+        "pox": 781,
+        "poy": 688,
+        "total": 3574.4000000003725
+    },
+    {
+        "pox": 786,
+        "poy": 692,
+        "total": 3581.9000000003725
+    },
+    {
+        "pox": 790,
+        "poy": 695,
+        "total": 3589.5
+    },
+    {
+        "pox": 795,
+        "poy": 699,
+        "total": 3596.60000000149
+    },
+    {
+        "pox": 800,
+        "poy": 702,
+        "total": 3605.300000000745
+    },
+    {
+        "pox": 804,
+        "poy": 705,
+        "total": 3612.300000000745
+    },
+    {
+        "pox": 808,
+        "poy": 708,
+        "total": 3620.9000000003725
+    },
+    {
+        "pox": 813,
+        "poy": 711,
+        "total": 3628.7000000011176
+    },
+    {
+        "pox": 817,
+        "poy": 714,
+        "total": 3636.60000000149
+    },
+    {
+        "pox": 822,
+        "poy": 717,
+        "total": 3645.7000000011176
+    },
+    {
+        "pox": 826,
+        "poy": 719,
+        "total": 3653.300000000745
+    },
+    {
+        "pox": 830,
+        "poy": 723,
+        "total": 3661.800000000745
+    },
+    {
+        "pox": 835,
+        "poy": 726,
+        "total": 3668.4000000003725
+    },
+    {
+        "pox": 839,
+        "poy": 729,
+        "total": 3677
+    },
+    {
+        "pox": 844,
+        "poy": 733,
+        "total": 3684.800000000745
+    },
+    {
+        "pox": 850,
+        "poy": 736,
+        "total": 3692.800000000745
+    },
+    {
+        "pox": 855,
+        "poy": 740,
+        "total": 3700.7000000011176
+    },
+    {
+        "pox": 861,
+        "poy": 743,
+        "total": 3710.10000000149
+    },
+    {
+        "pox": 866,
+        "poy": 747,
+        "total": 3717.2000000011176
+    },
+    {
+        "pox": 871,
+        "poy": 750,
+        "total": 3726
+    },
+    {
+        "pox": 876,
+        "poy": 753,
+        "total": 3733.2000000011176
+    },
+    {
+        "pox": 881,
+        "poy": 755,
+        "total": 3743.300000000745
+    },
+    {
+        "pox": 884,
+        "poy": 757,
+        "total": 3748.800000000745
+    },
+    {
+        "pox": 888,
+        "poy": 760,
+        "total": 3757.800000000745
+    },
+    {
+        "pox": 893,
+        "poy": 761,
+        "total": 3764.7000000011176
+    },
+    {
+        "pox": 897,
+        "poy": 764,
+        "total": 3774.10000000149
+    },
+    {
+        "pox": 902,
+        "poy": 766,
+        "total": 3781.10000000149
+    },
+    {
+        "pox": 907,
+        "poy": 768,
+        "total": 3789.10000000149
+    },
+    {
+        "pox": 912,
+        "poy": 770,
+        "total": 3796.7000000011176
+    },
+    {
+        "pox": 917,
+        "poy": 772,
+        "total": 3805.7000000011176
+    },
+    {
+        "pox": 922,
+        "poy": 774,
+        "total": 3813.4000000003725
+    },
+    {
+        "pox": 926,
+        "poy": 776,
+        "total": 3820.9000000003725
+    },
+    {
+        "pox": 930,
+        "poy": 778,
+        "total": 3829
+    },
+    {
+        "pox": 935,
+        "poy": 779,
+        "total": 3837.300000000745
+    },
+    {
+        "pox": 939,
+        "poy": 781,
+        "total": 3845.10000000149
+    },
+    {
+        "pox": 944,
+        "poy": 783,
+        "total": 3852.5
+    },
+    {
+        "pox": 949,
+        "poy": 784,
+        "total": 3861.4000000003725
+    },
+    {
+        "pox": 953,
+        "poy": 785,
+        "total": 3869.4000000003725
+    },
+    {
+        "pox": 957,
+        "poy": 786,
+        "total": 3876.7000000011176
+    },
+    {
+        "pox": 969,
+        "poy": 789,
+        "total": 3908.2000000011176
+    },
+    {
+        "pox": 972,
+        "poy": 790,
+        "total": 3908.60000000149
+    },
+    {
+        "pox": 976,
+        "poy": 791,
+        "total": 3917.2000000011176
+    },
+    {
+        "pox": 980,
+        "poy": 792,
+        "total": 3924.9000000003725
+    },
+    {
+        "pox": 984,
+        "poy": 793,
+        "total": 3932.4000000003725
+    },
+    {
+        "pox": 988,
+        "poy": 794,
+        "total": 3940.7000000011176
+    },
+    {
+        "pox": 993,
+        "poy": 796,
+        "total": 3948.5
+    },
+    {
+        "pox": 998,
+        "poy": 796,
+        "total": 3956.7000000011176
+    },
+    {
+        "pox": 1003,
+        "poy": 798,
+        "total": 3964.7000000011176
+    },
+    {
+        "pox": 1007,
+        "poy": 798,
+        "total": 3972.4000000003725
+    },
+    {
+        "pox": 1012,
+        "poy": 799,
+        "total": 3980.60000000149
+    },
+    {
+        "pox": 1017,
+        "poy": 801,
+        "total": 3988.9000000003725
+    },
+    {
+        "pox": 1022,
+        "poy": 803,
+        "total": 3996.7000000011176
+    },
+    {
+        "pox": 1026,
+        "poy": 803,
+        "total": 4004.300000000745
+    },
+    {
+        "pox": 1030,
+        "poy": 804,
+        "total": 4012.60000000149
+    },
+    {
+        "pox": 1034,
+        "poy": 805,
+        "total": 4022
+    },
+    {
+        "pox": 1037,
+        "poy": 805,
+        "total": 4028.2000000011176
+    },
+    {
+        "pox": 1039,
+        "poy": 805,
+        "total": 4036.800000000745
+    },
+    {
+        "pox": 1042,
+        "poy": 805,
+        "total": 4044.5
+    },
+    {
+        "pox": 1044,
+        "poy": 806,
+        "total": 4052.800000000745
+    },
+    {
+        "pox": 1046,
+        "poy": 806,
+        "total": 4060.5
+    },
+    {
+        "pox": 1048,
+        "poy": 806,
+        "total": 4068.800000000745
+    },
+    {
+        "pox": 1050,
+        "poy": 806,
+        "total": 4077
+    },
+    {
+        "pox": 1053,
+        "poy": 806,
+        "total": 4084.9000000003725
+    },
+    {
+        "pox": 1055,
+        "poy": 806,
+        "total": 4093.4000000003725
+    },
+    {
+        "pox": 1058,
+        "poy": 806,
+        "total": 4100.4000000003725
+    },
+    {
+        "pox": 1060,
+        "poy": 806,
+        "total": 4108.60000000149
+    },
+    {
+        "pox": 1062,
+        "poy": 806,
+        "total": 4116.800000000745
+    },
+    {
+        "pox": 1064,
+        "poy": 806,
+        "total": 4124.60000000149
+    },
+    {
+        "pox": 1067,
+        "poy": 806,
+        "total": 4133.200000001118
+    },
+    {
+        "pox": 1071,
+        "poy": 806,
+        "total": 4140.60000000149
+    },
+    {
+        "pox": 1074,
+        "poy": 806,
+        "total": 4149.10000000149
+    },
+    {
+        "pox": 1077,
+        "poy": 806,
+        "total": 4158.60000000149
+    },
+    {
+        "pox": 1081,
+        "poy": 806,
+        "total": 4164.9000000003725
+    },
+    {
+        "pox": 1085,
+        "poy": 806,
+        "total": 4172.800000000745
+    },
+    {
+        "pox": 1089,
+        "poy": 806,
+        "total": 4180.800000000745
+    },
+    {
+        "pox": 1092,
+        "poy": 806,
+        "total": 4188.700000001118
+    },
+    {
+        "pox": 1096,
+        "poy": 806,
+        "total": 4196.700000001118
+    },
+    {
+        "pox": 1100,
+        "poy": 806,
+        "total": 4204.5
+    },
+    {
+        "pox": 1104,
+        "poy": 806,
+        "total": 4212.9000000003725
+    },
+    {
+        "pox": 1109,
+        "poy": 806,
+        "total": 4221
+    },
+    {
+        "pox": 1112,
+        "poy": 806,
+        "total": 4228.800000000745
+    },
+    {
+        "pox": 1115,
+        "poy": 806,
+        "total": 4236.4000000003725
+    },
+    {
+        "pox": 1119,
+        "poy": 806,
+        "total": 4244.60000000149
+    },
+    {
+        "pox": 1121,
+        "poy": 806,
+        "total": 4253.10000000149
+    },
+    {
+        "pox": 1123,
+        "poy": 805,
+        "total": 4261.4000000003725
+    },
+    {
+        "pox": 1125,
+        "poy": 804,
+        "total": 4269.10000000149
+    },
+    {
+        "pox": 1126,
+        "poy": 804,
+        "total": 4277.4000000003725
+    },
+    {
+        "pox": 1127,
+        "poy": 804,
+        "total": 4285.200000001118
+    },
+    {
+        "pox": 1128,
+        "poy": 804,
+        "total": 4292.5
+    },
+    {
+        "pox": 1130,
+        "poy": 803,
+        "total": 4300.5
+    },
+    {
+        "pox": 1132,
+        "poy": 803,
+        "total": 4308.60000000149
+    },
+    {
+        "pox": 1133,
+        "poy": 802,
+        "total": 4316.4000000003725
+    },
+    {
+        "pox": 1134,
+        "poy": 802,
+        "total": 4325.300000000745
+    },
+    {
+        "pox": 1135,
+        "poy": 802,
+        "total": 4332.60000000149
+    },
+    {
+        "pox": 1135,
+        "poy": 801,
+        "total": 4341.300000000745
+    },
+    {
+        "pox": 1136,
+        "poy": 801,
+        "total": 4357
+    },
+    {
+        "pox": 1136,
+        "poy": 800,
+        "total": 4365
+    },
+    {
+        "pox": 1137,
+        "poy": 800,
+        "total": 4373.300000000745
+    },
+    {
+        "pox": 1138,
+        "poy": 800,
+        "total": 4404.700000001118
+    },
+    {
+        "pox": 1140,
+        "poy": 800,
+        "total": 8674.800000000745
+    },
+    {
+        "pox": 1144,
+        "poy": 799,
+        "total": 8682.300000000745
+    },
+    {
+        "pox": 1151,
+        "poy": 797,
+        "total": 8694.60000000149
+    },
+    {
+        "pox": 1158,
+        "poy": 795,
+        "total": 8699.200000001118
+    },
+    {
+        "pox": 1166,
+        "poy": 793,
+        "total": 8706.5
+    },
+    {
+        "pox": 1174,
+        "poy": 791,
+        "total": 8714.5
+    },
+    {
+        "pox": 1181,
+        "poy": 789,
+        "total": 8722.700000001118
+    },
+    {
+        "pox": 1188,
+        "poy": 788,
+        "total": 8730.700000001118
+    },
+    {
+        "pox": 1194,
+        "poy": 787,
+        "total": 8738.900000000373
+    },
+    {
+        "pox": 1199,
+        "poy": 786,
+        "total": 8747.300000000745
+    },
+    {
+        "pox": 1203,
+        "poy": 786,
+        "total": 8754.5
+    },
+    {
+        "pox": 1207,
+        "poy": 785,
+        "total": 8763
+    },
+    {
+        "pox": 1211,
+        "poy": 785,
+        "total": 8771.200000001118
+    },
+    {
+        "pox": 1215,
+        "poy": 785,
+        "total": 8778.800000000745
+    },
+    {
+        "pox": 1217,
+        "poy": 785,
+        "total": 8787.800000000745
+    },
+    {
+        "pox": 1220,
+        "poy": 785,
+        "total": 8794.60000000149
+    },
+    {
+        "pox": 1222,
+        "poy": 785,
+        "total": 8803
+    },
+    {
+        "pox": 1223,
+        "poy": 785,
+        "total": 8811.200000001118
+    },
+    {
+        "pox": 1225,
+        "poy": 785,
+        "total": 8818.5
+    },
+    {
+        "pox": 1226,
+        "poy": 785,
+        "total": 8826.700000001118
+    },
+    {
+        "pox": 1228,
+        "poy": 785,
+        "total": 8835.200000001118
+    },
+    {
+        "pox": 1230,
+        "poy": 785,
+        "total": 8843.10000000149
+    },
+    {
+        "pox": 1231,
+        "poy": 785,
+        "total": 8859.300000000745
+    },
+    {
+        "pox": 1232,
+        "poy": 784,
+        "total": 8994.900000000373
+    },
+    {
+        "pox": 1233,
+        "poy": 783,
+        "total": 9011.60000000149
+    },
+    {
+        "pox": 1234,
+        "poy": 781,
+        "total": 9019.200000001118
+    },
+    {
+        "pox": 1234,
+        "poy": 780,
+        "total": 9026.800000000745
+    },
+    {
+        "pox": 1235,
+        "poy": 778,
+        "total": 9035
+    },
+    {
+        "pox": 1236,
+        "poy": 775,
+        "total": 9044.700000001118
+    }
+];
+
+
+function simulateMovement (incomingObject, location) {
+    setTimeout(()=> {
+        let coordX = 0; // Moving from the left side of the screen
+        // let coordY = 500; // Moving in the center
+        location === "end" ? coordX = incomingObject.length-1: coordX = 0;
+
+        function move() {
+            console.log("moving");
+    
+            // Move step = 1 array element
+            // coordX += 1;
+            location === "end" ? coordX -= 1 : coordX += 1;
+
+            console.log("moving1");
+            console.log("coordX", coordX);
+            // Create new mouse event
+            let ev = new MouseEvent("mousemove", {
+                view: window,
+                bubbles: true,
+                cancelable: true,
+                clientX: incomingObject[coordX].pox,
+                clientY: incomingObject[coordX].poy
+            });
+
+            console.log("moving2");
+
+        
+            // Send event
+            document.querySelector('#mainContent').dispatchEvent(ev);
+
+            //make the animation smoother by repeating it again (slight movement)
+            let factor
+            location === "end" ? factor = -0.3 : factor = 0.3;
+            setTimeout(() => {
+                let ev2 = new MouseEvent("mousemove", {
+                    view: window,
+                    bubbles: true,
+                    cancelable: true,
+                    clientX: incomingObject[coordX].pox+factor,
+                    clientY: incomingObject[coordX].poy+factor
+                });
+            
+                // Send event
+                    document.querySelector('#mainContent').dispatchEvent(ev2);
+            }, incomingObject[coordX].total/3000);
+
+            console.log("moving3");
+
+
+
+            // If the current position of the fake "mouse" is less than the width of the screen - let's move
+            // if (coordX < window.innerWidth) {
+            // repeat the function again and move to next position
+            // with a delay factor from the record simulating user mouse speed delay
+
+            let animaionEnd = false;
+            location === "end" ? animaionEnd = (coordX === 0) : animaionEnd = (coordX >= incomingObject.length-1);
+
+            console.log("moving4", animaionEnd);
+
+
+            if (!animaionEnd) {
+                setTimeout(() => {
+                    move();
+                    //the more speed the faster and less pressure
+                }, incomingObject[coordX].total/3000);
+            }
+      
+        }
+        
+        // Starting to move
+        move();
+      }, 1000);    
+}
+
+
+// pass the object to the function
+simulateMovement(obj2, "start");
+setTimeout(()=> {
+    simulateMovement(obj2, "end");
+}, 2300);
+
+
+// original function
+// https://stackoverflow.com/questions/41143263/trigger-mousemove-event-using-jquery-or-javascript
+/*
+let coordX = 0; // Moving from the left side of the screen
+let coordY = window.innerHeight / 2; // Moving in the center
+
+function move() {
+    // Move step = 20 pixels
+    coordX += 20;
+    // Create new mouse event
+    let ev = new MouseEvent("mousemove", {
+        view: window,
+        bubbles: true,
+        cancelable: true,
+        clientX: coordX,
+        clientY: coordY
+    });
+
+    // Send event
+    document.querySelector('Put your element here!').dispatchEvent(ev);
+    // If the current position of the fake "mouse" is less than the width of the screen - let's move
+    if (coordX < window.innerWidth) {
+        setTimeout(() => {
+            move();
+        }, 10);
+    }
+}
+
+// Starting to move
+move();
+*/
+
+
+
+
+return simulateMovement;
 }
