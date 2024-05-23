@@ -22,7 +22,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-export const particles = () => {
+export const particles = (incomingControls) => {
 'use strict';
 // Simulation section
 
@@ -946,7 +946,9 @@ let bloomFramebuffers = [];
 let sunrays;
 let sunraysTemp;
 
-let ditheringTexture = createTextureAsync('LDR_LLL1_0.png');
+// let ditheringTexture = createTextureAsync('LDR_LLL1_0.png');
+let ditheringTexture = createTextureAsync('');
+
 
 const blurProgram            = new Program(blurVertexShader, blurShader);
 const copyProgram            = new Program(baseVertexShader, copyShader);
@@ -1159,7 +1161,9 @@ initFramebuffers();
 
 // Disable entry animation
 // take a number, changes the amount of smoke elements at entry animation
-// multipleSplats(parseInt(Math.random() * 20) + 5);
+if (incomingControls.entry) {
+    multipleSplats(parseInt(Math.random() * 20) + 5);
+}
 
 let lastUpdateTime = Date.now();
 let colorUpdateTimer = 0.0;
@@ -1586,8 +1590,10 @@ function correctDeltaY (delta) {
 function generateColor () {
     let c = HSVtoRGB(Math.random(), 1.0, 1.0);                  // the original "random colors"
 
-    let newColor = [{ r: 0, g: 0, b:1 }, { r: 1, g: 0, b:0 }];  // array of 2 custom colors by RGB values
+    let newColor = [{ r: 0, g: 0, b:1 }, { r: 0, g: 0.5, b:0.5 }];  // array of 2 custom colors by RGB values
     c = newColor[Math.floor(Math.random() * 2)];                // choose randomly from 0-1 indexes
+
+
     c.r *= 0.15;
     c.g *= 0.15;
     c.b *= 0.15;
@@ -3203,9 +3209,9 @@ function simulateMovement (incomingObject, location) {
 
 
 // pass the object to the function
-simulateMovement(obj2, "start");
+// simulateMovement(obj2, "start");
 setTimeout(()=> {
-    simulateMovement(obj2, "end");
+    // simulateMovement(obj2, "end");
 }, 2300);
 
 
@@ -3244,5 +3250,5 @@ move();
 
 
 
-return simulateMovement;
+return {simulateMovement, multipleSplats};
 }

@@ -1,7 +1,10 @@
 "use client"
 import {particles} from "@/app/cstThree/smoke/smoke"
+import Footer from "@/components/footer";
 // import {GUIFunction} from "@/app/cstThree/smoke/dat.gui.min.js"
 import { useEffect, useRef, useState } from "react";
+
+import classes from "./page.module.css";
 
 // cross screen animation
 let obj2 = [
@@ -1444,6 +1447,15 @@ let obj2 = [
 
 function Smoke() {
 
+let myColors = {
+    blue: "#4287f5",
+    green: "#13edc5",
+    red: "#ed1358"
+}
+
+const [newColors, setNewColors] = useState([]);
+const cstColors = useRef([]);
+
   // button
   // simulate function in .js file not imported when repeating button animation
   // so import here
@@ -1846,33 +1858,148 @@ function Smoke() {
 
 
   useEffect(()=> {
-    simulate = particles();
+    const {simulate, multipleSplats} = particles({entry: true});
 
-  },[render]);
+
+  },[]);
 
   return (
     // <>
     <div className="w-full h-full relative">
       <canvas className="h-full w-full absolute top-0 left-0 z-0"></canvas>
-        <section className="h-full w-full absolute top-0 left-0 z-1" id="mainContent">
-            {/* Hello World */}
-            <div className="flex h-full w-full items-center justify-center 
-            font-semibold text-5xl color-white uppercase gap-2">
-              <span className="">Welcome to your</span>
-              <span className="gradient_text_1">Website</span>
-              
-              <button id={"mybt"} onClick={(e)=>{console.log("///////////"); 
-              simulate(obj2, "start")
-              // cleanTrack(objClick);
-            //   buttonAnim(e, objClick, "mybt"); setRender((prev)=>!prev);
-            }}
-            className="text-black px-4 py-1 bg-white">SIM</button>
+        <section className="h-full w-full absolute top-0 left-0 z-1 overflow-x-hidden overflow-y-scroll" id="mainContent">
+            {/* place any elements here */}
+            
+
+            <div className={`flex flex-col items-center justify-end 
+            h-[60vh] w-full gap-9 pt-12 ${classes.firstDiv}`}>
+                
+                {/* header */}
+                <h1 className="text-5xl text-center font-semibold gr
+                px-2">
+                    Your website with a beautiful design
+                </h1>
+
+                <p className="font-[100] text-center text-lg
+                px-4">
+                    Animations make websites look more modern and gives a nice edge.
+                    Animations and transitions can make user interfaces more engaging and intuitive. 
+                    They provide visual cues and feedback. 
+                    <button type="button" id="mybt" 
+                    className="block mx-auto mt-4 px-6 py-1 bg-blue-800 
+                    font-[300]
+                    rounded-2xl text-sm uppercase"
+                    onClick={()=>{console.log("hi"); particles({entry:true, colors:myColors});}}  
+                    onTouchStart={()=>{console.log("hi"); particles({entry:true, colors: []});}}
+                    >
+                        Try it
+                    </button>
+                </p>
+
             </div>
 
+            <div className="flex flex-col items-center justify-end 
+            h-[50vh] w-full gap-9">
+                
+                {/* header */}
+                <h1 className="text-5xl text-center font-semibold gr
+                px-2">
+                    Control your animation
+                </h1>
+
+                <div className="font-[100] text-center text-lg
+                px-4">
+                
+                    <p>
+                        You will not only have beautiful animations 
+                        but you will also be able to control them. 
+                        Try simulating an animation from these buttons 
+                    </p>
+                    <div className="">
+                        <button type="button"
+                        className="mx-auto mt-4 w-[6rem] py-1 bg-blue-800 
+                        font-[300]
+                        rounded-2xl text-sm uppercase"
+                        onClick={()=>{simulate(obj2, "start");}}  
+                        onTouchStart={()=>{simulate(obj2, "start")}}
+                        >
+                            Play
+                        </button>
+
+                        <button type="button"
+                        className="ml-2 mx-auto w-[6rem] mt-4 py-1 bg-blue-800 
+                        font-[300]
+                        rounded-2xl text-sm uppercase"
+                        onClick={()=>{simulate(obj2, "end");}}  
+                        onTouchStart={()=>{simulate(obj2, "end")}}
+                        >
+                            reverse
+                        </button>
+
+                    </div>
+                </div>
+                
+            </div>
+
+            <div className="flex flex-col items-center justify-end 
+            h-[50vh] w-full gap-9 pt-12">
+                
+                {/* header */}
+                <h1 className="text-5xl text-center font-semibold gr
+                px-2">
+                    Choose your colors
+                </h1>
+
+                <div className="font-[100] text-center text-lg
+                px-4">
+                    <p>
+                        Not only control animations 
+                        but you can only edit them.
+                        Choose your favorite color from down below
+                    </p>
+
+                    <div className="flex flex-row gap-1 mt-2 justify-center">
+                        <button className={`rounded-full h-8 w-8`}
+                        style={{background: `${myColors.red}`}}
+                        onClick={()=>{
+                            cstColors.current.push(myColors.red); 
+                            console.log(cstColors.current);}}
+                        />
+
+                        <button className={`rounded-full h-8 w-8`}
+                        style={{background: `${myColors.green}`}}
+                        onClick={()=>{
+                            cstColors.current.push(myColors.green); 
+                            console.log(cstColors.current);}}
+                        />                        
+                        <button className={`rounded-full h-8 w-8`}
+                        style={{background: `${myColors.blue}`}}
+                        onClick={()=>{
+                            cstColors.current.push(myColors.blue); 
+                            console.log(cstColors.current);}}
+                        />                        
+                        </div>
+
+                    <button disabled type="button" id="mybt" 
+                    className="block mx-auto mt-4 px-6 py-1 bg-blue-800 
+                    font-[300] text-gray-400
+                    rounded-2xl text-sm uppercase"
+                    onClick={()=>{console.log("hi"); particles({entry:true, colors: myColors});}}  
+                    onTouchStart={()=>{console.log("hi"); particles({entry:true});}}
+                    >
+                        See in action
+                    </button>
+                </div>
+
+
+            </div>
+
+            <div className="h-[20vh]"/>
 
        
- 
+
         </section>
+
       </div>
 
     // </>

@@ -12,7 +12,7 @@ export default function Layout({
        
         <section className="min-w-full  ambientBackground relative">
         
-        <div className="h-[100vh] w-[100%]
+        <div className="h-[80vh] w-[100%]
         
         ">
             {children}
