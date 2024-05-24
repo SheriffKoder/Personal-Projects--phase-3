@@ -62,7 +62,7 @@ const Nav = () => {
                     <li className={` py-4 ${path === "projects" ? "active no_select" : "gradient_text_hover_1"}
                     `}>
 
-                        <Link href="/projects">
+                        <Link href="/portfolio">
                             Projects
                         </Link>
                     </li>

@@ -9,7 +9,7 @@ const ComponentCard = ({children}: Props) => {
   return (
     <div className="rounded-[17px] border ProjectCard_bg
     flex flex-row p-2 gap-1 fadeIn_animation opacity-0
-    h-[300px] w-[300px] md2:gap-[2rem]
+    h-[200px] w-[200px] md2:gap-[2rem]
     items-center justify-center relative"
     >
         {children}
