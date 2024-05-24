@@ -1,5 +1,5 @@
 "use client"
-import {particles} from "@/app/cstThree/smoke/smoke"
+import {particles} from "@/app/portfolio/cstThree/smoke/smoke"
 import Footer from "@/components/footer";
 // import {GUIFunction} from "@/app/cstThree/smoke/dat.gui.min.js"
 import { useEffect, useRef, useState } from "react";
