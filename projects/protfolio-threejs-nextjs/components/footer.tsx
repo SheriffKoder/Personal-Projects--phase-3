@@ -37,7 +37,7 @@ const Footer = () => {
                     </li>
                     <li className={`py-2
                     `}>
-                        <Link href="/portfolio" className={`${path === "projects" ? "no_select" : "gradient_text_hover_1"}`}>
+                        <Link href="/projects" className={`${path === "projects" ? "no_select" : "gradient_text_hover_1"}`}>
                             Projects
                         </Link>
                     </li>

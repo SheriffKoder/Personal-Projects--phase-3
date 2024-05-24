@@ -43,23 +43,23 @@ export default function Layout({
               <ButtonCanvas projects={featuredProjects}/>
           </div>
 
-        <nav className="w-[80%] mx-auto pb-6 border-b border-[#ffffff1b]">
+        <nav className="w-[80%] mx-auto pb-4 mt-2 border-b border-[#ffffff1b]">
           <ul className="flex flex-row gap-5 justify-center text-sm">
               <li>
                   <Link href="/portfolio" 
-                  className={`gradientRoundButton px-3 ${path === "" ? 'brightness-75' : "focus:opacity-90 hover:opacity-90"}`}>
+                  className={`px-3 border rounded-full ${path === "" ? 'brightness-50 border-white no_select' : "focus:opacity-90 hover:opacity-90 hover:border-white border-transparent"}`}>
                       Projects
                   </Link>
               </li>
               <li>
                   <Link href="/portfolio/cstComponents" 
-                  className={`gradientRoundButton px-3 ${path === "/cstComponents" ? 'brightness-75' : "focus:opacity-90 hover:opacity-90"}`}>
+                  className={` px-3 border rounded-full ${path === "/cstComponents" ? 'brightness-50 border-white no_select' : "focus:opacity-90 hover:opacity-90 hover:border-white border-transparent"}`}>
                   Components
                   </Link>
               </li>
               <li>
                   <Link href="/portfolio/cstThree" 
-                  className={`gradientRoundButton px-3 ${path === "/cstThree" ? 'brightness-75' : "focus:opacity-90 hover:opacity-90"}`}>
+                  className={` px-3 border rounded-full ${path === "/cstThree" ? 'brightness-50 border-white' : "focus:opacity-90 hover:opacity-90 hover:border-white border-transparent"}`}>
                   3D Models
                   </Link>
               </li>
