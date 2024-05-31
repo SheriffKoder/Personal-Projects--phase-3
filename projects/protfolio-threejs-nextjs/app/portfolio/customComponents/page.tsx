@@ -5,10 +5,23 @@ import React, { useState } from "react"
 import FirstComp from "@/components/customComponents/firstComponent/FirstComp";
 import SecondComponent from "@/components/customComponents/firstComponent/SecondComp";
 import ComponentView from "@/components/customComponents/ComponentView";
-
+import menu_dropDown from "@/components/customComponents/menu_dropDown/page";
 const page = () => {
 
-    const myComponents = [FirstComp, SecondComponent];
+    const myComponents = [
+        {
+            component:FirstComp,
+            name: "First",
+        },
+        {
+            component:SecondComponent,
+            name: "Second",
+        },
+        {
+            component:menu_dropDown,
+            name: "Drop-down menu",
+        }
+    ];
 
     const [displayComponent, setDisplayComponent] = useState<React.ReactNode|null>(null);
 
@@ -30,10 +43,11 @@ const page = () => {
             {/* call the Card many times with each imported Component as a Child */}
             {myComponents.map((Child, i) => (
             // on click register the component index
-            <div onClick={()=>{setDisplayComponent(Child)}}>
+            <div onClick={()=>{setDisplayComponent(Child.component)}}>
                     <ComponentCard>
-                        <Child/>
+                        <Child.component/>
                     </ComponentCard>
+                    <p className="text-center mt-2 text-xs font-semibold px-2">{Child.name}</p>
             </div>
             ))}
         </div>
@@ -42,10 +56,10 @@ const page = () => {
 
     {/* Call the CompView with the registered Component as a child */}
     {displayComponent && (
-        <div className="fixed pt-[3.5rem] top-0 left-0 right-0 bottom-0 bg-black flex items-center justify-center">
-            <ComponentView>{displayComponent}</ComponentView>
-            <button onClick={()=>setDisplayComponent(null)}
-            className="absolute bottom-0 mb-4">close</button>
+        <div className="fixed pt-[3.5rem] top-0 left-0 right-0 bottom-0 flex ambientBackground items-center justify-center">
+                <ComponentView>{displayComponent}</ComponentView>
+                <button onClick={()=>setDisplayComponent(null)}
+                className="absolute bottom-0 mb-4">close</button>
         </div>
     )}
 

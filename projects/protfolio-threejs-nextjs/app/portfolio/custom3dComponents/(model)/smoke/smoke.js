@@ -3163,7 +3163,9 @@ let obj2 = [
     }
 ];
 
-
+// time complexity O(n) only because we are repeating till length-1, 
+// space complexity O(1)
+// without mouse event, dispatch, timeout
 function simulateMovement (incomingObject, location) {
 
 

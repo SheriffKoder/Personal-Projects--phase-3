@@ -11,7 +11,7 @@ const page = () => {
             name: "Smoke cursor/background",
             img: "/images/cstComponents/smoke.png",
             desc: "Animations made with WebGL. Adds a nice touch to websites backgrounds especially with blur",
-            link: "portfolio/cstThree/smoke"
+            link: "./custom3dComponents/smoke"
         }
     ];
 

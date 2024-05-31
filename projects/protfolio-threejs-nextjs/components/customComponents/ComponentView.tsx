@@ -7,7 +7,7 @@ type Props = {
 
 const ComponentView = ({children}: Props) => {
   return (
-    <div className="w-full h-full"
+    <div className="w-full h-full flex items-center justify-center"
     >
         {children}
     </div>

@@ -52,14 +52,14 @@ export default function Layout({
                   </Link>
               </li>
               <li>
-                  <Link href="/portfolio/cstComponents" 
-                  className={` px-3 border rounded-full ${path === "/cstComponents" ? 'brightness-50 border-white no_select' : "focus:opacity-90 hover:opacity-90 hover:border-white border-transparent"}`}>
+                  <Link href="/portfolio/customComponents" 
+                  className={` px-3 border rounded-full ${path === "/customComponents" ? 'brightness-50 border-white no_select' : "focus:opacity-90 hover:opacity-90 hover:border-white border-transparent"}`}>
                   Components
                   </Link>
               </li>
               <li>
-                  <Link href="/portfolio/cstThree" 
-                  className={` px-3 border rounded-full ${path === "/cstThree" ? 'brightness-50 border-white' : "focus:opacity-90 hover:opacity-90 hover:border-white border-transparent"}`}>
+                  <Link href="/portfolio/custom3dComponents" 
+                  className={` px-3 border rounded-full ${path === "/custom3dComponents" ? 'brightness-50 border-white' : "focus:opacity-90 hover:opacity-90 hover:border-white border-transparent"}`}>
                   3D Models
                   </Link>
               </li>

@@ -1,5 +1,5 @@
 "use client"
-import {particles} from "@/app/portfolio/cstThree/smoke/smoke"
+import {particles} from "./smoke"
 import Footer from "@/components/footer";
 // import {GUIFunction} from "@/app/cstThree/smoke/dat.gui.min.js"
 import { useEffect, useRef, useState } from "react";
@@ -1458,7 +1458,7 @@ function Smoke() {
 
     return (
     // <>
-        <div className="w-full h-full relative">
+        <div className="w-[100vw] h-[100vh] relative">
             <canvas className="h-full w-full absolute top-0 left-0 z-0"></canvas>
             <section className="h-full w-full absolute top-0 left-0 z-1 overflow-x-hidden overflow-y-scroll" id="mainContent">
                 {/* place any elements here */}
@@ -1639,7 +1639,7 @@ function Smoke() {
 
                 </div>
 
-                <div className="h-[20vh]"/>
+                {/* <div className="h-[20vh]"/> */}
             
 
             </section>

@@ -12,7 +12,7 @@ const ComponentCard = ({children}: Props) => {
     h-[200px] w-[200px] md2:gap-[2rem]
     items-center justify-center relative"
     >
-        {children}
+        <span className="pointer-events-none">{children}</span>
     </div>
   )
 }
