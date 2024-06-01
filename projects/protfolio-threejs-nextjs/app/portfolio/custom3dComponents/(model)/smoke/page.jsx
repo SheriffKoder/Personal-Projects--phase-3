@@ -1435,35 +1435,494 @@ function hexToRgb(hex) {
     } : null;
 }
 
+function rgb2hsv (r, g, b) {
+    let rabs, gabs, babs, rr, gg, bb, h, s, v, diff, diffc, percentRoundFn;
+    rabs = r / 255;
+    gabs = g / 255;
+    babs = b / 255;
+    v = Math.max(rabs, gabs, babs),
+    diff = v - Math.min(rabs, gabs, babs);
+    diffc = c => (v - c) / 6 / diff + 1 / 2;
+    percentRoundFn = num => Math.round(num * 100) / 100;
+    if (diff == 0) {
+        h = s = 0;
+    } else {
+        s = diff / v;
+        rr = diffc(rabs);
+        gg = diffc(gabs);
+        bb = diffc(babs);
 
-  
+        if (rabs === v) {
+            h = bb - gg;
+        } else if (gabs === v) {
+            h = (1 / 3) + rr - bb;
+        } else if (babs === v) {
+            h = (2 / 3) + gg - rr;
+        }
+        if (h < 0) {
+            h += 1;
+        }else if (h > 1) {
+            h -= 1;
+        }
+    }
+    return {
+        h: Math.round(h * 360),
+        s: percentRoundFn(s * 100),
+        v: percentRoundFn(v * 100)
+    };
+}
+
+  // button
+  // take a recorded animation and clean its x/y
+  // by having stard and end of the animation only not the screen
+  // to add on it later the needed screen position in buttonAnim
+  const cleanTrack = (objs) => {
+    let pox = 0;
+    let poy = 0;
+    let total = 0;
+
+    let newObj = [];
+
+    for (let i=0; i<objs.length-1; i++) {
+      let temp = {pox: objs[i].pox-objs[0].pox,
+        poy: objs[i].poy-objs[0].poy,
+        total: objs[i].total
+      }
+      newObj.push(temp);
+    }
+
+    console.log(newObj);
+
+  }
 
 
 function Smoke() {
 
-    // background colors for buttons in the jsx
-    let myColors = {
-        blue: "#4287f5",
-        green: "#13edc5",
-        red: "#ed1358"
-    }
+let myColors = {
+    blue: "#4287f5",
+    green: "#13edc5",
+    red: "#ed1358"
+}
 
-    // store the input-color's value
-    //used state here not ref to allow the label background color to change 
+    // let cstColor = useRef("#ff0000");
     const [cstColor, setCstColor] = useState("#fff");
 
-    useEffect(()=> {
-        const {simulate, multipleSplats} = particles({entry: true, color: "grad", size: "small"});
-    },[]);
+  // button
+  // simulate function in .js file not imported when repeating button animation
+  // so import here
+  let simulate = (incomingObject, location) => {
+    setTimeout(()=> {
+        let coordX = 0; // Moving from the left side of the screen
+        // let coordY = 500; // Moving in the center
+        location === "end" ? coordX = incomingObject.length-1: coordX = 0;
 
-    return (
+        function move() {
+            console.log("moving");
+    
+            // Move step = 1 array element
+            // coordX += 1;
+            location === "end" ? coordX -= 1 : coordX += 1;
+
+            console.log("moving1");
+            console.log("coordX", coordX);
+            // Create new mouse event
+            let ev = new MouseEvent("mousemove", {
+                view: window,
+                bubbles: true,
+                cancelable: true,
+                clientX: incomingObject[coordX].pox,
+                clientY: incomingObject[coordX].poy
+            });
+
+            console.log("moving2");
+
+        
+            // Send event
+            document.querySelector('#mainContent').dispatchEvent(ev);
+
+            //make the animation smoother by repeating it again (slight movement)
+            let factor
+            location === "end" ? factor = -0.3 : factor = 0.3;
+            setTimeout(() => {
+                let ev2 = new MouseEvent("mousemove", {
+                    view: window,
+                    bubbles: true,
+                    cancelable: true,
+                    clientX: incomingObject[coordX].pox+factor,
+                    clientY: incomingObject[coordX].poy+factor
+                });
+            
+                // Send event
+                    document.querySelector('#mainContent').dispatchEvent(ev2);
+            }, incomingObject[coordX].total/3000);
+
+            console.log("moving3");
+
+
+
+            // If the current position of the fake "mouse" is less than the width of the screen - let's move
+            // if (coordX < window.innerWidth) {
+            // repeat the function again and move to next position
+            // with a delay factor from the record simulating user mouse speed delay
+
+            let animaionEnd = false;
+            location === "end" ? animaionEnd = (coordX === 0) : animaionEnd = (coordX >= incomingObject.length-1);
+
+            console.log("moving4", animaionEnd);
+
+
+            if (!animaionEnd) {
+                setTimeout(() => {
+                    move();
+                    //the more speed the faster and less pressure
+                }, incomingObject[coordX].total/3000);
+            }
+      
+        }
+        
+        // Starting to move
+        move();
+      }, 1000);    
+}
+
+  // button
+  // object recorded when hovering over a button
+  let objClick = [
+    {
+        "pox": 0,
+        "poy": 0,
+        "total": 68582.5
+    },
+    {
+        "pox": 0,
+        "poy": -3,
+        "total": 68590.5
+    },
+    {
+        "pox": 0,
+        "poy": -6,
+        "total": 68598.40000000037
+    },
+    {
+        "pox": 0,
+        "poy": -5,
+        "total": 68607.19999999925
+    },
+    {
+        "pox": 0,
+        "poy": -7,
+        "total": 68614.80000000075
+    },
+    {
+        "pox": 0,
+        "poy": -8,
+        "total": 68622.80000000075
+    },
+    {
+        "pox": 0,
+        "poy": -10,
+        "total": 68630.80000000075
+    },
+    {
+        "pox": 0,
+        "poy": -11,
+        "total": 68639.09999999963
+    },
+    {
+        "pox": 0,
+        "poy": -13,
+        "total": 68647.19999999925
+    },
+    {
+        "pox": 0,
+        "poy": -14,
+        "total": 68654.19999999925
+    },
+    {
+        "pox": 0,
+        "poy": -16,
+        "total": 68663.19999999925
+    },
+    {
+        "pox": 0,
+        "poy": -18,
+        "total": 68670.30000000075
+    },
+    {
+        "pox": 0,
+        "poy": -19,
+        "total": 68678.30000000075
+    },
+    {
+        "pox": 0,
+        "poy": -20,
+        "total": 68687.90000000037
+    },
+    {
+        "pox": 0,
+        "poy": -21,
+        "total": 68696
+    },
+    {
+        "pox": 0,
+        "poy": -23,
+        "total": 68702.80000000075
+    },
+    {
+        "pox": 0,
+        "poy": -25,
+        "total": 68710.09999999963
+    },
+    {
+        "pox": 0,
+        "poy": -26,
+        "total": 68718.69999999925
+    },
+    {
+        "pox": 0,
+        "poy": -28,
+        "total": 68727.40000000037
+    },
+    {
+        "pox": 0,
+        "poy": -30,
+        "total": 68738.90000000037
+    },
+    {
+        "pox": 0,
+        "poy": -31,
+        "total": 68744.19999999925
+    },
+    {
+        "pox": 0,
+        "poy": -32,
+        "total": 68750.69999999925
+    },
+    {
+        "pox": 0,
+        "poy": -34,
+        "total": 68759.40000000037
+    },
+    {
+        "pox": 0,
+        "poy": -36,
+        "total": 68766.59999999963
+    },
+    {
+        "pox": 0,
+        "poy": -37,
+        "total": 68775.40000000037
+    },
+    {
+        "pox": 1,
+        "poy": -39,
+        "total": 68782.80000000075
+    },
+    {
+        "pox": 1,
+        "poy": -42,
+        "total": 68790.90000000037
+    },
+    {
+        "pox": 2,
+        "poy": -44,
+        "total": 68798.40000000037
+    },
+    {
+        "pox": 2,
+        "poy": -46,
+        "total": 68807.90000000037
+    },
+    {
+        "pox": 3,
+        "poy": -48,
+        "total": 68814.09999999963
+    },
+    {
+        "pox": 3,
+        "poy": -50,
+        "total": 68822.40000000037
+    },
+    {
+        "pox": 3,
+        "poy": -51,
+        "total": 68830.5
+    },
+    {
+        "pox": 3,
+        "poy": -53,
+        "total": 68838.30000000075
+    },
+    {
+        "pox": 3,
+        "poy": -55,
+        "total": 68879.69999999925
+    },
+    {
+        "pox": 3,
+        "poy": -56,
+        "total": 68888
+    },
+    {
+        "pox": 4,
+        "poy": -56,
+        "total": 72509.90000000037
+    },
+    {
+        "pox": 5,
+        "poy": -56,
+        "total": 72525.5
+    },
+    {
+        "pox": 6,
+        "poy": -57,
+        "total": 72532.80000000075
+    },
+    {
+        "pox": 7,
+        "poy": -57,
+        "total": 72545.5
+    },
+    {
+        "pox": 8,
+        "poy": -57,
+        "total": 72556.69999999925
+    },
+    {
+        "pox": 10,
+        "poy": -58,
+        "total": 72564.09999999963
+    },
+    {
+        "pox": 12,
+        "poy": -59,
+        "total": 72580.40000000037
+    },
+    {
+        "pox": 15,
+        "poy": -59,
+        "total": 72589.5
+    },
+    {
+        "pox": 17,
+        "poy": -60,
+        "total": 72596.59999999963
+    },
+    {
+        "pox": 22,
+        "poy": -61,
+        "total": 72605.80000000075
+    },
+    {
+        "pox": 26,
+        "poy": -62,
+        "total": 72612.19999999925
+    },
+    {
+        "pox": 31,
+        "poy": -63,
+        "total": 72621.69999999925
+    },
+    {
+        "pox": 37,
+        "poy": -64,
+        "total": 72628.5
+    },
+    {
+        "pox": 43,
+        "poy": -65,
+        "total": 72636.30000000075
+    },
+    {
+        "pox": 50,
+        "poy": -66,
+        "total": 72644.80000000075
+    },
+    {
+        "pox": 59,
+        "poy": -67,
+        "total": 72653.19999999925
+    },
+    {
+        "pox": 68,
+        "poy": -69,
+        "total": 72660.59999999963
+    },
+    {
+        "pox": 80,
+        "poy": -70,
+        "total": 72670.69999999925
+    },
+    {
+        "pox": 94,
+        "poy": -71,
+        "total": 72676.69999999925
+    },
+    {
+        "pox": 109,
+        "poy": -72,
+        "total": 72688.19999999925
+    },
+    {
+        "pox": 126,
+        "poy": -73,
+        "total": 72692.90000000037
+    },
+    {
+        "pox": 146,
+        "poy": -74,
+        "total": 72700.90000000037
+    }
+  ]
+
+  // button
+  // render again to cause the button animation to be able to repeat
+  const [render, setRender] = useState(false);
+
+  // button
+  // take a button cleared animation record object and add the viewport to x/y
+  // to display on screen 
+  const buttonAnim = (e, myObj, id) => {
+    console.log(e);
+
+    const element = document.getElementById(`${id}`);
+
+    let width = element.offsetWidth;
+    let height = element.offsetHeight;
+    
+    let screenwidth = e.clientX;
+    let screenheight = e.clientY;
+
+    for(let i=0; i<myObj.length-1; i=i+2) {
+      myObj[i].pox = myObj[i].pox+(width/2)+screenwidth;
+      myObj[i].poy = ((myObj[i].poy)+screenheight);
+      myObj[i].total = myObj[i].total / 2000;
+    }
+
+    let newObj = [...myObj]
+
+    simulate(newObj, "start");
+
+    console.log(newObj);
+
+  }
+
+
+  useEffect(()=> {
+    const {simulate, multipleSplats} = particles({entry: true, color: "grad", size: "small"});
+
+
+
+  },[]);
+
+  return (
     // <>
-        <div className="w-[100vw] h-[100vh] relative">
-            <canvas className="h-full w-full absolute top-0 left-0 z-0"></canvas>
-            <section className="h-full w-full absolute top-0 left-0 z-1 overflow-x-hidden overflow-y-scroll" id="mainContent">
-                {/* place any elements here */}
-                
-                <div className={`${classes.firstDiv}`}>
+    <div className="w-full h-full relative">
+      <canvas className="h-full w-full absolute top-0 left-0 z-0"></canvas>
+        <section className="h-full w-full absolute top-0 left-0 z-1 overflow-x-hidden overflow-y-scroll" id="mainContent">
+            {/* place any elements here */}
+            
+            <div className={`${classes.firstDiv}`}>
                     <div className={`max-w-[1300px] mx-auto flex items-center justify-center
                     h-[100vh] md2:h-[100vh] w-full gap-9 pt-12 
                     md2:px-12 md2:items-center`}>
@@ -1482,8 +1941,8 @@ function Smoke() {
                                 px-6 mt-4 py-1 bg-blue-800 
                                 font-[300] ml-0
                                 rounded-2xl text-sm uppercase"
-                                onClick={()=>{particles({entry:true, color: "random", size: "small"});}}  
-                                onTouchStart={()=>{particles({entry:true, color: "random", size: "small"});}}
+                                onClick={()=>{console.log("hi"); particles({entry:true, color: "random", size: "small"});}}  
+                                onTouchStart={()=>{console.log("hi"); particles({entry:true, color: "random", size: "small"});}}
                                 >
                                 Try it
                             </button>
@@ -1507,146 +1966,138 @@ function Smoke() {
                         </div>
 
                     </div>
-                </div>
+            </div>
 
-                <div className="max-w-[1300px] mx-auto flex flex-col items-center justify-start 
-                h-[40vh] w-full gap-9 md2:gap-4">
-                    
-                    {/* header */}
-                    <h1 className="text-5xl text-center font-semibold gr
-                    px-2">
-                        Control your animation
-                    </h1>
+                    <div className="max-w-[1300px] mx-auto flex flex-col items-center justify-start 
+                    h-[40vh] w-full gap-9 md2:gap-4">
+                        
+                        {/* header */}
+                        <h1 className="text-5xl text-center font-semibold gr
+                        px-2">
+                            Control your animation
+                        </h1>
 
-                    <div className="font-[100] text-center text-lg
-                    px-4">
-                    
-                        <p className="max-w-[500px]">
-                            You will not only have beautiful animations 
-                            but you will also be able to control them. 
-                            Try simulating an animation from these buttons 
-                        </p>
+                        <div className="font-[100] text-center text-lg
+                        px-4">
+                        
+                            <p className="max-w-[500px]">
+                                You will not only have beautiful animations 
+                                but you will also be able to control them. 
+                                Try simulating an animation from these buttons 
+                            </p>
+                            <div className="">
+                                <button type="button"
+                                className="mx-auto mt-4 w-[6rem] py-1 bg-blue-800 
+                                font-[300]
+                                rounded-2xl text-sm uppercase"
+                                onClick={()=>{        
+                                    simulate(obj2, "start");
+                                }}  
+                                onTouchStart={()=>{
+                                    simulate(obj2, "start")
+                                }}
+                                    
+                                >
+                                    Play
+                                </button>
 
-                        <div className="">
-                            {/* the animation recorded in obj2, in normal direction mode using "start" */}
-                            <button type="button"
-                            className="mx-auto mt-4 w-[6rem] py-1 bg-blue-800 
-                            font-[300]
-                            rounded-2xl text-sm uppercase"
-                            onClick={()=>{        
-                                simulate(obj2, "start");
-                            }}  
-                            onTouchStart={()=>{
-                                simulate(obj2, "start")
-                            }} 
-                            >
-                                Play
-                            </button>
-
-                            {/* the animation recorded in obj2, in reverse mode using "end" */}
-                            <button type="button"
-                            className="ml-2 mx-auto w-[6rem] mt-4 py-1 bg-blue-800 
-                            font-[300]
-                            rounded-2xl text-sm uppercase"
-                            onClick={()=>{simulate(obj2, "end");}}  
-                            onTouchStart={()=>{simulate(obj2, "end")}}
-                            >
-                                reverse
-                            </button>
-
-                        </div>
-                    </div>
-                    
-                </div>
-
-                <div className="max-w-[1300px] mx-auto flex flex-col items-center justify-start 
-                h-[40vh] md2:pt-[10vh] w-full gap-9 md2:gap-4 pt-12">
-                    
-                    {/* header */}
-                    <h1 className="text-5xl text-center font-semibold gr
-                    px-2">
-                        Choose your colors
-                    </h1>
-
-                    <div className="font-[100] text-center text-lg
-                    px-4 md2:max-w-[500px]">
-                        <p>
-                            Not only control animations 
-                            but you can only edit them.
-                            Choose your favorite color from down below
-                        </p>
-
-                        <div className="flex flex-row gap-1 my-4 justify-center">
-
-                            {/* entry:true means display the random smoke quantity */}
-                            {/* color does trigger stored color values in script.js */}
-                            {/* size does switch between values for the smoke radius thus affecting the smoke's size */}
-
-                            <button className={`rounded-full h-8 w-8`}
-                            style={{background: `${myColors.red}`}}
-                            onClick={()=>{particles({entry:true, color: "red", size: "small"});}}  
-                            onTouchStart={()=>{particles({entry:true, color: "red", size: "small"});}}
-                            />
-
-                            <button className={`rounded-full h-8 w-8`}
-                            style={{background: `${myColors.green}`}}
-                            onClick={()=>{particles({entry:true, color: "green", size: "small"});}}  
-                            onTouchStart={()=>{particles({entry:true, color: "green", size: "small"});}}
-                            />                        
-                            <button className={`rounded-full h-8 w-8`}
-                            style={{background: `${myColors.blue}`}}
-                            onClick={()=>{particles({entry:true, color: "blue", size: "small"});}}  
-                            onTouchStart={()=>{console.log("hi"); particles({entry:true, color: "blue", size: "small"});}}
-                            /> 
-
-                            <button className={`rounded-full h-8 w-8 bg-gradient-to-r from-[#13edc5] to-[#4287f5] `}
-                            
-                            onClick={()=>{particles({entry:true, color: "grad", size: "small"});}}  
-                            onTouchStart={()=>{console.log("hi"); particles({entry:true, color: "grad", size: "small"});}}
-                            />
-
-                            {/* input color input and icon/background */}
-                            <label htmlFor="color-picker" className={`
-                            pt-[2px] cursor-pointer pr-[1px] relative rounded-full h-8 w-8`}
-                            style={{background: `${cstColor}`}}
-                            // onClick={()=>{particles({entry:true, color: "select"});}}  
-                            // onTouchStart={()=>{console.log("hi"); particles({entry:true, color: "select"});}}
-                            >&#127912;
-                            <input className="opacity-0 absolute top-0 left-0" 
-                            type="color" value={cstColor} id="color-picker" 
-                            onChange={(e)=>{setCstColor(e.target.value);}}/>
-                            </label>         
+                                <button type="button"
+                                className="ml-2 mx-auto w-[6rem] mt-4 py-1 bg-blue-800 
+                                font-[300]
+                                rounded-2xl text-sm uppercase"
+                                onClick={()=>{simulate(obj2, "end");}}  
+                                onTouchStart={()=>{simulate(obj2, "end")}}
+                                >
+                                    reverse
+                                </button>
 
                             </div>
-
-                            {/* button is enabled when there is a color choosen from the input color */}
-                            {/* which sends the new color after conversion to script.js */}
-                            <button type="button" id="mybt" disabled={cstColor !== "#fff" ? false : true}
-                            className={`block mx-auto mt-4 px-6 py-1 bg-blue-800 
-                            font-[300] ${cstColor !== "#fff" ? 'text-white' : 'text-gray-400'}
-                            rounded-2xl text-sm uppercase`}
-                            onClick={()=>{
-                                let {r,g,b} = hexToRgb(cstColor);
-                                particles({entry:true, color: "select", rgb:{r,g,b}, size: "small"});
-                            
-                            }}  
-                            // onTouchStart={()=>{console.log("hi"); particles({entry:true});}}
-                            >
-                                {cstColor == "#fff" ? 'See in action' : 'Apply Color'}
-                            </button>
+                        </div>
+                        
                     </div>
 
+                    <div className="max-w-[1300px] mx-auto flex flex-col items-center justify-start 
+                    h-[40vh] md2:pt-[10vh] w-full gap-9 md2:gap-4 pt-12">
+                        
+                        {/* header */}
+                        <h1 className="text-5xl text-center font-semibold gr
+                        px-2">
+                            Choose your colors
+                        </h1>
 
-                </div>
+                        <div className="font-[100] text-center text-lg
+                        px-4 md2:max-w-[500px]">
+                            <p>
+                                Not only control animations 
+                                but you can only edit them.
+                                Choose your favorite color from down below
+                            </p>
 
-                {/* <div className="h-[20vh]"/> */}
-            
+                            <div className="flex flex-row gap-1 my-4 justify-center">
+                                <button className={`rounded-full h-8 w-8`}
+                                style={{background: `${myColors.red}`}}
+                                onClick={()=>{particles({entry:true, color: "red", size: "small"});}}  
+                            onTouchStart={()=>{particles({entry:true, color: "red", size: "small"});}}
+                                />
 
-            </section>
-        </div>
+                                <button className={`rounded-full h-8 w-8`}
+                                style={{background: `${myColors.green}`}}
+                                onClick={()=>{particles({entry:true, color: "green", size: "small"});}}  
+                            onTouchStart={()=>{particles({entry:true, color: "green", size: "small"});}}
+                                />                        
+                                <button className={`rounded-full h-8 w-8`}
+                                style={{background: `${myColors.blue}`}}
+                                onClick={()=>{particles({entry:true, color: "blue", size: "small"});}}  
+                            onTouchStart={()=>{console.log("hi"); particles({entry:true, color: "blue", size: "small"});}}
+                                /> 
+
+                                <button className={`rounded-full h-8 w-8 bg-gradient-to-r from-[#13edc5] to-[#4287f5] `}
+                                
+                                onClick={()=>{particles({entry:true, color: "grad", size: "small"});}}  
+                            onTouchStart={()=>{console.log("hi"); particles({entry:true, color: "grad", size: "small"});}}
+                                />
+
+                                <label htmlFor="color-picker" className={`
+                                pt-[2px] cursor-pointer pr-[1px] relative rounded-full h-8 w-8`}
+                                style={{background: `${cstColor}`}}
+                                // onClick={()=>{particles({entry:true, color: "select"});}}  
+                                // onTouchStart={()=>{console.log("hi"); particles({entry:true, color: "select"});}}
+                                >&#127912;
+                                <input className="opacity-0 absolute top-0 left-0" 
+                                type="color" value={cstColor} id="color-picker" 
+                                onChange={(e)=>{setCstColor(e.target.value);}}/>
+                                </label>         
+
+                                </div>
+
+                                <button type="button" id="mybt" disabled={cstColor !== "#fff" ? false : true}
+                                className={`block mx-auto mt-4 px-6 py-1 bg-blue-800 
+                                font-[300] ${cstColor !== "#fff" ? 'text-white' : 'text-gray-400'}
+                                rounded-2xl text-sm uppercase`}
+                                onClick={()=>{
+                                    let {r,g,b} = hexToRgb(cstColor);
+                                    particles({entry:true, color: "select", rgb:{r,g,b}, size: "small"});
+                                
+                                }}  
+                                // onTouchStart={()=>{console.log("hi"); particles({entry:true});}}
+                                >
+                                    {cstColor == "#fff" ? 'See in action' : 'Apply Color'}
+                                </button>
+                        </div>
+
+
+                    </div>
+
+                    <div className="h-[20vh]"/>
+
+                    {/* <Footer /> */}
+       
+
+        </section>
+      </div>
     // </>
 
-    );
+  );
 }
 
 export default Smoke;

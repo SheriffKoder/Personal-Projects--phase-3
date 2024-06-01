@@ -41,8 +41,8 @@ if (canvas) resizeCanvas();
 // adjust the controller config
 // change BACK_COLOR to change the canvas background color
 let config = {
-    SIM_RESOLUTION: 128,
-    DYE_RESOLUTION: 512,
+    SIM_RESOLUTION: 16,
+    DYE_RESOLUTION: 16,
     CAPTURE_RESOLUTION: 512,
     DENSITY_DISSIPATION: 1,     //3.5
     VELOCITY_DISSIPATION: 0.2,    //0.48
