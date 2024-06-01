@@ -28,7 +28,7 @@ export default function RootLayout({
 
      
     <html lang="en" className="">
-      <body className={`${inter.className} relative overflow-x-hidden cursor-default`}>
+      <body className={`${inter.className} relative overflow-x-hidden cursor-default `}>
         
       {/* <StarsCanvas/> */}
       

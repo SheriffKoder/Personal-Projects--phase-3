@@ -12,6 +12,12 @@ const page = () => {
             img: "/images/cstComponents/smoke.png",
             desc: "Animations made with WebGL. Adds a nice touch to websites backgrounds especially with blur",
             link: "./custom3dComponents/smoke"
+        },
+        {
+            name: "Smoke cursor/background",
+            img: "/images/cstComponents/smoke.png",
+            desc: "Animations made with WebGL. Adds a nice touch to websites backgrounds especially with blur",
+            link: "./custom3dComponents/smoke"
         }
     ];
 
@@ -27,15 +33,15 @@ const page = () => {
 
                 <div className="w-full my-[3rem] text-4xl  ">
                     <h1 className="font-semibold">
-                        3D Models
+                        3D Animations
                     </h1>
                 </div>
-                {my3DComponents.map((component) => (
-                    <div className="flex flex-row flex-wrap w-full px-8">
-                        <div>
+                    <section className="flex flex-row flex-wrap w-full px-8 gap-4">
+                    {my3DComponents.map((component) => (
+                        <div className="mt-0 md1:mt-[-0.75rem] mb-4 md1:mb-0">
                             <div className="rounded-[17px] border ProjectCard_bg
-                            flex flex-row p-4 gap-1 fadeIn_animation opacity-0
-                            h-[200px] w-[200px] md2:gap-[2rem]
+                            flex flex-row p-4 gap-4 fadeIn_animation opacity-0
+                            md2:gap-[2rem] w-[calc(90vw-4rem)] h-[calc(90vw-4rem)] md1:w-[200px] md1:h-[200px]
                             items-center justify-center relative"
                             >
                                 {/* {component.name} */}
@@ -49,10 +55,10 @@ const page = () => {
                                     </Link>
                                 </div>
                             </div>
-                            <h2 className="text-center mt-2 text-xs font-semibold px-2">{component.name}</h2>
+                            <h2 className="text-center mt-2 text-[min(3vw,1rem)] md1:text-xs font-semibold px-2">{component.name}</h2>
                         </div>
-                    </div>
-                ))}
+                    ))}
+                    </section>
             
             
             </div>

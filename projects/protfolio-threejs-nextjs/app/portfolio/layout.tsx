@@ -43,30 +43,37 @@ export default function Layout({
               <ButtonCanvas projects={featuredProjects}/>
           </div>
 
-        <nav className="w-[80%] mx-auto pb-4 mt-2 border-b border-[#ffffff1b]">
-          <ul className="flex flex-row gap-5 justify-center text-sm">
+        <nav className="w-[100%] mx-auto pb-4 mt-2">
+          <ul className="flex flex-row gap-5 flex-wrap justify-center text-[min(3vw,0.75rem)]">
               <li>
                   <Link href="/portfolio" 
-                  className={`px-3 border rounded-full ${path === "" ? 'brightness-50 border-white no_select' : "focus:opacity-90 hover:opacity-90 hover:border-white border-transparent"}`}>
+                  className={`px-3 border rounded-full ${path === "" ? "gradient_text_1 border-[#3a8ebf] no_select" : "focus:opacity-90 hover:opacity-90 hover:border-white border-transparent"}`}>
                       Projects
                   </Link>
               </li>
               <li>
                   <Link href="/portfolio/customComponents" 
-                  className={` px-3 border rounded-full ${path === "/customComponents" ? 'brightness-50 border-white no_select' : "focus:opacity-90 hover:opacity-90 hover:border-white border-transparent"}`}>
+                  className={` px-3 border rounded-full ${path === "/customComponents" ? "gradient_text_1 border-[#3a8ebf] no_select" : "focus:opacity-90 hover:opacity-90 hover:border-white border-transparent"}`}>
                   Components
                   </Link>
               </li>
               <li>
                   <Link href="/portfolio/custom3dComponents" 
-                  className={` px-3 border rounded-full ${path === "/custom3dComponents" ? 'brightness-50 border-white' : "focus:opacity-90 hover:opacity-90 hover:border-white border-transparent"}`}>
+                  className={` px-3 border rounded-full ${path === "/custom3dComponents" ? "gradient_text_1 border-[#3a8ebf] no_select" : "focus:opacity-90 hover:opacity-90 hover:border-white border-transparent"}`}>
+                  3D Animations
+                  </Link>
+              </li>
+              <li>
+                  <Link href="/portfolio/custom3dModels" 
+                  className={` no_select opacity-50 px-3 border rounded-full ${path === "/custom3dModels" ? "gradient_text_1 border-[#3a8ebf] no_select" : "focus:opacity-90 hover:opacity-90 hover:border-white border-transparent"}`}>
                   3D Models
                   </Link>
               </li>
           </ul>
         </nav>
+        <div className="w-[80%] border-b border-[#ffffff1b] mx-auto"/>
 
-        <div className="min-h-[100vh] w-[100%]
+        <div className="min-h-[100vh] w-[100%] pb-8
         
         ">
             {children}

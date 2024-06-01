@@ -919,6 +919,34 @@ used in the single project page project's description text */
 /* ////////////////////////////////////////////////////////////////////////////// */
 /* ///////////////////////// @contact */
 
+
+@media (max-height: 495px ){
+  #contact__form {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-height: 531px ){
+  #footer {
+    height: auto;
+    margin-bottom: 10px;
+  }
+}
+
+@media (orientation:landscape) {
+  #contact__form__container {
+    max-width: 650px;
+  }
+}
+
+
+@media (orientation:portrait) {
+  #contact__form__container {
+    max-width: 330px;
+  }
+}
+
 @media (orientation: landscape) and (max-width: 1000px )
 ,(orientation: landscape) and (max-height: 635px )
 , (orientation: portrait) and (max-height: 635px ) 
@@ -930,10 +958,7 @@ used in the single project page project's description text */
     padding-bottom: 0;
   }
   
-  #contact__form {
-    flex-direction: row;
-    flex-wrap: wrap;
-  }
+
 
   #contact__labels-1{
     gap:0.75rem;
@@ -966,11 +991,11 @@ used in the single project page project's description text */
     margin-top: 0.5rem;
   }
 
-  #footer {
+  /* #footer {
     height: 85px;
     position: fixed;
     bottom: 0;
-  }
+  } */
 
 }
 

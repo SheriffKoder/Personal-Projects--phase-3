@@ -157,7 +157,7 @@ const showEmailConfirm = () => {
             </h1>
 
             <div className="glass_background py-4 px-8 rounded-[10px]
-            w-[calc(100vw-12vw)] max-w-[300px] lg:max-w-[450px]"
+            "
             id="contact__form__container">
               <form className="flex flex-col gap-4 text-xs md2:text-base" onSubmit={handleSubmit}
               id="contact__form">
@@ -170,7 +170,7 @@ const showEmailConfirm = () => {
                       Your Name*
                     </label>
                     <input
-                      className="border-0 rounded-[5px]
+                      className="border-0 rounded-[5px] p-1
                       outline-none focus:outline-2 focus:outline-offset-3
                       focus:outline-[#387ca4]
                       caret-[#387ca4]
@@ -192,7 +192,7 @@ const showEmailConfirm = () => {
                       Your Email*
                     </label>
                     <input
-                      className="border-0 rounded-[5px]
+                      className="border-0 rounded-[5px] p-1
                       outline-none focus:outline-2 focus:outline-offset-3
                       focus:outline-[#387ca4]
                       caret-[#387ca4]
