@@ -17,9 +17,9 @@ const page = () => {
     function openMenu () {
 
         // want to animate the 2nd menu which will appear in the page overlay componentView
-        const select = document.querySelectorAll(".cst_dropDownMenu_sort_bar")[1];
-        const list = document.querySelectorAll(".cst_dropDownMenu_list")[1];
-        const arrow = document.querySelectorAll(".cst_dropDownMenu_arrow")[1];
+        const select = document.querySelector(".cst_dropDownMenu_sort_bar");
+        const list = document.querySelector(".cst_dropDownMenu_list");
+        const arrow = document.querySelector(".cst_dropDownMenu_arrow");
     
 
         list?.classList.remove("hidden");
@@ -33,9 +33,9 @@ const page = () => {
     
     function closeMenu () {
         // want to animate the 2nd menu which will appear in the page overlay componentView
-        const select = document.querySelectorAll(".cst_dropDownMenu_sort_bar")[1];
-        const list = document.querySelectorAll(".cst_dropDownMenu_list")[1];
-        const arrow = document.querySelectorAll(".cst_dropDownMenu_arrow")[1];
+        const select = document.querySelector(".cst_dropDownMenu_sort_bar");
+        const list = document.querySelector(".cst_dropDownMenu_list");
+        const arrow = document.querySelector(".cst_dropDownMenu_arrow");
     
         list?.classList.remove("flex");
         list?.classList.add("hidden");

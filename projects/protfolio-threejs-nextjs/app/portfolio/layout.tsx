@@ -40,7 +40,7 @@ export default function Layout({
           md1:h-[30vw]">
 
               {/* will display 3d models with icons from featuredProjects */}
-              <ButtonCanvas projects={featuredProjects}/>
+              {/* <ButtonCanvas projects={featuredProjects}/> */}
           </div>
 
         <nav className="w-[100%] mx-auto pb-4 mt-2">

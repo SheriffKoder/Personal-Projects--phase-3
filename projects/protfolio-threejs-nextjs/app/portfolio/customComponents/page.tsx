@@ -6,24 +6,35 @@ import FirstComp from "@/components/customComponents/firstComponent/FirstComp";
 import SecondComponent from "@/components/customComponents/firstComponent/SecondComp";
 import ComponentView from "@/components/customComponents/ComponentView";
 import menu_dropDown from "@/components/customComponents/menu_dropDown/page";
+import progressCircle from "@/components/customComponents/progressCircle/progressCircle";
+
+
+
 const page = () => {
 
+    
+
     const myComponents = [
-        {
-            component:FirstComp,
-            name: "First",
-        },
-        {
-            component:SecondComponent,
-            name: "Second",
-        },
+        // {
+        //     component:FirstComp,
+        //     name: "First",
+        // },
+        // {
+        //     component:SecondComponent,
+        //     name: "Second",
+        // },
         {
             component:menu_dropDown,
             name: "Drop-down menu",
+        },
+        {
+            component: progressCircle,
+            name: "Progress Circle"
         }
     ];
 
-    const [displayComponent, setDisplayComponent] = useState<React.ReactNode|null>(null);
+    // const [displayComponent, setDisplayComponent] = useState<React.ReactNode|null>(null);
+    // const [displayComponent, setDisplayComponent] = useState<React.ReactNode|null>(myComponents[3].component);
 
 
   return (
@@ -43,7 +54,9 @@ const page = () => {
             {/* call the Card many times with each imported Component as a Child */}
             {myComponents.map((Child, i) => (
             // on click register the component index
-            <div onClick={()=>{setDisplayComponent(Child.component)}} key={Child.name}
+            <div 
+            // onClick={()=>{setDisplayComponent(Child.component)}} 
+            key={Child.name}
             className="mt-0 md1:mt-[-0.75rem] mb-4 md1:mb-0">
                     <ComponentCard>
                         <Child.component/>
@@ -56,13 +69,13 @@ const page = () => {
     </div>
 
     {/* Call the CompView with the registered Component as a child */}
-    {displayComponent && (
+    {/* {displayComponent && (
         <div className="fixed pt-[3.5rem] top-0 left-0 right-0 bottom-0 flex ambientBackground items-center justify-center">
                 <ComponentView>{displayComponent}</ComponentView>
                 <button onClick={()=>setDisplayComponent(null)}
                 className="absolute bottom-0 mb-4">close</button>
         </div>
-    )}
+    )} */}
 
 
 
