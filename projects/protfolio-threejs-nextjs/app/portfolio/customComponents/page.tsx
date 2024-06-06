@@ -5,33 +5,28 @@ import React, { useState } from "react"
 import FirstComp from "@/components/customComponents/firstComponent/FirstComp";
 import SecondComponent from "@/components/customComponents/firstComponent/SecondComp";
 import ComponentView from "@/components/customComponents/ComponentView";
-import menu_dropDown from "@/components/customComponents/menu_dropDown/page";
-import progressCircle from "@/components/customComponents/progressCircle/progressCircle";
+import DropDownMenu from "@/components/customComponents/menu_dropDown/page";
+import ProgressCircle from "@/components/customComponents/progressCircle/progressCircle";
+import Link from "next/link";
 
-
+export const myComponents = [
+    {
+        component:DropDownMenu,
+        name: "Drop-down menu",
+        link: "customComponents/DropDownMenu"
+    },
+    {
+        component: ProgressCircle,
+        name: "Progress Circle",
+        link: "customComponents/ProgressCircle"
+    }
+];
 
 const page = () => {
 
     
 
-    const myComponents = [
-        // {
-        //     component:FirstComp,
-        //     name: "First",
-        // },
-        // {
-        //     component:SecondComponent,
-        //     name: "Second",
-        // },
-        {
-            component:menu_dropDown,
-            name: "Drop-down menu",
-        },
-        {
-            component: progressCircle,
-            name: "Progress Circle"
-        }
-    ];
+
 
     // const [displayComponent, setDisplayComponent] = useState<React.ReactNode|null>(null);
     // const [displayComponent, setDisplayComponent] = useState<React.ReactNode|null>(myComponents[3].component);
@@ -54,15 +49,17 @@ const page = () => {
             {/* call the Card many times with each imported Component as a Child */}
             {myComponents.map((Child, i) => (
             // on click register the component index
-            <div 
-            // onClick={()=>{setDisplayComponent(Child.component)}} 
-            key={Child.name}
-            className="mt-0 md1:mt-[-0.75rem] mb-4 md1:mb-0">
-                    <ComponentCard>
-                        <Child.component/>
-                    </ComponentCard>
-                    <p className="text-center mt-2 text-[min(3vw,1rem)] md1:text-xs font-semibold px-2">{Child.name}</p>
-            </div>
+            <article>
+                <Link href={`./${Child.link}`}
+                // onClick={()=>{setDisplayComponent(Child.component)}}
+                key={Child.name}
+                className="mt-0 md1:mt-[-0.75rem] mb-4 md1:mb-0">
+                        <ComponentCard>
+                            <Child.component/>
+                        </ComponentCard>
+                        <p className="text-center mt-2 text-[min(3vw,1rem)] md1:text-xs font-semibold px-2">{Child.name}</p>
+                </Link>
+            </article>
             ))}
         </section>
             

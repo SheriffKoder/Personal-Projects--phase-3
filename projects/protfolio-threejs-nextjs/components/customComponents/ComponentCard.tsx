@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React, {ReactNode, useState} from "react"
 
 
@@ -20,32 +21,11 @@ const ComponentCard = ({children}: Props) => {
 
 
   return (
-    <div className={clicked ? modalCSS : cardCSS}
-    >
-        {clicked ? (
-          <>
-            <span className="w-full h-full grid place-items-center"
-            >
-              {/* not interact if not in modal view */}
-              <span>{children}</span>
-            </span>
-            <button onClick={()=>{setClicked(false)}}
-            className="absolute bottom-0 mb-4">close</button>
-          </>
-        ): 
-        <>
-          <span className="w-full h-full grid place-items-center cursor-pointer"
-          onClick={()=>{setClicked(true)}}>
-            <span className={clicked ? "": "pointer-events-none"}>{children}</span>
-          </span>
-        </>
-        }
+    <div className={cardCSS}>          
+      <div className="w-full h-full grid place-items-center cursor-pointer">
+        <span className="pointer-events-none">{children}</span>
+      </div>
 
-
-        
-
-        {/* close modal view */}
-  
     </div>
   )
 }

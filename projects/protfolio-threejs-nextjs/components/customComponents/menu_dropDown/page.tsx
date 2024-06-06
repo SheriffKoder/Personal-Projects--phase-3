@@ -1,9 +1,10 @@
 
+"use client"
 import React, { useEffect, useState } from "react"
 import classes from "./page.module.css";
 
 
-const page = () => {
+const DropDownMenu = () => {
 
     const colors = {
         menuBg: "#F0F2F2",
@@ -115,4 +116,4 @@ const page = () => {
   )
 }
 
-export default page
+export default DropDownMenu

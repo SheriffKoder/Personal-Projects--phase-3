@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import "./customComponents.css"
 import Nav from "@/components/Nav";
 
 // import StarsCanvas from "@/components/Contact/StarsCanvas";
@@ -12,7 +13,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Sheriff Koder - Web Developer",
-  description: "Sheriff Koder's Portfolio Website",
+  description: "Sheriff Koder / Sherif Khodeir Portfolio Website",
 };
 
 
