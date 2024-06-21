@@ -87,7 +87,7 @@ Which also allows its agents to have customized accounts to add, edit, delete pr
 
 >###### GG_Maps_AP = "google maps api key"
 >###### GG_Maps_MapId = "google maps map id"
->###### MONGODB_URI = "mongodb+srv://username:pasword@cluster0.jgxkgch.mongodb.net/folder" // MongoDB Atlas database connection string
+>###### MONGODB_URI = "mongodb+srv://username:password@cluster0.jgxkgch.mongodb.net/folder" // MongoDB Atlas database connection string
 >###### NEXTAUTH_SECRET = "your next-auth secret"
 >###### NEXTAUTH_URL= "your domain or local host"
 >######  EmailHost = "amazon aws email API domain"
