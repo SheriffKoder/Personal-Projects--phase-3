@@ -50,8 +50,4 @@ This app will help you stay on track on keeping your car well maintained. Where 
 Sign in with your google account, Add/Edit/Delete Posts and view other user's posts on the same database.
 - [older version](https://github.com/SheriffKoder/Personal-Projects--phase-3/tree/main/projects/NextJS1)  
 - [[ New version / More details ]](https://github.com/SheriffKoder/Draft-Projects-1) 
-##
-
-Sign in with your Google account to add/edit/delete posts. Done for the purpose of learning NextJS, Tailwind with a connected MongoDB database.
-[[ Folder / More Details ]](https://github.com/SheriffKoder/Personal-Projects--phase-3/tree/main/projects/NextJS1) [[ Live Demo ]](https://promptopia-two-umber.vercel.app/)
 
