@@ -5,9 +5,9 @@
 A static website built with Next.js, Tailwind CSS.
 Used Three.js to add 3D Models to be displayed on pages and animate them with javascript.
 
-![desktop screenshot](screenshot1.png)
+![desktop screenshot 1](screenshot1.jpg)
 
-![desktop screenshot](screenshot2.png)
+![desktop screenshot 2](screenshot2.jpg)
 
 >## **How to use on your computer**
 - Clone or download the project folder
