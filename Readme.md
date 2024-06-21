@@ -9,7 +9,8 @@ A website for a real-estate agency to display their products and news posts.
 Which also allows its agents to have customized accounts to add, edit, delete properties and posts for visiting clients to navigate through the properties and book a visit or stay up to date with the latest market/company news.
 [[ Folder / More Details ]](https://github.com/SheriffKoder/Personal-Projects--phase-3/tree/main/projects/re-nextjs) [[ Live Demo ]](https://phase-3-one.vercel.app/)
 ##
-**Amazon (Partial Clone)** | Next.js • Typescript • Tailwind • MongoDB  
+**Amazon (Partial Clone)** | Next.js • Typescript • Tailwind • MongoDB
+
 A trial to replicate amazon.eg shopping website. Create an account, select and order products or post your item for sale on the website.
 [[ Folder / More Details ]](https://github.com/SheriffKoder/Personal-Projects--phase-3/tree/main/recap/nodejs/recap) [[ Live Demo ]](https://amazon-nodejs.onrender.com/)
 
