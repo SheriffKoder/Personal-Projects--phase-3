@@ -97,10 +97,8 @@ const DarkModeToggle = () => {
         } 
         else if (localStorage.theme ==  undefined && window.document.documentElement.classList.contains("dark")) {
             localStorage.theme = "dark";
-            console.log("undefined theme");
         } else if (localStorage.theme ==  undefined && window.document.documentElement.classList.contains("light")) {
             localStorage.theme = "light";
-            console.log("undefined theme");
 
         } else {
             localStorage.theme = "light";
