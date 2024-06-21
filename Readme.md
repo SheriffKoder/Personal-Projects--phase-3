@@ -19,7 +19,7 @@ A trial to replicate amazon.eg shopping website. Create an account, select and o
 **Three.js Portfolio** | Next.js • Typescript • Tailwind • Three.js  
 
 My personal website containing information about me and my projects portfolio with a display of animated 3D models.
-[[ Folder / More Details ]](https://github.com/SheriffKoder/Personal-Projects--phase-3/tree/main/projects/re-nextjs) [[ Live Demo ]](https://www.sheriffkoder.com)
+[[ Folder / More Details ]](https://github.com/SheriffKoder/Personal-Projects--phase-3/tree/main/projects/protfolio-threejs-nextjs) [[ Live Demo ]](https://www.sheriffkoder.com)
 ##
 **Shop (mySQL)** | mySQL • Sequelize • ejs • javascript  
 A simple shop website with the ability to add/edit products with images and make orders to/from a mySQL database.
