@@ -1,33 +1,35 @@
+## ****Shop (mySQL version)** [[ Live Demo ]](https://phase-3-1ty9.onrender.com/)**
 
-# Shop (mySQL version) Logic
+>## **Description**
 
-A simple shop website with the ability to add/edit products and make orders to/from a mySQL database.
+A simple shop website with the ability to add/edit products with images and make orders to/from a mySQL database.
 
-What can be done on this website
--An admin user is created by default.
--Add a product by filling in the details.
--The ability to edit with the old information present.
--Delete a product.
--Add a product to the user's cart and view the cart.
--Make an order from the cart and clear the cart items.
--View your orders.
+![desktop screenshot](screenshot.png)
 
-Technologies used:
+>## **Functionalities**
+- An admin user is created by default.
+- Add a product by filling in the details.
+- The ability to edit with the old information present.
+- Delete a product.
+- Add a product to the user's cart and view the cart.
+- Make an order from the cart and clear the cart items.
+- View your orders.
+- 
+>## **Technologies used**
 Back-end: Javascript, NodeJS, ExpressJS, Sequelize
 Front-end: HTML/CSS, ejs templating engine
 
->**Sequelize**: a third-party library facilitiates working with mySQL by allowing to not use the normal mySQL syntax and work with javascript object of users etc. with name,age,email,password.
+**Sequelize**: a third-party library facilitates working with mySQL by allowing to not use the normal mySQL syntax and work with javascript object of users etc. with name,age,email,password.
 
-> **By changing the format** 
-> from > "INSERT INTO table (field1, field2,..) VALUES (?, ?, ..)", [value1, value2, ..]
-to > const user = User.create({value1: "..", value2: ".."});
+`By changing the format
+from > "INSERT INTO table (field1, field2,..) VALUES (?, ?, ..)", [value1, value2, ..]
+to > const user = User.create({value1: "..", value2: ".."});`
 
-> Instances: const user = User.build()
-> Queries: User.findAll()
->  Associations: User.hasMany(Product)
+` Instances: const user = User.build()
+ Queries: User.findAll()
+  Associations: User.hasMany(Product)`
 
-  
-  ### The main functionality of each file
+>## **Application's Logic**
 
 `util > database.js`
 - define the database that will be synced from in app.js and the models files
@@ -62,3 +64,16 @@ to > const user = User.create({value1: "..", value2: ".."});
 - find a cart by the user if item-adding/fetching the user's cart then get this cart's products to return to the user
 - find an order by the user if fetching the order
 - if making an order, get cart items, create an order with these cart items, then clear the cart
+
+
+>## **How to use on your computer**
+- Clone or download the project folder
+- open the folder in your IDE
+- open the terminal and run "npm install"
+- run "npm run dev" in the terminal after the installation is complete
+- create a ".env" file in the root directory and add these keys to use for development
+>###### PORT = 3306
+>###### DB_HOST = localhost
+>###### DB_USERNAME = root
+>###### DB_PASSWORD = ""
+>###### DB_DBNAME = new_schema
