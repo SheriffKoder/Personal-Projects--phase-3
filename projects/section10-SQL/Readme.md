@@ -14,7 +14,7 @@ A simple shop website with the ability to add/edit products with images and make
 - Add a product to the user's cart and view the cart.
 - Make an order from the cart and clear the cart items.
 - View your orders.
-- 
+
 >## **Technologies used**
 Back-end: Javascript, NodeJS, ExpressJS, Sequelize
 Front-end: HTML/CSS, ejs templating engine

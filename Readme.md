@@ -34,7 +34,7 @@ Displaying the latest movies in theaters with their description and thumbnails w
 - [older version](https://github.com/SheriffKoder/Personal-Projects--phase-3/tree/main/projects/react-movie-app)  
 - [[ New version / More details ]](https://github.com/SheriffKoder/Draft-Projects-1) 
 ##
-**Car Maintenance Tracker** | React.js • Tailwind • Typescript • Express.js • MongoDB 
+**Car Maintenance Tracker** | React.js • Tailwind • Typescript • Express.js • MongoDB
 This app will help you stay on track on keeping your car well maintained. Where you can access it on any device that has a browser. The app allows you to add details for your car and add multiple checkups, each with a different name, color and due date. but not just track with a due date, also a check history and know where this check was completed and how many times.
 - **Older versions :**
 - Front-end React.js (REST API fetch) [[ Folder ]](https://github.com/SheriffKoder/Personal-Projects--phase-3/tree/main/projects/car-maint--react-rest)
