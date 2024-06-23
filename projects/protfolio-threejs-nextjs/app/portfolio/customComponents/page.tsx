@@ -9,7 +9,7 @@ import DropDownMenu from "@/components/customComponents/menu_dropDown/page";
 import ProgressCircle from "@/components/customComponents/progressCircle/progressCircle";
 import Link from "next/link";
 
-export const myComponents = [
+const myComponents = [
     {
         component:DropDownMenu,
         name: "Drop-down menu",
