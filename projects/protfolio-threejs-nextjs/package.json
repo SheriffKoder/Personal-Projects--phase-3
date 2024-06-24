@@ -9,12 +9,14 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@aws-sdk/client-ses": "^3.600.0",
     "@react-three/drei": "^9.97.0",
     "@react-three/fiber": "^8.15.16",
     "@react-three/postprocessing": "^2.15.13",
     "@studio-freight/hamo": "^0.6.28",
     "@studio-freight/react-lenis": "^0.0.43",
     "@types/nodemailer": "^6.4.14",
+    "aws-sdk": "^2.1646.0",
     "bcrypt": "^5.1.1",
     "framer-motion": "^11.0.3",
     "framer-motion-3d": "^11.0.3",
@@ -26,7 +28,7 @@
     "mongoose": "^8.1.1",
     "next": "14.1.0",
     "next-auth": "^4.24.5",
-    "nodemailer": "^6.9.10",
+    "nodemailer": "^6.9.14",
     "react": "^18",
     "react-activity-calendar": "^2.2.7",
     "react-dom": "^18",

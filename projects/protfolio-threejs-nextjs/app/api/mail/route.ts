@@ -1,7 +1,11 @@
 
+
 //Part 11.2 - send email with data passed to this api
 
 import nodemailer from "nodemailer";
+
+// if you created a new key the IAM pass should be converted using a python script as mentioned here
+// https://docs.aws.amazon.com/ses/latest/dg/smtp-credentials.html
 
 
 export const POST = async (req:Request) => {
@@ -42,14 +46,20 @@ export const POST = async (req:Request) => {
         };
         
         //3 - Send the email
-        await transporter.sendMail(mailOptions);
-
+        transporter.sendMail(mailOptions, (error, info) => {
+            if (error) {
+                console.log("Error", error);
+            } else {
+                console.log("Email sent", info.response);
+            }
+        });
 
         // 200: operation succeeded
         return new Response(JSON.stringify("Email Sent"), {status: 200});
 
+
     } catch {
-        return new Response(JSON.stringify("Failed to fetch agent's info"), {status: 500});
+        return new Response(JSON.stringify("Failed to send email"), {status: 500});
     }
 
 }

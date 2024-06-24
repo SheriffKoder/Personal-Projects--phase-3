@@ -936,7 +936,7 @@ used in the single project page project's description text */
 
 @media (orientation:landscape) {
   #contact__form__container {
-    max-width: 650px;
+    /* max-width: 650px; */
   }
 }
 
