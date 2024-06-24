@@ -7,6 +7,7 @@ import Nav from "@/components/Nav";
 // import StarsCanvas from "@/components/Contact/StarsCanvas";
 // import SmoothScroll from "@/components/Scroll/SmoothScroll";
 import Footer from "@/components/footer";
+import ResumeOverlay from "@/components/Home/ResumeOverlay";
 
 
 const inter = Inter({ subsets: ["latin"] });
@@ -32,7 +33,7 @@ export default function RootLayout({
       <body className={`${inter.className} relative overflow-x-hidden cursor-default `}>
         
       {/* <StarsCanvas/> */}
-      
+        <ResumeOverlay/>      
         <Nav/>
 
         {/* all children lifted up beneath the nav length */}

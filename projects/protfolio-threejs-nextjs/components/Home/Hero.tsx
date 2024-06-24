@@ -15,6 +15,9 @@ import SingleWordUp from "../Animations/SingleWordUp";
 import CaretDown2 from "@/public/icons/caret-down2";
 
 import { useInView } from "framer-motion";
+import DownloadIcon from "./DownloadIcon";
+import ResumeOverlay from "./ResumeOverlay";
+import ResumeButton from "./ResumeButton";
 
 const Hero = () => {
 
@@ -68,22 +71,14 @@ const Hero = () => {
             text-[80%] flex-wrap
             ">
 
-              <Link href="/contact" className="lg:px-4 px-3 py-1
+              <Link href="/about" className="lg:px-4 px-3 py-1
               gradientRoundButton focus:opacity-95 hover:opacity-95
               text-[min(0.9em,1rem)]
               ">
-                  contact
+                  More about me
               </Link>
 
-              <span className="px-4 py-1 font-base 
-              gradientGreyButton focus:opacity-95 hover:opacity-95
-              text-[min(0.9em,1rem)]">
-
-                  <Link href="/about" className="gradient_text_1 w-full h-full">
-                    know more about me 
-                    {/* <span className="hidden 2xl:contents">(background, education, career...)</span> */}
-                  </Link>
-              </span>
+              <ResumeButton />
 
             </span>
           
