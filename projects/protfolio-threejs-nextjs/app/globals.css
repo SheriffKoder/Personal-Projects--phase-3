@@ -822,21 +822,23 @@ and turn it to a transparent icon image with a gray semi transparent background 
 .scaleVertical {
   animation: 2s scaleVertical ease-out forwards;
   height: 200px;
+  width: 100vw;
 }
 
 @keyframes scaleVertical {
-  from {height: 1px;}
-  to {height: 200px;}
+  from {height: 0px; width: 0px;}
+  to {height: 200px; width: 100vw;}
 }
 
 .scaleVerticalOut {
   animation: 2s scaleVerticalOut ease-out forwards;
-  height: 1px;
+  height: 0px;
+  width: 0px;
 }
 
 @keyframes scaleVerticalOut {
-  from {height: 200px;}
-  to {height: 1px;}
+  from {height: 200px; width: 100vw}
+  to {height: 0px; width: 0px;}
 }
 
 .fadeIn_animation2 {
@@ -857,7 +859,7 @@ and turn it to a transparent icon image with a gray semi transparent background 
 
 .fadeOut_animation2 {
   animation-name: fadeOut_keyframe2;
-  animation-duration: 4s;
+  animation-duration: 3s;
   animation-timing-function: linear;
   animation-fill-mode: forwards;
 }
