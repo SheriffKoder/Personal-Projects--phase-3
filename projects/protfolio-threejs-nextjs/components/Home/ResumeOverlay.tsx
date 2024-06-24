@@ -16,7 +16,7 @@ const ResumeOverlay = () => {
             document.getElementById("resumeOverlay")?.classList.add("hidden");
             document.getElementById("resumeOverlay")?.classList.remove("scaleVerticalOut");
             document.getElementById("resumeOverlayContainer")?.classList.remove("fadeOut_animation2");            
-        }, 3500);
+        }, 3000);
     }
 
   return (
@@ -25,7 +25,7 @@ const ResumeOverlay = () => {
     id="resumeOverlayContainer"
     className="fixed h-[100vh] w-[100vw] z-[99] hidden items-center justify-center 
     overflow-hidden bg-[rgba(2,8,18,0.79)]">
-        <div className="w-[100vw] h-[1px]  border
+        <div className="w-[100vw] h-[1px]
         hidden flex-col items-center justify-center gap-8 overflow-hidden"
         id="resumeOverlay">
         
