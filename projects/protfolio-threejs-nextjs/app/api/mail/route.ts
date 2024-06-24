@@ -46,7 +46,7 @@ export const POST = async (req:Request) => {
         };
         
         //3 - Send the email
-        transporter.sendMail(mailOptions, (error, info) => {
+        await transporter.sendMail(mailOptions, (error, info) => {
             if (error) {
                 console.log("Error", error);
             } else {
