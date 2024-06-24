@@ -45,17 +45,23 @@ export const POST = async (req:Request) => {
                 `
         };
         
+        let status;
         //3 - Send the email
-        await transporter.sendMail(mailOptions, (error, info) => {
+        transporter.sendMail(mailOptions, (error, info) => {
             if (error) {
                 console.log("Error", error);
+                status = error;
+                // throw new Error("Error: ", error);
             } else {
                 console.log("Email sent", info.response);
+                status = info.response
+                        // 200: operation succeeded
             }
         });
+        console.log("this: "+process.env.EmailHost)
 
-        // 200: operation succeeded
-        return new Response(JSON.stringify("Email Sent"), {status: 200});
+
+        return new Response(JSON.stringify(`Email Sent: ${status}`), {status: 200});
 
 
     } catch {
