@@ -46,7 +46,7 @@ export const POST = async (req:Request) => {
         };
         
         //3 - Send the email
-        transporter.sendMail(mailOptions);
+        await transporter.sendMail(mailOptions);
         
 
         // 200: operation succeeded
