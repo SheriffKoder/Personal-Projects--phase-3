@@ -61,7 +61,7 @@ export const POST = async (req:Request) => {
         console.log("this: "+process.env.EmailHost)
 
 
-        return new Response(JSON.stringify(`Email Sent: ${status}`), {status: 200});
+        return new Response(JSON.stringify("Email Sent"), {status: 200});
 
 
     } catch {
