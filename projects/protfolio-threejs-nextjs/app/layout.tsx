@@ -10,7 +10,7 @@ import Footer from "@/components/footer";
 import ResumeOverlay from "@/components/Home/ResumeOverlay";
 
 
-const inter = Inter({ subsets: ["latin"] });
+// const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Sheriff Koder - Web Developer",
@@ -30,7 +30,7 @@ export default function RootLayout({
 
      
     <html lang="en" className="">
-      <body className={`${inter.className} relative overflow-x-hidden cursor-default `}>
+      <body className={`relative overflow-x-hidden cursor-default `}>
         
       {/* <StarsCanvas/> */}
         <ResumeOverlay/>      
