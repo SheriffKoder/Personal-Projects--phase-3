@@ -163,7 +163,9 @@ const page = () => {
                                 md1:pb-0 md1:pt-[0rem] md1:order-2 md1:mx-0">
                                 {
                                 currentProject.link && (
-                                    <button className="px-4 py-0 gradientGreyButton focus:opacity-95 hover:opacity-95">
+                                    <button className={`px-4 py-0 gradientGreyButton focus:opacity-95 hover:opacity-95
+                                    ${currentProject.tech.includes("ExpressJS") ? "buttonNotificationRender" : ""}
+                                    `}>
                                         <Link href={currentProject.link} className="gradient_text_1 w-full" target="_blank">
                                         {
                                         currentProject.type === "site" && ("visit site")

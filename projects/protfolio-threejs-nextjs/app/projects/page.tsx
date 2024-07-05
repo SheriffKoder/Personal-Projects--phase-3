@@ -210,9 +210,11 @@ const page = () => {
                                     {
                                     project.link && (
                                       <button 
-                                      className="px-4 py-0  font-base gradientGreyButton 
+                                      className={`px-4 py-0  font-base gradientGreyButton 
                                       focus:opacity-95 hover:opacity-95
-                                      text-[min(0.75em,1rem)]">
+                                      text-[min(0.75em,1rem)]
+                                      ${project.tech.includes("ExpressJS") ? "buttonNotificationRender" : ""}
+                                      `}>
                                         <Link href={project.link} className="gradient_text_1 w-full h-full" target="_blank">
                                         {
                                         project.type === "site" && ("visit site")
@@ -320,7 +322,7 @@ const page = () => {
                       ): (
 
                         // if there are no projects in this category display this paragraph
-                        <p className="md1:px-[2rem]">There are still no projects yet in this section</p>
+                        <p className="md1:px-[2rem]">Awesome projects will be displayed here. Your's can be next !</p>
                       )}
 
                       

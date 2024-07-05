@@ -557,7 +557,7 @@ Yet to be added:<br/>
       image2: "/images/projects/assets/carmaint2/wallpaper2.png",
       imagex: "/images/projects/assets/carmaint2/wallpaperx.png",
       imageAnim:"",
-      tech: ["HTML5", "CSS3", "JavaScript", "TailwindCSS", "TypeScript", "MongoDB", "ReactJS", "GraphQL"],
+      tech: ["HTML5", "CSS3", "JavaScript", "TailwindCSS", "TypeScript", "MongoDB", "ReactJS", "GraphQL", "ExpressJS"],
       link: "https://carmaint-graphql-react.vercel.app/",
       icon: "/images/projects/assets/carmaint2/carmaint2-icon.png",
       id: "practice-4",

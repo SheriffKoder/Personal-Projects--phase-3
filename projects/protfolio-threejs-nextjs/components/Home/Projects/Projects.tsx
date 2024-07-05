@@ -195,7 +195,7 @@ const Projects = () => {
                 flex flex-row items-center justify-center"
                 style={{letterSpacing: "0.5px"}}>
                   starred
-                <span className="rotate-12">&#x2605;</span>
+                <span className="rotate-[-10deg]">&#x2605;</span>
                 </span>
                 }
                 
@@ -210,7 +210,9 @@ const Projects = () => {
               
                 {projects[currentProject].link && (
                   <button
-                  className="px-4 py-0 text-[min(0.75em,1rem)]  font-base gradientGreyButton focus:opacity-95 hover:opacity-95">
+                  className={`px-4 py-0 text-[min(0.75em,1rem)]  font-base gradientGreyButton focus:opacity-95 hover:opacity-95
+                  ${projects[currentProject].tech.includes("ExpressJS") ? "buttonNotificationRender" : ""}
+                  `}>
                       <Link href={projects[currentProject].link} className="gradient_text_1 w-full h-full">
                       visit site
                       </Link>

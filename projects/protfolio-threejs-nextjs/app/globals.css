@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
+/* @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"); */
 /* @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"); */
 
 
@@ -102,7 +102,29 @@ img {
   }
 } */
 
+.buttonNotificationRender:hover {
+  position: relative;
+  z-index: 99;
+}
 
+.buttonNotificationRender:hover::after {
+  position: absolute;
+  content: "Please allow up to 50 seconds until the website or the API to load";
+  width: 150px;
+  /* height: auto; */
+  background-color: rgb(33, 33, 33);
+  top: -3.5rem;
+  left: 0;
+  border-radius: 3px;
+  color: rgb(214, 214, 214);
+  font-size: x-small;
+  padding: 5px 5px;
+  padding-bottom: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
 /*/////////////////////////////////////////////////////////////////////*/
 /*/////////////////////////////////////////////////////////////////////*/
 
