@@ -30,7 +30,7 @@ export default function RootLayout({
 
      
     <html lang="en" className="">
-      <body className={`relative overflow-x-hidden cursor-default `}>
+      <body className={`relative overflow-x-hidden cursor-default font-poppins`}>
         
       {/* <StarsCanvas/> */}
         <ResumeOverlay/>      
