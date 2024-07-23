@@ -1,0 +1,136 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+/* ////////////////////////////////////////////////////////////////////////////// */
+/* ////////////////////////////////////////////////////////////////////////////// */
+/* ////////////////////////////////////////////////////////////////////////////// */
+/* custom components */
+
+/* drop down menu*/
+.cst_dropDownMenu_fadeIn {
+
+  opacity: 0;
+  animation: cst_dropDownMenu_fadeIn 0.15s forwards linear;
+  transition: all 0.15s linear;
+}
+
+.cst_dropDownMenu_fadeOut {
+
+  animation: cst_dropDownMenu_fadeOut 0.2s forwards linear;
+  transition: all 0.2s linear;
+}
+
+@keyframes cst_dropDownMenu_fadeIn {
+
+  from {
+      opacity: 0;
+      height: 0px;
+  }
+  to {
+      opacity: 1;
+      height: auto;
+  }
+}
+
+@keyframes cst_dropDownMenu_fadeOut {
+
+  from {
+    opacity: 1;
+    height: auto;
+  }
+  to {
+    opacity: 0;
+    height: 0px;
+  }
+}
+
+.cst_dropDownMenu_rotate180 {
+  rotate: 180deg;
+  top: 34%;
+}
+
+/* ////////////////////////////////////////////////////////////////////////////// */
+/* circle progress bar*/
+
+/* register the property to be able to transition the --progress below */
+@property --progress {
+  syntax: "<length-percentage>";
+  inherits: false;
+  initial-value: 0%;
+}
+
+[role="progressbar"] {
+  --size: 132px;
+  --bar-width: 20px;
+  --color-dark: #76f7bf;
+  --color-dark-glare: #989ea9;
+  --color-success: #ffffff;
+  /* 4400ff */
+
+  font-size: 2rem;
+  width: var(--size);
+  aspect-ratio: 1 / 1;
+
+  /* background-color: blue; */
+  background-image: conic-gradient(
+    var(--color-dark) var(--progress, 0),
+    var(--color-dark-glare) 0%
+  );
+  margin: 2rem auto;
+  border-radius: 50%;
+
+  display: grid;
+  place-items: center;
+
+  transition: --progress 500ms
+
+}
+
+[role="progressbar"] span {
+  display: none;
+}
+
+/* display when hit 100% */
+[role="progressbar"][aria-valuenow="100"]::after {
+  animation: progressComplete 0s forwards;
+  animation-delay: 1000ms;
+}
+
+/* delay the display of content */
+@keyframes progressComplete {
+  to {
+    content: "Done";
+    background-color: var(--color-success);
+  }
+}
+
+
+/* if javascript is disabled */
+.progressbar:not([role="progressbar"]) {
+  color: red;
+}
+
+[role="progressbar"]::after {
+  content: attr(aria-valuenow) "%"; /*as we did place aria using js we can use it here*/
+  background: white;
+  border-radius: inherit;
+  width: calc(100% - var(--bar-width)); /**/
+  aspect-ratio: 1/ 1; /**/
+  color: black;
+
+  display: grid;  /*for pseudo set display! or position */
+  place-items: center;
+}
+
+.progressbarCircle_testing-ground button {
+  padding: 0 0.5rem;
+  border: 1px solid white;
+  border-radius: 99px;
+}
+
