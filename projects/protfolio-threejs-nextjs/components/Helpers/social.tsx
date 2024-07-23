@@ -20,7 +20,7 @@ const SocialIcons = ({radius, size, background, size2, padding}:{
         key={social.name+" icon"} target="_blank">
 
             <Image src={social.icon} height={size2} width={size2} alt={social.name+" icon"}
-            className="transition-all duration-700 social_icon_box hover:invert focus:invert border hover:border-black focus:border-black h-[1.6rem] w-[1.6rem] focus:opacity-70 hover:opacity-70"
+            className="transition-all duration-700 social_icon_box hover:invert focus:invert border hover:border-black focus:border-black h-[1.6rem] w-[1.6rem] "
             style={{backgroundColor: background, borderRadius: radius, padding: padding}}
            
 

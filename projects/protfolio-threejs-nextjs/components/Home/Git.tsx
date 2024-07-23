@@ -41,8 +41,8 @@ const Git = () => {
     const setSizes = () => {
         // check viewport width to set sizes that match the current viewport width
         // /130, /65 helps getting specific points and set specific points related to the viewport width
-        setBlockSize((window.innerWidth/130 < 12 ? window.innerWidth/130 : 12))
-        setFontSize((window.innerWidth/65 < 12 ? window.innerWidth/65 : 12));
+        setBlockSize((window.innerWidth/130 < 12 ? window.innerWidth/140 : 12))
+        setFontSize((window.innerWidth/65 < 12 ? window.innerWidth/75 : 12));
         setBlockRadius((window.innerWidth < 900 ? 1 : (window.innerWidth < 550 ? 0 : 2)));
         setBlockMargin((window.innerWidth < 900 ? 2 : (window.innerWidth < 550 ? 1 : 4)));
     };
@@ -88,16 +88,17 @@ const Git = () => {
 
         </div>
 
-        <div className="flex items-center justify-center mt-8 text-[1.5vw]">
+        <div className="flex flex-col items-center justify-center gap-4 mt-8 text-[1.5vw]">
 
             {/* em's used relative to the text size of the container above */}
             <div className="relative  pb-[0.75em] pt-[1em] px-[1.25em]">
                 <motion.div
                 style={{
                     opacity: isInView ? 0.3 : 0,
-                    transition: "all 2s cubic-bezier(0.17, 0.55, 0.55, 1) 1s",
+                    transition: "all 2s cubic-bezier(0.17, 0.55, 0.55, 1) 0s",
                   }}
-                className="mt-2 absolute -inset-[-1rem] rounded-[0px] bg-gradient-to-t from-[#39d0b7b4] to-[#387ca4] opacity-30 blur-lg"
+                className="mt-2 absolute md1:-inset-[-1rem] rounded-[0px] bg-gradient-to-t from-[#39d0b7b4] to-[#387ca4] md1:opacity-30 md1:blur-lg
+                -inset-[-0rem] opacity-100 blur-md"
                 ></motion.div>
 
                 <div className="relative" ref={container2}>
@@ -110,10 +111,11 @@ const Git = () => {
                     fontSize={fontSize}/>
                     </div>
                 </div>
-
               
-
             </div>
+
+            <p className="text-[0.5rem] md1:text-[0.75rem] font-light opacity-50">This graph displays how many days I was working through the last year</p>
+
 
         </div>
 

@@ -94,7 +94,7 @@ const Hero = () => {
 
             <span className="text-[min(0.75em,1rem)] mt-2 font-extralight" >
               {text.split("<br/>").map((word)=>(
-                <div className="overflow-hidden">
+                <div className="overflow-hidden" key={word}>
                 <motion.div 
                 // variants={opacity} initial="initial" animate="open"
                 style={{

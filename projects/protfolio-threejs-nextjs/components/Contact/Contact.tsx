@@ -214,8 +214,8 @@ const showEmailConfirm = () => {
                 
                 "
                 id="contact__text-area">
-                  <label className="mdx:w-[10rem] block " htmlFor="inquiry">
-                    How can i help ?
+                  <label className="mdx:w-[10rem] mt-1 block " htmlFor="inquiry">
+                    Tell me how can I assist, or just say Hi 👋
                   </label>
                   <textarea
                   className="border-0 rounded-[5px] 

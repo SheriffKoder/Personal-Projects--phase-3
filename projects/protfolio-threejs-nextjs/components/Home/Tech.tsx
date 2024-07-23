@@ -28,12 +28,22 @@ const Tech = () => {
   
 
   return (
-       <div className="radialBackgroundHero w-[100vw] max-w-[1600px] mx-auto
-       flex flex-col items-center justify-start relative" id="tech-comp"
+       <div className=" w-[100vw] max-w-[1600px] mx-auto
+       flex flex-col items-center justify-start relative
+       " id="tech-comp"
        >
 
           
+          <div className="absolute w-full h-[50%] md1:h-full flex flex-row items-end justify-center radialBackgroundHero">
+          {/* when the ref is in view, the isInView will be true and trigger the laptop animation */}
+          <div className="relative md1:h-[4rem] h-[4rem] w-4" 
+          ref={containerTech}
+           />
+          </div>
 
+          <div className="absolute h-full w-full techGradBackground">
+
+          </div>
             
 
           {/* <div className="absolute top-[40vmin] w-full flex flex-col items-center"> */}
@@ -46,7 +56,7 @@ const Tech = () => {
 
                 <span className="absolute bottom-[calc(2rem+13vw+5vh)] z-[0]
                 text-[calc(1rem+1vw)] w-full text-center font-semibold"
-                ref={containerTech}>
+                >
                   Technologies Used
                 </span>
 
@@ -65,7 +75,7 @@ const Tech = () => {
           style={{
             // transform: !isInView ? "translateY(200px) translateX(-50%)" : "translateY(0px) translateX(-50%)",
             opacity: isInView ? 1 : 0,
-            transition: "all 3.5s cubic-bezier(0.17, 0.55, 0.55, 1) 3s",
+            transition: "all 3.5s cubic-bezier(0.17, 0.55, 0.55, 1) 1.5s",
             // transitionDelay: "2.5s",
             //time-s, delay-s
           }}>
@@ -96,9 +106,9 @@ const Tech = () => {
                 text-[calc(1rem+0.6vw)] justify-center lg:justify-start
                 ">
                   {technologies1.map((tech, index)=> (
-                    <div className="relative techHover">
+                    <div className="relative techHover" key={tech.name+ " "+index}>
                       <div className="shadowDiv"></div>
-                      <div key={tech.name+ " "+index} className={`
+                      <div className={`
                       pr-[min(1.5rem,calc(0.5rem+1.5vw))]
                       pl-[min(1.5rem*0.75,calc(0.5rem+1.5vw)*0.8)]
                       py-[min(0.6rem,0.75vw)]
@@ -125,9 +135,9 @@ const Tech = () => {
                 <div className="flex flex-row md2:gap-3 gap-1 flex-wrap w-full justify-center lg:justify-start
                 text-[calc(1rem+0.6vw)]">
                   {technologies2.map((tech, index)=> (
-                    <div className="relative techHover">
+                    <div className="relative techHover" key={tech.name+ " "+index}>
                       <div className="shadowDiv"></div>
-                      <div key={tech.name+ " "+index} className={`
+                      <div  className={`
                       pr-[min(1.5rem,calc(0.5rem+1.5vw))]
                       pl-[min(1.5rem*0.75,calc(0.5rem+1.5vw)*0.8)]
                       py-[min(0.6rem,0.75vw)]
@@ -154,9 +164,9 @@ const Tech = () => {
                 <div className="flex flex-row md2:gap-3 gap-1 flex-wrap w-full justify-center lg:justify-start
                 text-[calc(1rem+0.6vw)]">
                   {technologies3.map((tech, index)=> (
-                    <div className="relative techHover">
+                    <div className="relative techHover" key={tech.name+ " "+index}>
                       <div className="shadowDiv"></div>
-                      <div key={tech.name+ " "+index} className={`
+                      <div className={`
                       relative
                       pr-[min(1.5rem,calc(0.5rem+1.5vw))]
                       pl-[min(1.5rem*0.75,calc(0.5rem+1.5vw)*0.8)]
@@ -183,7 +193,6 @@ const Tech = () => {
 
           </motion.div>
 
-            {/* animate={isInView ? "open" : "closed"}
 
 
                 
@@ -193,9 +202,7 @@ const Tech = () => {
 
             
           
-          {/* when the ref is in view, the isInView will be true and trigger the laptop animation */}
-          <div className="w-[100px] h-[1px] border border-[#f000] relative"
-           />
+
 
        
 

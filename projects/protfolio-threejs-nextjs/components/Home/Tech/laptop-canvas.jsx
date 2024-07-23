@@ -98,8 +98,8 @@ const Model = ({openLid}) => {
             if (openLid) {
                 rotation_0();
             }
-            console.log("models lid", openLid);
-        }, 1000);
+            // console.log("models lid", openLid);
+        }, 10); // delay till open lid on view
     },[openLid])
  
       

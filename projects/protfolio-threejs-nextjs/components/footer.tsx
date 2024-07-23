@@ -49,28 +49,36 @@ const Footer = () => {
                     </li>
                 </ul>
 
+
+            </div>
+
+
+            {/* z to show on the contact page */}
+            <span className="w-full max-w-[800px] gradient_text_1 flex flex-col items-center justify-center gap-2 z-[0] relative">
+                
+                <span className="flex flex-row">
+                    <span>&#169; SHERIFF KODER</span>
+
+                    <span className="w-[17px] flex items-center justify-center mt-[-2px]">
+                        <Image src={"/icons/ss-c-logo.png"} height={15} width={17} alt="sheriffkoder.com website's logo"
+                        style={{height: "17px", width: "19px"}}>
+                        </Image>
+                    </span>
+                </span>
+
+
                 {
                     path !== "contact" && (
                             
-                    <div className="ml-auto flex flex-row gap-2 absolute right-[3rem] bottom-[-1.45rem]">
+                    <div className="mdx:ml-auto flex flex-row gap-2 mdx:absolute right-[1.5rem]">
                         <SocialIcons radius={"0.3rem"} size={"1.5rem"} background={"#ffffffdb"}
                         size2={24} padding={"0.3rem"}/>
                         
                     </div>
                 )}
-            </div>
-
-
-            {/* z to show on the contact page */}
-            <span className="gradient_text_1 flex flex-row z-[0]">
-                <span>&#169; SHERIFF KODER</span>
-
-                <span className="w-[17px] flex items-center justify-center mt-[-2px]">
-                    <Image src={"/icons/ss-c-logo.png"} height={15} width={17} alt="sheriffkoder.com website's logo"
-                    style={{height: "17px", width: "19px"}}>
-                    </Image>
-                </span>
             </span>
+
+
         </div>
         
 

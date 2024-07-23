@@ -1025,7 +1025,7 @@ used in the single project page project's description text */
   background-size: 100% 100%;
   background-repeat: no-repeat;
   /* background-position-x: center; */
-  background-position-y: 0px;
+  background-position-y: top;
 }
 
 @media (min-width: 860px ){
@@ -1036,6 +1036,11 @@ used in the single project page project's description text */
     background-position-x: right;
     background-position-y: 0px;
   }
+}
+
+.techGradBackground {
+  background: rgb(2,8,18);
+  background: linear-gradient(180deg, rgba(2,8,18,1) 0%, rgba(2,8,18,0.3867121848739496) 7%, rgba(2,8,18,0.2998774509803921) 8%, rgba(255,255,255,0) 100%);
 }
 
 .techHover:hover .shadowDiv {

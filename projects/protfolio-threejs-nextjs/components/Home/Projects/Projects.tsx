@@ -179,7 +179,7 @@ const Projects = () => {
       z-[0]
       "
       id="homeTech_textModels_container"
-      ref={container3}>
+      >
 
         {/* /////////////////////////////////////////////////////////////////////// */}
         {/* background image was used before, to at the back between the description and the model */}
@@ -285,10 +285,10 @@ const Projects = () => {
               className="hero_brush_mask">
             </div>
 
-                <div className="w-full h-full ml-auto relative">
-                <Computer orbitControl={orbitControl}
-                texture_1_url={projects[currentProject].image1}
-                texture_2_url={projects[currentProject].imagex}/>
+                <div className="w-full h-full ml-auto relative flex items-center justify-center">
+                  <Computer orbitControl={orbitControl}
+                  texture_1_url={projects[currentProject].image1}
+                  texture_2_url={projects[currentProject].imagex}/>
                 </div>
               
 
@@ -314,7 +314,7 @@ const Projects = () => {
        flex items-center justify-center">
         <div className="font-base cursor-pointer
          animateButtonHover
-        text-[min(1.1em,1.0rem)]">
+        text-[min(1.1em,1.0rem)]" ref={container3}>
 
               <Link href="/projects" className="gradientRoundButton py-[3px] px-3 rounded-full
               "

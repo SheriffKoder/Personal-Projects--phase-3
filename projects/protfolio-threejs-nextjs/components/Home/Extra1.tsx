@@ -78,7 +78,8 @@ const Extra1 = () => {
                     }}
                     key={content.title}>
                         <div
-                      className="absolute -inset-[-2rem] rounded-[7px] bg-gradient-to-t from-[#39d0b7b4] to-[#387ca4] opacity-50 blur-xl"
+                      className="absolute md1:-inset-[-2rem] rounded-[7px] bg-gradient-to-t from-[#39d0b7b4] to-[#387ca4] md1:opacity-70 md1:blur-xl
+                      -inset-[-0.9rem] rounded-[7px] opacity-90 blur-lg"
                         ></div>
                         {/* inside the Tilt */}
                             {/* <div className="absolute mx-auto w-[90%] h-full rounded-[7px] ambientBackground"></div> */}

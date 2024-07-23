@@ -29,7 +29,7 @@ function DecideEntryAnimation () {
 
     let isvisited = sessionStorage.visited;
     setVisited(isvisited);
-    console.log(visited)
+    // console.log(visited)
 
     setTimeout(() => {
     // after 2200ms i.e the preloader functionality finishes
