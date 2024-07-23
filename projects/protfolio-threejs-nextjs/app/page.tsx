@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useEffect } from "react";
 import Hero from "@/components/Home/Hero";
 import Tech from "@/components/Home/Tech";
@@ -16,15 +16,57 @@ import Extra2 from "@/components/Home/Extra2";
 import Extra3 from "@/components/Home/Extra3";
 import Projects from "@/components/Home/Projects/Projects";
 import Git from "@/components/Home/Git";
+import TransitionEffect from "@/components/Animations/TransitionEffect";
+import {motion, useInView} from "framer-motion";
 
 
+function DecideEntryAnimation () {
 
+  const [visited, setVisited] = useState<string|null>("");
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(()=> {
+
+    let isvisited = sessionStorage.visited;
+    setVisited(isvisited);
+    console.log(visited)
+
+    setTimeout(() => {
+    // after 2200ms i.e the preloader functionality finishes
+    // set isLoading to false to remove the preloader component
+    // and if the user scrolled the page, return to point X/Y = 0/0
+      setIsLoading(false);
+      // if (window !== undefined) {
+      // window.scrollTo(0,0);
+      // }
+    }, 2200);
+
+
+  },[visited]);
+
+  if (visited === "true") {
+    return <TransitionEffect/>
+  } else {
+    return (
+      <AnimatePresence mode="wait">
+          {
+            isLoading && <Preloader/>
+          }
+          </AnimatePresence>
+    )
+  }
+
+}
 
 
 //this is the home page components wrapper
 export default function Home() {
 
-  const [isLoading, setIsLoading] = useState(true);
+
+  const container2 = useRef(null);
+  const isInView = useInView(container2, { once: true });
+
+  
 
   useEffect( () => {
 
@@ -34,19 +76,10 @@ export default function Home() {
           const locomotiveScroll = new LocomotiveScroll();
       }
     )();
-
-    // after 2200ms i.e the preloader functionality finishes
-    // set isLoading to false to remove the preloader component
-    // and if the user scrolled the page, return to point X/Y = 0/0
-    setTimeout(() => {
-      setIsLoading(false);
-      // if (window !== undefined) {
-      // window.scrollTo(0,0);
-      // }
-    }, 2200);
+  
 
 
-  }, [])
+  }, []);
 
 
 
@@ -57,11 +90,13 @@ export default function Home() {
 
           {/* AnimatePresence to allow the exit animation from 
           the slideLeft variant on the PreLoader Component */}
-          <AnimatePresence mode="wait">
+          {/* <AnimatePresence mode="wait">
           {
-            isLoading && <Preloader/>
+            isLoading && !sessionCheck && <Preloader/>
           }
           </AnimatePresence>
+           */}
+          <DecideEntryAnimation/>
           
           
           <div className="w-full max-w-[1600px] flex flex-col mx-auto ">
@@ -90,13 +125,24 @@ export default function Home() {
               <Git/>
             </div>
 
-            <div className="mt-[7rem]">
+            <div className="mt-[7rem]"
+            ref={container2}>
               <Extra2/>
             </div>
 
-            <div className="mt-[5rem]">
+            <motion.div 
+            // variants={opacity} initial="initial" animate="open"
+            style={{
+              // transform: !isInView ? "translateY(200px) translateX(-50%)" : "translateY(0px) translateX(-50%)",
+              opacity: isInView ? 1 : 0,
+              transition: "all 2s cubic-bezier(0.17, 0.55, 0.55, 1) 1s",
+              // transitionDelay: "2.5s",
+              //time-s, delay-s
+            }}
+            
+            className="mt-[5rem]">
               <Contact/>
-            </div>
+            </motion.div>
 
           </div>
 

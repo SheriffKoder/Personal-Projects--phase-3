@@ -26,16 +26,31 @@ import { RectAreaLightHelper } from "three/examples/jsm/Addons.js";
 
 function Shape ({orbitControl, texture_1_url, texture_2_url}) {
 
+    function isLargeScreen () {
+        if (typeof window !== "undefined") {
+            const { innerWidth, innerHeight } = window;
+        
+            if (innerWidth >= 1537) {
+                return true;
+            } else {
+                return false; 
 
+            }
+        
+        }
+
+    }
     //////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////
     const springOptions = {
         damping: 60,
     }
+
+    
     const mouse = {
         rotation_y: useSpring(useMotionValue(-0.75), springOptions),
         scale: useSpring(useMotionValue(1), springOptions),
-        position_x: useSpring(useMotionValue(0), springOptions),
+        position_x: useSpring(useMotionValue(isLargeScreen() ? 1.7 : 0), springOptions),
 
     };
 
@@ -54,16 +69,18 @@ function Shape ({orbitControl, texture_1_url, texture_2_url}) {
 
             // console.log(innerWidth);
 
-            mouse.rotation_y.set(0);
-            mouse.scale.set(1.5);
+            mouse.rotation_y.set(isLargeScreen() ? -0.05 : 0);
+            // mouse.scale.set(1.5);
 
             // determine position-x based on viewport if mobile or desktop, 
             // it needs some difference to align as needed
             if (innerWidth >= 1537) {
-                mouse.position_x.set(-1.2); 
+                mouse.position_x.set(1.2); //-1.2
+                mouse.scale.set(1.5);
+
             } else {
                 mouse.position_x.set(0); 
-
+                mouse.scale.set(1.3);
             }
         }
 
@@ -74,7 +91,19 @@ function Shape ({orbitControl, texture_1_url, texture_2_url}) {
 
         mouse.rotation_y.set(-0.5);
         mouse.scale.set(1);
-        mouse.position_x.set(0);
+
+        if (typeof window !== "undefined") {
+            const { innerWidth, innerHeight } = window;
+        mouse.position_x.set(1.5);
+
+        if (innerWidth >= 1537) {
+            mouse.position_x.set(1.7); //-1.2
+        } else {
+            mouse.position_x.set(0); 
+
+        }
+
+        }
 
     }
 
@@ -159,7 +188,7 @@ function Shape ({orbitControl, texture_1_url, texture_2_url}) {
 export default function computer({orbitControl, texture_1_url, texture_2_url}) {
 
     return (
-        <div className="absolute top-0 left-0 w-full h-full">
+        <div className="absolute top-0 2xl:right-0 w-full h-full 2xl:overflow-visible">
             <Canvas
             camera={{
                 position: [0, 0, 15], fov:25,

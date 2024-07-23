@@ -19,16 +19,16 @@ const LaptopCanvas = dynamic(()=> import("./Tech/laptop-canvas"), {
 
 const Tech = () => {
 
-  const container2 = useRef(null);
+  const containerTech = useRef(null);
   const laptopRef = useRef(null);
 
-  const isInView = useInView(container2, { once: true });
+  const isInView = useInView(containerTech, { once: true });
 
 
   
 
   return (
-       <div className="w-[100vw] max-w-[1600px] mx-auto
+       <div className="radialBackgroundHero w-[100vw] max-w-[1600px] mx-auto
        flex flex-col items-center justify-start relative" id="tech-comp"
        >
 
@@ -46,7 +46,7 @@ const Tech = () => {
 
                 <span className="absolute bottom-[calc(2rem+13vw+5vh)] z-[0]
                 text-[calc(1rem+1vw)] w-full text-center font-semibold"
-                ref={container2}>
+                ref={containerTech}>
                   Technologies Used
                 </span>
 
@@ -78,7 +78,7 @@ const Tech = () => {
               <span className="mb-8 flex flex-col gap-3 text-[min(1.25rem,calc(0.75rem+0.5vw))]">
                 <h4 className="gradientBoldHeader mb-2">About my Skills</h4>
                 <span>
-                  <p>I am able to give your website an <b>edge</b> through thoughtfully designing the front-end according to the latest trends and building it with modern frameworks.</p>
+                  <p>I am able to give your website an <b className="relative edgeText">edge</b> through thoughtfully designing the front-end according to the latest trends and building it with modern frameworks.</p>
                   <p>Give your website more functionality and user control by having a back-end application connecting the website to a NoSQL database to create/read/update/delete information.</p>
                 </span>
                 <span>
@@ -96,23 +96,26 @@ const Tech = () => {
                 text-[calc(1rem+0.6vw)] justify-center lg:justify-start
                 ">
                   {technologies1.map((tech, index)=> (
-                    <div key={tech.name+ " "+index} className={`
-                    pr-[min(1.5rem,calc(0.5rem+1.5vw))]
-                    pl-[min(1.5rem*0.75,calc(0.5rem+1.5vw)*0.8)]
-                    py-[min(0.6rem,0.75vw)]
-                    md2:mt-2 mt-1 rounded-[5px] border border-[#ffffff21]
-                    flex flex-row items-center justify-start md2:gap-3 gap-2 ${tech.name}_bg
-                    text-[calc(1rem+0.6vw)]`}>
-                      <div className="opacity-90 w-[min(30px,calc(0.75rem+1vw))] h-[min(30px,calc(0.75rem+1vw))]
-                      flex relative">
-                        <Image src={tech.icon} fill alt={tech.name}
-                        sizes="30px"
-                        style={{objectFit:"contain"}}></Image>
+                    <div className="relative techHover">
+                      <div className="shadowDiv"></div>
+                      <div key={tech.name+ " "+index} className={`
+                      pr-[min(1.5rem,calc(0.5rem+1.5vw))]
+                      pl-[min(1.5rem*0.75,calc(0.5rem+1.5vw)*0.8)]
+                      py-[min(0.6rem,0.75vw)]
+                      md2:mt-2 mt-1 rounded-[5px] border border-[#ffffff21]
+                      flex flex-row items-center justify-start md2:gap-3 gap-2 ${tech.name}_bg
+                      text-[calc(1rem+0.6vw)]`}>
+                        <div className="opacity-90 w-[min(30px,calc(0.75rem+1vw))] h-[min(30px,calc(0.75rem+1vw))]
+                        flex relative">
+                          <Image src={tech.icon} fill alt={tech.name}
+                          sizes="30px"
+                          style={{objectFit:"contain"}}></Image>
+                        </div>
+                        <h3 className={`opacity-95 ${tech.name}_text
+                        text-[min(0.6em,1rem)]`}>
+                          {tech.name}
+                        </h3>
                       </div>
-                      <h3 className={`opacity-95 ${tech.name}_text
-                      text-[min(0.6em,1rem)]`}>
-                        {tech.name}
-                      </h3>
                     </div>
                   ))}
                 </div>
@@ -122,23 +125,26 @@ const Tech = () => {
                 <div className="flex flex-row md2:gap-3 gap-1 flex-wrap w-full justify-center lg:justify-start
                 text-[calc(1rem+0.6vw)]">
                   {technologies2.map((tech, index)=> (
-                    <div key={tech.name+ " "+index} className={`
-                    pr-[min(1.5rem,calc(0.5rem+1.5vw))]
-                    pl-[min(1.5rem*0.75,calc(0.5rem+1.5vw)*0.8)]
-                    py-[min(0.6rem,0.75vw)]
-                    md2:mt-2 mt-1 rounded-[5px] border border-[#ffffff21]
-                    flex flex-row items-center justify-start md2:gap-3 gap-2 ${tech.name}_bg
-                    text-[calc(1rem+0.6vw)]`}>
-                      <div className="opacity-90 w-[min(30px,calc(0.75rem+1vw))] h-[min(30px,calc(0.75rem+1vw))]
-                      flex relative">
-                        <Image src={tech.icon} fill alt={tech.name}
-                        sizes="30px"
-                        style={{objectFit:"contain"}}></Image>
+                    <div className="relative techHover">
+                      <div className="shadowDiv"></div>
+                      <div key={tech.name+ " "+index} className={`
+                      pr-[min(1.5rem,calc(0.5rem+1.5vw))]
+                      pl-[min(1.5rem*0.75,calc(0.5rem+1.5vw)*0.8)]
+                      py-[min(0.6rem,0.75vw)]
+                      md2:mt-2 mt-1 rounded-[5px] border border-[#ffffff21]
+                      flex flex-row items-center justify-start md2:gap-3 gap-2 ${tech.name}_bg
+                      text-[calc(1rem+0.6vw)]`}>
+                        <div className="opacity-90 w-[min(30px,calc(0.75rem+1vw))] h-[min(30px,calc(0.75rem+1vw))]
+                        flex relative">
+                          <Image src={tech.icon} fill alt={tech.name}
+                          sizes="30px"
+                          style={{objectFit:"contain"}}></Image>
+                        </div>
+                        <h3 className={`opacity-95 ${tech.name}_text
+                        text-[min(0.6em,1rem)]`}>
+                          {tech.name}
+                        </h3>
                       </div>
-                      <h3 className={`opacity-95 ${tech.name}_text
-                      text-[min(0.6em,1rem)]`}>
-                        {tech.name}
-                      </h3>
                     </div>
                   ))}
                 </div>
@@ -148,23 +154,27 @@ const Tech = () => {
                 <div className="flex flex-row md2:gap-3 gap-1 flex-wrap w-full justify-center lg:justify-start
                 text-[calc(1rem+0.6vw)]">
                   {technologies3.map((tech, index)=> (
-                    <div key={tech.name+ " "+index} className={`
-                    pr-[min(1.5rem,calc(0.5rem+1.5vw))]
-                    pl-[min(1.5rem*0.75,calc(0.5rem+1.5vw)*0.8)]
-                    py-[min(0.6rem,0.75vw)]
-                    md2:mt-2 mt-1 rounded-[5px] border border-[#ffffff21]
-                    flex flex-row items-center justify-start md2:gap-3 gap-2 ${tech.name}_bg
-                    text-[calc(1rem+0.6vw)]`}>
-                      <div className="opacity-90 w-[min(30px,calc(0.75rem+1vw))] h-[min(30px,calc(0.75rem+1vw))]
-                      flex relative">
-                        <Image src={tech.icon} fill alt={tech.name}
-                        sizes="30px"
-                        style={{objectFit:"contain"}}></Image>
+                    <div className="relative techHover">
+                      <div className="shadowDiv"></div>
+                      <div key={tech.name+ " "+index} className={`
+                      relative
+                      pr-[min(1.5rem,calc(0.5rem+1.5vw))]
+                      pl-[min(1.5rem*0.75,calc(0.5rem+1.5vw)*0.8)]
+                      py-[min(0.6rem,0.75vw)]
+                      md2:mt-2 mt-1 rounded-[5px] border border-[#ffffff21]
+                      flex flex-row items-center justify-start md2:gap-3 gap-2 ${tech.name}_bg
+                      text-[calc(1rem+0.6vw)]`}>
+                        <div className="opacity-90 w-[min(30px,calc(0.75rem+1vw))] h-[min(30px,calc(0.75rem+1vw))]
+                        flex relative">
+                          <Image src={tech.icon} fill alt={tech.name}
+                          sizes="30px"
+                          style={{objectFit:"contain"}}></Image>
+                        </div>
+                        <h3 className={`opacity-95 ${tech.name}_text
+                        text-[min(0.6em,1rem)]`}>
+                          {tech.name}
+                        </h3>
                       </div>
-                      <h3 className={`opacity-95 ${tech.name}_text
-                      text-[min(0.6em,1rem)]`}>
-                        {tech.name}
-                      </h3>
                     </div>
                   ))}
                 </div>

@@ -36,7 +36,12 @@ import {
     {
       name: "linkedin",
       icon: linkedin,
-      link: "https://www.linkedin.com"
+      link: "https://www.linkedin.com/in/sherif-khodeir-webdev/"
+    },
+    {
+      name: "github",
+      icon: github,
+      link: "https://github.com/SheriffKoder/"
     },
   ];
 

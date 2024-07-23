@@ -146,7 +146,7 @@ const showEmailConfirm = () => {
 
        {/* text div */}
        <div className="flex flex-col justify-center items-center
-       px-[6vw] mt-[-1rem] md2:mt-0
+       px-4 mt-[-1rem] md2:mt-0 w-full max-w-[450px]
        "
        id="contact__container"
        >
@@ -156,7 +156,7 @@ const showEmailConfirm = () => {
               Send me a message
             </h1>
 
-            <div className="glass_background py-4 px-8 rounded-[10px]
+            <div className="glass_background py-4 px-8 rounded-[10px] w-[100%]
             "
             id="contact__form__container">
               <form className="flex flex-col gap-4 text-xs md2:text-base" onSubmit={handleSubmit}

@@ -23,7 +23,7 @@ const Preloader = () => {
       if (window !== undefined) {
         window.scrollTo(0,0);
         }
-      return;
+      return sessionStorage.setItem("visited", "true");
     };
 
     setTimeout(()=> {

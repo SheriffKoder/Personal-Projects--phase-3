@@ -4,6 +4,7 @@ import Image from "next/image"
 // https://grubersjoe.github.io/react-github-calendar/
 import GitHubCalendar, { ThemeInput } from "react-github-calendar"
 import { github } from "@/public/assets";
+import {motion, useInView} from "framer-motion";
 
 
 //set the colors for commit levels for both light and dark themes as constants to pass to the component
@@ -25,6 +26,9 @@ const explicitTheme:ThemeInput = {
 
 
 const Git = () => {
+
+    const container2 = React.useRef(null);
+    const isInView = useInView(container2, { once: true });
 
     //default sizes
     const [blockSize, setBlockSize] = useState(12);
@@ -87,10 +91,28 @@ const Git = () => {
         <div className="flex items-center justify-center mt-8 text-[1.5vw]">
 
             {/* em's used relative to the text size of the container above */}
-            <div className="ProjectCard_bg pb-[0.75em] pt-[1em] px-[1.25em] rounded-[0.5em]">
-                <GitHubCalendar username="SheriffKoder" theme={explicitTheme} blockSize={blockSize}
-                blockRadius={blockRadius} blockMargin={blockMargin}
-                fontSize={fontSize}/>
+            <div className="relative  pb-[0.75em] pt-[1em] px-[1.25em]">
+                <motion.div
+                style={{
+                    opacity: isInView ? 0.3 : 0,
+                    transition: "all 2s cubic-bezier(0.17, 0.55, 0.55, 1) 1s",
+                  }}
+                className="mt-2 absolute -inset-[-1rem] rounded-[0px] bg-gradient-to-t from-[#39d0b7b4] to-[#387ca4] opacity-30 blur-lg"
+                ></motion.div>
+
+                <div className="relative" ref={container2}>
+                
+                    <div className="absolute w-full h-full top-0 rounded-[0.5em] ambientBackground"></div>
+
+                    <div className="z-[1] relative ProjectCard_bg pb-[0.75em] pt-[1em] px-[1.25em] rounded-[0.5em]">
+                    <GitHubCalendar username="SheriffKoder" theme={explicitTheme} blockSize={blockSize}
+                    blockRadius={blockRadius} blockMargin={blockMargin}
+                    fontSize={fontSize}/>
+                    </div>
+                </div>
+
+              
+
             </div>
 
         </div>

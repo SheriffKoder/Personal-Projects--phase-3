@@ -252,7 +252,7 @@ body {
   /* background: -webkit-linear-gradient(#eee, #333); */
   background: #000000; /* fallback for old browsers */
   background: -webkit-linear-gradient(
-    to bottom, rgba(255,255,255, 0.045), rgba(255,255,255, 0.025)
+    to bottom, rgba(255, 255, 255, 0.045), rgba(255,255,255, 0.025)
   ); 
   /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(
@@ -260,8 +260,21 @@ body {
   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
   border-color: rgba(255,255,255, 0.07);
+
+  position: relative;
+  z-index: 1;
   
 
+}
+
+.extra1_card_bg_wrapper::before {
+  position: absolute;
+  content: "";
+  width: 100%;
+  height: 100%;
+  background: rgb(2,8,18);
+  border-radius: 7px;
+  z-index: 0;
 }
 
 .extra1_card_bg:hover, .extra1_card_bg:focus {
@@ -865,7 +878,7 @@ and turn it to a transparent icon image with a gray semi transparent background 
 
 .fadeIn_animation2 {
   animation-name: fadeIn_keyframe2;
-  animation-duration: 2s;
+  animation-duration: 0.5s;
   animation-timing-function: linear;
   animation-fill-mode: forwards;
 }
@@ -881,7 +894,7 @@ and turn it to a transparent icon image with a gray semi transparent background 
 
 .fadeOut_animation2 {
   animation-name: fadeOut_keyframe2;
-  animation-duration: 3s;
+  animation-duration: 0.85s;
   animation-timing-function: linear;
   animation-fill-mode: forwards;
 }
@@ -915,7 +928,9 @@ and turn it to a transparent icon image with a gray semi transparent background 
 
 
 .gradientGreyButton {
-  @apply bg-[#4747475c] rounded-[1rem]
+  @apply bg-[#4747475c] rounded-[1rem]   border-transparent border box-border
+ hover:border-[rgba(22,189,215,0.57)]  focus:border-[rgba(22,189,215,0.57)] 
+
 }
 
 
@@ -960,6 +975,73 @@ used in the single project page project's description text */
 .blueLink2 a {
   @apply text-blue-500 cursor-pointer underline
 }
+
+.animateButtonHover {
+  @apply hover:scale-[0.98] focus:scale-[0.98] transition-all
+}
+
+
+.edgeText {
+ margin: 0 0.5rem;
+ color: transparent;
+}
+.edgeText::after {
+  content: "EDGE";
+  position: absolute;
+  display: block;
+  top: -3px;
+  left: -5px;
+  color: red;
+  transform: rotate(-10deg);
+  animation: flicker 1.5s infinite alternate;
+  color: #e9fbf8;
+  font-weight: 500;
+  letter-spacing: 3px;
+}
+
+/* Flickering animation */
+@keyframes flicker {
+    
+  0%, 18%, 22%, 25%, 53%, 57%, 100% {
+
+      text-shadow:
+      0 0 2px #fff,
+      0 0 9px #fff,
+      0 0 20px #39d0b7b4,
+      0 0 40px #39d0b7b4,
+      0 0 45px #39d0b750,
+      0 0 50px #39d0b750,
+      0 0 75px #39d0b750;
+  
+  }
+  
+  20%, 24%, 55% {        
+      text-shadow: none;
+  }    
+}
+
+.radialBackgroundHero {
+  background: radial-gradient(circle at center, rgba(17, 93, 99, 0.28) 1%, rgba(255, 255, 255, 0) 70%);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  /* background-position-x: center; */
+  background-position-y: 0px;
+}
+
+@media (min-width: 860px ){
+  .radialBackgroundHero {
+    background: radial-gradient(circle at center, rgba(17, 93, 99, 0.28) 1%, rgba(255, 255, 255, 0) 70%);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position-x: right;
+    background-position-y: 0px;
+  }
+}
+
+.techHover:hover .shadowDiv {
+ @apply absolute -inset-[-1rem] rounded-lg bg-[conic-gradient(at_top_right,_var(--tw-gradient-stops))] from-violet-600 via-indigo-600 to-cyan-600 opacity-50 blur-2xl
+}
+
 
 #project_description h2 {
   font-weight: 700;
@@ -1012,16 +1094,26 @@ used in the single project page project's description text */
 @media (orientation:landscape) {
   #contact__form__container {
     /* max-width: 650px; */
+    /* min-width: 450px; */
   }
 }
 
 
 @media (orientation:portrait) {
   #contact__form__container {
-    max-width: 330px;
+    /* max-width: 330px; */
+    /* min-width: 450px; */
+
   }
 }
 
+@media (max-height: 480px ) 
+{
+  #contact__labels-1{
+    max-width: 300px;
+  }
+
+}
 @media (orientation: landscape) and (max-width: 1000px )
 ,(orientation: landscape) and (max-height: 635px )
 , (orientation: portrait) and (max-height: 635px ) 
@@ -1029,7 +1121,7 @@ used in the single project page project's description text */
 
   #contact__form__container {
     padding-bottom: 0;
-    padding: max(1rem,min(1.5vw,1.5rem));
+    /* padding: max(1rem,min(1.5vw,1.5rem)); */
     padding-bottom: 0;
   }
   
@@ -1038,7 +1130,7 @@ used in the single project page project's description text */
   #contact__labels-1{
     gap:0.75rem;
     flex:1;
-    max-width: 300px;
+    /* max-width: 300px; */
   }
 
   #contact__labels-1 div label, #contact__labels-1 div input{
@@ -1204,6 +1296,7 @@ will just rotate the icons */
 #homeTech_text {
   width: 100%;
   flex:1;
+  /* height: 270px !important; */
   padding: 5vw min(7vw,3rem) 0 min(7vw,3rem);
 
 }
@@ -1255,7 +1348,7 @@ will just rotate the icons */
   #homeTech_textModels_container {
     flex-direction: row;
     overflow-x: hidden;
-    overflow-y: scroll;
+    /* overflow-y: scroll; */
   }
   
   #homeTech_text {

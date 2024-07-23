@@ -52,8 +52,8 @@ const Footer = () => {
                 {
                     path !== "contact" && (
                             
-                    <div className="ml-auto flex flex-row gap-2 absolute right-[2rem] bottom-[-1.45rem]">
-                        <SocialIcons radius={"0.3rem"} size={"1.5rem"} background={"#ffffff7d"}
+                    <div className="ml-auto flex flex-row gap-2 absolute right-[3rem] bottom-[-1.45rem]">
+                        <SocialIcons radius={"0.3rem"} size={"1.5rem"} background={"#ffffffdb"}
                         size2={24} padding={"0.3rem"}/>
                         
                     </div>

@@ -97,7 +97,8 @@ const Projects = () => {
     <div className="relative" id="homeTech_container">
 
       {/* title container */}
-      <div className="" id="homeTech_title">
+      <div className="z-[1]" id="homeTech_title"
+       >
         <h1 className="gradientBoldHeader text-center relative">
           Highlighted Projects
         </h1>
@@ -105,7 +106,12 @@ const Projects = () => {
 
 
       {/* icons container */}
-      <div className="2xl:pt-[3.5vw]" id="homeTech_icons">
+      <motion.div className="z-[1] 2xl:pt-[1.5vw]" id="homeTech_icons"
+      style={{
+        opacity: isInView ? 1 : 0.3,
+        transition: "all 1s cubic-bezier(0.17, 0.55, 0.55, 1) 0s",
+      }}
+      >
 
           {/* caret up */}
           <div className="z-[1] flex items-center justify-center
@@ -121,7 +127,9 @@ const Projects = () => {
 
             {
             projects.map((project, index) => (
-                <div className={`
+                <motion.div 
+                
+                className={`
                 ${projects[currentProject].name == project.name ? "neon_button_selected" : "neon_button_notselected"}
                 h-[min(15vw,75px)]
                 w-[min(15vw,75px)] 
@@ -133,7 +141,9 @@ const Projects = () => {
                 backgroundSize: "100% 100%",
               }}
               key={project.name+"icon"}
-              onClick={()=>{changeProject(index); }}>
+              onClick={()=>{changeProject(index); }}
+              onMouseEnter={()=>{changeProject(index); }}
+              >
 
                 {project.star === true && 
                 <span className="br brightness-[0.85]
@@ -146,7 +156,7 @@ const Projects = () => {
                 </span>
                 }
 
-              </div>
+              </motion.div>
               ))
             }
           </div>
@@ -158,15 +168,18 @@ const Projects = () => {
             <CaretDown  color={"#ffff"} size={"50px"} />
           </div>
 
-      </div>
+      </motion.div>
 
       {/* container holding both the project's description and the 3d model */}
       <div className="
       lg:ml-[5vw]
-      2xl:ml-0
-      overflow-y-hidden
+      2xl:ml-[6vw]
+      overflow-hidden
+      2xl:relative
+      z-[0]
       "
-      id="homeTech_textModels_container">
+      id="homeTech_textModels_container"
+      ref={container3}>
 
         {/* /////////////////////////////////////////////////////////////////////// */}
         {/* background image was used before, to at the back between the description and the model */}
@@ -179,10 +192,12 @@ const Projects = () => {
         flex flex-col gap-[min(1vw,1rem)] z-[1] text-[calc(1rem+0.25vw)]
         fadeIn_animation 
         md2:mt-[min(5vh,1rem)]
-        
+        2xl:absolute
         lg:mt-[4.5vw]
         2xl:mt-[-1vw]
         2xl:justify-center
+        bg-gradient-to-r from-[rgb(2,8,18)] from-0% via-[rgb(2,8,18)] via-40% to-transparent to-100%        
+        
         "
         id="homeTech_text"
         ref={projectDescription}>
@@ -201,7 +216,7 @@ const Projects = () => {
                 
               </h4>
 
-              <p className="text-[min(0.75em,1rem)] opacity-60">
+              <p className="text-[min(0.75em,1rem)]">
                 {projects[currentProject].description}
               </p>
 
@@ -210,7 +225,8 @@ const Projects = () => {
               
                 {projects[currentProject].link && (
                   <button
-                  className={`px-4 py-0 text-[min(0.75em,1rem)]  font-base gradientGreyButton focus:opacity-95 hover:opacity-95
+                  className={`px-4 py-0 text-[min(0.75em,1rem)]  
+                    font-base gradientGreyButton
                   ${projects[currentProject].tech.includes("ExpressJS") ? "buttonNotificationRender" : ""}
                   `}>
                       <Link href={projects[currentProject].link} className="gradient_text_1 w-full h-full">
@@ -220,7 +236,7 @@ const Projects = () => {
                 )}
 
                   <button
-                  className="px-4 py-0 text-[min(0.75em,1rem)] font-base gradientGreyButton focus:opacity-95 hover:opacity-95">
+                  className="px-4 py-0 text-[min(0.75em,1rem)] font-base gradientGreyButton">
                     <Link href={`/projects/${projects[currentProject].id}`} className="gradient_text_1 w-full h-full">
                     more details
                     </Link>
@@ -260,7 +276,7 @@ const Projects = () => {
         </div>
 
         {/* 3d model container + back image */}
-        <div className="lg1120:mt-[-3vw]"
+        <div className="lg1120:mt-[-3vw] 2xl:ml-auto 2xl:!w-full overflow-hidden"
         id="homeTech_models">
 
           <div className="relative flex items-center justify-center w-full h-full">
@@ -269,12 +285,15 @@ const Projects = () => {
               className="hero_brush_mask">
             </div>
 
-              <Computer orbitControl={orbitControl}
-              texture_1_url={projects[currentProject].image1}
-              texture_2_url={projects[currentProject].imagex}/>
+                <div className="w-full h-full ml-auto relative">
+                <Computer orbitControl={orbitControl}
+                texture_1_url={projects[currentProject].image1}
+                texture_2_url={projects[currentProject].imagex}/>
+                </div>
+              
 
               {/* z-[1] to not allow the all projects button to get in the way of clicking this element */}
-              <button className="rounded-[5px] h-8 w-8 bg-black 
+              <button className="2xl:ml-[17.5rem] rounded-[5px] h-8 w-8 bg-black 
               flex items-center justify-center opacity-80 z-[1]"
               onClick={()=>{orbitControl === "default" || orbitControl === "back" ? setOrbitControl("view") : setOrbitControl("back") }}
               id="homeTech_magnifyButton">
@@ -291,17 +310,16 @@ const Projects = () => {
       {/* end of homeTech_textModels_container */}
 
       {/* when viewed will trigger the default 3d model position animation set in the model file */}
-      <div className="w-full h-[5%] bg-transparent absolute bottom-[-2rem] xl:bottom-0
-       flex items-center justify-center" ref={container3}>
-        <div className="text-[calc(1rem+0.3vw)] bg-[#4747475c] 
-            rounded-full flex items-center justify-center">
+      <div className="z-[1] w-full h-[1%] bg-transparent absolute bottom-[-2rem] xl:bottom-0
+       flex items-center justify-center">
+        <div className="font-base cursor-pointer
+         animateButtonHover
+        text-[min(1.1em,1.0rem)]">
 
-              <Link href="/projects" className="text-[min(0.6em,1rem)] px-3 py-1
-              gradient_text_1  focus:opacity-95 hover:opacity-95
+              <Link href="/projects" className="gradientRoundButton py-[3px] px-3 rounded-full
               "
-              style={{borderRadius: "100px"}}
               >
-                view all projects
+                see all my work
               </Link>
             </div>
       </div>

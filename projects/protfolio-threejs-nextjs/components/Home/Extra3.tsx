@@ -4,6 +4,9 @@ import { Tilt } from "react-tilt"
 
 // Why choose me
 
+import {motion, useInView} from "framer-motion";
+
+
 const contents = [
     {
         title: "Dedication",
@@ -29,11 +32,16 @@ const contents = [
 
 
 const Extra3 = () => {
+
+    const container2 = React.useRef(null);
+    const isInView = useInView(container2, { once: true });
+
   return (
     <div className="h-auto flex flex-col items-center justify-center my-[5rem]
     gap-8">
         
-        <h1 className="w-full text-center BoldHeader font-bold capitalize  ">
+        <h1 className="w-full text-center BoldHeader font-bold capitalize  "
+        ref={container2}>
             Why Choose me
         </h1>
 
@@ -54,7 +62,16 @@ const Extra3 = () => {
                     key={content.title}>
 
                         {/* inside the Tilt */}
-                        <div className="extra1_card_bg border py-2 pl-6 pr-3
+                        <motion.div 
+                        // variants={opacity} initial="initial" animate="open"
+                        style={{
+                        transform: !isInView ? "translateY(50px)" : "translateY(0px)",
+                        opacity: isInView ? 1 : 0,
+                        transition: `all 2s cubic-bezier(0.17, 0.55, 0.55, 1) ${(index/20)+0.5}s`,
+                        // transitionDelay: "2.5s",
+                        //time-s, delay-s
+                        }}
+                        className="extra1_card_bg border py-2 pl-6 pr-3
                         flex flex-row gap-4 items-center justify-center
                         rounded-[7px] h-[15vw] min-h-[100px] max-w-[500px] mx-auto
                         
@@ -85,7 +102,7 @@ const Extra3 = () => {
                                     {content.description}
                                 </span>
                             </div>
-                        </div>
+                        </motion.div>
                     </Tilt>
 
                 ))

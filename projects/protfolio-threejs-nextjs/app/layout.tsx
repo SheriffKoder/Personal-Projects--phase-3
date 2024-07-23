@@ -14,7 +14,7 @@ import ResumeOverlay from "@/components/Home/ResumeOverlay";
 
 export const metadata: Metadata = {
   title: "Sheriff Koder - Web Developer",
-  description: "Sheriff Koder / Sherif Khodeir Portfolio Website",
+  description: "Sherif Khodeir's Web developer's portfolio website containing his projects, information about him and contact methods.",
 };
 
 

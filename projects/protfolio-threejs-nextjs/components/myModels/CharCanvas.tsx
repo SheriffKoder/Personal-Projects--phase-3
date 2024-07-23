@@ -87,6 +87,7 @@ const CharCanvas = () => {
             <Canvas
             shadows
             camera={{position: [0,2,5], fov: 10}}
+            className='radialBackgroundHero'
             >
             <Experience/>
             {/* <ambientLight intensity={0.2}/> */}
