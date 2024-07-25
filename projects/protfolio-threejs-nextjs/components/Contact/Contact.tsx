@@ -251,7 +251,7 @@ const showEmailConfirm = () => {
                     <button type="submit"
                   className="gradientRoundButton text-white 
                     rounded-full py-1 px-4 max-w-[200px]
-                    opacity-80 hover:opacity-90 text-center mdx:ml-auto">
+                     animateButtonHover text-center mdx:ml-auto">
                             Send E-Mail
                     </button>
                   </div>                

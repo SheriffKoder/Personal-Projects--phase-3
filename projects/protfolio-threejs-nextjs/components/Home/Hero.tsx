@@ -36,7 +36,7 @@ const Hero = () => {
   const container3 = useRef(null);
   const isInView1 = useInView(container3,{ once: true });
 
-  let text=`I aspire to help my clients businesses shine and grow<br/>
+  let text=`I aspire to help my clients' businesses shine and grow<br/>
               by designing and building beautiful and interactive websites<br/>
               with ReactJS, NodeJS, ThreeJS and more...<br/>`
 

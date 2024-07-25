@@ -22,7 +22,7 @@ const DownloadButton = () => {
 
   return (
     <div className="px-4 py-1 font-base cursor-pointer font-semibold
-    gradientGreyButton animateButtonHover
+    gradientGreyButton
     text-[min(0.9em,1rem)]" onClick={showResumeOverlay}>
 
         <span className="gradient_text_1 w-full h-full flex flex-row gap-2">
