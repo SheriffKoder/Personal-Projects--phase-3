@@ -150,7 +150,7 @@ const Home_Rec = () => {
   return (
     <>
     {propertiesRec?.length > 0 ? (
-    <div id="rec" className="w-full md:w-[100vw] md:mx-auto h-auto border-[#ffffff15]"
+    <div id="rec" className="w-full md:mx-auto h-auto border-[#ffffff15]"
     aria-label="recommended properties">
 
         {/* title */}

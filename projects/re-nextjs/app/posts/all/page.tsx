@@ -135,7 +135,7 @@ const page = () => {
                             <span className="inline-block shrink-0 h-3 w-3 bg-[rgba(0,89,255,0.7)] rounded-full mr-4"></span>
                             <span className="w-full text-start font-light text-sm
                             lowercase flex flex-row items-center">
-                              <span className="opacity-60 mr-2">{post.date_update} by {post.userId.name} </span>
+                              <span className="opacity-60 mr-2 capitalize">{post.date_update} by {post.userId.name} </span>
                               <Link href={"/posts/"+post._id} key={post._id} 
                               className="ml-auto mr-[-0.25rem]
                               bg-theme-text-brighter dark:bg-theme-text-dark text-white 

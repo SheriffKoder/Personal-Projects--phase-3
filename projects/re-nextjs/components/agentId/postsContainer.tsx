@@ -109,7 +109,7 @@ const PostsContainer = ({setPostEditId, userAuthority, setReload, reload, userNa
     //we fetch posts when the pagination reference pageId or reload (set to true when editing deleting) are changed 
     },[pageId,reload]);
     
-
+    // console.log(userAuthority);
   return (
 
         <>
@@ -119,7 +119,7 @@ const PostsContainer = ({setPostEditId, userAuthority, setReload, reload, userNa
             <h4 className="text_shadow-3 font-semibold text-xl md2:text-start
             text-[#000000c7] dark:text-[#ffffffe2]
             ">
-                { userAuthority === "viewer" ? (`${userName}'s posts`) : ("Your posts")}
+                { userAuthority === "viewer" || userAuthority === "dummyVisitorViewer" ? (`${userName}'s posts`) : ("Your posts")}
             </h4>
 
             <button type="button" 
@@ -214,7 +214,7 @@ const PostsContainer = ({setPostEditId, userAuthority, setReload, reload, userNa
                                 md2:mt-auto md2:justify-end md2:mb-0">
 
                                     <button type="button"
-                                    onClick={() => {bodyNoScroll(); setPostEditId(post._id); showPostAdd();}}
+                                    onClick={() => {if (userAuthority !== "dummyVisitorViewer"){bodyNoScroll(); setPostEditId(post._id); showPostAdd();}}}
                                     className="bg-theme-text-brighter dark:bg-theme-text-dark text-white 
                                     rounded-full w-[65px]
                                     dark:opacity-90 dark:hover:opacity-100 
@@ -223,7 +223,7 @@ const PostsContainer = ({setPostEditId, userAuthority, setReload, reload, userNa
                                     </button>
 
                                     <button type="button" 
-                                    onClick={()=>{handlePostDelete(post._id);}}                           
+                                    onClick={()=>{if (userAuthority !== "dummyVisitorViewer"){handlePostDelete(post._id);}}}                           
                                     className="bg-theme-text-brighter dark:bg-theme-text-dark text-white 
                                     rounded-full w-[65px]
                                     dark:opacity-90 dark:hover:opacity-100 

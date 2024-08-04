@@ -110,10 +110,10 @@ const page = () => {
         if (session?.user) setReload(false);
 
         //call the fetch function above
-        if (session?.user && sessionId) 
+        if (session?.user && sessionId) fetchUserInfo();
 
         // setTimeout(()=> {
-            fetchUserInfo();
+            // fetchUserInfo();
         // }, 10000);
 
     }, [session, sessionId, reload]);
@@ -153,7 +153,7 @@ const page = () => {
                 <Link className=""href="/">Home</Link>
                 <span>&#62;</span>
                 <span className="text-theme-text-brighter">
-                { user.authority === "viewer" ? (`${user.userInfo.name}'s profile`) : ("Your Profile")}
+                { user.authority === "viewer" || user.authority === "dummyVisitorViewer" ? (`${user.userInfo.name}'s profile`) : ("Your Profile")}
                 </span>
             </div>
 
@@ -162,7 +162,7 @@ const page = () => {
             {/* container 1 - this page's user related info */}
             <h1 className="mb-6 mt-8 text_shadow-3 font-bold text-3xl text-[#000000c7] dark:text-[#ffffffe2] capitalize w-full
             text-center md2:text-start">
-                { user.authority === "viewer" ? 
+                { user.authority === "viewer" || user.authority === "dummyVisitorViewer" ? 
                 ( `Viewing ${user.userInfo.name} as admin`
                 ):(
                 `Hello, ${user.userInfo.name.split(" ")[0]}`
@@ -236,7 +236,7 @@ const page = () => {
                     <h4 className="text_shadow-3 font-semibold text-xl md2:text-start
                     text-[#000000c7] dark:text-[#ffffffe2]
                     ">
-                        { user.authority === "viewer" ? (`${user.userInfo.name}'s Properties`) : ("Your properties")}
+                        { user.authority === "viewer" || user.authority === "dummyVisitorViewer" ? (`${user.userInfo.name}'s Properties`) : ("Your properties")}
                     </h4>
 
                     <button type="button" 
@@ -294,13 +294,13 @@ const page = () => {
             {/* container 4 - other users on the database
             in case this user is an admin and owner of the currently open page
             as we do not need to show all users on a page viewed as a viewer (other agent's page)*/}
-            { (user.userInfo.role === "admin" && user.authority === "owner") ? (
+            { ((user.userInfo.role === "admin" && user.authority === "owner") || user.authority === "dummyVisitorOwner") ? (
                 <AgentCard userIncoming={user} setUserIncoming={setUser} sessionId={sessionId}/>
             ) : ("")}
 
             {/* in case the profile page is not the admin's page and we will not show other agents
             we can display a return back to profile button instead */}
-            {(user.userInfo.role === "admin" && user.authority === "viewer") ? (
+            {((user.userInfo.role === "admin" && user.authority === "viewer") || user.authority === "dummyVisitorViewer")  ? (
 
                 <div className="bg-white rounded-[17px]
                 glass-container-background-2

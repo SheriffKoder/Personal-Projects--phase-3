@@ -92,6 +92,8 @@ const AgentInfo = ({user, setReload}:{
 
     const handleUserEditSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
 
+        if (user.authority === "dummyVisistorViewer") return;
+        
         //Part 11.01
         let data;
         console.log(updatedUserInfo);
@@ -141,7 +143,7 @@ const AgentInfo = ({user, setReload}:{
 
             <h2 className="text_shadow-3 font-semibold text-xl  w-full
             text-center md2:text-start mb-2 mt-2 text-[#000000c7] dark:text-[#ffffffe2]">
-                { user.authority === "viewer" ? (`${user.userInfo.name}'s Information`): ("Your information")}
+                { user.authority === "viewer" || user.authority === "dummyVisitorViewer" ? (`${user.userInfo.name}'s Information`): ("Your information")}
             </h2>
 
             {/* full name */}

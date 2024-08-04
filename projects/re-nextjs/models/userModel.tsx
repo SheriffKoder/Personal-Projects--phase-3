@@ -17,7 +17,7 @@ export interface UserDocument extends Document {
     email: string;
     name: string;
     password: string;
-    role: "admin" | "user";
+    role: "admin" | "user" | "dummyVisitor";
     phone: number;
     avatar: string;
     position: string;
@@ -25,6 +25,7 @@ export interface UserDocument extends Document {
     posts_count: number;
     update: string;
     SortDate: Date;
+    _id: string;
 
 }
 

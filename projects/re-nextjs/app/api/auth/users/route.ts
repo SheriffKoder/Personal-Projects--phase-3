@@ -145,17 +145,29 @@ export const POST = async (req: Request): Promise<NewResponse> => {
     //once done with creating the user and the local folders, return the user's data to be console.log
     //will need the signup true to take some action after signup, like login automatically
     // 201: success and created a resource
+    if (user._id) {
     return new NextResponse(JSON.stringify({
-        user: {
-            id: user._id.toString(),
-            email: user.email,
-            name: user.name,
-            role: user.role,
-
-        },
-        signUp: true,
-    }), {status: 201});
+            user: {
+                id: user._id.toString(),
+                email: user.email,
+                name: user.name,
+                role: user.role,
     
+            },
+            signUp: true,    
+    }), {status: 201});
+    } else {
+        return new NextResponse(JSON.stringify({
+            user: {
+                id: "",
+                email: "",
+                name: "",
+                role: "",
+            },
+            signUp: false,
+        }), {status: 500})
+    }
+
 };
 
 

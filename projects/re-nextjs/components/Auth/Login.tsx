@@ -53,8 +53,8 @@ const Login_component = () => {
 
     const [error, setError] = useState("");
     const [userInfo, setUserInfo] = useState({
-        email: "",
-        password: "",
+        email: "test@email.com",
+        password: "password",
     });
     const router = useRouter();
 

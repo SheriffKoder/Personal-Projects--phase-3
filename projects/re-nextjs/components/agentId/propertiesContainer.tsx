@@ -72,7 +72,7 @@ const PropertiesContainer = ({setPropertyEditId, userAuthority, setReload, reloa
                 
                 <div key={property._id}
                 className="h-auto w-full max-w-[390px] md:w-[calc(50%-16px)] md2:w-[calc(33.3%-16px)] xl:w-[calc(33.3%-16px)] ">
-                    <PropertyCardAdmin setPropertyEditId={setPropertyEditId} property1={property} currentPage="agent" setReload={setReload}/>
+                    <PropertyCardAdmin setPropertyEditId={setPropertyEditId} property1={property} currentPage="agent" setReload={setReload} authority={userAuthority}/>
                 </div>
                 )
             )}

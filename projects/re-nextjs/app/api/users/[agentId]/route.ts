@@ -27,17 +27,26 @@ export const POST = async (req:Request, {params}:any) => {
 
         let authority : string = "notAuth";
 
+        const userCheck = await UserModel.findById(sessionId);
+
         //if the page's url matches the sessionId, then the user viewing the page is its owner
         if (pageUrl === sessionId) {
-            authority = "owner";
+            if (userCheck?.role === "dummyVisitor") {
+                authority = "dummyVisitorOwner";
+            } else {
+                authority = "owner";
+            }
         }
 
         //if the page's url does not match the sessionId, then the user viewing the page is not its owner but a viewer admin
         if (pageUrl !== sessionId) {
-            const userCheck = await UserModel.findById(sessionId);
             if (userCheck?.role === "admin") {
                 authority = "viewer";
-            } else {
+            }
+            if (userCheck?.role === "dummyVisitor") {
+                authority = "dummyVisitorViewer";
+            }
+            else {
                 authority = "notAuth";
                 return new Response(JSON.stringify("not authorized"), {status: 402});
             }
@@ -54,7 +63,7 @@ export const POST = async (req:Request, {params}:any) => {
 
         //the admin users do need to have all the agents to view in agentCards
         let allAgents :UserDocument[] = [];
-        if (userInfo?.role === "admin" ) {
+        if (userInfo?.role === "admin" || userInfo?.role === "dummyVisitor" ) {
             allAgents = await UserModel.find({_id:{$ne:userInfo?._id}});
         }
 
@@ -122,7 +131,7 @@ export const PATCH = async (request:Request, {params}:any) => {
             userInfo.avatar = userAvatar;
             userInfo.name = newInfo.get("name") as string;
             userInfo.email = newInfo.get("email") as string;
-            userInfo.password = newInfo.get("password") as string;
+            if (userInfo.role !== "dummyVisitor") userInfo.password = newInfo.get("password") as string;
             userInfo.phone = Number(newInfo.get("phone") as unknown as number);
             userInfo.position = newInfo.get("position") as string;
 
@@ -148,37 +157,38 @@ export const DELETE = async (request:Request, {params}:any) => {
     
     try {
 
-        await connectToDB();
-        const {sessionId, removableUserId} = await request.json();
+        console.log("deleting");
+        // await connectToDB();
+        // const {sessionId, removableUserId} = await request.json();
 
 
 
-        //Delete and clear user items from the database
-        await UserModel.findOneAndDelete({_id:removableUserId}),
-        await PostModel.deleteMany({userId: removableUserId});
-        await PropertyModel.deleteMany({property_userId: removableUserId});
+        // //Delete and clear user items from the database
+        // await UserModel.findOneAndDelete({_id:removableUserId}),
+        // await PostModel.deleteMany({userId: removableUserId});
+        // await PropertyModel.deleteMany({property_userId: removableUserId});
 
 
-        ////////////////////////////////////////////////////////////////////////////////////
-        //// Clear and delete user local folder
-        //define the paths in the folder as we created them when adding a new user
-        const myPathFolders = [
-            "/properties",
-            "/posts",
-            "/profile",
-        ];
-        const userPath = `/public/images/agent-${removableUserId}`;
+        // ////////////////////////////////////////////////////////////////////////////////////
+        // //// Clear and delete user local folder
+        // //define the paths in the folder as we created them when adding a new user
+        // const myPathFolders = [
+        //     "/properties",
+        //     "/posts",
+        //     "/profile",
+        // ];
+        // const userPath = `/public/images/agent-${removableUserId}`;
 
-        //local function, that iterates over folders to clear their contents
-        //then deletes these sub folders
-        //then delete the userPath/main agent folder
-        removeFolder(userPath, myPathFolders);
-        ////////////////////////////////////////////////////////////////////////////////////
-
-
+        // //local function, that iterates over folders to clear their contents
+        // //then deletes these sub folders
+        // //then delete the userPath/main agent folder
+        // removeFolder(userPath, myPathFolders);
+        // ////////////////////////////////////////////////////////////////////////////////////
 
 
-        return new Response(JSON.stringify("Delete User success"), {status: 200});
+
+
+        // return new Response(JSON.stringify("Delete User success"), {status: 200});
 
     } catch (error) {
         console.log(error);        

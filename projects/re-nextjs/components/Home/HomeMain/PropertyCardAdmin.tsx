@@ -26,10 +26,11 @@ type userInterface = {
 
 
 
-const PropertyCardAdmin = ({setPropertyEditId, property1, currentPage="", setReload}:{
+const PropertyCardAdmin = ({setPropertyEditId, property1, currentPage="", setReload, authority}:{
   setPropertyEditId: React.Dispatch<React.SetStateAction<string>>
   property1:PropertyDocument, 
   currentPage:string,
+  authority: string,
   // userIncoming:userInterface | null,
   setReload: React.Dispatch<React.SetStateAction<boolean>>,
 }) => {
@@ -190,7 +191,8 @@ const PropertyCardAdmin = ({setPropertyEditId, property1, currentPage="", setRel
     //Part11
     const [property, setProperty] = useState<PropertyDocument | null>(null);
 
-    let slider__container = document.getElementById(property?._id);        
+    const sliderContainer = useRef("");
+    // let slider__container = document.getElementById(property?._id);        
 
     useEffect(()=> {
 
@@ -215,6 +217,8 @@ const PropertyCardAdmin = ({setPropertyEditId, property1, currentPage="", setRel
     
           const tempProperty:PropertyDocument = property1;
           tempProperty.property_images = filteredImages as string[];
+
+          sliderContainer.current = tempProperty._id;
           setProperty(tempProperty);  
         // } else if (property !== null) {
 
@@ -258,7 +262,7 @@ const PropertyCardAdmin = ({setPropertyEditId, property1, currentPage="", setRel
                 `}>
 
                   <button 
-                    onClick={()=>{setPrevFade1(fade1); setFade1(fade1-1); animationCombination1(slider__container); }}
+                    onClick={()=>{setPrevFade1(fade1); setFade1(fade1-1); animationCombination1(sliderContainer.current); }}
                     className="absolute bg-[#0a0a0a7d] left-1 rounded-[3px]
                     bg-[url('/icons/arrow-left.svg')] h-4 w-4 bg-no-repeat bg-contain
                     ">
@@ -267,7 +271,7 @@ const PropertyCardAdmin = ({setPropertyEditId, property1, currentPage="", setRel
                   <Link href={"/properties/single/"+property._id} key={property._id}
                   className="min-h-[50vw] md:min-h-[25vw] md2:min-h-[18vw] xl:min-h-[14vw]">
                     <Image src={property.property_images[imageReference]} height={400} width={400} alt={property.property_type+" "+property.property_country+" "+property.property_city+" "+property.property_district+" "+property.property_area+" "+property.property_beds+" bedrooms "+property.property_baths+" bathrooms "+property.property_listing_type}
-                    id={property._id}
+                    id={sliderContainer.current}
                     className={`border-0 rounded-t-[10px] min-w-full sm:h-[50vw] md:h-auto md:min-h-[25vw] md2:min-h-[18vw] xl:min-h-[14vw]
                     ${currentPage === 'property' ? '' : 'xl:rounded-l-[10px] xl:rounded-tr-none'}
                     
@@ -278,7 +282,7 @@ const PropertyCardAdmin = ({setPropertyEditId, property1, currentPage="", setRel
                   </Link>
 
                   <button
-                    onClick={()=>{setPrevFade1(fade1); setFade1(fade1+1); animationCombination1(slider__container); }}
+                    onClick={()=>{setPrevFade1(fade1); setFade1(fade1+1); animationCombination1(sliderContainer.current); }}
                     className="absolute bg-[#0a0a0a7d] right-1 rounded-[3px]
                     bg-[url('/icons/arrow-right.svg')] h-4 w-4 bg-no-repeat bg-contain">
                   </button>
@@ -321,7 +325,7 @@ const PropertyCardAdmin = ({setPropertyEditId, property1, currentPage="", setRel
                   ">
 
                     <button type="button"
-                      onClick={() => {bodyNoScroll(); setPropertyEditId(property._id); showPropertyAdd();}}
+                      onClick={() => { if (authority !== "dummyVisitorViewer") {bodyNoScroll(); setPropertyEditId(property._id); showPropertyAdd();}}}
                       className="bg-theme-text-brighter dark:bg-theme-text-dark text-white 
                       rounded-full w-[65px]  mt-auto
                       dark:opacity-90 dark:hover:opacity-100 
@@ -330,7 +334,7 @@ const PropertyCardAdmin = ({setPropertyEditId, property1, currentPage="", setRel
                           Edit
                       </button>
 
-                    <button type="button" onClick={()=>{handlePropertyDelete(property._id);}}
+                    <button type="button" onClick={()=>{if (authority !== "dummyVisitorViewer") {handlePropertyDelete(property._id);}}}
                       className="bg-theme-text-brighter dark:bg-theme-text-dark text-white 
                       rounded-full w-[65px] mt-auto
                       dark:opacity-90 dark:hover:opacity-100 

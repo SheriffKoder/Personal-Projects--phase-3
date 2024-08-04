@@ -27,7 +27,7 @@ const AgentCard = ({userIncoming, setUserIncoming, sessionId}:{
     }) => {
 
     //as we fetch allAgents on the admin profile page, this card will get one of these agents/user 
-    const [user, setUser] = useState(userIncoming);
+    const [user, setUser] = useState<userInterface>(userIncoming);
 
   
     //delete a specific user from DB using their Id, also the api checks on the page we are on to see if it is an admin user page, of course it is as we cannot render it if we are not agents, maybe can use session info... 
@@ -52,10 +52,14 @@ const AgentCard = ({userIncoming, setUserIncoming, sessionId}:{
     const reloadUsers = (removableUserId:string) => {
 
         let temp_user = user;
+        if (user) {
+
+        
         const filteredAgents = user.allAgents.filter((agent) => agent._id.toString() !== removableUserId);
         temp_user.allAgents = filteredAgents;
 
         setUser(temp_user);
+        }
     }
 
 
@@ -149,7 +153,7 @@ const AgentCard = ({userIncoming, setUserIncoming, sessionId}:{
                             View
                         </Link>
 
-                        <button type="button" onClick={()=>{handleUserDelete(agent._id.toString()); reloadUsers(agent._id.toString()); setUserIncoming(user);}}
+                        <button type="button" onClick={()=>{if (userIncoming.authority !== "dummyVisitorOwner") {console.log(userIncoming.authority); handleUserDelete(agent._id.toString()); reloadUsers(agent._id.toString()); setUserIncoming(user);}}}
                         className="border border-1
                         dark:bg-[#68585806] bg-[#ffffffd3] 
                         dark:border-[#ffffff19] dark:hover:border-[#ffffff36]

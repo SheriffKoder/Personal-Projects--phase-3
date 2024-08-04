@@ -8,12 +8,13 @@ import { NextRequest } from "next/server";
 
 export const GET = async (request:NextRequest, {params}:any) => {
 
+    console.log(params);
     try {
         await connectToDB();
         // console.log(params);
 
         const thisProperty = await PropertyModel.findById(params.propId).populate("property_userId");
-    
+        console.log(thisProperty);
         //return recommended side container properties but not including the current thisProperty 
         const recProperties = await PropertyModel.find({_id:{$ne:thisProperty?._id}}).limit(3);
     

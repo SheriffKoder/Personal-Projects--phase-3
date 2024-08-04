@@ -49,7 +49,7 @@ const authOptions: NextAuthOptions = {
                     update: user.update,
                     position: user.position,
                     phone: user.phone,
-                }
+                } as any
                 
             }
         })

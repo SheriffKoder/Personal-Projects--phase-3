@@ -27,9 +27,11 @@ export interface PropertyDocument extends Document {
 
     property_date: string,
     property_update: string,
-    property_userId: PopulatedDoc<Document<Types.ObjectId> & UserDocument>,
+    // property_userId: PopulatedDoc<Document<Types.ObjectId> & UserDocument>,
+    property_userId:  UserDocument,
     property_description: string,
     SortDate: Date;
+    _id: any;
 
   
   }

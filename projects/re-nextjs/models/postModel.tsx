@@ -13,8 +13,10 @@ export interface PostDocument extends Document {
     image: string,
     date_add: string,
     date_update: string,
-    userId: PopulatedDoc<Document<Types.ObjectId> & UserDocument>,
-    SortDate: Date;
+    // userId: PopulatedDoc<Document<Types.ObjectId> & UserDocument>,
+    userId: any,
+    SortDate: Date,
+    _id: string,
 
   
   }
