@@ -86,7 +86,7 @@ exports.getLogin = (req: Request_With_reqUser, res: Response, next: NextFunction
             user: req.session.user,
             // isAuthenticated: req.isLoggedIn  //cookies //9.1
             // isAuthenticated: req.session.isLoggedIn //sessions //9.2
-            oldInput: {},
+            oldInput: {loginEmail:"test@email.com", loginPassword:"12121212"},
             loginErrorMessage: "",
             signUpErrorMessage: "",
             isLogin: true,

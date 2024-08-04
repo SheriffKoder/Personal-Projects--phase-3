@@ -46,7 +46,7 @@ exports.getLogin = (req, res, next) => {
             user: req.session.user,
             // isAuthenticated: req.isLoggedIn  //cookies //9.1
             // isAuthenticated: req.session.isLoggedIn //sessions //9.2
-            oldInput: {},
+            oldInput: { loginEmail: "test@email.com", loginPassword: "12121212" },
             loginErrorMessage: "",
             signUpErrorMessage: "",
             isLogin: true,
@@ -397,7 +397,7 @@ exports.postReset = (req, res, next) => {
             res.redirect("/");
             console.log("sending mail");
             const mailOptions = {
-                from: "node-amazon-project@email.com",
+                from: "kodersheriff@gmail.com",
                 to: userEmail,
                 subject: "(TEST) NODE AMZ: Password Reset!",
                 html: `

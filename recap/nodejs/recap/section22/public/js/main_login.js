@@ -142,7 +142,7 @@ $ (function() {
 
     //// grey out the buttons of the sign-in area, email and the sign-in(which posts to form)
     login_email_continue_button.prop("disabled", true);
-    signIn_button.prop("disabled", true);
+    // signIn_button.prop("disabled", true);
 
 
 
@@ -162,7 +162,7 @@ $ (function() {
 
     //if the password input value is auto-filled
     //when its container displayed/hovered, watch for input 
-    login_password_container.on("focus mouseenter", function() {
+    login_password_container.on("mouseenter", function() {
         const input = password_input.val();
 
         if (validPassword(input)) {
