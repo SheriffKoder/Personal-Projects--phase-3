@@ -52,7 +52,7 @@ const Introduction = () => {
                         <br/>
                         <br/>
                         <span className="text-xs font-extralight">
-                        find more details about my Education, Previous Career and my Web Development's learning path in the below drop down menus*
+                        {/* find more details about my Education, Previous Career and my Web Development's learning path in the below drop down menus* */}
                         </span>
 
 

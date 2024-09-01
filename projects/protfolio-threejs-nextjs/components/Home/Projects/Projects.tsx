@@ -313,10 +313,10 @@ const Projects = () => {
       <div className="z-[1] w-full h-[1%] bg-transparent absolute bottom-[-2rem] xl:bottom-0
        flex items-center justify-center">
         <div className="font-base cursor-pointer
-         animateButtonHover
+         
         text-[min(1.1em,1.0rem)]" ref={container3}>
 
-              <Link href="/projects" className="gradientRoundButton py-[3px] px-3 rounded-full
+              <Link href="/projects" className="animateButtonHover gradientRoundButton py-[3px] px-3 rounded-full
               "
               >
                 see all my work

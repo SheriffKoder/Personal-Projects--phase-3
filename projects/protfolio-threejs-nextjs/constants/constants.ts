@@ -152,6 +152,10 @@ import {
       name: "ThreeJS",
       icon: threejs,
     },
+    {
+      name: "Accessibility",
+      icon: acc,
+    },
 
   
   ];
@@ -175,6 +179,15 @@ import {
       name: "GraphQL",
       icon: graphql,
     },
+    {
+      name: "mySQL",
+      icon: mysql,
+    },
+    {
+      name: "Sequelize",
+      icon: sequelize,
+    },
+    
 
   
   ];
@@ -184,18 +197,7 @@ import {
       name: "git",
       icon: git,
     },
-    {
-      name: "mySQL",
-      icon: mysql,
-    },
-    {
-      name: "Sequelize",
-      icon: sequelize,
-    },
-    {
-      name: "Accessibility",
-      icon: acc,
-    },
+
   ];
   
 

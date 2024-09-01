@@ -99,8 +99,8 @@ const Tech = () => {
                   what is needed to achieve the end result.
                 </p>
               </span>
-              <h3 className="lightHeader mb-2 mx-auto lg:mx-0">Highly practiced Skills</h3>
-              <div className="w-full text-[calc(1rem+0.25vw)]">
+              <h3 className="lightHeader mb-2 mx-auto lg:mx-0 font-semibold">Skills & Technologies</h3>
+              <div className="w-full">
               <h3 className="mb-2 text-center lg:text-start">Front-End</h3>
                 <div className="flex flex-row md2:gap-3 gap-1 flex-wrap w-full
                 text-[calc(1rem+0.6vw)] justify-center lg:justify-start
@@ -159,8 +159,8 @@ const Tech = () => {
                   ))}
                 </div>
               </div>
-              <h3 className="lightHeader mt-[1rem] mx-auto lg:mx-0">Lightly practiced Skills</h3>
               <div className="w-full">
+                <h3 className="mb-2 text-center lg:text-start">Other</h3>
                 <div className="flex flex-row md2:gap-3 gap-1 flex-wrap w-full justify-center lg:justify-start
                 text-[calc(1rem+0.6vw)]">
                   {technologies3.map((tech, index)=> (

@@ -29,11 +29,11 @@ const page = () => {
 
   // categorize project types by name for project cards category refactoring
   const allProjects = [
-    {
-      name: "Client Projects",
-      description: "projects done for other people",
-      projects: [...clientProjects]
-    },
+    // {
+    //   name: "Client Projects",
+    //   description: "projects done for other people",
+    //   projects: [...clientProjects]
+    // },
     {
       name: "Personal Projects",
       description: "large/complete projects done for the purpose of practicing new skills",

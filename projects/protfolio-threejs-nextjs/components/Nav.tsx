@@ -66,10 +66,11 @@ const Nav = () => {
                             Projects
                         </Link>
                     </li>
-                    <li className={`py-4 ${path === "contact" ? "no_select text-[#d8d8d8]" : "animateButtonHover"}
+                    <li className={`py-4
                     `}>
-                        <Link className="gradientRoundButton py-[0.1rem] px-3
-                        " 
+                        <Link className={`gradientRoundButton py-[0.1rem] px-3
+                        ${path === "contact" ? "no_select text-[#d8d8d8]" : "animateButtonHover"}
+                        `}
                         
                         href="/contact">
                             Contact

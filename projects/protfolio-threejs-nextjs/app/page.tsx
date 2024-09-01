@@ -121,9 +121,9 @@ export default function Home() {
               <Extra3/>
             </div>
 
-            <div className="mt-[2rem]">
+            {/* <div className="mt-[2rem]">
               <Git/>
-            </div>
+            </div> */}
 
             <div className="mt-[7rem]"
             ref={container2}>

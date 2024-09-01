@@ -25,7 +25,7 @@ const page = () => {
         max-w-[2500px] mx-auto">
             
             <Introduction/>
-            <ul className="flex flex-col gap-4 lg:gap-14 min-h-[360px] lg:px-[7rem] max-w-full lg:max-w-[1600px] mx-auto">
+            {/* <ul className="flex flex-col gap-4 lg:gap-14 min-h-[360px] lg:px-[7rem] max-w-full lg:max-w-[1600px] mx-auto">
               <motion.li
               initial={{y:200, opacity: 0}}
               whileInView={{y:0, opacity:1, transition: {duration: 0.5, ease: "easeInOut"} }}
@@ -46,7 +46,7 @@ const page = () => {
               viewport={{once: true}}>
                 <Learning/>
               </motion.li>
-            </ul>
+            </ul> */}
             
         </div>
 

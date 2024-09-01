@@ -977,7 +977,8 @@ used in the single project page project's description text */
 }
 
 .animateButtonHover {
-  @apply hover:scale-[0.98] focus:scale-[0.98] transition-all
+  /* @apply hover:scale-[0.98] focus:scale-[0.98] transition-all */
+  @apply border border-transparent hover:border-[#d5d5d5]
 }
 
 
