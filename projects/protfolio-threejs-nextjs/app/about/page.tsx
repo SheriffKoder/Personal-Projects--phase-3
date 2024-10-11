@@ -10,6 +10,7 @@ import {motion, useInView} from "framer-motion";
 
 import React, {useEffect, useRef, useState} from "react"
 import { SectionWrapper } from "@/hoc";
+import Link from 'next/link'
 
 
 const page = () => {

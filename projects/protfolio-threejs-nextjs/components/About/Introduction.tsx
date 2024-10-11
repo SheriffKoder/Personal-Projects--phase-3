@@ -3,6 +3,7 @@ import Image from "next/image"
 
 import { scaleAnimation } from "@/utils/scaleAnimation"
 import { goals } from "@/constants/constants"
+import Link from "next/link"
 
 const Introduction = () => {
   return (
@@ -57,6 +58,24 @@ const Introduction = () => {
 
 
                     </p>
+
+                    <div className='w-full flex md2:justify-start items-center justify-center gap-4
+                    mt-8'>
+
+                        <div className="font-base cursor-pointer text-[min(1.1em,1.0rem)]">
+                        <Link href="/projects" 
+                        className="animateButtonHover gradientRoundButton py-[3px] px-3 rounded-full">
+                            See all my work
+                        </Link>
+                        </div>
+
+                        <div className="font-base cursor-pointer text-[min(1.1em,1.0rem)]">
+                        <Link href="/projects" 
+                        className="animateButtonHover gradientRoundButton py-[3px] px-3 rounded-full">
+                            Contact me
+                        </Link>
+                        </div>
+                    </div>
                 </div>
 
                 <div className=" mx-auto order-1 m2:order-2 flex flex-col md2:w-[40%]
@@ -64,7 +83,7 @@ const Introduction = () => {
 
                     {/* user image/avatar */}
                     <div className="inline-block mx-auto
-                    rounded-full border-4 opacity-90
+                    rounded-full border-4 opacity-[0.97]
                     bg-gradient-to-r from-[#50a3d4] from-30% to-[#39d0b7b4]
                     overflow-hidden 
                     max-w-[250px] lg:max-w-[350px]
@@ -141,6 +160,8 @@ const Introduction = () => {
                 </div>
                 
         </div>
+
+
 
 
 

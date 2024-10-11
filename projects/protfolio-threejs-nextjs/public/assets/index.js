@@ -18,10 +18,14 @@ import expressjs from "./tech/expressjs.png";
 import graphql from "./tech/graphql.png";
 import nextjs from "./tech/nextjs.png";
 import acc from "./tech/acc.png";
+import figma from "./tech/figma_s.png"
+import sql from "./tech/sql.png"
+
 
 import x from "./social/twitter.png"
 import linkedin from "./social/linkedin.png"
 import github from "./social/github.png"
+
 
 
 export {
@@ -44,6 +48,8 @@ export {
   sequelize,
   expressjs,
   acc,
+  sql,
+  figma,
 
   x,
   linkedin,

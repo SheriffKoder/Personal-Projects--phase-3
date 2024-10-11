@@ -17,6 +17,8 @@ import {
     sequelize,
     expressjs,
     acc,
+    sql,
+    figma,
 
     x,
     linkedin,
@@ -156,7 +158,6 @@ import {
       name: "Accessibility",
       icon: acc,
     },
-
   
   ];
   
@@ -180,6 +181,10 @@ import {
       icon: graphql,
     },
     {
+      name: "SQL",
+      icon: sql,
+    },
+    {
       name: "mySQL",
       icon: mysql,
     },
@@ -196,6 +201,10 @@ import {
     {
       name: "git",
       icon: git,
+    },
+    {
+      name: "Figma",
+      icon: figma,
     },
 
   ];
@@ -219,13 +228,14 @@ import {
   export const PracticeProjects= [
     {
       name: "Amazon (Partial-Clone)",
-      description: `A copy of amazon.eg shopping website. Create an account, select and order products or post your item for sale on the website.`,
+      description: `Create an account, select and order products or post your item for sale on the website.`,
       image1: "/images/projects/assets/amazon/wallpaper1.png",
       image2: "/images/projects/assets/amazon/wallpaper2.png",
       imagex: "/images/projects/assets/amazon/wallpaperx.png",
       imageAnim:"",
       tech: ["HTML5", "CSS3", "JavaScript", "Accessibility","TypeScript", "ExpressJS", "NodeJS", "MongoDB"],
       link: "https://amazon-nodejs.onrender.com",
+      github: "https://github.com/SheriffKoder/Personal-Projects--phase-3/tree/main/recap/nodejs/recap/section22",
       icon: "/images/projects/assets/amazon/amazon-icon.jpg",
       id: "practice-1",
       longerDescription:
@@ -333,6 +343,7 @@ import {
       imageAnim:"",
       tech: ["HTML5", "CSS3", "JavaScript", "TailwindCSS", "TypeScript", "MongoDB", "NextJS"],
       link: "https://phase-3-one.vercel.app/",
+      github: "https://github.com/SheriffKoder/Personal-Projects--phase-3/tree/main/projects/re-nextjs",
       icon: "/images/projects/assets/realestateadmin/re-icon.png",
       id: "practice-2",
       longerDescription: 
@@ -450,15 +461,14 @@ import {
     },
     {
       name: "Car Maintenance 1 (REST API)",
-      description: `Do you have many checkups for your car that you often forget when the next check is ?
-      This app can help you track your checkups and make your maintenances on time to keep your car well maintained.
-      `,
+      description: `This app can help you track your car checkups and make maintenance on time.`,
       image1: "/images/projects/assets/carmaint1/wallpaper1.png",
       image2: "/images/projects/assets/carmaint1/wallpaper2.png",
       imagex: "/images/projects/assets/carmaint1/wallpaperx.png",
       imageAnim:"",
       tech: ["HTML5", "CSS3", "JavaScript", "TailwindCSS", "TypeScript", "MongoDB", "ReactJS", "ExpressJS"],
       link: "https://carmaint-rest-full-react.vercel.app/",
+      github: "https://github.com/SheriffKoder/Car-Maintenance-Tracker-RESTful",
       icon: "/images/projects/assets/carmaint1/carmaint1-icon.png",
       id: "practice-3",
       longerDescription: `
@@ -558,14 +568,14 @@ Yet to be added:<br/>
     },
     {
       name: "Car Maintenance 2 (GraphQL REST API)",
-      description: `Do you have many checkups for your car that you often forget when the next check is ?
-      This app can help you track your checkups and make your maintenances on time to keep your car well maintained.`,
+      description: `This app can help you track your car checkups and make maintenance on time.`,
       image1: "/images/projects/assets/carmaint2/wallpaper1.png",
       image2: "/images/projects/assets/carmaint2/wallpaper2.png",
       imagex: "/images/projects/assets/carmaint2/wallpaperx.png",
       imageAnim:"",
       tech: ["HTML5", "CSS3", "JavaScript", "TailwindCSS", "TypeScript", "MongoDB", "ReactJS", "GraphQL", "ExpressJS"],
       link: "https://carmaint-graphql-react.vercel.app/",
+      github: "https://github.com/SheriffKoder/Car-Maintenance-Tracker-RESTful-Graphql",
       icon: "/images/projects/assets/carmaint2/carmaint2-icon.png",
       id: "practice-4",
       longerDescription: `
@@ -676,9 +686,26 @@ Yet to be added:<br/>
 
   export const DraftProjects = [
 
+    // Apple iPhone
+    {
+      name: "Apple iPhone 15 Pro",
+      description: `Apple style webpage displaying user interactive videos and iPhone 3D models `,
+      image1: "",
+      image2: "",
+      imagex: "",
+      imageAnim:"",
+      tech: ["HTML5", "CSS3", "JavaScript", "ReactJS", "TailwindCSS", "ThreeJS"],
+      link: "https://draft-projects-2.vercel.app/",
+      github: "https://github.com/SheriffKoder/Draft-Projects-2/tree/main/APPLE-GSAP-3JS",
+      icon: "/images/projects/assets/drafts/appleiPhone/appleiPhone.jpg",
+      id: "draft-111024",
+      longerDescription: ``,
+      type: "page",
+      date: "2024"
+
+    },
     // Shop ExpressJs
     {
-      // phase2/courses/nodejs/section22 
       name: "Shop (MongoDB)",
       description: `A simple shop website with the ability to add/edit products and make orders to/from a MongoDB database. `,
       image1: "/images/projects/assets/drafts/shopexpress/wallpaper1.png",
@@ -687,6 +714,7 @@ Yet to be added:<br/>
       imageAnim:"",
       tech: ["HTML5", "CSS3", "JavaScript", "ExpressJS", "NodeJS", "MongoDB"],
       link: "https://phase2-nodejs.onrender.com/products",
+      github: "https://github.com/SheriffKoder/Course--Phase2--jQuery-ResponsiveDesign-NodeJS/tree/main/courses/nodejs/section29",
       icon: "/images/projects/assets/drafts/shopexpress/shopexpress.png",
       id: "draft-1",
       longerDescription: 
@@ -714,6 +742,7 @@ Yet to be added:<br/>
       imageAnim:"",
       tech: ["HTML5", "CSS3", "JavaScript", "NextJS", "TailwindCSS", "TypeScript", "MongoDB"],
       link: "https://promptopia-two-umber.vercel.app",
+      github: "https://github.com/SheriffKoder/Draft-Projects-1",
       icon: "/images/projects/assets/drafts/promptopia/icon.png",
       id: "draft-2",
       longerDescription: 
@@ -734,6 +763,7 @@ Yet to be added:<br/>
       imageAnim:"",
       tech: ["HTML5", "CSS3", "JavaScript", "ReactJS"],
       link: "https://react-movie-app-pink-tau.vercel.app/",
+      github: "https://github.com/SheriffKoder/Draft-Projects-1",
       icon: "/images/projects/assets/drafts/movie-library/icon.png",
       id: "draft-3",
       longerDescription: 
@@ -759,6 +789,7 @@ Yet to be added:<br/>
       imageAnim: "/images/projects/assets/drafts/calc/wallpaper1.gif",
       tech: ["HTML5", "CSS3", "JavaScript"],
       link: "https://calculator-kappa-self.vercel.app/",
+      github: "https://github.com/SheriffKoder/Course--Phase1--TheOdinProject/tree/main/side_notes/calculator12",
       icon: "/images/projects/assets/drafts/calc/icon.png",
       id: "draft-4",
       longerDescription: 
@@ -802,6 +833,7 @@ calculations like tan(),cos(),sin(), power etc.<br/>
       imageAnim: "",
       tech: ["HTML5", "CSS3", "JavaScript", "NodeJS", "ExpressJS", "mySQL", "Sequelize"],
       link: "https://phase-3-1ty9.onrender.com/admin/products",
+      github: "https://github.com/SheriffKoder/Personal-Projects--phase-3/tree/main/projects/section10-SQL",
       icon: "/images/projects/assets/drafts/mysql1/icon.png",
       id: "draft-5",
       longerDescription: 
@@ -845,7 +877,7 @@ calculations like tan(),cos(),sin(), power etc.<br/>
 
   
   export const featuredProjects = [
-    {...PracticeProjects[0], star: false}, {...PracticeProjects[1], star: true}, {...PracticeProjects[3], star: false}, {...DraftProjects[2], star: false}
+    {...PracticeProjects[0], star: false}, {...PracticeProjects[1], star: true}, {...PracticeProjects[3], star: false}, {...DraftProjects[3], star: false}
     // {...PracticeProjects[0], star: false}, {...PracticeProjects[1], star: true}, {...PracticeProjects[2], star: false}, {...PracticeProjects[3], star: false}
 
   ]
