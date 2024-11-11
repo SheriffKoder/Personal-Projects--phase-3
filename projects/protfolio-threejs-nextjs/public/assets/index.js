@@ -25,6 +25,7 @@ import sql from "./tech/sql.png"
 import x from "./social/twitter.png"
 import linkedin from "./social/linkedin.png"
 import github from "./social/github.png"
+import pinterest from "./social/pinterest.png"
 
 
 
@@ -53,6 +54,7 @@ export {
 
   x,
   linkedin,
-  github
+  github,
+  pinterest,
   
 };

@@ -22,7 +22,8 @@ import {
 
     x,
     linkedin,
-    github
+    github,
+    pinterest,
 
   } from "../public/assets";
 
@@ -44,6 +45,11 @@ import {
       name: "github",
       icon: github,
       link: "https://github.com/SheriffKoder/"
+    },
+    {
+      name: "pinterest",
+      icon: pinterest,
+      link: "https://pinterest.com/sheriffkoder7"
     },
   ];
 

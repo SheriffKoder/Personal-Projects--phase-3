@@ -13,8 +13,8 @@ import ResumeOverlay from "@/components/Home/ResumeOverlay";
 // const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Sheriff Koder - Web Developer",
-  description: "Sherif Khodeir's Web developer's portfolio website containing his projects, information about him and contact methods.",
+  title: "Sherif Khodeir - Web Developer",
+  description: "Sherif Khodeir is a full-stack web developer dedicated to crafting exceptional, custom business portfolio websites with personalized content management systems (CMS). Employing powerful tools like React and Node, he brings visions to life. Explore his projects, connect through social media, and how to get in touch!",
 };
 
 

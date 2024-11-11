@@ -36,7 +36,7 @@ const Hero = () => {
   const container3 = useRef(null);
   const isInView1 = useInView(container3,{ once: true });
 
-  let text=`I aspire to help my clients' businesses shine and grow<br/>
+  const text=`Aspiring to help clients' businesses shine and grow<br/>
               by designing and building beautiful and interactive websites<br/>
               with ReactJS, NodeJS, ThreeJS and more...<br/>`
 
@@ -46,7 +46,7 @@ const Hero = () => {
         {isInView && (
             <div className="z-1 absolute bottom-[2rem] w-full flex items-center justify-center"
             >
-                <a href="#tech-comp" className="mx-auto border-2 border-white rounded-full w-8 h-8
+                <a href="#tech-comp" aria-label="Go to next section" className="mx-auto border-2 border-white rounded-full w-8 h-8
                 flex items-center justify-center opacity-50 cursor-pointer z-[1] ">
                   <CaretDown2 size={40} color="#ffff"/>
                 </a>
@@ -83,11 +83,11 @@ const Hero = () => {
             text-3xl mb-2 md1:text-4xl md2:text-6xl xl:text-7xl
             ${VisbyRoundFont.className}`} 
             >
-              Sheriff Koder
+              Sherif Khodeir
             </span>
             
             
-            <span className="text-[min(1em,1.25rem)] font-thin">A full-stack
+            <span className="text-[min(1em,1.25rem)] font-thin">full-stack
               <span className="font-semibold uppercase"> Web developer</span>
             </span>
             

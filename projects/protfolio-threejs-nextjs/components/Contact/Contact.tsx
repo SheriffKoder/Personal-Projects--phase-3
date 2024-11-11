@@ -166,7 +166,7 @@ const showEmailConfirm = () => {
                 <div className="flex flex-col gap-4"
                 id="contact__labels-1">
                   <div className="flex flex-col gap-2 mdx:gap-0 mdx:flex-row h-14 mdx:h-7 items-center">
-                    <label className="w-[10rem] block text-center mdx:text-start">
+                    <label className="w-[10rem] block text-center mdx:text-start" htmlFor="name">
                       Your Name*
                     </label>
                     <input
