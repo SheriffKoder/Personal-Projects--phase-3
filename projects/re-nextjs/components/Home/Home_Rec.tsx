@@ -186,7 +186,7 @@ const Home_Rec = () => {
                 id="slider__container"
                 href={`/properties/single/${propertiesRec[sliderIndex]._id}`}>
                     {/* image */}
-                    <Image src={propertiesRec[sliderIndex].property_images[0]} fill={true} alt={propertiesRec[sliderIndex].property_city}
+                    <Image src={propertiesRec[sliderIndex].property_images[0]} fill={true} priority alt={propertiesRec[sliderIndex].property_city}
                     onMouseEnter={stopTimer} onMouseLeave={startTimer}
                     className="rounded-[17px] border-0  hover:opacity-100 dark:opacity-75 dark:hover:opacity-90
                     w-full h-[calc(50vw)] max-h-[500px] max-w-[833px]"
