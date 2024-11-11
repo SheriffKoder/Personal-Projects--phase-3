@@ -753,7 +753,25 @@ html.hide_scroll_dark::-webkit-scrollbar-thumb {
 /*//////////////////////////////////////////////////////////*/
 
 
+.LunSlider img:not(img:first-child) {
+  display: none;
+}
 
+.fade {
+  animation-duration: 0.75s;
+  animation-name: fadeIn;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+
+@keyframes fadeIn {
+  0% {
+      opacity: 0.5;
+  }
+  100% {
+      opacity: 1;
+  }
+}
 
 
 
