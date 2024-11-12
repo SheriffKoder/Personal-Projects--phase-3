@@ -13,6 +13,27 @@ import { writeFile } from "fs";
 import { decreaseUserScore } from "@utils/userScore";
 import { NextRequest } from "next/server";
 
+import { v2 as cloudinary } from 'cloudinary';
+
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
+
+export async function uploadImage(image:File) {
+    const imageData = await image.arrayBuffer();
+    const mime = image.type;
+    const encoding = 'base64';
+    const base64Data = Buffer.from(imageData).toString('base64');
+    const fileUri = 'data:' + mime + ';' + encoding + ',' + base64Data;
+    const result = await cloudinary.uploader.upload(fileUri, {
+      folder: 'nextjs-course-mutations',
+    });
+    return result.secure_url;
+  }
+  
+
 
 //to fill the edit property form inputs
 export const GET = async (request:NextRequest, {params}:any) => {
@@ -56,29 +77,68 @@ export const PATCH = async (request:NextRequest, {params}:any) => {
         const files = [file1, file2, file3];
         let files_url:string[] = [];    //will store the files paths in this array once stored locally
 
+
+        console.log("files");
+        console.log(files);
+
+        console.log("files_url was"+ files_url)
+        console.log(files_url);
+        console.log("0")
+
+
         //2. store a file if there is and get a path
         //if the file is a string type then it has not been changed
         //push the string as a url already, and add/push the new string for new files
         files.forEach(async (file) => {
             if (typeof file !== "string" && file !== null) {
 
-                const path = join(process.cwd(), `/public/images/agent-${currentProperty?.property_userId.toString()}/properties`, file.name);
+                // const path = join(process.cwd(), `/public/images/agent-${currentProperty?.property_userId.toString()}/properties`, file.name);
                 
-                let file1_url = ""; 
-                file1_url = path.split("/public")[1];
-                files_url.push(file1_url);
+                // let file1_url = ""; 
+                // file1_url = path.split("public")[1];
+                // files_url.push(file1_url);
+                // console.log(file1_url);
+                // console.log(files_url);
 
-                const bytes = await file.arrayBuffer();
-                const buffer = Buffer.from(bytes);
+                // const bytes = await file.arrayBuffer();
+                // const buffer = Buffer.from(bytes);
 
-                await writeFile(path, buffer, (err)=>console.log(err));
+                // await writeFile(path, buffer, (err)=>console.log(err));
                 // console.log(`image ${file.name} is saved in ${path}`);
+
+                let imageUrl = await uploadImage(file);
+                console.log(imageUrl);
+                files_url.unshift(imageUrl);
+                console.log(files_url);
+                                // files_url.push("/aa");
+                                // console.log(files_url);
+                if (currentProperty) {
+                    currentProperty.property_images = files_url;
+                    await currentProperty.save();
+
+                };
+                console.log("1")
+
+
                 
-            } else if (typeof file == "string") {
-                files_url.push(file);
+            } 
+            else if (typeof file == "string") {
+                console.log("2")
+                files_url.unshift(file);
+                if (currentProperty) {
+                    currentProperty.property_images = files_url;
+                    await currentProperty.save();
+
+                };
             }
         })
 
+        console.log("files_url became"+ files_url)
+        console.log(files_url);
+        console.log("3")
+
+
+        
         if (currentProperty) {
         // //     currentProperty.property_country = propertyInfo.country,
         // //     currentProperty.property_city = propertyInfo.city,
@@ -110,7 +170,7 @@ export const PATCH = async (request:NextRequest, {params}:any) => {
             currentProperty.property_description =  newInfo.get("description") as string;
 
             //the images paths to be stored as an array to the database
-            currentProperty.property_images = files_url;
+            // currentProperty.property_images = files_url;
 
             currentProperty.property_update = getToday_date();
             currentProperty.property_availability = newInfo.get("availability") as string,

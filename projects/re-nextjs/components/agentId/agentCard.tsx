@@ -123,7 +123,7 @@ const AgentCard = ({userIncoming, setUserIncoming, sessionId}:{
                     </div>
 
                     <h3 className="text-base font-semibold">{agent.name}</h3>
-                    <p className="text-xs font-light">{agent.position}</p>
+                    <p className="text-xs font-light h-[2em] ">{agent.position}</p>
 
                     <div className="h-[30vw] w-[30vw] max-w-[100px] max-h-[100px]
                     bg-white overflow-hidden
@@ -138,11 +138,24 @@ const AgentCard = ({userIncoming, setUserIncoming, sessionId}:{
 
                     </div>
 
-                    <p className="text-xs font-light">Last Update: {agent.update}</p>
-                    <p className="text-xs font-light">Properties [{agent.properties_count}]</p>
-                    <p className="text-xs font-light">Posts [{agent.posts_count}]</p>
+                    <p className='text-xs mb-1 font-light'>
+                        { agent.role === "admin" ? (
+                            <span className="text-[#279b72] dark:text-[#32b084]">[admin]</span>
+                        ): ("")}
+                        { agent.role === "user" ? (
+                            <span className="">[agent]</span>
+                        ): ("")}
+                        { agent.role === "dummyVisitor" ? (
+                            <span className="">[demo]</span>
+                        ): ("")}
+                    </p>
+                  
 
-                    <div className="mt-2 flex flex-row items-center justify-center">
+                    <p className="text-[0.6rem] font-light">Last Update: {agent.update}</p>
+                    <p className="text-[0.6rem] font-light">Properties [{agent.properties_count}]</p>
+                    <p className="text-[0.6rem] font-light">Posts [{agent.posts_count}]</p>
+
+                    <div className="mt-2 flex flex-row items-center justify-center px-1">
                         <Link href={"/agents/"+agent._id} type="button" 
                         className="border border-1
                         dark:bg-[#68585806] bg-[#ffffffd3] 
@@ -158,7 +171,7 @@ const AgentCard = ({userIncoming, setUserIncoming, sessionId}:{
                         dark:bg-[#68585806] bg-[#ffffffd3] 
                         dark:border-[#ffffff19] dark:hover:border-[#ffffff36]
                         text-[#000000dd] dark:text-[#ffffffd3] 
-                        rounded-[17px] text-sm  w-[65px] ml-2
+                        rounded-[17px] text-sm  w-[65px]
                         opacity-90 hover:opacity-100">
                             Remove
                         </button>

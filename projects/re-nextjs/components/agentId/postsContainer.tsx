@@ -172,24 +172,27 @@ const PostsContainer = ({setPostEditId, userAuthority, setReload, reload, userNa
                         <div className="md2:order-1 px-2 md2:py-2 md2:px-3 md:flex-1 md2:h-full flex flex-col
                         flex-1 relative md2:pr-3">
 
-                            <div className="absolute w-full h-full rounded-b-[10px] top-0 left-0 z-[0] opacity-[0.07] dark:opacity-5"
-                            style={{backgroundImage: "url('/images/deco.png')", backgroundSize: "", backgroundPosition: "10px -40px" }}>
+                            <Link href={"/posts/"+post._id} key={post._id}>
+                                <div className="absolute w-full h-full rounded-b-[10px] top-0 left-0 z-[0] opacity-[0.07] dark:opacity-5"
+                                style={{backgroundImage: "url('/images/deco.png')", backgroundSize: "", backgroundPosition: "10px -40px" }}>
 
-                            </div>
+                                </div>
 
-                            <p className="flex flex-row items-baseline font-bold uppercase min-h-[3rem]" onClick={()=>{router.push(`/posts/${post._id}`);}}>
-                                <span className="inline-block shrink-0 h-3 w-3 bg-red-500 opacity-80 rounded-full mr-4"></span>
-                                <span className="text-start dark:text-[#ffffffde] dot-text line-clamp-2">
-                                {post.title}
+                                <p className="flex flex-row items-baseline font-bold uppercase min-h-[3rem]" onClick={()=>{router.push(`/posts/${post._id}`);}}>
+                                    <span className="inline-block shrink-0 h-3 w-3 bg-red-500 opacity-80 rounded-full mr-4"></span>
+                                    <span className="text-start dark:text-[#ffffffde] dot-text line-clamp-2">
+                                    {post.title}
+                                    </span>
+                                </p>
+                                
+                                <span className="flex flex-row items-baseline mt-2" onClick={()=>{router.push(`/posts/${post._id}`);}}>
+                                    <span className="inline-block  shrink-0 h-3 w-3 bg-green-500 opacity-80 rounded-full mr-4"></span>
+                                    <span className="text-start max-h-[4rem] max-w-[900px] text-sm dot-text line-clamp-3">
+                                        {post.content}
+                                    </span>
                                 </span>
-                            </p>
-                            
-                            <span className="flex flex-row items-baseline mt-2" onClick={()=>{router.push(`/posts/${post._id}`);}}>
-                                <span className="inline-block  shrink-0 h-3 w-3 bg-green-500 opacity-80 rounded-full mr-4"></span>
-                                <span className="text-start max-h-[4rem] max-w-[900px] text-sm dot-text line-clamp-3">
-                                    {post.content}
-                                </span>
-                            </span>
+                            </Link>
+
 
                             <div className="flex-1 flex flex-col justify-end mt-auto">
                                 <span className="flex flex-row items-baseline mt-2 md2:flex-1 md2:h-full md2:items-end">

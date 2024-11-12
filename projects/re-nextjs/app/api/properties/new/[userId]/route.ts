@@ -14,6 +14,26 @@ import { increaseUserScore } from "@utils/userScore";
 import { NextRequest } from "next/server";
 
 
+import { v2 as cloudinary } from 'cloudinary';
+
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
+
+export async function uploadImage(image:File) {
+    const imageData = await image.arrayBuffer();
+    const mime = image.type;
+    const encoding = 'base64';
+    const base64Data = Buffer.from(imageData).toString('base64');
+    const fileUri = 'data:' + mime + ';' + encoding + ',' + base64Data;
+    const result = await cloudinary.uploader.upload(fileUri, {
+      folder: 'nextjs-course-mutations',
+    });
+    return result.secure_url;
+  }
+  
 //add a new property
 export const POST = async (request:NextRequest, {params}:any) => {
 
@@ -36,30 +56,37 @@ export const POST = async (request:NextRequest, {params}:any) => {
         //2. store a file if there is and get a path
         //there are either a file or no file (null), no pre existing files of course
         //push the string as a url already, and add/push the new string for new files
+
+        try {
+
+        console.log("text")
         files.forEach(async (file) => {
-            try {
+            // try {
 
                 if (file) {
-                    const path = join(process.cwd(), `/public/images/agent-${params.userId}/properties`, file.name);
+                    // const path = join(process.cwd(), `/public/images/agent-${params.userId}/properties`, file.name);
     
-                    let file1_url = ""; 
-                    file1_url = path.split("/public")[1];
-                    files_url.push(file1_url);
+                    // let file1_url = ""; 
+                    // file1_url = path.split("/public")[1];
+                    // files_url.push(file1_url);
     
-                    const bytes = await file.arrayBuffer();
-                    const buffer = Buffer.from(bytes);
-                    await writeFile(path, buffer, (err)=>console.log(err));
+                    // const bytes = await file.arrayBuffer();
+                    // const buffer = Buffer.from(bytes);
+                    // await writeFile(path, buffer, (err)=>console.log(err));
                     // console.log(`image ${file.name} is saved in ${path}`);
+                    let imageUrl = await uploadImage(file);
+                    console.log(imageUrl);
+                    files_url.unshift(imageUrl);
+                    console.log(files_url);
                 }    
 
-            } catch (error) {
-                console.log(error);
-            }
+            // } catch (error) {
+            //     console.log(error);
+            // }
         })
 
 
         //// create a new property and save
-        try {
             //[connect] to the db, every time because this is a lambda function
             //i.e will end once it does its job
             await connectToDB();

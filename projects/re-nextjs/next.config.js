@@ -19,6 +19,12 @@ const nextConfig = {
             hostname: 'lh3.googleusercontent.com',
 
           },
+          {
+            //if going to use the user images from google accounts
+            protocol: 'https',
+            hostname: 'res.cloudinary.com',
+
+          },
         ],
       },
 

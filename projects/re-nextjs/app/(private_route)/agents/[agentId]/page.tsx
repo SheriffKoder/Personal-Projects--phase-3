@@ -160,10 +160,14 @@ const page = () => {
             {user.userInfo ? (
                 <>
             {/* container 1 - this page's user related info */}
-            <h1 className="mb-6 mt-8 text_shadow-3 font-bold text-3xl text-[#000000c7] dark:text-[#ffffffe2] capitalize w-full
+            <h1 className="mb-6 mt-8 text_shadow-3 font-bold md2:text-3xl text-[#000000c7] dark:text-[#ffffffe2] w-full
             text-center md2:text-start">
                 { user.authority === "viewer" || user.authority === "dummyVisitorViewer" ? 
-                ( `Viewing ${user.userInfo.name} as admin`
+                ( 
+                    <div className="flex flex-col">
+                        <p>You are viewing <span className="font-light">{user.userInfo.name}</span> as an admin</p>
+                        <p className="text-[0.6rem] md:text-sm text-gray-600 dark:text-gray-400 font-light">As a demo user you do not have the authority to edit or delete information.</p>
+                    </div>
                 ):(
                 `Hello, ${user.userInfo.name.split(" ")[0]}`
                 )}
@@ -185,6 +189,12 @@ const page = () => {
                     <p className="text-xs font-light">{user.userInfo.position}
                         { user.userInfo.role === "admin" ? (
                             <span className="ml-1 text-[#279b72] dark:text-[#32b084]">[admin]</span>
+                        ): ("")}
+                        { user.userInfo.role === "user" ? (
+                            <span className="ml-1 ">[agent]</span>
+                        ): ("")}
+                        { user.userInfo.role === "dummyVisitor" ? (
+                            <span className="ml-1">[demo]</span>
                         ): ("")}
                     </p>
                     <div className="h-[11.75rem] w-[11.75rem] bg-white overflow-hidden

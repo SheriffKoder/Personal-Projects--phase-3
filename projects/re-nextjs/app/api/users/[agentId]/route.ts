@@ -38,12 +38,12 @@ export const POST = async (req:Request, {params}:any) => {
             }
         }
 
+
         //if the page's url does not match the sessionId, then the user viewing the page is not its owner but a viewer admin
         if (pageUrl !== sessionId) {
             if (userCheck?.role === "admin") {
                 authority = "viewer";
-            }
-            if (userCheck?.role === "dummyVisitor") {
+            } else if (userCheck?.role === "dummyVisitor") {
                 authority = "dummyVisitorViewer";
             }
             else {
