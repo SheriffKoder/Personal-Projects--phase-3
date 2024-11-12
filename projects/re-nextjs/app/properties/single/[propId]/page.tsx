@@ -287,33 +287,34 @@ const page = async () => {
     
                                         {/* inquiry button shown at the end on larger view-ports, tried other ways, this was the simplest and does the job */}
                                         <div className="mt-auto mx-auto mb-2 md:hidden">
-                                        {pageProperty ? (
-                                                <button className="
-                                                md:ml-auto mx-auto md:mx-0 mt-auto md:my-0 md:mt-1
-                                                outline-2 outline-offset-4 dark:hover:outline-[#fffd] outline dark:outline-[#ffffff2b]
-                                                outline-[#0000000f] hover:outline-[#0000002a]
-                                                px-2 py-1 border-0 rounded-[7px] opacity-70 dark:hover:opacity-90 hover:opacity-100
-                                                bg-[#279b72] dark:bg-[#32b084] text-white"
-                                                type="button" onClick={()=>{
-                                                    if (pageProperty != null) handleInquiry(pageProperty.thisProperty)
-                                                }}>
+                                        {/* {pageProperty ? ( */}
+                                                
                                                 
                                                 {pageProperty.thisProperty.property_availability === "Yes" ? 
                                                 (
-    
-                                                    "Book a visit"                 
+                                                    <button className="
+                                                    md:ml-auto mx-auto md:mx-0 mt-auto md:my-0 md:mt-1
+                                                    outline-2 outline-offset-4 dark:hover:outline-[#fffd] outline dark:outline-[#ffffff2b]
+                                                    outline-[#0000000f] hover:outline-[#0000002a]
+                                                    px-2 py-1 border-0 rounded-[7px] opacity-70 dark:hover:opacity-90 hover:opacity-100
+                                                    bg-[#279b72] dark:bg-[#32b084] text-white"
+                                                    type="button" onClick={()=>{
+                                                        if (pageProperty != null) handleInquiry(pageProperty.thisProperty)
+                                                    }}>
+                                                    Book a visit  
+                                                    </button>
+               
                                                 ) : (
     
-                                                    "Contact us for alternatives"
+                                                    <button className="outline-2 outline-offset-4 hover:outline-[#fffd] outline outline-[#ffffff2b]
+                                                    px-2 py-1 border-0 rounded-[7px] opacity-80 hover:opacity-90
+                                                    bg-theme-text-brighter dark:bg-theme-text-dark text-white">
+                                                        Contact us for alternatives
+                                                    </button>
                                                 )}                                        
                                                 
-                                                </button>
-                                                ):("")}
-                                            <button className="outline-2 outline-offset-4 hover:outline-[#fffd] outline outline-[#ffffff2b]
-                                                px-2 py-1 border-0 rounded-[7px] opacity-80 hover:opacity-90
-                                            bg-theme-text-brighter dark:bg-theme-text-dark text-white">
-                                            Contact us for alternatives
-                                            </button>
+                                                {/* ):("")} */}
+                                            
                                         </div>
     
                                     </div>

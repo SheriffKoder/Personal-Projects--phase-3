@@ -35,6 +35,7 @@ interface propertyInterface {
 }
 
 import { PropertyDocument } from "@models/propertyModel";
+import Slider from "@components/Helpers/Slider";
 
 const PropertyCard = ({property1, currentPage}:{property1:PropertyDocument, currentPage:string}) => {
 
@@ -215,28 +216,8 @@ const PropertyCard = ({property1, currentPage}:{property1:PropertyDocument, curr
                 xl:max-h-[120px]
 
                 `}>
-                  <button 
-                    onClick={()=>{setPrevFade1(fade1); setFade1(fade1-1); animationCombination1(slider__container); }}
-                    className="absolute bg-[#0a0a0a7d] left-1 rounded-[3px]
-                    bg-[url('/icons/arrow-left.svg')] h-4 w-4 bg-no-repeat bg-contain">
-                  </button>
+                                    <Slider property={property}/>
 
-                  <Link href={"/properties/single/"+property._id} key={property._id}
-                  className="min-h-[9vw]">
-                    <Image src={property.property_images[imageReference]} height={400} width={400} alt={property.property_type+" "+property.property_country+" "+property.property_city+" "+property.property_district+" "+property.property_area+" "+property.property_beds+" bedrooms "+property.property_baths+" bathrooms "+property.property_listing_type}
-                    id={property._id}
-                    className={`min-w-full min-h-[9vw]
-                    `}
-                    style={{objectFit:'cover'}}>
-                    </Image>
-                  </Link>
-
-
-                  <button
-                    onClick={()=>{setPrevFade1(fade1); console.log(prevFade1); setFade1(fade1+1); console.log(fade1); animationCombination1(slider__container); }}
-                    className="absolute bg-[#0a0a0a7d] right-1 rounded-[3px]
-                    bg-[url('/icons/arrow-right.svg')] h-4 w-4 bg-no-repeat bg-contain">
-                  </button>
                 </div>
                 
                 <div className="w-full text_shadow-2 relative">

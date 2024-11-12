@@ -31,7 +31,7 @@ const PropertyImage = ({pageProperty, property_title}: {
 
 
         //[fadeOut]
-        slider__container?.classList.add("fadeOut_animation");
+        // slider__container?.classList.add("fadeOut_animation");
         
     }
     
@@ -39,13 +39,13 @@ const PropertyImage = ({pageProperty, property_title}: {
     
     //[fadeIn] after fadeout(600ms) and delay(200ms) finish
     setTimeout(()=> {
-        slider__container?.classList.add("fadeIn_animation");
+        // slider__container?.classList.add("fadeIn_animation");
     },800);
     
     //after fadeOut,delay,fadeIn finish, remove to be re-applied
     setTimeout(()=> {
-        slider__container?.classList.remove("fadeOut_animation");
-        slider__container?.classList.remove("fadeIn_animation");
+        // slider__container?.classList.remove("fadeOut_animation");
+        // slider__container?.classList.remove("fadeIn_animation");
     },1400);
     
     

@@ -715,7 +715,7 @@ html.hide_scroll_dark::-webkit-scrollbar-thumb {
 /* keep the components centered because of the 6px scroll */
 @media screen and (min-width: 640px) {
   #children_container {
-    margin-left: 6px;
+    /* margin-left: 6px; */
   }
 }
 
@@ -757,8 +757,13 @@ html.hide_scroll_dark::-webkit-scrollbar-thumb {
   display: none;
 }
 
+/* this allows the fade animation to work everytime the button changes the image */
+.LunSlider2 img:not(img:first-child) {
+  display: none;
+}
+
 .fade {
-  animation-duration: 0.75s;
+  animation-duration: 1s;
   animation-name: fadeIn;
   animation-timing-function: linear;
   animation-fill-mode: forwards;

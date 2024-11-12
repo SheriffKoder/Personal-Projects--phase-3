@@ -13,6 +13,7 @@ import { PostDocument } from "@models/postModel";
 //Part 10
 import { useSession } from "next-auth/react";
 import { updateUser_lastUpdate } from "@utils/dateGenerate";
+import Slider from "@components/Helpers/Slider";
 
 
 type userInterface = {
@@ -250,42 +251,23 @@ const PropertyCardAdmin = ({setPropertyEditId, property1, currentPage="", setRel
           dark:opacity-75 dark:hover:opacity-90 opacity-90 hover:opacity-[0.999]
           focus:opacity-100 dark:focus:opacity-90
           xl:h-[205px]
-          md:h-[332px] md2:h-auto
+          h-[450px] md2:h-auto
           `}>
 
                 <div className={`relative flex flex-row items-center justify-center text-start
                 ${currentPage === 'property' ? '' : 'xl:max-w-[50%]'} 
-                
-                md:max-h-[25vw] overflow-hidden rounded-t-[10px] xl:rounded-tr-none xl:rounded-bl-[10px]
-                md2:h-[18vw] xl:max-h-full h-full bg-[#0000001a]
-                
+                bg-[#0000001a]
+                overflow-hidden rounded-t-[10px] xl:rounded-tr-none xl:rounded-bl-[10px]
+                h-[100%]
+                min-h-[250px]
+                md2:h-[18vw]
+                md2:max-h-[25vw] 
+                xl:min-h-[100px]
+                xl:h-full
+                xl:w-[80%]
                 `}>
 
-                  <button 
-                    onClick={()=>{setPrevFade1(fade1); setFade1(fade1-1); animationCombination1(sliderContainer.current); }}
-                    className="absolute bg-[#0a0a0a7d] left-1 rounded-[3px]
-                    bg-[url('/icons/arrow-left.svg')] h-4 w-4 bg-no-repeat bg-contain
-                    ">
-                  </button>
-
-                  <Link href={"/properties/single/"+property._id} key={property._id}
-                  className="min-h-[50vw] md:min-h-[25vw] md2:min-h-[18vw] xl:min-h-[14vw]">
-                    <Image src={property.property_images[imageReference]} height={400} width={400} alt={property.property_type+" "+property.property_country+" "+property.property_city+" "+property.property_district+" "+property.property_area+" "+property.property_beds+" bedrooms "+property.property_baths+" bathrooms "+property.property_listing_type}
-                    id={sliderContainer.current}
-                    className={`border-0 rounded-t-[10px] min-w-full sm:h-[50vw] md:h-auto md:min-h-[25vw] md2:min-h-[18vw] xl:min-h-[14vw]
-                    ${currentPage === 'property' ? '' : 'xl:rounded-l-[10px] xl:rounded-tr-none'}
-                    
-                    `}
-                    style={{objectFit:'cover'}}
-                    priority>
-                    </Image>
-                  </Link>
-
-                  <button
-                    onClick={()=>{setPrevFade1(fade1); setFade1(fade1+1); animationCombination1(sliderContainer.current); }}
-                    className="absolute bg-[#0a0a0a7d] right-1 rounded-[3px]
-                    bg-[url('/icons/arrow-right.svg')] h-4 w-4 bg-no-repeat bg-contain">
-                  </button>
+                  <Slider property={property}/>
                 </div>
                 
                 <div className="w-full text_shadow-2 flex flex-col h-full relative">

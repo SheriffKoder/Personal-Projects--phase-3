@@ -9,7 +9,7 @@ export const GET = async (request:NextRequest, {params}:any) => {
 
     // console.log(params);
     const page = params.pageId - 1; //so page 1 will be 0, page 2 will be 1, page 3 will be 2
-    const end = 2;  //how many items per each view
+    const end = 3;  //how many items per each view
     const start = page * end;
 
     

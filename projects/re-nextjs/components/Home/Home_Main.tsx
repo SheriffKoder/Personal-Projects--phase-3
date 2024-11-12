@@ -292,21 +292,26 @@ const Home_Main = () => {
 
   return (
 
-    <div className="w-[95%] lg:flex lg:flex-row justify-center mx-auto ">
+    <div className="w-full flex flex-col justify-center mx-auto ">
 
 
       {/* latest posts */}
-      <div className=" bg-white rounded-[17px]
-      glass-container-background-2 
-      border backdrop-blur-10 py-7 px-7 w-[95%] mx-auto lg:ml-6 my-20
-      dark:bg-[#68585806] dark:border-[#ffffff05]
+      <div className=" w-[100%] md2:w-[90%] lg:max-w-[1500px]
+      
+       py-7 px-7 mx-auto 
+      
       text-[#000000b3] dark:text-[#ffffffb0] text-center text-l flex flex-col gap-1
-      lg:max-w-[300px] lg:order-2 h-fit xl:min-h-[700px] lg:min-h-[1200px]
+      order-2
       "
       id="home-news">
             {/* here are the posts */}
-            <h4 className="text_shadow-3 font-semibold text-lg mb-[1.5rem]">Latest market news</h4>
 
+            {/* title */}
+            <h4 className=" text-[min(calc(1rem+2vw),(3.5rem))] font-semibold
+            text-center text_shadow-3 mb-[1.5rem] text-[#000000b3] dark:text-[#ffffffb0]">
+                Latest market news
+            </h4>
+            
             {/* posts container */}
             <div className="flex flex-col gap-6 xl:my-0">
 
@@ -322,6 +327,7 @@ const Home_Main = () => {
                     text_shadow-2 h-[174px] md:h-[150px] lg:h-[230px]
                     relative z-[1]
                     ${index > 2 && 'hidden lg:flex xl:hidden'}
+                    text-[min(calc(0.5rem+1.5vw),(1.5rem))]
                     
                     `}
                     >
@@ -339,7 +345,8 @@ const Home_Main = () => {
                         
                         <span className="flex flex-row items-baseline mt-2">
                           <span className="inline-block  shrink-0 h-3 w-3 bg-green-500 opacity-80 rounded-full mr-4"></span>
-                          <span className="text-start max-h-[4rem] max-w-[900px] text-sm dot-text line-clamp-3">
+                          <span className="text-start max-h-[5rem] max-w-[900px] dot-text line-clamp-3
+                          text-[min(calc(0.5rem+1vw),(1rem))]">
                             {post.content}
                           </span>
                         </span>
@@ -381,18 +388,22 @@ const Home_Main = () => {
             
       </div>
 
-
+        
       {/* latest properties */}
-      <div className=" bg-white rounded-[17px] h-auto
+      <div className=" bg-white h-auto order-1
           glass-container-background-2 
-          border backdrop-blur-10 py-7 px-7 my-20
+          border backdrop-blur-10 pt-14 pb-7 px-7 mb-10
           dark:bg-[#68585806] dark:border-[#ffffff05] 
           text-[#000000b3] dark:text-[#ffffffb0] text-center text-l flex flex-col gap-1
-          lg:max-w-[930px] w-[95%] mx-auto lg:mx-0 lg:ml-auto
+          w-full mx-auto lg:mx-auto
       "
       >
-            {/* here are the properties */}
-            <h4 className="text_shadow-3 font-semibold text-lg">Check out our latest properties</h4>
+
+            {/* title */}
+            <h4 className=" text-[min(calc(1rem+2vw),(3.5rem))] font-semibold
+            text-center text_shadow-3 mb-[1.5rem] text-[#000000b3] dark:text-[#ffffffb0]">
+                Check out our latest Properties
+            </h4>
 
             {/* latest properties container */}
             <div className="flex flex-col h-full">
@@ -400,12 +411,12 @@ const Home_Main = () => {
           {/* property */}
             {properties_andPosts?.properties.length > 0 ? (
             <>
-              <div className="flex flex-row gap-6 my-6 flex-wrap justify-center lg:justify-start mx-auto">
+              <div className="flex flex-row gap-6 my-6 flex-wrap justify-center mx-auto">
 
               {properties_andPosts.properties.map((property: PropertyDocument) => (
                 <div key={property._id} className="
                 
-                h-auto xl:w-[48%] md:w-[46%] lg:w-[47%] w-[100%] max-w-[390px] xl:max-w-[900px]">
+                h-auto xl:w-[48%] md:w-[46%] lg:w-[47%] w-[100%] max-w-[390px] xl:max-w-[400px]">
                   <PropertyCard property1={property} currentPage="home"/>
                 </div>
               )

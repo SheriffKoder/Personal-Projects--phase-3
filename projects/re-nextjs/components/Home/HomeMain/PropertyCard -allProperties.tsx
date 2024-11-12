@@ -13,6 +13,7 @@ import { useEffect, useState } from "react";
 import { bodyNoScroll, showEdit } from "@utils/bodyNoScroll";
 
 import { PropertyDocument } from "@models/propertyModel";
+import Slider from "@components/Helpers/Slider";
 
 const PropertyCard = ({property1, currentPage}:{property1:PropertyDocument, currentPage:string}) => {
 
@@ -140,33 +141,12 @@ const PropertyCard = ({property1, currentPage}:{property1:PropertyDocument, curr
                 <div className={`relative flex flex-row items-center justify-start text-start
                 ${currentPage === 'property' ? '' : 'xl:max-w-[50%]'} 
                 max-h-[23vh] rounded-t-[10px] overflow-hidden md:max-h-[22vw] lg:max-h-[18vw]
-                
+                md2:h-[100%] h-[150px] 
                 ${currentPage === 'AllProperties' ? 'xl:min-w-full xl:max-h-[100%]' : ''}
 
                 `}>
-                  <button 
-                    onClick={()=>{setPrevFade1(fade1); setFade1(fade1-1); animationCombination1(slider__container); }}
-                    className="absolute bg-[#0a0a0a7d] left-1 rounded-[3px]
-                    bg-[url('/icons/arrow-left.svg')] h-4 w-4 bg-no-repeat bg-contain">
-                  </button>
-
-                  <Link href={"/properties/single/"+property._id} key={property._id}
-                  className="min-h-[18vw]">
-                    <Image src={property.property_images[imageReference]} height={400} width={400} alt={property.property_type+" "+property.property_country+" "+property.property_city+" "+property.property_district+" "+property.property_area+" "+property.property_beds+" bedrooms "+property.property_baths+" bathrooms "+property.property_listing_type}
-                    id={property._id}
-                    className={`border-0 rounded-t-[10px] min-w-full min-h-[18vw]
-                    ${currentPage === 'property' ? '' : 'xl:rounded-l-[10px] xl:rounded-tr-none'}
-                    `}
-                    style={{objectFit:'cover'}}
-                    priority>
-                    </Image>
-                  </Link>
-
-                  <button
-                    onClick={()=>{setPrevFade1(fade1); console.log(prevFade1); setFade1(fade1+1); console.log(fade1); animationCombination1(slider__container); }}
-                    className="absolute bg-[#0a0a0a7d] right-1 rounded-[3px]
-                    bg-[url('/icons/arrow-right.svg')] h-4 w-4 bg-no-repeat bg-contain">
-                  </button>
+                  
+                  <Slider property={property}/>
                 </div>
                 
                 <div className="w-full text_shadow-2 relative">
