@@ -197,14 +197,15 @@ const page = () => {
                             <span className="ml-1">[demo]</span>
                         ): ("")}
                     </p>
-                    <div className="h-[11.75rem] w-[11.75rem] bg-white overflow-hidden
-                    rounded-full flex items-center justify-center dark:text-black
+                    <div className="h-[11.75rem] w-[11.75rem]  overflow-hidden bg-white dark:bg-black
+                    rounded-full flex items-center justify-center dark:text-black border-2 border-[rgba(255,255,255,0.31)] dark:border-[rgba(255,255,255,0.43)]
                     mt-4">
                     
                         <Image src={user.userInfo.avatar} height={150} width={150} alt=""
-                        className="flex-1 h-full"
+                        className="flex-1 h-full "
                         style={{objectFit:'cover'}}
                         priority
+                        
                         ></Image>
 
                     </div>

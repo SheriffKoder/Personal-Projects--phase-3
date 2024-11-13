@@ -218,7 +218,7 @@ const Login_component = () => {
     //when the user is logged into session, the useEffect redirects to their page
     //wether after login or the sign-up's login
     useEffect(() => {
-        console.log(session?.user);
+        // console.log(session?.user);
         // console.log(session?.user.id);
         if (session?.user.id && loggedIn === false && !localStorage.loggedIn) {
             loggedIn = true;

@@ -271,7 +271,7 @@ const Home_Main = () => {
     const fetchProperties_andPosts = async () => {
       const response = await fetch("/api/properties/homePage_main");
       const jsonResponse = await response.json();
-      console.log(jsonResponse);
+      // console.log(jsonResponse);
 
       if (jsonResponse.properties.length <= 0) {
         setDataPropertiesCondition("no properties found...");

@@ -32,7 +32,7 @@ function changeImageForward (id:string) {
 
 
   return (
-    <div className='w-full h-full relative
+    <div className='w-full h-[100%]
     flex flex-row items-center justify-between
     '>
 
@@ -60,6 +60,8 @@ function changeImageForward (id:string) {
                 priority
                 key={index}
                 src={img} 
+                sizes="(max-width: 470px) 90vw, (max-width: 471px) 50vw (max-width: 1024px) 33vw"
+
                 // height={400} width={400} 
                 alt={property.property_type+" "+property.property_country+" "+property.property_city+" "+property.property_district+" "+property.property_area+" "+property.property_beds+" bedrooms "+property.property_baths+" bathrooms "+property.property_listing_type}
                 

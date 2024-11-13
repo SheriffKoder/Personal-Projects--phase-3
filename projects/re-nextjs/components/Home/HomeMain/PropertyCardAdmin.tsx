@@ -204,7 +204,7 @@ const PropertyCardAdmin = ({setPropertyEditId, property1, currentPage="", setRel
 
         //Part11 - filter un existing image slots
         // console.log(property1.property_images);
-        console.log(imageReference);
+        // console.log(imageReference);
 
         // if (property === null && property1 !== null) {
           const filteredImages = property1.property_images.filter((image: string) => {

@@ -181,7 +181,8 @@ const Nav = () => {
           {session?.user && (
             <div className="nav-user-menu  hidden dark:bg-[#31313175] bg-[#ffffffd3]"
             // onMouseLeave={()=>handleDropDownIcon("leave")}
-            onMouseLeave={()=>{handleDropDownIcon("leave"); console.log(session?.user);}}
+            onMouseLeave={()=>{handleDropDownIcon("leave"); //console.log(session?.user);
+            }}
             >
                 <ul className=" flex flex-col items-center justify-center w-full">
 

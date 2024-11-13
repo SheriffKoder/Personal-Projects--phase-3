@@ -223,6 +223,13 @@ const page = () => {
     //fetch is triggered on pageId change, or reset search results (on no results)
   },[pageId, clearSearch]);
 
+  useEffect(()=> {
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+  }, [pageId]);
+
 
 
   return (
@@ -257,7 +264,7 @@ const page = () => {
             
             ">
                 <span className="min-w-[9rem] px-2 py-1 text_shadow-2 opacity-80 dark:opacity-90">
-                    search description
+                    Search Description
                 </span>
                 
                 <input className="w-full border-0 rounded-r-[6px] outline outline-none

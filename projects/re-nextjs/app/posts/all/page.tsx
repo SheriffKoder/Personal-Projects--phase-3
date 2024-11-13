@@ -57,6 +57,13 @@ const page = () => {
   //to return new skip/limit posts from the api
   },[pageId]);
 
+  useEffect(()=> {
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+  }, [pageId]);
+  
 
   return (
     <div className="flex flex-col pb-6 pt-28 px-4">

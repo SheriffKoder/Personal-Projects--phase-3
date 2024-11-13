@@ -258,7 +258,7 @@ const PostAdd_Component = ({postEditId, setPostEditId, setReload}:{
     
     useEffect(()=> {
 
-        console.log(postEditId);
+        // console.log(postEditId);
 
         //the edit passes and id and the add passes "", 
         //so if there is an id, set action to edit, 

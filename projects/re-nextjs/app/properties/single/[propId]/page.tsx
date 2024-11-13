@@ -22,7 +22,7 @@ type pagePropertyType = {
 }
 
 //async because we will fetch outside a use effect for the loading.tsx to work
-const page = async () => {
+const page = () => {
 
     const router = useRouter();
 
@@ -274,11 +274,11 @@ const page = async () => {
                                                     {pageProperty.thisProperty.property_description.indexOf("credits:") ? 
                                                     
                                                     
-                                                    pageProperty.thisProperty.property_description.split("credits:")[0].split("\r\n").map((p)=><span>{p}</span>)
+                                                    pageProperty.thisProperty.property_description.split("credits:")[0].split("\r\n").map((p, index)=><span key={index}>{p}</span>)
                                                     
                                                     
                                                     :
-                                                    pageProperty.thisProperty.property_description.split("\r\n").map((p)=><span>{p}</span>)
+                                                    pageProperty.thisProperty.property_description.split("\r\n").map((p, index)=><span key={index}>{p}</span>)
                                                     }
                                                 </div>
                                                 <a className="text-blue-500 underline" 

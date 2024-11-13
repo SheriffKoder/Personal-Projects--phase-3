@@ -101,7 +101,7 @@ const DarkModeToggle = () => {
             localStorage.theme = "light";
 
         } else {
-            localStorage.theme = "light";
+            localStorage.theme = "dark";
             window.document.documentElement.classList.add(localStorage.theme);
 
         }

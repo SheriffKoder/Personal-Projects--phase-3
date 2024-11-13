@@ -41,7 +41,7 @@ const page = () => {
 
     //get page url as it included the id for the user page in question
     const current_url = window.location.href.toString().split("/posts/")[1];
-    console.log(current_url);
+    // console.log(current_url);
 
     //connect to data base
     const fetchPost = async () => { 
@@ -157,21 +157,21 @@ const page = () => {
                                             {post_andRecPosts.post.content.indexOf("credits:") ?
                                             
                                             post_andRecPosts.post.content.split("credits:")[0].split("\r\n").map((p, index)=>
-                                            index == 0 ? <span>                                        
+                                            index == 0 ? <span key={index}>                                        
                                                 <span className="inline-block shrink-0 h-3 w-3 bg-green-500 opacity-80 rounded-full mr-2"></span>                                        
                                                 {p}
                                                 </span> 
                                                 : 
-                                                <span>{p}</span>
+                                                <span key={index}>{p}</span>
                                             )
                                             :
                                             post_andRecPosts.post.content.split("\r\n").map((p, index)=>
-                                                index == 0 ? <span>                                        
+                                                index == 0 ? <span key={index}>                                        
                                                     <span className="inline-block shrink-0 h-3 w-3 bg-green-500 opacity-80 rounded-full mr-2"></span>                                        
                                                     {p}
                                                     </span> 
                                                     : 
-                                                    <span>{p}</span>
+                                                    <span key={index}>{p}</span>
                                                 )
                                             }
                                         </div>
@@ -242,7 +242,7 @@ const page = () => {
                                         className="h-auto max-w-full 
                                         bg-[#fffffff0] focus:bg-[#ffffff] hover:bg-[#ffffff] 
                                         dark:bg-[#ffffff07] dark:hover:bg-[#ffffff0a] dark:focus:bg-[#ffffff0a]
-                                        flex flex-col rounded-[17px] box-shadow-1 p-3 border border-[rgba(255,255,255,0.02)]
+                                        flex flex-col rounded-[17px] box-shadow-1 p-3 border border-[rgba(255,255,255,0.31)] dark:border-[rgba(255,255,255,0.02)]
                                         text_shadow-2 text-xs w-full min-h-[158px]
                                         relative z-[1]
                                         ">
