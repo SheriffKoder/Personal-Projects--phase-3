@@ -37,7 +37,7 @@ const userSchema = new Schema<UserDocument, {}, Methods>({
     email: {type: String, required: true, unique: true},
     name: {type: String, required: true, trim: true},
     password: {type: String, required: true},
-    role: {type: String, enum: ["admin", "user"], default: "user"},
+    role: {type: String, enum: ["admin", "user", "dummyVisitor"], default: "user"},
     phone: {
         type: Number,
         required: [true, "a contact number is required"],

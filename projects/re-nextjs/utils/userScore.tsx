@@ -35,7 +35,7 @@ const increaseUserScore = async (target:string, userId:string) => {
 const decreaseUserScore = async (target:string, itemId:string) => {
 
     // let User = await UserModel.findById(userId);
-    // console.log(User);
+    console.log("AAAA");
 
         if (target === "property") {
             let property = await PropertyModel.findById(itemId);
@@ -50,6 +50,8 @@ const decreaseUserScore = async (target:string, itemId:string) => {
         }
 
         if (target === "post") {
+            console.log("BBBB");
+
             let post = await PostModel.findById(itemId);
             let User = await UserModel.findById(post?.userId);
             if (User) {

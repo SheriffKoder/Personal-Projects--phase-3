@@ -211,10 +211,12 @@ const PostsContainer = ({setPostEditId, userAuthority, setReload, reload, userNa
                                                 </div>
                                             </div>
                                 </span>
+                            </div>
 
-                                <div className="text-sm font-light w-full flex flex-row gap-2
+                        
+                            <div className="text-sm font-light w-full flex flex-row gap-2
                                 mt-2 mb-1 justify-center
-                                md2:mt-auto md2:justify-end md2:mb-0">
+                                md2:mt-auto md2:justify-end md2:mb-0 relative right-0 bottom-0">
 
                                     <button type="button"
                                     onClick={() => {if (userAuthority !== "dummyVisitorViewer"){bodyNoScroll(); setPostEditId(post._id); showPostAdd();}}}
@@ -226,7 +228,7 @@ const PostsContainer = ({setPostEditId, userAuthority, setReload, reload, userNa
                                     </button>
 
                                     <button type="button" 
-                                    onClick={()=>{if (userAuthority !== "dummyVisitorViewer"){handlePostDelete(post._id);}}}                           
+                                    onClick={()=>{if (userAuthority !== "dummyVisitorViewer"){ handlePostDelete(post._id); }}}                           
                                     className="bg-theme-text-brighter dark:bg-theme-text-dark text-white 
                                     rounded-full w-[65px]
                                     dark:opacity-90 dark:hover:opacity-100 
@@ -235,10 +237,11 @@ const PostsContainer = ({setPostEditId, userAuthority, setReload, reload, userNa
                                         Delete
                                     </button>
 
-                                </div>
                             </div>
-                        
+
                         </div>
+
+
 
                     </div>
 

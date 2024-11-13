@@ -12,6 +12,7 @@ import { getToday_date } from "@utils/dateGenerate";
 import { join, resolve } from "path";
 import { writeFile , unlink, readdir, rmdir} from "fs";
 import { removeFolder } from "@utils/deleteFolder";
+import { storeImages } from "@components/Helpers/ImageUpload";
 
 
 // get the data for the user, we needed to pass some body(sessionId) so used post
@@ -95,29 +96,36 @@ export const PATCH = async (request:Request, {params}:any) => {
     const file: File | null = newInfo.get("file") as unknown as File;
     let userAvatar = "";
     if (file) {
-        const bytes = await file.arrayBuffer();
-        const buffer = Buffer.from(bytes);
-        const path = join(process.cwd(), `/public/images/agent-${currentUserPage}/profile`, file.name);
-        await writeFile(path, buffer, (err)=>console.log(err));
-        console.log(`image ${file.name} is saved in ${path}`);
-        userAvatar = path.split("/public")[1];
-        console.log("userAvatar");
-        console.log(userAvatar);
+        // const bytes = await file.arrayBuffer();
+        // const buffer = Buffer.from(bytes);
+        // const path = join(process.cwd(), `/public/images/agent-${currentUserPage}/profile`, file.name);
+        // await writeFile(path, buffer, (err)=>console.log(err));
+        // console.log(`image ${file.name} is saved in ${path}`);
+        // userAvatar = path.split("/public")[1];
+        // console.log("userAvatar");
+        // console.log(userAvatar);
+
+        userAvatar = await storeImages(file) as string;
     } else if (!file) {
         userAvatar = newInfo.get("avatar") as string;
     }
 
-    await connectToDB();
 
 
     try {
-        let userInfo = await UserModel.findById(currentUserPage);
+
+        await connectToDB();
+
+        let userInfo: UserDocument | null = await UserModel.findById(currentUserPage);
 
         // console.log(userInfo);
-        console.log("userAvatar");
-        console.log(userAvatar);
+        // console.log("userAvatar");
+        // console.log(userAvatar);
 
-        if (userInfo && newInfo != null) {
+        if (userInfo) {
+            // console.log(userInfo);
+            // console.log(newInfo.get("name"));
+
             // // we have info object from json, want to overwrite its keys with userInfo
             // userInfo.name = newInfo.name;
             // userInfo.avatar = newInfo.avatar;
@@ -130,11 +138,13 @@ export const PATCH = async (request:Request, {params}:any) => {
             //2. the fromData items are fetched differently
             userInfo.avatar = userAvatar;
             userInfo.name = newInfo.get("name") as string;
-            userInfo.email = newInfo.get("email") as string;
+            if (userInfo.role !== "dummyVisitor") userInfo.email = newInfo.get("email") as string;
             if (userInfo.role !== "dummyVisitor") userInfo.password = newInfo.get("password") as string;
             userInfo.phone = Number(newInfo.get("phone") as unknown as number);
             userInfo.position = newInfo.get("position") as string;
 
+            console.log(userInfo);
+            // userInfo.markModified("name");
             await userInfo.save();
 
         }

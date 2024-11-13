@@ -92,7 +92,7 @@ const AgentInfo = ({user, setReload}:{
 
     const handleUserEditSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
 
-        if (user.authority === "dummyVisistorViewer") return;
+        if (user.authority === "dummyVisitorViewer1") return;
         
         //Part 11.01
         let data;
@@ -120,7 +120,8 @@ const AgentInfo = ({user, setReload}:{
             })
 
             const newUserInfo = await response.json();
-            // console.log(newUserInfo);
+            console.log("newUserInfo");
+            console.log(newUserInfo);
 
             document.getElementById("infoApply_button")!.style.display = "none";
             document.getElementById("infoCancel_button")!.style.display = "none";

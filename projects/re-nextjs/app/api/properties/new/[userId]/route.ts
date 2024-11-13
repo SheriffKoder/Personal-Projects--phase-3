@@ -14,25 +14,8 @@ import { increaseUserScore } from "@utils/userScore";
 import { NextRequest } from "next/server";
 
 
-import { v2 as cloudinary } from 'cloudinary';
+import { storeImages } from "@components/Helpers/ImageUpload";
 
-cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-  api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET,
-});
-
-export async function uploadImage(image:File) {
-    const imageData = await image.arrayBuffer();
-    const mime = image.type;
-    const encoding = 'base64';
-    const base64Data = Buffer.from(imageData).toString('base64');
-    const fileUri = 'data:' + mime + ';' + encoding + ',' + base64Data;
-    const result = await cloudinary.uploader.upload(fileUri, {
-      folder: 'nextjs-course-mutations',
-    });
-    return result.secure_url;
-  }
   
 //add a new property
 export const POST = async (request:NextRequest, {params}:any) => {
@@ -58,32 +41,13 @@ export const POST = async (request:NextRequest, {params}:any) => {
         //push the string as a url already, and add/push the new string for new files
 
         try {
+            // store images in an array and wait till this process ends to use the urls
+            files_url = await storeImages(files) as string[];
 
-        console.log("text")
-        files.forEach(async (file) => {
-            // try {
 
-                if (file) {
-                    // const path = join(process.cwd(), `/public/images/agent-${params.userId}/properties`, file.name);
-    
-                    // let file1_url = ""; 
-                    // file1_url = path.split("/public")[1];
-                    // files_url.push(file1_url);
-    
-                    // const bytes = await file.arrayBuffer();
-                    // const buffer = Buffer.from(bytes);
-                    // await writeFile(path, buffer, (err)=>console.log(err));
-                    // console.log(`image ${file.name} is saved in ${path}`);
-                    let imageUrl = await uploadImage(file);
-                    console.log(imageUrl);
-                    files_url.unshift(imageUrl);
-                    console.log(files_url);
-                }    
-
-            // } catch (error) {
-            //     console.log(error);
-            // }
-        })
+            console.log("files_url became"+ files_url)
+            console.log(files_url);
+            console.log("3")
 
 
         //// create a new property and save

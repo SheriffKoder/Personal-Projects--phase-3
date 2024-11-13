@@ -11,6 +11,8 @@ import { writeFile } from "fs";
 import { increaseUserScore } from "@utils/userScore";
 import { NextRequest } from "next/server";
 
+import { storeImages } from "@components/Helpers/ImageUpload";
+
 
 //to fill the "edit post inputs" on edit (yes used the GET to fetch info to be returned to the form element)
 export const GET = async (request:NextRequest, {params}:any) => {
@@ -50,14 +52,18 @@ export const POST = async (request:Request, {params}:any) => {
     let postImage = "";
 
     if (file) {
-        const path = join(process.cwd(), `/public/images/agent-${currentUserPage}/posts`, file.name);
+        // const path = join(process.cwd(), `/public/images/agent-${currentUserPage}/posts`, file.name);
         
-        postImage = path.split("/public")[1];
+        // postImage = path.split("/public")[1];
 
-        const bytes = await file.arrayBuffer();
-        const buffer = Buffer.from(bytes);
-        await writeFile(path, buffer, (err)=>console.log(err));
-        console.log(`image ${file.name} is saved in ${path}`);
+        // const bytes = await file.arrayBuffer();
+        // const buffer = Buffer.from(bytes);
+        // await writeFile(path, buffer, (err)=>console.log(err));
+        // console.log(`image ${file.name} is saved in ${path}`);
+
+        // store the image url in a string and wait till this process ends to use the url
+        postImage = await storeImages(file) as string;
+        
     } else if (!file) {
         // postImage = newInfo.get("image") as string;
         postImage = "/images/defaultPost.jpg";
@@ -134,12 +140,15 @@ export const PATCH = async (request:Request, {params}:any) => {
     //type string means the image has not been changed, it is the old url not a new file
     if (typeof file !== "string" && file !== null) {
 
-        const bytes = await file.arrayBuffer();
-        const buffer = Buffer.from(bytes);
-        const path = join(process.cwd(), `/public/images/agent-${currentUserPage}/posts`, file.name);
-        await writeFile(path, buffer, (err)=>console.log(err));
-        console.log(`image ${file.name} is saved in ${path}`);
-        postImage = path.split("/public")[1];
+        // const bytes = await file.arrayBuffer();
+        // const buffer = Buffer.from(bytes);
+        // const path = join(process.cwd(), `/public/images/agent-${currentUserPage}/posts`, file.name);
+        // await writeFile(path, buffer, (err)=>console.log(err));
+        // console.log(`image ${file.name} is saved in ${path}`);
+        // postImage = path.split("/public")[1];
+
+        // store the image url in a string and wait till this process ends to use the url
+        postImage = await storeImages(file) as string;
 
     } else if (typeof file == "string") {
         postImage = newInfo.get("file") as string;
