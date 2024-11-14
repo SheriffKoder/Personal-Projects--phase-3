@@ -445,6 +445,8 @@ import {
         - When signing-up a new agent profile, a new local folder in public/images is created with the new agent's id value, with separate folders to contain future images for profile, posts, properties.<br/>
         - When deleting a an agent profile, the local folder created for the user "and" its contents will be deleted.<br/>
         - View (retrieve) products, posts or agents by last added date.<br/>
+        - Upload local images, store the image files on the cloud using (Cloudinary) and store/retrieve their urls to/from the database.<br/>
+
         <br/>
         - Images input management:<br/>
         you do not need to have all the images inputs to be filled when adding/editing a property.<br/>
@@ -457,8 +459,6 @@ import {
         - properties/posts you may be interested in should be retrieved based on the current property/post's category/price range for example.<br/>
         - clicking on the agent's name from property/post page redirect to a page containing the agent's submissions.<br/>
         - property and post input validation.<br/>
-        - use a cloud image storage service to store images and return back their "urls" to be stored in the database.<br/>
-        - delete the agent's old image when updating their photo (if no cloud service is used).<br/>
         `,
 
       type: "site",
@@ -554,7 +554,7 @@ express-validator (input validation), jwt authentication tokens).<br/>
 - Input validation.<br/>
 - Password encryption (bcrypt).<br/>
 - User authentication (jwt tokens).<br/>
-- Image storage (multer).<br/>
+- Local image storage (multer).<br/>
 - Be able to access and manipulate (edit/delete/complete) from the multiple checks present in the car all-checks array separately.<br/>
 - Be able to manipulate a specific check history instances to edit or delete them from start/middle/end of the check array.<br/>
 <br/>

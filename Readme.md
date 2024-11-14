@@ -12,7 +12,7 @@ Which also allows its agents to have customized accounts to add, edit, delete pr
 **Amazon (Partial Clone)** | Next.js • Typescript • Tailwind • MongoDB
 
 A trial to replicate amazon.eg shopping website. Create an account, select and order products or post your item for sale on the website.
-[[ Folder / More Details ]](https://github.com/SheriffKoder/Personal-Projects--phase-3/tree/main/recap/nodejs/recap) [[ Live Demo ]](https://amazon-nodejs.onrender.com/)
+[[ Folder / More Details ]](https://github.com/SheriffKoder/Personal-Projects--phase-3/tree/main/recap/nodejs/recap/section22) [[ Live Demo ]](https://amazon-nodejs.onrender.com/)
 
 
 
