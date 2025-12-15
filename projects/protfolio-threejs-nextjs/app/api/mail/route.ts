@@ -18,13 +18,11 @@ export const POST = async (req:Request) => {
 
         //1
         const transporter = nodemailer.createTransport({
-            host: process.env.EmailHost,
-            port: process.env.EmailPort as unknown as number, //to solve the "no overload" ts error
-            secure: false, //true for 465, false for other ports
+            service: "gmail",
             auth: {
-                user: process.env.EmailUser,
-                pass: process.env.EmailPass
-            }
+                user: process.env.GMAIL_USER,
+                pass: process.env.GMAIL_APP_PASSWORD,
+            },
         });
 
         //2

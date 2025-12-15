@@ -20,7 +20,11 @@ import nextjs from "./tech/nextjs.png";
 import acc from "./tech/acc.png";
 import figma from "./tech/figma_s.png"
 import sql from "./tech/sql.png"
-
+import chartjs from "./tech/chartjs.png"
+import gsap from "./tech/gsap.png"
+import firebase from "./tech/firebase.png"
+import stripe from "./tech/stripe.png"
+import ai from "./tech/ai.png"
 
 import x from "./social/twitter.png"
 import linkedin from "./social/linkedin.png"
@@ -43,6 +47,11 @@ export {
   typescript,
   threejs,
   nextjs,
+  chartjs,
+  gsap,
+  firebase,
+  stripe,
+  ai,
 
   mysql,
   graphql,
